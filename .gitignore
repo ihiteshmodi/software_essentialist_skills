@@ -1,0 +1,9 @@
+/*
+!/.gitignore
+!/README.md
+!/agent-skills/
+!/essentials-lab/
+node_modules/
+.DS_Store
+.data/
+*.db

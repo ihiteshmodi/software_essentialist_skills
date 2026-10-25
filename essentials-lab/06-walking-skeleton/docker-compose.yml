@@ -1,0 +1,12 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: 06-walking-skeleton/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - skeleton-data:/data
+
+volumes:
+  skeleton-data:

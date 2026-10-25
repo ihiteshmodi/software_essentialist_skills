@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Conference tickets: register</title>
+    <style>
+      body { font: 16px/1.5 system-ui, sans-serif; max-width: 28rem; margin: 3rem auto; }
+      input, button { font: inherit; padding: .4rem .6rem; }
+      #message { margin-top: 1rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Register for the conference</h1>
+    <form id="register">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required />
+      <button type="submit">Register</button>
+    </form>
+    <p id="message" role="status"></p>
+    <script type="module">
+      const messages = {
+        Registered: 'You are registered.',
+        InvalidEmail: 'That email does not look right.',
+        EmailAlreadyTaken: 'That email is already registered.',
+      };
+      document.getElementById('register').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const email = document.getElementById('email').value;
+        const res = await fetch('/users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const result = await res.json();
+        document.getElementById('message').textContent = messages[result.type] ?? 'Something went wrong.';
+      });
+    </script>
+  </body>
+</html>

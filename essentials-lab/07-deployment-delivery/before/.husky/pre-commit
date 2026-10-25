@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# The "before" quality gate: a local hook. Anyone (or any agent) can skip it with `git commit --no-verify`,
+# delete it, or never install it. Nothing stops broken code reaching main or production.
+npm test

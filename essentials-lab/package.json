@@ -1,0 +1,32 @@
+{
+  "name": "essentials-lab",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "test": "vitest run",
+    "test:unit": "vitest run",
+    "test:e2e": "vitest run -c vitest.e2e.config.ts",
+    "typecheck": "tsc --noEmit",
+    "lab:01": "vitest run 01-vertical-slicing",
+    "lab:02": "vitest run 02-horizontal-decoupling",
+    "lab:03": "vitest run 03-temporal-decoupling",
+    "lab:04": "vitest run 04-composition",
+    "lab:05": "vitest run 05-subject-system-verification",
+    "lab:06": "vitest run 06-walking-skeleton",
+    "lab:06:start": "node --experimental-strip-types 06-walking-skeleton/src/main.ts",
+    "pipeline:local": "bash 07-deployment-delivery/scripts/pipeline-local.sh"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@amiceli/vitest-cucumber": "^5.0.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^24.0.0",
+    "@types/supertest": "^6.0.0",
+    "supertest": "^7.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^3.2.0"
+  }
+}

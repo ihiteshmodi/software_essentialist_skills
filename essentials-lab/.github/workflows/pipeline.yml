@@ -1,0 +1,53 @@
+# One path to production: commit phase → acceptance phase → gated deploy.
+# Lives at the root of the essentials-lab repo (copy essentials-lab into its own repo to run it on GitHub).
+name: pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  commit-phase:
+    name: "1 · Commit phase (fast, ~80% confidence)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run test:unit
+
+  acceptance-phase:
+    name: "2 · Acceptance phase (production-like)"
+    needs: commit-phase
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Build the release candidate and start it
+        run: docker compose -f 06-walking-skeleton/docker-compose.yml up -d --build --wait
+      - name: Run the acceptance tests against it
+        run: npm run test:e2e
+        env:
+          APP_URL: http://localhost:3000
+      - name: Tear down
+        if: always()
+        run: docker compose -f 06-walking-skeleton/docker-compose.yml down -v
+
+  deploy:
+    name: "3 · Deploy (gated)"
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: acceptance-phase
+    runs-on: ubuntu-latest
+    environment: production   # add required reviewers in repo settings for a manual approval gate
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash 07-deployment-delivery/scripts/deploy.sh production
