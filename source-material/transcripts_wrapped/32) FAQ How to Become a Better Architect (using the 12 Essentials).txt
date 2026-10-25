@@ -1,0 +1,31 @@
+So, yeah, this is a great one here. Becoming a better architect. Now, what is an architect really? It's about making the decisions at the start of a project
+that are going to be really smart to make. And I think that's something that just comes with experience. However, there is a good amount of education that needs
+to be done as well. So you just need to know about the foundational architectural styles and patterns that exist that are just foundational to the way that
+we're writing code. So this is why we have something called the stereotypical architecture, which is something that you see on front end, the back end, the
+desktop, you see it everywhere. It has a few laws in there. Like one of the laws is that we have the CQS principle, meaning that there has to be a read path and
+a write path. There's very good reasons for that. It's also event based, which means that we could scale features horizontally because we could just temporally
+decouple features. So if you've seen the temporal decoupling, essentially, you'll know why that's so important. And then also the horizontal decoupling as well.
+There's layers of concerns. So we need to make sure that we have those layers of concerns established and that we're putting responsibilities in correct
+abstractions and making sure that we logically decide that those abstractions belong to these layers. And then each of those abstractions that belongs to those
+layers needs to talk to the appropriate ones. For example, an abstraction inside of the, let's say, the application layer is not necessarily supposed to know
+about directly an infrastructure concern. That's called the dependency rule. A lot of this is just becoming aware of the, just, just the foundational common
+stuff that you should know. But another part is to just continue educating yourself on different platforms, tools, approaches, like static sites, static site
+generation, serverless, right? These things have non-functional and functional reasons why we would want to use them. And knowing these tools and knowing why
+they're useful is a great aspect of how you can become a better architect. So the strategic design essential involves you selecting the platform, selecting the
+architectural components, selecting tools, selecting the external services that you're going to use in order for you to build the baseline, build the foundation
+of your architecture before you put out your walking skeleton. In the process of selecting those tools, you can only go based on the experiences you've had and
+the knowledge you have. So if you go through the phases of craftship, what you're going to experience is using a three and four tier architecture. We're going
+to use the hexagonal architecture. We're going to make it event based. You're going to learn how to glue pieces together in the responsibility first phase,
+because you now will understand the stereotypical architecture and you'll know how to use object design. Think about those things, getting all the way up to
+that, and then getting into the guess points and being able to look at an architecture. Through a systems thinking type of lens and decompose problems and
+transmit those problems into the correct systems of guess points. That's also a very powerful technique to be able to do as well. In order to become a better
+architect, I would say, yeah, go through the phases of the craft, but take note of the architectural styles, patterns, and yeah, the tools that we're going to
+use to move through. But also go and try out new tools. Yeah. Maybe you've never used Docker before. We're going to use that. Maybe you've never used
+Kubernetes. Maybe you've never used an event queue or event bus rather. Maybe you've never used MongoDB. It's good to know what these things are and know why
+they're beneficial to know non-functionally why you could use them. But then try them out as well on your own time and see if you could plug things together.
+But at the end of the day, it all comes down to responsibilities. So if you need something that is going to be able to retrieve data very fast, we all know that
+the thing that's able to do that is it's going to be key value storage is the best tool for that. Right. Right. And then there's document storage and then
+there's just relational storage. So large part is choosing the best tool for the non-functional task that you need to accomplish as well. Hopefully that was
+clear in order to become a better architect. But first step, go through the phases of craftship. Craftship. Craftship. And yeah, you're going to get a lot of
+just doing that. And then from there on, it's just more education and more experience. Part of the mix. And then it's just the best tool for the many things to
+core hardware. And then I'm going to tiny cart Carolyn get a big, I'm going to Mainly run the four heaven out of the 대

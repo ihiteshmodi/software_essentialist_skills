@@ -1,0 +1,423 @@
+How do we go? Anything blow up? I'm just hanging back here and I got some blueberries diving into. Very important blueberry business. Got the gang of four right
+now. The real ones. I like it. Now we get the gang of three. So anyways, I just kicked things off. No reason to dilly dally. So we've got some new content in
+there, but it's also not all that new either, because this is all stuff that was getting the first milestone initially. I got everyone to just start getting
+through. By the way, gang of four is a great man. Gang of four is also the new version. Now we have the gang of four back. But yeah. So like. The content that
+was in there. When we first started kicking things off in the program. Of course. I just everyone just dive in here and start playing with these TD assignments.
+Now what I've gone ahead and done is I've taken all the content out from the TDD or from the book. And I've put it into the platform. And it's all just more
+cohesive now. Did anyone get a chance to look at some of the new videos and stuff that I put in there? Not yet. Fair enough. Honestly, time is flying by for me
+personally. So I don't really remember one of the videos, whether it was yesterday or the day before. Yeah. I've just been in here. Yeah. So I would say some of
+the videos that are really good that went up are these ones. In the stateless guess point. So this is. How to use faster. So this is not different really from
+how we've been doing emergent design with TDD. However. What I call out here and what I place your awareness on is the fact that. There's an upfront part of the
+work that we're doing. However, a lot of the times it's upfront work that we're doing. It happens in the mind. I click into this here. I think of the image that
+I want as well. Yes. Let's see the image address. Yes. So this is an input output system. We're dealing with you. As you probably remember from the systems
+thinking stuff. Talked about. But what happens is. With faster. It really is just inputs and outputs. And what I'm trying to. Make very clear here. At this
+level. Is that. We have to find architect and automate. And this can happen in the mind. Or it could happen on paper. However. When we're doing this at the
+stateless guess points. Simple. Problems. You probably will not be doing this. On paper. Because it's just a function. Or a stateless class. However. This tool
+here. The reason why I think this tool is so powerful. Is because. We can take this same tool. And we take. A much more complex problem. At a much higher level
+of abstraction. Even like an architectural problem. For example. Ryan. One of the students in the program. He is asking about. How I might design out. A job
+queue. That's a. Very different. Problem. Than. Like something of the stateless guess point. That's actually very likely more. At the system level. Probably
+even higher up. Than that. It's a very architectural problem. That needs to be. Thought through. And we could use faster. At the stateless guess point. Or we
+could use it at. The. Much higher up like that as well. And we. Would just use this same process. Now. I think Lucas called this out recently. With. One of the.
+Modules here. It was this one. How TDD works in the real world. And just updated this a little bit. In the real world. What happens is. You'll get a problem. To
+solve. And. Very well. Could be. Something that you solve. At the. Stateless level. Stateful level. Or the application. Level. Or yeah. An infrastructural.
+Level as well. At the end to end level. What I realize here is. It doesn't matter. It doesn't matter where you start. What always tends to happen. Is you need
+to drill in. With several. Loops. And I think. You might have mentioned here. In the comment Lucas. You said something about. This n. Number of loops. Rather
+than. An nth layer loop. That's a great point. Because. What I'm going to get to. Thinking through. Ryan's problem. That's going to be at a much higher level.
+Of abstraction. What's going to happen is. We're going to do faster. At. The highest level up. We're going to find all the responsibilities. We're going to get.
+On some of the examples. We're going to take those. We're going to discover. Okay. What is the system under test. This particular guess point. That we want to.
+Be writing this test at. And then we're going to. Automate the infrastructure. And that's going to take us. Into our very first. Merger design. As we execute.
+Our emerger design loop. We're going to call upon. More constructs. And that's going to force us. Kick off this process again. At another level. Hopefully you
+can see. What's happening here. It's. This really is a resilient tool. Because yeah. You can apply it at any level. And. You're going to have to drill in.
+Several times. Now of course. You can take shortcuts. And you may not want to be. Writing tests. Every single level. But at least. You do have the capability.
+To do that. You. You can take those shortcuts. But we're going to be learning. How to. To test at each of those. Guest points. And then. That's going to be up
+to you. Later on. When we get into the. Strategic design stuff. About. When is. When makes sense to. Do double. Triple. Quadruple. T. T. And when. You probably
+just want to. Do one level. Call it. Do a level of end to end testing. And call it a day. Right. It's going to depend on the. It's going to depend on the score.
+Of the game we're playing. And this is a whole other thing. I can't wait to talk about. But. I can't. Overload you guys. With all this theory. Right now. I need
+to give you. Actual assignments. So you can hook into it. And experience it yourself. But. What I really wanted to talk about. And we'll have to get to this. In
+bridging the gap. Is. Yeah. It's a game. And there's a score. To be played. So. If you remember. This is the. I'll just do like. Maybe like a minute on this
+top. If you remember. There's the value creation system. If I go to. I believe it's in here. Yes. This beautiful thing. So. It's a game. And we want to push
+value. Through that. And. Through. Now. We can. Actually. Speed up the way the game is played. And yeah. Negative value. We want to avoid that. As much as
+possible. So we could speed up. The way the game. Is played. By. Optimizing parts. Of it. For example. If you're starting. With an architecture. That is.
+Designed. In a really. Extendable way. You can skip having to do. This architect. Step. For. Your. Infrastructure. This is why. We want to use. Strategic
+monoliths. This is why. Like when you have. A microservice architecture. It's really great. If it's designed out properly. Because then you can build new
+products. On top of it. Very fast. And there's a book. I have. Over my stack of books. I think it's called. Writing. Writing software. Write. As in. Write it
+wrong. And. I can't remember exactly. The thesis. Of that book. Why? Because. I haven't fully read it. But someone in the program. Was asking me about. Hey.
+I've read this. It seems similar. To what we're. Talking about. In this course. From what I can remember. In that book. He's talking about. Pretty much building
+leverage. And. Having your. Architecture. Be something that. Allows you. To go faster. That's what we're trying to do here. This really just. These are all the
+concrete. Components of what's required. In order to move value. Through the system. And we do want to be. Stacking. Our theoretical guesses. We want to stack.
+These guesses up. Because that's going to allow us to. Do these guesses. The physical ones. As fast as possible. So if we have a really strong. Architecture.
+And a really strong platform. Upon which we can build apps on. Then we could just. Ship out new products. On top of that. Really fast. And I think that was the
+thesis. Which is. Have a platform. And then. You can create products. On top of your platform. Fast. So. Yeah. I don't even have to do any writing here. But.
+That's part of the game. To be played. So there's ways to win this game. Ways to optimize. You. Moving through fast. And one of those. Principles of the game.
+Is to stack theoretical. Guesses. Yeah. So. That's a whole topic. I can't wait to talk more about. But I can't go too deep. Into that right now. Anyways. I want
+to. If people have questions. I really want to. Provide as much value as I can. In these Q&As. So. Please. Drop questions in the chat. If you also want to get
+on the mic. And talk through some things. We can do that as well. If there's folks in here. Who. Have specific design problems. They want to go through. Drop
+those in here. And then. What we'll do is. We'll. Decide how we can carve out. The rest of the chat. This Q&A. To get to all those. So. I'll give everyone.
+About two. Or so minutes. To think through. Any questions that you have. Or anything you would like us to. Potentially work through. In this call. And. We can
+get to. So. Cue the elevator music. And I'm just going to take your questions. And write them down. And I'm going to organize them. On this piece of paper. I
+got right here. Do I have any? Put some on. We. Go see. The stream. Hello Mr. Daniel. Mr. I pull in those pancakes. Back to the mix. My friend. With it. Yeah.
+As well. Daniel. Daniel. I wouldn't mind you jumping on here. Actually. As a speaker as well. If you're down to do that. Like conversations. Are fun. Stateful.
+Guest points. At work. In an office with no mic. You ain't an emcee though. Yeah. If anyone wants to jump on here. And discuss. Definitely put your hand up. Or.
+Just that. I'm going to give you guys a few more minutes. To drop your questions in here. And then I'll get. Work through those. And then we'll take a look
+back. And see if we have any more. Going on to. Gabriel just joined in. Hello. Hello. So I'll just put this here. What we're doing is. Waiting questions. So
+approximately. One more minute. We're doing right now. So anyone who's jumping in has an awareness as to what's going on. Questions. And then. We'll do.
+Through. And then. More questions. And then. And then we'll call. Weekend. All right. So. Let's go ahead. And start moving through some of these. Through these
+questions. I'm going to just grab them all here. All right. So VDN. You said. Yep. The faster thing looks pretty interesting. I could definitely see it becoming
+more clear. As we work through more examples. Yes. It will. Yes. It will. Major learning is just. Give y'all. The chance to go. And mess up. And play around
+with stuff. So that I can get the feedback as fast as possible. And then put the minimum amount of theory required for you to succeed at the assignments. So
+this does take a little bit of gumption. People with a bit of the tenacity to move forward and actually see results. But it's true. A little bit of pain. That's
+how you get to the game. All right. Cool. So is there a particular way to approach organizing code? Let me just drop this. Boom. That's number one. And we have
+another one here. Some of the stateful assignments. Yeah. My evil twin was supposed to get some more of these done. So you guys can blame him. Okay. So I'm
+going to move from here. Let's go forward on what we've got here. And we'll. I'll check back into the chat a little bit later on. See if we have more questions.
+Boom. Is there a particular way to approach organizing code? If we start with the entry point. Deciding where to put modules and files. What to call them. Ah.
+So you're asking this in particular. Right. This was in Solidbook. This was the. Oh. What did I call this again? It was in humans and code. I believe. Great
+question. So. I do want us to have these things. There's a few topics around this whole thing. About just like the ergonomics. Of. Structuring your work. In
+your. Projects. And it all starts with. And we really have used the responsibility. Driven. Thinking. To. Get to this. Because it's very purposeful. But this
+all starts from. The developer use cases. Right. What are things developers need to do? Find. Add. Remove. Change. Extend. Features. They need to understand
+features. Right. You need to. Execute a test. For a feature. Right. You need to. Add. Find a. Point. To add code. After. A feature. There's just a number of
+different. Use cases here. Just like we can think of the use cases. Or. This is the role. The developer's role. And let's say. Daniel. Is the actor here. Want.
+There's just a number of different. Things that this role of the developer needs to do. And we can get clear on that. Using the same process that we use. To
+understand. How to break down responsibilities. And sign those into roles. So. This person. The actor. Plays the role of the developer. And. What are some of
+the things that the developer. Needs to do. For the responsibilities. Of the developer. All of this should really start. I'm not answering this question.
+Directly. There is a particular way. But we want to start. Based on. We actually need the goal. Of this person. First of all. What is the role. And then what is
+their goal. So. Maybe somebody here. Can. Help. By. Explaining. What is the goal. Of the developer. Ultimately. If we. Think from value first development. What
+is the developer's. Yep. Deliver software's value. Create value. Yep. Excellent. First. By the way. What I'm showing you all here. Is a rough. Technique. This
+isn't exactly it. This is a rough thing. Called. Impress. Maybe you've seen this before. What we're doing here. Is. So often. We could do work. That doesn't
+really have. An impact. Stuff. That doesn't actually matter. This is a. It's an. Aristotelian. Technique. It's an. Aristotle. Driven. Technique. Really.
+Because. What we're doing here. Is we're getting very clear. On. The purpose. Of. Everything. It is that we're going to do. And again. This is also thinking
+backwards. It's starting from the end. Like. All of these things. Lend together. Into the same. Ideas. But. Impact mapping. Is. A technique. That is more. More
+commonly known. And that's what I'm. Walking you through here. Indirectly. Is this. What is the goal? Who is the actor. That does that? What is the impact. That
+will be created? And then. What are the things. That need to be done. In order to. Have that done. This is. Pretty much. What's going to be the. How to organize
+your project. That's going to be. The thing that answers that. Right? So. All of the. Little decisions we make. About. How to. Design our project. Happen right
+here. But it all starts on a foundation of. Clarity. On the goal. That we want. Fundamentally. And most people don't really get a chance. To sit down. And
+actually. Piece together. What the goal is. And the context. In which the goal is executed. The context is value. First development. And then who the actors
+are. Because there's several actors. And as you have more actors. I'll show you what I mean. Here. Pretty much what it is. We need to do here. In order to
+achieve the goal. There's. A few other ones. There's the users. There's the customer. We need to put everyone down. Really. What else do we have? We have the
+developers. On your team. Is there. Everyone here. Is affected by. What it is you're going to do next. Now. Do you need to go. And do all this stuff. Right now.
+No. This is just me. Showing you. Like behind the scenes. Of how I can feel confident. About telling you guys. What to do here. Is because. I've gone through it
+myself. I've done the observe and evaluate. And elimination. And execution here myself. This is why I feel very confident. Telling you guys. Because. I've
+maneuvered through it. And I've tried it out. And I've seen it reflected back. In other projects. Yeah. These are the roles. What's the goal? Everyone here has.
+Pretty much the same. Fundamental. Impact. What we want to have created here. Which is yes. We want. To. They want to consume valuable software. Let's just do
+like. This developer here. To. Produce. Software. In. Such a way. That. Produce value in software. In such a way that. It. Is. Increasing. Easy. To do so. As
+time goes. That really is. What the developer wants. You and the other developers. Want to fix. Really. What does the user want to do? Consume value in
+software. What does the customer want? To own. Value. As. Software. And. In exchange. For as. Little. Value. Time. Money. As. Possible. Does that make sense?
+That's really. What's going on here. So. How can we do this? There's so many different ways. We could. So many different things. That go into. Making this
+happen. Right. But a large part of this. Is. If we. Break down. And. Cause we're just talking about. One part of this. Which is organizing code. This is like. A
+whole. Network. Of. Of responsibilities. Really. So. Let's see. The who. Why. What. So this is the. What. No. This is the. Why. This is the. What. And then. The
+how. So here. We have all of the different developer use cases. Like the. Of them. So me. A ton of them here. Listed out a few. I'll just drop those here. This
+is not all of them. I believe I. Called this out. In solid book earlier. I've. Maneuvered through this as well. What really got me under this was Alistair
+Cockburn's book. On. Use cases. And just. The concept of use cases in general. Was. Quite transformative for me. So those are all of the things we need to do.
+And. Organizing code. Yeah. I can drop this into the course. Long story short. I can put this into the course platform. I had planned on getting to this.
+Nonetheless. I've just been looking into his work to learn about ports and adapters. Yeah. He has an incredible book on. I believe he. Popularized. If not
+inventing. The concept of the use case. In software. Really intelligent. Fellow. It's a bit of an older book. Personally. It does go into a lot of detail. But.
+There's some stuff in there. That's a little unnecessary. I would say. For. Most people's level of working. However. Just because. It's more about. Creating
+documents and whatnot. But. I would say. Just for my level of thinking. Had a huge impact on. The way I think. So organizing code. Yeah. Damn. And this gets
+into the whole topic of humans and code. I'm not sure I could give. All of you. All this stuff right now. Instead. What I could do is. Show you. This is. I
+think the utility of solid book in general. Which is. If you want to go through the stuff in more detail. You can go and do it. The utility of the essentials of
+software essentialism. Is to. Show you the 80-20. And if you want to go piece through. And do more of the observation and evaluation. You can do that in solid
+book. Long story short. I can put this in here. And. Some of the things we want to do. Is. Like. How can you make it very easy to. Let's take one of these.
+Because we could take. Faster to move through this as well. How do you make it easy to find a use case? Okay. What is the first thing that a developer would do?
+What am I doing in my thinking right here? I'm going straight to an example, aren't I? Yes, I am. So what's one of the first things they do. Is they would. Open
+up the project repo maybe. What do I want to see. At the front of that project repo. Okay. If I don't know. If I can't understand the folder structure. And
+maybe there's not. A common folder structure. There's not that knowledge in the world. Or knowledge in the head. About how folder structures are organized. Then
+I'm not going to really know. Where the feature is. So maybe there needs to be. A sort of prompt. Or a constraint. This is Don Narmann's. The design of everyday
+things. By the way. There needs to be. Some sort of prompt. Or constraint. In the read me. That can tell me. Where I need to go. To find this thing. So. Even
+just having an awareness. Of these developer use cases. Up front. What I could do is. I can. Hook into this. And put these at the front. Of the read me. How to
+find. A feature. How to X, Y, a feature. How to this, that. If you can have those seen. Within the first. 10 seconds. This is. Like the idea. Of
+discoverability. And understanding. I talked about this in solid. But Don Norman. Talks about this in his book here. Yeah. I can't find. The one he's done here.
+But. It's definitely in solid. There's the two lanes. Of understanding. First. You have to discover. What you can do. Then you take some action. In the world.
+And then. Was that what I wanted? Then you understand. So what I do. Is I'd. In the project. Read me itself. I'd make sure. That these use cases. Are very well.
+Established. And understood. And can be seen. Within a split second. And from there. I want those. To constrain everything down. I could do. And then go into.
+Probably click into. A module folder. Now that I'm in the module folder. What are these modules? And. What are the features. Within them? Can I know. That right
+away? You can see. What's happening here. Is like. I'm still using faster. In my thinking. I'm still. Guiding my thinking. With a concrete example. This
+requires. An extreme level. Of empathy to do. Especially. If I'm doing this. Without. Actually doing it. You have to really. Project yourself. Into the
+situation. And imagine. Is someone going to get this? So. The components. That are helping me. Do this. Level of thinking. Are. If I can. In here.
+Discoverability. Understanding. The seven principles. Of design. I think there's seven. The seven principles. And. Use cases. Of course. So this is. How people.
+Learn. Achieve. Goals. And. Believe. These are. The main things. I'm using. To. Structure out. My design. Here. So. I don't know. Maybe this stuff. Could be
+useful. In the course. I haven't. Thought about dropping. All of these concepts. In here. But. I definitely. Do want to have a section. On how to organize your
+code. And at least explain. At a high level. Why. To organize your code. And I think. These are the. Main. Theoretical things. You need to be aware of. And you
+could read about. All of these. In solid book. And that will be. The utility. Which is to go. And learn all these things. Specifically. If you don't have solid
+book. Shoot me a DM. I'll give it to you. If you don't have it already. Read about this. In humans. And. And. And one other thing. Called organizing. It's a
+nose tube. All right. Let's move on. Yes. Do you have some assignments. For the stateful guest point already. I'd like to try some. I do have some. I need to
+clean them up. However. I can actually list out. A couple right now. If you want to just. Get started on those. It's also just. Sequencing. And. Sequencing
+them. In the correct order. Which is something. I need to just. Put my brain into. And. Execute on a little bit here. So. I'm going to just pull open. My. Notes
+real quick. Take a look at some of the. Capabilities. Because we also have. A philosophy for how we. Carve out. Projects for you. In this program. And the
+philosophy is. We're doing it from a milestone. Which goes into capabilities. Which goes into the projects. Which goes into the topics. And then goes into the
+lessons. And that's the way. Things should flow. That's the way. I don't know. I don't know. I don't know. So I'm just got this open. In another tab. I'm just
+going to go into my. Documents here. And. I'm going to make this page. Let's see. What do I have. And. A lot of it spread out. Okay. I'm going to make this page
+public. For a second. Turn into. Paid. And. Let's see. What do I have. I'm going to share this. With myself. And. Let's drop it right. Refresh. Okay. So let's
+see. Some of the actions. I have. Yeah. No. I was going to sit down. And move through this. A little bit differently here. Yeah. See. I haven't. Written out
+the. You remember how. When we did the first milestone. One of the first things I did. Was I wrote down. What is it you would be able to achieve. I can explain.
+A lot of that to you right now. At a high level. But. You need to be able to. Design out. In. Piece together. State machines. So that's one of the very first
+things. That I need you to be able to do. Yeah. I haven't. I think this is all. Some of this is in the. Straight line as well. Which is another document. Just
+have to move all that stuff into here. One of them is to. Yeah. Design out a state machine. And this is going to teach you. The concept of invariance. I believe
+it was. Alexandra. Alexandra. Do you. Are you aware of. Invariance. And what that is. Great. This is perfect kind of assignment. For you then. So what is an
+invariant? Lee. Yeah. Ash. I got to have this stuff. Like if this is the case. Like I could put together an assignment. Like one of the next assignments for
+you. And. Maybe if you guys gave me like 30 minutes after this. I could drop some. Assignments in there for you to get started on. If that sounds cool. But
+yeah. Like invariance. What is this? This is where we. Start to get into the concept of. Business logic and rules. Because so far. All we've really been doing
+with. Faster at the stateless level. Is just like transforming data. The model that we've been using. At this point in time. This is terrible. Let's grab this.
+Right. Like we've been using input output systems. Right. But. Output. Stop. Stop. Great. I'm actually getting excited about this. Because. This really just
+shows me the disparity. Not the disparity. Like the. The level of awareness. From where I am in my thinking. Versus where students are in their thinking. To me.
+The idea of invariance is. It's almost trivial. But I'm glad to know that. This is something that. You. Aren't even really aware of yet. So anyways. Like. With
+the stateless ones. All we do is. Data goes in. And data comes out. Right. Like with. We've seen with. Palindrome. Mom. And what's going to come out. On the
+other side of this. Of course. Because the model here. Is. Alan. Some of the processes. That it runs. Are just. Lowercase. Everything. Reverse. And. And. And.
+Okay. And that's. The processes it runs. In order to do this. Because this is the model. Everyone with me so far? Hopefully. Great. So. This is feedback level
+one. Feedback. Level. Level. One. Stateless. Now. Here's what's going to happen next. These problems. Yeah. All they really do is transform data. They just look
+at data. But. It's not. All. That. Helpful. Because in the real world. We're. Always. Dealing with. Statefulness. Problems are stateful. If I told you. Let's
+see. What kind of problem can I give you? I say. Go and. Wash these clothes. Go and wash these clothes. So. At the start. The clothes are not washed. It's not
+washed. And where do you want to be? Clothes washed. As well. So. If you're a human being. And you're doing this. Let's say. What you're going to do as a human.
+Is you're going to. Go. And you're going to get the clothes. So. Gathered clothes. That's my last name. Gathered clothes. What's the next thing you might do.
+After you gathered the clothes. Somebody call this up. Anything in between here. That you might do. Separate colors. Oh great. Separated colors. You make this
+link public. Copy link. Anyone with the link. This. G drafts. Here. Because I'm going to allow you all to mess with it. Let's see. If I. See if you can get into
+this. Put in detergent. Boom. Okay. So yeah. We're assuming that there's a machine being used. Let's assume that you're not using machine. You're doing it by
+hand. Right. So. Separated colors. Sure. Maybe. Actually yeah. Separating by colors isn't really necessary for you to do it by hand. Right. So. See how.
+Privileged I am. I don't even wash my clothes. I don't wash my clothes by hand. I can't even like really. Conceive this example. Anyways. Let's say. I know
+something else that needs to happen. This is why we start from the end. Which makes it a lot easier. I can say here. Clothes dry. Clothes dry. Right. Clothes
+clean. Is actually the last thing. Clothes dry. Clothes washed. You see what happens when you start from the end. Telling you. The technique. Okay. And then
+let's say assemble washing materials. Boom. That's how you freaking do stuff. Let's start from the end. See how fast my brain is working now. Okay. Great. So
+what have we done just now? Yeah. This washboard is from 1912 right now. Sir William Churchill's washing machine. Or just freaking washboard. So. We have is the
+first state and then the end state. And. P. Croucher grade analysis. Yes. So. How is this different? It's different because what has just happened is we have
+intermediary. Intermediate. We have states. We have states. That we can be. We're no longer just dealing with data going in and data going out. What's happening
+here is each and every single one of these states is data. To be at one of these states is a form of data. Right. So. What might be. What might go into this?
+Perhaps. The clothes. To be washed. That's probably what needs to go in. Input. And what's going to be the. I'll do that. And what's the output of this? It's
+going to be washed. I struggle with you. Clean. I like the word clean. Let's see what we're doing here. Now I need to introduce. These transitions are feeling
+functional. They should. Because it is functional. And it really doesn't matter. Like how, if you write object oriented code or functional code. This really is
+the functional part of the program. Because. You need to just recognize the paradigm doesn't matter. And I think this is where I'll talk about. Programming
+paradigms as well. See, these are like lessons. Things I need to discuss. Programming paradigms. Doesn't matter. Right. Topics. And their topic is variance.
+We're talking about variance. We're talking about transitions. Events. Talking about input data. Or no, we're talking about initial state. Right. This is all
+about state really too. So. Now clothes can go. Like every single time we move from one state to the next. What's happening here. Is. We are doing. Transition.
+And every single time we do a transition. We get something called. An event. Created. Is. We're going to get a washing machine trust. That's the next. Next
+phase here. I'm thinking about how I'm going to. Explain this to you guys. Of course. The human being needs to do all of these things. Right. Which sucks. This
+is why we have. The concept of washing machines. Because the washing machine. Can move through all of these different states. Right. Because there's rules at
+each of these states. Am I allowed to go from. Gathered clothes to. Clothes clean. I'll tell you what will happen if. It was. My mom watched me. That she beat
+me. So. Don't do that. I can't go from here to there. That's invalid. This is what we call in. Invalid. Transition. You can't do that. And. How do you enforce
+this rule? If you have a system that's modeling this. How do you enforce this rule? This is the concept of invariance. Invariant is. Their invariance. Equals a
+rule. Which really equals. Business. Logic. Which is saying what you can and cannot do. That's what this is. So as we model out our system. Because this all is.
+A system of some sort. However, this one is one that is handled. By human. And I'm going to. Walk this down. Bring them out. Change the color. Ever so slightly.
+This is a system nonetheless. And every single time we do this. We have an event. Gathered clothes is the name of that event. This is the name of that event.
+This is the name of that event. These are also. Sorry. These are states as well. So the states and events are pretty much two sides of the same. These are
+states that we're in. An event is a piece of data that represents. Hey, this state was just. We just moved to this state. So. Confusing. But we'll have to spend
+a little bit of time on that. That's all encapsulation is for. It's just to protect the way. Variance. Like what is the purpose of encapsulation? To protect the
+way the model changes. So if you have someone calling. Let's imagine this was now some code. Right. And. Let's do this real quick. Technique. And. Let's say
+this is called. I don't know. This is not a good. Washing machine. This is like. Literally a middle ages washing machine. It's human. Why am I saying that?
+Literally people do this. My bad. Anyways. Washing machine. Right. We have this here. What should I be able to say on this? It's new. Right. Should I be able to
+say. Dry. Clothes. What? It doesn't even. It's not even started. It doesn't have any clothes in it. This is not valid at all. This makes no sense. So your job
+at this point in time. Is to. Harden. This concept. Whatever this is. Wherever this is defined. Your job is to. If this has a thing called dry clothes. If
+someone tries to call this the wrong time. System. System and valid. State. It. Should. Let that. Happen. That's what we're. Trying to do here. So you need some
+logic to protect this. So what am I going to get you to do next? What's the whole point of this next. Guest point. It really is this here. We're getting clear
+on. This whole idea of state. How it's related to events. How it's related to transitions. Because. This is where we actually begin to solve problems. Because
+the way that problems are solved in the world. Because hey look. That's a problem. Isn't it? I. I have clothes that are not wash. I need to be clean. And. This
+is how we get to solving problems. Is by. Introducing the concept of state. But we want to be careful when we introduce state. Because as soon as we do that. We
+need to make sure that state is changing correctly. It's changing at the right time. It's not. Changing at the wrong time. Because. Well. Anyone ever have to.
+Huh. I mean this is funny. Anyone ever have to. Blow into their Nintendo. Or something like that. Or restart your router. All these random. Things. What's going
+on there? Or. If you're using Uber Eats or something. And. It was about to like. Purchase. But then your phone. I don't know. You got a call. Like maybe it
+didn't expect for that to happen. And then what does it do? I don't know. You end up accidentally purchasing McDonald's or something. Like. You know what I
+mean? It's just. You don't want to be able to put the system in an invalid state. Or do things that it shouldn't be able to do. And that is the role of this
+guest point. That's what we're getting at here. Alexander. Is that kind of clear? Amazing. Amazing. I'm glad to hear it. So. That's what we're trying to do
+here. So. It's on me to piece together the correct assignments for you. But I have some really interesting ones. Daniel. If I say the word. Elevate. Yeah.
+That's one of my favorite words. Around this time to say. There's an elevator assignment. I want you all to try out. Tim. I'm glad it was helpful. There is a,
+yeah, there's an elevator assignment. I want you all to do. And. Another thing in testing that is often confusing is this concept of fixtures. What is a
+fixture? Fixture it really? What does it mean? It means the initial state. So if we want to write a test. Let me grab another one of these. I'll grab this.
+Imagine you're playing. Actually. I'll grab this one more time. Cause this is a. This is a really good example. What the. Get. I like this as an example that
+just popped into my brain. Imagine we're playing tic-tac-toe. No, we're playing checkers. Cause in the game. And we want to. No, we're playing chess. Imagine
+we're playing chess. Right. And imagine that. We are. Let's say. What state are we at? Let's say we want to test. We're over here. Like the game has ended. The
+game has ended. We're playing chess. Everybody else playing checkers. Aye for real. The game has ended. That's my Drake voice. And. Let's say that. I don't
+know. Red wins. Right. And how. Let's say. What happened. Chess. Damn. Why is it escaping me right now? What do you call that? When you lose in chess. It's
+because you get. Jeez. Checkmate. Why? Yes. I forgot the. The word pool. I forgot the word pool. I was trying to describe. To someone. Pool once. I'm like.
+Yeah. It's that thing. With like. Water. And. You just. Sometimes you just. When it's hot. It's. I'm like. What is wrong with me? I could literally. Get to
+like. Aristotelian metaphysics. And all this random stuff. But I can't remember the word. Pool. What's wrong with me? I'm messing up my brain. I think. So
+anyways. The game has ended. Right. And let's say you want to write a test. Let's go over here. It. Knows that. Let's say it can. Uh-huh. And detect. A
+checkmate. This is an interesting. Problem. Now. Before I even get into this. Can you see why this is relevant? Can you see why this whole idea of statefulness
+is relevant? To be able to even solve a problem like this? Why we're doing it at this guess point. And not at the stateless one? Stateful problem. So. So let's
+say this is the end. Right. And let's say. Over here. It's the game. Has started. This is funny. Can you checkmate someone in that many steps? I don't know.
+Maybe. I try. I guess so. Obviously don't play a lot of chess. Just in real life. No. So. So. If we want to be able to. Do. Oh my god. You pulled it up. Let me
+look at this real quick. A scholar's mate. Is what it's called. Bro. Are you really a scholar? If you're getting. Dummied like that. So. Come on. All right.
+Cool. So maybe this would be. We could even call this scholar's mate. If that was something that was well known in this dummy. So it could detect a checkmate.
+And what you would do here. Is you do the sequence of steps to create that. Now let's say you. We actually wanted to make it a little bit more complex. Let's
+say we had a much more complex game. Because I'm not going to use scholar's mate actually. I just realized. That's. Probably a good example here. All we have to
+do is. I don't know what the sequence of steps is. But. It would be. This would be the act. Or it'd be like game.mool. That's. I'll play your one. Then. This.
+And then. Let's just call that position. I'm not going to even bother. Bring that in. And this would of course alternate. Damn. That's sad. Fool's mate. Oh. So
+you could be a scholar. Or you could be a fool. Magic getting. Oh my god. That's. Yeah. I'd rather get scholar. Getting scholars. Mated in that game. Sounds a
+lot better than getting fools. Mated. I'll go with that. Sure. You might have the sequence of steps here. So one, two, three, four. This would map up to. One.
+Two. Three. And then I would need another one in there to make this clear. But you get the idea. So I'll remove one of these maybe. And then let's say, what do
+I want to validate here? I want to assert. And I'm going to use programming by wishful thinking to like describe this. But I want to expect. Like, how could I
+do that? Game.get. Game.state. Maybe I'll say that. And I'll say that. Maybe 2d. End. And then, oh, it's interesting. The game is over. Or maybe this is where I
+would have to think about a little bit of the API design. I'm just getting this rough. I also want to be able to detect that it's a checkmate. It's D. So get
+game. I don't know. This is terrible API design. End.reason. And maybe be like. Checkmate. And maybe I want to actually verify that even deeper.
+Game.reason.type. Maybe we'll call it checkmate. There's an assignment, by the way, you should be doing in this section here. That would be, if you haven't done
+this already, this is the password validator. It's forcing you to work backwards like this and carve up the API design. I did a quick video on that called
+Arrange ActiveSert Backwards and Program Biological Thinking. So definitely watch that in order to do what I'm doing right here. Piece out the API backwards.
+So, yeah, maybe the type would be called that. And then the, finally, I would want to know, like, which pieces were affected. Right? Like, pieces. Like, I'm not
+going to get too deep into it here. But I effectively want to be able to detect which piece was affected, why it was affected, whose piece it was. And I want
+all of that to be true. I want that to describe the state of the universe, of the world right here. Where the game has ended for the reason I've just specified.
+And I want that to be the case. So, let's see if I wanted to verify this. Now, these lines of code right here. I'm acting it out. Right? I'm doing this line by
+line. But let's say I wanted to verify this. With a much more complex game state. Let's see the game state was actually like all these different freaking moves.
+Now, do I want to have this in my test? Probably not. Right? Okay. This whole thing right here. All of this setup. We could, because we could move it to setup.
+We could declare this as being a part of this setup code. No fill zone. Damn it. We're at this. I'm very glad. All of this stuff here. We could effectively
+declare this as setup code. Because this is all changing the state. So, what if we just said, hey, let's make this the initial state for our next test. We want
+to have this act as like the initial state. And what we could do is we could use a, this is also one of the assignments I want you guys to use. Because I need
+you to learn this topic. It's the concept of the builder. The builder pattern. Because what we could do is we can clean up our tests by moving all the stuff.
+Encapsulating it away. So that we can set up the initial state. Because initial state is equivalent to fixture. Or initial state for a test. Encapsulate all
+this away using a builder. So maybe using this could look something like instead of all that. Let's grab this in. How might we clean this up? Let's see. Game.
+Maybe we have a game builder. And I'm, again, I'm using program by wishful thinking. This does not exist. Of course it doesn't exist. I'm doing figment driven
+design right now. But it wouldn't exist. And I'm just think about it. How would I like to express the fact that the game could be started from an initial state?
+Game builder dot. How about wit? With. Maybe I could grab this from. Maybe I can have all these moves saved in a file. Right? Maybe I could start naming
+different game states. Like commonly known game states. So maybe I'll actually do that with common game state. Or actually game builder. I'll call it from
+common game state. And maybe let's start naming those. Maybe I have something called a game. Test. Test. Until. I don't know. Game test. Util. Or something like
+that. This essentially would be. You don't know about this yet. Like a service provider. Something that's just. As a. Helping tool for us. I don't love that
+name. I'd have to think about that. But we'll go for. With it right now. Just because. Naming is a process. It's a terrible name. Actually no. We'll do game.
+States. We'll call it that for now. I don't know. From common game states. I don't know. Maybe this would be like. Let's call this. The most brutal game ever.
+Maybe this is something well known to you and your team. Right? You guys can describe what that is. And this would just be a sequence of. All of these moves
+here. Because if I come over here. Sprout bat. In states. Class. Game states. And not that this is the best design. It's really not the best design. But it
+works. You ever. What might this do? It might have to figure out a way. Sister. Yeah. This is not a great design. But. This would find a way. What you would
+want to do here. Is you want to make sure that this. Maybe takes in the game. And. It applies these moves to the game. And then it returns the game. See what's
+going on here? All of this stuff. We don't have to think about it right now. Just. That out of your mind. Think about what it is you want to have. This is the
+concept of the builder. This is you. Just. Ideating. Programming by which. We're thinking of the cleanest way. You can express what you want to express.
+Treating. Your code. As your paintbrush. What is it that I want to happen? We'll figure out how to make it happen later. It's just. Highest level of
+abstraction. You could think at. One of the highest. Second highest. This is the highest. And then you say. The build maybe. Boom. And what are you going to
+get? Game. Is what it's going to give you. Boom. And then now you're going to assert on that. And you're going to do the same asserts we talked about. And yeah.
+Y'all got that? The builder. Does this make sense? The concept of the builder. In the initial state. There's a fixture. Am I clear? Okay. Cool. So. These are
+some of the things I want you to start practicing. Now you have a little bit of the lessons on this. I'm going to upload this video. And. Yeah. Give me some
+time. If not tonight. Tomorrow. I'm going to have some. Assignments up for you. To just get started on this. I probably will have to think about a way to.
+Because we're using the GitHub right now. And I'm going to have to update that. Project. However. It's going to. Immediately. Have your project be out of date
+with mine. If you've already pulled it. So. That's something I'm going to have to probably record another video on. If someone else wants to do that. As you do
+it. List out the steps that you do. And just. Send it into the course chat. Incredible. That would save me some time. And I'd appreciate that. But yeah. You're
+going to have to pull the new stuff. You could use Loom. To do that. Whatever. It's great too. I use it all the time. Okay. Cool. So. That's pretty much that
+there. I think we had one other question. So. These are some of the things we'll get into. Very shortly. Last question here. When you. Khalil. Finish the
+course. Will we have all the theory and practice. Covered with video material. Easy question to answer. Yes. That's the idea here. I want this to all be video.
+And once the curriculum is. Tightened. I have all of this material. Just spread out. In documents. Like. From teaching. The software essentialist mentorship
+students. From my own learning. I. The thing that is really concrete here. Is. What you guys need to know. At which point. Which truly is the straight line. The
+capabilities. In sequence. In the topics that you need to learn. That really truly is what I have. Like. Iron clad. The thing that needs to be a little bit
+cleaner here. Is just. Structuring out. How much of this topic. Should I show you right now. What is. Not. What is sending you down a path. And. Yeah. Just
+like. Also some of these. Like clarity. On some of the assignments as well. Like. It's very easy to pull these assignments out. And get you guys to start doing
+them. It's just. I have to. Write them out. And some of them. Especially in the next guess point. Because we're getting into guess point two. This is really fun
+and easy. Is. Subjective. But guess point two. Is relatively easy for me. As an instructor. To carve out. The harder one is guess point three. Because that's
+when we're getting into. Application level stuff. And that's going to have to be split. Into like. Maybe three or four different parts. Because there's a lot to
+cover. So I think what I'm going to do. Is just get you all the. Some of the guess point two things. To start with. Start getting your. Assignments into the
+feedback loop. So I can start reviewing them. And as you run into problems. And challenges. I want to know about those things. So that I can tune the
+assignments. And. Start chucking the. Educational materials in there as well. To help assist you. Anyone else have any other questions. Before we. I'm just
+checking the time here. We're at time. However. I want to carve out some more time. For anyone else. That has. Something they want to. Talk about. Anything
+else. Key. Pressing. For us to get. I'm going to record. Actually. I'm going to be. Uploading this video. By the way. Daniel says he's Gucci. Daniel's Gucci.
+Y'all Gucci. Write that down. Jot that. Yeah. Sick book. Essentialism is a. Very good. What else am I reading these days? I haven't even really had a chance to
+read much else. How has it helped you? If you don't mind sharing some of. What's forced you to think. I've even been talking to some of the other students. And
+just by working backwards with TD. Like it forces you to. Play. A little bit of. And work backwards. I've heard that this is just. It has stretched. Their
+brains a little bit. In a way where. Like just in life. In general. I feel like it's very easy to dilly dally. And. Not really accomplish what you want to
+accomplish. What I do every single day. Is I write down. I do this process. This thing that you just saw here. I do this every day. What do we need to have
+next? Where do I want to be next? What is the state of the universe. That I will be in. And then what that does is. It carves the. Pieces moving back. To make
+that happen. And this is not new. We've seen this. And the. The mastery foundations content. Drew this up. Can you see that there? It's all coming together now.
+Isn't it? Yes. So. I keep dialing back to. What's important now. Says VDM. And whenever I come. Across call. Like subjects. I dial it. Back to the essentials.
+And first principles. Because those never change. Yeah. And the thing that's going to give you confidence. Is when you feel like. I'm done. Taking in
+information. And that's it. I've gone and done. Training. Like mentorship. Courses like before. Like I've flown out. I've done trainings. Business trainings.
+Social skills trainings. And it's really interesting that. Like speaking training. I've done a bunch of different things. And. What I've noticed is. You just
+need. Like a rite of passage. Really. You need someone. Who has. Sifted through it. To say. You're good. You're done. Or you go through yourself. And you say.
+That's it. I've gone through all this stuff. Observe and evaluate. Is done. But if you get. The sign off. From someone else. Now you're. Oh. It's now. We are
+now equals. Like. Mentor mentee. Relationship is over. You are now. You're no longer a student. Go out. And do stuff. If you get that. Set up. Then you feel
+like. Yeah. Okay. I have the confidence now. So. Observe and evaluating. Going through everything. Is going to help you with that. Or getting a mentor. Be like.
+Alright. You're good. Get out there. And that's essentially. What I want to do in this course. And I just learned in Kajabi. I could give you all. Certificates
+of completion. Once you complete. Because. Yeah. That's what I want to do. One. Specific milestone. One specific thing. You want to do. Is this quiz. You want
+to get. All the way up to here. In the course. Take this quiz here. This is going to be like. A quick. Like little sanity check. On. Hey. Did you get. What you
+needed to get done. Done. How are you feeling. About your skills. Thus far. I see that there's a question. In here. Little. Little question. I've just joined
+the course. I see a lot of the topics. Already been discussed. And worked out. Would it take much time. To get up to speed. But still. I feel like. It makes
+sense. To do the course. Along with others. Maybe I'm late. You're absolutely not late. At all. This course. Is currently being. Developed out. You're in the
+early. Adopter phase. Of the course. My friend. I think I need to update. A little bit. Of the videos. I need to shift. This all over. To evergreen. But you are
+absolutely. Not late. At all. This is also. A self-paced course. Too. Which means. You could do it. At your own time. However. I am on a mission. Right now. To
+get this. Completely. The V1. Of this course. All developed out. So that everyone. Could go through. And do all of the assignments. And then I'm going to circle
+back. And clean it all up. Using all the feedback. I get from you all. And then release it. Finally. Full version. And then I'm going to shift over. To doing.
+To turning it into the book. And finally finishing. Solid book as well. This year. So that's a big. Architecture of the plan. So no. You're not late. You can
+move through. The content in the course. I don't think it's going to take you that long. There's only that first set of exercises. That have. Been put out. And
+those have been out. For a little while. And I do know. That some developers. Just went. And flow. Just flew through those. Like in. I don't know. Like less
+than a week. A few days. You're. If you're. You think you're behind. Your only. About a month behind. But you're not even a month behind at all. Because it.
+Will only take you. Maybe. A few days. To catch up. If that. And if you want to just make sure. You're at a good point. We're also starting from. The beginning
+as well. Because some of the devs that are here. In the program. I've gone and I've pieced in some content. That wasn't actually there before. For example. This
+one to five fast track. Was not there before. So. The thing that you're going to want to go and do is. Move through this. Just like piece by piece. But also
+there's the action item checklist. Right here. And this has all of the. Definitive things you. Want to make sure you're doing. If you go through and do all
+this. In sequence. You're caught up. Hopefully that's it. Daniel says here that we've. Mainly done. The first set. And. I'd like to host. Some mob programming
+sessions as well. Now that's going to be cool. Because last. I think it was last week. Daniel. And. Manny. Did a pair of programming session. We're going to
+have more of those things. And we're going to just have more. Going on in here in general. It's only going to get better. As this course is done. We have more
+time. Resources to just feed back into it. So. We're in a good place. All right. So. I will. Stay in here. Let's just do a couple more minutes. Anyone else have
+anything. Big. They want to. Ask. Questions. Concerns. Comments. I want the course. But I am poor. Are you poor? Are you rich in spirit? Where am I hosting this
+by the way? This is course events channel. Oh. This is like super public. Okay. I got it. So. The thing about the discount is. We're done with the discount now.
+The course is going to be developed out. I'm building it out right now. But what's going to happen is. We're going to. Split it into smaller pieces. So that it
+is. Digestible. And. Consumable. And. Affordable. For everyone else. Like in different parts. So. There's still a major discount right now. On the course. In
+the early adopter phase. But the massive 60. Going down to 85% off. Of the course. That's done. That was the pre-launch. And we're not doing that anymore. I got
+your book. But the course is out of my possibilities. Yes. I understand. I think after I also finish the course. I will consider. How to. Work in the. Payment
+purchase. Parody stuff. But. Yeah. That's a whole. Thing for. That's probably like a V2 thing. So I would wait on that. Yeah. Because I can't be doing that
+right now. How could I fit the faster framework to work in the team. In the upfront design phase, perhaps. Are there techniques to work with more than one dev?
+Absolutely. Any tips on how to work with the calendar? Can you give me more clarity on how to work with the calendar? What do you mean by that specifically? Do
+you mean planning? Or do you mean like a calendar design problem? Planning. Meetings. I don't like meetings. And planning is a lie. In my opinion. You have
+plans. You don't have a plan. Yeah. All this talk about agile and whatnot. Look. Like. What's going on here with this course is. Things have. Even me building
+this out. Things have changed really fast. Because I'm so down to just. Completely scrap what I've just been doing. And just learn from reality. Learn from. You
+guys are effectively the users. And the customer. So. There's the ways that I'm working. And just completely scrap that. If it's not working. Or if I hear
+something differently. So. Takes a lot of that. How could you fit this in? Well I would want a very particular example. I'm trying to fit this in with my work.
+Maybe it's a different topic. Yeah. I would say it's. A fundamentally different. Topic in general. Yeah. Don't. I don't think you should go. And. Start. Trying
+to get them to buy into. This whole thing. Just yet. There's people who do event. Storming. There's people that do. Impact mapping. There's people that do. All
+these techniques. There's people that do. In their workplace. But never ever once mentioned. They don't mention any of these things. They inherently are aware
+of them. But they don't mention them. And I think that's the idea here. By you being a value first developer. It's just about you making better decisions
+really. So. Yeah. As Daniel's saying here. Regardless of the idea. So. You hand chart. Sorry Khalil. Maybe I missed it earlier. And you already. Wrote it
+already. But I'm curious. If you have an estimation. Of when. In your opinion. V1 of this course will be ready. If not. So. I just wanted to help. My own
+planning. I have some personal deadlines. I've set for myself. However. I don't want them to translate. Into expectations. The personal deadline. I've made for
+myself. I want to get as much. As I can get done. Possible. In the physical. By the end of this month. If possible. I want to get the physical. Done. This
+month. Even if it's just like. Very bare bones. That's my personal goal. So. Do not quote me on that. Do not take that. As an expectation. But. I'm going hard
+in the paint. Right now. To. Trying it. As much of this done. As I can. And. I think it should go. A lot faster now too. Because. What really slowed me down. A
+lot. During this first phase. Was just getting clarity. On how I'm going to piece. The content for you all. Like. Even the. Summaries. From one to five. Like. I
+spent way too much time on that. Because it was all philosophy. And. I realized. Through. Some of the other members. In the community. Just. Bruh. This is not
+even really. Hooking with me right now. I need. I just need to be doing work. So great. Like. For the software. Essentialist. Mentorship students. You have.
+Daniel. Seen my straight line. Document that I made for him. And I've. Put that together. Pretty quickly. And I was just like. Here. Go. And do this. Go. And do
+this. Go. And do that. That didn't take me very long to do. However. I was able to give it to him. And allow him to just run into challenges. And it wasn't a
+whole lot of. Organized content. It was more just discussions. Like. Here. Go do this. And come back when you get stuck. Here. Go do this. Come back when you
+get stuck. Go do this. Come back when you get stuck. And we recorded some videos. We had discussions. And we learned a lot. Doing that. So I have. The majority
+of this stuff. Already pieced out. For you. It's just about. Now. Structuring it. Into content. And I've made a lot of refinements. On how I structure. And
+design. And develop content. So I estimate. That it should be. Getting done a lot faster. Than it's been getting done before. Since I have a lot more clarity
+here. And thus. Is the refinement. Of the feedback loop. And that's how that goes. So. Hopefully. Yeah. Dude. Those summaries. I had to cut them down. They were
+even. They were even larger than that. So thanks for asking that question. I just want to be very clear. With you all. On. Like. Expectations. And. Deadlines.
+And. When I could get stuff done. I just want to make sure. I'm promising. What I could reasonably do. But also. Just taking into consideration. The fact is.
+Essential number. Two is the feedback loop. And it's. And also. Essential number one. Is software essentialism. And this is all a guess. So. It's very hard. To
+give you concrete. Concrete dates. But. Estimates. Estimates. So. Yeah. I could probably give you. A more. A better estimate. Which is. Definitely though. One
+thousand percent. We're going to have. The stateless stuff done. By the end of this month. For sure. For sure. That's going to be done. By the end of this
+month. And we might have some of the. Yeah. We might have some of the. Level. Three. Application. Content. Out. Like. Also. Finished. By the end of this month.
+Some of that. Fully. Finished. But. I will. As I mentioned. In the update. This week. I'm going to prioritize. Just getting the assignments out. For those of
+you. Who just want to. Run ahead. And go. Try stuff. So I'm going to get those out. So you can go. And do similar to what. Daniel and I did. Where. Yeah. You
+just go. Try the assignments. Come back. You got stuck. And. I'll get a lot of feedback. From you. All doing that. And I'm sure y'all. Will get a lot of. Value
+out of it. As well. So hard for me to get off of here. I love talking to y'all. Please. If you have another question. I'm going to hang out for five more
+minutes. At six o'clock. I'm out of here. Six o'clock. My. Yeah. It's. Dude. It's like. Daniel says. I love that. The course creation. Is also an exercise of
+the content. Yeah. It's super meta. Totally is. Because what's happening here. Is I'm shipping value. Am I not? It's not software as value. It's like
+information. Or education content. As value. So. It's always the same stuff. It's all loops. Yeah. Exactly. When I started out. I had. Like the rough idea. So
+yeah. Where is that on the map? I had the theoretical problem. And the solution of it. I had the general architecture. I still have that. Have all these things.
+And then there's actual. The physical. So. Piecing that out. So a lot of this. I didn't really have a clear enough process. On how I would ship it out to you.
+To try doing fully video. Super high quality full video. It's okay. That was way too much. Came back. Just do this all as text. Like full blown docs. It's okay.
+That's also a lot. Especially for the philosophical stuff. And now it's just okay. Milestone. Minimum amount of content. Required. To accomplish that milestone.
+Boom. That's what we're doing. And sometimes that might be me doing a loom video. Sometimes it might be some text. Let's ship that V1. And then. Stack the
+theoretical guesses. So that means. Theoretically. Did my solution to the problem work for you? Did you get a result? Yes or no? If it did. Great. Now let's.
+Optimize the physical. Which means. Make the videos. Make the text stuff better. So translate it all the video. So really. We're doing the exact same thing I'm
+describing to you. Like. For you to be doing in software. I'm doing that in course development. Okay. So just to give context. I work in a software house. And
+we're building a lot of different software. Mobile apps. We're starting to grow now. But we don't have a clear way to work yet. Building software. That's why I
+asked that question before. I know maybe it's a very different topic from the course. But if you have some advice for topics that I should learn. It will help
+me a lot. Yeah. I think we're going to. This is a topic. To be discussed in the course as well. I think this is more of like a bridging the gap kind of
+territory. Or. Yeah. Very likely it is. Because. Time is valued as well. If I take three months to put out the next batch of content. That's negative value for
+you guys. So I don't want that to happen. So you working effectively. And you planning. And shipping things out. That's also key as well. So maybe what I could
+do here is. Consider that. I'm going to take your feedback there. And I'm going to. Chuck that in here as well. Right. Talk is related. See you later Daniel.
+You just grab this. And then you grab this as well. Now let's just put these two in here. For now. Let's toss that there as well. Like I could tell you right
+now. Just. Thinking backwards is going to be huge. Impact mapping is huge. Some of this stuff we do get into. We have to talk about impact mapping. And the
+theoretical. Also. This whole. The reason why I say it is all relevant. Is because. What you need to be doing here. Is developing your. Decision making
+abilities. So. You planning. What you're going to focus on. You planning when things are going to get done. All. Like you even estimating out. The work that you
+need to do. There's something called. Tracer bullets. There's something called. Tracer bullets. It's called the walking skeleton. It's one of the essentials.
+That we. Are going to talk about a little bit later on. That's about you. Just getting the minimal. Version of the architecture. Out as fast as possible. So
+that you can iterate on it. So that you can learn. So that you can learn. How fast you work. So that you could learn. So that you can make better guesses.
+Because. It really truly. Is just all about making. Better guesses. Like. So it's. I can't give you like a solid. Here's how to. Estimate your project. Like
+this. It's a strategic. Game. It's a game. To be played in a strategy. And it's going to. Involve looking at. Your current puzzle pieces. The state of those
+pieces. And where we are in the game. To. Like. Voice that out. But the thing that's going to be. Common is. You're always going to have. Some elements. Of the
+value creation system. More or less fleshed out. And. It's always going to be wise. To flesh. Some of these things out. Like the architecture bit. Have that
+more fleshed out. Because that's going to help you go faster. And also having a process fleshed out. With these things too. Will help you go faster. But. Maybe
+we should talk about this. A little bit more. Because I do like this. Topic. And I would like to explore it more. However. I'm going to take the learnings here.
+Just developing this course out. And probably. Splay a lot of that. On to. How I'd recommend to work. This stuff here. Also. When we get into bridging the gap.
+And we have to build our own projects. From scratch. Some of you. Probably won't have time to do that. Some of you will. Those of you that do. The goal is going
+to be for us. To get to value as fast as possible. So that's also going to be an exercise of time management. Planning. And meetings. And stuff like that. Man.
+It just. Meetings. I feel like you could save time. Like. Again. Can you give back time. And enrich time. With meetings. What do I use? I use a tool called
+Loom. In fact. I'm using it right now. To record this video. I use this tool called Loom. And I don't even have to really be in meetings. If. Oftentimes. I
+don't need to. Yeah. This. I can't give you blanket advice on that. Like. Even what I just said there. It needs to be taken to a grain of salt. Anyways. I'm
+going to leave it right there. So. Gentlemen that are in this right now. I will be seeing you. Very soon. There will be some assignments. Coming out. Stay tuned
+on that. Thank you for being a part of this community. Yeah. Just let me serve you guys. This has been fun. Let's keep it going here. And see if I can get some
+stuff shipped out. Fast as possible. And keep the feedback coming in. If you guys have ideas. Things of improvement. This has really been helpful for me to hear
+from you all. I'm building this for you. So. Let me hear it. With that said. I'm going to jump out of here. Everyone enjoy your weekend. And I'll see you all
+soon. Peace. You're welcome. I'll see you all soon. Everybody starts from there. Sorry. Maybe I'm going to jump out of here. Then I'll see you all soon. Bye.
+Bye. Bye. Sbchao. Bye. Not great. Thank you. Thank you. Thank you. Thank you. Thank you.

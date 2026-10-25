@@ -1,0 +1,12 @@
+What do we want to do in terms of how we're going to be implementing abstraction? Because let's remember that at a high level, the highest level of abstraction
+is just the high level steps and events. And we need to carry out the subroutines of those steps and events. And if we're going to do it using functions, it's
+just going to be scripts talking to other scripts. However, if we're using classes, it's going to be objects which have connections or references to other
+objects. And it's going to be a network of objects that talk to each other that do work. So that's the conceptual model for functional versus object oriented.
+Now, in terms of the actual syntax, if you're here in the course at this point, you're probably the type of person that's, it wouldn't be very hard for you to
+find out how classes and objects work. When I do use them, I will call things out. But for the most part, it's fairly straightforward. And I always recommend
+using the AI tools to just ask, Hey, what is this? Hey, why did we do this thing here? You don't actually need to know anything about object oriented
+programming, but I'm going to begin using objects in the best practice first phase. And I'll explain why I'm doing what I'm doing and why it's effective when we
+get there. And I will be using also throughout the rest of the course past the best practice first phase. Predominantly objects because one, I really liked them
+too. I love the expressiveness and the amount of control you get. And yeah, I also think it does encapsulation and information hiding very well. What do you
+need to know about object oriented programming? Not much, not much at all. And if you wanted to know more, yeah, you could go online, watch a quick crash course
+on it. I don't think that would particularly be necessary.

@@ -1,0 +1,61 @@
+What's up crafters, Khalil here. In this video, I'm going to be doing a review of stats calculator, where you take a look at some submissions and walk through
+it. Stats calculator. What is this one all about? Well, the idea is to actually process some incoming integers, and then you're going to report on those. So
+pretty straightforward, not anything overly complex here. There's just a number of ways you could implement this. And it's kind of the challenge. So faster here
+is supposed to help you think through how you're going to design your solution out here. So here's how I think about it. You know, you have this sequence of
+incoming into, you know, you have to, but what are you going to do? Are you going to return an object? Are you going to run one big string, a series? Are you
+going to return an array? How exactly are you going to implement this higher level functionality? This thing that's being asked for here. This is the what, and
+there's a number of different ways we can implement the how. So that is a key distinction. Here's how I would think through this assignment using faster. What I
+would do is begin with find. If I, and here I'm actually getting more clear on explaining to you what you should really be looking for at each part here using
+finder. So the responsibilities, these are from the description here. Each of these things that this should know and do. Those are responsibilities. So at the
+find step, you want to think through your responsibilities and examples. And then of course, you're going to do the same things we did last time in the previous
+assignment. However, I am adding this new. Note here that you want to clarify before you verify. Well, this, this means getting clear on what the objects look
+like, the input and the output and how you're going to verify what it is. So really this here, this design principle here, clarify before you verify, which is,
+is to yes, get clear on how you're going to verify the responsibilities is the what. And then we're getting clear on how we're going to do that. So this is
+where you would want to make that decision about object, string, arrays, however you're going to do it. And again, as I've said before, this upfront part could
+just happen in your mind. You could be doing this in, you know, a split second, a millisecond before you actually do your code in the emergent section. When
+you're at your tests, you can kind of do it in the middle, but you could also do this stuff upfront. You could decide, maybe take a second to think through how
+you're going to make this and then step in and do your emergent tests. So hopefully that gives you a little bit of context for this assignment here. Now I'm
+going to go and jump over to the discord and we're going to look through and find a stats calculator and pull that up. So this one here, right? So let's take a
+look at the final result here. First things first, you can see the entire file stats calculator first input, second, third. Okay, cool. So these are just a few
+different inputs. So it should return minimum value bill to return minimum value among past. So I'm just going to read through this for a second here that I'll
+give some of my thoughts and comments. Okay, great. So I just took a second to look at this. Of course, it's always going to be good if it works, but what's
+going to make this really great and exceptional is if we have followed the creating checklist here. I'm going to say for this one, and I've added this in later,
+by the way, this was, this assignment was done much earlier. You want to use the each feed test to parameterize these added. I've also added that as a key
+refinement that you can make to your test code when you're doing the refine step here too. Otherwise, this looks pretty good. Looking at the end result. Yeah.
+Like parameterize some of this stuff, but I do like the fact that you're using concrete examples to guide these and that you have the responsibility actually
+wrapping the examples. So this is really nice. Responsibility, example, example, responsibility, example, example. Good, good. Yeah. Yeah. The only way I would
+clean this up is me parameterize these parameterize these and parameterize those. So that's the feedback that I'm going to give here as for the other aspect of
+this, like working backwards and programming by wishful thinking. I can't fully tell by looking at your green commits here backwards, but I can see if you're
+doing baby steps, which is actually ideal. So you started out here with nothing and you've defined the structure. So that's great. Look at that. I said to
+clarify before you verify, and you've actually clear. This is the shape of what you're going to return. And you've gone ahead and return that right away. And
+you've even strictly typed what it is you're going to return with your calculate stacks. So in the clarify before you verify step, it's great to get a full
+picture of that input output system. One you've chosen to use a function here, which is great. And we'll pass the numbers and return stats. Nicely done. Nicely
+done. So that is a good example of how you can clarify before you verify. And I'm seeing that there. And if we look at this next test, we'll see that we have
+several of these examples come in first input, second, third. Yeah. We want to encapsulate what varies. So if you're going to be writing this here. And you're
+going to be writing this here. You're going to be writing this here. In order to make this more flexible and stable, what you want to do is encast this in this
+as a part of your test code. That's potential refactoring. That's good because if you were to change something in here or to change one of these, you know, you
+want the thing that you're going to change reflect everywhere that it exists. So it's best not to stringly represent these things and then have them represented
+here as well. It's best to have them be one whole thing. And in one of the previous demonstrations, I believe I showed how you can do this. Parameterization is
+going to help you with this. So that's going to help you clean up your code. Always look for how you can encapsulate what varies. And these are the things you
+want to encapsulate. So yeah, use the parameterization technique to do that. So a quick comment here. Ben asks a question about when you have a case that
+handles all positive integers. And a case that handles all handles integers, including zero and a case that handles all negative integers. I wonder if it makes
+sense to state your intentions explicitly here. I know that. I think you could do that and state the abstract as well. Thoughts. So. Here, what he's done is he
+should return maximum value of among past. And that's what's being explored here in these tests. So testing max, max testing against max. And that's, that's
+what's being actually asserted against is the max because you can assert against some of the other things in here as well. However, that's what's being asserted
+against here. Yeah. Ben asks, does it make sense for you to also state that? The responsibility here too, for some of these other things, you know, one thing
+you could do to make this even more clear. If you had these cases is you could name these cases instead of first input, second input, third input. You could
+name these cases a little bit better. You could say this is a, like one of the standard inputs from the assignment. You could name this input containing zeros
+input containing this, that. Right. Names are not something to be wasted. Names actually do a lot. So if you wanted to express that you have these different
+inputs for value that you could use to express these edge cases, that would be a great use of names is to give those names that can express that a little bit
+better. So I think that's a nice little distinction and we can move along. I've also just embellished this a little bit too. I've also just embellished this as
+well to demonstrate what some of those could look like. Assignment input containing zeros input with negative numbers, five numbers. Those would be really good
+names you could use instead of first input, second input, third input, all potential improvements. So with this assignment, I think this was also done pretty
+well. Um, the things to call out here are number one, let's get some parameterization going. That is my, probably the main feedback feedback. Number two is
+let's utilize these names instead of first input, second input, third input. Let's utilize those names a little more effectively here where we can actually have
+those express the edge case, describe the cases in the variable names. Uh, and that could give you further ideas for how to refine this even more. Uh, the other
+feedback is to encapsulate what varies. So I see you have the, and this is going to be solved with parameterization, but you have these string representations
+of the examples here. So if he were to take these and use parameterization, you could actually encapsulate what varies and have those in one place. So I think
+that's the main feedback I have for this one here. So I'll leave the video there. I hope that was helpful. Otherwise this was well done. You know, we're always
+going to have improvements that we could do on our assignments. So these videos aren't really saying you're doing anything wrong. These are just ways that we
+could take things further and make them better. All right. With that being said, cut the video. I'll see you in the next one. And as always to mastery. Thank
+you.

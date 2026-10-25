@@ -1,0 +1,85 @@
+What's going on crafters, Khalil here, and what we're going to be looking at today is how to use faster at the stateless guest point. Or where should you be
+right now? So far, using the emergent design process, kind of getting the physical mechanics to practice the emergent design aspect of fast, which is like this
+stuff down here at the bottom. And this is a red green refactor. This is the three laws of TDD. And the reason why I wanted you to start with that first was,
+and we called this out earlier on, was because there's two parts to this. There's the upfront and there's the emergent. The physical mechanics are a really good
+way to begin. However, the upfront part of this is something that we also need to invest some time and energy into learning. However, kind of hard to do them
+both at the same time. So I wanted you to get the physical mechanics down. So hopefully you've done FizzBuzz, you've done Palindrome, and those should have been
+relatively straightforward for you to do. And now what we're going to be doing is we're going to be getting into problems that are a little bit more
+challenging. They're going to call on you to do a little bit more design. Let's get into that specifically. So faster is, you know, it's the design method that
+we are going to be using throughout the duration of the program. This is a tool I've put together that is going to help you solve problems at each of the
+different guest points. And the one that we're starting at right now is the stateless guest point. This is the first feedback loop level. And I want to begin to
+solve our problems incorporating this theoretical upfront design aspect. Now, what is this upfront design aspect? Why does that matter? When you've been doing
+your simple problems, FizzBuzz and Palindrome, you probably haven't really had to do a whole lot of upfront design thinking. Because this is such a simple guest
+point, it's literally just inputs, outputs, and maybe you're processing the data in the middle. Now, going back to the systems thinking stuff we've talked
+about, if we are just thinking about the stateless guest point on that level, problems are very, very easy to be done. And you can solve them pretty much just
+in your mind, go straight to the code and make it happen. Now, as we get into more complex problems, what's going to happen here is you're not going to be able
+to just go straight to your brain and start coding it on the fly. Sometimes what happens is when problems get more complex, you're actually going to have to
+incorporate more of the upfront design process on a piece of paper, on a whiteboard, or even using the three-step responsibility-driven design process that
+we're going to get into a little bit later. What I want us to do here is to just introduce you to all of this upfront here with the simplest guess point,
+because as we move to the other levels, for example, at the application level, this is a lot harder. The problems you're solving there are quite involved. And
+if even if we were to move to the end-to-end level, for example, how would you do end-to-end testing, solving a problem at that level? And let's even say you
+were building a scraper of some sort or a web browser automation. You have to do it end-to-end. What's going on there is these problems get more tricky, more
+complex. And what FASTER is going to help us do is streamline this process and make it consistent. So let's get into how we can do this now at the stateless
+guess point. And by the way, the problem that we're going to be doing this with is going to be the password evaluator. So all problems you get, they're going to
+start out with a problem statement of some sort. And if I come over to here, kind of the visualization of the inputs and outputs of each and every part of the
+FASTER process from find, architect, automate, specify, test, and refine, and this goes in a loop. The very first thing we want to do is this first system,
+which is defined. Let's talk about the inputs. It's the problem statement. It could be a design story, a rough description, a vague example. Our goal, what we
+want as the output of this is we want to have a clear understanding of the responsibilities and some examples. Yes. So responsibilities, this comes from
+responsibility driven design and they're either doing or knowing. So for example, if you have a class called user, maybe it does something called set name. That
+is something it does. And maybe it has something called get name. And this is implies that it knows something. So all of your requirements ever are going to be
+things that are done or they're going to be things that are known. So you either do something or, you know, so if we take in the problem statement here, it says
+to write a function or a class for validating passwords. Passwords must meet the following criteria. All of these things here are things that need to be done.
+We need to validate passwords. So I would say the doing here to validate password. Right. And I could actually go over here and I might write this in a to view
+file. Validate password. Password password. And it should also know that password between five and 15 characters long is valid. It also needs to, so between
+five and 15 is valid. And then that also implies outside of that is not valid. It contains at least one digit. So with these, it knows that passwords without at
+least one digit are not valid. So really it's, it is just one thing we're doing and we have all of these different knowings. And this is really going to be the
+majority of the tests that we're writing. So that's kind of part of what we need to do here as the processes. The other process we need to do, and we probably
+should have started with this one. And this is to determine the starting guess point by the problem statement. Now, as I mentioned, the problem statement you
+could be given, this could be, it doesn't have to be as clean as this one here, where this one's literally telling us we need to write a function or a class for
+validating passwords. What's happening here with the problem statement is it's giving us a sign of the system under test. And the system under test here is,
+that's just like, what is it that we're actually testing? What components are required? It's just going to be a function or a static method, because we know
+that that's how this works at the stateless guess point. However, as we kind of continue along and we do this process through some of the other guess points,
+I'm going to give you problem statements that you're not going to know exactly which guess point we need to start at. And you're going to have to get a sense of
+which one that is. And you'll be able to find that by the process of elimination, but also just by reading this, the problem statement and mapping that to what
+subject under test, it seems like it needs to be exercised under. Because really you could take the same thing and you can apply this, the end to end guess
+point. You could apply this at the application guess point. You could even apply this at the stateful guess point. I'm making it very easy for you now because
+we're working at this guess point. So we'll find that a little bit later on. So that's all of this kind of stuff we need to do here at this first find step. We
+need to find, or we need to get the responsibilities in some of the examples as the output. Now, what are the examples? Examples would be concrete examples of
+this. So if this is the responsibilities examples would be mom. And then we know that it's not. Right. And we have mom and then five, five, five. Let that is
+valid. So those are the concrete examples. And for us to move from find to the next step, we want to have this understood, or we want to know that we have the
+ability to have this understood. Now, if we think back to how you've been doing the emergent design stuff in the previous section, you probably didn't do any of
+this upfront, right? And that's fine because the problems are simple enough for you to do them in your mind. And that's a form of metacognition. But again, as
+problems get more complex and there's more to hold in the mind, because I believe the mind can only hold up to, I think like four pieces of information at a
+time. You're not just dealing with simple input output systems, like functions or stateless static methods. You're actually dealing with collaborating objects
+and more complex things. Like if I told you design out the auto suggestion feature in a text editor, or I told you to handle the, write the piece of logic that
+assigns the skin to like a weapon in like CSGO. Right. Right. Right. Right. This type of stuff is not as trivial because it implies relationships, which implies
+collaborations, which implies that they're going to be more complex and there's more moving parts. This is very easy. Data is going in, data is coming out. So
+because of that reality, a lot of this upfront design stuff theory, you could pretty much do in your minds, but we want to get in the habit of at least being
+aware, having that form of metacognition of what is happening here. So with that said, we move from fine to the architect step with the responsibilities and the
+examples. So the very good. Next thing we need to do is if the inputs of the architect step are responsibilities and examples, what we now need to do here is we
+need to get clear on the subject under test. So this is a stateless problem. We already know what this is. It's going to be a function or a static method. It's
+not always going to be a function or a static method. It's going to be a function or a static method. After we've decided that we've found that out, we want to
+move forward with the responsibilities, examples and system under test. And then we go to the automate step. So see, we've got that there and automate. So now
+in the automate step, the main goal, the main thing we want to do here is we want to take the responsibilities, take the examples and system under test. And we
+want to get very clear on how are we going to test this? How would this be possible? There are scenarios you could end up in where it is really not clear how
+you're going to test the thing that you want to test. And it's super important for you to be able to have at least a picture of that, if not drawn out, have
+that well understood before you begin to write your code. So that's why this automate step is here. And because you're using the starter, you're because you're
+using the, and because you're using the starter that I've given you already in this project, you don't really need to go ahead and do this because I've given
+you the starter already for this project. You don't really need to do this. We have it here already. Really all is just a set of scripts. We have just set up,
+but again, I urge you to think about how complex this might be if we were trying to test some features that integrated between systems. Or yeah, we were trying
+to test the web scraper, or we were trying to test a browser automation library or a Chrome extension. Think about how this steps here might be a bit more
+involved because we would have to be executing this at a much different level. So we're just doing this at the stateless case point for now, not bad. So what
+should we have moving inwards towards the emergent design process? We should have some examples, whether we have them in our mind or the ability for us to
+collect them, or we have them all written out. So we want to example by example, do the design process that we've been doing previously with TDD, which is just
+to pick up an example, specify it. And then once you have the test specification, then you go ahead and actually write your test code in your production code.
+And you do this with arrange at assert. We've already seen how to do that. There's something here called subject verification. We should talk about this a
+little bit right after this. And you can make your test pass with fake it or obvious implementation. And then of course, you're going to go ahead and commit.
+Once you've committed your code. So now you have your test that's passing. You have your code has been committed. Now you're in the refined step. And this is
+the refactor step from red, green refactor. And you know what to do here. Use the rule of three to remove duplication. And then you commit and you only do this
+if you've seen duplication three times. And then you line up and get the next test. So this is not all that much different. Some how we have been doing this in
+the previous section with the magic design, because again, just in summary, like this upfront design section of what we're doing here. And this is just can be
+pretty much done all in your mind, like on the spot for simple problems. But when you get into the more complex ones in this module, you're going to want to be
+doing this. So with that said, I'm going to leave the video right here. Go ahead and continue moving through the modules. And we're going to talk about some
+other things like subject verification, which is one of the key essentials. The first physical essential that we will care about here in this section. And we'll
+talk about doing a range act assert backwards. And we'll also talk about the transformation priority premise in this module. And then after that, we'll get into
+the state and stuff. So go ahead, do the assignments, move through the modules. With that said, as always to mastery.

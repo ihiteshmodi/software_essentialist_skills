@@ -1,0 +1,11 @@
+All right, what's going on crafters, Khalil here, and we are ready to get into the metaphysics. Let's get to the first principles of what it means to be a
+software developer, how to think about software, code, your role, and how to do this thing well. So this section is going to be all about the mental models.
+We're going to get into the principles, the skills, things we're going to use. And this is basically the foundation for the entirety of the course in this
+community. We're going to start with the general mental models, and this will help us get clear on the purpose of software, value, how scalability works, and so
+on. From there, we'll then learn the 12 principles that will help us write scalable code. And we're going to keep this fairly high level because we're going to
+build on this foundation throughout the phases of craftship, where you'll be building something, and you'll be watching it improve over time as we add in the 12
+essentials and continually refine your ability to use them. And then I'm going to show you how the primary skills I've mentioned early, faster and flooping, the
+ideal developer workflow. I'm going to show you how all of these work together and build on the 12 essentials. Additionally, the guest points, which is our
+problem decomposition technique. I'm going to show you how all of these work together. And following that, we've got some frequently asked questions and short
+guides that you can take in to make sure that you're on the right path. And with all of that said, I think we're good to go. Let's dive into this first section,
+the general mental models.

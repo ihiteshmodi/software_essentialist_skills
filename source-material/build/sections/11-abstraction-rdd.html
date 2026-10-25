@@ -1,0 +1,686 @@
+<section id="abstraction-rdd" class="doc-section" data-title="Abstraction, OOP &amp; RDD">
+  <h2>Abstraction Levels, OOP &amp; Responsibility-Driven Design</h2>
+  <p class="lede">Pick the construct that matches a concept’s <strong>intended level of abstraction</strong>: interface → abstract class → class → object. Abstract only when more than one actor can play the role. Below patterns sit <strong>responsibilities</strong> (doings and knowings). You group them into <strong>roles</strong> using six object stereotypes and wire up <strong>collaborations</strong> last. That is Responsibility-Driven Design, “the deepest level of design” Khalil teaches. <a class="src" data-lesson="79">L79</a> <a class="src" data-lesson="23">L23</a> <a class="src" data-lesson="94">L94</a></p>
+
+  <table class="tbl">
+    <thead><tr><th>Topic</th><th>Question it answers</th><th>Key heuristic</th></tr></thead>
+    <tbody>
+      <tr><td><a href="#abstraction-rdd--levels-of-realness">Levels of realness</a></td><td>Interface, abstract class, class or object?</td><td>Start concrete. Interface for infra seams and &gt;1 actor. Abstract class only after the rule of three.</td></tr>
+      <tr><td><a href="#abstraction-rdd--roles-actors">Roles, actors &amp; contracts</a></td><td>Do I need this interface?</td><td>George Clooney test</td></tr>
+      <tr><td><a href="#abstraction-rdd--how-much-oop">How much OOP</a></td><td>Do I need to study OOP first?</td><td>No. Same steps/events abstraction, as scripts or as an object network.</td></tr>
+      <tr><td><a href="#abstraction-rdd--better-design">Getting better at design</a></td><td>What is “good design”?</td><td>Discoverability + understanding. Metacognition + empathy.</td></tr>
+      <tr><td><a href="#abstraction-rdd--rdd">Responsibility-Driven Design</a></td><td>How do I design something no library gives me?</td><td>Responsibilities → roles → collaborations</td></tr>
+      <tr><td><a href="#abstraction-rdd--stereotypes">Object stereotypes</a></td><td>What kind of object owns this responsibility?</td><td>Six stereotypes. Control center = coordinator + controller.</td></tr>
+      <tr><td><a href="#abstraction-rdd--category-theory">“Category theory” for design</a></td><td>Where does this responsibility go?</td><td>Categorize as hard as possible. Lean into the dominant role.</td></tr>
+      <tr><td><a href="#abstraction-rdd--zoom-example">Worked example: zoom</a></td><td>What does RDD look like on a real feature?</td><td>Concrete example → responsibilities → stereotypes</td></tr>
+      <tr><td><a href="#abstraction-rdd--critique-next-steps">Critique &amp; next steps</a></td><td>What happens after the upfront design?</td><td>Controllers don’t subscribe. Make small guesses. Then write the use-case test.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="abstraction-rdd--levels-of-realness" data-title="Levels of Realness">
+    <h3>Levels of Realness: Interfaces, Abstract Classes, Classes, Objects <a class="src" data-lesson="79">L79</a> <a class="src" data-lesson="84">L84</a></h3>
+
+    <p>A student built a <code>TrafficLight</code> class and then extracted an interface from it as its “public API”. Khalil used that to explain a <strong>spectrum of realness</strong>, running from “not real at all” (interfaces) to “completely real” (concretions). Many developers struggle with when to use interfaces, abstract classes and concretions, and with what a <strong>contract</strong> is. <a class="src" data-lesson="79">L79</a> Khalil calls levels of realness “a really key concept”. He dislikes OOP taught as “here’s a class that does this” and wants each tool traced back to a purpose, which here is writing scalable code. <a class="src" data-lesson="91">L91</a></p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 760 290" role="img" aria-label="Ladder of realness: interface or type, abstract class, class, plain object, rising from most abstract to most real">
+        <defs>
+          <marker id="ar-arrow-ladder" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+        </defs>
+        <rect x="20" y="140" width="170" height="90" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2.5"/>
+        <rect x="205" y="110" width="170" height="120" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="390" y="80" width="170" height="150" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="575" y="50" width="170" height="180" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2.5"/>
+        <text x="105" y="162" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">interface / type</text>
+        <text x="105" y="182" text-anchor="middle" font-size="11" fill="var(--fg)">role · job description</text>
+        <text x="105" y="198" text-anchor="middle" font-size="11" fill="var(--fg)">can never be instantiated</text>
+        <text x="105" y="218" text-anchor="middle" font-size="11" font-style="italic" fill="var(--fg)">use: &gt;1 actor, infra seams</text>
+        <text x="290" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">abstract class</text>
+        <text x="290" y="152" text-anchor="middle" font-size="11" fill="var(--fg)">partial implementation</text>
+        <text x="290" y="168" text-anchor="middle" font-size="11" fill="var(--fg)">+ abstract members</text>
+        <text x="290" y="184" text-anchor="middle" font-size="11" fill="var(--fg)">e.g. React Component: render()</text>
+        <text x="290" y="218" text-anchor="middle" font-size="11" font-style="italic" fill="var(--fg)">use: after the rule of three</text>
+        <text x="475" y="102" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">class</text>
+        <text x="475" y="122" text-anchor="middle" font-size="11" fill="var(--fg)">a blueprint</text>
+        <text x="475" y="138" text-anchor="middle" font-size="11" fill="var(--fg)">needs new</text>
+        <text x="475" y="218" text-anchor="middle" font-size="11" font-style="italic" fill="var(--fg)">use: the default concretion</text>
+        <text x="660" y="72" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">plain object</text>
+        <text x="660" y="92" text-anchor="middle" font-size="11" fill="var(--fg)">real right away</text>
+        <text x="660" y="108" text-anchor="middle" font-size="11" fill="var(--fg)">{ name: 'Khalil' }</text>
+        <text x="660" y="218" text-anchor="middle" font-size="11" font-style="italic" fill="var(--fg)">use: data, props shapes</text>
+        <line x1="20" y1="256" x2="740" y2="256" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ar-arrow-ladder)"/>
+        <text x="20" y="280" font-size="12" fill="var(--fg)">most abstract (roles, “what should happen”)</text>
+        <text x="740" y="280" text-anchor="end" font-size="12" fill="var(--fg)">most real (actors, “what actually happens”)</text>
+      </svg>
+      <figcaption><span class="badge course">Course</span> Spectrum of realness from <a class="src" data-lesson="79">L79</a>. The “use:” lines summarize the heuristics from <a class="src" data-lesson="79">L79</a> and <a class="src" data-lesson="84">L84</a>.</figcaption>
+    </figure>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L79</span> The same <code>UserRepository</code> idea at each level of realness</figcaption>
+      <pre><code class="language-ts">// Most abstract — cannot be instantiated
+interface UserRepository {
+  save(user: User): Promise&lt;void&gt;;
+  getById(id: string): Promise&lt;User | null&gt;;
+}
+// TypeScript type — same level of abstractness
+type UserRepositoryShape = {
+  save(user: User): Promise&lt;void&gt;;
+  getById(id: string): Promise&lt;User | null&gt;;
+};
+
+// Middle — partial implementation + abstract members
+abstract class Repository&lt;T&gt; {
+  async getById(id: string): Promise&lt;T | null&gt; {
+    /* standardized implementation */ return null;
+  }
+  abstract save(entity: T): Promise&lt;void&gt;;
+}
+// React analogy (class components): you must implement render;
+// change detection etc. is implemented behind the scenes.
+
+// Real — class needs `new` (a blueprint)
+class User {
+  constructor(public name: string) {}
+}
+const user = new User('Khalil');
+
+// Most real — plain object
+const plainUser = { name: 'Khalil' };</code></pre>
+    </figure>
+
+    <div class="cards">
+      <div class="card"><h4>Interface / type</h4><p>“A pure abstract conceptual idea of what it is that something should be.” It describes a <strong>role</strong>, like a job description that exists before anyone fills the job. A TS <code>type</code> sits at the same level. <a class="src" data-lesson="79">L79</a></p></div>
+      <div class="card"><h4>Abstract class</h4><p>Both concept and real. It has some implementation (e.g. a standardized <code>getById</code>) plus abstract members you must implement. Best example: the React <code>Component</code>, where you implement <code>render</code>. <a class="src" data-lesson="79">L79</a> <a class="src" data-lesson="84">L84</a></p></div>
+      <div class="card"><h4>Class</h4><p>Real, but it needs <code>new</code>. It’s a blueprint, so it is slightly less real than a plain object. <a class="src" data-lesson="79">L79</a></p></div>
+      <div class="card"><h4>Plain object</h4><p>Real right away. <code>TrafficLightProps</code> as a type describing a plain object is fine. It’s a typing shorthand that avoids getter/setter boilerplate. <a class="src" data-lesson="79">L79</a></p></div>
+    </div>
+
+    <div class="callout rule"><strong>Rules</strong>
+      <ul>
+        <li><strong>Only make something abstract when multiple different actors can play that role.</strong> Otherwise default to a concretion. <a class="src" data-lesson="79">L79</a></li>
+        <li>Choose the construct by the concept’s <em>intended level of abstraction</em>, not by habit. <a class="src" data-lesson="79">L79</a></li>
+        <li>When you do need a contract, <strong>start with the most abstract thing</strong>, an interface or type. Move to an abstract class only when the <strong>rule of three</strong> shows a real need to share implementation. <a class="src" data-lesson="84">L84</a></li>
+        <li>Use contracts at infrastructure seams (repositories, and a <code>Clock</code> around <code>new Date()</code>). That is what lets you decouple from infrastructure at the upper guess points. <a class="src" data-lesson="79">L79</a> <a class="src" data-lesson="84">L84</a></li>
+      </ul>
+    </div>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>Extracting an interface for something only one actor will ever play, such as the traffic light. <a class="src" data-lesson="79">L79</a></li>
+        <li>Treating interface extraction as a “public API” declaration with no role behind it. <a class="src" data-lesson="79">L79</a></li>
+        <li>Reaching for abstract classes first instead of interfaces. <a class="src" data-lesson="84">L84</a></li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“Abstraction is pretty much the root principle of design.”<cite><a class="src" data-lesson="79">L79</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="abstraction-rdd--roles-actors" data-title="Roles, Actors &amp; George Clooney">
+    <h3>Roles vs Actors, Contracts &amp; the George Clooney Test <a class="src" data-lesson="79">L79</a> <a class="src" data-lesson="84">L84</a></h3>
+
+    <div class="callout def"><strong>RDD vocabulary</strong>
+      <ul>
+        <li><strong>Role</strong>: a job to be played. It stays abstract until an actor plays it.</li>
+        <li><strong>Actor</strong>: the real thing that plays one or many roles.</li>
+        <li><strong>Responsibility</strong>: what a role must do, e.g. “make house out of bricks”.</li>
+        <li><strong>Collaboration</strong>: the interactions between roles (who talks to whom).</li>
+        <li><strong>Contract</strong>: an actor playing a role. <code>implements</code> creates it (“we’re going to play this role now”), there can be several, and <code>extends</code> can create one too.</li>
+      </ul>
+      <p><a class="src" data-lesson="79">L79</a></p>
+    </div>
+
+    <h4>The Broadway play</h4>
+    <p>In <em>Three Little Pigs</em> the <strong>roles</strong> are the big bad wolf and pigs 1–3. Scenes are <strong>collaborations</strong>, and “make house out of bricks” is a <strong>responsibility</strong>. All of it stays abstract until <strong>actors</strong> play it, and any actor could play any role, even Tina Fey as the big bad wolf. The roles side is declarative (“what should happen”). The actors side is the implementation (“what actually happens”). <a class="src" data-lesson="79">L79</a></p>
+    <p>Now write a <strong>George Clooney cameo</strong> into the play, as himself. Only George Clooney can play that role, so it needs no abstraction. Khalil’s verdict on the student’s traffic light interface: <em>“You George Clooney’d it.”</em> <a class="src" data-lesson="79">L79</a></p>
+
+    <div class="callout rule"><strong>George Clooney test</strong>
+      <p>Ask: <em>“Who else is going to play this role?”</em> If the answer is only this one concretion, no contract is needed. With one implementation, contract and concretion “are one and the same.” When a second actor appears (a traffic light on Mars, or a <strong>model train traffic light</strong> whose lights stay on longer), <strong>triangulate</strong> the contract. The essentials go into the contract and the details stay in the concretions. <a class="src" data-lesson="79">L79</a></p>
+    </div>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — premature interface: two names, one actor, zero benefit</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Interface extracted for a role only one actor plays</figcaption>
+          <pre><code class="language-ts">type Color = 'red' | 'green' | 'yellow';
+
+interface ITrafficLight {
+  next(): void;
+  getColor(): Color;
+}
+
+class TrafficLight implements ITrafficLight {
+  private color: Color = 'red';
+  next() { /* red → green → yellow → red */ }
+  getColor() { return this.color; }
+}
+
+// Every reader now jumps interface → class to find the behavior
+const light: ITrafficLight = new TrafficLight();</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — concrete until a second actor shows up</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Just the concretion; the contract is deferred</figcaption>
+          <pre><code class="language-ts">type Color = 'red' | 'green' | 'yellow';
+
+class TrafficLight {
+  private color: Color = 'red';
+  next() { /* red → green → yellow → red */ }
+  getColor() { return this.color; }
+}
+
+const light = new TrafficLight();
+
+// Only when e.g. ModelTrainTrafficLight appears:
+// triangulate the essentials into a contract and
+// keep timing details in each concretion.
+// interface TrafficLight { next(): void; getColor(): Color }</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <h4>Where a contract earns its keep: the repository role</h4>
+    <p>A use case can be pure core code if it depends on contracts instead of the DB/ORM. In the adapter layer, the <code>UserRepo</code> interface <em>is</em> the adapter: a <strong>role</strong>. <code>FirebaseUserRepo</code> and <code>SequelizeUserRepo</code> are <strong>actors</strong> that play it. The use case only cares that <em>someone</em> plays the role. Unit tests pass in an in-memory test double instead. <a class="src" data-lesson="84">L84</a></p>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L84</span> Use case depending on a role; infrastructure actors play it</figcaption>
+      <pre><code class="language-ts">interface UserRepo {
+  save(user: any): Promise&lt;void&gt;; // loose typing for now
+}
+
+class CreateUser {
+  constructor(private userRepo: UserRepo) {}
+  // execute: validate, check existing, userRepo.save(user) ...
+}
+
+class FirebaseUserRepo implements UserRepo {
+  // setup: Firebase infrastructure config
+  async save(user: any) { /* ... */ }
+}
+// class SequelizeUserRepo implements UserRepo { ... }
+
+const firebaseUserRepo = new FirebaseUserRepo();
+const createUser = new CreateUser(firebaseUserRepo);
+// new UserRepo() is impossible: an interface is not a concretion</code></pre>
+    </figure>
+
+    <div class="callout tip"><strong>A career milestone</strong>
+      <p>Knowing how to deal with contracts: “When I realized how to do this and I got really good at it everything changed.” Pair it with <strong>YAGNI</strong> and the <strong>rule of three</strong>. Both fight the urge to add things you “feel you’re going to need”. <a class="src" data-lesson="84">L84</a></p>
+    </div>
+
+    <blockquote class="quote">“I can’t get more abstract than a contract and it can’t get more real than an actor.”<cite><a class="src" data-lesson="79">L79</a></cite></blockquote>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Coding agents love to add <code>IFoo</code> + <code>FooImpl</code> pairs, factories and abstract bases “for flexibility”. Run the George Clooney test in review: if no second actor exists or is planned, inline it. Keep contracts where real seams are (repos, clock, payment, mail), because that’s where agents can generate test doubles and swappable adapters safely.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="abstraction-rdd--how-much-oop" data-title="How Much OOP">
+    <h3>How Much OOP Do You Need? <a class="src" data-lesson="36">L36</a></h3>
+    <p>Very little up front. The highest level of abstraction is the <strong>high-level steps and events</strong>, and implementing them means carrying out their subroutines. The paradigm is an implementation choice under that same abstraction: <a class="src" data-lesson="36">L36</a></p>
+    <div class="cards">
+      <div class="card"><h4>Functional</h4><p>“Scripts talking to other scripts.” <a class="src" data-lesson="36">L36</a></p></div>
+      <div class="card"><h4>Object-oriented</h4><p>“A network of objects that talk to each other that do work.” Objects hold references to other objects and collaborate. <a class="src" data-lesson="36">L36</a></p></div>
+      <div class="card"><h4>Why Khalil prefers objects</h4><p>Expressiveness, control, and good support for <strong>encapsulation</strong> and <strong>information hiding</strong>. The course uses objects from Best Practice First onward and explains them as they come up. <a class="src" data-lesson="36">L36</a></p></div>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> The same steps (validate → save → welcome) in both styles</figcaption>
+      <pre><code class="language-ts">// Scripts talking to scripts
+async function createUser(input: Input) {
+  const user = validate(input);
+  await saveUser(user);
+  await sendWelcomeEmail(user);
+}
+
+// A network of objects holding references to each other
+class CreateUser {
+  constructor(private users: UserRepo, private mailer: Mailer) {}
+  async execute(input: Input) {
+    const user = User.create(input);   // rules hidden inside User
+    await this.users.save(user);       // collaborator via reference
+    await this.mailer.sendWelcome(user);
+  }
+}</code></pre>
+    </figure>
+
+    <div class="callout tip"><strong>Learning syntax</strong>
+      <p>Don’t front-load OOP study. A crash course is “probably not necessary.” Ask an AI assistant “what is this?” and “why did we do this?” when you need to. <a class="src" data-lesson="36">L36</a></p>
+    </div>
+    <blockquote class="quote">“The highest level of abstraction is just the high level steps and events.”<cite><a class="src" data-lesson="36">L36</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="abstraction-rdd--better-design" data-title="Getting Better at Design">
+    <h3>Getting Better at Design <a class="src" data-lesson="30">L30</a></h3>
+
+    <div class="callout def"><strong>Design = discoverability + understanding</strong>
+      <p><strong>Discoverability</strong> is how easily you find what you’re looking for, which is features (the key developer use cases). <strong>Understanding</strong> is being able to add, change and test them once you find them. Good design means you can do this, and it makes it easier for others. Every developer designs interfaces: “Your code is the interface for someone else to do their work.” <a class="src" data-lesson="30">L30</a></p>
+    </div>
+
+    <ol class="steps">
+      <li><strong>Structure by the abstraction prism</strong> — organize the project the way requirements come to exist, get tested and get implemented (capabilities → features). It’s the most intuitive way to find things. <a class="src" data-lesson="30">L30</a></li>
+      <li><strong>Develop metacognition</strong> — understand <em>why</em> you understand things. Internal awareness builds external awareness at the same time. <a class="src" data-lesson="30">L30</a></li>
+      <li><strong>Establish the patterns</strong> — use patterns everyone understands conceptually, and agree on the set at project start. Patterns are mental models with <strong>stereotypical responsibilities</strong>: a Redux store is an event listener/handler/coordinator type of thing, and React components present the view. <a class="src" data-lesson="30">L30</a></li>
+      <li><strong>Study the stages of action</strong> — the seven stages of action from Don Norman’s <em>The Design of Everyday Things</em>. <a class="src" data-lesson="30">L30</a></li>
+    </ol>
+
+    <div class="callout rule"><strong>Empathy check while coding</strong>
+      <p>Will someone else understand what this is, how to use it and why I’m using it, and can they do their task with it? <a class="src" data-lesson="30">L30</a></p>
+    </div>
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>“Loosey goosey” code whose purpose can’t be understood as one cohesive thing or tied to a known pattern. <a class="src" data-lesson="30">L30</a></li>
+        <li>Mixing stereotypical responsibilities, e.g. React components doing more than presenting the view. <a class="src" data-lesson="30">L30</a></li>
+      </ul>
+    </div>
+    <blockquote class="quote">“Getting better at design is really a practice of metacognition and developing awareness.”<cite><a class="src" data-lesson="30">L30</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="abstraction-rdd--rdd" data-title="Responsibility-Driven Design">
+    <h3>Responsibility-Driven Design (RDD) <a class="src" data-lesson="23">L23</a> <a class="src" data-lesson="38">L38</a> <a class="src" data-lesson="91">L91</a> <a class="src" data-lesson="94">L94</a></h3>
+
+    <div class="callout def"><strong>Definition</strong>
+      <p>RDD sees software as a set of <strong>responsibilities</strong> (doings and knowings). They are grouped into <strong>roles</strong>, the roles <strong>collaborate</strong>, and objects or functions (whatever the “syntactic sugar” is) fill and play those roles. It answers where things belong, how to organize concerns, how big objects should be and how many instance variables they should have. <a class="src" data-lesson="23">L23</a></p>
+      <p>A <strong>responsibility</strong> is the smallest building block: “something that we do or something that we know.” <a class="src" data-lesson="94">L94</a></p>
+    </div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 880 140" role="img" aria-label="RDD pipeline: responsibilities, roles, collaborations, then objects or tools play the roles">
+        <defs>
+          <marker id="ar-arrow-rdd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+        </defs>
+        <rect x="10" y="20" width="190" height="90" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2.5"/>
+        <rect x="230" y="20" width="190" height="90" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="450" y="20" width="190" height="90" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="670" y="20" width="200" height="90" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2.5"/>
+        <text x="105" y="48" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">1. Responsibilities</text>
+        <text x="105" y="70" text-anchor="middle" font-size="11" fill="var(--fg)">doings · knowings</text>
+        <text x="105" y="88" text-anchor="middle" font-size="11" fill="var(--fg)">list all you can</text>
+        <text x="325" y="48" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">2. Roles</text>
+        <text x="325" y="70" text-anchor="middle" font-size="11" fill="var(--fg)">assign via stereotypes</text>
+        <text x="325" y="88" text-anchor="middle" font-size="11" fill="var(--fg)">lean into dominant role</text>
+        <text x="545" y="48" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">3. Collaborations</text>
+        <text x="545" y="70" text-anchor="middle" font-size="11" fill="var(--fg)">who talks to whom</text>
+        <text x="545" y="88" text-anchor="middle" font-size="11" fill="var(--fg)">done last</text>
+        <text x="770" y="48" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">Actors</text>
+        <text x="770" y="70" text-anchor="middle" font-size="11" fill="var(--fg)">objects / functions / tools</text>
+        <text x="770" y="88" text-anchor="middle" font-size="11" fill="var(--fg)">play the roles</text>
+        <line x1="202" y1="65" x2="226" y2="65" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ar-arrow-rdd)"/>
+        <line x1="422" y1="65" x2="446" y2="65" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ar-arrow-rdd)"/>
+        <line x1="642" y1="65" x2="666" y2="65" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ar-arrow-rdd)"/>
+        <text x="440" y="132" text-anchor="middle" font-size="11" fill="var(--fg)">roles side = declarative (“what should happen”) · actors side = implementation</text>
+      </svg>
+      <figcaption><span class="badge course">Course</span> The three-step RDD process as stated in <a class="src" data-lesson="91">L91</a> and run live in <a class="src" data-lesson="94">L94</a>, followed by “find existing tools that implement those roles.” Model from <a class="src" data-lesson="23">L23</a>.</figcaption>
+    </figure>
+
+    <ol class="steps">
+      <li><strong>List responsibilities</strong> — every doing and knowing the feature needs, starting from a concrete example. Don’t worry about order or wording yet. <a class="src" data-lesson="91">L91</a> <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>Assign them to roles</strong> — identify what the roles are, using <a href="#abstraction-rdd--stereotypes">object stereotypes</a> and each object’s dominant role. <a class="src" data-lesson="91">L91</a> <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>Define collaborations</strong> — how the roles work together. “I like to do that, that last part of collaboration last.” <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>Find tools</strong> — look for existing libraries that implement those roles, e.g. a message queue for scheduling. <a class="src" data-lesson="91">L91</a></li>
+    </ol>
+
+    <h4>Why go this deep: phases of craftship</h4>
+    <div class="cards">
+      <div class="card"><h4>Code-first</h4><p>“React + Firebase, hook it all up, done.” The pieces are big, technology-focused blocks with little design. It gets you a job. <a class="src" data-lesson="94">L94</a></p></div>
+      <div class="card"><h4>Pattern-first</h4><p>The building blocks are services, entities, repos, aggregates and factories. They’re more granular, but you get stuck choosing which blocks to use and how to fit them together. <a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="23">L23</a></p></div>
+      <div class="card"><h4>First principles (Responsibility First)</h4><p>DDD, clean architecture and the rest are “just different lenses on the first principles.” RDD is the way in, and it’s where you design things no pattern, library or framework gives you. Examples: a loading state, a custom router, a unit of work. <a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="91">L91</a></p></div>
+    </div>
+
+    <h4>Four abilities of strategic design</h4>
+    <p>Khalil says every developer needs to be able to: <a class="src" data-lesson="23">L23</a></p>
+    <ol>
+      <li><strong>Stereotype components</strong>: see which responsibilities any library/framework/tool helps implement.</li>
+      <li><strong>Develop components</strong>: build them yourself when needed. This is where RDD comes in.</li>
+      <li><strong>Integrate components</strong>: fill “object design gaps” / “responsibility gaps” between systems that don’t talk to each other.</li>
+      <li><strong>Prioritize components</strong>: build first the contexts and modules that lead to the most business value.</li>
+    </ol>
+
+    <h4>Designing your own abstractions</h4>
+    <p>Abstraction design, meaning building custom abstractions, is “probably the hardest part of software design in general” but “also the most important.” “If you understand the doings and knowings, you could design anything.” Work <strong>outside-in</strong>: first the conceptual flow (“presenter loads posts” → “show loading” → “presenter has loaded posts”), then the abstraction. <a class="src" data-lesson="91">L91</a></p>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L91</span> Loading state pulled out of the presenter (method names and repo inferred)</figcaption>
+      <pre><code class="language-ts">class LoadingState {
+  private loading = false;
+  start() { this.loading = true; }
+  stop() { this.loading = false; }
+  isLoading() { return this.loading; }
+}
+
+class PostsPresenter {
+  constructor(private postsRepo: PostsRepository, private loadingState: LoadingState) {}
+
+  async loadPosts() {
+    this.loadingState.start();                 // "show loading"
+    const posts = await this.postsRepo.getPosts();
+    this.loadingState.stop();                  // "presenter has loaded posts"
+    return posts;
+  }
+}</code></pre>
+    </figure>
+
+    <div class="callout rule"><strong>Before any code</strong>
+      <p>“You should be writing no code unless you’re very clear on who plays what role and why do they need that.” Role → goal → feature → only the essential properties. That’s how you write the minimal amount of code. <a class="src" data-lesson="94">L94</a> For the metaphysics behind it (essence, purpose, form), see <a href="#metaphysics">Metaphysics</a>.</p>
+    </div>
+
+    <p><strong>Where it’s taught:</strong> mainly in the Responsibility First phase, which covers the three-step process, bespoke frontend/backend abstractions, object stereotypes, and stereotypical architecture mapped to frontend and backend patterns. It’s practised again in Value First and in the guess point assignments. <a class="src" data-lesson="38">L38</a></p>
+
+    <blockquote class="quote">“This is the deepest level of design I can teach you. Once you learn it, you learn how to really design anything.”<cite><a class="src" data-lesson="23">L23</a></cite></blockquote>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>AI makes code-first building fast, but it doesn’t decide where the doings and knowings belong. Assigning responsibilities to roles is the design work you keep. Hand the agent a responsibility list with stereotype labels instead of “build zoom”, and it has a spec to follow and you have a map to review against.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="abstraction-rdd--stereotypes" data-title="Object Stereotypes">
+    <h3>The Six Object Stereotypes <a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="95">L95</a> <a class="src" data-lesson="38">L38</a></h3>
+    <p>“Six stereotypical objects that pretty much encompass every single object we will ever make.” Every object is at least one of them. <a class="src" data-lesson="94">L94</a> They answer “what types of objects should we use?”, since OO architecture is “one object talking to the next, talking to the next.” <a class="src" data-lesson="95">L95</a> Once you see how the stereotypes connect to frontend and backend patterns, “matrix just explodes.” <a class="src" data-lesson="38">L38</a> The terms come from Rebecca Wirfs-Brock’s <em>Object Design</em>. <a class="src" data-lesson="94">L94</a></p>
+
+    <table class="tbl">
+      <thead><tr><th>Stereotype</th><th>Responsibility (course)</th><th>Frontend example</th><th>Backend example</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Information holder</strong></td><td>Knows. Just holds data, and it’s where the information belongs. <a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="95">L95</a></td><td><code>MouseEvent</code> (type, angle). <code>Camera</code> (origin, zoom factor), observable e.g. with MobX. <a class="src" data-lesson="95">L95</a></td><td>A request DTO or an event payload <span class="badge copilot">Added by Copilot</span></td></tr>
+        <tr><td><strong>Structurer</strong></td><td>Holds essential data and the rules for how it may or may not change. “Pretty much your aggregate.” <a class="src" data-lesson="94">L94</a></td><td><code>Camera</code> with rules on how far it may move. <a class="src" data-lesson="94">L94</a></td><td>A post aggregate that a comment is added to. <a class="src" data-lesson="94">L94</a></td></tr>
+        <tr><td><strong>Service provider</strong></td><td>Mostly stateless behavior and math, utility-class-like. <a class="src" data-lesson="95">L95</a></td><td><code>CanvasService</code> computing the new canvas state. <a class="src" data-lesson="95">L95</a></td><td>A price calculator or password hasher <span class="badge copilot">Added by Copilot</span></td></tr>
+        <tr><td><strong>Coordinator</strong></td><td>Lets objects subscribe to events and notifies subscribers (observer). “Maybe 10 lines of code.” <a class="src" data-lesson="94">L94</a></td><td>Application observer. Redux-like store. <a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="30">L30</a> Page switching. <a class="src" data-lesson="94">L94</a></td><td>Express router, web server, event listeners. <a class="src" data-lesson="94">L94</a></td></tr>
+        <tr><td><strong>Controller</strong></td><td>Makes decisions and tells other objects to do work. It usually doesn’t perform the state change itself. <a class="src" data-lesson="94">L94</a> Executes use cases, ≈ DDD application service. <a class="src" data-lesson="95">L95</a></td><td><code>ZoomController</code>. A page can be a controller. <a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="95">L95</a></td><td><code>CreateUser</code> use case. <a class="src" data-lesson="84">L84</a> Post-comment controller. <a class="src" data-lesson="94">L94</a></td></tr>
+        <tr><td><strong>Interfacer</strong></td><td>Crosses over to infrastructure and the outside world: network, file system, human peripherals, third-party APIs. “Like a bridge.” <a class="src" data-lesson="94">L94</a></td><td>Canvas, <code>WindowAPI</code>, <code>CanvasAPI</code>. <a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="95">L95</a></td><td>Express network handling, repositories, Stripe/mail APIs. <a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="95">L95</a></td></tr>
+      </tbody>
+    </table>
+    <p><span class="badge copilot">Added by Copilot</span> In Wirfs-Brock’s original catalogue, a <em>structurer</em> is defined as an object that maintains relationships between other objects. Khalil’s working definition (“pretty much your aggregate”) is close: an aggregate holds its parts together and guards the rules about them.</p>
+
+    <div class="callout def"><strong>Control center = coordinator + controller</strong>
+      <p>“The key place where all of the main decision making logic happens.” It can be centralized or delegated, and part of it can come from a framework (Express does some routing). Apps usually have several coordinators and controllers, not one of each. <a class="src" data-lesson="94">L94</a> Coordinating means getting requests and routing them. Controlling means saying “do this, do this.” <a class="src" data-lesson="95">L95</a></p>
+    </div>
+
+    <div class="callout anti"><strong>React as your control center</strong>
+      <p>Write everything inside React and React <em>is</em> the control center, so you have none of your own and must test through React’s hidden behavior. Push React out to the infrastructure layer and <strong>take back ownership of the control center</strong>. Then “you can actually test out 90% of the core use cases without ever even starting react.” <a class="src" data-lesson="94">L94</a> More in <a href="#frontend">Frontend Architecture</a>.</p>
+    </div>
+
+    <div class="callout tip"><strong>One object, many stereotypes</strong>
+      <p>“It’s very rare that an object plays exactly one stereotypical role.” Take a canvas service that’s an interfacer. Add caching and it becomes a structurer too. That’s normal, so don’t agonize over it. <a class="src" data-lesson="95">L95</a></p>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="abstraction-rdd--category-theory" data-title="“Category Theory” for Design">
+    <h3>“Category Theory” for Design: Cohesion &amp; the Dominant Role <a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="95">L95</a></h3>
+    <p>When a design feels overwhelming, the building blocks are usually too big and too vague. The student’s “camera service” was “a container for everything related to this type of behavior.” The fix is to <strong>descend granularly enough</strong>: get all the puzzle pieces (responsibilities) on the table, <strong>organize them into categories</strong>, then work out how the categories collaborate. <a class="src" data-lesson="94">L94</a> Choosing which stereotype a set of responsibilities belongs to is abstraction design plus categorical thinking, which is coupling and cohesion. <a class="src" data-lesson="95">L95</a></p>
+
+    <blockquote class="quote">“We want to lean into the dominant role because this is the category theory here. We’re trying to categorize as hard as possible.”<cite><a class="src" data-lesson="94">L94</a></cite></blockquote>
+
+    <div class="callout rule"><strong>Placement heuristics</strong>
+      <ul>
+        <li>Find each object’s <strong>dominant role</strong>. If it plays two roles, consider splitting it into two objects. <a class="src" data-lesson="94">L94</a></li>
+        <li>Name responsibilities generally: “allows objects to subscribe to events / notifies subscribers”, not “subscribing to the mouse scrolled event”. <a class="src" data-lesson="94">L94</a></li>
+        <li>“Anytime I hear state change or updating something to me, that tells me controller”, or a controller talking to an interfacer/stateful object. <a class="src" data-lesson="94">L94</a></li>
+        <li>Controllers <strong>delegate</strong> the actual change. The controller gets the post, creates the comment and adds it to the post, and the repo (interfacer) saves it. <a class="src" data-lesson="94">L94</a></li>
+        <li>Anything that touches peripherals, network, file system or third-party APIs is an <strong>interfacer</strong>. Rules about how something may change go in information holders or a <strong>structurer</strong>. <a class="src" data-lesson="94">L94</a></li>
+        <li>Keep IO out of the application layer. IO belongs in interfacing ports/adapters. That’s why dependency inversion and the dependency rule exist, and why being pedantic here pays off in testability. <a class="src" data-lesson="95">L95</a></li>
+        <li>Watch for objects that take on more responsibilities than they need, and break them out. <a class="src" data-lesson="95">L95</a></li>
+      </ul>
+    </div>
+
+    <div class="callout anti"><strong>Calling everything a service</strong>
+      <p>Everyone does it, especially in the application and domain layers. Services don’t break down far enough to follow the rules that apply in any architecture (“the laws of software design”), and they lead to references passed around everywhere, like a canvas object spread across many classes. <a class="src" data-lesson="94">L94</a> Code you can’t tie to known patterns is hard for others to pick apart. <a class="src" data-lesson="30">L30</a></p>
+    </div>
+
+    <p>There’s often no single right answer. A controller can <em>be</em> one use case, or it can hold many use cases as methods:</p>
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L95</span> Two controller shapes: “a fun game of coupling and cohesion”</figcaption>
+      <pre><code class="language-ts">class UpdateCanvasProjection { execute() {} }                // controller == single use case
+class Canvas { updateCanvasProjection() {} /* other use cases */ } // controller w/ many use cases</code></pre>
+    </figure>
+    <blockquote class="quote">“There is no statically right answer to this... a fun game of coupling and cohesion.”<cite><a class="src" data-lesson="95">L95</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="abstraction-rdd--zoom-example" data-title="Worked Example: Zoom">
+    <h3>Worked Example: Role-Mapping the Canvas Zoom Use Case <a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="95">L95</a></h3>
+    <p>A student was building a canvas drawing app (Excalidraw/Figma-like). Canvas manipulation is the app’s <strong>core value</strong>. Blocky, pattern-first or “find a library” approaches get you partway, then break as more use cases arrive. <a class="src" data-lesson="95">L95</a> The design ran through FA²STR: a concrete example first, then the guess point (most likely <strong>application level</strong>, because the feature involves coordination and control), then RDD. <a class="src" data-lesson="94">L94</a></p>
+
+    <div class="callout def"><strong>Concrete example</strong>
+      <p>“Currently zoomed out and want to read [small] text. So I zoom in.” <strong>Vagueness does not compile.</strong> <a class="src" data-lesson="94">L94</a></p>
+    </div>
+
+    <h4>Step 1 — Responsibilities brainstormed (unordered)</h4>
+    <ul>
+      <li>Detect mouse scroll. Pass the event somewhere it can be acted on. Trigger the event.</li>
+      <li>Subscribe to the mouse-scrolled event. Know when the work is done.</li>
+      <li>Do the zooming work. Adjust the camera’s view of the canvas.</li>
+    </ul>
+    <p>The order was off and that was fine, because the point was to get everything written down. Responsibilities got reworded and generalized as roles were assigned, and new objects (e.g. the mouse event) showed up along the way. <a class="src" data-lesson="94">L94</a></p>
+
+    <h4>Step 2 — Role mapping</h4>
+    <table class="tbl">
+      <thead><tr><th>Object</th><th>Stereotype</th><th>Doings / knowings</th><th>Src</th></tr></thead>
+      <tbody>
+        <tr><td>Canvas / <code>WindowAPI</code> (wheel listener)</td><td>Interfacer</td><td>Listens to <code>wheel</code>, switches on event type, pushes a <code>MouseScrollEvent</code> to the observer. Bridge to human peripherals.</td><td><a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="95">L95</a></td></tr>
+        <tr><td><code>MouseScrollEvent</code></td><td>Information holder</td><td>Knows the type and angle / delta-Y.</td><td><a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="95">L95</a></td></tr>
+        <tr><td>Application observer</td><td>Coordinator (control center)</td><td>Allows objects to subscribe and notifies subscribers. Does most of the work.</td><td><a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="95">L95</a></td></tr>
+        <tr><td><code>ZoomController</code></td><td>Controller ≈ application service</td><td>Executes zoom in / zoom out. The feature ends at updating the zoom factor, then it emits <code>ZoomUpdated</code>.</td><td><a class="src" data-lesson="95">L95</a></td></tr>
+        <tr><td><code>Camera</code></td><td>Information holder (L95) / structurer ≈ aggregate (L94)</td><td>Knows origin coordinates and zoom factor (default 1, in memory). Holds the rules on how far it may move.</td><td><a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="95">L95</a></td></tr>
+        <tr><td>“Camera repo”</td><td>Stateful updater (interfacer)</td><td>Performs the camera update for the controller. Shows the repo idea outside a DB.</td><td><a class="src" data-lesson="94">L94</a></td></tr>
+        <tr><td><code>CanvasService</code></td><td>Service provider</td><td>Stateless math that computes the new canvas state.</td><td><a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="95">L95</a></td></tr>
+        <tr><td><code>CanvasAPI</code></td><td>Interfacer + controller</td><td>Applies the new projection to the real canvas.</td><td><a class="src" data-lesson="95">L95</a></td></tr>
+      </tbody>
+    </table>
+
+    <h4>Step 3 — Collaborations</h4>
+    <figure class="diagram">
+      <pre class="mermaid">flowchart LR
+  W["Window: wheel event"] --&gt; WA["WindowAPI · interfacer"]
+  WA --&gt;|"notify MouseScrollEvent"| AO["ApplicationObserver · coordinator (control center)"]
+  AO --&gt;|MouseScrolled| ZC["ZoomController · controller"]
+  ZC --&gt;|"update zoom factor"| CAM["Camera · information holder / structurer"]
+  ZC --&gt;|"notify ZoomUpdated"| AO
+  AO --&gt;|ZoomUpdated| SUB["ZoomUpdatedSubscription · event handler"]
+  SUB --&gt; UCP["UpdateCanvasProjection · controller (use case)"]
+  UCP -.-&gt;|reads| CAM
+  UCP --&gt;|"compute new canvas state"| CS["CanvasService · service provider"]
+  UCP --&gt;|"apply projection"| CA["CanvasAPI · interfacer"]
+  CA --&gt; CV["Canvas element"]</pre>
+      <figcaption><span class="badge course">Course</span> The zoom collaboration from the student’s diagram as reviewed in <a class="src" data-lesson="95">L95</a>, with the subscription object Khalil recommended. The link from the canvas/window into the coordinator was left open in <a class="src" data-lesson="94">L94</a>. <code>WindowAPI</code> fills that gap in <a class="src" data-lesson="95">L95</a>.</figcaption>
+    </figure>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L94</span> First pass from the live session</figcaption>
+      <pre><code class="language-ts">interface MouseEvent { type: 'mouse'; angle: number /* amount scrolled; "other stuff" */ }
+
+class AppEventsObserver {            // Coordinator
+  subscribe(eventName: string, handler: (e: MouseEvent) =&gt; void): void {}
+  notify(eventName: string, e: MouseEvent): void {}
+}
+
+class CanvasInterfacer {             // Interfacer: bridge to user peripherals
+  constructor(private events: AppEventsObserver) {}
+  // generates the MouseScrolled event
+}
+
+class CameraController {             // Controller: decides, delegates the change
+  constructor(events: AppEventsObserver, private cameraRepo: CameraRepo) {
+    events.subscribe('MouseScrolled', (e) =&gt; this.cameraRepo.update(/* computed position */));
+  }
+}
+
+class Camera { /* Structurer ~ aggregate: current position + movement rules */ }
+interface CameraRepo { update(position: unknown): void }  // stateful updater</code></pre>
+    </figure>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L95</span> Khalil’s wishful-thinking sketch of the interfacer and controller</figcaption>
+      <pre><code class="language-ts">class WindowAPI {
+  constructor(private window: Window, private observer: ApplicationObserver) {
+    this.window.addEventListener('wheel', (e) =&gt; this.handle(e));
+  }
+  private handle(event: WheelEvent) {
+    switch (event.type) {
+      case 'mouseScroll': // extendable to more events later
+        this.observer.notify(new MouseScrollEvent(event.deltaY));
+        break;
+    }
+  }
+}
+
+class Camera { // information holder
+  constructor(public origin = { x: 0, y: 0 }, public zoomFactor = 1) {}
+}
+class ZoomController { // controller ≈ application service
+  constructor(private camera: Camera, private observer: ApplicationObserver) {}
+  zoomIn(deltaY: number) { /* update zoom factor */ this.observer.notify(new ZoomUpdatedEvent(/*...*/)); }
+  zoomOut(deltaY: number) { /* ... */ }
+}</code></pre>
+    </figure>
+
+    <h4>Why split it? The god service vs stereotyped objects</h4>
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — one “CameraService”: IO, rules, math, state and rendering fused; untestable without a real canvas</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> The too-broad “service” container</figcaption>
+          <pre><code class="language-ts">class CameraService {
+  private x = 0;
+  private y = 0;
+  private zoom = 1;
+
+  constructor(private canvas: HTMLCanvasElement) {
+    canvas.addEventListener('wheel', (e) =&gt; this.onWheel(e)); // IO
+  }
+
+  private onWheel(e: WheelEvent) {
+    if (!e.ctrlKey) return;
+    const next = this.zoom * (e.deltaY &lt; 0 ? 1.1 : 0.9);      // math
+    this.zoom = Math.min(8, Math.max(0.1, next));             // rules + state
+    const ctx = this.canvas.getContext('2d')!;
+    ctx.setTransform(this.zoom, 0, 0, this.zoom, -this.x, -this.y); // rendering
+    this.redrawEverything(ctx);
+  }
+
+  private redrawEverything(ctx: CanvasRenderingContext2D) { /* ... */ }
+}</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — one dominant role per object; the use case runs in memory with no DOM</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Same behavior, split by stereotype (CanvasAPI omitted)</figcaption>
+          <pre><code class="language-ts">// Information holder
+class MouseScrollEvent { readonly name = 'MouseScrolled'; constructor(readonly deltaY: number) {} }
+class ZoomUpdatedEvent { readonly name = 'ZoomUpdated'; constructor(readonly zoomFactor: number) {} }
+
+// Coordinator: subscribe / notify
+class ApplicationObserver {
+  private handlers: Record&lt;string, Array&lt;(e: any) =&gt; void&gt;&gt; = {};
+  subscribe(name: string, fn: (e: any) =&gt; void) { (this.handlers[name] ??= []).push(fn); }
+  notify(e: { name: string }) { (this.handlers[e.name] ?? []).forEach((fn) =&gt; fn(e)); }
+}
+
+// Interfacer: the only object that touches window
+class WindowAPI {
+  constructor(window: Window, observer: ApplicationObserver) {
+    window.addEventListener('wheel', (e) =&gt; {
+      if (e.ctrlKey) observer.notify(new MouseScrollEvent(e.deltaY));
+    });
+  }
+}
+
+// Structurer / information holder: data + rules for how it may change
+class Camera {
+  constructor(public origin = { x: 0, y: 0 }, public zoomFactor = 1) {}
+  zoomBy(deltaY: number) {
+    const next = this.zoomFactor * (deltaY &lt; 0 ? 1.1 : 0.9);
+    this.zoomFactor = Math.min(8, Math.max(0.1, next));
+  }
+}
+
+// Controller: executes the use case, delegates the change
+class ZoomController {
+  constructor(private camera: Camera, private observer: ApplicationObserver) {}
+  zoom(deltaY: number) {
+    this.camera.zoomBy(deltaY);
+    this.observer.notify(new ZoomUpdatedEvent(this.camera.zoomFactor));
+  }
+}
+
+// Service provider: stateless math
+class CanvasService {
+  project(camera: Camera) {
+    return { scale: camera.zoomFactor, dx: -camera.origin.x, dy: -camera.origin.y };
+  }
+}
+
+// Composition root: a subscription, not the controller, links event → use case
+observer.subscribe('MouseScrolled', (e: MouseScrollEvent) =&gt; zoomController.zoom(e.deltaY));</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Ask an agent to “add zoom” and you’ll usually get the <em>before</em> column. Give it the role map (interfacer, coordinator, controller, structurer, service provider) and one dominant role per object, and the output becomes reviewable piece by piece. Stereotype labels also let you spot a misplaced responsibility at a glance, e.g. “this information holder is doing IO”.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="abstraction-rdd--critique-next-steps" data-title="Critique &amp; Next Steps">
+    <h3>Reviewing the Upfront Design: Critique &amp; Next Steps <a class="src" data-lesson="95">L95</a> <a class="src" data-lesson="94">L94</a></h3>
+    <p>Khalil confirmed most of the student’s decisions. The interfacer for window events, the coordinator as control center, the camera as information holder (“excellent decision”, mirroring DDD/hexagonal), the stateless canvas service, and designing with no infrastructure/backend yet were all good calls. He flagged one issue. <a class="src" data-lesson="95">L95</a></p>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — the API/controller subscribes to events itself</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L95</span> <code>CanvasAPI</code> subscribes to <code>ZoomUpdated</code> and does the projection work</figcaption>
+          <pre><code class="language-ts">class CanvasAPI {
+  constructor(observer: ApplicationObserver) {
+    observer.subscribe(ZoomUpdatedEvent, (e) =&gt; this.updateProjection(e));
+  }
+  updateProjection(e: ZoomUpdatedEvent) { /* compute + draw */ }
+}</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — an intermediary subscription links events to use cases</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L95</span> Controllers are “just called upon”</figcaption>
+          <pre><code class="language-ts">class ZoomUpdatedSubscription {
+  constructor(observer: ApplicationObserver, private updateCanvasProjection: UpdateCanvasProjection) {
+    observer.subscribe(ZoomUpdatedEvent, (e) =&gt; this.updateCanvasProjection.execute(e));
+  }
+}
+// Same idea for CanvasCleared → UpdateCanvasProjection, etc.</code></pre>
+        </figure>
+      </div>
+    </div>
+    <p>“Controllers, use cases, they don’t normally subscribe to things. They’re normally just called upon.” The subscription object keeps “9,000 different non-declarative objects” from depending on the observer. Khalil admits his own DDDForum <code>AfterCommentPosted</code> subscription is “not the best way.” <a class="src" data-lesson="95">L95</a></p>
+
+    <div class="callout rule"><strong>Review lessons</strong>
+      <ul>
+        <li><strong>Vertical slice vs temporal decoupling.</strong> A change inside one use case/transaction (e.g. how the camera changes) is a vertical slice. Updating the canvas projection <em>after</em> <code>ZoomUpdated</code> is a separate feature, which is temporal decoupling. <a class="src" data-lesson="95">L95</a></li>
+        <li><strong>Name use cases with the most command-like responsibility</strong>, e.g. “update canvas projection”. <a class="src" data-lesson="95">L95</a></li>
+        <li><strong>“Lead with the guess, but make small guesses at a time.”</strong> Sending delta-Y to a backend brings a new set of responsibilities (reconciliation, network events, offline storage), so postpone it. <a class="src" data-lesson="95">L95</a></li>
+        <li><strong>Extract concepts later.</strong> Zoom-factor concepts may become their own value objects through object calisthenics. <a class="src" data-lesson="95">L95</a></li>
+        <li><strong>Frontend concerns are real responsibilities.</strong> View data and model data (knowings), plus updating view data, getting model data and triggering a re-render (doings), must go on objects. Put state on the objects (delegated, backend-like) or in one application data model (centralized, Redux-like). Both have trade-offs. <a class="src" data-lesson="94">L94</a></li>
+        <li><strong>“The real reason we have the complexity we have is because of state management”</strong>: where data belongs, who operates on it, and which namespace that goes in. <a class="src" data-lesson="95">L95</a></li>
+      </ul>
+    </div>
+
+    <h4>Next: from upfront to emergent design</h4>
+    <ol class="steps">
+      <li><strong>Relax on certainty</strong> — upfront design is a theoretical, good-enough guess. It only becomes real (physical) in test form. <a class="src" data-lesson="95">L95</a> <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>Write the first test at the application guess point</strong> — take the dominant zoom use case, make it readable (Gherkin-style), and ignore backend persistence, subscriptions and outside coordination for now. <a class="src" data-lesson="95">L95</a></li>
+      <li><strong>Let the design emerge</strong> — red-green-refactor produces the real design. <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>Match rigor to product stage</strong> — build fast until the theoretical guesses are validated, then go defensive. “There’s no right tests always.” <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>Clarity → elimination → execution</strong> — “Now you need to weed out what you don’t need. And then you can just go and build.” <a class="src" data-lesson="94">L94</a></li>
+    </ol>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> A first application-level scenario for the dominant use case</figcaption>
+      <pre><code class="language-gherkin">Feature: Zoom
+  Scenario: Zoom in to read small text
+    Given the camera is at zoom factor 1
+    When the user scrolls the mouse wheel up
+    Then the camera zoom factor should be greater than 1</code></pre>
+    </figure>
+
+    <p><strong>Upcoming “straight line” curriculum:</strong> state machines → object calisthenics → object stereotypes → use-case testing → common collaborations on the use case → stubbing &amp; mocking. <a class="src" data-lesson="95">L95</a> Test levels and guess points are covered in <a href="#workflow">FA²STR &amp; Workflow</a> and <a href="#testing">Testing</a>.</p>
+
+    <blockquote class="quote">“If I hadn’t stuck to the responsibility-driven mindset, I would have gotten lost.” (student)<cite><a class="src" data-lesson="95">L95</a></cite></blockquote>
+  </article>
+</section>

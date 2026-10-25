@@ -1,0 +1,685 @@
+All right, so we'll do my bit here. Max 10 minutes, 15 minutes, and then whenever, based on what people have. So hopefully people have questions, things they'd
+like to know more of. But I could also just, I'm probably going to just riff on this for a little bit here, because this is what I really want to get across.
+All right, cool. So everyone's here, everyone's ready. Let's see, who do we got? All right, we got 10 folks in here. Wonderful. All right, cool. So welcome to
+the Office Hours, Software Essentialist Office Hours. So yeah, the idea behind this, the reason why I wanted to make this, and I want to be doing these more
+regularly, is recently, actually last week, I was spending some time with a couple of the crafters from this community who also live in Toronto, Ontario. And we
+sat down and we pretty much just walked through some sessions. We talked about content in the Stateful Guest Point. I walked through the stereotypical
+architecture, how that works at the Stateful Guest Point. We even started with a basic create user feature, and then I broke down all the problems with that. A
+lot of missed concerns, like when everyone goes ahead and does create user for the first time, if you see some of the code out there, with async calls, doing a
+database call, synced into Express, like it just looks very, quote unquote, functional or functional JavaScript-y with the kind of callback hell style code.
+That's kind of stuff that everyone gets into right away when you start learning backend. Even if you're a front-end developer, a lot of your code might look
+like that because it looks very, it looks kind of elegant. And I'll admit, when I first got into JavaScript, that was something I was doing a lot of. However,
+the problem is there's like a lot of missed concerns. There's no domain model. And that's the main idea behind the Stateful Guest Point. I'm actually calling it
+the Stateful Domain Modeling Guest Point, which is where the heart of your software really goes. So I sat down with them and I'm walking through this code that
+they wrote. I got them to write. I'm like, okay, so this is great. You got the thing to work. He's never done that backend before ever. I'm like, make this
+create user call just work. He gets it to work. And I'm like, it's awesome. Now let me rip it apart and tell you everything that's wrong with it. And yeah, just
+really, truly, this is so important. And I talked about this earlier on in the course already, the stereotypical architecture. But once you're aware of the fact
+that there is a stereotypical architecture, you might hear of hexagonal, onion, ports adapters, this and that, even event-driven architectures, they all are one
+stereotypical architecture. And you're going to see it on the front end. You're going to see it on the back end. You're going to see it on the desktop. Once
+you're aware of the stereotypical architecture and the layers and the concerns within those layers, you can't unsee it. And you always know when you're missing
+certain concerns. And you always know how to encapsulate those concerns. Or at least that's what the intention is of the stateful guess point. We're going to
+learn how to encapsulate the heart of your software, core code in the stateful guess point here. So yeah, that's what we did. And I'm like, damn, this is going
+really well teaching these concepts because they're asking me questions like right there on the spot. Why? What's the purpose of events? Why even bother with
+that? What's this thing called temporal decoupling? Oh, so that's what a vertical slice is? Okay, cool. So then how does this apply to this? How does it apply
+to that? All of these different really great questions right there on the spot. And I'm like, this is right in alignment with the philosophy of this course of
+the feedback loop. This is like the tightest feedback I could possibly get. Like right here, teaching you live. So I met with my coach today as well. With
+respect to, he helps me design out pretty much what I'm doing here. He's helping me stay on track. And he's just like, yeah, dude, like why are you not just
+teaching the content live as soon as possible? I'm like, you know what? Yeah, let's just do that. So I want to do office hours in general just so that if
+there's stuff that we're not quite discussing yet, if you have a question about something that might be in a section a little bit later on, for example, if you
+go into the office or the course chat, there's quite a few really good discussions in there. There's one in here particularly I had with Jan and where we were
+talking about kicking off a new feature, like for some kind of like Spotify API or like he was building an app that's like similar to Spotify and he needed to
+develop out some features. And I'm just going to paste the link here in the chat, which is a really great discussion. And we ended up at several of the guest
+points in the that we're learning how to perform work at. And we ended up just walking through some of what we're going to have to do here right now and also
+some of what we're going to have to do a little bit later on. But even more importantly, I think what was awesome about this is it really gave. It really
+created a lot of clarity on how you use faster like in practice, which is fundamentally the main tool that you get from this course. It's a decomposition tool.
+And if you know how to decompose your work into the correct guess points or the correct kind of slices or pieces of the system of how you're moving value
+through the value creation system, if you know where, if you know specifically how to break your problems down and what to do at each of those different tiny
+guess points, then it's very easy to flow into your work. Because it's when you don't have the clarity, that's when it's very hard for you to flow into your
+work. So if I was to put, just summarize the purpose of this whole course, it's to give you all the clarity to flow into your work and then the confidence to
+know, okay, I also have the tools to do that. And faster really truly is the main tool. So that's where we're going and that's where I want us all to be. But I
+want us to be there as fast as possible. Now me writing all of these scripts off to the side, I actually have, I'll pull this up here. So if I could bring this
+over on the other screen. I'm not sure if we're sharing that or not, but yeah. Pull this here. So I've done a lot of work here on the stateful guess point. And
+this is what it's looking like right now. We have to get into domain model visualization. I wanted to kick this off with actually just getting you into
+understanding the stereotypical architecture up front. But I also want you to understand the idea of domains, subdomains, and pretty much just what we have to
+do here at the stateful guess point, because there's a fair amount of work. But really, truly, it's the 12 essentials, the macro level principles that are going
+to make this all manageable. And it's about slotting those 12 principles into faster. So yeah, there's a lot for us to discuss here. There's some new techniques
+we need to learn. But I'm going to say one of the hardest things you will learn how to do at the end of this is, for example, this is like probably one of the
+hardest assignments I could come up with for this section. And this is something I've done myself, which is like, I built a notion to Google Calendar Sync for
+myself. It was like a two-way sync. And the hardest part of this is setting up your tests and also defining the logic that's going to actually synchronize these
+two worlds together without coupling them together and having it be a big mess. And then putting that into the heart of your software, into the heart of your
+code in the domain layer. So really, that's like the beauty of what it is we're doing here. And what I don't want to do is go off on a tangent in directions, in
+a direction where I'm just giving way too much content that's not all that useful. So what I want to do more is just be more attuned to all of you and where you
+currently are so that we could just get this going as fast as possible. And then later on, I'll come back, upload the lessons, upload the assignments, upload
+the Q&As that I'm going to do afterwards as well, and then tune it later on. But hopefully that makes sense. It's just about gaining more information, just
+tighter feedback loops with you all, actually watching you all utilize this stuff and move forward on it. So that's kind of leaning towards next. And that's
+going to be an idea behind the office hours. And then I'm going to announce this later on today, times to be teaching these sessions. So these are going to be
+teaching sessions coupled with assignments. I'm going to say, all right, go off, go do these things. Come back. You're going to have questions and we'll do a
+Q&A on what you just tried to do. And then that's going to give me the essential questions that you have in the essential missing pieces of your, of missing
+pieces of knowledge that I need to put into the content. So it's going to inform that. So that was a lot of me talking, speaking out words. This one's going to
+be really cool. This is probably my favorite. RDD is like my favorite topic in general in software design at all. And this really, it is three steps to design
+everything. If you know how to use this tool. And I would like for you to know how to use this tool at this point, because if you can domain model it, all you
+really need to do after that is make sure that you could connect it to the real world. Just, it's all about creating a vertical slice to connect to your model.
+That's like my conceptual model of the domain layer. Building this little world and just connecting to it using infrastructure. Yeah, that's going to give you a
+lot of confidence there. So with that said, me speaking all these words, let's jump over here. And I don't know how long that was, maybe 10 minutes, a little
+bit over, but that's the main idea. Does anyone have any questions about that? Before I move into whatever y'all want to discuss or work through. And also if
+anyone wants to speak out loud, I believe there is the ability to request the mic. And then you can jump in. Two, but typing is also fine. That's a good
+question. Would it be, would the office hours be open to any kind of question or would it be course related questions? All right. So yeah, I would like to keep
+the office hours more related to things we're doing in the course. However, yeah, I'm always going to try to position these things back towards the course
+material and back towards what is valuable. So maybe we shouldn't, probably shouldn't be talking about a lion's mane. Or I'm just looking at, I'm just looking
+at the vitamins I have on my counter, right? That's just a random thing. So yeah, let's try to keep it more course focused. Things that are relevant toward, for
+everyone here. So if you want to drop your SoundCloud link, maybe not the best idea. Do we need to complete everything in state lists to do the assignments from
+this session? In this, assignments from this session? Well, session right now is just whatever y'all want to actually chat about. Hopefully it's like we're
+discussing something in here. Hopefully it's something that's like a design problem. Maybe you're faced with that work or just a general question you have about
+something in software design, architecture testing. Maybe it's like, how do you do this on the front end? How would you think through this? I'm going to answer
+those questions with the tools from this course. So that's what I'm more getting at here. I could also, I could also just ask my all questions here as well. Or
+you could say, hey, can you teach me this? Yes, I can teach you that. Hand raised, invite. Yes. Good evening, Talib. Hey, how's it going? I'm good. Awesome.
+Good evening, everybody. It's not a good night. Here in Paris, that's why. Talib, I'll jump right in the question. So I'm reading the solid book right now. And
+a bit on the manner how you would like the tests to be structured. And I tried to do a little presentation. It's only one slide where I will explain. And I
+would like to run it by you and see if I understood the, I mean, way that we do from the infrastructure. And test our domain and do the double loop testing with
+the TBD. And test our controllers. Where we can just let the controllers call our business layer. Awesome. Yeah. Can you hear my screen here? Yeah, please. So
+that sounds great. Definitely go ahead and do that. I'm just going to start grabbing some of these other questions and banking them in here as well. So let's do
+that. We could take a look at your screen. And then I'm going to give you my feedback on that. So yeah, I would love that. It sounds great. Yeah. The button
+that's disabled, I don't know if it's... Let me see if I need to do something in order to give you the ability to do that. Let me put a screenshot of this so we
+can go faster. Yeah. If you have a screenshot, is it several slides or just one slide? Just one. Just one. Oh, yeah. Let's just grab the slide. I'll chuck it up
+here onto the screen. And I'm going to grab some of these questions that we're going to get to as well. It's great. I love this question about the stateful
+guess point. All right. So we'll get to those next. All righty. All right. Let's grab this. Copy image. Check it right here. All right. Beautiful. So what I'm
+seeing here through this. Yeah, we can see. Yeah. So basically, like we have our... That's acceptance testing, which is unit testing also. So it goes fast. And
+then the testing for the domain. So the entities, the aggregate routes, everything. And wherever there is this diamond, it's testable. So just like that runs
+faster than the real thing. So basically the descriptions here with the focus on acceptance testing, that we shouldn't include any knowledge or sense or
+whatever third-party service. So it shouldn't be there. So whatever we can replace the database or the interface to be a CLI. So far, this is looking good. All
+right. So there's a couple of them. Just so I can make sure that this all makes sense here. So I'm just going to go over what I'm looking at. Integration test,
+right? There's a few comments. So integration, man, it means so many different things to so many different people, which is why I actively try to avoid that
+word. Integration. But yes, it's what is incoming. You're going to want to make sure that... You know what? I'll actually draw it out like this. I should do my
+own quick little drawing here just to make sure I can convey this. I think I've put this elsewhere too. But you're going to have your... Just what everyone
+normally has is they have their business logic and app logic all in one big thing. However, you could have a front end app, front end, go that way. Mobile app.
+Whoops. Front end app, mobile app. And let's also put something else. Let's say maybe somebody else's system wants to integrate. Maybe you need to listen to
+like web hooks from another system. For example, the design of even Discord is an entire system where I needed to get it to integrate with Kajabi. When everyone
+signed up to jump in this program or to actually jump into this Discord here, you... I needed to create an integration between those two systems. And that's a
+similar thing that's going on here. So really, yes, all these things are inbound. So let's just put like some other system, external system that needs to use
+ours. So I'm just commenting on this incoming part right now because this is one of the most confusing parts. So what's going on here is there's a few things
+that we need to test. So let me actually get your take on this part again. Like, how are you testing this bit? Was that a question? Yeah. So can you explain how
+your test... Like, what is it exactly you're testing? Here, like a network request comes in, hits the controller. What are you testing exactly? Actually, right
+all my work is the backend that is being tested with end-to-end tests. Base, it's an in-memory one, but... Yeah. So the end-to-end tests are getting bigger and
+bigger. Yeah. Awesome. And it cannot cover everything because this from a higher level requires like going into the edge cases. Yeah. Everything becomes lower.
+So what I'm trying to see is a channel from the infrastructure because that's what drove us basically to do the end-to-end testing. Right now, I think we're at
+a state where we need a cover from the infra. Try to isolate with the business logic, accidents testing on it. And then all the rest we tested, like we will be
+just testing the part that we added to the external system. Perfect. Yeah. So that might be hard for everyone else here to fully understand. So I'll explain
+what's going on. I just want to make sure this has some reliance. What's going on is the way like everyone tests it. Like you're going to run into two problems.
+And this is what I'm going to talk about at the beginning of the stateful section in here, because I didn't talk about this earlier and I should really put all
+of what I'm about to say right now into from code first to first principles in that section of the course. What are the two biggest problems that everyone runs
+into when they're building out their back end? Number one, your end-to-end tests don't scale. Number one test is that, or number one problem is that. Your
+end-to-end tests are not going to scale. And the reason why is because you're trying to test everything. If you want to test a feature, your feature needs to
+go, your test needs to go like this, like input output. It's just the whole freaking app. It's going to test all of that. That's the vertical slice. It's going
+to go back end database. Test it all as one big thing. Now, you might be realizing this, but if you want to end test back end database, the hardest part about
+that is like setting up your database every single time, setting up the, this is called fixtures, but setting up the state of the world where you could test the
+functionality you want to test. That's very complex. And if you need to do that every single time at the beginning of your end-to-end tests, your end-to-end
+tests are going to get, take longer and longer to run. So it's this problem of you don't have the correct level of granularity. So the first way we solve this
+problem is using a technique called dependency inversion. And what we do is we describe the, we actually create a contract describing what our persistence is.
+Persistence. We describe the idea of persistence and we don't rely directly on a database. Instead, we just rely directly on the. Interface and abstraction. And
+then what happens is the database actually implements the contract here. So what's going on here is a relationship where we have. Is a. Right. Or plays the role
+of. And then we have your backend code now fully decoupled from that, which. uses or relies on. So what's going on here now is if you want to test the.
+Business. If you just want to test the business logic, you could do that now. And the reason why I could do that. Is because. You could say. All right. I'm
+going to use a fake. Or let. Fake. In memory. Database. And that there's a law here where it's always way faster and easier to manipulate. Something in. In
+memory. Rather than in disk. So it's faster, number one, but also it's very easy for me to do that. And this also play. Can play the role. Of a database. So now
+if you want to set up the state of the world. And you want to test your business logic. You don't actually need to. Do an end to end test. You could just test
+your business logic. Directly. There's actually still one other problem here, which is. It's not normally like this. What you actually have is your. Controller.
+Plus business logic. Plus app logic. All together. So this might be like express. As your controller. Like web server actually. And then you have your business
+logic. And you have your app logic. Business logic is like domain layer, by the way. Domain. And you have all that together. I'm just going to move this down a
+bit. So that's the first problem is end to end tests. Just don't. You can't. They just do not scale. So we still have a little bit of an issue here where it's
+like. Yeah. We have to go through the. Controller. In order to run our end to end test. We might. We don't have to rely on a database anymore. But we still have
+to go through your controller. So the solution to this is exactly the same thing. All you do is you define an API. You describe. What are the inputs to use my
+system? And what goes on here now. Is. You don't actually need this. Scene and all. And this is called the application interface. So imagine your app is like a.
+I'll call this an application. Interface. Imagine your app is just like one big plane object. If you've ever used. Stripe. Before. I'm sorry. It doesn't rely
+directly on that. What's going on instead here is you have. Sorry. This implements your application interface. Let me move all these down. Move that down. This
+is some silly trickery going on here. And then I need one more thing here. One more component. And this is going to be your controller. This is going to be your
+web server. All these things actually talk to your web server. Directly. All right. Let me move this down. Yet again. And we'll say that your. What's going on
+here is you. Your app actually implements. The interface. So this will literally say everything that your app can do. And this is going to be pure. And then
+your web server is going to. Use this. Now what we've just done here. Is. We've done something. Really incredible. Where. This code. All this stuff. The stuff
+that is really important. You don't need a database. And you don't need a web server. In order to test it. So now you don't need to do any. Testing. Now you
+could just test. The application. And the domain logic. Without actually meeting. A real one of these. And. Yeah. That's the beauty. So. Just bringing it back
+to what we've got going on here. I just wanted to make sure we're going through all of that. Just so that we can see. How this. Will work. There's one other
+thing here. Which is going to be making. Your API. Turning that into a contract as well. Having that be very. Established and well understood. We want that to
+be. Also turned into a contract. So that. Everybody here can reliably. Rely on it. So. I'm. That would go here. I'm just not going to draw it right now. Because
+this is more important for us to talk about. But what's going on here is. Yeah. Now you can just test this stuff purely. And if you've seen in some of the other
+videos. I talk about the ideal developer workflow. The ideal developer workflow is. You have an end to end test. That's going to. Cut through everything. Like
+real. So it's going to go. Like this. It's going to go from your web server. Through. To your database. So that's like the actual boundary of your system. Like
+the real boundary of your system. And it's going to be as production like as possible. You're going to start with one of those. Just to make sure you piece
+together. All the components you need. Then what you're going to do is. You're going to say. Cool. I have that one. End to end test. Then you move in. A few
+layers. Two layers. And this is going to be your. Level three. Application. Guest point. And from here. You're going to write the majority of your tests. And
+this is really. Truly going to test. The. Yeah. This is really truly going to test. The. All of your edge cases. The true functionality. Because. Here's a
+scenario. Let me see if I could actually pull up the. Exact code. For this. Here's a great example. Of some code. That I was talking about. Earlier by the way.
+Yeah. So. This is the. Create user. I got. One of your. Fellow students. To go and build out. So we built this out. Create user. Now. This is. A database. It's
+tracking for existing email. It's going to query into it a little bit. This is how we're. This is. An application concern. If the user already exists. We want
+to return some sort of error. So. This is an application level thing to do. Being able to reach into a database. And see if that user was already there. You
+need to do those things. But we're relying on a real construct here. And if we wanted to test this feature. If I go back. So I hate packaged by. Infrastructure
+like this. Yeah. There's the only way to test it. Is to make a real call from the outside. To do an end to end test. Right. Just input output. The whole system.
+So this is where everyone starts out. And what we actually want to move towards. Is something like this. Instead. Where we. Don't need to do that. Right. He's
+laughing in the chat. Right. I gave him this assignment. I'm like. Dude. I need you to. Just patch it through. Make sure you can do this. First of all. Which is
+by the way. A first step. If you've never done that before. And you're a front end developer. I'm going to make you do this as well. Just build out. Create
+user. If you've never done it. Make sure you could do that. Using the technology. And then what we need to do. Is literally. As he says. Just get it to work.
+Just get it to work. And then what we'll do is. We'll carve it out. And do it properly. We'll carve out your domain layers. And carve out those things. There's
+a question here. Is persistence the same. As repository in this context. Absolutely. Repository. Yes. Repository. Although you could rely. On other persistence
+things as well. Maybe you rely on a cache too. Maybe you also need to utilize. External services. For example. Let's say you needed to use. Stripe. For billing.
+Are you going to use. A real stripe. No. You're not going to use real stripe. You're just going to call this. Payment. Service. Let's get rid of cash for now.
+I'm going to call it. Payment service. And. What you're going to do is. You're going to make this code. Rely on the concept. Of a payment service. But not a
+real one. And then later on. What you could do is. When you're ready to actually. Test the whole system out. Like legit. And you could hook up stripe. Or. You
+could say. You know what? I'm actually going to hook up. PayPal. Or you could have them both. But. Know for sure that. While we're testing. We're going to have
+a fake. Payment. Service. And this is the one that we're going to give to our app. In order. To test. Application level three tests. And this is going to. The
+relationship here is again. Uses. A. Payment service. And then for these. For each of these. Strawless. A little cleaner. Each of these things here. Anyone
+guess what I'm going to say? Is. That's right. Is. Is. And plays the role of. I really like the. Like. Saying is. Is. And plays the role. Playing roles.
+Because. We're talking about roles. And we're talking about responsibility. General design. Which is. The most first principles. Type of way. For you to think
+about design. If we're thinking from that point of view. I really like. Using this concept of. Well. This thing really. Is just playing the role. Of. Of this
+thing. We think of interfaces. As. Just. Goals. Payment. Service. This is the role. And then all these things. Play. That role. So. Yeah. That was a bit of a
+derailment. In taking it away. Like. I stole the mic from you. For a minute there. But. Hopefully that was useful. And hopefully that helped to validate. Or
+invalidate. Some of your assumptions here. Yes. I would like to. Come back to the. Phase. Between the application layer. And. This. Not just like. What the. Use
+cases are exposing. Like. Can a. Web server. Depend on the use case. Directly. Like. Via. Go dependency. Because. Well. To depend on the domain. Layer. Where is
+not. Permitted. But. Great. And. Amazing. Excellent. Question. So. What we're talking about right here. You're probably wondering. What the heck is the purpose
+of the. Incoming. Like. What is the level. I believe this is like. What level six. Incoming. Adapters. What's the purpose of an. Incoming adapter test. All
+right. Well. Let's say. Let me. Give you an example. Let's say you're slack. Right. Like the company slack. And. Let's say. You have. A lot of different apps.
+That. Need to make sure. That they could use. The. The API. You need to make sure. That they could make calls. To the API. So. You have your. Front end. You
+have your. Desktop app. You have your. Mobile app. Maybe you have some other stuff. That need to also rely on. Slack's APIs. Now. If we. Want to make sure.
+That. All of those. Different. These are. These are incoming. Adapters. These are kind of pieces. That need. To use our system. If we want to. What is it we
+want to test. What is the guess. That we're making. Anytime we ship something. The guess that we're making. Is we're saying. These incoming. Adapters. Right.
+Like these. We'll call this again. These are like views. And like. Sorry. What were you going to say? Oh yeah. So these are like views. And screens. Like UIs.
+Like these UIs. And these incoming things. We're saying. These UIs. Can call. These UIs are configured. To call. The right. API. Endpoints. And the API.
+Endpoints. Map. To the correct. Use cases. The part that we're concerned. With validating here. The incoming adapter. Is. That. The API. Endpoints. Map. To the
+correct. Use cases. Because sometimes. That's not. The case. If anyone here. Has ever deployed. A backend app. And it's like. Just have. Everyone. Does anyone
+know. About course. That problem. When you put your something. On the internet. And you try to make a call to it. And it's like. It doesn't even get. Into the
+app. To actually call. The use case. You see where I'm going with this. Yeah. So that's the purpose. Of the incoming adapter test. Is we want to just make sure.
+That. Is. Our. API calls. Just at least. Calling into the use cases. That we want. We don't need them. To actually execute. The use cases. But we need them. To
+call into. The use cases. We need to make sure. And feel pretty good. About. That fact. So. Yeah. Yeah. Go ahead. As in the right. Parameters. Would they need
+to. On an interface. Proper sense. Of an interface. They can just depend. On. Use case. That is. Appliquated. Like there should be. An abstraction. Between
+them. Got it. I'm going to say. That you're going to want. To create. Some sort. Of. Object. This is called. The application interface. I haven't talked about
+this. I don't think anywhere. In any of my content. Yet. But. This is the. Essential. One of the essentials. This essentials. Called composition. Eventually.
+What you want to do. Is you want to take. All of your use cases. And you want to. Put them together. Into one big object. Clump them together. You have one now.
+You now have one pure object. That is your. Object. So. That's a different idea. And the reason. Why you want to do that. Is because. If they're going to. Rely
+directly. On your use cases. What happens is. Your use cases. Are going to get called. And you need to configure. All your use cases. In order to write. These
+tests. What if you don't even really. You don't need to. Execute your use cases. And make them do. That functionality. That's not what we're trying to validate.
+In the incoming. At this incoming level. All we're trying to validate. At this incoming level is. Are we calling the correct use cases. With the correct.
+Parameters. Based on this. The way that. This beat could be like. Rest. Right. Maybe this is rest. Maybe this is graph QL. Right. Who knows. This could be soap.
+This could be something else. We just want to make sure. Hey. Based on. This system that's talking to us. Is it calling into the correct use cases. Based on.
+Whatever it is that's coming in. Does that make sense? It makes perfect sense. Thank you. Awesome. No worries. Leave room. For somebody else to. These are
+amazing. Excellent questions. By the way. Hopefully others are also finding this useful. But this thing right here. About the incoming adapters. Is not
+apparently. Like obvious to you right away. But it's something that I've always just. Struggled with. I'm like yo. I'm doing all these tests. Why is it when I
+deploy my thing on the internet. I'm just like. It just doesn't work sometimes. I'm like what's the point of writing all these tests. Like the inner entities.
+Of my test. The inner layers of my tests. And then it's just like. The first call into it. Just not quite working. How do I validate that that's working
+correctly? And I. This is the answer. Right. Thank you. You're welcome. Okay. So I'm going to leave some space there. For more comments on this. And I'm going
+to go back. To some of the other questions. And everybody knows. I will be. Uploading this as well. Daniel says. I know this is a bit late. But without that.
+Application interface abstraction. You end up building your app. Within your framework. Yeah. Also a great topic. Is the idea of control styles. And there's so
+much stuff. I want to. Tell you guys. But I just. See I could just talk forever. I recorded an update. The other day. And my girlfriend was in the other room.
+And I was like. I finished the update. And I was just like. Did you just listen. Listen to me talk for 25 minutes straight. Yeah. I've learned how to tune you
+out. Because really. I could just talk for 25 minutes straight. About just like code stuff. Like non-stop. And that's what I'm trying to avoid. Which is why I
+want to do more of these live sessions. So that me talking on. Straight. Is actually very useful. Instead of me just kind of. Talking to me crazy. Yeah. I'm not
+going to get into the whole idea. Of control styles right now. Unless anyone wants me to. But I love that topic as well. And it's quite useful. Perhaps not.
+That useful right now. Can I info dump about code? Says Daniel. Sorry. All right. Let's see what other questions. We got in here. All right. I'm excited about
+the domain modeling topic. Would you do a demonstration now. Of how to build. How to model a domain of a simple app. Love it. I could definitely do something.
+Like that right now. I think that'd be very useful. I'm going to just look at this other question here. Before we dive into that. And I'm going to also ask
+anyone else. If they have any other questions. I could just kind of answer off. Cuff off. Fly here. Before I get into. Doing code things. And working through
+something like that. I'm going to answer this question right now. Are there notes. Or solid book chapters. Pointers that can help us move forward. With a
+stateful guess point. Before the content comes up. Like we had. In all honesty. I've been writing this stuff. Just pulling it out of my brain. And. Like I have
+a lot of content on here. And just to really prove that to you. It's this stuff here. Let this out. Let me open one of these up. Yeah. You see what I'm. You see
+what I'm talking about. I've got like a ton of stuff in here for y'all. And this is honestly. Like I want to have this stuff in here. At some point. But I'm
+like. I also don't want to dump everything on you. Right away. So my new philosophy for this is. Let me just decide on the main capabilities. And things you
+should be able to do at this point. And then let's work backwards. To just do those things. So for the. Stateful guess point. Here. All I really want. To do is.
+Pretty much walk through what we just did right now. And. But just in a little bit more detail. Going into specifically. Getting. Clear on the domain layer.
+What the concerns of the domain layer are. There are. Four concerns. It's data. Rules. Relationships. Between the data. And processes. We have three. Tactical
+tools. For handling that. You've already learned. One of those tactical tools. But you've learned. The stereotypical way. Of. Maneuvering that. You've learned.
+How to use the service provider. A stereotypical. Object. And you've been doing that. When you were doing your input. Output systems. At the level. One.
+Stateless guess point. That translates. Directly. Into. The domain. Driven design. Pattern. Called domain services. Which. Are what we're going to use. Later
+on. In order to. Do some of the. Challenging stuff. There. Specifically. That challenge. I gave you. Or that I'm saying. That we're going to do. Down here.
+Which is. To. Do these two. Ones here. Thinking about it. This way. The way that you're going to solve. This problem. Of syncing habits. To the calendar. Is you
+have a domain service. Which is a. Level two. One. Concept. Because it's just an input. Output system. But then it needs to work against. Entities. And you're
+going to have a. Habits. List. Or it's going to actually. Give me a. This is going to be syncing tasks. You're going to have a tasks list. Which is a. Which is
+going to be a. Level two. Concept. And you're also going to have another entity. Which is going to be a. Google calendar. Or just a calendar in general. And
+it's another. Level two. And then your. Job for this assignment. Is to write a domain service. That creates. This is just input. Output. So what goes in. What's
+going to go into this. Is going to be your tasks list. And your calendar. And these are going to be. Preloaded with. State. So these are going to have. Certain
+states on them. And what you need to do. Is. The output of this. Domain service. This input output system. Is going to be. To create a sync plan. And the sync
+plan. Is going to outline. Specifically. What are the. Updates. What are the. Removes. And what are the ads. That need to happen. Across both of these two
+systems. And. How this would work. In reality. In practice. Is after this domain service. Does its work. And you get back. All the ads. Deletes. And updates.
+You give that. To the application layer. And then the application layer. Goes and. Tells the repositories. It tells the external services. What to do. And then
+they just do. What they do. Hopefully that makes sense. But like. Really truly. This is a hard problem. Syncing tasks to your calendar. Really hard. However. If
+you know how to domain model. Then you know how to solve. Almost all of the. Really hard problems. Because you could solve. All of this stuff. Using. Art
+eating. Responsibility driven design. If we can find. All the responsibilities. For doings and knowings. And we could assign. Those doings and knowings. To the
+correct. Object stereotypes. There's only six of them. And. You could domain model it out. Have the model in your domain. Then just connect. Your domain. To
+infrastructure. And that's pretty much it. So. This allows you to get really creative. Think about how video games are developed. Think about how. I used to
+work on this software called. It was like dragging and dropping. Call. It was like building like a. Some call flow software. Like. Just quickly draw this out.
+Imagine like you can. Place nodes. On a thing. Like on like a graph. There's all these like. Different. Like. Lines. But then imagine down here. You have like.
+These different types of nodes. That you're allowed to drag. And drop onto this call flow. And there's rules. And this is a front end app. Mind you. And imagine
+like. This is the. The call flow. And there's all these rules. About like. Let's say this one right here. Is the. It's like a telephone. Let's say this one
+right here. Is I don't know. An operator. Maybe say. This right here. Is like a switch. Like switching. So maybe. How do we get. This. Switch. Kind of to break
+into two paths. Maybe that's what this is. So if I drop like that. There. It would create like a. Switch. That's pretty. Challenging logic. Especially on the
+front end. However. Once you do. The stateful guess point. Once you learn how to work at the. Stateful guess point. You learn how to use these. Three kind of
+tactical tools. You can actually solve problems. Like this relatively easy. You won't be able to hook it all up just yet. But you'll be able to. Build out. The
+domain. Layer. Of solving that problem. Because if I just draw the. Stereotypical architecture real quick. We have domain. This is terrible. We have app. This
+is very bad. We have adapter. This is very bad. We have infrastructure. This domain there. Right here. The concerns. We are mostly dealing with. Is. Data.
+Rules. Relationships. Processes. Right in the middle here. Right. That's domain. Concerns. All right. So. Yeah. It was a bit of a tangent. So how to use
+aggregate roots properly. That's a great question as well. I'm going to. Toss that in too. So let me just come back to this. The question earlier was. Are there
+any notes or solid book chapters. That could help us move forward. With the stateful guest point. Content. Before it goes up. Okay. Here's what I will do. I'm
+going to just go through. At a very high level. What you need to know. And what you need to do. In each of these. And then. Yeah. I'm going to go through all
+these. At a high level. And then I'm going to. Tell you what you need to know. And I'll show you where you can go learn it. And hopefully that'll. Give you what
+you need. In order to start. On those sections. So I won't spend too long on that. I'll try to do this. In five minutes. Let's see if I can. And then. I'm going
+to answer these other questions. And then I'm going to. Finish it up with. Actually building something. So I think that's the plan. Let's do that. All right. So
+let's go through these each. Real quick. By the way. Another thing. I'm seeing like. Even this. That last question. Everything feels very black box. One other
+aspect. About designing this course. So. Is it needs to have. A very strong. Essence. And element. Of storytelling. Meaning. You. Understand. Where we're
+starting. You understand. Like. The beginning. Of. Section. You kind of know what the problem is. You know. Your perspective of the problem. That you're
+currently struggling with. You know. Why you're struggling with that. Then I. Show you a new perspective. Then I show you. How to use that perspective. And I
+show you. The information in that perspective. Then I show you. Why this is. Good. Maybe you see a demonstration. And then I cap up. And we collect the
+learnings. And we move on to the new. The next topic. So that's. Is required. In making everything flow. And feel really nice. And good. In this course.
+However. I'm dropping stuff on you. Right now. So storytelling. I'm doing my best to. Integrate as much storytelling. As I can. So I'm kind of referring to
+this. Last question. That I just saw. I'm doing my best. To integrate as much storytelling. As possible. But really truly. I'm. As I move through this stuff.
+And I try to get it all out. As quickly as possible. And also. I'm teaching you all live. Correctly. Based on what you need. And we just come to the next steps.
+It could feel a little sparse. But that's the goal of the V2 of this. Is to make sure that it all flows. Really nice. As well. So. Answer that already. Doing my
+best. And I'll come back to that. And I'll explain. More of how we're going to. Talk about that. So. Let's go through each of these real fast. And where's my
+timer? I'm actually going to get my timer. So. I'm going to time myself. Where is that? Where is the. Victim to ADHD. Where's my time? All right. So. Section
+number one. What do we need to do? All right. All you need to know. Is the stereotypical architecture. And you need to know. The problems I just told you. Which
+are. It's going to be number one. Biggest problem. Is. Your end-to-end tests. Are just going to get flaky. If you try to do. Create user. Write out your code
+like this. Create user. Without having a decoupled architecture. Your stuff is going to. Just. End-to-end tests will not work. And then maybe. What you'll try
+to do. Is. Oh. You just pull out. Some of the functionality. Like. Back in here. Where we have. You know. What if I said. Dude. There's no validating. You're
+not validating. The user. Email. Okay. I'll just write a function. And then just put that function. Over on like. A new file. And I'll just test that. Problem
+you have here. Is a lack of encapsulation. Your data. And the related behavior. Is not together. So that's another problem. When we solve that. Using classes.
+Or you could also solve that. In a functional approach. So I have some modules planned. Where I teach you encapsulation. And I teach you how to do that.
+Functionally. And with classes. So that's the next problem. We're going to run into. I have a demonstration video. Where I've actually. Walked through this
+already. Like through the code. And we started carving out. A domain model. So that needs to go up. But I'm going to say. By the end of this section. You need
+to understand. The stereotypical architecture. You need to understand. What the domain layer is. You could also. Think about the domain layer. On the front end.
+Because it could be there as well. There's no reason it shouldn't. But really truly. It's a stereotypical architecture. We need to understand here. And really.
+Yeah. This is why I wanted this stuff. To be a little bit earlier. So that's section one. So your first assignments. And I'm going to have to put these up.
+These are the things. I actually want you to do. So this is a little bit different. From what's currently in the platform. Initially. I just wanted you to build
+out. A state machine. Now you got to do. A bit more than that. What I want you to do. Is process modeling. Some class diagrams. And state machines. Why I'm
+asking you to do. All three of these different visualization things. Because you can't really fully. Get what you need. In order to understand the problem. The
+domain. Unless you can visualize. Like process modeling. This is event storming. This is where data and behavior. Comes from in the first place. If you want to
+understand your business. All you need to do. Is actually just chart out. All of the events. Put it in sequence. And then. You just write in front of that. What
+are the. Commands that create those events. Okay. Now that command. What is the input data. For that command to create. To actually make the state change. Okay.
+Then what's the name of the event. That came out. So process modeling. Is going to give you. The essential. Data. And behavior. And it's also going to allow
+you. To identify the namespaces. Data behavior namespaces. This is like. A foundational module. You could pretty much. Assemble everything. I'm telling you.
+About building information systems. Into data behavior namespaces. That's all it really is. And the challenge. Is knowing which data and behavior. Belongs in
+which namespace. And keeping those things separate. So it's not mixing concerns. It's not talking about. Discord. Directly inside of your. Code that has to do
+with like. Pet store. So that's the namespacing issue. So I want us to understand. Those things here. And then actually do some. Modeling. Because process
+modeling. Is going to give you. Clarity on the data behavior. Namespacing from one perspective. Class diagram is going to help you. Identify what are the
+entities. And relationships between those entities. And state machines. Are going to give you more clarity. On the rules. When can those entities change. And
+when can they not change. Under what conditions do they change. And what is the new state. Of those entities. When they change. So that's the assignment. And I
+want you to model out. Tic-tac-toe. Traffic light. And this blog post. So if you do. One, two, three. State machines. Process modeling. Class diagrams. For
+these three things here. So this should. Instead of just say. State machines. All three of those. That's an amazing exercise. That's going to give you. A lot of
+clarity. And that's going to. Really put you at another level. Of being able to understand the domain. So that we can actually move into. Doing a domain model.
+Implementation. Because so far. This is just all understanding. This is more of the theoretical guess point. Of understanding the solution space. Here's where
+we actually move into. The domain model implementation. I have one minute left. So it's going to take. Maybe twice the amount of time. I said to explain this.
+That's okay. Fine with that. So I'm going to just set this timer back. Yet again. Let's do five more minutes. Implementing the model. So here what we're going
+to do. The main capabilities in here. Okay. So this is just legit. Coding that. So based on everything. We've learned about. How to collect the. Data behavior
+rules. We know the concerns. That we need to deal with. At the stateful guess point. We might even know. A little bit about. The stereotypical objects. That we
+need to use. What we're going to do now. Is what. I'm now calling this. Nth looping. I used to call it. Double looping. But bro. Look we have. How many layers.
+Do we have. That we're writing guesses at. I think like. Most of the time. You're going to start at layer five. So right at the boundary. Or you're going to
+start at layer three. Which is the developer boundary. With all the edge cases. And the business logic. And the app logic. So. I'm calling it. I'm calling it.
+Nth looping. Instead of. Double looping. Which is what it. Is predominantly called. In the TDD spaces. But. What you're going to do here. Is you're going to be
+going from. Nth looping is. Level. Two. Level one. And the best example. I could give you for this. Is if I just tell you. Build out. Student. Which is level
+two. This is a. This is an entity. All right. And. As you do that. You're going to need to build up. The value objects. So it's going to be like. First name.
+Last name. And then I'm also saying. That there's some. There's some rules here. There's a part of. You building this out. Where I say that. Once you put in the
+first name. And last name. It's going to automatically. If the student has never been created before. It's going to automatically. Create a student email for
+them. Based on the first name. Last name. There's some valid. There's some. Domain rules there. That actually go into making that happen. And then. This is
+also. Level two. Because these things are stateful. However. In order for you to do. Validation logic. You might need to validate. The first name. And last
+name. So let's say validate. The first name. That's going to be a level one. Input output. Is this valid. Or is it not valid. So maybe you could. Begin to see
+here. Where. This really truly is a problem. It's really truly. Just decomposing. Our problems down into smaller parts. In knowing the types of tests. That we
+need to do. Because at level two. Whoops. At level two. What we need to do. Is we're going to use. The essential. Subject verification. I know sometimes. I call
+a system. But. I'm feeling like. I want to come back. To calling it subject. Because. It's kind of drawing a boundary. Around. The actual. Tiny little
+components. We're going to test. Here. What we need to do. At level two. Is. To do. Subject verification. Properly. Anytime we're dealing. With a stateful. Type
+of test. We need to do. State verification. We've learned this already. In the emergent design section. In the stateless. Testing. Section. Where if you want
+to. Do subject verification. At level one. All you do. Is you just do. Result verification. You're just testing. The inputs. And the outputs. There's a video.
+You could watch. If you haven't seen that already. However. When you're testing. Stateful stuff. It's a little bit different. You're not actually testing.
+Inputs and outputs. So what you need to do. Is do a different form. Of subject verification. And this is going to involve. You actually defining. APIs. To reach
+into the object. To ascertain. The correct state. Of the object. And also ascertain. If the object has been changed. And is changing correctly. And that's node.
+Back to state machines. So I'm going to make you. Also ensure. That you are saving. Domain events. On your entities. As they're changing. So that we make sure.
+That while they change. They're changing. For the correct reason. And we could. Reasonably feel good. About the way that. Is happening to. You're going to
+learn. About results. Mutability. All kinds of different stuff. In here. But here is where. We'll take it. A little bit further. And I'm going to ask you. To.
+Do. Tic-tac-toe. And this is one of the hardest. Challenges that you'll probably. Have done up until this point. Other than Boolean calculator. Tic-tac-toe. And
+here's where you're going to use. Something called object calisthenics. You could google online. Object calisthenics. I'm also going to make you. Utilize the
+object stereotypes. The six object stereotypes. This is probably where I'm going to introduce. That concept. And I want you to be. Very well aware of what those
+are. Because those six object stereotypes. Are. The six building blocks. That make up every single abstraction. We've never seen one before. Actually sorry.
+This is the. The six object stereotypes. Are the abstractions that. Are going to be. I could box every single abstraction. To being one of these six. So I want
+you to be. Well aware of what these are. And while you're building out. Tic-tac-toe. I'm going to give you some rules. That help you. Really. Make sure you're.
+Designing cohesive objects. And that each of your objects. Conform to. At least one of these. Six object stereotypes. Great. Section five. This is going to be
+about. Actually. Now we're talking about fixtures. Which is one of the hardest problems. It's like setting up the initial state. Because. If you wanted to test
+out. Let's say. I asked you to write a test. Tomorrow. On a new project. Your first test is. Edit user. You're like. Wait. But I haven't done. Create user yet.
+You don't need to do. Create user. In order to test. Edit user. You just need to create. The state of the world. In your code. And then. If you could create.
+The state of your world. In your code. Then you could validate. Your tests. Based on that. So. This is kind of. Leaning back into everything. That we've learned
+so far. About process modeling. And seeing that. Hey. You could actually understand. Your entire domain. By just modeling out the events. Seeing that your
+entire system. Is just a sequence of state changes. And. I've talked about this earlier today. Event modeling. This is one of the. Hells up. Event modeling.
+Which is. Seeing that. You can. Yeah. Literally map it all out. These are just state changes. This is how your app changes. Over time. Connecting all these
+things together. You could say. All right. I'm going to write a test. Starting from. Right here. Starting from right here. In the system. This is the state of
+the world. At this point. And I'm going to write the test. On the next. Thing that happens. The next command. Perfect. That could be done. All you need to do.
+Is know how to. Create the state of the world. So that's what. This. Section. Is about. This one here. Simplifying. Initial state management. And I'm going to
+want you to utilize. Something called. Builders. Best resource. I have for you. To learn how to use builders. Is a book called. Growing. Object oriented
+software. Guided by tests. Incredibly. Foundational book. It really. Just pieces together. The way that. Object oriented design. And tests. Integrate together.
+It's. Probably one of the best. Software books. I've ever read. It's definitely. My top five. So. That's a good book. If you want to look into that. See how it
+works. A little bit more. However. We're just going to get into it. Anyways. I'm going to show you. And then. Almost finally. I've talked about this.
+Beforehand. But domain services. Complex processing. With domain services. What we're going to do here. Is. Yeah. I've already mentioned this. I'm going to give
+you. Some problems. That are challenging. That require you. To write. Some pretty complex logic. That involves entities. Domain services. Are the key. So.
+Again. Even with this example. I was talking about. Dragging nodes. Onto a call flow. Let's say. This is. Oh. You're not allowed. To drag a telephone node. Onto
+a. A slot. Where there's no. I don't know. Like operator. Afterwards. Or something like that. Some logic. That could exist. Like that. Perfect. That's fine. All
+of that stuff. Can be handled. If we have a domain model. That expresses those rules. Another thing. I was considering. Getting y'all to do here. Was literally
+building out. Role-based. Access control. Right. Or a resource. A resource. Or a role-based access control. RBAC. I was actually thinking about. Getting you
+guys to do that. But I think that's a bit much. For now. That might be something. I demonstrate. How to do. And then you could just watch me. Know how to do it.
+And then finally. Here. Oh. This actually. I think is where I was thinking about. Making us do this. Yeah. And then finally. Here. I want us to just. Take a
+problem. And. Show you how to break down. The responsibilities. Of that problem. Into doings and knowings. And then we. Based on everything. We've just learned.
+We could model out. An entire domain. Admittedly. What's going to happen here. Is yeah. It's great that we can model out. A whole domain. But as we get to the
+next guest point. There's a concept. I. I talk about. It's called. Role-goal. And this is also going to help us design. Aggregates. Which I think was a question
+you had a little bit. Earlier on. You don't actually want to carve out an entire. Like all of the work we're doing here is great. And all. To design entities.
+However. However. We want to be very careful about. The size of our entities. And. How they come to be. Let me actually move over to this. Because this is a
+great topic. So I'm pretty much done. Describing. What we're going to do in this section. And how we're moving through it. And some of what you could go. And do
+Google searches on. And go and find content on. If you would like. You could just wait for me. And wait for the sessions. Where I. Walk through all this stuff
+with you. But. Yeah. Aggregates. I want to go to that. Real quick now. Because that's a really great. Topic. So let me go ahead. And cross out. What we've
+already talked about. Boom. Let's talk about that. I'll come back to that. But. The aggregates. So for example. A playlist has many tracks. Yeah. This is
+something that I've notoriously done bad in the past. And I think everybody has done this bad in the past. It's one of the hardest parts of domain driven design
+to understand. For those of you who don't know what an aggregate root is. An aggregate is the minimum amount of information required. For you to perform a
+command. I don't know what a command is. Let me teach y'all something. Because that's why y'all are here. Right? Okay. Let's go over to this. And you know what?
+I feel like I have an event storming template. I do. Okay. I'll paste a link to this. If anyone wants it. Let's open this up in FigJam. Let's see. Hopefully
+this will make a new one. Or a clone. Or a copy. Bing bong. All right. Cool. So is this a copy? Let's just do this just in case. So the question here is. How do
+you design aggregates? And how do you make them. Like how do you do that properly? So I'll tell you what usually happens here first. And then I'll show you how
+to do this properly. So let's say you have a use case called. Like a feature that's called. I don't know. Let's do a simple one. Let's do create user again.
+Right? That's the name of the feature. And what ends up happening in create user. Is. Well, you guys tell me. Like. What do you need. In order to do create user
+usually. If the event. Like it's created. After create user. Is. User. Created. What is usually required to pass in. Like input data. In order to create a user.
+So let's call the feature here. Create user. And what's the input data. For that. What I'm going to do is. Grab this comment. Let's talk about. Input data
+required. So let me put it out to you. Like what is usually the required input data. To do a create user. It's going to take a while. So. Yeah. Form submitted.
+I don't know. Email password. Yeah. Boom. There we go. Email. Password. Right. Maybe. I'm not going to get into it. But maybe. Using like social sign on. You
+might need. Or. Social. Sign on. Key. Right. Maybe that comes back from like the. Get redirected. And then you come back to the main page. And then you get a
+social sign on key. You pass that to the back end. And then the back end verifies. Like. Okay. Great. Let's create your user now. Using that information. So you
+didn't have to type it in. Whatever. We're going to do. Email password. Makes it nice and easy. So that's what's required to do for a user. So in this. Sense
+here. There's this concept called an aggregate. And the aggregate describes. The absolute minimum. Form of data. That is. It's the absolute minimum data
+required. In order to perform. This command. And it's saved into a. Into an event. Absolute minimum amount. That's required. So. It's not necessarily input
+data. It's the data that is required. In order to. Execute. And understand any rules. That might have to happen there. So. For create user. Yeah. All we really
+need is email and password. Let me see if I could think of another example. Where you actually need more information. Because. I'll say. The data here is this.
+The rules. Are. Email. Is. Let's say. Email. Is. Unique. So. Not. Taken. Another rule. Is. Password. Is. Valid. Right. These are two very basic rules. And. I
+could actually validate these. In the. Application layer. So. I need. This data. It's like. Everything that I need. Is going to help me perform. It's the.
+Minimum data I need. In order to perform a transaction. So. That's great. Now. Let's say I have. To make this make more sense. Now. I need to introduce another.
+Use case. So. I'm going to copy that. Let's say. Later on. What I want to do. Is. Edit user. Here's where it starts getting interesting. Right. Aggregate. User
+edited. And we'll call this. User. As. Everyone tends to do. Great. So. What might. I need. In order to perform. Edit user. Interesting. Yeah. I might need the
+ID. For sure. Guaranteed. I need to be able to identify that. Person. Yep. Yep. That's definitely. Required. Yep. I'm probably going to. Also need. What. Is it
+that I want to edit. Maybe let's call this. User. Details. Right. Maybe we'll call it that. I mean. But like. It could be their first name. Last name. Right.
+Who knows. First name. Last name. Right. Maybe they have something else. They want to. Change as well. Right. Maybe they want to change their. Email. Right.
+Let's say. Changing password. Maybe let's exclude that. Because that's. Generally something. That is done. That has more rules. That's going to. Complicate this
+even more. More. So what's required. What's going on here is. There's a boundary. Of. There's a boundary. In which we could perform. A transaction. And. Now.
+What we've just done. Because. Up until this point. By the way. Like. In the course. You all should have been. Using the rule of three. To introduce. New.
+Parts. New. Aspects. To your abstractions. Only when necessary. So you only introduce. New abstractions. Only when necessary. If you now know that. In order for
+us. To do. Edit user. We need this new concept. Called user details. And we need. To put. Use first name. Last name. When what happens is. User ends up. Having
+something called. First name. And ends up having. Something called. Last name. On it as well. So beforehand. All we really had was. In this. All we really had
+was. Email. Password. But now. It's like. User is going to have. What's common. Might have email. But on this user. Should we also include. Password. What we
+need. The password. In order to decide. If we're going to edit. The user or not. No. Not really. Okay. Well. And the user. Are there any. Where's the tool I
+need. I'll have the tool for rule. But. Are there any rules. That would prevent this user being. From being edited. Any rules that are going to prevent this
+user. From being edited. Rules usually go here. If that. That we need to execute. Let's think about the rules. And rules are. Like. If all we're allowed to pass
+in. Is first name. Last name. And email. The only rules are just that. This is valid. That's valid. And that's valid. However. Maybe we could make a rule that.
+Yeah. You're not allowed to edit. Not allowed to edit. Unless. Your account. Is. Verified. Oh. Interesting. So now. What we've just done. Is we've introduced.
+Some constraint. Something that is going to constrain. The state machine. We're not allowed to actually. Edit a user. To go to user edited. Unless. Unless. The
+account has been verified. So in order to perform. The decision making logic. It seems like we actually need. An additional piece of data. On. This concept
+here. And that concept. Is going to have to be called. It's going to be like. Account verified. Maybe account verified status. Or maybe it could just be email.
+Right. And email could play a type. It could be. Verified. Or not verified. Right. So what's going on here. Is. You only want to. You want your aggregate. To be
+as small as possible. But. If we just keep on. Adding. New and new things. To the aggregate. Because. Maybe later on. We'll have like. Edit role. Add role.
+Change role. So then. Whenever we load up. The aggregate. From persistence. We're going to have role. We're going to have. Maybe like. Other things on here.
+Like. Account. Spending. All these things. What's going to happen over time. Is. You just want to do. A simple edit user. And when you. Have to do edit user.
+You're going to have to load up. Like 9,000 other things. From all these different. Other commands. Can you see. Begin to see the problem here. Problem is. We
+have one concept. One. Construct. User. And this thing here. Is. Going to just keep on growing. And growing. And growing. That might not seem like. A problem
+right now. However. It can eventually. Turn into a problem. If. When we want to. Perform. A command. User ends up being. So large. That. It actually. Takes a
+lot. Of. Actually ends up. Taking a lot of memory. Or the. Queries become very expensive. Just to load up user. Just to do. A command. So. In this case. The
+only things. We actually need. Are. These three things. And. Like the email. And maybe this is going to be. Encapsulated in email. Where email. Has a value. And
+it has status. There we go. Now. We could do this. And this is the minimum. Amount of data. So. There's another pattern. That I've seen. In the community.
+Where. Instead of just calling. Things user. Or. Just calling it user. Sometimes I've seen them. Do this specifically. They go. User. For. Edit. User. Aha. And
+what would they do here. Is they would call this user. For. Create. User. That's interesting. Isn't it? So what's going on here now. Is. This concept. Exists.
+Only for. Edit user. And this concept. Exists. Only for. Create user. But what happens. Like. Isn't that just a lot of classes. Aren't you just going to have.
+Tons of different classes. And things. Yeah. But if you use. The. Principles. We've been talking about. If you use. You only refactor. When you encounter.
+Duplication. Three times. You'll eventually. End up with an. Abstract. User. And this is just going to have. The stuff that is common. Across. All of them. So
+then eventually. You might end up having. A crap. A user. Like that. And all the stuff. That needs to be. In each of these. Will. Get moved. And pulled up. And
+refactored. Up to that user. So this is the concept. Of the aggregate. It's. The minimum amount. Of data. That's required. In order to perform. The command. One
+of the hardest. Concepts to understand. So if you don't fully get it. Right now. That's okay. We're gonna have to. Spend some more time on this. But. This is
+one of the things. That trips everybody up. And if you're finding. That you can't really. Figure out. What this boundary is. Probably going on here. Is. You're
+probably trying to do. Too much. In one. Command. And you probably need. To apply what. I'm going to teach you. Which is called. Temporal decoupling. Easiest
+example. Of this I could give. Is. If. Everyone is still. Tuned. Yeah. Everyone's still tuned in here. This is a great one. I love this example. Check this out.
+It is. Let's say. It's called. Make. Purchase. Right. Maybe. What's going on. Is you have a website. E-commerce website. And you want to do. Make purchase. And.
+After you do this. Make purchase. What should happen. So you get an event. Right. Purchase made. Suppose. Okay. Cool. So what's going to happen. Within this
+command here. What's going to happen. All right. Lots of stuff is going to happen. Let's say. It's going to. Find the items. In the shopping cart. So it's going
+to. First of all. Pass in the shopping cart. ID. Get the items. From the shopping cart. It's going to get the. Whoops. I don't know if I can drag down. It's
+going to get the items. From the shopping cart. It's going to. Make sure that. The items. In the shopping. Carts. Are. In inventory. It's already. It's getting
+to be a lot. Right. Okay. Then what else. Do we need to do. Still a lot. Okay. Make sure that the items. In the shopping cart. Exist in the inventory. There's
+actually enough. We also need to. Make sure. That the. Customer's. Credit card. On file. Works. Or. If they. Passed. In a. Token. Use that. Sure. Okay. We'll do
+that. What else. We need to. Send. An. Email. Notification. If. It. Works. And let. Them. Know. Okay. So this is like getting. Huge. There's so much we need to
+do. To do complete. Complete. Make purchase here. Right. Holy hell. What is going to be the aggregate for this? Cool. Like. In order to do all of these. Things
+here. It's going to really. complicate the size of whatever object. We need here. It's going to be. It could just be to get the. Like the shopping cart. And
+maybe that's. Really the aggregate. Let's call it shopping cart. And this is already just feeling like it doesn't really make sense. Okay. Wait. What? Shopping
+cart. Is that. Now. As you do your state machine. Assignments. As you do your process modeling assignments. As you step into that. You're going to realize. This
+is doing way too much. And there's a concept called. Iden potency. Which means. If. I would want you to walk through this. Line by line. And. Let's say you get
+to. The point where. Because we haven't even. Got to the point where we build them. Let's say you. Build. The customer. Save. The. The inventory. And then you
+need to send an email notification. Let's say you get all the way down here. And then. It dies. Right in between. Build the customer. And update inventory. So
+what's just happened is. You've billed the customer. You didn't really return the request. And the inventory is now. In an invalid state. Bad. It's very bad.
+Isn't it? You do not. Ever want to. Be in this position. This is like. The worst thing that could happen. And. I've been here personally. And. Just full
+disclosure. Like. Sometimes you do need to do this. This is called a transaction script. Sometimes you need to do this fast. And. When I first made the solid
+book. Website. I just chucked everything in there. And just did that. And then I had to deal with the issues. As a result of that. Because. Sometimes. There's
+something called. Cold starts. Right. With like. When you're dealing with serverless. Sometimes things will hang. And they will just like. Cut. It'll cut your
+request. So I've had to deal with that sometimes. And it's very bad. You don't want to have that situation. You want to be able to make a request. And. Be like.
+Either this whole thing works. Or none of it works. Like. Full transaction. So what you realize here. Is you're actually dealing with several state machines.
+And you're dealing with several subdomains. So. I'm just thinking about how I want to show this to you. But like. There's a lot here. There's the concept of
+billing. Right. There's a concept of billing. Because you have to bill the customer. There's a concept of inventory. So these are namespaces. There's inventory.
+Because we need to be aware of that. There's a concept of namespacing. Or sorry. Notifications. Or we'll just call this email. Because we need to email them. So
+billing also has to do with credit cards. Billing. Does that. Shop. Okay. Then there's a concept of the shopping cart. Where does the shopping cart belong? That
+belongs in e-commerce. Okay. So we have these main general kind of namespaces that we can use to piece together these concepts that are being mentioned here.
+And how this actually needs to be modeled out is we have. And I'll just create the events first of all. We'll have it like this. Item added to cart. Right.
+We'll have the item added to cart. We'll have order placed. And I'm going to give you a success scenario. Given everything is good and well. This could also
+fail. And then that will create other situations. But I'm giving you the success scenario. Item added to cart. Order placed. Let's say customer build. Okay.
+Right. Say email sent. Okay. Also shopping cart updated. Say shopping cart emptied. Yep. And let's also say what else needs to happen. And we also have
+inventory updated. Look at all this stuff we were trying to do in one call. Make purchase. Incredible. Now if you draw boundaries around this. Draw boundaries.
+Let's make this no fill. Which subdomain is this? That's e-commerce. Let's make all these larger. E-com. Which subdomain is this? Whoops. I'm just creating a
+few of these. And let's move this one. And let's move that one. And let's move that one. Okay. So yeah. We've got e-commerce. Which subdomain is this? That's
+going to be. Call that. Actually this is going to be. None of those. That's going to be orders. This is dealing with orders. And fulfilling orders. Right. What
+subdomain is that? Billing. Right. Which subdomain is this? Emails. Great. And then. What happens next? Then we go back to the other subdomain. Because this is
+all throughout time. Right. From left to right. Going through time. And then which one are we in again? E-commerce. Again. And this is why. Your systems are all
+event based. And they all kind of trigger each other. And then. This is inventory. And this is e-commerce. E-commerce. And this is the success scenario. Now
+imagine failure scenarios. Imagine. The. Customer. Imagine we tried to bill the customer once. And it failed. Okay. What do you do? Just cancel the whole order?
+Or maybe do you wait a couple days? Oh. Maybe you send an email. And then you say. Okay. We're going to wait a few days. Try your order. If you want to try it
+again. What if they never try it again? After three days. Then what? Then I guess you cancel the order. And you release the item back from the inventory. You
+see how all of. Like all of these little things here. Like the shopping cart. The order. The. Say. I don't know. The customer having. Like even the customer.
+The payment method. The email. The shopping cart. Again. All of these are different little state machines. That need to be modeled. And these state machines
+interact with each other. Through events. It's through these events that we get from one subdomain. To the next. It's kind of this. Kind of flow. So this is why
+I say you can understand an entire domain. Just by looking at the events. And then of course all of these have commands that go in front of them. And of course
+all of these have the aggregates. That is. What the command is performed against. So a large part of. This is another part of designing aggregates correctly. Is
+doing this process. Properly. Of assigning. Starting with all the events. Figuring out what those events are. And then. Drawing boundaries around. The. Like
+finding the commands. Finding the aggregates. And then drawing boundaries around those systems. Making sure that. They're even in the correct system. First of
+all. And all of that is prerequisite work. To making sure you're designing small. Small aggregates. So. Maybe you can understand the method. To my madness. Of
+why I'm making you do some of this work here. Hopefully the visualization work now. Makes a lot more sense. So this is called process modeling. This is a form
+of event storming. And I want you to do this first of all. And know how to do this first of all. So that you can begin to do the stateful. Actual domain model
+implementation. Things. A little bit later on. So we haven't really talked about aggregates. Much in the content yet. The reason for that is because. We have
+all this other stuff. To do first. Is that helpful? Does this make sense? Okay. Let's see. Let me just see this one. Specifically. Aggregate root. That has a
+list. As one of its properties. Reorder the tracks. Like that. Yeah. It sounds like what you need to do here. Is. You might be missing a concept here. What I
+recommend. Is. For this. Particular problem. What I would love to do. Is. Can you make a thread. And let's actually go through this. Like in the thread. There.
+So I. Think it was. Leo. Max. I think that asked that. Question. Yeah. Leo. Max. Make a thread. And then let's go through that one. Because I love this
+challenge. All right. Let me cross that out. How will we be introduced to domain service? And I'm just going to grab this next question. I could probably answer
+this one fast too. And then this will probably be it for tonight. We'll do this. And then we'll do a. Do some more domain modeling. One. Maybe what we want to
+see is like. How we do this in code. I think. Perhaps. Not sure. We'll kind of go with this. Since I was talking about this. Before. I'll just continue along
+with that train of thought. And then come back to this. So how do you keep track of the whole process. And make sure you're doing the right steps. In the right
+order. Aha. I'm so glad you asked that. I have a tool for it. I have a tool for it. Ever heard of the. Value creation system. No. But for real. Let's see if I
+could go to that real quick. Let me pull this up. One second. Let me get to this. I need to get to the website really quick. Yeah. Let's grab this link. Pull it
+over here. Look at there. Yeah. I started just breaking this out. Because I'm going to start putting this stuff in there. But. I believe it's in here. How do I
+make sure I'm doing everything in the right order. Like this. This is how. You're always making guesses. Right. You don't really want. You never want to be
+making. Physical guesses. Unless you have your theoretical guesses sorted. Right. This is just the concept of abstraction. Even me trying to get this
+information out to you all. It's like. I need to make sure I theoretically understand what it is I'm doing. And what's defined theoretically what success is.
+Before I even take my pen to the paper and start writing and start going. So if I don't theoretically understand. I'm not going to. I shouldn't begin. Same way
+for you. Theoretically. Abstractly. Upfront. This is upfront design as well. If you're starting your work on a new project. If you're starting a new project.
+You've never began. You're going to learn the whole domain from scratch. Never done it before. You're starting right here. Because you don't even understand the
+domain. You don't understand the problem. Once you understand the problem. You've done. This is like in domain. On design. They call this. You're talking with
+the. Domain experts. Maybe you've done an event storm. Once you've done some big picture modeling. Once you're feeling pretty confident. About understanding the
+domain. The big problems you're solving. The purpose of the software. It's an input output system. The output of that. Is you now understanding. All right. Well
+let's get clear on how. We're going to. How we're solving the problem. So maybe you're working at a new company. And a new company to you. And you're learning
+their domain. Here's where you're actually spending time. Understanding their theoretical solution space. To the problem. This is. The output of this. By the
+way. Is going to be your domains. It's going to be. An understanding of the. Which domains are core domains. Which domains are generic ones. Which ones are
+supporting. That concept is not clear. Let's go back to this again. Some folks are not familiar with that. But. We've got. Here. We've got e-commerce orders.
+Billing. Email. E-commerce. And inventory. If I am an e-commerce business. Right. Like my business. Is my online store. Let's think about this. Let's think
+about. This business. In general. The software essentialist. This course. Essentialist.dev. There is an. E-commerce aspect to this. There's the website. There
+is a. Education aspect to it. There's also billing. As I saw there. There's also orders. Right. Email. Email. Email. All these different things here. Right now.
+Let's just take these few. Which out of all of these. Is the most important one. To my business. Probably this one here. The education part. Right. So what does
+that do? That makes that. The core domain. So. I should probably just piece. All of this out. But. If we look. Show you this image. If you have clarity. On the
+inputs and outputs. To this entirety. Of this whole system here. That's how you know. If you're at the right point. Because if you're. Thinking back to this.
+And you're like. I don't really know. What the core domain is. That I'm working on. What problems. And you got to come back up to here. And make sure you know.
+What the core domain. You're working on is. First and foremost. And also first and foremost. Know what those domains are. Right. So some people are working on
+software. Where they don't. Even really know. What the core domain is. And then as a result. Their code base is a mess. And it can't really be changed. We call
+that a big ball of mud. So if you begin work. On one of those projects. Start at the very top. What are we solving? This is why I say. You also need to
+understand. How business works. What are we solving? Okay. This is the value we create. Great. How are we doing that? Okay. So we have all these domains. Okay.
+You're going to use Stripe. As your billing subdomain. Okay. Great. You're going to use. Or no. You have a billing subdomain. You need billing. You need this.
+You need that. Okay. You need education. Okay. You need that. All right. We have an understanding. What's most important? Okay. Got it. Then you move over to
+architecture. You're like. Okay. Cool. So. What is it. Like. How are we going to make this. A reality though? Which of these. Domains are we going to build?
+Which of these domains. Are we just going to use something off the shelf? A very common one. Is identity and access management. With the domain of users. Right.
+Are you going to build out. Authentication. In users and roles. Are you going to build that all out yourself? Probably not the wisest decision. Probably better
+to say. That is a generic subdomain. That's something I could just go download. Just go integrate some software. And get it to do that as well. Are you going to
+go and build out. Your entire email sending? Are you going to. Invent a. Are you going to host an SMTP server? And go and do all of your. That stuff yourself?
+No. Like. The subdomain of billing. We're just going to have that be its own. External service. And we're just going to use MailChimp. So this is where you're
+taking the solution space. The theoretical. Okay. Here are the different domains. And over here in the architecture step. What you do is you're saying. Okay.
+Now. Here are the. Here's what we're actually going to do. This is where you get into the idea of the plan. So. We're going to build this one. We're going to
+build that one. We're going to use this. Library. Or framework. Or tool for this. Subdomain. Or this combination of libraries and tools for this subdomain.
+External tools. Once you have all of that. Decided out. Then begins the work of actually putting it in practice. So. Here's what we're learning. These are all
+the guess points that we're working through. And we're actually making sense of now. So this is the answer to how do you. Ensure you have all the right steps in
+the right order. You need the theoretical. First of all. Sort it out. Make sure that's well understood. Then we move into the physical guess points. I might
+actually reorder these a little bit. Because like. This is actually really truly. The order that it goes. But I've talked about something recently called the.
+Ideal developer workflow. And in that. Ideal developer workflow. I actually recommend you. Start. So after you have your architecture. We talked about that last
+step. Have that understood very clearly. Then what you want to do is. Deploy a small piece of functionality. Oh I have that twice. I want to build a small piece
+of functionality. Deploy that. Make sure you have an end-to-end test. And then you're going to jump in. And you're going to go to level three. So that's. This
+is all level. It's kind of like building out your infrastructure. Building up the end pieces. Then you're going to just do your system level test. And then
+you're going to be spending the majority of your work doing your application level three tests. You're going to spend 20% of your time. Coming back and filling
+it in with infrastructure tests. So that's the correct order. The ideal developer workflow. I need to put a module there. And this is probably a better
+visualization. If that looks like. Does that make sense? Do you have more questions on that kind of? Sure. Like it's a big question too. Like this is the whole
+purpose of the course. Which is. Breaking down. Decomposing. The work you have to do. And putting that into. First of all. Knowing where that work is. And also
+understanding your work as a sequence of systems. Because systems thinking really truly is. Like the main thing that's bringing order to all this chaos is. I
+can understand the work I need to do. As in terms of inputs and outputs. If I was to go and learn. I know nothing about real estate by the way. But if I wanted
+to go and learn about real estate. All I would do is. Do the exact same thing I'm doing here. I would make sure I understand the inputs and the outputs. So I'd
+be like. Do I understand how. I don't know. Like getting a loan works. Do I understand the inputs and the outputs. And the processes that happen in the middle.
+Not really. Okay. Let's make sure we understand that. Oh. This is a bit bigger of a problem. Okay. If there's more tiny systems inside of it. Okay. Let's
+understand those systems. We get all the way down to the system of maybe like money. Or the system of value. And then. Okay. Now. I'm at the smallest system.
+Now. Let's kind of go higher up. Let's kind of get right back up to the problems that we're trying to figure out. That's how you understand stuff really fast is
+to know the systems, the inputs and outputs of those systems. You know, they play together. Because that's what we're doing here with software. And the smallest
+system really is the one that everyone. Not everyone, but most of you have already done, which is the stateless guess point. That's the smallest system. And the
+next one, what we're spending on time on now is the stateful one. So what's the input to the stateful guess point? And what's the output to the stateful guess
+point? Yeah. This is going to be. See. Vertical slices. So it's going to be a unit of functionality. So it's going to be a command. We're coming straight back
+to. This here. This right here. Is pretty much the level two stuff. The core structure makes total sense. Woo. Love it. It's helping me have a framework to
+think about software development and communicate with my coworkers. Helps me set the right context before jumping in. What I want to say. I love that. That's
+incredible. And that's really the first thing. It's like, we want to get good at this skill. It's almost like I use this analogy of like, damn. With water. It's
+like, right now, what might be. Some of you might be experiencing is like, I want to get in there and just do the work. Just like do this thing. But I just
+don't even know the right way. It's like, you're just always going to feel blocked. Unless you have clarity. It's going to feel like you're blocked. Like your
+creativity can't really flow. As soon as you get clarity. As soon as you understand these systems and the way the systems play together. You understand the
+inputs and the outputs of the systems. And then you understand the processes that you need to use at each of those systems. And there's 12. I've organized all
+of the processes into 12 main essentials. You have to use each of those essentials that the systems in different ways. For example, the way you use vertical
+slicing at level two. Actually, you don't even use it at level two. The way that you use horizontal decoupling at level two is a little bit different than the
+way you use horizontal decoupling at level five. Admittedly, but you still need to use it. If you can understand how all of those things play together. Inputs
+and outputs. Processes. Those processes are 12 essentials. Each of those 12 essentials have to get executed a little bit differently at each of the guess
+points. Put all that together. And then you maneuver through all of them. And you actually do them yourself. Then it's like the dam just like bursts open. And
+now you have clarity. And now when it's time to go and take a new feature and actually do some work. You know exactly what to do. And now it's just to spend the
+time focused on doing it. And that's where creativity comes out. And that's my goal of this program. And my goal for all of them is to have that. So clarity
+number one. And that's why I wish I spent a little bit more time using this all together so that you would understand that. Because also like you're always
+going to have problems I can't really answer. But if you understand how to begin to solve that problem and the level at which that problem even should be begun
+to be solved from. And then you can kick it off and start going. And do the emergent design work as it emerges. That was a lot. Oh my god. Very good though.
+Very good. Okay. Let's sync back here. So I think we got this uncovered. It's a great question. Yeah. I'm just going to really quick on this one. No. Not very
+long at all. How will we be introduced to the concept of the domain service? That's coming up. Stateful. Guest point. Here. Not there. Not there. Right here. We
+kind of went over the general structure of the stateful guest point. Yeah. You're going to become. You're going to get introduced to it right here. And I'm
+going to give you a concrete problem. And I've already talked about some of the problems that you're going to be able to solve with it. Like this. If you needed
+to build a recommendations algorithm. Like how does Facebook know to recommend you to certain friends? What's going on is something in their system somewhere in
+their domain. Perhaps when they receive certain events. Like after this person liked that page. Or after this person clicked on that. After this person did
+that. I guarantee you there's some aspect of their domain that's responsible. Probably domain is like recommendations or friend recommendations. Some aspect is
+responsible for waiting. Assigning weights. To who should be recommended to who. Someone becomes a friend with this person. Okay great. I'm going to change the
+weight of friend recommendations based on that new information. That logic could be incredibly complex. Probably. I forget. Some of the algorithms.
+Collaborative filtering. And there's a million of them. There's tons of algorithms for that. I don't know. But. I guarantee you that work is being done in a
+domain service. Because it's incredibly domain specific. I'm not going to make you do that. So maybe I probably won't actually make you do this one. Like to
+that same degree. But if I just go to my. Like I went to my website on my blog. At the bottom of every blog post. There's a thing that has recommended blog
+posts. How am I determining which blog posts to recommend to you? What are the inputs? And what are the outputs? The outputs are the recommended blog posts. But
+what are the inputs? And how am I making those decisions? That's what a domain service is for. Does that make sense? Hopefully that makes sense. Cool. Bing
+bong. All right. Let me just check. Who's here? Where are we at? So I just want to just pause real quick. Before I dive into this. Because this will be probably
+the last thing we do. Maybe I could get some more clarity on. I think it was Taha that asked. Taha's not even here for this. Does anyone else have anything else
+they would like me to discuss? Because if I dive into this. I want more clarity. Specifically on how you would like me to. Like what exactly you would like to
+see from me. Otherwise. No other questions. I could just get in there. Start plugging away on stuff. Also want to ask. How useful has this been so far? For
+those of you that are in here. It's also good to know. Useful getting a bigger picture. Yeah. Rohan. Like definitely. I think you would have really benefited
+from a little bit more structure on my end. Especially like the beginning to the course. You kind of like bumped in. You're like. New. Like all this new stuff.
+What the heck? Like how does this even piece together? So that's my bad with the element of storytelling in the course. I really. Could have done a better job
+of including more storytelling. But. It's going to get better. Just being more attuned to where y'all are at. It's huge. So this is really helpful on my end to
+gain that really useful insight. Risky Biscuit. So glad to hear that. Cheo. Also glad. I've been leaning into stateful testing. I'm curious about how that's
+been going. You leaning into stateful testing. Front end. Back end. I don't know if anyone's really gone through some of the assignments in there right now. And
+I wouldn't be offended if anyone hasn't. Because. Yeah. It needs to be pieced together probably a little bit more. Some more clarity here. We've been talking
+about it. But. Yes. Front end. Complex behavior living in it is rare. Or which is rare. Oh. So you're dealing with a situation where there is complex behavior
+on the front end. Yeah. Yeah. You've got to build. It's like building a whole domain model. And. I wanted to do a video later on. On. Like. Kind of the laws of
+the stereotypical architecture. Namely. Like. Some that come straight to mind are. It's one way. So there's reads and writes. It's event based of course. Right.
+And. Yeah. We already know this as well. The horizontal. Decoupling. We have to decouple from infrastructure. A lot of that different stuff. And then also just
+the concept of domains in general. Like your front end. Has. Very likely has several domains. Two. Something that's kind of huge mindset shift is. Anything that
+you think is really complex. Consider. Whoever. Built. The routing aspect. Like. React. Writer. Those guys have built React. Writer. Inside of that tool is a
+domain layer. Layer. They have a domain layer. In that tool as well. Just the same. As I kind of grew out here. With like. Domain. This. And then this is app.
+And then this is adapter. And then that's infra. There's a domain layer. There's a domain layer. In your router. React router. As well. It's the same thing.
+You're just saying. I don't really want to deal with. Building out. That entire domain layer. Application layer. Infrastructure. But. I'm just going to use the
+tool. And integrate it in. So. Thinking about it this way. It's like. Imagine this is like. One. Two. Three. Imagine these things right here. These are like.
+Your little domains. Your app is just a bunch of like. Domains connected to each other. Some of them are the ones that you've built. Some of them. Are just ones
+that you've. Installed. Or just connected. Right. And thinking about it that way. Because some of them are like. Thinking about this that way. Really just makes
+it. That's an incredible conceptual model. It's just that. The software you're building. If it feels hard. It's like. It should feel hard. Because you're
+building out. Like a really rich. Thing here. In the domain layer. And it's like. React. Thinking. Thinking about building React. Or thinking about building
+like. D3.js. That's a crazy. What. Imagine what the domain layer looks like. For that kind of. But that's really truly. The. What's going on. It's exciting.
+When you feel like you could do it. So. By the end of the stateful. Guest point. I want everyone to feel like. They can. Take a. Feature. Or sorry. Take a. The
+problems that you want to model. And domain. And actually create a domain there. For that. Occupus. We. Want users to manipulate stuff. For. Degree planning
+locally. Damn. Yeah. Totally. Okay. Let's see. What to do next. So. I could definitely build something. Let me just. Whoops. Maybe I'm way too large here.
+Demonstration of. How to build a domain module. Of a simple app. Let's see. What would be worthwhile. To develop out here. What degree will we go? I actually
+need to build out the. I need to build out the course platform. For this. To be quite honest. For this program. I don't want everything done here. To be done.
+Within. Javi. I want everyone to be able to. Actually go into the course platform. And just do your assignments. In there. If I ask you to. Design out.
+Something like. Do your event storming. It would be awesome. If I could actually validate. If your event storm is correct. Or not. Inside of a platform. So.
+Having assignments. Having a leaderboard. Having like. Checklists. Like even the action item checklist. I would like that to be. Within the platform. Those are
+some of the elements. Of things that I want. Actually. I could probably start. Modeling some of that stuff out. Let me see. I think the question. I want to ask
+right now. Is like. For everyone who's been here. Throughout this. Kind of. Chat so far. My question is. For the stateful guest point. Let me just take a look.
+At the assignments. I have here. This is a fun. I know some of you. Have gone through. Some of those assignments. Already. Designed diagram. The state machines.
+Tic-tac-toe. Who here has done. Say. This is like. End flooping. So like. Who's done. Traffic light. Student. Or any. Like any of these three here. If anyone's
+done them. I think Lucas has done them. Anyone who. Hasn't quite done them. What. Is going to. What do you think you need. For me. Okay. So you just did the
+traffic light. Nice. Anyone who hasn't quite done them yet. What do you think you might need. For me. In order for you to do them. Whether it's me to just kind
+of. Drop in the rest of the content. Or maybe I could take. Some of what we discussed here. So something I missed. Even just connecting. To. Why I'm getting you
+to do it. Maybe is helpful now. Content. Close. The example. All right. Examples are huge. Someone had a doubt. And how to model. The acronym. The rules.
+Actors. Yes. Yeah. Actors and roles. Oh. Actors and roles. Using stately. Can I say it. And model the actors and roles. In one of these examples. If I did. I'm
+evil. Evil man. Self evaluation. Ah. In this stuff here. Okay. Definitely. It's good to know. I could. Definitely. Rearrange this. So the answer to that. How
+are we going to. Yeah. I think I want you to do. The process model. And then. Because. For some of these challenges. I realize like. You're going to get more
+out of this. Doing the. Class diagram. Visualization for this one. Really truly. Leans more on the class diagram. Than anything else. Whereas the visualization.
+For this one. Who cares about the class diagram. It's more about the state machine. Right. Even for this one. For the state machine. Class diagram. Sure. Could
+be all right. So I think. Yeah. I'm going to. Edit these assignments. For sure. Give some more clarity on that. And examples. Examples are huge. So that's just.
+Excellent feedback. Thank you. I'm just jotting that down. The actors and roles. Okay. If I mentioned the word. Actor. And role. In here. Like I said role.
+Somewhere in any of these assignments. Because actors and roles. Are a little bit more. That's more of the topic. That we will be discussing. At the application
+guest point. Because it's actors. Really truly. That give meaning. Actors play roles. The roles. That are played by the actors. Usually at a system level. Or
+actual person. That's what gives meaning. To the. Features. The input data. So. We're only at the stateful guest point. So I'm like. Kind of like. Wait. Where
+do we talk about that? So yeah. Just skip that for now then. I would even say. If you've already done. One of these state machines. And you're feeling pretty
+comfortable. About your ability. To model out state machines. You need the content for me. On how to do the. Process modeling. I'm going to have to put that in
+here. So. Leave that for now. But come back to it. I'm going to update the action item checklist. But just jump ahead. To developing out. I've annotated. Each
+of the transitions. With the clear rule. I'll come. And call it. I'll say I did that. Notated. No. I did do that. Yeah. I'm a goof. All right. Fair enough.
+Thank you for calling. Yeah. I got to get rid of that. That's. You're not equipped. To make sense of that. Just yet. All right. Yeah. So skip that. Jump ahead.
+Try doing the. Try to build it out. You're going to. Very likely struggle with the. Part that has to do with. Time. So also skip the aspect of that. Of time.
+Because I want us to get to talking about time. In the next section. Decoupling from time. I want us to come back and do that. So just imagine you are the one
+who is. You're just going to design the API to move it forward. Move the traffic light forward. I may. Yeah. I don't think I'm going to put the time stuff in
+here. Because we're really covering a lot. However, it's a very important part of this. So we'll probably come back to that. Give it a shot. But. If just me
+telling you right now. What you need to do. In order to move the traffic light forward. Is you need to completely decouple from time. Because if you do new
+date. Yeah. You can model out time. In stately pretty easily. But when you get to actually developing the domain model. Actually building it for real. Modeling
+time is going to be hard. Because we're not really used to thinking about it this way. But the answer to this is going to be. For you to design out. Build out a
+clock abstraction. It's going to be for you to decouple from anything that talks to the system at all. Because the domain model needs to be super pure. It's not
+allowed to know about system time. It's not allowed to know about random number generators. So even if you do math.random inside of your code. It's like you're
+breaking the encapsulation of the core code. So when you do new date inside of traffic light. Or if you try to move time using set timeout. You're breaking the
+encapsulation. And also you're not going to be able to test your code without waiting 30 seconds. You don't want that situation. So. That's a challenge that I
+was. I originally pieced out for us to get to right here. But. Let me get the content out. And I'm. I might put it here earlier. But just don't worry about it
+for now. Just do the state machine with the transitions in general. And then this is really truly the one that I want us to talk about next. Is building out the
+domain model. This is the. I kind of covered this. This is like. Well two. You're going to envelope from the entity. And develop out value objects. So I'm
+seeing. What I really need to do here. Is just get the. Like actual demonstrations. And some. More content. As for getting the content out. And the
+demonstrations. I'm going to leave an announcement. But it'd be very good. If I could just. Make a. Just do a Q&A. Or not a Q&A. Just do a lesson live. And
+actually demonstrate it live. And teach. So teach first. Ask questions. Then jump into a demo. Then ask questions. Then post all of that. And I think that
+sounds like. It would be the fastest thing to do. So I think I'm actually just going to leave it here. This was really good though. I don't want to. Just dive
+live into coding anything. In particular. I think this is actually. Where it's going to take a little bit. Of planning on my part. To do. If you were to see me.
+Develop this out. I'm just going to probably have to go. Right. Here. This is probably where I'm going to start. Actually doing the code. So I'll probably
+demonstrate one of these. I'll demonstrate me doing this. And then you'll know how to do it. Because in here. We actually have to use a lot of techniques. Like
+the result pattern. Guards. Results are just unions. Immutability as well. Doing this in a way. Where. You're protecting the invariance. For those of you who
+also are not familiar with. Classes. How to encapsulate properly with classes. Also how to encapsulate with functions. There's a lot of stuff to cover in here.
+I think the next step. Is going to be. Me scheduling some time to teach. And demo at the same time. So I need to do a little bit of prep for that. So that's
+what we'll do next. I'll take maybe five. Ten more minutes of questions. If there are. And then I'll leave it for. Here tonight. And then I'm going to just dive
+straight into. Prepping when we're going to do lessons. Or I could just get out some of the stuff fast. And can you just jump into there. So the question is.
+Anyone have any other questions. Or comments or concerns. Feedback you can give me. Very great. What was useful here. Would you like to see more of. So far. I
+just know we need content. Event storming session. Oh yeah. I love events storming. It's one of my favorite things. Everyone here needs to know how to do that.
+That's a non-negotiable. Yeah. That's huge. Okay. Cool. Done. Event storming. What we'll do is. There's two forms of event storming. There's like the big
+picture. And there's the process modeling. The course outline. Where I plan for us to do big picture. Is more in the. Bridging the gap. Where you go on to a
+project. That already has been. I'm going to start work. You're going to begin work. On an existing project. So that's where you're going to do more. Big
+picture event storming. Which is. It means you're going into the domain. That already exists. And you're just. Gaining clarity. As the hours. And how they're
+doing things there. So that's big picture. Process modeling is more. Okay. You're just. You got one feature. And how are we going to make this feature work? And
+then you find out the subdomains. Right then and there. So if that's at the beginning of a new project. That's really good to do. Because you could take that
+from any new feature. And then you could find out the essential subdomains. And we need to carve out. And find. Pretty much how you're going to carve through.
+The entirety of a future. Right there. And response. So I think that sounds great to do actually. For a session. One. Is to do. Process modeling. What do you
+guys think? Do some process modeling in here. Just to kick it off. Yeah. I think we should do. One, two, three. All together. And then this right after. We take
+our learnings from that. And then we literally just turn it into code. Boom. I'm about it. I'm about it. I'm about it. All right y'all. I think we'll leave it
+here for now. This is great. Thank you. All for. I have a 15 gigabyte file. I now need to edit down. Love it. Quick time man. Quick time. Let's just. So yeah.
+If you have anything else you want to chat about. I've asked some of you to start. Threads. In the. Yeah. Start a thread. In course chat. Or you could leave a
+post. Yeah. Let's go chat about. I feel like I'm probably just going to. Open posts back up. So we. Can do things in there again. Because. Part of me feels like
+it's actually easier to find posts. The feedback loop. Than it is in threads mode. Let's just do threads. So if you have anything else you want to chat about.
+Let's go start a thread. And maneuver through some problems. And then we'll turn that into material. All right. Blessed. Thank you all for coming. And. Stay
+tuned for an update for me. On some of the next steps. All right. See you soon. Bye. Bye. Bye. Bye. Bye. Bye. Bye. Bye. Bye. Take care. Bye. Bye. Bye. Bye. Bye.
+Bye. Bye. Bye.

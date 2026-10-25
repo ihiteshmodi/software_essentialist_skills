@@ -1,0 +1,91 @@
+All right, crafters, we are back with another one of these reviews of the Boolean calculator. So let's take a quick look through who do we have lined up here.
+We've got Shannon who says they found this one a little bit more challenging. They have all the test cases passing, but I feel like there might be a better way
+of implementing this. We'll go for your feedback. I was okay with, but this one I found the most challenging. Yeah, this is a hard one. So we already took a
+look at one of these in the past recording I did. Now let's take a look at this. Step one is express the first test. Now we're going straight from here, which
+is just getting the test going to a full-blown approach here. Now I'm not going to grill you on this here. We want to spell the spelling for single because that
+doesn't really matter to me as much. I understand what you're saying. Describe each. So we're going straight to a, all right, this is actually a very good topic
+here. What we're doing here is we're jumping straight to the test infrastructure that we're setting up. And for all of these other tests that we've been doing,
+you should be able to just express them using it. And you don't really need to have each for all of them. Now, this is not bad. I actually think this is quite
+elegant and quite nice. But at the end of the day, you're making a decision here on how you're choosing to run all of your tests. This is why with Faster, the
+framework that I am going to be showing you all, it's find, architect, automate, specify, test, and refine. Specify, test, and refine is the same thing as red
+reading factor. And this is where the emergent design starts to come out. The first three, which is find, architect, and automate. This is the upfront design.
+So there's two types of design really. And what you're doing here is you've made an upfront design decision. You've said, we are going to sculpt this out. And
+this is going to be the one test we're going to use to run all of the functionality from. There's benefits and drawbacks to this. It is an approach. There is no
+single one correct approach to do this. However, I would say that when you're doing TDD, it is a lot easier for you to start out with a more simple architecture
+for writing your tests. Especially when those tests are tests that can be done stateless. It's nice to refactor towards this because we want to minimize the
+complexity. And that's what we have been trying to do here with this part, which is managing complexity with TPP. And you can read about this in a solid book.
+And this is actually going to get pulled out, put into the platform because I need it there instead. But yeah, we're making an upfront design decision here. And
+this could result in complexity that makes this very hard for us to actually continue along. But we'll see because, again, it's a guess. This is all a guess and
+it's hard to know. So time and experience and more reps will lead the path forward. Because if I was to do this, you asked me for my feedback on this, how I
+would start. Maybe there's a simpler way. There is a simpler way. The simpler way is to move towards this, to refine towards this type of solution. But to begin
+with kind of what we saw in the last video, which is just to begin with very simple examples. Take one example, write it as English, make that your it
+statement. It returns true when I pass in true. It returns true when I do true and true. It returns false when I do true and false. That's like the simplest
+possible way. And when you refine, you can refine towards this here. Because, yeah, we're setting up infrastructure that could make it difficult. So let's move
+along into the solution space here. So we've introduced a concept here. There are a few different ways for us to do TDD as you're now aware. There's the fake it
+strategy. And there's also this obvious implementation strategy. So what you've done here is you've jumped straight to designing abstractions, which is the
+conditioned map. And you're solving this using this here. So we're trying to avoid complexity in this step. And if we're to jump to that, you're jumping to, if
+not level seven or eight, you're jumping to here. When instead you could just do the first test with true or false and just return a constant or a, yeah, just
+return a constant here. And that's a way simpler transformation to do. Yeah. What are easier ways to do this? The easier way is to just move through it piece by
+piece. Now, the drawback to this is when you prefer the simpler transformations, it means you can't really jump to the solution you have in your mind right
+away. And that's where, again, this concept of foresight, metacognition, knowing what you want to do and stopping yourself from doing that and doing the good
+hygienic thing, which is to move through it piece by piece. For the simpler transformations and allow those to actually have the design emerge from. So I, this
+tells me a lot from this first test where you might be in your mind, which is you had a really good solution and this could influence the way we're doing this
+here. So let's take a look. So this is a lot of code to be seeing in one test. First of all, single Boolean use. So now we've switched this up a little bit
+here. We've now changed this into a string, which is necessary, of course, because this is no longer true or false. This is a full addition. One way I might
+also refine this in your next step. And you might get to this is I would actually strictly type what this is. Meaning I might have something like, if I could
+just go down here. I might actually do type expression. Screen. And use the word expression instead. I would do that in a refactor step of force. I don't want
+to introduce all this stuff at once. So, yeah, what I'm seeing here is a lot of code. However, I am understanding the intent. I'm understanding what is
+happening here, which is good. I'm just worried about this becoming really complex, really fast, because you've implemented a lot of code here. And I can't
+really provide feedback on how you've arrived to it. All of what is happening here is happening within your brain. It's not happening within the code to be read
+as a story. Right. You've made a lot of guesses really fast. You've made a lot of guesses at one time. In fact, you've made however many guesses this is. You've
+done all of those at the same time. And when you make many guesses at the same time, it's read out a path of where your brain is forced to go down. Because I'll
+give you an example here. If your goal was to learn entrepreneurship, the way you would do that is your state B would be to build a product that makes money.
+And that's probably one of the best ways to learn is to learn by example and to lead by example. That's one thing. Right. Now, if your other goal was to learn
+to become a better programmer, to learn how to do a lot of the stuff we're doing in this program, then the example he would use is to actually build something
+using code, using the principles we talk about here. Now, these are two entirely different paths to be going down. And there's a lot of uncertainty and
+complexity in each one. So if you want to do them both at the same time, you want to learn entrepreneurship and get really good at that and start making money,
+and you want to get really good at programming and using the stuff we're doing here. You cannot count on reality allowing you to do them both at the same time.
+Because as an entrepreneur, you may end up having to use tools that don't require you to write any code because it's going to allow you to go faster. If you
+needed to just hook up email marketing, are you going to go and build your own email marketing solution? No, you're just going to go use a tool. But that's not
+going to give you the experiences you want in order to learn programming better, is it? And at the same time, if you're trying to learn how to write code well,
+and you want to actually build a product, as an entrepreneur, it's not a wise decision to be writing all of this code when you need to just go fast and hook
+things up because time is your most limited resource and you're running out of time and running out of capital. So hopefully you can see by this example, when
+we have two separate swim lanes or we have two separate intentions, guesses that we're making. It's very hard for us to assume that they're going to all
+converge into one and it splits our focus off in multiple directions. When that happens, it requires a lot more cognitive willpower and a lot more cognitive
+creativity to create the solution. When instead, if you just chose one at a time, you can allow the mechanism of the feedback loop to present to you what you
+need at that time. So, you're almost like you're tunnel visioned or you have a piece of paper in front of your face and you've just done the next thing. Okay,
+great. What's the next thing there? Okay, great. And then now what's the next thing to solve? And then what's the next thing to solve? You keep moving forward a
+little bit each time. But yeah, when you do them, you're doing like five, six, seven different guesses all at the same time. It's like it forces you up into
+your mind and your brain. And then we end up with things like this where you have to write a lot of code. And we're going to talk about this in the metaphysics,
+but we tend to think that it's very easy for us to come to solutions. However, when we want to come to a solution, do we ever just go beeline it straight to the
+solution in the correct way? Like, I'm sure you had to backspace a lot of this. I'm sure you had to delete a lot of this. I'm sure you had to run the code and
+rerun it. So it's not like you're going, you're starting from here and you're just going straight to the solution. Instead, you're going all around here. Maybe
+it's not quite working. You're there. And then you finally end up there. When instead, if you chose smaller, tiny little goals, you could just move from here to
+here and then here to here and then here to here and here to here. And then eventually we'll end up at the end. So don't try to do it all in one swift movement
+here. It also makes it hard for me as a instructor to actually give you feedback because I cannot walk through how you're doing this here. So I'm sure this
+works because if the tests pass, you probably don't want this in there. But if the tests pass, then it works. And that's great. And this looks really cool. Like
+this makes me happy in my soul a little bit, but I can't give you good feedback here. So that's the big thing. I will say that I, we have operands. Sure. Yeah.
+I'm starting to see some language emerge here. And I would say what you've done really well is you are using concepts. You have a stack, you have tokens. You're
+adding the tokens onto the stack. And that's great. Excellent. I would like to see this stuff emerge over time though. However, one last thing I will say on
+this is there's a great book called The Philosophy of Software Design. So he has this saying, and this fits into the concept of the feedback loop in general,
+but one of his pieces of advice is to design it twice. Yeah, do it twice. So you've done this already once here. You've made it work. My challenge to you now is
+to do this again. Now that you have proof, how are you going to do this? But move towards the solution. See if you can get here in an emergent way. Because
+you've done this in an upfront way. I don't know if you wrote this all out on a piece of paper or if you did it on a whiteboard or something, but I probably
+would have. Because when I was in college, this assignment here that we're looking at right now, this is also one that I think I had to do my first or second
+year. And it was really hard and it took me the entire weekend. This is like me just starting out coding. Took the whole weekend and we had to do this with link
+lists. And that was really hard. And I spent so much time deleting and going back and trying over and over and just refreshing. And eventually it worked, but it
+was hard. You don't want to really be doing all the heavy lifting in your mind. Allow the tool to be doing the heavy lifting, which is to make the small guesses
+and lead with that. So that's my feedback on this so far. I'm just going to take a quick peek at the next one in here. So what we're doing here is we're
+introducing parentheses. Right. Beautiful. That you have the guard of the tests in order to do this. It's a spectrum. You could do it all up front. And hey, I
+mean, to you, this could be, this could have been obvious. This could have been an obvious implementation. At least to me, it wasn't. To me, this is a bit of a
+hard problem. So we just cleaned up a bit. And now we are doing some serious refactoring in here. But I want to take a look at your final solution here because
+this looks really elegant. We're going to, yeah, exactly. This stuff here. When you see these types of nested statements here, these are things that can be
+refined and refactored. But this is not the time to be doing this. The goal of this, all of these challenges for this first part is for you to just get the
+mechanics down and for you to minimize complexity. So, yeah, let me see the big thing here. Consider doing this using smaller commits and smaller pieces,
+smaller chunks and move towards this. But this is also another way you could do this if time is of the essence. And if you have the confidence to write code
+this way, it does work. So it's not bad. It's actually great. But it's not something that's easy for me to review as an instructor based on the way it was done.
+But you've made it work. And that's incredible. That's where I'm going to leave it on this one here. So great job. So keep on moving through the assignments. So
+you've done all of them now. And I think Shannon is now ready for the next assignments. However, the next stuff I'm going to get out is actually the content,
+which should give some more context to all of this. And then we'll get into the next stateful assignments. And I believe that's where we're going to get into
+refactoring away a lot of this stuff, the ifs and the elses and putting them into better capsulated units of code. All right. We'll leave it there. So great
+job. Keep on plugging through your assignments and I will see you in the next one. All right.

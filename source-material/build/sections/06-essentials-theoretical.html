@@ -1,0 +1,467 @@
+<section id="essentials-theoretical" class="doc-section" data-title="12 Essentials III: Theoretical">
+  <h2>12 Essentials III: Theoretical</h2>
+  <p class="lede">The three theoretical essentials answer <strong>who, why and what</strong> before anyone writes the <strong>how</strong>. <strong>Value identification</strong> clarifies the problem (vision, roles, goals, capabilities). <strong>Domain discovery</strong> turns it into a solution with a shared language (features, stories, acceptance criteria, concrete examples). <strong>Strategic design</strong> turns the solution’s requirements into an architecture. “We need to make theoretical guesses first before we can make physical ones.” <a class="src" data-lesson="21">L21</a> <a class="src" data-lesson="22">L22</a> <a class="src" data-lesson="23">L23</a> <a class="src" data-lesson="65">L65</a></p>
+
+  <table class="tbl">
+    <thead><tr><th>Essential</th><th>Guess point</th><th>Question it answers</th><th>Output (input to the next)</th><th>Smell when missing</th></tr></thead>
+    <tbody>
+      <tr><td><a href="#essentials-theoretical--value-identification">Value Identification</a></td><td>Problem</td><td>Who do we help, why, and what will they be able to do?</td><td>Vision, roles + goals, capabilities, concrete what/why examples</td><td>Code written without knowing why; “just build these endpoints”</td></tr>
+      <tr><td><a href="#essentials-theoretical--domain-discovery">Domain Discovery</a></td><td>Solution</td><td>What will we build, and what will someone experience?</td><td>Features, stories, acceptance criteria, concrete examples, domain language, boundaries</td><td>Generic names, no boundaries, event storming “until your brain’s mush”</td></tr>
+      <tr><td><a href="#essentials-theoretical--strategic-design">Strategic Design</a></td><td>Architecture</td><td>How do we realize this in the real world?</td><td>Chosen components: build vs buy vs service, and how they integrate</td><td>Stuck choosing tools; rebuilding auth/email; stuck at pattern level</td></tr>
+    </tbody>
+  </table>
+  <p>Mapping from <a class="src" data-lesson="21">L21</a>, <a class="src" data-lesson="22">L22</a>, <a class="src" data-lesson="23">L23</a>, <a class="src" data-lesson="65">L65</a> and <a class="src" data-lesson="93">L93</a>. The theoretical essentials sit under the metaphysical ones (<a href="#essentials-metaphysical--abstraction">abstraction</a>, <a href="#essentials-metaphysical--feedback-loop">feedback loop</a>) and above the <a href="#essentials-physical">physical essentials</a>. Clarity on roles, goals and capabilities before code is itself essential; without it, the other essentials can’t be done properly. <a class="src" data-lesson="93">L93</a></p>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-theoretical--roadmap" data-title="Theoretical Guess Points Roadmap">
+    <h3>The Theoretical Guess Points: Problem → Solution → Architecture <a class="src" data-lesson="65">L65</a> <a class="src" data-lesson="23">L23</a> <a class="src" data-lesson="85">L85</a></h3>
+
+    <div class="callout rule"><strong>Theoretical before physical</strong>
+      <p>Design is abstraction: “thinking before doing”, what vs how, theoretical vs physical, upfront vs emergent. So why model a domain in code before you know the problem, its solution, and the architecture you’ll implement it with? “You can’t really do the stateful part unless you made your theoretical guesses first.” Khalil restructured the course around this. <a class="src" data-lesson="65">L65</a> In the value creation system the rule of the game is the same: go left to right, <strong>theoretical first, then physical</strong>. <a class="src" data-lesson="85">L85</a></p>
+    </div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 900 320" role="img" aria-label="Theoretical guess points: problem guess point (value identification) outputs to solution guess point (domain discovery), which outputs requirements to architecture guess point (strategic design), which flows down into the physical guess points">
+        <defs>
+          <marker id="et-arrow-roadmap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker>
+        </defs>
+        <text x="20" y="26" font-size="13" font-weight="700" fill="var(--accent)">THEORETICAL guess points · each is an input → output system</text>
+
+        <rect x="20" y="40" width="262" height="186" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="151" y="64" font-size="14" font-weight="700" text-anchor="middle" fill="var(--fg)">Problem</text>
+        <text x="151" y="82" font-size="11" text-anchor="middle" fill="var(--accent)">Value Identification</text>
+        <text x="32" y="108" font-size="11" fill="var(--fg)">in: phenomena from the world, people</text>
+        <text x="32" y="126" font-size="11" fill="var(--fg)">crunch domain knowledge, role → goal</text>
+        <text x="32" y="144" font-size="11" fill="var(--fg)">vision · roles/goals · capabilities</text>
+        <text x="32" y="162" font-size="11" fill="var(--fg)">qualitative + quantitative evidence</text>
+        <text x="32" y="188" font-size="11" font-weight="700" fill="var(--fg)">out: the problem + concrete</text>
+        <text x="32" y="206" font-size="11" font-weight="700" fill="var(--fg)">examples of what and why</text>
+
+        <rect x="319" y="40" width="262" height="186" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="450" y="64" font-size="14" font-weight="700" text-anchor="middle" fill="var(--fg)">Solution</text>
+        <text x="450" y="82" font-size="11" text-anchor="middle" fill="var(--accent)">Domain Discovery</text>
+        <text x="331" y="108" font-size="11" fill="var(--fg)">subdomains → bounded contexts</text>
+        <text x="331" y="126" font-size="11" fill="var(--fg)">scenario: state A → state B</text>
+        <text x="331" y="144" font-size="11" fill="var(--fg)">event storming / event modeling</text>
+        <text x="331" y="162" font-size="11" fill="var(--fg)">language · domain model</text>
+        <text x="331" y="188" font-size="11" font-weight="700" fill="var(--fg)">out: features · stories · AC · examples</text>
+        <text x="331" y="206" font-size="11" font-weight="700" fill="var(--fg)">= requirements (functional + NFR)</text>
+
+        <rect x="618" y="40" width="262" height="186" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="749" y="64" font-size="14" font-weight="700" text-anchor="middle" fill="var(--fg)">Architecture</text>
+        <text x="749" y="82" font-size="11" text-anchor="middle" fill="var(--accent)">Strategic Design</text>
+        <text x="630" y="108" font-size="11" fill="var(--fg)">stereotype · develop</text>
+        <text x="630" y="126" font-size="11" fill="var(--fg)">integrate · prioritize components</text>
+        <text x="630" y="144" font-size="11" fill="var(--fg)">core / supporting / generic</text>
+        <text x="630" y="162" font-size="11" fill="var(--fg)">build vs buy vs external service</text>
+        <text x="630" y="188" font-size="11" font-weight="700" fill="var(--fg)">out: components + how the</text>
+        <text x="630" y="206" font-size="11" font-weight="700" fill="var(--fg)">contexts/modules connect</text>
+
+        <line x1="284" y1="133" x2="315" y2="133" stroke="var(--accent)" stroke-width="2" marker-end="url(#et-arrow-roadmap)"/>
+        <line x1="583" y1="133" x2="614" y2="133" stroke="var(--accent)" stroke-width="2" marker-end="url(#et-arrow-roadmap)"/>
+        <line x1="749" y1="228" x2="749" y2="258" stroke="var(--accent)" stroke-width="2" marker-end="url(#et-arrow-roadmap)"/>
+
+        <rect x="20" y="262" width="860" height="42" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="450" y="288" font-size="12" text-anchor="middle" fill="var(--fg)">PHYSICAL guess points: acceptance test / feature file → walking skeleton → stateful domain model in code → …</text>
+      </svg>
+      <figcaption>Problem → solution → architecture as input → output systems, from <a class="src" data-lesson="23">L23</a> (names and the requirements arrow), <a class="src" data-lesson="21">L21</a>, <a class="src" data-lesson="22">L22</a> and <a class="src" data-lesson="65">L65</a> (contents). <a class="src" data-lesson="65">L65</a> names only the problem guess point explicitly; the other two labels come from <a class="src" data-lesson="23">L23</a> and <a class="src" data-lesson="85">L85</a>. Layout <span class="badge copilot">Added by Copilot</span>. Full ladder: <a href="#essentials-metaphysical--guess-points">guess points</a>.</figcaption>
+    </figure>
+
+    <h4>The roadmap, top to bottom <a class="src" data-lesson="65">L65</a></h4>
+    <ol class="steps">
+      <li><strong>Problem space</strong> — start from the problem and the people, not the code. Crunch domain knowledge with your boss or the domain experts. Carry three things into the solution space: the problem, concrete examples of <em>what</em> you’re building, and concrete examples of <em>why</em>.</li>
+      <li><strong>Subdomains</strong> — break the problem into parts.</li>
+      <li><strong>Bounded contexts + domain model</strong> — the solution space. A domain model is different from an understanding: you decide which abstractions to codify and agree on names. “No, it’s going to be called this. And here’s how it works.”</li>
+      <li><strong>Drive it through a concrete scenario</strong> — “Person is at state A, person wants to be at state B, and here’s their experience.” Event storm that scenario to find the events, state changes, and the systems you’ll build, buy, or reluctantly build (core, generic, supporting).</li>
+      <li><strong>Decide how to assemble it</strong> — try out systems, build vs buy, how the bounded contexts connect (modular monolith, microservices, integrations). Keep it simple.</li>
+      <li><strong>Then build</strong> — down into the physical guess points (the stateful guess point: value objects, entities, identifiers). See <a href="#ddd-feedbook">the FeedBook case study</a> for the full walk.</li>
+    </ol>
+
+    <div class="cards">
+      <div class="card"><h4>“Build tic-tac-toe”</h4><p>A context-free kata. <a class="src" data-lesson="65">L65</a></p></div>
+      <div class="card"><h4>“Web-based multiplayer tic-tac-toe”</h4><p>Adds concurrency, client and server domains, creating games and rooms, setting up games, network issues, rendering. <a class="src" data-lesson="65">L65</a></p></div>
+      <div class="card"><h4>“Tic-tac-toe on a McDonald’s order terminal”</h4><p>The problem changes again and exposes different subdomains. “Just changing it ever so slightly really changes the work that we have to do.” <a class="src" data-lesson="65">L65</a></p></div>
+    </div>
+
+    <ul>
+      <li><strong>Inputs/outputs bound the work.</strong> Treating each guess point as a system constrains the many possible activities and tells you when to move on. <a class="src" data-lesson="21">L21</a> <a class="src" data-lesson="23">L23</a></li>
+      <li><strong>Zero theoretical guesses made</strong> (new product, entrepreneur)? Maybe don’t run multi-loop TDD at every guess point. Push one theoretical guess through as fast as possible, then “start playing defense” with tests at the physical level. <a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Platform strategy:</strong> once shared infrastructure exists (deployment, architecture, known services, tested code), later features can skip guesses at some guess points and score faster. <a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Order of work</strong> comes from the <a href="#workflow">ideal developer workflow and FA²STR</a>, which start by clarifying the theoretical guesses. <a class="src" data-lesson="93">L93</a></li>
+    </ul>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>Modeling the domain (stateful guess point) before the theoretical guesses are made. <a class="src" data-lesson="65">L65</a></li>
+        <li>Code-first mindset: jumping to solve problems with code. <a class="src" data-lesson="65">L65</a></li>
+        <li>Working from code toward the problem produces work that “doesn’t matter long-term” and extra complexity. Coding up toward the vision “always results in a mess.” <a class="src" data-lesson="21">L21</a> <a class="src" data-lesson="93">L93</a></li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“If nothing else, the most important thing to understand is abstraction. It’s the thinking before doing.”<cite><a class="src" data-lesson="65">L65</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-theoretical--value-identification" data-title="Value Identification">
+    <h3>Value Identification <a class="src" data-lesson="21">L21</a> <a class="src" data-lesson="93">L93</a></h3>
+
+    <div class="callout def"><strong>Definition</strong>
+      <p>“The act of getting clear on what is valuable.” <a class="src" data-lesson="93">L93</a> Get very clear on the <strong>problem guess point</strong>: the top of the theoretical abstraction stack (vision, roles and their goals, capabilities), i.e. the <strong>who</strong>, the <strong>why</strong> and the <strong>what</strong>. Until it’s clear, you’re at an impasse: “That is a blockage. That is do not pass go.” <a class="src" data-lesson="21">L21</a></p>
+    </div>
+
+    <table class="tbl">
+      <thead><tr><th>Level (top → bottom)</th><th>Meaning</th><th>Owned by</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Vision</strong></td><td>Can you even conceive what you want to build?</td><td rowspan="3">Value identification (problem guess point)</td></tr>
+        <tr><td><strong>Roles + goals</strong></td><td>Very clear roles whose goals we’re helping</td></tr>
+        <tr><td><strong>Capabilities</strong></td><td>What those roles will be enabled to do</td></tr>
+        <tr><td><strong>Features</strong></td><td>Start of the solution space: what we actually need to build</td><td rowspan="4">Domain discovery (solution guess point)</td></tr>
+        <tr><td><strong>Stories</strong></td><td>Real-world scenarios</td></tr>
+        <tr><td><strong>Acceptance criteria</strong></td><td>Rules the story must satisfy</td></tr>
+        <tr><td><strong>Concrete examples</strong></td><td>Specific cases, the last stop before code</td></tr>
+      </tbody>
+    </table>
+    <p>The theoretical side of the <a href="#essentials-metaphysical--prism">abstraction prism</a>. <a class="src" data-lesson="21">L21</a> <a class="src" data-lesson="22">L22</a> Top-down: who → why → what → stories → acceptance criteria → concrete examples → validated → <em>then</em> code. <a class="src" data-lesson="93">L93</a></p>
+
+    <h4>How to actualize it <a class="src" data-lesson="21">L21</a></h4>
+    <div class="cards">
+      <div class="card"><h4>Building for a customer</h4><p>Talk to the customer, the person you’re building for. Prototype. Wireframe.</p></div>
+      <div class="card"><h4>Joining an existing product</h4><p>Get clear on what problems it solves and how (including problems like a messy codebase) with <strong>big-picture event storming</strong>, then move into the solution space.</p></div>
+      <div class="card"><h4>Entrepreneurial developer</h4><p>You play the customer role, so you do the strategy work. <strong>Quantitative:</strong> are there people with a big enough pain, and how many (“gaining a number”)? <strong>Qualitative:</strong> talk to users and domain experts and “feel into their problem.”</p></div>
+      <div class="card"><h4>Named techniques</h4><p><strong>Feature injection</strong> and <strong>impact mapping</strong> (DDD/BDD communities), covered in the guess points. See <a href="#essentials-theoretical--role-goal-chain">the role → goal chain</a>.</p></div>
+    </div>
+
+    <div class="callout rule"><strong>Exit criterion for the problem guess point</strong> <a class="src" data-lesson="21">L21</a>
+      <p>You can say who you help, what they achieve, what they can do, and how you help them, and you have good-enough qualitative and quantitative data that it’s worthwhile (“a fair amount of confidence”). Then move to the solution guess point. The problem guess point’s input is phenomena from the world; its output is your idea. It covers idea generation and validating that there’s a problem, and needs no code or DDD. <a class="src" data-lesson="85">L85</a></p>
+    </div>
+
+    <ul>
+      <li><strong>The first guess is theoretical:</strong> “does anyone even care?” (e.g. an anime debate app). Value identification is how you validate it. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Value depends on roles and context.</strong> DDD Forum was written only to practise DDD: value for Khalil as learner and educator, not for real customers. Reframed for conference organizers, it gains a real reason. <a class="src" data-lesson="93">L93</a> <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>DDD without value</strong> teaches you only the patterns. You skip the important part: crunching and refining a domain model. “A robust domain can only come from trying to build something of value” (student summary, endorsed). <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Self-check while coding:</strong> “what is the actual value of me doing this thing… how can I connect this to a role’s goal?” If you can’t answer, you’re thinking forwards (reacting). <a class="src" data-lesson="93">L93</a> Check against the <a href="#metaphysics--three-roles">three roles and goals</a>. <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Asking for design help?</strong> Khalil’s standard Discord reply: “Do you have clarity on the theoretical guesses first?” Share examples and user stories, not tool questions. <a class="src" data-lesson="21">L21</a></li>
+    </ul>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>Writing code without a clear understanding of why. <a class="src" data-lesson="21">L21</a></li>
+        <li>“How do I do XYZ with this tool?” before the theoretical guesses are clear. <a class="src" data-lesson="21">L21</a></li>
+        <li>Building features with no purpose (“just build these endpoints”). <a class="src" data-lesson="82">L82</a></li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“Before we get into the how, before we start talking about code, we want to clarify the who, the why, and the what.”<cite><a class="src" data-lesson="21">L21</a></cite></blockquote>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>An agent can’t decide who you serve or whether they care. Those are guesses you have to make and validate. When code is cheap, the who/why/what gate is what stops fast generation of features nobody wanted.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-theoretical--role-goal-chain" data-title="Role → Goal → Features → Examples → Tests">
+    <h3>Role → Goal → Features → Concrete Examples → Acceptance Tests <a class="src" data-lesson="82">L82</a> <a class="src" data-lesson="65">L65</a></h3>
+
+    <p>A 1-2-3 chain that drives all work. Role = <strong>who</strong>, goal = <strong>why</strong>, features/capabilities = <strong>what</strong>, concrete examples = <strong>how</strong>, and the examples become acceptance tests. “Never start a project without these four words clearly understood.” Khalil derived <em>role-goal</em> from metaphysics (Aristotle, Sartre’s existentialism) and later found it already existed as <strong>impact mapping</strong> and <strong>feature injection</strong>. <a class="src" data-lesson="82">L82</a> Other problem → solution processes: BDD’s feature injection, DDD’s impact mapping, agile’s <strong>user story mapping</strong>. Role-goal is Khalil’s “mishmash”, more responsibility-driven: concrete people (actors), the roles they play, their goals. <a class="src" data-lesson="65">L65</a> It all “stems from BDD.” <a class="src" data-lesson="82">L82</a></p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 900 320" role="img" aria-label="Impact map for DDD Forum: role conference organizer, goal obtain an audience of devs curious about DDD to sell tickets to, features register, buy tickets, view ticket advertisement, ask DDD questions, concrete example James buys three tickets, acceptance test given when then">
+        <defs>
+          <marker id="et-arrow-impact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+        </defs>
+        <text x="95" y="24" font-size="11" font-weight="700" text-anchor="middle" fill="var(--accent)">WHO · role</text>
+        <text x="275" y="24" font-size="11" font-weight="700" text-anchor="middle" fill="var(--accent)">WHY · goal</text>
+        <text x="455" y="24" font-size="11" font-weight="700" text-anchor="middle" fill="var(--accent)">WHAT · features</text>
+        <text x="635" y="24" font-size="11" font-weight="700" text-anchor="middle" fill="var(--accent-2)">HOW · concrete example</text>
+        <text x="815" y="24" font-size="11" font-weight="700" text-anchor="middle" fill="var(--accent-2)">acceptance test</text>
+
+        <rect x="20" y="125" width="150" height="60" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="95" y="151" font-size="12" font-weight="700" text-anchor="middle" fill="var(--fg)">Conference</text>
+        <text x="95" y="169" font-size="12" font-weight="700" text-anchor="middle" fill="var(--fg)">organizer</text>
+
+        <rect x="200" y="95" width="150" height="120" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="275" y="122" font-size="11" text-anchor="middle" fill="var(--fg)">Obtain an audience</text>
+        <text x="275" y="138" font-size="11" text-anchor="middle" fill="var(--fg)">of devs curious</text>
+        <text x="275" y="154" font-size="11" text-anchor="middle" fill="var(--fg)">about DDD to sell</text>
+        <text x="275" y="170" font-size="11" text-anchor="middle" fill="var(--fg)">tickets to</text>
+        <text x="275" y="200" font-size="10" text-anchor="middle" fill="var(--accent)">(customer: make money)</text>
+
+        <rect x="380" y="40" width="150" height="44" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="455" y="67" font-size="12" text-anchor="middle" fill="var(--fg)">Register</text>
+        <rect x="380" y="96" width="150" height="44" rx="6" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="3"/>
+        <text x="455" y="123" font-size="12" font-weight="700" text-anchor="middle" fill="var(--fg)">Buy tickets</text>
+        <rect x="380" y="152" width="150" height="44" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="455" y="179" font-size="12" text-anchor="middle" fill="var(--fg)">View ticket advert</text>
+        <rect x="380" y="208" width="150" height="44" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="455" y="235" font-size="12" text-anchor="middle" fill="var(--fg)">Ask DDD questions</text>
+        <rect x="380" y="264" width="150" height="34" rx="6" fill="none" stroke="var(--svg-stroke)" stroke-dasharray="5 4"/>
+        <text x="455" y="286" font-size="10.5" text-anchor="middle" fill="var(--fg)">drive traffic: out of scope</text>
+
+        <rect x="560" y="78" width="150" height="80" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="635" y="108" font-size="11" text-anchor="middle" fill="var(--fg)">James buys three</text>
+        <text x="635" y="124" font-size="11" text-anchor="middle" fill="var(--fg)">tickets for his</text>
+        <text x="635" y="140" font-size="11" text-anchor="middle" fill="var(--fg)">company</text>
+
+        <rect x="740" y="70" width="150" height="96" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="750" y="94" font-size="10.5" fill="var(--fg)">Given 3 tickets in cart</text>
+        <text x="750" y="112" font-size="10.5" fill="var(--fg)">When James purchases</text>
+        <text x="750" y="130" font-size="10.5" fill="var(--fg)">Then order placed</text>
+        <text x="750" y="148" font-size="10.5" fill="var(--fg)">And email sent</text>
+
+        <line x1="172" y1="155" x2="196" y2="155" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#et-arrow-impact)"/>
+        <line x1="352" y1="155" x2="376" y2="62" stroke="var(--svg-stroke)" stroke-width="1.5" marker-end="url(#et-arrow-impact)"/>
+        <line x1="352" y1="155" x2="376" y2="118" stroke="var(--svg-stroke)" stroke-width="1.5" marker-end="url(#et-arrow-impact)"/>
+        <line x1="352" y1="155" x2="376" y2="174" stroke="var(--svg-stroke)" stroke-width="1.5" marker-end="url(#et-arrow-impact)"/>
+        <line x1="352" y1="155" x2="376" y2="230" stroke="var(--svg-stroke)" stroke-width="1.5" marker-end="url(#et-arrow-impact)"/>
+        <line x1="532" y1="118" x2="556" y2="118" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#et-arrow-impact)"/>
+        <line x1="712" y1="118" x2="736" y2="118" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#et-arrow-impact)"/>
+
+        <text x="720" y="206" font-size="10.5" text-anchor="middle" fill="var(--fg)">devs usually skip straight from</text>
+        <text x="720" y="222" font-size="10.5" text-anchor="middle" fill="var(--fg)">“what” to code: several levels</text>
+        <text x="720" y="238" font-size="10.5" text-anchor="middle" fill="var(--fg)">of abstraction live before code</text>
+      </svg>
+      <figcaption>The DDD Forum role-goal board, reframed <a class="src" data-lesson="82">L82</a>. Role, goal, features, out-of-scope item and the James example are from the course. The features were brainstormed from a “how”: marketing drives traffic to DDD Forum, a “built with DDD” page promotes the conference, visitors sign up. Rendering <span class="badge copilot">Added by Copilot</span>.</figcaption>
+    </figure>
+
+    <h4>From example to executable spec</h4>
+    <p>An acceptance test is a concrete example (Given/When/Then) put straight into the codebase to drive work. It is a <strong>shared executable specification</strong> for frontend and backend. It runs through four layers: concrete example → test runner → test code → <strong>protocol driver</strong> (acts “as if it is the user talking to the system”) → system. <a class="src" data-lesson="82">L82</a> Details in <a href="#testing">Testing</a>.</p>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L82</span> The concrete example for “buy tickets”, as written live on the board</figcaption>
+      <pre><code class="language-gherkin">Feature: Buy tickets
+  Scenario: James buys three tickets for his company
+    Given James has three tickets in cart
+    When James purchases tickets
+    Then an order should have been placed
+    And an email is sent</code></pre>
+    </figure>
+    <ul>
+      <li>First framed as “he is billed / emailed access”, then shrunk to “places an order”, because billing and emailing should be <a href="#essentials-physical--temporal-decoupling">temporally decoupled</a> (pattern-first). <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Then-clause tense:</strong> past tense usually fits (“order placed”, “email sent”). Present tense (“I should now be logged in”) is fine for UI experience. The hard rule: describe the system the way the user interacts with it. <a class="src" data-lesson="82">L82</a></li>
+    </ul>
+
+    <p>The highest theoretical abstraction <em>in code</em> is the feature file: stories, acceptance criteria and a concrete-examples table. If someone can read it and see exactly what the software should do, you have the top-level abstraction; everything else goes deeper into implementation. <a class="src" data-lesson="93">L93</a></p>
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> The same example grown into a full feature file: story → acceptance criteria → examples table</figcaption>
+      <pre><code class="language-gherkin">Feature: Buy tickets
+  As a developer curious about DDD
+  I want to buy conference tickets for my team
+  So that we can attend the DDD conference
+
+  # Acceptance criteria
+  #  - Purchasing a non-empty cart places one order for all its tickets
+  #  - The buyer is emailed a confirmation
+  #  - An empty cart cannot be purchased
+
+  Scenario Outline: Buying the tickets in the cart
+    Given &lt;buyer&gt; has &lt;count&gt; tickets in cart
+    When &lt;buyer&gt; purchases tickets
+    Then an order for &lt;count&gt; tickets should have been placed
+    And a confirmation email should have been sent to &lt;buyer&gt;
+
+    Examples:
+      | buyer | count |
+      | James | 3     |
+      | Aiko  | 1     |
+
+  Scenario: Empty cart
+    Given Priya has no tickets in cart
+    When Priya purchases tickets
+    Then no order should have been placed</code></pre>
+    </figure>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — API/DB-first: tables and endpoints, but no who, why or example</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Design starts at the code level</figcaption>
+          <pre><code class="language-text">-- 1. schema.sql: start with tables
+CREATE TABLE users   (id, email, password_hash);
+CREATE TABLE tickets (id, conference_id, price);
+CREATE TABLE orders  (id, user_id, total, status);
+
+# 2. an endpoint per table
+POST   /users
+GET    /tickets
+POST   /orders
+PATCH  /orders/:id/status
+POST   /emails              ← who calls this, and why?
+
+# 3. "test" it
+curl -X POST localhost:3000/orders -d '{"userId":1,"total":300}'
+
+# Which feature is this? Which role's goal does it serve?
+# When is it done? Nothing in the code can answer.</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — derived from role → goal → feature → example; the test is the “flag post”</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Use-case contract and acceptance test shaped by the James example</figcaption>
+          <pre><code class="language-ts">// Role: conference organizer · Goal: sell tickets to DDD-curious devs
+// Feature: Buy tickets · Example: James buys three tickets for his company
+export type BuyTicketsCommand = { buyerId: string };
+
+export type BuyTicketsResult =
+  | { type: 'OrderPlaced'; orderId: string; ticketCount: number }
+  | { type: 'CartEmpty' };
+
+export interface BuyTickets {
+  execute(command: BuyTicketsCommand): Promise&lt;BuyTicketsResult&gt;;
+}
+
+// tests/tickets/buyTickets.spec.ts: one scenario, driven through a protocol driver
+describe('Feature: Buy tickets', () =&gt; {
+  it('James buys three tickets for his company', async () =&gt; {
+    const james = await driver.aBuyerWithTicketsInCart('James', 3);   // Given
+
+    const result = await driver.purchaseTickets(james);               // When
+
+    expect(result).toMatchObject({ type: 'OrderPlaced', ticketCount: 3 }); // Then
+    expect(await driver.emailsSentTo(james)).toHaveLength(1);           // And
+  });
+});</code></pre>
+        </figure>
+      </div>
+    </div>
+    <p>A student’s “abstracted APIs on top of the vertical hierarchy” is an <strong>API-first</strong> approach starting at the code level. Khalil calls it extremely common and recommends <em>BDD in Action</em>. <a class="src" data-lesson="93">L93</a> Code-first also means thinking in <strong>endpoints instead of features</strong> and testing manually with curl. <a class="src" data-lesson="82">L82</a> Features then map onto <a href="#essentials-physical--vertical-slicing">vertical slices</a>.</p>
+
+    <div class="callout tip"><strong>Artifacts for product-minded teams</strong> <a class="src" data-lesson="82">L82</a>
+      <p>Role-goal (≈ impact mapping, feature injection), process modeling, user story mapping, example mapping. Books: <em>BDD in Action</em>, <em>Specification by Example</em>. Advanced stance: skip mandatory document types and just go through the problem, solution and architecture guess points. “The artifacts, of course, they are a side effect of the shared understanding,” and they go stale quickly.</p>
+    </div>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>A concrete example plus its acceptance test is the best prompt and the best oracle you can give an agent. Without the role and goal above it, the agent will happily produce the “Before” column: tables and endpoints with no reason to exist.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-theoretical--domain-discovery" data-title="Domain Discovery">
+    <h3>Domain Discovery <a class="src" data-lesson="22">L22</a> <a class="src" data-lesson="93">L93</a></h3>
+
+    <div class="callout def"><strong>Definition</strong>
+      <p>Getting very clear on the language used and making sure everyone else understands it. <a class="src" data-lesson="93">L93</a> Grounded in DDD’s premise: “If we can all be working upon a shared understanding, a shared mental model of the problem of the domain, then we’re going to have a lot more high quality code.” Its goal is the <strong>solution guess point</strong>: given the who/why/what, what will we build, what will someone experience, and concrete examples of how it works: <strong>features, stories, acceptance criteria, examples</strong>. <a class="src" data-lesson="22">L22</a></p>
+    </div>
+
+    <h4>Why language matters</h4>
+    <ul>
+      <li><strong>Words → images → action.</strong> “As a developer, you are primarily just working against mental models.” Names get read and form images in other developers’ minds, and that’s how they know what to do. Naming variables, folders, classes and functions has the same effect as folder structure: design = discoverability and understanding. <a class="src" data-lesson="22">L22</a></li>
+      <li><strong>Example:</strong> a pet clinic’s language revolves around animals, pets, reservations, procedures, medication. <a class="src" data-lesson="22">L22</a></li>
+      <li><strong>A solved problem is a domain model.</strong> Khalil logs life problems in Notion. Solving one produces systems, knowledge, language, processes and symbols: a domain model that could become a domain model implementation. The Software Essentialist itself is one. <a class="src" data-lesson="93">L93</a></li>
+    </ul>
+
+    <div class="cards">
+      <div class="card"><h4>Stability → domain layer</h4><p>Make some code super stable so everything else can rely on it, and put the most important knowledge there: the <strong>domain layer</strong> at the centre of clean/hexagonal/onion/“stereotypical” architecture. Businesses rarely change wholesale (“They’re probably not going to switch to selling hot dogs”), so you can keep refining the <strong>domain model</strong> and its implementation. <a class="src" data-lesson="22">L22</a></p></div>
+      <div class="card"><h4>Boundaries</h4><p>Every app also has generic domains: users, auth, notifications, email. Side domains can even become the business (Slack came out of the game Glitch, “I believe”). Boundaries keep problems contained and let you decide per area: invest, scale, rip out and restart, or swap vendors (replace Auth0). <a class="src" data-lesson="22">L22</a></p></div>
+      <div class="card"><h4>Context mapping</h4><p>Separate contexts, apply namespacing boundaries, and be clear how the boundaries talk to each other. Gives high-level clarity on how you solve the problem. <a class="src" data-lesson="22">L22</a></p></div>
+      <div class="card"><h4>Core / supporting / generic</h4><p>Modeling a concrete scenario reveals which systems you build yourself (core), build reluctantly because they matter (supporting), or pull off the shelf (generic). <a class="src" data-lesson="65">L65</a></p></div>
+    </div>
+
+    <h4>Techniques</h4>
+    <table class="tbl">
+      <thead><tr><th>Technique</th><th>What it gives you</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Big-picture event storming</strong></td><td>Gets an organization onto the same language; “a pathway to a ubiquitous language”</td><td><a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td><strong>Process modeling</strong> (tactical event storming)</td><td>Pick one user story, “walk the path”, find the exact input/output data from pain to benefit. A stream of events and commands (and “data”; Khalil avoids the word “aggregate” here)</td><td><a class="src" data-lesson="93">L93</a> <a class="src" data-lesson="65">L65</a></td></tr>
+        <tr><td><strong>Event modeling</strong> (Adam Dymitruk)</td><td>Shows how screens connect and the system as <strong>inputs, outputs and state changes</strong>. Khalil prefers it slightly because it maps closely to vertical slicing: input → work → save → event triggers more behavior or the user returns for the next step</td><td><a class="src" data-lesson="22">L22</a> <a class="src" data-lesson="65">L65</a></td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>These surface aggregates, domain events, commands and queries, and the <strong>front end</strong> too: e.g. the GraphQL query needed to show a screen before the next command. You get the data, behavior and namespaces to carry into the codebase. <a class="src" data-lesson="22">L22</a></li>
+      <li><strong>Always drive them with a concrete scenario.</strong> Without one you “event storm until your brain’s like mush.” <a class="src" data-lesson="65">L65</a></li>
+      <li>Domain modeling in depth (subdomains → bounded contexts → process modeling → aggregates): <a href="#ddd-feedbook">Theoretical Design &amp; DDD: FeedBook</a>. <a class="src" data-lesson="65">L65</a></li>
+    </ul>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>Giving little thought to naming and organization. <a class="src" data-lesson="22">L22</a></li>
+        <li>Letting generic domains (users, auth, notifications) or any problem area bleed into everything else. <a class="src" data-lesson="22">L22</a></li>
+        <li>Treating domain modeling as backend-only. <a class="src" data-lesson="22">L22</a></li>
+        <li>Learning DDD on a valueless project, so you learn only the patterns. <a class="src" data-lesson="93">L93</a></li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“It allows us to see our system as inputs, outputs, and state changes. That’s fundamentally all we’re dealing with here.”<cite><a class="src" data-lesson="22">L22</a></cite></blockquote>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Agents mirror the vocabulary you give them. They can’t crunch knowledge with your domain experts or agree on what a “reservation” means. Settle the language and boundaries first, and generated code stops being generic CRUD.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-theoretical--strategic-design" data-title="Strategic Design">
+    <h3>Strategic Design <a class="src" data-lesson="23">L23</a> <a class="src" data-lesson="93">L93</a></h3>
+
+    <div class="callout def"><strong>Definition</strong>
+      <p>Borrowed from DDD: making very smart decisions about how we piece together our architecture. <strong>Architecture</strong> = “the large-scale decisions that we’re going to make and we make the majority of those decisions very early on in the project.” It sits at the transition from the solution guess point to the <strong>architecture guess point</strong>: “how do we realize this in the real world?” <a class="src" data-lesson="23">L23</a> DDD’s version (Vernon’s “red book”) is deciding which components to build, outsource, or build anyway (core/supporting/generic). Khalil’s version adds clarity on subdomains/contexts, the tools, and four abilities. <a class="src" data-lesson="93">L93</a></p>
+    </div>
+
+    <h4>Requirements drive architecture</h4>
+    <figure class="diagram">
+      <pre class="mermaid">flowchart LR
+  S["Solution guess point"] --&gt; F["Functional requirements: mostly from the concrete examples"]
+  S --&gt; N["Non-functional requirements: how fast, how real-time, how many concurrent users"]
+  F --&gt; A["Architecture guess point: which architectural components?"]
+  N --&gt; A
+  A --&gt; K1["Stereotype"]
+  A --&gt; K2["Develop"]
+  A --&gt; K3["Integrate"]
+  A --&gt; K4["Prioritize"]</pre>
+      <figcaption>The solution guess point outputs requirements; they drive component choices through four skills. <a class="src" data-lesson="23">L23</a> Rendering <span class="badge copilot">Added by Copilot</span>.</figcaption>
+    </figure>
+
+    <p>Problems strategic design must answer <a class="src" data-lesson="23">L23</a>: which components to use without getting stuck; what to build yourself vs install (an NPM package) vs use as an external service; how to integrate components that “just aren’t integrating”; what to do when no component exists, or when it isn’t fully related to your core problem.</p>
+
+    <h4>The 4 things every developer must be able to do <a class="src" data-lesson="23">L23</a> <a class="src" data-lesson="93">L93</a></h4>
+    <div class="cards">
+      <div class="card"><h4>1. Stereotype components</h4><p>Look at any library, framework, tool or platform (an “architectural component”) and quickly identify which aspects, concerns and responsibilities it helps implement, and where it belongs. Many devs struggle here, e.g. “where does React Query go?” Example: Next.js SSR plus libraries realize the SEO sub-aspect of a system.</p></div>
+      <div class="card"><h4>2. Develop components</h4><p>Build components yourself when none exist. This leads to <strong>responsibility-driven design</strong>.</p></div>
+      <div class="card"><h4>3. Integrate components</h4><p>Make systems that don’t talk to each other work together by filling the <strong>object design gap / responsibility gap</strong> with glue code. Example: Discord ↔ course platform, done with little time as a quick HTML form that posts to a hosted service, which calls the Discord API.</p></div>
+      <div class="card"><h4>4. Prioritize components</h4><p>Choose which contexts, domains and modules to build first, generally those leading to the most business value. Core / supporting / generic: build, buy off the shelf, or avoid depending on. Should your core depend on Notion’s API, which may change? <a class="src" data-lesson="93">L93</a></p></div>
+    </div>
+
+    <div class="callout def"><strong>RDD: the deepest level</strong> <a class="src" data-lesson="23">L23</a>
+      <p>“Responsibility-driven design is about seeing software as a bunch of just different responsibilities, which are doings and knowings.” Responsibilities group into <strong>roles</strong>, roles <strong>collaborate</strong>, and objects or functions (the “syntactic sugar”) fill and play those roles, like actors in a Broadway play. It answers where things belong, how to organize concerns, and how big an object should be. “This is the deepest level of design I can teach you. Once you learn it, you learn how to really design anything.” Glue code is RDD and object design, Khalil’s “favorite topic right now.” <a class="src" data-lesson="93">L93</a> Depth: <a href="#abstraction-rdd">Abstraction Levels, OOP &amp; RDD</a>.</p>
+    </div>
+
+    <ul>
+      <li><strong>Why responsibilities:</strong> they are the “atomic, deepest level” for thinking about code. Thinking there lets you stitch anything together. <a class="src" data-lesson="23">L23</a></li>
+      <li><strong>Build vs buy:</strong> don’t build email or auth yourself. If you’re building something like Google Calendar, scheduling is core, so keep control of it. <a class="src" data-lesson="65">L65</a> Build the core; use off-the-shelf pieces for sub-aspects where possible. <a class="src" data-lesson="23">L23</a></li>
+      <li><strong>It’s an art.</strong> Strategic design is decision-making, and “it only gets better over time as you make more and more decisions.” <a class="src" data-lesson="23">L23</a></li>
+      <li><strong>Where it’s used:</strong> best-practice-first, responsibility-first and pattern-first phases. <a class="src" data-lesson="23">L23</a> The architecture guess point then covers tools, tests, CI and whether to go event-based from day one, before the <a href="#essentials-physical--walking-skeleton">walking skeleton</a>. <a class="src" data-lesson="93">L93</a> More in <a href="#architecture">Architecture &amp; Code Structure</a> and the FeedBook architecture guess point in <a href="#ddd-feedbook">the DDD case study</a>.</li>
+    </ul>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>Getting stuck choosing components, or not making good decisions. <a class="src" data-lesson="23">L23</a></li>
+        <li><strong>The pattern-first plateau:</strong> devs who go code-first → best-practice-first → pattern-first often think only in patterns and can’t go deeper to responsibilities to reason strategically. <a class="src" data-lesson="23">L23</a></li>
+        <li>Building commodity systems (email, auth) yourself. <a class="src" data-lesson="65">L65</a></li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“Strategic design is, as you would imagine, a little bit of an art because it’s about strategy and it’s about decision-making.”<cite><a class="src" data-lesson="23">L23</a></cite></blockquote>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>An agent will suggest a library for anything and write the glue in seconds. Deciding what’s core, what to buy, and which non-functional requirements rule out an option is still your guess. Stereotyping components by responsibility is how you review what it wired together.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-theoretical--tools-per-guess-point" data-title="Tools Belong to Guess Points">
+    <h3>Tools Belong to Guess Points <a class="src" data-lesson="85">L85</a> <a class="src" data-lesson="93">L93</a></h3>
+
+    <p>“It’s less about the tool. It’s more about the inputs, outputs of the system of creating value.” Processes change and new ones appear, but the value creation system “will never change.” Knowing which guess point a tool serves is a “massive simplification” that ends “which tool, when?” confusion. Pick a few tools. <a class="src" data-lesson="85">L85</a></p>
+
+    <table class="tbl">
+      <thead><tr><th>Tool</th><th>Guess point</th><th>Used for</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Talking to customers, prototyping, wireframing, quantitative + qualitative analysis</td><td>Problem</td><td>Validate the who, why and what</td><td><a class="src" data-lesson="21">L21</a></td></tr>
+        <tr><td><strong>Big-picture event storming</strong></td><td>Problem</td><td>Everyone gathers and gets a sense of the domain; clarify an existing product before changing code</td><td><a class="src" data-lesson="85">L85</a> <a class="src" data-lesson="21">L21</a></td></tr>
+        <tr><td><strong>Impact mapping</strong> / role-goal / feature injection</td><td>Problem → solution</td><td>Who, what impact, capabilities; carry what/why examples into the solution</td><td><a class="src" data-lesson="93">L93</a> <a class="src" data-lesson="65">L65</a> <a class="src" data-lesson="82">L82</a></td></tr>
+        <tr><td><strong>User story mapping</strong></td><td>Theoretical guess points</td><td>Planned explicitly for the theoretical section</td><td><a class="src" data-lesson="85">L85</a> <a class="src" data-lesson="65">L65</a></td></tr>
+        <tr><td><strong>Tactical event storming</strong> / process modeling, event modeling</td><td>Solution</td><td>Model how a solution could work for one story: events, commands, data, screens, state changes</td><td><a class="src" data-lesson="85">L85</a> <a class="src" data-lesson="93">L93</a> <a class="src" data-lesson="22">L22</a></td></tr>
+        <tr><td>Context mapping, subdomain → bounded context work</td><td>Solution</td><td>Boundaries and how they communicate</td><td><a class="src" data-lesson="22">L22</a> <a class="src" data-lesson="65">L65</a></td></tr>
+        <tr><td>Example mapping, Given/When/Then</td><td>Solution → crossover</td><td>Concrete examples that become acceptance tests</td><td><a class="src" data-lesson="82">L82</a></td></tr>
+        <tr><td>Component stereotyping, build-vs-buy, core/supporting/generic</td><td>Architecture</td><td>Choose and integrate architectural components</td><td><a class="src" data-lesson="23">L23</a> <a class="src" data-lesson="93">L93</a></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout rule"><strong>Map any question to its essentials</strong> <a class="src" data-lesson="85">L85</a>
+      <p>Any developer question = one metaphysical essential + one physical or theoretical essential. The metaphysical ones “permeate every single thing that we do.” Example: “How do I do transactions in use cases?” is physical (writing code) → temporal decoupling, plus abstraction design (filling responsibility gaps). For tool questions, first ask which guess point you’re at. See <a href="#essentials-metaphysical--jargon-map">mapping jargon onto the essentials</a>.</p>
+    </div>
+
+    <div class="callout tip"><strong>Choose tools by responsibility</strong> <a class="src" data-lesson="85">L85</a>
+      <p>Khalil applies this to his own course: the needed responsibility was “collect feedback”, and Kajabi comments already did that, so no extra tool was needed.</p>
+    </div>
+  </article>
+</section>

@@ -1,0 +1,38 @@
+I could actually walk through this flow and statefully see how these things are changing step by step. Okay, so what I'm going to do now here is I'm going to
+tally up everything that's changing and let's go ahead and model each of those out. So what do we have? We have a pre-reader invite. We have an email. This is
+an external thing. This is actually part of a generic subdomains. We have a user and we have a pre-reader. So these are the four pieces of state that we have in
+our system at this point in time. Some of these are managed by us. These ones, some of them are not managed by us. These ones, however, in order to create a
+pre-reader, it's going to rely on both one of these and one of these. And then we should also mention, as we called it before, the author was something that was
+already created way ahead of time over there. And emails just get created all over the place, right? So this temporally is the experience from here. This is one
+author to here, to here, to here. So if we're talking about state machines and how a pre-reader has to come to be, a pre-reader can only really come to be if an
+author is there first, then a pre-reader invite is there, and then a user exists, and then the pre-reader can exist. So this is the sequence of creation. Now
+that we've refactored the entire process here of seeing how these pieces of state can come to exist, let's just hone in now on these pieces of state
+individually. The ones that I care about the most here that I'm going to actually model out are going to be this one and this one. And then when we want to do
+the code part, we'll actually model out both the pre-reader invite and the pre-reader itself. We'll do those two. So let's talk about the pre-reader invite
+first. How will we model this out? What is it that's required in a domain model to encapsulate? We need the data. We need the rules. We need the processes and
+we need the relationships. So we can use a state machine to get clear on the rules on how this thing can change over time. And that's what we're going to do
+first. So let's go and do that pre-reader invite. So we'll call this pre-reader invite. And what's going to be the initial state? It's pretty much going to be
+invited. And then what's the other state? It's going to be accepted or active. Say accepted. It makes more sense. And then what's the transition? The name?
+Maybe accept. Right. Pretty straightforward. That one's easy. Now let's maybe see if we can create another one of these. And this is a pre-reader. Right. And
+what is really required for me here to model out parent state? And all that's really required here for me to model out, it's a basic pre-reader. And what states
+can they be in? Admittedly, there's not a whole lot of change here. There's not a whole lot of rules. Ultimately, just the rules that are required are what's
+necessary in order to create. So it's more about the relationships and the data. But there is not really a whole lot of actual states moving from this to
+another one. That's not really happening here very much. So if I wanted to give a better example of state machines in general, like the washing machine is a
+great one. Right. Because with the washing machine, at least we it's off and then it needs to be. It can be turned on. And then from there. We could, we have
+other states we have. Perhaps you have sensing. So you have more states and things that it could be in and you can't get to sensing from off. Right. So you
+might even just open this up in general and just get rid of this. And there's only certain things you could do. Like when it's on, like, for example, maybe it's
+in like, maybe here it's selecting the washed cycle. Right. Now it's one of the first things or waiting for wash, waiting for wash cycle selection. Right. Or
+maybe you just call this idle. And then from here you can get to sensing. And the only way to do that is by doing start. And that would be turned on of course.
+So washing machine is more complex and some of your assignments are more complex than this, but the state machine I'm dealing with here with the pre-reader and
+the pre-reader invite, they're not that complex where they're going to require more complexities, not necessarily in the rules aspect, but it's going to be more
+in terms of actually creating them and validating that what they're created with is valid. So passing in all the correct pieces of those state machines and then
+proceeding to actually create them out and make sure that they can't be created without those things. So that's where the majority of the complexity is going to
+be. One thing I will add on to the idea of the pre-reader though. Now, again, this all depends on the domain knowledge and what it is you're actually supposed
+to build. So one thing I will add to a pre-reader is the ability for them to edit their display name. And let's say that what happens is when they first join,
+their display name is going to be a combination of their first name and last name. So when they first join, that's going to be a part of the pre-reader in
+general. And if they want to change it, they can change it. And maybe I'm going to assign some rules for this. Say the rules are, it might take some of the last
+characters of their display name. It might take some of the last characters of their last name. And then let's say that it might just take their first name and
+then lowercase it and then put a hyphen in between and last name, also lowercase. And that's going to be their display name, maybe 10 characters in order to do
+that. So that's going to be the rule of when a pre-reader is created, just a little bit of functionality that can be here just for demonstrative purposes.
+That's something that can happen. So pre-reader is going to start out and they can edit their display name if they'd like. So with that being said, let's
+finally get into the part of this where we can now build out these domain models.

@@ -1,0 +1,60 @@
+What's going on crafters, Khalil here and in this video we're going to talk about the wonderful Temporal Decup. Let's cover it at a high level because this is
+one of the more complex ones and we're really going to need to spend some time on this one and dig into it a little bit deeper. Let's get the mental model
+constructed, the foundation in your mind, so that we can start to play with this moving forward. Something I used to notice in my code base happened very often
+is whenever I would get new requirements, when I get new features, I always struggle to figure out exactly where to put them. Now we've talked about horizontal
+decoupling and we've talked about vertical slicing, so now you can see that we have this grid in terms of understanding where things should go. When we have a
+feature, hopefully we're using feature folders and then inside of those feature folders we have the operations. So that's going to help us identify where those
+things live and then with respect to the lower level details of an operation, which actually comes together to create the feature to realize it physically. If
+we are familiar with horizontal decoupling and we know the abstractions that are involved and we have clarity on how the patterns talk to each other, then if we
+need to make a change in the code base for whatever reason, let's say a React component just isn't quite rendering properly. It should be relatively easy for us
+to know how to get to that by driving things down almost like a book or like a table of contents where we could go feature, where we could go into the project
+folders, source, modules, domain, feature, operation, and then start to look in and then start to look into the area where the component seems to be messing. So
+yeah, some sort of perpendicular awareness we have up and down, left and right. However, I've noticed when a requirement would come in, it would come in this
+particular type of form. Go after this, do this work. Before this happens, do this work. When this happens, under the circumstance, if this is already true, and
+let's say if we are running in production or if we're running in dev, then do this. And those types of requirements, when I used to try to add these in
+normally, I remember I used to end up with code that looked somewhat like this. For example, when I was building an app that helps students get jobs, we always
+just kept adding more and more functionality after a job was posted. It's a terrible way to add functionality that comes afterwards, but it is such a common
+thing that has to happen. And the reason why this is bad is because we're dealing with, again, a type of coupling. And coupling really just means the tightness
+or the interconnectedness of modules or lines of code. If I wanted to verify and validate that the correct things happen afterwards, I would also have to be
+doing all of this other stuff as well. This is quite bad code for a lot of different reasons. There's the fact that they seem to be waiting on each other. What
+happens if notification service fails, then we're not going to be doing the other important things. And then what happens in that case? So this gets into a
+pretty, this topic of how to deal with what needs to happen after things with responses to events and how to deal with policies. But it is so important because
+the reality is that requirements are temporal. This means that requirements always have to do with time. Requirements always come in this form of after this,
+before that, or only when this happens, policies. Instead of trying to slot new operations inside of an existing one, so trying to place it at the end of a
+vertical slice or put it at the top or somewhere in the middle and only run it in a certain circumstance. What tends to be more scalable in the long term is to
+practice this skill called temporal decoupling. And what this means is we decouple the functionality using events. Let me break this down high level because
+this is, again, one of the more complex topics out of all of them. And we're going to need to talk about this in detail later on, particularly in the pattern
+and responsibility first phases of craftship, but also a little bit in the guess points as well. Complete executing a vertical slice. Let's say the vertical
+slice was to, let's say we were dealing with a trading application and on that trading application, somebody performed an operation called make trade. Now,
+after a trade is made, let's say, what are some of the things that might need to happen afterwards? So let's walk through a little bit of an example. And I
+always like to talk about this one because it really helps highlight the complexity of systems and what it is we're really dealing with at the end of the day
+here. Think about when you buy something on Amazon. So you place an item in your cart and then you go to checkout and then you place the order. At some point
+later on, you are billed. And at some point later on, you are going to get your package ideally. Now, when you do place order in Amazon system, Amazon does not
+have lines of code waiting, async lines of code waiting, holding up and blocking a request, holding up a request that you just made to bill you, to send you the
+notification email, to update the inventory immediately, to create some sort of fulfillment detail for the fulfillment team, to log that in some sort of
+analytics software. It doesn't do all of these things at the exact same time. That's not what happens when you make the request. Because if you had to do that,
+it would take a very long time for your request to complete. And probably no one would be using Amazon. What Amazon is doing instead is they are practicing this
+art of temporal decoupling. When you do place order, what's happening is Amazon is dispatching an event. They're publishing an event called order placed. And
+what's happening is they have other pieces of their infrastructure, which listen for this order placed event. Now, when the order placed event occurs, and it is
+picked up by what we call event handlers, those things then go ahead and call new vertical slices. And sometimes those vertical slices live in entirely
+different systems. For example, if you did place order, and that created an order placed event, you can guarantee that there's going to be some sort of billing
+system that is going to listen to that. And it's going to take your order details, and it is going to attempt to charge the credit card on file. Now, what
+happens if that credit card fails? That's going to dispatch another sort of event, and that event might be customer charge failed. And after that event happens,
+perhaps there's some policy that Amazon has where a notification service, which is listening for this failed charge event, will actually send you a notification
+and wait a couple days before retrying. Hopefully, you can see the complexity involved here. And if you're thinking that this is unnecessary, it is actually
+very necessary, because there's this concept called idempotency, which means that anytime we do anything in our system, it's going to keep the system in a
+consistent state. Because when I showed you earlier, if we were to fail on one of these lines of code here, this would be a very bad problem. Now, what I'm
+explaining to you right now is perhaps one of the most common, most tricky, most challenging problems that most developers face who are at the pattern first
+phase of craftship. This topic is even one that I am not particularly an expert in. I just know a lot from the experts, but we are going to spend a fair amount
+of time on this in the pattern first phase of craftship, where we will learn about how to use a unit of work, how to set up an event based architecture on the
+backend. If you are doing frontend development, already have something like this already going very likely, because every frontend architecture needs this
+aspect of reactivity. If you're using Redux, you've definitely got this going on. On the backend, because it contains a lot more higher level policy, it's
+really important that we decouple these operations from each other and think through what will happen if they succeed and if they fail, and how we're going to
+create what we call these compensating events. Dispatch saved, pushed over to other parts of our system. So this was another pretty complex, challenging one,
+but it is such an exciting topic. When it comes to how this works in the guest points, there's various aspects of making this work that are going to have to be
+put into practice. In order for us to implement this technique, we're actually going to need to create an event based architecture, which means that the
+entirety of our system is going to take a shape in which it is event enabled. If we're referring to the guest points, this is going to influence pretty much
+everything down from the system level, because it is going to, because it is a part of what the system itself is fundamental. So we will get into this later on.
+We'll talk about the types of tests we can write and where we will test the patterns we'll use, but I can leave this one here for right now. We'll get into this
+in both the pattern first phase and in the responsibility first phase, where we're going to be building custom things. So with that said, I'll leave this video
+right here and I'll see you in the next one. As always, Tim Astro. you

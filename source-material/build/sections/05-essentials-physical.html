@@ -1,0 +1,962 @@
+<section id="essentials-physical" class="doc-section" data-title="12 Essentials II: Physical">
+  <h2>12 Essentials II: Physical</h2>
+  <p class="lede">The seven physical essentials turn a clear “what” into running, verified, shipped code. Slice work by <strong>features</strong>, split each slice into <strong>layers</strong>, push time-based requirements into <strong>events</strong>, <strong>compose</strong> the parts in one place, put a <strong>boundary</strong> around what you verify, deploy a <strong>walking skeleton</strong> first, and gate everything with a <strong>deployment pipeline</strong>. <a class="src" data-lesson="93">L93</a></p>
+
+  <table class="tbl">
+    <thead><tr><th>Essential</th><th>Question it answers</th><th>Key artifact</th><th>Smell when missing</th></tr></thead>
+    <tbody>
+      <tr><td><a href="#essentials-physical--vertical-slicing">Vertical Slicing</a></td><td>Can I see and test the features?</td><td>Feature folders, one <code>.feature</code> file per feature</td><td>Package-by-infrastructure, thinking in endpoints</td></tr>
+      <tr><td><a href="#essentials-physical--horizontal-decoupling">Horizontal Decoupling</a></td><td>Where does this line of code belong?</td><td>Use case + repository contract</td><td>Fat controller, anemic domain model</td></tr>
+      <tr><td><a href="#essentials-physical--temporal-decoupling">Temporal Decoupling</a></td><td>What happens after / before / when?</td><td>Domain events + handlers (coordinator)</td><td>Growing list of awaited side effects</td></tr>
+      <tr><td><a href="#essentials-physical--composition">Composition</a></td><td>How are the parts wired, per environment?</td><td>Composition root</td><td><code>if (env === 'prod')</code> everywhere, hidden imports</td></tr>
+      <tr><td><a href="#essentials-physical--subject-system-verification">Subject/System Verification</a></td><td>What exactly am I verifying?</td><td>Boundary + result/state/communication test</td><td>Only E2E tests; “we’re only testing our mocks”</td></tr>
+      <tr><td><a href="#essentials-physical--walking-skeleton">Walking Skeleton</a></td><td>Can this even deploy and run?</td><td>Deployed thin slice + E2E test</td><td>Weeks of components, deploy at the end</td></tr>
+      <tr><td><a href="#essentials-physical--deployment-delivery">Deployment &amp; Delivery</a></td><td>Can negative value reach users?</td><td>Commit → acceptance → deploy pipeline</td><td>Manual testing, Husky as the only gate</td></tr>
+    </tbody>
+  </table>
+  <p>Summaries from the essentials overview <a class="src" data-lesson="93">L93</a> and lessons <a class="src" data-lesson="16">L16</a>–<a class="src" data-lesson="20">L20</a>, <a class="src" data-lesson="24">L24</a>, <a class="src" data-lesson="25">L25</a>. All 12 essentials are skills you level up, like character stats, and you need all of them. They “bleed into each other.” <a class="src" data-lesson="93">L93</a> <a class="src" data-lesson="82">L82</a> For ordering the work, use the <a href="#workflow">ideal developer workflow and FA²STR</a>.</p>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-physical--vertical-slicing" data-title="Vertical Slicing">
+    <h3>Vertical Slicing <a class="src" data-lesson="16">L16</a> <a class="src" data-lesson="93">L93</a></h3>
+
+    <div class="callout def"><strong>Definition</strong>
+      <p>Decomposing work into manageable chunks, meaning <em>vertical slices of functionality</em>. You chunk modules, features and operations into slices so that <strong>features are first-class citizens</strong> in the code structure and in how you approach the work. <a class="src" data-lesson="16">L16</a></p>
+    </div>
+
+    <div class="cards">
+      <div class="card"><h4>Feature</h4><p>Valuable to the customer. Described by a user story that takes someone through an experience from A to B, involving many API calls. Example: “register and sign up for a premium package on a membership website.” <a class="src" data-lesson="16">L16</a></p></div>
+      <div class="card"><h4>Operation</h4><p>A lower-level slice: a <strong>command</strong> (changes the system, e.g. <code>createUser</code>) or a <strong>query</strong> (reads it, e.g. <code>getProfileDetails</code>). In practice an API call, a thin input→output slice. A sequence of operations builds a feature. <a class="src" data-lesson="16">L16</a> <a class="src" data-lesson="93">L93</a></p></div>
+      <div class="card"><h4>Module / capability</h4><p>The thick slice: a high-level module, bounded context or capability (profile management, friending, settings). Features/workflows sit between modules and operations. <strong>Cohesion</strong> decides how thick to cut. <a class="src" data-lesson="93">L93</a></p></div>
+    </div>
+
+    <h4>Why</h4>
+    <ul>
+      <li><strong>Design = discoverability and understanding.</strong> It must be easy to find what you need. <a class="src" data-lesson="16">L16</a></li>
+      <li><strong>It matches reality:</strong> developers work against features. The key developer use cases are to <em>discover, understand, add, change, remove, test and debug features</em>. <a class="src" data-lesson="16">L16</a></li>
+      <li><strong>Your mental model shows up in the code.</strong> Other developers read it back out. Thinking in “tiny scripts” produces tiny scripts. <a class="src" data-lesson="16">L16</a></li>
+      <li><strong>The most valuable thing to test is the feature</strong>, not <code>createUser</code>/<code>editUser</code> in isolation. Features come out of the theoretical guess points, and acceptance tests are written at the physical ones. <a class="src" data-lesson="16">L16</a></li>
+    </ul>
+
+    <h4>How</h4>
+    <ol class="steps">
+      <li><strong>Start from features</strong> — derived from customer needs and user stories, not from endpoints. <a class="src" data-lesson="16">L16</a> <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Cut modules by capability</strong> — “feel into” how thick to cut, judged by discoverability and understanding. Vaughn Vernon’s domains → bounded contexts → sub-bounded contexts is an optional deeper cut. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Make features visible in folders and tests</strong> — a feature can be a folder, a file, or just a feature file in tests. Ideal entry path: README says “go to the tests” → tests by capability → a feature file per feature → stories → scenarios with concrete examples → code. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Navigate like a table of contents</strong> — <code>source → modules → domain → feature → operation</code> → the component misbehaving. This works when combined with horizontal layers (the grid below). <a class="src" data-lesson="18">L18</a></li>
+      <li><strong>Self-check</strong> — Can you see the features in your code base? Could someone else find them? How hard would it be? <a class="src" data-lesson="16">L16</a></li>
+    </ol>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — package by infrastructure: one feature is smeared across five folders</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Folders by technical type</figcaption>
+          <pre><code class="language-text">src/
+  controllers/
+    userController.ts
+    postController.ts
+    commentController.ts
+  services/
+    userService.ts
+    postService.ts
+  models/
+    user.ts
+    post.ts
+  repositories/
+    userRepo.ts
+    postRepo.ts
+  utils/
+    helpers.ts        ← where do new things go?  here.</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — package by feature: the folder tree reads like the product</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Modules → features → operations, with tests organised the same way</figcaption>
+          <pre><code class="language-text">src/
+  modules/
+    users/                         ← capability / module
+      domain/                      ← User, Email (shared by the module)
+      registration/                ← feature
+        createUser.ts              ← operation (command)
+        createUserController.ts
+      profile/                     ← feature
+        getProfileDetails.ts       ← operation (query)
+        editUser.ts                ← operation (command)
+    posts/
+      posting/ …
+  shared/
+tests/
+  users/
+    registration.feature           ← stories + scenarios + examples
+    registration.spec.ts</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 680 262" role="img" aria-label="Grid of features as vertical columns crossing horizontal layers">
+        <rect x="140" y="10" width="170" height="34" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <rect x="320" y="10" width="170" height="34" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <rect x="500" y="10" width="170" height="34" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <text x="225" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Registration</text>
+        <text x="405" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Edit profile</text>
+        <text x="585" y="32" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Place order</text>
+        <text x="70" y="32" text-anchor="middle" font-size="11" fill="var(--fg)">features →</text>
+        <text x="70" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">Infrastructure</text>
+        <text x="70" y="124" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">Adapter</text>
+        <text x="70" y="170" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">Application</text>
+        <text x="70" y="216" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">Domain</text>
+        <rect x="140" y="54" width="170" height="40" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="320" y="54" width="170" height="40" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="500" y="54" width="170" height="40" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="140" y="100" width="170" height="40" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="320" y="100" width="170" height="40" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="500" y="100" width="170" height="40" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="140" y="146" width="170" height="40" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="320" y="146" width="170" height="40" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="500" y="146" width="170" height="40" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="3"/>
+        <rect x="140" y="192" width="170" height="40" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="320" y="192" width="170" height="40" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="500" y="192" width="170" height="40" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="225" y="78" text-anchor="middle" font-size="11" fill="var(--fg)">POST /users · Prisma</text>
+        <text x="405" y="78" text-anchor="middle" font-size="11" fill="var(--fg)">PATCH /users/:id</text>
+        <text x="585" y="78" text-anchor="middle" font-size="11" fill="var(--fg)">POST /orders</text>
+        <text x="225" y="124" text-anchor="middle" font-size="11" fill="var(--fg)">UsersRepository</text>
+        <text x="405" y="124" text-anchor="middle" font-size="11" fill="var(--fg)">UsersRepository</text>
+        <text x="585" y="124" text-anchor="middle" font-size="11" fill="var(--fg)">OrdersRepository</text>
+        <text x="225" y="170" text-anchor="middle" font-size="11" fill="var(--fg)">CreateUser</text>
+        <text x="405" y="170" text-anchor="middle" font-size="11" fill="var(--fg)">EditUser</text>
+        <text x="585" y="170" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fg)">PlaceOrder ← you are here</text>
+        <text x="225" y="216" text-anchor="middle" font-size="11" fill="var(--fg)">User · Email</text>
+        <text x="405" y="216" text-anchor="middle" font-size="11" fill="var(--fg)">User</text>
+        <text x="585" y="216" text-anchor="middle" font-size="11" fill="var(--fg)">Order</text>
+        <text x="405" y="254" text-anchor="middle" font-size="11" fill="var(--fg)">vertical = where the feature is · horizontal = which concern · the cell = where the code lives</text>
+      </svg>
+      <figcaption><span class="badge copilot">Added by Copilot</span> The “grid” (perpendicular awareness) from <a class="src" data-lesson="18">L18</a>: vertical slices (features/operations) crossed with horizontal layers (concerns) <a class="src" data-lesson="17">L17</a>. Cell contents are illustrative.</figcaption>
+    </figure>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li><strong>Packaging by infrastructure</strong>: folders by technical type hurt design, discoverability and understanding. <a class="src" data-lesson="16">L16</a> Khalil: “I hate packaged by infrastructure.” <a class="src" data-lesson="88">L88</a></li>
+        <li><strong>Transaction-script thinking</strong>: treating work as “just adding code” to tiny scripts. <a class="src" data-lesson="16">L16</a></li>
+        <li><strong>Starting from React components</strong>: “not the worst thing,” but it doesn’t match the key use case of working against features. <a class="src" data-lesson="16">L16</a></li>
+        <li><strong>Thinking in endpoints instead of features</strong>, typical of code-first. <a class="src" data-lesson="82">L82</a></li>
+        <li><strong>Testing operations</strong> as if they were the most valuable unit. <a class="src" data-lesson="16">L16</a></li>
+      </ul>
+    </div>
+
+    <div class="callout tip"><strong>When interfaces make navigation painful</strong>
+      <p>Khalil’s three-part answer: (1) slice features into feature folders, (2) use cohesive folder structure and naming (a name also says what something is <em>not</em>), (3) follow the layered-architecture rules so you know what to expect, since use cases always reference interfaces. <a class="src" data-lesson="84">L84</a></p>
+    </div>
+
+    <blockquote class="quote">“If you can't see your features from the folder structure alone there's a good chance maintainability is under pressure.”<cite><a class="src" data-lesson="16">L16</a> <a class="src" data-lesson="93">L93</a></cite></blockquote>
+    <blockquote class="quote">“It is the internal representations that we have in our minds, the mental models that we're working off of, that's what is going to show up in our code.”<cite><a class="src" data-lesson="16">L16</a></cite></blockquote>
+
+    <p><strong>Roadmap:</strong> the main vertical-slicing work happens in Best Practice First (feature slicing). Pattern First adds read/write path separation and read/write models. <a class="src" data-lesson="16">L16</a> Deeper structure in <a href="#architecture">Architecture &amp; Code Structure</a>; features come from <a href="#essentials-theoretical">the theoretical essentials</a>.</p>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Agents follow the structure they find. In a package-by-infrastructure repo, one feature change sprawls across <code>controllers/</code>, <code>services/</code> and <code>models/</code>. Feature folders plus one <code>.feature</code> file per feature give the agent one place to work and one oracle to check against.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-physical--horizontal-decoupling" data-title="Horizontal Decoupling">
+    <h3>Horizontal Decoupling <a class="src" data-lesson="17">L17</a> <a class="src" data-lesson="84">L84</a> <a class="src" data-lesson="88">L88</a></h3>
+
+    <div class="callout def"><strong>Definition: two parts</strong>
+      <ol>
+        <li><strong>Awareness:</strong> know the well-known layers of abstraction, their <em>directionality</em> and stereotypes, so every line of code goes into the right abstraction instead of “no abstractions and just writing code.”</li>
+        <li><strong>Actual decoupling:</strong> strategically decouple those layers with <strong>dependency inversion</strong> (contracts), so you can isolate and put a boundary around what you want to verify.</li>
+      </ol>
+      <p>It breaks down what happens <em>inside</em> an operation (a vertical slice) into categories of work, called <strong>concerns</strong>. <a class="src" data-lesson="17">L17</a> <a class="src" data-lesson="93">L93</a></p>
+    </div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 920 250" role="img" aria-label="Layers: Infrastructure depends on Adapter depends on Application depends on Domain; core code is adapter, application and domain">
+        <defs>
+          <marker id="ep-arrow-layers" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+        </defs>
+        <text x="460" y="22" text-anchor="middle" font-size="12" fill="var(--fg)">dependencies point inward: outer layers rely on inner ones, never the reverse</text>
+        <rect x="10" y="40" width="190" height="130" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="240" y="40" width="190" height="130" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="470" y="40" width="190" height="130" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="700" y="40" width="190" height="130" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2.5"/>
+        <text x="105" y="66" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">Infrastructure</text>
+        <text x="105" y="92" text-anchor="middle" font-size="11" fill="var(--fg)">Express · Prisma · React</text>
+        <text x="105" y="112" text-anchor="middle" font-size="11" fill="var(--fg)">DB · network · file system</text>
+        <text x="105" y="132" text-anchor="middle" font-size="11" fill="var(--fg)">system clock · Math.random</text>
+        <text x="335" y="66" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">Adapter</text>
+        <text x="335" y="92" text-anchor="middle" font-size="11" fill="var(--fg)">ports / contracts (roles)</text>
+        <text x="335" y="112" text-anchor="middle" font-size="11" fill="var(--fg)">UsersRepository · Clock</text>
+        <text x="335" y="132" text-anchor="middle" font-size="11" fill="var(--fg)">PaymentService</text>
+        <text x="565" y="66" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">Application</text>
+        <text x="565" y="92" text-anchor="middle" font-size="11" fill="var(--fg)">use cases</text>
+        <text x="565" y="112" text-anchor="middle" font-size="11" fill="var(--fg)">CreateUser · PlaceOrder</text>
+        <text x="565" y="132" text-anchor="middle" font-size="11" fill="var(--fg)">application interface</text>
+        <text x="795" y="66" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">Domain</text>
+        <text x="795" y="92" text-anchor="middle" font-size="11" fill="var(--fg)">entities · value objects</text>
+        <text x="795" y="112" text-anchor="middle" font-size="11" fill="var(--fg)">data · rules</text>
+        <text x="795" y="132" text-anchor="middle" font-size="11" fill="var(--fg)">relationships · processes</text>
+        <line x1="202" y1="105" x2="236" y2="105" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ep-arrow-layers)"/>
+        <line x1="432" y1="105" x2="466" y2="105" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ep-arrow-layers)"/>
+        <line x1="662" y1="105" x2="696" y2="105" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ep-arrow-layers)"/>
+        <path d="M10,182 L10,192 L200,192 L200,182" fill="none" stroke="var(--svg-stroke)"/>
+        <text x="105" y="212" text-anchor="middle" font-size="11" fill="var(--fg)">infrastructure code:</text>
+        <text x="105" y="228" text-anchor="middle" font-size="11" fill="var(--fg)">touches the real world (slow)</text>
+        <path d="M240,182 L240,192 L890,192 L890,182" fill="none" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="565" y="212" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">core code: you own it, it touches no infrastructure (fast to test)</text>
+        <text x="565" y="230" text-anchor="middle" font-size="11" fill="var(--fg)">“It's not about where it comes from, it's about what it touches.”</text>
+      </svg>
+      <figcaption><span class="badge course">Course</span> Layers and directionality <a class="src" data-lesson="17">L17</a> <a class="src" data-lesson="19">L19</a>; core vs infrastructure code <a class="src" data-lesson="84">L84</a>; domain concerns <a class="src" data-lesson="88">L88</a>. Layers are theoretical and don’t need to map to folders <a class="src" data-lesson="84">L84</a>. Example names are illustrative.</figcaption>
+    </figure>
+
+    <h4>Why</h4>
+    <ul>
+      <li><strong>Locality:</strong> if the DB connection breaks, DB code lives in one known place. <strong>Less duplication:</strong> duplication appears when nobody knows where things belong, and the code “turns into mush.” <a class="src" data-lesson="17">L17</a></li>
+      <li><strong>Testing options.</strong> Application and domain hold the edge cases, business rules, validation and policies, which is the most valuable code to test. Without decoupling you can only reach it by starting the whole app end to end, which means slow tests and slow pipelines. <a class="src" data-lesson="17">L17</a></li>
+      <li><strong>Black-box testing only gives result verification.</strong> Edge cases such as “deactivate without delete, then rejoin → <em>welcome back</em>” become nearly impossible to cover through the black box. <a class="src" data-lesson="84">L84</a></li>
+      <li><strong>Fast CI.</strong> Decoupling lets fast tests run in CI instead of E2E-only suites. <a class="src" data-lesson="93">L93</a></li>
+    </ul>
+
+    <div class="callout rule"><strong>Two problems of the naive backend, and their fixes</strong> <a class="src" data-lesson="88">L88</a>
+      <ol>
+        <li><strong>E2E tests don’t scale.</strong> Every feature test goes through the whole app to the DB, and setting up DB state (fixtures) each time is slow and complex. <em>Fix: dependency inversion.</em> Describe persistence (and external services like a <code>PaymentService</code>) as a contract. Core code “uses / relies on” it; the real DB, Stripe or a fake in-memory version “is a / plays the role of” it. “It's always way faster and easier to manipulate something in memory rather than in disk.”</li>
+        <li><strong>Controller, application logic and business logic are fused</strong>, so even with a fake DB you still go through Express. <em>Fix: an application interface.</em> All use cases are composed into one pure object; the app implements it and the web server uses it (see <a href="#essentials-physical--composition">Composition</a>).</li>
+      </ol>
+      <p>A third problem is <strong>lack of encapsulation</strong>: pulling validation into a random function in another file keeps data and behavior apart. <a class="src" data-lesson="88">L88</a></p>
+    </div>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — fat route: HTTP, rule and SQL in one place, testable only end to end</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L88</span> The naive <code>createUser</code> Khalil “ripped apart” (<code>db</code> is a Prisma-style client)</figcaption>
+          <pre><code class="language-ts">app.post('/users', async (req, res) =&gt; {
+  const { email, password } = req.body;                       // HTTP parsing
+  const existing = await db.users.findOne({ where: { email } });
+  if (existing) return res.status(409).json({ error: 'User already exists' }); // a rule!
+  const user = await db.users.create({ data: { email, password } });           // persistence
+  return res.status(201).json(user);
+});</code></pre>
+        </figure>
+        <p>This is the “anemic domain model” shape. There’s no place where the rules live, and no horizontal decoupling. <a class="src" data-lesson="84">L84</a> Almost everybody starts here, and it “looks kind of elegant.” <a class="src" data-lesson="88">L88</a></p>
+      </div>
+      <div class="after"><div class="compare-label">After — slim controller → use case → repository contract; fakes make the core testable</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Same slice split into layers (names follow L84/L88)</figcaption>
+          <pre><code class="language-ts">// adapter: the contract (a role)
+export interface UsersRepository {
+  findByEmail(email: string): Promise&lt;User | null&gt;;
+  save(user: User): Promise&lt;void&gt;;
+}
+
+// application: the use case, pure (no Express, no Prisma)
+export type CreateUserResult = { type: 'Created'; user: User } | { type: 'AlreadyCreated' };
+
+export class CreateUser {
+  constructor(private readonly users: UsersRepository) {}
+
+  async execute(input: { email: string; password: string }): Promise&lt;CreateUserResult&gt; {
+    if (await this.users.findByEmail(input.email)) return { type: 'AlreadyCreated' };
+    const user = User.create(input);          // domain: validation and invariants
+    await this.users.save(user);
+    return { type: 'Created', user };
+  }
+}
+
+// infrastructure: an actor playing the role
+export class PrismaUsersRepository implements UsersRepository {
+  constructor(private readonly prisma: PrismaClient) {}
+  async findByEmail(email: string) {
+    const row = await this.prisma.user.findUnique({ where: { email } });
+    return row ? User.fromPersistence(row) : null;
+  }
+  async save(user: User) {
+    await this.prisma.user.create({ data: user.toPersistence() });
+  }
+}
+
+// infrastructure: slim controller, parse → delegate → map
+export const usersRouter = (createUser: CreateUser) =&gt;
+  Router().post('/users', async (req, res) =&gt; {
+    const result = await createUser.execute({ email: req.body.email, password: req.body.password });
+    if (result.type === 'AlreadyCreated') return res.status(409).json({ error: 'User already exists' });
+    return res.status(201).json(result.user.toDTO());
+  });</code></pre>
+        </figure>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> The payoff: an in-memory fake plays the same role, so the rule is tested in milliseconds</figcaption>
+          <pre><code class="language-ts">class InMemoryUsersRepository implements UsersRepository {
+  private users: User[] = [];
+  async findByEmail(email: string) { return this.users.find((u) =&gt; u.email === email) ?? null; }
+  async save(user: User) { this.users.push(user); }
+}
+
+it('does not create a user whose email is already taken', async () =&gt; {
+  const users = new InMemoryUsersRepository();
+  await users.save(User.create({ email: 'khalil@example.com', password: 'Secret-123' }));
+
+  const result = await new CreateUser(users).execute({ email: 'khalil@example.com', password: 'Other-456' });
+
+  expect(result.type).toBe('AlreadyCreated');
+});</code></pre>
+        </figure>
+        <p>Keep the fake honest with a shared <a href="#essentials-physical--subject-system-verification">contract test</a> <a class="src" data-lesson="81">L81</a>.</p>
+      </div>
+    </div>
+
+    <h4>How: rules</h4>
+    <ul>
+      <li><strong>Know the layers</strong>: infrastructure → adapter → application → domain. MVC, Clean, Onion, Ports &amp; Adapters/Hexagonal are all related (“it is all related”). They are one stereotypical architecture you “can't unsee” once you know it. <a class="src" data-lesson="17">L17</a> <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Stereotype each abstraction.</strong> A React component presents, accepts input and passes it off (<em>interfacing</em>), so it belongs to infrastructure and never touches a database. <a class="src" data-lesson="17">L17</a></li>
+      <li><strong>Classify code by what it touches</strong>, not where it comes from. An npm library that just returns a string is core. Express is infrastructure because it opens a port. <a class="src" data-lesson="84">L84</a></li>
+      <li><strong>Use cases depend on interfaces</strong> (roles), and concretions (actors) are injected via the constructor. “The repository is the adapter… it is a role to be played.” <a class="src" data-lesson="84">L84</a> <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Start with an interface</strong>, and move to an abstract class only after the rule of three shows a real need to share implementation. <a class="src" data-lesson="84">L84</a></li>
+      <li><strong>Keep controllers slim</strong>: pull data out of the request and pass it to a service layer. The evolution is view → controller → DB, then carve out a service layer (four-tier), then a pure application + domain core behind contracts. <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Know the rules well enough to break them knowingly</strong>, and to marshal “mush” back into testable code later. <a class="src" data-lesson="17">L17</a></li>
+    </ul>
+
+    <div class="callout tip"><strong>Quiz from the live session</strong>
+      <p>Where does <code>await this.repo.save(post)</code> belong? Answer: in the <strong>application service / use case</strong> (application layer, high-level persistence logic), not in a controller. <a class="src" data-lesson="93">L93</a></p>
+    </div>
+
+    <h4>Decoupling from time: the clock contract</h4>
+    <p><code>new Date()</code> and <code>Math.random()</code> are infrastructure because they touch the system clock and random generator. The domain model must be pure: no system time, no <code>Math.random</code>, no <code>setTimeout</code>. Otherwise tests have to wait (e.g. 30 s for a traffic light). Put a clock contract in between. Khalil notes that passing the date value straight into the constructor is “not great.” <a class="src" data-lesson="84">L84</a> <a class="src" data-lesson="88">L88</a></p>
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — hidden dependency on the system clock</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L84</span> Domain object calling the clock directly</figcaption>
+          <pre><code class="language-ts">class User {
+  createdAt: Date;
+  constructor() {
+    this.createdAt = new Date(); // talks to the system clock -&gt; infra, hard to test
+  }
+}</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — time is a role; tests control and travel it</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Clock contract with a system and a fixed implementation (<code>Clock</code>/<code>now()</code> shape from L84)</figcaption>
+          <pre><code class="language-ts">interface Clock { now(): Date }
+
+class SystemClock implements Clock { now() { return new Date(); } }          // infra
+class FixedClock implements Clock {                                          // tests
+  constructor(private current: Date) {}
+  now() { return this.current; }
+  advance(ms: number) { this.current = new Date(this.current.getTime() + ms); }
+}
+
+class User {
+  readonly createdAt: Date;
+  constructor(clock: Clock) { this.createdAt = clock.now(); }
+}</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>Responsibilities living in the wrong place, which leads to duplication, confusion and “mush.” <a class="src" data-lesson="17">L17</a></li>
+        <li>All logic in the Express controller (anemic domain model): only black-box testable. <a class="src" data-lesson="84">L84</a></li>
+        <li>Injecting a concrete DB/ORM into the use case, which makes it infra-dependent and slow to test. <a class="src" data-lesson="84">L84</a></li>
+        <li>A React component that knows about a database. <a class="src" data-lesson="17">L17</a></li>
+        <li><code>this.repo.save(...)</code> in a controller. <a class="src" data-lesson="93">L93</a></li>
+        <li>Writing code “until the thing works” with no thought to where things belong. “You haven't been bit yet.” <a class="src" data-lesson="93">L93</a></li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“What we want here is some order, some structure and a clear place for abstractions to go.”<cite><a class="src" data-lesson="17">L17</a></cite></blockquote>
+    <blockquote class="quote">“Ultimately, what we need is more testing options… The skill that is going to give you more testing options is the skill of dependency inversion.”<cite><a class="src" data-lesson="17">L17</a></cite></blockquote>
+    <blockquote class="quote">“It's not about where it comes from it's about what it touches.”<cite><a class="src" data-lesson="84">L84</a></cite></blockquote>
+
+    <p><strong>Roadmap:</strong> MVC in Code First → layered architecture plus 4-tier non-flaky E2E tests in Best Practice First → core vs infrastructure and ports &amp; adapters in Pattern First → stereotypical architecture in Responsibility First. <a class="src" data-lesson="17">L17</a> More in <a href="#architecture">Architecture</a> and <a href="#abstraction-rdd">Abstraction &amp; RDD</a>.</p>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>AI tools happily generate fat controllers with ORM calls inline. Knowing the four layers and “what it touches” is how you review and steer: ask for a use case behind a repository interface plus an in-memory fake, and the business rules the agent wrote become testable in milliseconds.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-physical--temporal-decoupling" data-title="Temporal Decoupling">
+    <h3>Temporal Decoupling <a class="src" data-lesson="18">L18</a> <a class="src" data-lesson="93">L93</a></h3>
+
+    <div class="callout def"><strong>Definition</strong>
+      <p>Decoupling functionality with <strong>events</strong>, instead of slotting new operations into existing ones. When a vertical slice completes, it publishes an event (e.g. <code>OrderPlaced</code>). <strong>Event handlers</strong> listen and invoke <em>new</em> vertical slices, sometimes in entirely different systems. <a class="src" data-lesson="18">L18</a></p>
+      <p><strong>Coupling</strong> is “the tightness or the interconnectedness of modules or lines of code.” <a class="src" data-lesson="18">L18</a></p>
+    </div>
+
+    <h4>Why</h4>
+    <ul>
+      <li><strong>Requirements are temporal.</strong> They arrive as “after this do that,” “before this happens,” “only when this happens, if this is already true,” or “if in production/dev.” These are <em>policies</em>. <a class="src" data-lesson="18">L18</a> “The nature of reality is… temporal… It's event based.” <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Appending breaks things.</strong> Steps block each other. If the notification service fails, the important steps after it never run and the system is left undefined. To verify one follow-up you must run everything. <a class="src" data-lesson="18">L18</a></li>
+      <li><strong>Speed.</strong> If Amazon billed, emailed, updated inventory, created fulfillment and logged analytics inside “place order,” requests would be too slow, and “probably no one would be using Amazon.” <a class="src" data-lesson="18">L18</a></li>
+      <li><strong>All-or-nothing.</strong> Never leave “billed the customer but inventory not updated.” Khalil did exactly that with a <code>makePurchase</code> transaction script on the solidbook site, and serverless cold starts cut requests midway. <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Hard to retrofit.</strong> Temporal coupling is “only solvable… from the very start,” so design event-based architecture from day one. <a class="src" data-lesson="93">L93</a></li>
+    </ul>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L93</span> The smell as discussed live (post-job side effects)</figcaption>
+      <pre><code class="language-ts">async function jobPosted(job: Job) {
+  // ...post the job
+  await afterJobPosted(job);
+}
+
+async function afterJobPosted(job: Job) {
+  await notifyAdmins(job);             // if this fails...
+  await updateRecommendations(job);    // ...these never run
+  await trackAnalytics(job);
+}</code></pre>
+    </figure>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — one request awaits every follow-up, and one failure strands the rest</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Transaction-script <code>placeOrder</code> (the Amazon example from L18, shaped like L88’s <code>makePurchase</code>)</figcaption>
+          <pre><code class="language-ts">export async function placeOrder(cmd: PlaceOrderCommand) {
+  const order = await orders.save(Order.place(cmd));
+  await billing.charge(order.customerId, order.total);  // slow third-party call
+  await email.sendConfirmation(order);                  // if this throws...
+  await inventory.decrement(order.items);               // ...stock is never updated
+  await fulfillment.createShipment(order);
+  await analytics.track('order_placed', order);
+  return order;                                         // the user waited for all of it
+}</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — the slice ends at “order placed”; handlers start new slices</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Publish <code>OrderPlaced</code>; billing may publish <code>CustomerChargeFailed</code>; a notification policy reacts</figcaption>
+          <pre><code class="language-ts">type OrderPlaced = { type: 'OrderPlaced'; orderId: string; customerId: string; total: number };
+type CustomerChargeFailed = { type: 'CustomerChargeFailed'; orderId: string; customerId: string; reason: string };
+type DomainEvent = OrderPlaced | CustomerChargeFailed;
+
+interface EventBus {
+  publish(event: DomainEvent): Promise&lt;void&gt;;
+  subscribe&lt;T extends DomainEvent['type']&gt;(
+    type: T, handler: (event: Extract&lt;DomainEvent, { type: T }&gt;) =&gt; Promise&lt;void&gt;): void;
+}
+
+// orders module: the vertical slice ends when the order is saved
+export class PlaceOrder {
+  constructor(private orders: OrdersRepository, private bus: EventBus) {}
+  async execute(cmd: PlaceOrderCommand) {
+    const order = Order.place(cmd);
+    await this.orders.save(order);
+    await this.bus.publish({ type: 'OrderPlaced', orderId: order.id, customerId: order.customerId, total: order.total });
+    return order;
+  }
+}
+
+// other modules subscribe; each handler invokes a new vertical slice
+bus.subscribe('OrderPlaced', async (e) =&gt; {
+  const charge = await chargeCustomer.execute({ customerId: e.customerId, amount: e.total });
+  if (!charge.ok) {
+    await bus.publish({ type: 'CustomerChargeFailed', orderId: e.orderId, customerId: e.customerId, reason: charge.reason });
+  }
+});
+bus.subscribe('OrderPlaced', (e) =&gt; reserveInventory.execute({ orderId: e.orderId }));
+bus.subscribe('OrderPlaced', (e) =&gt; sendOrderConfirmation.execute({ orderId: e.orderId }));
+
+// notification policy: "when a charge fails, notify, then retry in a couple of days"
+bus.subscribe('CustomerChargeFailed', async (e) =&gt; {
+  await notifyCustomer.execute({ customerId: e.customerId, template: 'payment-failed' });
+  await scheduleChargeRetry.execute({ orderId: e.orderId, after: { days: 2 } });
+});</code></pre>
+        </figure>
+        <p><span class="badge copilot">Added by Copilot</span> An in-process bus loses events on a crash. Production backends need persistence and exactly-once/outbox-style delivery, which Khalil lists as backend concerns of the coordinator <a class="src" data-lesson="93">L93</a>.</p>
+      </div>
+    </div>
+
+    <figure class="diagram">
+      <pre class="mermaid">flowchart LR
+  PO["PlaceOrder slice"] --&gt;|publishes| OP(["OrderPlaced"])
+  OP --&gt; B["Billing: charge card on file"]
+  OP --&gt; N["Notifications: confirmation email"]
+  OP --&gt; I["Inventory: update stock"]
+  OP --&gt; F["Fulfillment: create details"]
+  OP --&gt; A["Analytics: record"]
+  B --&gt;|charge fails, publishes| CF(["CustomerChargeFailed"])
+  CF --&gt; NP["Notification policy: notify, wait a couple of days, retry"]</pre>
+      <figcaption><span class="badge course">Course</span> Amazon event chain described in <a class="src" data-lesson="18">L18</a>. Each box after an event is a new vertical slice, possibly in another system.</figcaption>
+    </figure>
+
+    <h4>How</h4>
+    <ol class="steps">
+      <li><strong>Hear the time words</strong> — treat “after / before / when / only if” as signals for events and policies. <a class="src" data-lesson="18">L18</a></li>
+      <li><strong>End the slice at its own state change</strong> — the Gherkin “then” became “an order should have been placed” rather than “he is billed / emailed,” because that work must be temporally decoupled. <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Publish, then react</strong> — handlers call follow-up slices. Start simply with a <strong>coordinator</strong> (the object stereotype whose one job is to take in events and let other parts know; basically event listeners), and make it robust later. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Keep flow unidirectional</strong> — event → bus → command → command handler, cycling one way, as Redux does. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Model success, then failure</strong> — for each decoupled step, ask what happens if it fails and design <strong>compensating events</strong> (billing fails → email, wait, cancel after 3 days, release inventory). <a class="src" data-lesson="18">L18</a> <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Use it to find aggregate boundaries</strong> — if you can’t find the boundary, “you're probably trying to do too much in one command.” <a class="src" data-lesson="88">L88</a></li>
+    </ol>
+
+    <div class="callout tip"><strong>Frontend vs backend</strong>
+      <p>Front ends likely already have this: every front-end architecture needs reactivity, and Redux does it. The backend holds more high-level policy, so decoupling operations and thinking through success/failure paths matters more there. <a class="src" data-lesson="18">L18</a></p>
+    </div>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>Continually appending functionality after a core action in the same operation. Khalil’s own “after job posted” code was “a terrible way to add functionality that comes afterwards.” <a class="src" data-lesson="18">L18</a></li>
+        <li>Sequential blocking calls where one failure prevents other important work. <a class="src" data-lesson="18">L18</a> <a class="src" data-lesson="93">L93</a></li>
+        <li>A mail service as a <em>direct</em> dependency of <code>CreateUser</code>. Khalil corrects his own diagram for this. <a class="src" data-lesson="20">L20</a></li>
+      </ul>
+    </div>
+
+    <div class="callout def"><strong>Terminology note</strong>
+      <p>The course describes idempotency as “anytime we do anything in our system, it's going to keep the system in a consistent state” <a class="src" data-lesson="18">L18</a>, and uses it for “either this whole thing works or none of it works” <a class="src" data-lesson="88">L88</a>. <span class="badge copilot">Added by Copilot</span> Standard usage: <em>idempotent</em> means repeating an operation has the same effect as doing it once, which is vital for retried handlers. All-or-nothing is <em>atomicity</em>.</p>
+    </div>
+
+    <blockquote class="quote">“The reality is that requirements are temporal.”<cite><a class="src" data-lesson="18">L18</a></cite></blockquote>
+    <blockquote class="quote">“When you do place order, what's happening is Amazon is dispatching an event.”<cite><a class="src" data-lesson="18">L18</a></cite></blockquote>
+    <p>Khalil’s own caveat: “This topic is even one that I am not particularly an expert in. I just know a lot from the experts.” <a class="src" data-lesson="18">L18</a> <strong>Roadmap:</strong> unit of work and event-based backend architecture in Pattern First; custom builds in Responsibility First. <a class="src" data-lesson="18">L18</a> Events also drive <a href="#ddd-feedbook">event storming and process modelling</a>.</p>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Generated code appends side effects as sequential <code>await</code>s by default and rarely handles the failure path. Spotting “after / when / if” requirements and asking for an event, its handlers and a compensating event is a human design decision.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-physical--composition" data-title="Composition">
+    <h3>Composition <a class="src" data-lesson="19">L19</a> <a class="src" data-lesson="93">L93</a></h3>
+
+    <div class="callout def"><strong>Definition</strong>
+      <p>Consciously, not unconsciously, creating a network of collaborating abstractions. You pass in each part’s required dependencies, and <em>their</em> dependencies, like <strong>Russian dolls</strong>. Done well, the app is configurable from one location and dynamic runtime behavior is easy. It is “more than just a passing design principle” like “prefer composition over inheritance.” <a class="src" data-lesson="19">L19</a> <a class="src" data-lesson="93">L93</a></p>
+    </div>
+
+    <div class="cards">
+      <div class="card"><h4>Truth 1: software is made of many parts</h4><p>Code-first developers wire parts unconsciously: copy from docs, Stack Overflow or ChatGPT, then plug things together until it works. The result is cyclical dependencies and code that is hard to understand, maintain and, most critically, test. <a class="src" data-lesson="19">L19</a></p></div>
+      <div class="card"><h4>Truth 2: software runs in many environments</h4><p>Dev, test, CI, staging, production. Some things toggle per environment (e.g. Redux dev tools on in dev). Handling this needs <strong>polymorphism</strong>, “the ability for your code to take on different shapes.” <a class="src" data-lesson="19">L19</a></p></div>
+    </div>
+
+    <h4>How</h4>
+    <ol class="steps">
+      <li><strong>Decouple first</strong> — composition depends on horizontal decoupling. Without concerns in buckets there’s “nothing to swap”; it’s “jiggly puff type code.” <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Respect directionality</strong> — outer-layer concerns rely on inner-layer ones. <a class="src" data-lesson="19">L19</a></li>
+      <li><strong>Trace the graph</strong> — follow every dependency all the way up to the web server. “It forces you to really have a tight awareness of how you're linking up your code base.” <a class="src" data-lesson="19">L19</a></li>
+      <li><strong>Encapsulate wiring in a composition root</strong> — one object does all linking and holds the environment checks. Stop importing things “willy nilly” in Express controllers, which hides the object collaborations: “Apps are all made from objects that talk to each other.” <a class="src" data-lesson="19">L19</a> <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Grow deliberately</strong> — start with a composition root (poor man’s DI). Switch to a DI container only when it gets messy, per Mark Seemann’s effort-vs-messiness graph in <em>Dependency Injection</em>. <a class="src" data-lesson="93">L93</a></li>
+    </ol>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — environment checks and dependencies grabbed inline</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L19</span> Env checks littered through services (“We've all done it”)</figcaption>
+          <pre><code class="language-ts">class UserService {
+  async createUser(dto) {
+    const db = process.env.NODE_ENV === 'production' ? prodDb : devDb;
+    // ...
+  }
+}</code></pre>
+        </figure>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L93</span> The smell: code must run dynamically but components aren’t swappable</figcaption>
+          <pre><code class="language-ts">if (env === 'prod') {
+  analytics = new NodeAnalyticsService();
+}</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — dependencies passed in; environment decided once</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L19</span> Constructor injection plus a composition root that builds the Russian doll</figcaption>
+          <pre><code class="language-ts">class CreateUser {
+  constructor(private userRepo: UserRepo) {}
+  execute(dto) { /* ... */ }
+}
+
+class CompositionRoot {
+  static build(env: 'dev' | 'test' | 'ci' | 'staging' | 'production') {
+    const db = env === 'production' ? new ProdDatabase() : new DevDatabase();
+    const userRepo = new UserRepo(db);
+    const createUser = new CreateUser(userRepo);
+    const controller = new UserController(createUser);
+    return new WebServer(controller);
+  }
+}</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> A fuller root: one DB connection at bootstrap (L93), fakes vs real actors per environment (L88), use cases composed into an application interface (L88)</figcaption>
+      <pre><code class="language-ts">// main.ts: the only file that knows which environment it is
+type Env = 'test' | 'development' | 'staging' | 'production';
+
+export interface Application {                 // "everything that your app can do", pure
+  users: { createUser: CreateUser };
+  orders: { placeOrder: PlaceOrder };
+}
+
+export async function compose(env: Env) {
+  const db = env === 'test' ? null : await DbConnection.create(config[env]);   // once, not per request
+
+  const users: UsersRepository = db ? new PrismaUsersRepository(db) : new InMemoryUsersRepository();
+  const orders: OrdersRepository = db ? new PrismaOrdersRepository(db) : new InMemoryOrdersRepository();
+  const payments: PaymentService =
+    env === 'production' ? new StripePaymentService(config.production.stripeKey) : new FakePaymentService();
+  const bus: EventBus = new InProcessEventBus();
+
+  const application: Application = {
+    users: { createUser: new CreateUser(users) },
+    orders: { placeOrder: new PlaceOrder(orders, bus) },
+  };
+  registerBillingHandlers(bus, payments);
+
+  return { application, server: createWebServer(application) };   // web server *uses* the application
+}</code></pre>
+    </figure>
+
+    <figure class="diagram">
+      <pre class="mermaid">flowchart TB
+  CR["Composition root: reads env once"] --&gt; WS["WebServer"]
+  WS --&gt; APP["Application interface"]
+  APP --&gt; CU["CreateUser use case"]
+  CU --&gt; UR["UsersRepository role"]
+  CR -.-&gt;|production| PR["PrismaUsersRepository"]
+  CR -.-&gt;|test| IM["InMemoryUsersRepository"]
+  PR -.-&gt;|plays the role of| UR
+  IM -.-&gt;|plays the role of| UR</pre>
+      <figcaption><span class="badge copilot">Added by Copilot</span> Russian-doll wiring <a class="src" data-lesson="19">L19</a> with actors playing a role <a class="src" data-lesson="88">L88</a>; only the root chooses which actor.</figcaption>
+    </figure>
+
+    <h4>Where it pays off</h4>
+    <ul>
+      <li><strong>Testing</strong>: swap dependencies at the application guess point (and the system and incoming-adapter guess points). You can test an entire front-end feature without starting React or setting up Redux. <a class="src" data-lesson="19">L19</a></li>
+      <li><strong>Application interface</strong>: clumping all use cases into “one big object” is an instance of composition. Incoming-adapter tests then only check that endpoints call the correct use cases with the correct parameters, without running them. Without it, as a student put it, “you end up building your app within your framework.” <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Deployment pipelines</strong>: code must be composable up front to run in many environments. “We 1000% will have to use it.” <a class="src" data-lesson="19">L19</a></li>
+      <li><strong>Reproducible dev infra</strong>: encapsulate provisioning in the code base (Docker instead of a local DB). <a class="src" data-lesson="82">L82</a> <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>Plugin architectures</strong>: VS Code extensions and themes, new weapons in a game, audio nodes in a DAW. Aim for an app that is “polymorphic in general.” <a class="src" data-lesson="19">L19</a> <a class="src" data-lesson="93">L93</a></li>
+    </ul>
+
+    <div class="callout rule"><strong>Code review from the live session: connections</strong>
+      <p>A student built each module’s repository per request (async <code>UserRepository.build()</code>) to avoid long-lived DB connections. The consensus: per-request connections cost handshakes and suffer serverless cold starts, and callers might forget to <code>await</code> the async build. Instead, create a <code>DbConnection</code> abstraction once at bootstrap and inject it into thin repositories through the composition root. <a class="src" data-lesson="93">L93</a></p>
+    </div>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>Copy-paste-plug-until-it-works wiring; treating design as only folder structure. <a class="src" data-lesson="19">L19</a></li>
+        <li>Cyclical dependencies from unconscious linking. <a class="src" data-lesson="19">L19</a></li>
+        <li>Environment checks littered through the code base. <a class="src" data-lesson="19">L19</a> <a class="src" data-lesson="93">L93</a></li>
+        <li>Front-end code that can only be tested E2E because abstractions aren’t known or placed. <a class="src" data-lesson="19">L19</a></li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“The way in which we link together our dependencies is incredibly important.”<cite><a class="src" data-lesson="19">L19</a></cite></blockquote>
+    <blockquote class="quote">“It's about creating dynamic behavior and that we need to link things together almost like a Russian doll.”<cite><a class="src" data-lesson="19">L19</a></cite></blockquote>
+    <p><strong>Roadmap:</strong> mainly Best Practice First (refactoring code-first work with composition), used heavily in Pattern First; DI containers in Pattern/Responsibility First. <a class="src" data-lesson="19">L19</a> <a class="src" data-lesson="93">L93</a></p>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Generated code is the new “paste from Stack Overflow”: inline <code>new</code>, hidden imports, scattered env checks. Insist on constructor injection and a single composition root so the dependency graph stays auditable and every piece stays swappable for fast tests.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-physical--subject-system-verification" data-title="Subject/System Verification">
+    <h3>Subject/System Verification <a class="src" data-lesson="20">L20</a> <a class="src" data-lesson="84">L84</a></h3>
+
+    <div class="callout def"><strong>Definition</strong>
+      <p>Using tests to place a <strong>boundary</strong> around the thing you want to verify, so you can tell whether it helps achieve a goal. It treats the application as nested input/output systems, decomposed by vertical slices and horizontal layers, so you can isolate specific parts. <a class="src" data-lesson="20">L20</a> Khalil prefers the term <em>subject</em>. <a class="src" data-lesson="88">L88</a></p>
+    </div>
+
+    <h4>Why</h4>
+    <ul>
+      <li>“The reason why we write tests is because everything we're doing is a guess.” This is the <a href="#essentials-metaphysical">feedback loop</a> made physical. <a class="src" data-lesson="20">L20</a></li>
+      <li>Developers struggle with testing because it’s treated as an afterthought instead of something foundational. Learning it “means learning 18 other things at the same time.” <a class="src" data-lesson="20">L20</a> <a class="src" data-lesson="93">L93</a></li>
+      <li>If you can’t draw the boundary you need, that tells you to apply more horizontal decoupling, vertical slicing or composition. “It all builds on each other.” <a class="src" data-lesson="93">L93</a></li>
+    </ul>
+
+    <h4>Three types of verification</h4>
+    <div class="cards">
+      <div class="card"><h4>1 · Result</h4><p>Inputs → outputs; the environment is unchanged. Simplest, and the <em>only</em> kind possible through a black-box E2E test. <a class="src" data-lesson="20">L20</a> <a class="src" data-lesson="84">L84</a></p>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L20</span> Palindrome</figcaption>
+          <pre><code class="language-ts">it('knows that "mom" is a palindrome', () =&gt; {
+  expect(isAPalindrome('mom')).toBe(true);
+});</code></pre>
+        </figure>
+      </div>
+      <div class="card"><h4>2 · State</h4><p>Act on a loaded model with no direct output, then reach into its state. Found by programming by wishful thinking: write the assertion with the API you wish existed. <a class="src" data-lesson="20">L20</a> <a class="src" data-lesson="84">L84</a></p>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L84</span> Checkers turn alternation (“not a good API by the way”)</figcaption>
+          <pre><code class="language-ts">game.move(/* coords */); // player 1
+game.move(/* coords */); // player 2
+expect(game.getCurrentPlayer()).toBe(1);</code></pre>
+        </figure>
+      </div>
+      <div class="card"><h4>3 · Communication</h4><p>Verify the subject talks properly to its dependencies: <strong>indirect inputs</strong> (repo fetch) and <strong>indirect outputs</strong> (repo save). Hardest, but it “is going to lead to the tests that are the most valuable.” <a class="src" data-lesson="20">L20</a> <a class="src" data-lesson="84">L84</a></p>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L81</span> <code>CreateUser</code> with a fake repo</figcaption>
+          <pre><code class="language-ts">it('returns AlreadyCreated and does not save when user exists', async () =&gt; {
+  const userRepo = new InMemoryUserRepo(); // fake, covered by the contract test
+  await userRepo.save(existingUser);
+  const createUser = new CreateUser(userRepo);
+
+  const result = await createUser.execute(existingUserInput);
+
+  expect(result.type).toBe('AlreadyCreated');
+  // plus: verify no save attempt was made on the repo
+});</code></pre>
+        </figure>
+      </div>
+    </div>
+    <p>Result and state verification are often combined in the same test, which is “completely fine.” <a class="src" data-lesson="20">L20</a> Full technique coverage (spies, builders, AAA backwards) is in <a href="#testing">Testing</a> <a class="src" data-lesson="53">L53</a>.</p>
+
+    <h4>How to choose the boundary</h4>
+    <ol class="steps">
+      <li><strong>Name the guess</strong> — the test type depends on the guess you are validating. Example: do API calls route to the right use cases and do contracts still hold? That needs a boundary from the outside world to the use-case entry. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Pick the layer</strong> — for API stability across mobile, web and desktop clients, test at the <strong>incoming adapter</strong>. For “a job posting cannot be edited after 48 hours live,” test in the <strong>domain layer</strong>. <a class="src" data-lesson="20">L20</a></li>
+      <li><strong>Widen for side effects</strong> — to verify a welcome email after <code>createUser</code> (temporally decoupled), the subject must include the event infrastructure for <code>UserCreated</code>, plus a spy on the mail service. <a class="src" data-lesson="20">L20</a></li>
+      <li><strong>Prioritise features</strong> — the most valuable thing to test is what’s most valuable to the customer. <a class="src" data-lesson="20">L20</a></li>
+      <li><strong>Make fast tests valuable</strong> — “We want the tests that run really fast to be tests that are also incredibly valuable”: high-value unit tests in the pipeline’s fast stage. <a class="src" data-lesson="20">L20</a></li>
+    </ol>
+
+    <div class="callout rule"><strong>“We're only testing our mocks” → contract tests</strong>
+      <p>That feeling means the fake and prod implementations lack <strong>test parity</strong>. Run one integration spec across <em>all</em> implementations of the interface: “You're testing the contract, not the implementation.” Use library mocks only for trivial stubs (a logger); for stateful dependencies, use fakes covered by contract tests. <a class="src" data-lesson="81">L81</a></p>
+      <figure class="code">
+        <figcaption><span class="badge recon">Reconstructed from L81</span> <code>userRepo.ispec.ts</code>: the same spec over every repo</figcaption>
+        <pre><code class="language-ts">describe('user repo', () =&gt; {
+  const allUserRepos: UserRepo[] = [
+    new InMemoryUserRepo(),
+    new ProductionUserRepo(/* ... */),
+    // could also be a MongoDB one, etc.
+  ];
+
+  allUserRepos.forEach((userRepo) =&gt; {
+    it('can save users', async () =&gt; {
+      const user = { /* fill in user data */ };
+      await userRepo.save(user);
+
+      const fetchedUser = await userRepo.get(/* id / email */);
+
+      expect(user).toEqual(fetchedUser);
+    });
+  });
+});</code></pre>
+      </figure>
+    </div>
+
+    <div class="callout tip"><strong>Three test categories</strong> <a class="src" data-lesson="82">L82</a>
+      <ul>
+        <li><strong>Acceptance</strong>: does this do what the customer wants?</li>
+        <li><strong>Unit</strong>: does this do what I, as a developer, think it should? Domain and application logic; about 80% of the work.</li>
+        <li><strong>Infrastructure</strong>: does this infrastructure do what I want (start/stop DB, connect, start/stop web server)?</li>
+      </ul>
+    </div>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>Testing as an afterthought. <a class="src" data-lesson="20">L20</a></li>
+        <li>Relying only on E2E/black-box tests for rule-heavy features. <a class="src" data-lesson="84">L84</a></li>
+        <li>Getting lost in mock vs stub vs fake taxonomy; just say “test double.” <a class="src" data-lesson="84">L84</a></li>
+        <li>A fake repo and a prod repo tested separately with no shared contract. <a class="src" data-lesson="81">L81</a></li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“It's us placing a boundary around the thing we want to verify to be able to tell if it's going to help us achieve a goal.”<cite><a class="src" data-lesson="20">L20</a></cite></blockquote>
+    <p><strong>Roadmap:</strong> manual testing in Code First → test infrastructure and acceptance tests in Best Practice First → patterns for the most valuable tests in Pattern First → outside-in, test-driven work with FA²STR in Value First, “perhaps one of the most valuable things I can teach you in this course.” <a class="src" data-lesson="20">L20</a></p>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>When agents write the code, choosing the boundary and the verification type is your main lever. State and communication checks catch code that returns the right value but never saves or emits. Contract tests stop an agent-written fake from quietly drifting from prod.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-physical--walking-skeleton" data-title="Walking Skeleton">
+    <h3>Walking Skeleton <a class="src" data-lesson="24">L24</a> <a class="src" data-lesson="81">L81</a></h3>
+
+    <div class="callout def"><strong>Definition</strong>
+      <p>“Build the smallest slice of useful functionality and deploy it as quickly as possible,” verified by an automated end-to-end test in the most production-like environment possible. <a class="src" data-lesson="24">L24</a> “It's exactly the same thing as a tracer bullet” (<em>The Pragmatic Programmer</em>): the most bare-bones valuable thing, shipped in front of someone. <a class="src" data-lesson="81">L81</a> It is “a minimal slice of functionality through all of the main architectural components.” <a class="src" data-lesson="82">L82</a></p>
+    </div>
+
+    <table class="tbl">
+      <thead><tr><th></th><th>Scenario 1: components first</th><th>Scenario 2: skeleton first</th></tr></thead>
+      <tbody>
+        <tr><td>What you do</td><td>~2 weeks of React components and core logic (maybe tested), no DB or web server hooked up; deploy at the end</td><td>Deploy a minimum slice across everything first. It feels “like hell,” snag after snag</td></tr>
+        <tr><td>Outcome</td><td>Unknown deploy time; infra surprises land last. Khalil’s own version: all the fun pure code first, then “all these weird CORS errors”</td><td>After a weekend or 1.5 weeks: “something deployed, even if it's a little bit crappy”</td></tr>
+        <tr><td>Verdict</td><td colspan="2"><strong>Scenario 2</strong>: “We don't actually know how long it's going to take for us to get something deployed.” <a class="src" data-lesson="24">L24</a> <a class="src" data-lesson="81">L81</a></td></tr>
+      </tbody>
+    </table>
+
+    <h4>How</h4>
+    <ol class="steps">
+      <li><strong>Get very clear on the theoretical</strong> — the problem and the solution. <a class="src" data-lesson="24">L24</a></li>
+      <li><strong>Get clear on architectural components</strong> — patterns and how they play together. <a class="src" data-lesson="24">L24</a></li>
+      <li><strong>Draw a broad-stroke architecture diagram.</strong> <a class="src" data-lesson="24">L24</a> <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Build it and test it end to end</strong> — functionality that cuts across all main components, UI → DB. <a class="src" data-lesson="24">L24</a> <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Figure out how to deploy it</strong> — with a minimal pipeline, because “working software” means software void of bugs, so even the skeleton needs a guard phase. <a class="src" data-lesson="24">L24</a> <a class="src" data-lesson="81">L81</a></li>
+    </ol>
+
+    <div class="callout rule"><strong>Decisions the skeleton forces early</strong>
+      <ul>
+        <li>Monolith vs monorepo, source control, CI, deployment pipeline, test infrastructure, scripting. <a class="src" data-lesson="24">L24</a> <a class="src" data-lesson="93">L93</a></li>
+        <li>A reproducible setup so others can pull, run and test; Docker to encapsulate infrastructure. <a class="src" data-lesson="24">L24</a> <a class="src" data-lesson="81">L81</a></li>
+        <li>Developer ergonomics (folder structure, README): “things are admittedly never going to be easier” than at the start. <a class="src" data-lesson="24">L24</a></li>
+      </ul>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> A minimal skeleton E2E test: run it locally against Docker, and in the pipeline against staging via <code>BASE_URL</code></figcaption>
+      <pre><code class="language-ts">// tests/e2e/registration.e2e.ts
+const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3000';
+
+describe('walking skeleton: registration', () =&gt; {
+  it('registers a user through the deployed API and reads it back from the DB', async () =&gt; {
+    const email = `skeleton+${Date.now()}@example.com`;
+
+    const created = await fetch(`${BASE_URL}/users`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: 'S3cure-pass!' }),
+    });
+    expect(created.status).toBe(201);
+
+    const fetched = await fetch(`${BASE_URL}/users?email=${encodeURIComponent(email)}`);
+    expect((await fetched.json()).email).toBe(email);
+  });
+});</code></pre>
+    </figure>
+
+    <h4>Where it sits</h4>
+    <ul>
+      <li><strong>Guess points:</strong> architecture guess point → (physical) E2E test across everything → deployment &amp; delivery → <strong>execution</strong> guess point. The question at the end: “Can users even use this thing? Will this even work? Does it deploy?” After users use it, check KPIs, which loop back into what to build next. <a class="src" data-lesson="24">L24</a> <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>After the skeleton you’ve “made a pretty big mess.”</strong> The rest of Best Practice First improves the design so Pattern First work is effective. <a class="src" data-lesson="81">L81</a> Next come proper scripts, clean runs across environments, working composition, a confirmed test strategy, and tests embedded in the pipeline. <a class="src" data-lesson="25">L25</a></li>
+      <li><strong>Existing messy projects:</strong> kick off a new feature with a skeleton to pull the codebase toward structure. <a class="src" data-lesson="24">L24</a> For existing features, pin behavior with characterization tests first; don’t rewrite from scratch. <a class="src" data-lesson="81">L81</a></li>
+      <li>It is architectural and strategic at once: it sets up design and the testing foundation together. <a class="src" data-lesson="82">L82</a> It is step one of the <a href="#workflow">ideal developer workflow</a>’s physical side.</li>
+    </ul>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>Building components for weeks or months without DB/web server, deploying last. <a class="src" data-lesson="24">L24</a> <a class="src" data-lesson="82">L82</a></li>
+        <li>Assuming you can predict the snags of the physical realm: version conflicts, outdated tools, containerization issues. <a class="src" data-lesson="24">L24</a></li>
+        <li>Working in front-end or back-end silos without an end-to-end slice. <a class="src" data-lesson="81">L81</a></li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“We want to get the most bare bones version of something that is valuable to somebody out shipped in front of them.”<cite><a class="src" data-lesson="81">L81</a></cite></blockquote>
+    <blockquote class="quote">“Make sure that we can actually score this thing through the goalpost.”<cite><a class="src" data-lesson="82">L82</a></cite></blockquote>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Agents make scenario 1 (weeks of unconnected components) seductively fast. Deploy the skeleton first so every generated piece is exercised by an E2E test against real, production-like infrastructure.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-physical--deployment-delivery" data-title="Deployment &amp; Delivery">
+    <h3>Deployment &amp; Delivery <a class="src" data-lesson="25">L25</a> <a class="src" data-lesson="93">L93</a></h3>
+
+    <div class="callout def"><strong>Definition</strong>
+      <p>Make sure the tests you write actually gate what ships, so you never ship <strong>negative value</strong>: “bugs, defects, anything that is going to take the users out of benefit.” The tool is a <strong>deployment pipeline</strong>, a <em>constraint</em> (from Don Norman’s <em>The Design of Everyday Things</em>, “something that limits you from all the possible sets of things you can do”) that enforces a single path to production and a minimum quality standard. <a class="src" data-lesson="25">L25</a> The ideas come from the Continuous Delivery / DevOps movements: “I'm not the brainiac that invented this.” <a class="src" data-lesson="93">L93</a></p>
+    </div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 960 300" role="img" aria-label="Deployment pipeline: commit, CI server, commit phase, acceptance phase, deploy, users">
+        <defs>
+          <marker id="ep-arrow-pipe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+        </defs>
+        <rect x="500" y="16" width="340" height="44" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)" stroke-dasharray="6 4"/>
+        <text x="670" y="36" text-anchor="middle" font-size="11" fill="var(--fg)">optional extra phases (add later):</text>
+        <text x="670" y="52" text-anchor="middle" font-size="11" fill="var(--fg)">security · performance · infrastructure tests</text>
+        <rect x="10" y="90" width="110" height="110" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="65" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Commit</text>
+        <text x="65" y="142" text-anchor="middle" font-size="11" fill="var(--fg)">push / merge</text>
+        <text x="65" y="160" text-anchor="middle" font-size="11" fill="var(--fg)">to source</text>
+        <text x="65" y="178" text-anchor="middle" font-size="11" fill="var(--fg)">control</text>
+        <rect x="150" y="90" width="100" height="110" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="200" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">CI server</text>
+        <text x="200" y="142" text-anchor="middle" font-size="11" fill="var(--fg)">picks up</text>
+        <text x="200" y="160" text-anchor="middle" font-size="11" fill="var(--fg)">every commit</text>
+        <rect x="280" y="90" width="190" height="110" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2.5"/>
+        <text x="375" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">1 · Commit phase</text>
+        <text x="375" y="140" text-anchor="middle" font-size="11" fill="var(--fg)">lint · build</text>
+        <text x="375" y="158" text-anchor="middle" font-size="11" fill="var(--fg)">high-value unit tests</text>
+        <text x="375" y="176" text-anchor="middle" font-size="11" fill="var(--fg)">(~80% confidence, fast)</text>
+        <text x="375" y="194" text-anchor="middle" font-size="11" fill="var(--fg)">→ release candidate</text>
+        <rect x="500" y="90" width="200" height="110" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2.5"/>
+        <text x="600" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">2 · Acceptance phase</text>
+        <text x="600" y="140" text-anchor="middle" font-size="11" fill="var(--fg)">deploy RC to a</text>
+        <text x="600" y="158" text-anchor="middle" font-size="11" fill="var(--fg)">production-like staging</text>
+        <text x="600" y="176" text-anchor="middle" font-size="11" fill="var(--fg)">run E2E acceptance tests</text>
+        <rect x="730" y="90" width="110" height="110" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2.5"/>
+        <text x="785" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">3 · Deploy</text>
+        <text x="785" y="142" text-anchor="middle" font-size="11" fill="var(--fg)">manual or</text>
+        <text x="785" y="160" text-anchor="middle" font-size="11" fill="var(--fg)">automated</text>
+        <rect x="870" y="90" width="80" height="110" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="910" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Users</text>
+        <text x="910" y="142" text-anchor="middle" font-size="11" fill="var(--fg)">no negative</text>
+        <text x="910" y="160" text-anchor="middle" font-size="11" fill="var(--fg)">value</text>
+        <line x1="122" y1="145" x2="146" y2="145" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ep-arrow-pipe)"/>
+        <line x1="252" y1="145" x2="276" y2="145" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ep-arrow-pipe)"/>
+        <line x1="472" y1="145" x2="496" y2="145" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ep-arrow-pipe)"/>
+        <line x1="702" y1="145" x2="726" y2="145" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ep-arrow-pipe)"/>
+        <line x1="842" y1="145" x2="866" y2="145" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ep-arrow-pipe)"/>
+        <rect x="10" y="226" width="250" height="54" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)" stroke-dasharray="6 4"/>
+        <text x="135" y="248" text-anchor="middle" font-size="11" fill="var(--fg)">local hooks (Husky): extra feedback only</text>
+        <text x="135" y="266" text-anchor="middle" font-size="11" fill="var(--fg)">any dev can turn them off, so not a gate</text>
+        <path d="M280,214 L280,222 L840,222 L840,214" fill="none" stroke="var(--svg-stroke)"/>
+        <text x="560" y="244" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">minimum pipeline: commit phase + deploy</text>
+        <text x="560" y="262" text-anchor="middle" font-size="11" fill="var(--fg)">(Khalil’s minimum: “if you could deploy… and the E2E tests run, you're good”; then add acceptance/staging)</text>
+      </svg>
+      <figcaption><span class="badge course">Course</span> Ideal pipeline phases <a class="src" data-lesson="25">L25</a> <a class="src" data-lesson="93">L93</a>; release candidate and infra tests after Dave Farley <a class="src" data-lesson="82">L82</a>; ~80% confidence and Husky caveat <a class="src" data-lesson="81">L81</a>. Drawn by Copilot.</figcaption>
+    </figure>
+
+    <h4>The phases</h4>
+    <ol class="steps">
+      <li><strong>Commit phase</strong> — lint (code looks standard), build, run tests. Ideally these are <strong>high-value unit tests</strong>, which test features purely and fast, not just front-end component tests. Package the artifact. Passing unit tests should give ~80–90% confidence, which is only possible with a pure, decoupled core. <a class="src" data-lesson="25">L25</a> <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Release candidate</strong> — a deployable artifact (zip, Docker image…), the version that becomes production if later stages pass. <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Acceptance phase</strong> — set up infrastructure mirroring production (staging) and run E2E tests as acceptance tests. They test the same things as high-value unit tests, but through the whole system, as a user would. Infrastructure tests can run before or after: “doesn't really matter.” <a class="src" data-lesson="25">L25</a> <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Deploy</strong> — manual or automated. <a class="src" data-lesson="25">L25</a></li>
+    </ol>
+
+    <h4>Rules</h4>
+    <ul>
+      <li><strong>One path to production</strong>: make it “virtually impossible for someone to ship negative value.” <a class="src" data-lesson="25">L25</a></li>
+      <li><strong>Start minimal</strong>, then add phases (security, performance). Pipeline speed can keep improving; some people’s whole job is that “runway before code gets out to users.” <a class="src" data-lesson="25">L25</a> <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Fast things pre-commit, slow things in CI.</strong> E2E in a pre-commit hook was “so painful… everyone would just turn it off.” If you can’t build a full pipeline, run <em>some</em> tests in one. <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>Know how you’ll deploy before building</strong> (a theoretical guess); work it out concretely during the walking skeleton. <a class="src" data-lesson="25">L25</a></li>
+      <li><strong>Testing ROI pays off here.</strong> Manual walkthroughs are fine at first but slow everything down as features grow. <a class="src" data-lesson="25">L25</a> <a class="src" data-lesson="93">L93</a></li>
+    </ul>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> A minimal GitHub Actions pipeline (GitHub Actions came up in <a class="src" data-lesson="81">L81</a>/<a class="src" data-lesson="93">L93</a>). Real pipelines should build the release candidate once and promote that same artifact.</figcaption>
+      <pre><code class="language-yaml"># .github/workflows/pipeline.yml
+name: pipeline
+on:
+  push:
+    branches: [main]
+
+jobs:
+  commit-phase:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - run: npm run test:unit            # high-value unit tests: no DB, no web server
+
+  acceptance-phase:
+    needs: commit-phase
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+      - run: ./scripts/deploy.sh staging
+      - run: npm run test:e2e
+        env:
+          BASE_URL: ${{ vars.STAGING_URL }}
+
+  deploy:
+    needs: acceptance-phase
+    runs-on: ubuntu-latest
+    environment: production               # add required reviewers here for a manual gate
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./scripts/deploy.sh production</code></pre>
+    </figure>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>Relying on manual testing/walkthroughs as feature count grows. <a class="src" data-lesson="25">L25</a></li>
+        <li>Only running front-end component unit tests instead of feature-level tests. <a class="src" data-lesson="25">L25</a></li>
+        <li>Local hooks (Husky) as the quality gate: “There's nothing stopping any developer from just turning that off locally.” <a class="src" data-lesson="25">L25</a> <a class="src" data-lesson="81">L81</a></li>
+        <li>Writing all tests as E2E acceptance tests, which are slow and need the full app, DB and server. <a class="src" data-lesson="82">L82</a></li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“The entire purpose of a deployment pipeline is to ensure that our code is up to a minimum standard of quality.”<cite><a class="src" data-lesson="25">L25</a></cite></blockquote>
+    <blockquote class="quote">“We make it very hard to ship negative value to our users.”<cite><a class="src" data-lesson="93">L93</a></cite></blockquote>
+    <p>Test strategy per stage: <a href="#testing">Testing</a>. Where it fits in the flow: <a href="#workflow">Ideal Developer Workflow</a>.</p>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Agents, like people, skip local hooks, so a CI pipeline is the constraint that can’t be bypassed. Keep humans owning the pipeline design and the test boundaries it enforces; that’s where quality judgment lives.</p></aside>
+  </article>
+</section>

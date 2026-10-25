@@ -1,0 +1,96 @@
+Phase,Section,Prompt,Should trigger?,Expected skill,Did it work as expected?
+Phase 1: Discover,clarify-requirements,I want to add password reset to the app.,Yes,clarify-requirements,Y
+Phase 1: Discover,clarify-requirements,The client now also wants guests to be able to check out. Update the plan.,Yes,clarify-requirements,Y
+Phase 1: Discover,clarify-requirements,"Before we build anything, help me pin down what this invoicing tool actually needs to do.",Yes,clarify-requirements,Y
+Phase 1: Discover,clarify-requirements,Fix the typo in the signup button label.,No,None,Y
+Phase 1: Discover,domain-discovery,Event storm the checkout flow.,Yes,domain-discovery,Y
+Phase 1: Discover,domain-discovery,"Our app has bookings, payments and reviews. Where are the bounded contexts?",Yes,domain-discovery,Y
+Phase 1: Discover,domain-discovery,People in sales and support mean different things by 'account'. Help us sort out the vocabulary and the boundaries.,Yes,domain-discovery,N - it ran clarify requirements!
+Phase 1: Discover,domain-discovery,Write the SQL migration for the bookings table.,No,layering-and-composition,Y
+Phase 1: Discover,state-machines-invariants,"An order can be placed, paid, shipped or cancelled. Model it.",Yes,state-machines-invariants,Y
+Phase 1: Discover,state-machines-invariants,Invites can only be accepted once and expire after 7 days. Implement the Invite entity.,Yes,state-machines-invariants,Y
+Phase 1: Discover,state-machines-invariants,Make it impossible to ship something that hasn't been paid for.,Yes,state-machines-invariants,N - it ran clarify requirements!
+Phase 1: Discover,state-machines-invariants,Format this price as a currency string.,No,tdd-test-writing,Y
+Phase 2: Design,architecture-decisions,Should we use Postgres or MongoDB for this project?,Yes,architecture-decisions,Y
+Phase 2: Design,architecture-decisions,What does hexagonal architecture mean for our codebase?,Yes,architecture-decisions,Y
+Phase 2: Design,architecture-decisions,"Before coding, sketch which pieces the system needs and what we'll use for each.",Yes,architecture-decisions,Y
+Phase 2: Design,architecture-decisions,Split billing into its own service?,No,monolith-vs-microservices,N - it read the mentioned skill
+Phase 2: Design,monolith-vs-microservices,Should we split billing into a microservice?,Yes,monolith-vs-microservices,Y
+Phase 2: Design,monolith-vs-microservices,Is it time to break the backend into separate services?,Yes,monolith-vs-microservices,Y
+Phase 2: Design,monolith-vs-microservices,Notifications are slowing down the main app. Deploy them on their own?,Yes,monolith-vs-microservices,Y
+Phase 2: Design,monolith-vs-microservices,Where should the new reports folder go?,No,feature-first-structure,N - it read the mentioned skill
+Phase 2: Design,monorepo-layout,Set up a monorepo for our React frontend and Node backend.,Yes,monorepo-layout,Y
+Phase 2: Design,monorepo-layout,Where should shared DTOs live between the web app and the API?,Yes,monorepo-layout,Y
+Phase 2: Design,monorepo-layout,We have three packages in one repo and imports are a mess. Reorganise it.,Yes,monorepo-layout,N - it ran clarify requirements!
+Phase 2: Design,monorepo-layout,Add a new feature folder for invoices in the backend.,No,feature-first-structure,N - it read the mentioned skill
+Phase 2: Design,responsibility-driven-design,"Our OrderService is 2,000 lines. Who should own what?",Yes,responsibility-driven-design,Y
+Phase 2: Design,responsibility-driven-design,Do I need an interface for this notification sender?,Yes,responsibility-driven-design,Y
+Phase 2: Design,responsibility-driven-design,Too many classes are poking at each other for this checkout. Untangle who does what.,Yes,responsibility-driven-design,Y
+Phase 2: Design,responsibility-driven-design,Write a test for the discount calculation.,No,tdd-test-writing,N - it read the mentioned skill
+Phase 3: Build,fa2str-workflow,Implement the approved password-reset feature.,Yes,fa2str-workflow,Y
+Phase 3: Build,fa2str-workflow,Let's build the MVP for the ticket booking app.,Yes,fa2str-workflow,Y
+Phase 3: Build,fa2str-workflow,The scenarios are signed off. Go build it end to end.,Yes,fa2str-workflow,Y
+Phase 3: Build,fa2str-workflow,Is this ready to deploy?,No,walking-skeleton-delivery,Y
+Phase 3: Build,feature-first-structure,Where should the new invoicing files go?,Yes,feature-first-structure,Y
+Phase 3: Build,feature-first-structure,Write the README for this project.,Yes,feature-first-structure,Y
+Phase 3: Build,feature-first-structure,"Our code is grouped into controllers, services and models and nobody can find anything.",Yes,feature-first-structure,Y
+Phase 3: Build,feature-first-structure,Wire the database connection at startup.,No,layering-and-composition,N - it read the mentioned skill
+Phase 3: Build,layering-and-composition,This controller has SQL and business rules in it. Fix it.,Yes,layering-and-composition,Y
+Phase 3: Build,layering-and-composition,Which status code and error format should the update endpoint return when the version is stale?,Yes,layering-and-composition,Y
+Phase 3: Build,layering-and-composition,Set up the wiring so tests can swap the real database for an in-memory one.,Yes,layering-and-composition,Y
+Phase 3: Build,layering-and-composition,Add retries to the payment provider calls.,No,operational-resilience,N - it read the mentioned skill
+Phase 3: Build,event-driven-decoupling,"After an order is placed, email the customer and update stock.",Yes,event-driven-decoupling,Y
+Phase 3: Build,event-driven-decoupling,"When a user signs up, also create their default workspace.",Yes,event-driven-decoupling,Y
+Phase 3: Build,event-driven-decoupling,The checkout handler awaits five different things one after another. Split it up.,Yes,event-driven-decoupling,Y
+Phase 3: Build,event-driven-decoupling,The shipping API sometimes times out. Make the call robust.,No,operational-resilience,N - it read the mentioned skill
+Phase 3: Build,operational-resilience,Call the shipping provider's API to get delivery quotes.,Yes,operational-resilience,N
+Phase 3: Build,operational-resilience,Add retries and a timeout to the payment gateway client.,Yes,operational-resilience,Y
+Phase 3: Build,operational-resilience,Generating the report takes two minutes and the browser gives up. Fix the endpoint.,Yes,operational-resilience,Y
+Phase 3: Build,operational-resilience,Email the customer after the order is placed.,No,event-driven-decoupling,N - it read the mentioned skill
+Phase 3: Build,observability-and-config,Add request logging and a health check.,Yes,observability-and-config,Y
+Phase 3: Build,observability-and-config,Move the database URL and API keys into environment variables.,Yes,observability-and-config,Y
+Phase 3: Build,observability-and-config,When something breaks in production we can't tell which request it was.,Yes,observability-and-config,Y
+Phase 3: Build,observability-and-config,Lock down who can call the admin endpoints.,No,security-baseline,N - it read the mentioned skill
+Phase 3: Build,security-baseline,Add an admin endpoint to delete users.,Yes,security-baseline,Y
+Phase 3: Build,security-baseline,Add login and protect the profile routes.,Yes,security-baseline,Y
+Phase 3: Build,security-baseline,Make sure nobody can brute-force our sign-in page.,Yes,security-baseline,Y
+Phase 3: Build,security-baseline,Add structured logs with a request id.,No,observability-and-config,N - it read the mentioned skill
+Phase 3: Build,walking-skeleton-delivery,Set up the CI pipeline and deploy the first slice.,Yes,walking-skeleton-delivery,Y
+Phase 3: Build,walking-skeleton-delivery,Run the go-live checks before we release to production.,Yes,walking-skeleton-delivery,Y
+Phase 3: Build,walking-skeleton-delivery,Nothing is deployed yet and we've been coding for a month. What now?,Yes,walking-skeleton-delivery,Y
+Phase 3: Build,walking-skeleton-delivery,Review this diff before I commit.,No,code-review,N - it read the mentioned skill
+Phase 3: Build,frontend-architecture,Build the todo page in React.,Yes,frontend-architecture,N
+Phase 3: Build,frontend-architecture,Where should the form validation and data fetching live in this Vue app?,Yes,frontend-architecture,Y
+Phase 3: Build,frontend-architecture,Our components have API calls and business rules all mixed into them.,Yes,frontend-architecture,N
+Phase 3: Build,frontend-architecture,Write tests for the todo presenter.,No,frontend-testing,N - it read the mentioned skill
+Phase 3: Build,understand-codebase-by-features,I just joined this project. Help me understand the codebase.,Yes,understand-codebase-by-features,Y
+Phase 3: Build,understand-codebase-by-features,Map how the checkout works in this legacy app before we change it.,Yes,understand-codebase-by-features,Y
+Phase 3: Build,understand-codebase-by-features,Someone else wrote this repo years ago; where do I even start?,Yes,understand-codebase-by-features,Y
+Phase 3: Build,understand-codebase-by-features,Plan the new loyalty-points feature.,No,clarify-requirements,N - it read the mentioned skill
+Phase 4: Test,test-strategy,Which tests should we write for the booking feature?,Yes,test-strategy,Y
+Phase 4: Test,test-strategy,Add tests to this untested legacy module before we refactor it.,Yes,test-strategy,Y
+Phase 4: Test,test-strategy,We only have browser tests and they take forty minutes. What should we do instead?,Yes,test-strategy,Y
+Phase 4: Test,test-strategy,Add a fake clock for these tests.,No,test-doubles-and-contracts,N - it read the mentioned skill
+Phase 4: Test,tdd-test-writing,Write a test for the password strength rule.,Yes,tdd-test-writing,Y
+Phase 4: Test,tdd-test-writing,TDD the FizzBuzz kata.,Yes,tdd-test-writing,Y
+Phase 4: Test,tdd-test-writing,Drive this discount calculation out one failing example at a time.,Yes,tdd-test-writing,Y
+Phase 4: Test,tdd-test-writing,Which tests do we need for the whole checkout feature?,No,test-strategy,N - it read the mentioned skill
+Phase 4: Test,test-doubles-and-contracts,Add a fake email service for the tests.,Yes,test-doubles-and-contracts,Y
+Phase 4: Test,test-doubles-and-contracts,Replace these jest.mock calls with something better.,Yes,test-doubles-and-contracts,Y
+Phase 4: Test,test-doubles-and-contracts,Our in-memory repository passes tests but production breaks. How do we keep them in sync?,Yes,test-doubles-and-contracts,Y
+Phase 4: Test,test-doubles-and-contracts,Add retries to the email provider client.,No,operational-resilience,Y
+Phase 4: Test,frontend-testing,Write tests for the todo list UI.,Yes,frontend-testing,N
+Phase 4: Test,frontend-testing,How do I test this React form without rendering the whole app?,Yes,frontend-testing,Y
+Phase 4: Test,frontend-testing,Our UI tests are flaky and slow; test the screen's behaviour another way.,Yes,frontend-testing,Y
+Phase 4: Test,frontend-testing,Write a test for the order total calculation in the backend.,No,tdd-test-writing,N - it read the mentioned skill
+Phase 5: Review,code-review,Review my changes before I commit.,Yes,code-review,Y
+Phase 5: Review,code-review,Is this backend change production ready?,Yes,code-review,Y
+Phase 5: Review,code-review,Look over what the agent just wrote and tell me what's wrong with it.,Yes,code-review,Y
+Phase 5: Review,code-review,Commit these changes.,No,commit-discipline,N - it read the mentioned skill
+Phase 5: Review,commit-discipline,Commit these changes.,Yes,commit-discipline,Y
+Phase 5: Review,commit-discipline,Write the commit message for this refactor.,Yes,commit-discipline,Y
+Phase 5: Review,commit-discipline,Save this progress in git.,Yes,commit-discipline,Y
+Phase 5: Review,commit-discipline,Check this diff for layer violations.,No,code-review,N - it read the mentioned skill
+No skill expected,No skill expected,Rename this variable to `total`.,No,None,Y
+No skill expected,No skill expected,What does `Array.prototype.flatMap` do?,No,None,Y
+No skill expected,No skill expected,Convert this JSON to YAML.,No,None,Y

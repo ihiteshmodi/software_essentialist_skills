@@ -1,0 +1,56 @@
+what is going on crafters we're back with another one of these military time validator reviews let's take a look at kareel's solution here for this one okay
+first attempt 139 lines changed and it goes straight to the end here let's see what we've done all right we're all this is looking great i like this cool cool
+i'm seeing the parameterization here this is going to keep things very open closed for us it tells us that insert is a valid military time range boom you've
+done that you want to add new examples you just add them in here valid time is the high level responsibility specification there invalid time is the high level
+responsibility specification here let's see what this is saying so this is just one specific example instead of being parameterized that's fine tells us that
+this is not so you've got one invalid time here in general then you've got some more specific invalid times because of syntax so responsibility specification
+example that looks really great as well and then a ton of examples here responsibility specification right there invalid time because of hours super open closed
+which means you could just add another one of these right in the middle see you're testing a lot of weird stuff in here nice and then responsibility
+specification example well done i like the look of this time validator let's go and take a look at the production code i want to see how we've done this aha
+we've broken this up into smaller pieces here so we have a bunch of i'll look at that so you just made an interface for time you've made an interface for time
+range so you're actually really decomposing this down splitting parsing yep okay so let's take a look at the code all together what's this one here this is the
+index file and this is the thing that is doing the work so this is a file called time time is hour valid is minute valid it's time valid you start time less
+than end time so these are all the little responsibilities that are involved in solving this problem which is why this is a more complex problem this requires
+you to really decompose it down and write it out on paper if you have to do but i think also a really great technique to make sense of this is to find all those
+responsibilities find all those little things you need to be able to detect in no and then model those as tiny little functions the thing is if you could just
+solve a small part of this you could solve all of it because you could piece them all together and we saw that in the functional approach in the last video and
+i have a feeling we're about to see that here too let's take a look at the thing that gets exported ah brilliant yeah it could be a static method not a huge
+deal this works as well you just have to instantiate it but this looks really great look at that just these three things here you parse the time then you
+determine if the first part of the time is valid then you determine if the second part of the time is valid then you determine if start time is less than end
+time those three things are going to give us the yes or no response to is military time range valid or not that's really cool so the algorithm really is those
+four things we need to find out but what's involved with finding out those four things truth let's go and see how you worked through this here yeah all right so
+step one you've started with just chucking in a basic valid example and you're just faking it love to see it and then you've gone on to add another example
+however this one is supposed to be a falsy example and that would be falsy because that's starting with 25 so that's impossible so what did you do here you've
+broken it into get time range parts solving that part of the problem here then you're using parse int which is a part of the global typescript namespace right
+now you're checking if the end hour is less than or equal to 24 so end hour is being computed on here i love this yeah this is how we should be moving through
+your tests this is refactor and yeah group test by validity i'm calling this responsibilities the highest level responsibility the responsibilities of doings
+and knowings these are functionally the requirements can detect valid time can detect invalid time because of hours can that can detect when things are not
+invalid time ranges and then you have examples within them so that's great good refactor here all right so now we're going to check that the start and end hour
+is greater or equal to zero where are you doing that you're doing it here okay so you're parsing less than 24 and end hours is less than 24 and start hours is
+greater than zero and end hours is greater than zero so you're just checking to make sure that these two parts here have their numbers are right it's good this
+is really how you break down this problem in small pieces and what we're doing here is we're using the is our valid helper you split and renamed some of these
+and you're parsing the values here which is good okay so you've already done the hour checks and now you're doing the minute checks and you've just done it like
+that you just added that in there so far what i've seen with this solution based on how you've done it in loki did it in the previous one is the utility of
+these small little tiny functions that check things piece by piece that's really helpful to be able to break your problems down all right so let's see where we
+at so you've gotten rid of is our valid you've just logically coalesced this into is time valid and it's time valid for start and end start and start and you
+just pull that into something cleaner and let's see parse time range and then you have is time valid and is time valid is the main thing which is doing the hour
+and minute check very nice these are great refactorings just making the highest level of abstraction in your production code a really simple object because if
+we look at this and this is just a principle in general that i think of all the time which is levels of abstraction the simplest level of abstraction you're
+ever going to have is you explaining the problem out to someone in fact it the simplest highest level here is this is describing it then the next step down from
+there is writing these specifications and then the next step down from that is writing the test code the next step down from that is your first layer your first
+level of production code and this is the first level of production code it is the direct object or static method or function that gets called upon in order to
+kick off the system under test so that's the highest level of abstraction there and then we have some of the other pieces behind the scenes that are
+encapsulated that aren't actually shown up front unless you want to descend a layer deeper into these so this is what i mean if you've ever heard you've ever
+heard of this is the highest level of abstraction that you've ever heard of this is the level here we have some abstraction that this reads just algorithmically
+how you would solve the problem on paper or how you would say to someone hey yeah make sure you can parse it and then check if the start is good and then check
+if the end is good that's how you would actually look at this and describe it out in steps so really here at this highest level of abstraction we're looking at
+the steps which is awesome and if you want to go in deeper you can see those steps by going into those functions themselves to see what are the lower level
+steps so levels of abstraction key topic really handy and helpful to be aware of and that is happening all the time we're doing that sort of gradient like
+movement from theoretical to physical moving along we're checking for some other things and i think this is probably because we're just checking if the number
+is finite we also want to make sure that this isn't something we allow to work because that wouldn't be a valid military time i can see why that's a great test
+to write and finally that last step which is to verify that the start time is less than the end time you've gone and changed a bunch of those examples and just
+added that last step here and then now we're pretty much looking at the end parts of this step one step two step three step four that's it done and that is your
+military time validator so really well done for this one i don't really think i have any strong things i would change and do differently i think this is an
+exemplary demonstration so great job my friend and if you're about to do this one or you're struggling a little bit definitely take another look through the
+code base here walk through the commits because this one has my samples of approval and with that said i'm going to leave the video right there and i'll see you
+in the next one and as always to mastery you

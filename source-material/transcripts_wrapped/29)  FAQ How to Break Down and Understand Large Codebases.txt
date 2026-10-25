@@ -1,0 +1,30 @@
+So we have a question here, which is how to break down and understand large code bases. This is a good question. I wrote a little something here actually
+earlier on, but if we could just remember the fact of the matter is that you have one main task as a developer, and that task is to keep the user benefit and
+the customer benefit and simultaneously to do the work that you need to do. And the work that you need to do is entirely on features. Now, if we think back to
+the abstraction prism, this is something I went into in the metaphysics. The abstraction prism is a great way for you to understand how we go from the problem
+that the role is trying to solve, so their goal to the capabilities that they're going to need to have to the features. And that's effectively the who, why,
+what, and then the features of the how. And as a developer, the entirety of what you're tasked to do is work on the features. So you need to be able to, first
+of all, have those three theoretical things, what, why, and who have those three things very clear. And then from there, we just need to start to think about
+the features. If we were to maneuver into the code base, you are looking for features. You're looking to discover them. You're looking to test them. You're
+looking to add them. You're looking to change them. You want to be looking for features in the code base. Now, admittedly, not every code base is organized very
+cleanly where it's easy for you to find those things, but because you know what you should be looking for, that should make it a little bit easier. And of
+course, features are not just specific operations, API calls. Features are user stories or more general. So sometimes it can be very hard to find these things
+if there are not any acceptance tests. If the concept of a feature doesn't exist within the code base. However, there are ways for you to still find that
+nonetheless. You may have to ask. You may have to look into tickets. You may have to ask about just what are some of the most common features, or even just look
+into the front end app and see how it is being used and see what some of those features are. And then try to trace to find out how that feature is realized in
+the code base. And you'll start to get a sense of how the developers were thinking about it when they were putting it together. Now, what I always recommend is
+to have a layer of code where you actually have tests that are going to represent those features specifically. And if you're organizing your code well, you're
+going to have a source folder, a tests folder. And inside of those two folders, you're going to have inside of, let's say source, for example, you have modules
+and you're going to have shared. Now, modules is going to represent the capabilities, the high level capabilities. And that's exactly the same thing that we
+were referring to when we talked about the abstraction prism. So those high level capabilities inside of that, you're going to have your feature. You're going
+to be your feature folders. So ideally, that's what you would like to see in both the source folder and the test folder. So it would go source modules and then
+some of the features. And then the test folder will go tests and then keep it like whatever the capability is. So there could be modules as well. You could call
+that. And then inside of that, you have features too. And then inside of each of those features, there will be acceptance tests in the test folder. And then in
+the source folder, those features. Admittedly, you could structure those out as just feature folders. And inside of those, you could just have operations.
+There's a number of different ways you could do it. It's going to be up to you. And the delicate balance of do you want more entities or less entities. But this
+is all besides the point. In order for you to break down and understand large code bases, you need to remember that what you're trying to do here are the key
+developer use cases. You're doing work on features. You're doing work on features. So you need to find those features. You need to discover them, understand
+them, test them, add them, change them, execute them. That's what you're looking for. So that should be the 80-20 in terms of you trying to actually understand
+a code base. The 80-20 in terms of you will getになります. So that's what I will get to the 80-80 in terms of you trying to do here are the 81-80 on the five
+runners. So that Almost solids can happen in terms of you trying to get a key Manchester and come into this schedule. From self-operschance to Mente gang On
+purpose on the tenido Easter So that you can thousands ofavedaru So that the one does deal with the 80-20 in terms that you could hold the solemnity.

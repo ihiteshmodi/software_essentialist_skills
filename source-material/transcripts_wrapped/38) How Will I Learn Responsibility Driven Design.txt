@@ -1,0 +1,10 @@
+A little bit of foreshadowing as to what we're going to get to a little bit later on. And you know about the phases of craftship, hopefully. So you know that
+the responsibility first phase is when we're going to focus on responsibility driven design for the most part. So what are we going to do at that particular
+phase? We're going to learn about the three-step RDD design process. We're also going to do some work to create some bespoke abstractions. What's going to be on
+the front end, some stuff on the back end. And we're going to talk more about the object stereotypes. Talk more about the stereotypical architecture. And see
+how all that stuff maps up to the front end and the back end patterns. Because I think once you can do that, once you can see how they all link together. It's
+like matrix just explodes. And then now you're never going to be able to see your libraries, frameworks, tools, little patterns you've used before. You're never
+going to be able to see them all in the same light at that point. So how will I learn responsibility driven design? Where are we going to learn that? We're
+going to learn it in the responsibility first phase of craftship. However, as we move on and you're doing work in value first, as you're doing some of the stuff
+on the guest points, you will also very likely be tasked to use some of your responsibility first chops in order to practice a bit more. That should be pretty
+good.

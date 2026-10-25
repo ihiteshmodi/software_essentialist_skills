@@ -1,0 +1,596 @@
+Huh. Might be on the run really soon here. Okay, great. Let's see. Who do we got loaded in? We've got Mr. Pancakeponer. We have Red Clarity. We have Wes.
+V-I-J-C. What's up with it? Patrick M. AJ. Welcome. So where's everybody at so far in the course content? I know Lucas is running ahead, sprinting forward,
+getting into that messy territory with the new assignments. Where's everyone else at? While everyone's getting that cleared. What I'm going to do here is drop a
+little bit of what I want to discuss with you all. Important matters. So first we have the Stateful Guest Point. Nice. Good call. Good call, Wes. Stateful Guest
+Point. Application. Guest Point. This is my favorite one. The application one is so good. We have the outgoing. Do, do, do. And we have the system. E2D. Guest
+Point. So. I'm going to say Guest Points. Not test under development right now. Anyone ever heard of commit action? This productivity and like a time and
+productivity coaching company. I started working with them today. So if you guys see everything turn up really fast, you have them to thank for that. Okay.
+Guest Points under development. Those are some of the things I wanted to talk about. So this is level two. Four. One of the other things that I wanted to
+quickly discuss here, maybe not even quickly, a little bit more than that is front end architecture. This seems to be a major area. And this is going to get a
+lot of attention. Like even after this course, this topic here is going to get a lot of attention from me. Probably the most attention because it seems to be
+the thing that everyone's struggling with the most, especially in the front end space, because there's just not a lot of guidance here. I just want to list out
+some of the common questions and pain points. Common questions, pain points. So one of the big questions, pain points is how do I. Does like, how do I get
+better? So negative value. So yeah. Anyways, where was I with the common questions and the pain points. So how do I get better architecting? I turn this vid on.
+See, it's a land down. Springs. Let's try that. Yeah. Yeah. So how do you get better at actually architecting your front end applications based on all of these
+various tools and technologies? So how do I become a better front end architect? It's a huge one. How do I have libraries of families? What's another common
+question or pain point here on the front end? Pull some of these things out. Cause I know a lot of you were doing front end development and it seems to be a
+tricky area. I'm feeling my computer. Oh, it can get really laggy. I'm going to turn off the camera. Yeah. Event management. Okay. How do I identify my problem
+points working with your front? I might just feel bad, but you know where to start. Don't know where to start. Yeah. Okay. So yeah. I want to talk a little bit
+about this. And another thing I wanted to mention is front loading the valve. So what I've noticed is some of the feedback I've gotten in this course, at least
+is there's devs that are in here. Everyone has a little bit of a different goal. There's some of you are in here. If we want to learn. Some of you want to do
+get better at front end architecture. Some of you just want to refine your skills. Some of you just are just completely lost in general. So the video that is on
+the landing page on the website, kind of long hour long video. I mean, that thing there is like the high level of what you can expect. However, what I'm going
+to do is, and I've started to see this just based on the feedback I've been getting people going through the assignments is I need to do some, I need to front
+load the value in this course. So really put everything, make it very clear to everyone. Some of the main ideas of the game changing stuff that we're going to
+get to instead of getting to it a little bit later. And all this stuff, what I believe some of those game changing things are. One of the major game changing
+things is the fact that once you learn about a testable. Stereo these actually I'll call this stereotypically testable architecture. Once you learn this. I'm
+stereotypically testable appetite. Sure. You understand that the architecture you do on the front end that you do on the back end, you do on desktop, pretty
+much anywhere. It is exactly the same. It has the same underlying elements of, or the same underlying laws of what constitutes a testable architecture. And if
+you could master this on the front end or the back end, doesn't matter wherever you've effectively mastered it everywhere. It's just a language. The terminology
+that we use on either side of the stack tends to be a little bit different. For example, we call the thing that we call the presenter in the front end.
+Typically we would just say we would call a call out a repository that deals with read models on the back end. In DTOs, what were commonly known as DTOs on the
+back end. Those are also could be called DTOs on the front end, but usually this is something that's just handled by GraphQL or just gets cached in immediate
+sort of caching. So I've started to piece some of this stuff together. I'm just going to open up my other block here and pull up an image for you all. It's
+going nuts. Come on, what are you at? Front end voltage. Yes. Man. Crafting out a little bit of the update for this week. Some of the new modules and ideas I've
+planned, some of the stuff I'm planning on front running. But yeah, there is a stereotypical architecture that is testable front end, back end, desktop, but
+not. And once you learn that, yeah, you're good. And I have a few different ways I draw this out. I've drawn it out here. It's on Twitter and I learned about
+this by the way, in the object design book. And it really pulls together everything that you learn about in D hexagonal architecture, XYZ. It just goes in more
+detail. It's just more granular. Once you understand that what's going on at each of these layers of this is by the way, this is the architecture. It doesn't
+show how things are linked up, the patterns and the tools and how we're connected, but this is fundamentally what we're dealing with each time. So this is the
+appropriate level of granularity to know that there's data rules, processes, and relationships here. And this is going to roughly equate to our level one and
+level two work. And then here, this is going to equate to our level three application network. And then outgoing adapter and incoming adapters. So this is four
+and six. And then we have our end to ends. So this is such like, when I learned this was such a superpower because it gave me the confidence to just know, oh,
+I'm good. Like wherever I'm like, you could slot me down in any project and I could understand. And then this is what Daniel mentioned. He's like, how do I
+understand the problem points? You can begin to understand the problem points by knowing how just measuring the differential from where you are with here, this
+ideal stereotypically testable architecture. And where you currently are. Because the guess points that stuff we're doing in the physical is really just to
+carve out your ability to write tests strategically. So that is a lot. I just said a lot of words, tons of words. And this is why I put it together into a nice
+mental model here, which I call the ideal developer workflow. And this is just a consistent way that I believe you'll want to approach your work 95% of the
+time. And you can do this on the front end, the back end. I initially got this idea from a book called Growing Object-Driented Software Guided by Tests. And
+that's the other thing a lot of the time. Before I do that, anyone have any questions or comments on what I'm saying here so far? I just know if they do too. Is
+that what we're doing? And as I see questions, you just draw questions in and make sure I toss all of those over here and get into the Q&A. But this is where
+we're going in the conversation today. Exactly. Like if you feel like your software is jumbled, here are the fundamental shapes. Yeah. And it's really hard to
+unsee it once you finally see it. There's a reason why I'm not. You can have Next.js, you have Nest.js, you have all these remixes. You have all these tools on
+the front end. And the way that I interpret them and make sense of them is I just ask myself, okay, what type of concern is this handling? What types of
+responsibilities is this handling with respect to these, the stereotypical architecture? Because actually I'm going to pull that. Pull it again. I need to
+actually draw this again with the guest points laid out. So I think that probably makes it a little bit more useful. But yeah, we talk about server side
+rendering. We talk about client side rendering, all these different responsibilities. These things can all get organized into what it is you actually need. If
+you know the correct way to where you have a really solid starting point. The problem is that we, I feel like most developers don't have a solid starting point
+for what an architecture should look like. That is what we're going to nail down in the physical section of the course. We're going to do that four or five
+times. We can make you do that on a backend project, on a front end project, on a desktop project, even a Chrome extension, just so that you really understand.
+This is the same stuff over and over. We're not doing anything different each time. Feels like it. There's all these new tools that are coming out. But all you
+need to do is splay those tools onto the stereotype architecture and you inherently understand where things belong and where certain, which tools handle which
+responsibilities. So the big problem that most developers have is that this responsibility for coordinating and controlling most developers write all of their
+code within react and react handles the coordination and control. Some of you don't know what coordination and control is. Let me just say this. How do I put
+this in a way that makes sense? When you start your react application up. It's react that is really running the show. Somebody's running the show really. And if
+you, when you want to start your app, if you have to start react while you're, if you want to test your features, if you need to start react, then react is
+doing the coordination. What you actually want is. We want your features to be over here. So you can have a feature. And then you want to have several different
+tests for us. So specs to have one spec. And by spec, this could be like a scenario that you're testing. So, and this often is the case. Most of the time you
+will have, if we take create user on the backend, there's usually one success case. That is a success. And there's often five, six, seven, eight, nine different
+failure cases for. Normally. Right. So the feature could be called the premiums. So that's usually what ends up happening. What we want is if this is our
+feature and we have all these specs, these scenarios that we want to test these edge cases. We want this to be completely separate from. I'm talking about react
+right now. The UI. The view. And we also want it to be separate found. Any of the libraries. And. APIs. That's it. Am I doing? Yes. This is struggling. Am I
+cool? It's excellent. It's. No. Because really. If these things are separate. Here's what happens to you. The way that we can work. Here's how you kick off a
+project. So I'll actually put a header here. Just so that we make it very clear. Different. We're able to accomplish this level of decoupling. Here's how we do
+our work. On front end, back end, wherever. It doesn't matter. How we can work. Deal. What? Works. This is really cool. Again, this is not new stuff. This is
+all just old stuff tucked away in books. But the really challenging. The reason why it's so hard to learn. Is because. It is tucked away within books. And also
+there's an. There's a link between testing. Design. Architecture. And strategy that. You need to learn them all at the same time. And take on a lot of
+cognitive. You need to be able to handle like. Really not knowing what's going on. And learn them all at the same time. And sit in that space. To begin to grasp
+this stuff. Now I'm trying to piece it together. Where you don't have to have that experience. That's what we're doing in the course. But. That's why it is so
+hard to learn testing. It's because you can't really get good at testing. Without getting good at object oriented design. And also understanding architecture.
+Because for you to test. Means you need. A. Testable architecture. Yeah. I think we. I saw this conversation somewhere else. Yeah. Maybe it was you that.
+Started that off. So. How we can work with the ideal developer workflow. So it goes like this. We're going to use faster of course. And. We want to move across
+the value creation system. These are other ideas. I'm going to pull in a little bit later on. But. I'll give you the most general way that this will work. Let's
+assume that we have a feature. So that is cool. We have a feature. We know what it is we need to do. We're given that. And what we could do is. If we have a
+testable architecture. If we set that up. That's one of the first things we're going to want to do. Actually, no. Let's assume we don't even have that yet. We
+don't have anything. Step number one. Is to build our testable architecture. So we're going to pick the test. That's step number one. And. Step number two. Is
+to deploy it. With. The tiny slice. Functionality. Cuts across. All the main. Architectural. Components. So what's that going to be? If this is a front end.
+That's going to be UI. Plus your app. Which is going to be close. And then. Plus. Maybe any of these things here. If it needs to talk to an API. We have. We're.
+Testing API server. Something like that. So it's going to be some functionality. So this could very easily just be. Yeah. I can. Get some data. And display it.
+It's not really going to do much. But it's going to work. End to end. You're going to have this. End to end. Structure set up. You're going to have. Yes. As Tim
+says. The vertical slice. One. Vertical slice. Carved out. That's how you're going to begin. Okay. You've got that. And you've got it. Deployed. That is so.
+Important. To have this deployed. Because if I go to Figma again. I'm actually going to go into the. Forest document. I think I saw. Damn. My computer is really
+shut down. You got this. You got this. I believe. Oh, damn. Yes. Okay. Cool. Because if we go into here. And we were to look at. I don't know. We're going to.
+Ah. Right. We're to look at this. The value creation system. Our goal again. Is to. Push value. From here. All the way through. Into the end. What we're doing
+here is. I've been saying. Start at the end. Or think backwards. Plan this thing. All the way through. To have a very clear picture. Of what needs to happen at
+the end. And make sure that you know what that is. What we're doing here. Is we're actually optimizing. Our chances of success. By making sure. That we have
+deployment. Working. Off. The get go. Because if we were to do all of our work. Spend like a month. Building something out. Front end or back end. It's okay.
+Time to deploy it. Oh dang. This is hard. This thing isn't deploying. That's a very bad situation to be in. Best thing to do. Is to build out. Your. Deployment
+architecture. As soon as possible. So you know. Okay. We can. Get some wins going. As soon as the feature is done. We could actually deploy. So. We have. That
+set up. Number one. Number two. And. While. Sir. Also while we build out. Our stereotypically. Testable. Architecture. There's other elements to this. As well.
+That we might. Have to integrate. Because. This is stereotypical. I'm saying here. Meaning that. We're always going to have some. Foundational elements. That
+are going to be essential. All the time. Basically. The. This. Right. And. Drawing it out. Like this. We're going to always have this. But you might. Also have
+some other things you need. Let's say. You know this ahead of time. That you need to do offline. Caching as well. Let's say this is front end. Still. We're
+talking. Say that you're going to need that. Say you also know. That you are a thousand percent. Going to need to do. Something with the canvas. So. Maybe you
+need some sort of. Library. Again. What I'm saying is. You want to. Start from the stereotypical stuff. That's well understood. But also know. What some of
+those main proponents are. If I. Write up the word faster. Here again. Okay. Okay. Okay. Okay. Okay. Okay. And this is two A's. That's find. Architect. So
+really. This thing here is. Find. And architect. And this here is automate. Right. And it's pretty much all of the upfront design we need to do. And that's how
+we kick off. At least begin to kick this thing off. Now we're in the emergent. And now it's time to do some feature work. So developing features. How do we
+develop features? Because now this is the emergent design part. And this is the other half of us. How does this. This is the other half of us. Here's what's so
+freaking awesome about this approach. And again, it's front end and it's back ends. Desktop, whatever you want. What makes this approach so awesome. Is that you
+can spend the majority of your time. Working from. And this is going to be. Layer three. Layer three application. You'll spend the majority of your time
+actually working here. In a way where. Your code is. I'm going to draw this in a column. We'll do it in this code. Let's move that a little different. That's
+way too bright. Bang. This code here. Is core code. Which also means it's pure. Also means it's. Doesn't touch IO. Which means that these tests run incredibly
+fast. Which means you have an incredible amount of control. Over how you write these tests. And it also means that you can. Test your edge cases really easily
+because. You don't need to start up react. You don't need. On the front end. You don't need to start up react. You don't need to talk to a API directly. You
+don't need to talk to things directly. You can almost imagine that what's happening here is. You have a pure object. It's almost like you have a pure object.
+That describes your entire app. Maybe two objects. But on the front end, the key ones are. Presenter. Troller. And with these two objects here. Testing your
+entire. Pretty much through these two things. Your app again. Just. And this is back to some of the theory that we have been exploring in the program. I'm just
+going to go over here. Again, it's just systems thinking. Okay. The model here you're dealing with is just an input output system. It's a stateful one. Now.
+Where you might have repositories or you might have other things that can be stateful. You might have a cache. But really you can do. You can just test this
+entire app. As if it's just a regular JavaScript object that doesn't rely on React. Doesn't actually touch React. Doesn't actually touch a API. Doesn't touch
+anything infrastructural. And this is so good. Once you learn how to do this properly. And I have some culture. Because a little thing I started piecing this
+out just to demonstrate. Just look at these tests here. Right? So I have my presenter and I have my controller. And what am I doing? I'm creating a new to-do
+when none exists. To-do is controller, not create to-do. Yeah, create one. Okay. Gets created. Now what I want to test. I want to test that there's one to-do
+that was created. Okay. Great. So my presenter is able to get all the to-dos and it sees that there's one. Okay. Great. Now what about adding a to-do to a
+existing list? All right. Cool. So I can set up the state of my application. This is why we're talking about the stateful guest point now. And this current
+week, this is the parent focus. I could set up my app, build some state. All right. Again, I have my two objects, my presenter and my controller. And that is
+going to make up fundamentally the entirety of my app. And then I could do my behavior against that. Test what I want to test as if it's an input output system.
+Create the to-do. And now let me go and check the read side. Let me get all the to-dos. Okay, great. I have the to-dos and I have the new one and it's at the
+bottom of the list. Incredible. Great. So you could do this on the front end. You could do it on the back end. And then how do you hook this up? Controller.
+Presenter. There's a boundary here. It was drawing that boundary over here as well. At least beginning to draw this boundary where do not, you could just hook
+your components up later on. Your components get state from the presenter and your components just tell the controller what to do. And if you ever wanted to
+swap out React for another front end library, you could do that. Because the way that most developers use React is as if it's a framework. You write your code
+within it. When you write your code within the view layer library, that's when it becomes a framework. Ultimately, it becomes a framework when you let do the
+coordinating and controlling. And coordinating and controlling is, that means like your use cases. It means this stuff. So you're in really good shape. If your
+features, you can actually go from, Hey, I got a requirement to coding out the feature without touching or mentioning anything of React. You're in really good
+shape. So with the ideal developer workflow, what we want to do is we want to get the feature. We want to write a failing B2E test. So this is actually going to
+cut across everything. This isn't the biggest vertical slouse. Let's draw that out. Let's do it with this. So imagine. Let's say I cut across. Cut across. Oh,
+this is going to look not good at all. Let me undo that. Let's just assume it's going to cut across that one. Nice. And then. Yeah. I feel like that's easier to
+happen than you would imagine. Good. And then this is an E2E system level test. So you're going to have this one here is going to cut across. Let's see if it
+also cuts across. Problem solved. That's my bad. I'm going to go all day. Nice. This is a vertical slouse. And by the way, yeah, we're going to see this a lot
+cleaner than it is right there. So you're going to write your failing E2E test. And this is going to describe the feature as close as it can to the language
+that the the user would be using it. So if it was create user, you would read this test. It's not like this. I've drawn this really nice. Actually, somebody
+else I believe in the coaching program. But given I am a loser. I am a loser without an account. And I called when I enter my details and enter valid details
+and say, cause this is maybe this test is going to be like a success case. Cause I mentioned we can have success failure, failure, tons of these. And when I
+enter valid details, then I shared. I have a, I should get an email. Some of this stuff is not, you're not able to actually test with an end to end test because
+end to end tests really test the entire system. This is really interesting. And this is why you're always going to fail. If the only way you're testing your
+system is from end to end, or the only way you're testing is through tiny low level unit tests that just test tiny little things. The reason why that's going to
+fail is because. How are you going to write this test where you can see that the person's getting an email? Are you going to literally write an automation to
+log into their Gmail and see that they got an email? So maybe you can begin to respect the complexity here of really validating that our stuff works properly.
+So an end to end test is great. And we might actually stop this part out. We might just express it in the test at the end to end level, but it might not work
+here. And then what we could do is the way that we will actually test that they have gotten an email, the way that we verify that. Maybe on the front end, the
+way that we're going to verify that is if they're looking at a particular page that says, great. Check your email. Maybe that's the way we verify that. Check
+it. However, does that really mean that it worked? We don't really know that for sure. However, at this level, at this guest point, because that's working at
+the level five, but at this guest point here, now, this is where we get a lot of fricking control. This is where we get crystal clear clarity on the way that
+our system is interacting with libraries, APIs, and also how it's being called. And also when things are doing things. This is really, truly the heart, the
+core, the stuff that makes your application special. It happens here at this guest point. So what we would do is we would write this E2E test from, well, this
+would be acceptance criteria. criteria from the perspective of the user. And then what we would do, and I'm going to come back to all these questions, by the
+way. And then what we would do is we would take that same acceptance test. You can also shift it a little bit. Cause what we're going to do here is we're going
+to, as we write this first test, you're going to mention things that don't exist at all. So you might talk about a page. You might talk about going to this page
+and doing this behavior, mention things that are not real. And what's going to happen is your test is of course going to fail. What you want to do here is you
+want to inflow in. You want to move in one level in here. You're going to find yourself at the developer testing. The developer boundary now. So I will call
+this the system boundary. This is level five. And this is about the, it's written from the perspective of user, but it's for the customer. And then you're going
+to move in a level here where you're going to write a mailing use case test. And I call these high value unit tests is why I personally call these. And this is
+at your application level, which is level three. And this test is for the developer. And this is primarily where you're going to be doing 80% of your work. You
+will be working here. 80% at the. And I'll just give you a hint as for what happens later on. 20% of the time it's going to be making the rest. Team you are
+into key test pulse. And then it's going to be filling in other. Yes. So that might be writing outgoing adapter tests. And for example, if this was on the front
+end, what might we be testing? Does my graph QL API caution. Right. And if I say save, is it going to save properly? Is it going to give me the right data back?
+So that might be like the outgoing adapter test. Another outgoing adapter test is let's say I have, I want to show toasters on the screen. Is this thing
+actually working correctly? Does it actually call the toaster? And does it actually get shown when it should get shown? And then we also have your incoming
+ones. This is less important on the front end. This level of granularity isn't as important as far important on the backend. So you might write some of these
+tests here, but the other, yeah, you're going to make your B2B test pass filling in other guest points. And then we'll talk about the front end, which is
+hooking up react components and doing component test. So setting up your view layer library. Right? So then you would be testing your react components really in
+isolation separate and you testing your react components. This is going to be similar to the state. Aha. This is similar to the state was testing. This is like
+your level one testing. We have been exploring because why your react components should just be receiving data and render in a particular way. Based on what's
+going in. A lot of them, they should be like that. Some of them will be stateful. And the ones where your components. I go back to this. There is component
+state. Your component state is going to come from the presenter here. Lot of the times these tests will be stateless. They'll be stateless components. I'm sure
+you, if you're familiar with this react, you've heard of stateless components. Sometimes they will be stateful. And then you're going to have to, of course, be
+level two testing. Because your components here are going to resemble state machines, which is what we've been talking about. At least Lucas and I have been
+talking about this a lot this week. It's been going through some of the assignments. And we even took a look at state. The AI is a great tool for visualizing
+your application. Logic. X state. David Piano. This might be a, I think this is David Piano's mastermind, master piece here. So yeah, this is a tool for
+visualizing your state machines. So that's the brain dump on how this works. And now again, like this is not new stuff. If you've read the book, growing object
+oriented software guided by tests, this is a foundational idea. It's just, we need to bring this to modern JavaScript, modern front end developments, because
+the C sharp guys, the C sharp people, they all know about this stuff. They've been doing it for years. The Java full seemed to know this stuff. It seems like
+just the JavaScript space. Yeah. We don't really know this stuff. It's really important. Before I get to the questions, I just want to draw this out, which is
+the way I believe they had it in the book. And the first time I ever saw this, the way they diagrammed this out. I believe this. You rod. So step one is rod
+strong. And this has a sound. So let's limit yourself. Mor Отеч let's six second steps and. freundance And then Descyes N�� Mark Let'srix New house and flex
+Close Six second steps. You lifecycle You away when you're outer loop, your customer loop. And again, with the, if you've hung around, you've come to these Q
+and A's. If you've listened to my philosophical glance, this is the idea of creator needed, which is that it's up to the creator to determine the purpose of
+what things are. This is a little existential. Also S essentialism, which is also just the same idea. Just one applies to humans. One applies to objects.
+Essentialism is more about us opponents to objects. Which means what I'm getting at here is that customers drive every single thing that we do. So if you're
+writing code and it's not, you can't connect it back to the exact feature that the customer asked for, then you're doing wasteful work. It's not useful. It's
+the agony, as it says. So creator created, which means the customer, everything must be good. At least in this case, the customer requirements to be functional
+or non-functional. Sometimes developers have to make decisions as well. Actually, this is not everything. This is just features. Feature work. Cause sometimes
+developers have to do stuff like that customers wouldn't know. Like customers don't really care about the fact that our architecture is testable or not. But we
+need to do so. Anyways, what I'm getting at here is deploy small piece of functionality. Then we'll have a customer acceptance test. Right. And it's only to me.
+And of course, what's going to happen here is it's going to be failing. It's going to fail right away. And this is going to take us into the developer. High
+value. We're going to test. It's also a loose case test. And this is initially going to be failing. Just failing. Red. And of course, this will eventually be
+going to draw links so you can see all those things. Staying. Thank you. Context. So this is what it's going to look like. Boom, boom. Right. So this is the
+upfront part of the work that we need to do. Once this is done, we are effectively ready to do feature work for the entirety of the project. Once we have this
+stuff set up, no sell zone upfront. And this is all our feature work. We're going to spend most of our time here and specifically 80% of our time there. That's
+set. Floral. And we'll probably loop over this several times because again, as I mentioned, we're going to have more than one. We're very likely going to have
+more than one scenario. I have a lot of different scenarios. And again, you're going to have to end flu bin here too, because if this is level three, we're
+probably going to mention things that don't exist in here as well. And then have to carve those out as well. So it all flows through this failing system test
+into this application test into smaller objects back up to here. And you just go and keep on going until you've exhausted that. Maybe you have five or six,
+seven of these done. Okay. This test is still failing, but this stuff here exists now. So let's go ahead and make an outfit. And then you just connect the rest
+of it together. Oh, oh. And then you're done with the feature. So this is going to be fundamentally how this works at a high level. Y'all need to see it. So
+that's what we're going to do in the project section. And this is what I'm going to record videos on and make this more clear upfront in the program, because I
+feel like some of y'all might be getting a little antsy, wanting to see how is this, how are we going to actually do this on the front end? Or how are we
+actually going to do this on the back? Want you to see this here is like game change, game change. All right. Let's look at some of these questions here. All
+right. To be clear, vertical slicing is the idea of deploying a slice of functionality that touches the main architectural components for all this front end
+backend. All right. Those have to be of law. Let's grab this question. Love this question. I'm going to cut this into two pieces. This one. So vertical slicing
+is, it's the idea of driving everything you're. Yeah. It's the idea of applying a slice of making your use case, a vertical slice through the entirety of the
+architecture. We could argue that. And you could just. You know, this, let's say you just cut through here at the application level. Is that a vertical slice?
+Yeah. Because you cut across this stuff. But the way that I really think is most useful to think about this here is. You want to deploy vertical slices. You
+want to think of your feature, your features and the stuff that comes in that you're supposed to do each week when you get a new requirement or something new
+that you're supposed to develop out for a customer. You want to think of that as a vertical slice. Features are vertical slices that need to get deployed. They
+cut across these, the end to end all the way from layer five down to one. It's a vertical slice. Right. That's the way to think about that. And it's going to be
+this. Yeah. It doesn't matter if it's front end or back end as top Chrome extension, robot, whatever. It's the same thing because we have a stereotypical
+architecture and we have stereotypical rules that influence the way that the patterns that exist and have existed and will continue to exist. What? For example,
+we have something called the dependency rule, which is a rule that means that nothing from a, an inner layer is allowed to know about something from an outer
+layer. So value objects, which entities, which belong down here are not allowed to mention or know about repositories and be it repository adapters or real
+actual repositories. They're not allowed to know about that. If this sounds like gibberish, I'll give you another example. React components. React components.
+They shouldn't know about. They shouldn't talk to the cash director. Should not. Do you see how this really is a powerful tool? There's so many, it depends. How
+do I know what to do when, or how should this talk to that? Once you understand the stereotypical architecture, you understand the stereotypical, here's the
+bottom word, stereotypical collaborations between what's allowed to talk to what. And I want to read the three. What's it called? The who's that's to solve most
+design problems. It's one of my favorite articles. Yeah. Once you know how to apply this process, you, and you know that the stereotypical collaborations and
+conversations that happen. Really, really easy to just. Okay, cool. We're going to use remix for that. We'll use this tool for that. Uh, okay. I see how we
+could use redux in here as well. We'll use this aspect of redux, but we won't use these aspects of redux. We'll use this part to just handle that. Okay. And
+we'll swap this out for that. You can begin to have these conversations about architecture because you're starting from the stereotypical point. So let me come
+back to the question. There's another part to this. Vertical slicing is the idea cuts across the main components. Yep. Regardless of. And yep. It's not
+necessarily the idea of deploying a unit of functionality. It's just the idea that it is a unit of functionality. It is a feature. And you want to deploy. Yeah.
+You dominantly want to be deploying slices of functionality. Does the deployed slice have to be, for instance, the first feature or simple example, like in the
+case of initial read, you don't have to like Daniel could probably comment here. I believe this is called a characterization. Could be called a characterization
+test. I don't know if that's the name of it, but actually characterization tests are just testing right after the fact. Correct. Okay. So let's see if you want
+to deploy in a piece of end to end functionality. Yes. It's going to cut across the stack. So yeah, you could look at it as a vertical slice. There's another
+idea called tracer bullets. I believe. And this is, what is the tracer bullet in software moment? This is another way. Yeah. This was first mentioned in the
+pragmatic programmer. And this is what is going to help us develop out the walking skeleton. That's what it is. Almost forgot about it. The walking skeleton.
+How can I figure out such an important piece of this? It's actually one of the fricking essentials. Piecing out a walking skeleton. What we're doing here with
+these steps here is we are building out the walking skeleton for application. Why is it called that? Because it's the, you're building out the entirety of the
+system so that you can do all of your feature work. You need to build a skeleton to begin to piece together the rest of it. So the walking skeleton is going to
+be. You're essentially referring to it right here, but it doesn't need to be a, it doesn't need to be the first test. It could be something a lot simpler. Can I
+just talk to the backend? Can I like get some data out of the database and show it on the screen? I think that's the purpose here is just to get the main
+components tied together and deployed. Walking skeleton. Daniel says there are two names of tests that you write typically as an initial starting clone. Okay.
+With legacy code, it's a little bit different. I'm not sure what the approval, the approval tests. Is that different from characterization? Or is that the
+exactly the same? So that's what I thought. Great. Yeah. Tim, let me know if that's clear enough or if you want to rephrase the question so I can answer it
+better. Yeah. Let's see what else we got. Let me grab these. I'll just give him a second to chime in. Before I shoot my brain off into different territory.
+These questions. Tracer bullets is going. Yeah. Tracer bullets is going to give you. Let's say you wanted to make sure you can cache. You can, you have an event
+database. You have your, your relational database. You want to have all these things piece together. to have all these things pieced together. We know that
+you're going to need them to do the majority of your work because you have a broad string picture of your architecture already. It's a lot cognitively to be
+developing a feature and be doing like the architecture. So what you need to do is kick off some of your work with just, let's just make sure that the stuff can
+interact with each other and let's find that out as soon as possible, because you don't want to find out later on that you have database issues where it's, oh,
+damn, I'm struggling to write in this database or some weird MySQL error. It's like, you want to get all that figured out ahead of time before you actually get
+into your feature work. So upfront walking skilled. Yeah. See, right. You don't want to find out you've been missing the target the full time. This goes back to
+this game that we're playing. It's a game and our goal here is to score points by getting value across all the way across this thing as fast as possible. We
+want value to get on the edge. And by beginning our work from we start doing our work by actually ideating it and making sure we understand what we need to
+build. Thinking about the broad stroke picture of the architecture. Then we shoot right over here to actually getting it set up. And then we do the majority of
+our work within here. So we're setting up the front and the back, and then we're building up the middle of this thing. And our features are getting developed
+throughout here. This part. So yeah, got it. I got the idea about the vertical slice and how it relates to the walking skeleton and its feature journey. Boom.
+Yes. We got it. All right. What else are we going in here? No problem. My man. For the email E2E mocking email part is assuming that they're deployed as a
+single unit. I'm assuming this question is about. What was this question? Who asked this? Daryl. Yes. Are you asking if this is like the front end and the
+backend are deployed as a single unit? Or are you asking us? Discent. Cause if we really want to go deep on this here, there's so many ways that you actually
+could test that this works correctly. How could you test that emails are actually getting sent? This is such a fricking, I can't believe people's do this, but
+they will literally create like, um, I studied networking in school, computer networking. What we'll do is they'll actually create a SMTT server and they will
+make it work against that or they will intercept the requests within an environment on their Docker machine to make sure that it goes out or it doesn't go out.
+All of that stuff is a mess. I feel like you don't really want to get involved with that. Instead, what we want is just to have a solid testing strategy. So let
+me see. Says, how do you handle a front end and backend are deployed separately? You can't just mock part of the email or. Okay. Let's talk about if we're
+testing this out on the front end. The workflow here is you get an acceptance test. It should be written as close to the language that the user expects to
+experience the system as possible. That same acceptance test. You're going to take that. And you're going to put that on the. System level for the front end.
+With an end to end test on the front end. And you're going to take that same test and you're going to give it to the backend as well. Separate. However, they're
+going to be working against the exact same specification. You only ever have one. Acceptance test. You don't switch the test for different environments. It's
+always supposed to be written the exact same way for the system. The reason for this and Dave Farley talks about this. The reason why you want to do this is
+because you want to assume that you could take this acceptance test. And let's say you wanted to, let's say you were working for Slack and you were building
+like the Chrome version of the application. You would have an acceptance test that describes, oh, when someone gets a notification, this should happen. You'd
+write the acceptance test and you give it to the Chrome, the team that's building the Chrome app, the web app. They should go and do their work based on that.
+And you should also be able to give that same acceptance test to the mobile developers, give that to the desktop developers. And yes, they might validate those
+tests in slightly different ways. However, what is being asked for is the same. The experience is the same. So if you have a new piece of new feature that needs
+to be developed out across your entirety of every single way that your app can be experienced, it's written one time and every team goes and takes that test. So
+that's a part of the answer to this. Now, how to handle a front end and back end are deployed separately. Yeah. So you have the one test. Now, how are you
+actually going to validate the email? Well, you might just do a no-op. And if you maybe don't know what a no-op is, it's just always no operation. We don't, we
+can't actually test that. So we don't actually do anything. Sometimes that is actually the answer because the way that things can be tested is to actually go on
+a layer of depo. So for example, if I was trying to test that an email was sent out and I was working on a backend application, there's a few ways I could
+validate that. I'm going to actually just write some of the Zedler. Ways to validate. So I mean, and this is why I coined subject verification as one of the key
+essentials that we need to master here in order to get good at pretty much all. The reason why I'm getting you all to learn the 12 essentials is so that you
+could do this. That is the purpose of the 12 essentials to do this effectively, at least the physical ones. There's reason for some of the other ones too. So we
+have results. We have communication. And we have state verification that we could do. Daryl, are you familiar with each of these or are you familiar with some
+of these? Awesome. So at the end to end level, we can only really test our system as an input output machine. We're not supposed to be reaching into the system.
+So which one of these three types of verification does that mean we need to rely on if we're doing end to end tests? For the most part, you would imagine you
+can, you can use an aspect of this. For the most part, it's result. End to end to end. What you should really be focused on is I ask you to do something. And
+it's you're testing the system like the way that the user would be using it. So what is going to happen here is if you're testing a backend, well, how do you
+interact with the backend? It's a network for test to a express server. So you're going to be testing. You're going to be doing result verification. Against the
+return data from the, it's going to be, oh, it's a two-on-one response with this data. That really is truly end to end. You're testing it right at the system
+boundary. So we can only really do a result verification with end to end test. Now you, of course, that's, it is possible to do the other ones because people
+sometimes do. However, I do not think it's good practice. I think it's actually bad practice to do that because it begins to really conflate and just make our
+tests super messy. When instead, what you could just do is say, all right, cool. I know that the system works this way. Input, output. In out. And I get this
+result back. Great. So I'm going to, I'm going to treat that as the test worked or it didn't work. Now what you do is you say, great. I'm going to have end to
+end tests validate this aspect for me, but then I'm going to also include end to end tests as a part of a larger testing strategy. So if I really wanted to test
+the email aspect, what I would do is I would probably write a application level test and then I would do some mocking. And I do some mocking against the way
+that it interacts with the system. So if I was testing at the E2E level with let's say a create user. And I could validate that what I would do here at the
+application level inside the application, where my tests are not input output lack boxes, where it's actually more inside of the application, where I have more
+control over the dependencies. This is where I'm going to do communication verification. This is where I'm going to do stuff like that. I'm going to just, this
+is where I'm going to do things like. Specs. Cause now in order for me to do my testing and I have to load up a use case with an email object. So I will do
+email ppispy.getcalls. Right. I don't know the API of length one. And then maybe I could also get the call and make sure that I was called with the correct
+arguments. Because really at this step, great user, I need to set up for a user. I'm going to probably need to pass them an email. Yeah. Spawn. Probably need to
+pass in a user repo. So this is going to be mine. Maybe you can see where I'm going with this. So the answer to your question is it be part of a testing
+strategy. This is what I would recommend doing is instead of trying to test everything at the end to end level, sometimes you have to know things and just be
+like, yeah, we're not going to validate this at this level. We'll validate this at a different level where we actually have the ability to intercept that. So
+you copy that acceptance test and you could make it a little more specific at the developer. And demand it. Maybe we can get a call. validate it there. So yeah,
+exact, you know, and get calls, maybe it calls to, yeah. And this is all programming by wishful thinking. So you could define whatever API you offer in this.
+And I'm using a spy. I like to describe this stuff with spies more than with mocks. And you're going to understand what I mean by spies and mocks and
+differences between that once I put out the lessons in the application guest point, such a confusing topic. We've had many debates here, but I think we've
+landed on some very good categories there, even if this stuff makes sense. Am I getting closer to a fine solution or a fine answer here? I will say other things
+that could be done at the end to end level that I've seen, that I've heard mentioned from others are you very well could do this and use the, for example, if
+the email service that you're using has a sandbox version, we could pass that it, and the end to end level. Well, you don't want to, you don't want this. You
+want to keep your tests up as simple as possible. I don't really love that solution. I, I think this is the best solution personally. And if I was to draw this
+out where we have our, I don't have this being. What is that info? I'll just put this core code and info code. And we have this in the, the straight. I believe
+this is in the straight. Describe that. Yeah. I don't think, I don't think the sandbox version actually works very well. And then level does it. Aha. Right.
+This is more looking like it. So that should say core code. And then this is info code. So you're going to have a testing strategy like set up here. So the high
+value unit tests, the one where I was showing you to do communication verification, you could test create user and test the way that it's going to interact with
+that stuff going at outwards. Like your email service. And then when you do your end to end test, that's just going to cut across everything, but it's only
+going to hit this boundary and see what comes back. We're only testing this and it's going to work across the whole system. See what comes back, but it's
+freaking hard to you using a sandbox would pretty much just be so that you don't spend money every time you run it. It's not so that you can validate on the
+email going through it. Does that make sense? Yeah. Hell yeah. Yeah. All right. So those are some of the main questions. Let's see. Anyone else have any good
+questions? Anyone else? Anything that's causing some uncertainty or how do we feel about this stuff here? The ideal developer workflow. So this is where we're
+going, right? This is the main idea. And once you have this down, it's like, you need to understand the, I call it the ideal developer workflow. Cause ideally
+this is how we would love to work because if we could always work this way, we would just have. Few bugs or as the little, the smallest amount of negative value
+as possible. However, in the real world, we can't always work this way. Also in the real world, sometimes we start from legacy projects. In the real world,
+sometimes we need to cut corners and go a little bit faster. However, if you know that this is a approach that you can, when you have the ability to work
+towards working this way. Yes, this is money. This is value. And this is, I believe how front end architects make a lot of money because they're able to carve
+out a way for you to actually work consistently. Because this is a consistent approach. If you can understand it, you can make it consistent. If you can go into
+a new project, do this upfront design, carve out the walking skeleton, set up the processes and set up the way that everyone should be developing their
+features. So set up the rest of the testing strategy for how you're going to test your React components after the fact, after you've got the core functionality,
+make sure that things just look okay. Write a couple of E2E tests to be like, okay, we got it. Or make those E2E tests pass. Be like, okay, we got it. We're
+done. And then deploy. I know when you deploy, it's going to work. Come on. Front end or back end or wherever. So that's the main idea. I think that's the front
+loaded value. So Daniel, I was going to voice a worry around developing use cases with all respect, knowledge on how they would be used by your front end
+library framework. But I think this would be handled by testing the E2E bit. Yeah, exactly. If you start with the walking skeleton, hook everything up right
+away. You want to know that ahead of time. Can I, could I even? So you might build out like a shitty component to just make sure you can have these seasoned.
+Okay. I got hired. I would say another thing from the front end, that's really good to set up, make sure it works is reactivity. So I drew out that picture
+here. I'll go through this a little bit here. I'm going to go through this. One thing that's awesome about this is if you're familiar with CQRS or our CQS, if
+you're familiar with read databases and write databases and reading and writing. Separating those code paths. So what you'll notice is this looks a lot like
+that because it is. That's a really strong design principle to separate your code paths into read and writes because then you can reason your architecture and
+data flows in one direction. So yeah, you want to have reactivity. I would say when you're building out your walking skeleton, it's good to know. Okay. I got
+reactivity set up. So we know that's working. Now start building features. Done. I'm blessed. I like this stuff too. A lot of developers have asked me, well,
+how do I organize my state? Where does global state go? What is global? Well, how should I test a state? Where does state belong in my front end? Imagine a
+database, right? Your front, imagine your front ends database is like a cache kind of in your API. Your axios calls, or if you're using graph QL, graph QL is
+like my sequel for front end. It's going to do the work to get the data and stuff for you. And it's going to store it in one place. But as soon as it gets
+stored, you want that stuff to get chopped into global state. And then from that global state, you're going to transform that data and compute what your domain
+models are. And you're going to compute what your view models are. And as soon as your view models get updated and hydrated, your components should be
+subscribed to that. And then they're going to get their initial state. Now, when they get their initial state and you start messing around with your components,
+well, that state's going to change independently of the view model state. So that's how you can have forms and you can have toggles and stuff like that. Because
+you don't want toggle state. You don't want toggles and things like that floated up here. Do you? No. So we have a really clear separation of where state
+belongs. It's either it's global and it gets translated into domain and view or it's component state. It's those two really. And then as soon as you decide, all
+right, we're ready to execute an interaction. We're ready to call some functionality. Let's make something happen. Great. You'd say, I want to create the to-do
+or I want to submit the form or onto XYZ. You do that from the component, it calls a controller. And then the controller is effectively the exact same thing as
+a backend use case, high value unit test. It does the work. And we just divide the responsibilities up so that once the request goes out, updates the cache and
+everything flows back down reactivity wise. And that's the way that works. One other part of this that I really love is let's say you're working with a super
+complex front-end application. You're some of you are. Lucas is working on, he's got some drag and drop stuff going on. Let's say you're building a digital
+audio word station. I always love to use that example. Or you're building a drag and drop call flow app, which is probably one of the scariest things I've ever
+worked on in my life. On applications like that, you have a lot of domain logic on the front end. And in my earlier days, I used to say, oh, domain driven
+design doesn't really belong on the front end. Our models on the front end should be, our front, our models on the front end should be, what do you call it?
+Dumb or just mostly presentation. Yeah. Most of the time. However, a lot of the times you're dealing with more than just a get data and show it on the screen
+type of app. For those types of apps where you have a lot of logic and a lot of decision-making logic on the front end, you need the correct models for that.
+And that's what the domain models are. Now, in this example, I'm talking about to-do's. That's not really, there's not a whole lot that needs to be known about
+a to-do other than the fact that it has a shape. It has some validation logic in order for you to create a to-do. You need to have a valid length for the
+to-do's name. Probably that stuff needs to be enforced for sure. However, on other examples, other scenarios, like a drag and drop app where you're creating a
+call flow. Maybe some nodes can't get dragged in certain places on the board. Maybe if a digital audio workstation, maybe you're not allowed to plug a certain
+type of plugin into another one. Or maybe you need the ability to hook up, think of like a guitar pedal or a guitar board. Pedal board, where you can hook up
+like four, five, six, seven different pedals and they all feed through each other. It's incredible. All that stuff is domain logic and complex front end logic.
+And that's where you're going to need to use more complex patterns for those types of problems. And they do happen. So. Sometimes you want to front load that
+logic as a way to speed up feedback. Yeah, exactly. And in terms of feedback, I believe what you mean is you don't want to have to see an entire network request
+go all the way to the backend in order to know if something is valid or not. Yeah, exactly. My man, Daryl. Yeah. It's so huge, man. I love this. European
+friendly time. I forget what time y'all are. I used to work with someone who worked in France and I was not running the same way I live and I was. I wonder how
+many of y'all are in the. Are you a P mashing? Shit. I wonder if I could check that. If I knew that I would actually probably do when I use it. It seemed like
+it was way earlier. So I will say these are some of the main things I wanted to talk about today in this Q and A. We are at seven. Just peek at us. Yeah. Good
+stuff. You know, what's crazy is that my recording of this quick time is at eight gigs. Apparently this is an eight gigabyte recording. So I'm going to have to
+go and cut this down. Yeah. Loom bro. Loom. I'm paying for you. What's going on here? That value video I was telling you about earlier. The one that I put on
+the, the original landing page that when I first recorded that, I believe it was 60 gigs. It's like, oh, nah, not like this. That's five gigabyte. It was the
+video editor to do the video editing, edit together. So yeah, that's the main stuff I want to talk about. So I'll take maybe five more minutes. Oh, I see.
+There's a good question here. I'll answer that question. And then I'll spend a few minutes here to just, if anyone else has anything else they would like to
+ask. Now is the time to skits. And I'm just going to quickly jot some of how we'll wrap this up. I'll wrap up with final questions and what to expect. That's
+seamless. All right. So how do you use controller tests use cases when using Redux NGRX? So I don't use NGRX too much. Do you remember in Redux or something
+called like thunks? I think it's called Redux thunks or Redux something. I can also just take a look at NGRX. Not just like Redux in angular. Yeah. Reactive
+Redux. Right. Yeah, exactly. Okay. So what we are looking for here. Let me, this, and this is a perfect example of, I like this. This is such a great question.
+This is a perfect example of how do you architect a front end app? Here's my mindset. Here's my mental models that I'm using to answer this question. All right.
+NGRX. Your question is how do you do your controller test use case tests when using this? Great. You're aware of what the test we want to do is I use case
+tests, controller tests, high value use case test, application level tests, developer tests, all these different names we could use to describe this level
+three. That's another one type of tests that we want to do. That's what we want to test. How do we do that using this tool? Great. So that's also another good
+question to talk. I'm going to just toss that in here. Toss both of these questions in. Boom. So here's what's going on in my head when I see this stuff. I'm
+like, all right, great. How do you normally do it? Well, how, let's see how they would see. So let's go up to. What's the Redux docs. What I'm going to look for
+in the Redux docs is I'm going to look for what seems to be a feature. And them telling me how to do this. I want to see how they're like, how you need to even
+connect this thing together. Okay. So you create your store. You have your, your reducer. This is what's going to describe the state changes. So the reducer,
+what's this going to be in the architecture? The reducer is effectively the cache slash gateway. It's going to be within here doing the work. That's what that's
+going to map up to. And the way that I know that is because I'm just thinking, what are the responsibilities of the reducer? And I'm like, okay, I know what
+that is. And where do those responsibilities tear stereotypically live? Stereotypically that lives. That's an interface and responsibility. There's an
+infrastructure line. Okay. Nice sort of diagram of that. There's. Awesome. Okay. You can subscribe. So that's reactivity create the store. That's all set up
+store.dispatch. This is all still just about updating the store. Nothing really about features yet. So really this is all telling me, oh, it seems like this
+tool, the responsibilities, what are the responsibilities of this tool? It seems like it doesn't have anything to do with features at all. Actually seems like
+the responsibilities of this is just about the store and reactivity. So what I would do is I'm really clears things up. Okay. Redux. Uh, what does this do? The
+doings or the knowings? So it knows. Seems like it's able to know what the global state is. It seems like it's able to provide reactivity to the state. And
+really that's good enough for me to categorize this as an interface or good enough for me to categorize this as a place to hold global state. And it also
+provides the ability to change state. Also provides, I believe it provides the ability to get the state to query into state. And that's what I would want to
+know. How to query into the state. What does that call? The selector origin? Query. React. Redux. State. Querying a Redux store. This looks old. It's Adams.
+Yeah. I've got a selector. So since I can still have that. Right. I don't really know exactly what RTK query is of my leaves though. So selectors. Sure. You're
+saying it's that I haven't seen it. Is that what you're saying there? Hierarchical subjects. I'm thinking at a level of abstraction higher and are actually
+lower from a more first principles level, I'm like, okay, what is the object stereotype? It's an interface. And I'm also thinking, what are the
+responsibilities? I need something that's going to behave like a repository. That's what I'm thinking. Selector. Great. Create select looks like I need to.
+Okay, cool. Uh huh. So how does this work exactly? Is this, is this reactive? Like I'm going to get this over time. Books with subject selector and creates.
+State. Set. Results subjects. Yeah. Okay. So it's reactive. I don't really like that. And I do like it. Okay. Right. I see. So this is good in terms of this
+reactivity. What's this going to help me do? Again, if you know, the stereotypical architecture. Great. That's going to help me accomplish this. That's going to
+help me sync up my view models. Looking at all these different things and saying, what is this going to help me do? Because I have a stereotypical architecture
+to compare it against. This is a stereotypical architecture. All right. Great. Selectors are for. Developing reactivity to key parts of the cache so that I
+could keep my view models in sync. That's what that's for. That makes sense. Selectors. And remember when I said there's something called the dependency rule,
+which I said that your components shouldn't be able to. Your components should not know about. The cache. They shouldn't know directly about the database. The
+thing that's acting as the database. A low level dependency or a inner layer concern is not allowed to talk to the outer layer concern directly. It's not
+allowed to know about it. That's why I would say it would be very bad practice for you to take a selector and have that in the same file as a component. That's
+how I would make that argument. So where does the selecting belong? It belongs within the element of the presenter. Facade. See you later, Daniel. Facade. I
+don't know. To me, a facade is a conflated term. It depends on what exactly we mean by that. I would just go by a lot of different names. But the way I would
+think about it is, yeah, it is just preparing the data. It's protecting the data. It's preparing it. It's getting it in the correct shape. It's holding the
+responsibility of preparing the data to be in the correct shape for the component. Because the component shouldn't take on the responsibility of preparing data
+to be seen. It just should get the data to be seen. You need something else that has the responsibility of preparing the data to be seen by the... See, like,
+this is really the level of granularity you need to be thinking at in terms... Like, in order to do this level of responsibility-driven thinking. Thinking at
+the level of responsibilities instead of just thinking at the pattern first level. It looks like this thing talks that big. Why? I've just seen it do that.
+Okay. Why? Okay. Where are you getting that from? And what I found in my study of this and when I found looking at the oldest book I can find... Object design,
+responsibility-driven design and seeing that pretty much everything else seems to have floated from that. And that all of the architectures that we talk about
+and almost everything else seem to flow from this. Like, okay, now I have a starting point. And now I know where responsibilities belong. Another word to say
+that is I know where concerns belong. Concerns, responsibilities, a similar idea, concept. So when you talk about separation of concerns, all of these ideas
+start to make more sense. Separation of concerns. Single responsibility principle. All of these things make no sense at all, unless you have an understanding of
+what is stereotypically a single response. What are the things that should be singularly responsible? Those are the object stereotypes. Right? All, none of this
+stuff makes sense unless you can compare it against that. Just to wrap up this, I love these questions. To wrap up this, my thinking here, right? How do you
+test this? You just keep it. We keep it away, first of all, from your. Let's go back to the image. You're going to do your use case tests here. So what's going
+to happen is I need, if let's say I need the ability to get a to do by ID on the fly from my cache. If I need the ability to do that, that's what I'm going to
+be looking to see what I could do as Redux. But I think I'm going to have to go into that a little bit more detail later on. I'm just noting the time here, but
+this is a really great question. So we should probably do this in the, in the chat, but yeah, you got to keep this separated. If I just keep to go back to this
+image again, that I'm hearing. This is the way we want to write our tests. So just imagine that we have this test and I can say to you, yeah, but by the way,
+we're using Redux. That would be fair to say, looking at this test because they would be completely separate. It wouldn't really be there at all. We would want
+to write a different type of test later on. And this would be an outgoing adapter test to test that we're actually making sure that the cache is getting updated
+correctly. So we will want to test those things. Like when we call our backend and we hydrate our Redux score, we will want to test that correctly, but that's
+not a use case test for a use case test. We just, as Tim musically says here, keep them separate. It's not important. Does that make sense? Hopefully it does.
+If not, we will go into it. Awesome. Lessed. All right. Let's see. What do we got? One more question. Then I'm out of here. And I'm, who am I doing this? Do I'm
+more of this? It was actually. Okay. What do subject verification types? Was all communication. And it was state map. How do they map to the different guest
+points? Yeah. It's not a methodical mapping, but I will tell you which ones we predominantly use at each of the guest points. And if you understand that each of
+the guest points is an input output system. I just go back to this image and they're fine. We've, we've drawn this out for maybe one or two of these. Yeah. So
+the state lists one, it's literally just data in data out. There is state does not hang out. States not loitering in here. States not hanging out. Inside here
+saying 15 bucks. Look, man. You guys seen it? Yeah. Anyways. Yeah. States not hanging around inside there. It's going in. No, no. So the way that we test this
+is there's only one way to test that. That's result verification. So that's level one. So level one. Stateless. We're going to be doing result. This checking
+the data, checking the output, input output. state full, right? This is going to be an easy one. By the way, you may use a combination of these. So some element
+of you working on state full systems, if you do, if you had a new chess game and you said game dot, let's say, I don't know what's an input out. What could be
+an input output here? Really? This is not, this is not going to be an input output at all. This is going to just state does hang out state does loader. So once
+you make the game and you start operating on it, the game changes. So you have to do state verification. You have to do stuff like game dot. Well, get game
+state. And then I'll give you some results. That's the game state is. So you have to inquire into the model here. And that's why you have to do state
+verification. Result verification. You find you're mostly going to be doing this for problems that are transforming data. You're validating data. This is going
+to, of course, state lists. You're going to mostly find this with like utility classes. Right. And funnily enough, you're going to be doing this on end to end
+of it, which is weird because it's the level that has. Literally everything. It feels weird to say that because, yeah, it's the level that encapsulates
+literally everything you're doing in your system. But point of this is it's an input system. We're treating it as a black box. We're not, we don't care about
+what's inside. We care about what comes back and what we're looking at after performing some sort of after asking for something. Hey, what happens when we put
+this in? This comes out. That's result verification. The verification is, yeah, this thing is changing and I want to keep track of how it's changing. So we're
+going to be doing that with our stateful tests. So this is going to be, yeah, if you have an entire object that's containing something that could change over
+time like that, that's one example. Better examples of this in the wild. And I'm probably going to adjust the way that we've designed these assignments to level
+two assignments to be more aligned with this. The other forms of stateful testing are, you're going to be doing this with your entities, value objects, right?
+Because let's say you create a student who's created your student correctly. And then you want to say, okay, we've got that name. So you're doing state
+verification here because we've created a student. Student now has some state in it. And then you're getting the name. Mob. So state is hanging out in level
+three. Let's move on. Application. This is, yeah, this is such, again, this is my favorite guest point because this is the most valuable and quite literally
+life-changing, at least from my point of view. This one you're going to be doing. And here you could actually do a mixture of pretty much all of them, but the
+predominant one here, the one that gets added is communication verification. And I don't really think you're going to be doing communication verification on any
+of the other guests. If I really think about this, no, this is the only one you're going to be doing communication verification. And why is that? It's because,
+oh man. Cause now what we're working with is something called indirect inputs. And indirect. Okay. So when we were drawing out our machines earlier, our state
+machines, or sorry, not our state machines, our systems. That's such a bad box. Depressive boss. It was input output. We have data go in and you have data go
+out. Great. So the inputs are clear here. The inputs are actually quite direct. It is a bomb. It's a palindrome. Yes, it is my band. Yes. Super clear. It's
+palindrome. It's palindrome. Okay. Very clear. Stateless. It's also still very, very clear what the inputs are. You are, you want to create a student. So we're
+going to pass in all the props to create a student. And what's going on. This is called model here is creating a new one. That's what I'm doing. And you're not
+going to get anything on the output. You're not getting anything until you go. Yo. Yeah. What's in here? What's in your state there? Oh, got this. So what's
+happening here is you're being like, bro, what's in here? Let me see that. Okay, cool. Got that. Now, the one that makes this thing all freaking interesting and
+messed up. This is where it gets way more complex is that the application level, what happens is when you're creating this model. Let's see if I can draw this
+out. Pop it. I'm going to draw it like this. Wallet. And try this. You're going to have inputs. And you could have some output. And let's get a different color
+here. What's going to happen is you're going to have another input. That machine. And another input. Those should all be different colors. And this is going to
+get injected here. And that's going to get injected here. And that's going to get injected. Okay. So if you're doing create user. And this thing needs to. Let's
+move this down a bit. This is my best way of getting it. Let's say, what is this? Mail service. This is actually not. We would do this afterwards in create
+user. We would want to do this as a song on that. Not the best example. All right. And let's say maybe this is a database. Let's use a input. And what might
+this. Maybe this is a cache. Let's put it. And this feature is called create user. So let's say maybe what you end up doing here is you say. I'm just going to
+design the act. Say. Results. Close. Create. Use word dot. Beat. Error. Exit. V pass. And this is probably going to. Listen. Permis. So if you did that. You
+actually are going to get some results. Right? This is, could be either so many different ways we could model this. I'll give you an example of a way I would
+model the success case. Maybe you could model it like this. Maybe an object. Be a, it could be wrapped in a result. And maybe that's results. Is going to be.
+Success or failure. Yeah. This could be just like a thick object here. This is actually like. A legitimate object. Results. Right. Use it. Success. Use it.
+Okay. Do it like that. And maybe what we need to do here is we need to say. Result dot. Is success. Then if it's successful. Then you can do stuff with the
+success object. So here, what we're doing is. State verification. Notice that because we're reaching into something here. But what's going on right here is
+we're actually doing. Result. Actually, no, we're not doing a result. We're getting a result, but we're doing state verification against the results. What would
+make this result verification? Sorry. We're still not really doing state verification here with this. We're doing state verification if we do this. Yeah. That's
+more. And. You could really just say that if we really wanted to get pedantic about this to be defined. In a way you could say that's who's all, but now we're
+just doing. Now we're just doing this. So this is more about communication and state verification for the most part. Okay. Now, what about the communication
+verification? Let's say the scenario, what was I trying to test? I wanted to test that. This user has never been created before. Never attempted to create this
+user first time. And it's a success. So I'm going to expect that the cat spy. I can spy on the cash there. I can't calls to let's say the method is. This cast
+has item. Maybe I want to make sure that this was called once. And calls to have one. But maybe I also want to make sure that it was actually valence. Like
+there, it was a cache miss and the, the object didn't exist because how could it? Because it has the user has never been created yet. So I would want to verify
+that. So what's going on here is this is communication verification because these things here. Right. Right. And I can continue to go on with this even further.
+Right. Just get right on the phone. Could continue to go on a little bit further with this and I'll just write one for user. So let's expect that this was
+successful. What might be successful? Maybe. If. Calls. Maybe if I tried to call save. If I called save, that means I got to. Be able to call save and in this,
+which meant by. Figures. If I tried to save it, then yeah. That's good. The system is being interacted with in the way that I eat. We're doing the command like
+behaviors that we should be doing in order for the system to behave correct. So these really are the indirect. Outputs. So these are, can you see how these are
+the outputs of the system? I'm changing state somewhere, but that state is changing within here. It's changing. Could we be changing within here? Are we
+changing within here? Or wouldn't be changing within here? Or wouldn't be changing within here? So that's really how communication verification is happening
+here. And that's why these inputs are, or these outputs are indirect. The messed up part about this is that this user repo is both an input and an output. This
+is so confusing, man. This is why testing is so hard. This is why it's all explained. So in the pseudo code for create user, something we're going to need to do
+is let's say this is the pseudo code create user. And let's say we have the exec and input data. All this was the chance to do that. So since this is not past
+API, so it was supposed to do that on this object, we're probably going to have us user. It's going to be, it's going to be use case. Name of that. Keep that.
+It does that. It's going to be injected with user. Dependency injection. And so I have access to the user repo. That's what I'm communicating here. I'm also
+going to have cash. I'm also going to have mail service just for the sake of this right now. I'm not doing. This is how it's made to be an input because I'm
+injecting it. However, it's really being treated as an input. The cache is also being treated as an input as well. Mail service is perhaps the only thing that
+wouldn't be treated as an input. The reason why this is not the case is that it's not the case. The reason why this is treated as an input is because if I
+change, if I could actually set up the way that this user repo is set up. If I can be like, okay, I need a user repo because I know that this create user use
+case is going to need a user repo. Well, if I'm solo. But if I could set this thing up and I could knew it with, let's say the user I'm about to create. I could
+give it the ID of the user I'm about to create. I know that's going to make this test fail to create a new user if the user already exists. So in that way, this
+is where the input actually lives. And it's so indirect because it doesn't actually live. It doesn't actually go directly in this input. This input. I can just
+change a color of this. Damn it. Can't. Here's all the. Yeah. I've smarted you. This input really truly is here. It's so indirect, but if I change this, it
+changes the way this entire and use case works. So that's why that's communication verification and that's indirect. Let's direct indirect inputs and outputs.
+Does this make sense? I've lost folks. It's better to change the indirect input or mock response. Okay. Mocking your response. When you say better, what do you
+mean? Is it better to change to the indirect app? Not sure what you mean? Because what we're doing here actually is this would be a mock object. This would be a
+mock object. This would be a mock object. This wouldn't be a real object. This is not real. This is something I could control. And I actually want the ability
+to control this because if I control the indirect inputs are, then I could run my code down so many different edge cases. This is how I set up the state of the
+world where the user already exists. This is how I set up the state of the world where the user has been banned. This is how I set up the state of the world
+where edge cases. User exists. How do I set up that? Well, I put the user. User regent. Now, if I need the edge case for success. Have, don't have user. What
+else do I might have on a test? Email already taken. Email already taken. Or like username already taken. By other members. Right? So I'd set it up where some
+other member with a different email, but the same username exists. So then the test fails for that. Do you see there's tons of these think about discord. Think
+about all of the applications you're using today. All of the fricking edge cases are probably existing one. So many. Now imagine you try to test all these edge
+cases from the end to end level. Yeah. It would take forever because it's going through databases. It's going through all that stuff. And you can't really
+easily adjust the inputs and outputs. Here you can adjust the inputs as like a pure object. And that's what makes it such a powerful guest point. Of course,
+this is to be combined with other forms of tests as a part of an entire testing strategy. You don't want to just do this at home, but it begs the question.
+Well, what if I use user repo? I do all these tests with a fake user repo. How am I going to, what's going to happen when I actually put in like a real one?
+Like I'm going to, isn't it going to break? What happens when I swap in on my real user repo for like, after all this time of using a fake one? That's when we
+do something called contract test. And we do that in the outgoing adapter guest point. That's where we just define the contract of what a user repo is. What is
+the user repo? We define all the things that it could do. It's save. Okay. Get by the, this, that we define that. We have all those things very clear. Then we
+write the type of test. If we have a user equals five. That implements who's a repo. And if we have a fire base who's repo. This is the one that we use in
+production. If we have that. Then what we need to do is we need to write the type of test. The tests, both of these at the same time. And it keeps these in
+sync. It keeps, it develops a level of parody. So if I wanted to test that I could save properly instead of testing this independently and then testing that
+independently. What I would do is I would say it sure. Save. And you're like this. I'm going to do this. And then I actually want to have an array of all user
+repos. For each. And then I'm going to write my tests, my expense against all of them at the same time. So I'll never just test one of them in isolation. I will
+always make sure that they're all being tested. And this test is going to be expensive, of course, because it's going to talk to a real backend. And it's going
+to talk to the fake one at the same time too. But it's going to keep them all in sync that you have, so that you have confidence to know that you could swap one
+out for the other. This is. Near. It's a repo spy. Oops. And then, I mean, this might be like, then. Fire this. This might be a while and I could do this. Or
+some config. I'm below. Okay. So that's a contract test. And we do this at, this is a outgoing adapter. Guess point four. We need to do that. So it's better to
+change to the indirect input or mock the response. I'm not sure if I've helped to answer that question just yet. I think the answer. Yeah. I'm not sure if I
+didn't fully understand the question. Okay. Contract tests. Yes. Contract tests are really the key to this here. How are you going to be able to go and do all
+this work against fake stuff? This is why when people say, stop mocking. Don't mock. Mad cuz bad. You got a mock like this. You have to make sure they stay in
+sync. And yeah, contract tests are the key. How would this mock be implemented? Is this just like an array? Yeah, you got it. Boom. That's it. The only
+difference is when you do this. and as soon as you implement use the repo, you're going to have whatever other parts of the contract need to be added. You're
+going to have to take that in sync. So you could use a spy to do this, which is why I really like you using the contract. Is that what I like to do? Does that
+make sense? How would the mock be implemented? What could be implemented? What are the ways that the sketch does have to make sure they stay in sync? How would
+the mock be implemented? Is this just like an array? Yeah, you got it. Boom. That's it. The only difference is when you do this. And as soon as you implement
+user repo, you're going to have whatever other parts of the contract need to be added. I think this is way better than using like testing tools, like Jess
+whatnot, because when I use a spy, I know right away. Ah, Hey, I added a new part of this contract. I need to make sure it's implemented. I can actually have to
+sit down and write my code myself. Yeah. I don't know. Like when I use just or something like that, by the way, I call me Ruby and I'm going to go to the next
+one. I'm going to go to the next one. Or something like that, and by the way, I call me writing these spies. I just call this handwritten mocks. I call using
+like a library. I just call those mocks. So I call spies, handwritten mocks. I prefer these most of the time, but you could use libraries as well. I just, as
+long as they will yell at you when you've added more parts of the contract and you need to go back and implement them. However, I know sometimes people write
+their mocks, literally write in their test files. And then you're just faced with a ton of duplication. So I would just prefer to just create the actual
+handwritten object instead. Yeah, that looks good to me. Boom. Just like that. And you're going to do this in the application guest point. I might as well call
+this out right now. Cause you're going to be doing this for the application guest point challenges. You're going to need to turn this into a builder as well. So
+where did I start piecing this out? I'll just grab this. I think I might've put this in one of the channels. I don't know. It's channel. I'll just show you.
+Fake user repo. Got that. Let's make sure it implements this man. Figment driven design. It's crazy. Huh. Got them. Category theory around like fakes, spies,
+stubs, mocks, XYZ. It's all. Another way to just avoid all of that is just calls in memory. Who's everything? All right. We'll call it that. So you're going to
+want to get a lot of control over this object and we're using it. So right now, if all we're doing is just testing the way that it's being. Yeah. Like use the
+command, like operations against it. Are we calling save? Great. However, we do want to be able to use this as a stopping tool, as a setting, as the indirect
+inputs. And to do that, yeah, you're going to want to, and here, yeah, initial. Let's say this. Well, and this will pretty much do it. You can make, you could
+design the building of this to be a lot easier. You can have a way nicer builder. So you can actually have our, this is a builder. Do stuff like that. Or you
+could just say, let's. Random user. It may be kind of like. Amount. 10. No, this is just a powerful tool. This keeps your tests up incredibly domain driven so
+that anyone could just look at what it is you want to happen here. You can make it happen. You just have to do the code inside. What I've struggled a bit in
+this in-memory repos is the queries. For example, I'm creating the get user by ID could be a pain if the user received is. The queries. Do you just save plain
+objects? Yes. Although if you need to use a mapper of some sort, you want to create the same as close as you can, the same level of parody that's required. Now,
+if you're dealing with, if your domain objects are not plain objects in general, you want, first of all, you want to be starting with plain objects. So if the
+domain objects you're working against are coming straight from the database as was an active records from, or RM. Then yeah, you need to convert the dependency
+relationship there before talking about back. And you would want to begin the process of carving out what is a plain object. You would need to start carving out
+domain objects in general. So are you like in this situation, in this scenario of your, are you, are your objects not plain? Are your objects not domain objects
+with like RM objects? By the way, it is getting late. If anyone needs to cut, feel free. I won't be offended. Yeah. Okay. Great. This is, I see what you're
+saying here for your queries for your queries. Okay. I understand. So yeah, we have the read and write path. When you're doing your queries, you always want to,
+your queries should be as simple objects as possible. The queries, you don't want them to actually be domain objects. Model that here at the front end stuff.
+The only time we ever use domain objects in general is to do the writes. I need to draw a relationship here where this to do's toss the repo to get the domain
+objects. Anytime you're doing reads, you always only want to be just going straight to whatever your data store is to create the shape of that object as simple
+as possible. Yeah. Cause you can run into mapper help 1000%. And this is also has become incredibly clear to me when I've done event storming. Because when you
+do event storming, you do any sort of process modeling. Cause there's different flavors of events. Darn it. There's the big picture. There's the process
+modeling, which is more low level. If you have a specific scenario, you want to see how things will interact. Regardless of which one I've done. That will show
+you that will expose to the minimum essential required input data for a command. It will also expose to you if you put the views in there, the absolute minimum
+essential output data for a query. So instead of returning, if you need to generate a view, if you need to do a query, you don't want to be getting the right
+object to display the query. Does that make sense? You don't want to be getting the domain object. Then splay that into the object for the query. If you go
+straight to database, design the view object. Let me show that. Hmm. It's all about input output systems. I'm telling you. It all starts with these couple of
+little things. Input system, output systems. We start with some of these things and just they blow up into just, oh my God. Yes. We're going to do event
+storming in the theoretical. By the way, this weekend, what I'm going to be doing is trying to get the entirety of, I want to get some more clarity on the line
+for everyone. Cause I'm going him. So I'm meeting with the community crafters tomorrow. I think I have to see exactly. I got to pull that out. I'm meeting with
+them tomorrow, but we do have a little bit of a breakout room. If anyone's around this weekend, I'm going to be around just in the paint. I mentioned this at
+the beginning of this call too. I started working as a productivity coach, time coach, productivity coach. So yeah, we are just filing it off. Right? So yeah,
+we'll see this weekend though. I do want to get some clarity on the front end project we're building and the back end projects that we're building. So what's in
+my awareness right now is getting to the end of the physical and getting the projects done. So I might reach out to folks asking about things you would like to
+see on the front end. And if you all, if any of you have things that you're like, damn, I actually really need to see how this looks like in the front end or
+things you really want me to pay attention to. Swap that somewhere. I could see it because I'm piecing this up. Swap that somewhere. All right. That should do
+it for today. One other. Yeah, actually quick comment. The back end, actually front end and back end. It's been mentioned to me that we want to talk about off.
+Make sure that we bring that up. That's like a part. Yeah. That's like an essential thing we see all the time. So I'll make sure that we talk about off on both
+front and back. Anything else? Please let me know. I'm going to create a thread. I'm going to announce an announcement and have the places for us to talk about
+those things. This is awesome. Can't wait to put this one up. This is a great Q&A. Thank you. All right, everyone. You know what I say. It's a master. I'll see
+you soon. Peace, lads.

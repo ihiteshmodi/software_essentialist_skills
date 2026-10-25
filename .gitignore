@@ -3,6 +3,9 @@
 !/README.md
 !/agent-skills/
 !/essentials-lab/
+!/source-material/
+__pycache__/
+.mypy_cache/
 node_modules/
 .DS_Store
 .data/

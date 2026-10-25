@@ -1,0 +1,108 @@
+Also, you see, thought works by abstraction. What do I mean by abstraction? Well, a lot of Chinese characters are abstractions. If we take, for example, the
+Chinese character for man, it is written this way. Now, that was originally the head and legs of a human figure, something, you know, like this, when we draw an
+abstract figure of a man. Everybody knows that's a man. But as a matter of fact, it cuts out a great deal of man. This figure cuts out all the details and gives
+us a simple image which we can grasp all at once. And we have to do that in order to think so that we can use a series of very simple images or grasps of the
+world, and these are abstractions. And it is fundamentally in terms of abstractions that we think. What's going on, crafters? Khalil here. And in this video, we
+are going to talk about abstraction, one of the main metaphysical essentials that is foundational to the other ones. But one thing that's important to make note
+of is how much are you aware of what is actually going on behind the scenes of these things? When you start a cycle, how much are you aware of what's going on
+inside of the machinery? How aware are you of what will happen if you pause in the middle of your wash and you leave it open? Do you know what the machine is
+going to do later on? Maybe not. And with respect to this remote here, how aware are you of the encodings of the specific sequences of zeros and ones that your
+remote controller is going to emit to signal to the television receiver that it should turn on? Or is just you pressing the button power good enough? So perhaps
+it should become clear that what's going on here is we're using and we're maneuvering the world with abstractions. And these are conceptual models that are
+going to give us a good enough understanding of these inventions that are a lot more complex behind the scenes. So what I've got up here on the screen is pretty
+much the public interface on the left-hand side. We have what a human could do, which is just start cycle. And then behind the scenes, we have all of the
+low-level steps and complexities of the implementation, which are abstracted away and are known by the developers. But this is not something that needs to be
+known up front. Same thing with the television remote. Pretty much all you do is say, turn on TV, and you just do that using the power button. And this is what
+makes abstraction so powerful. It's a way to tame complexity, which is the default state of the universe. So never forget that you yourself are abstraction
+designer, and a large part of what you're supposed to do as a developer is to tame this complexity. So this is the first essential. It's one of the metaphysical
+ones, which means that it is one of the most important ones. And that's what we're going to be getting into here. So in this video, we're going to cover what
+abstraction is and why it's so important. We're also going to talk about how to use abstraction to tame complexity by decoupling a goal into theoretical and
+physical parts. And then we are going to go over the layers of abstraction, i.e. the abstraction prism. And we'll quickly discuss the stereotypical architecture
+and see how that fits in. So first of all, what is abstraction? Maybe you are starting to get the idea here. A lot of people struggle to understand abstraction
+because it is abstract. There's a number of ways we can call it out. We could say this is the difference between the essential complexity versus the accidental.
+This is somewhat what happens with upfront and emergent design. There's theoretical and physical. There's what versus how, declarative versus imperative. And we
+can continue to go on with this. And all of these are pretty good and point us towards the right direction. But ultimately, I will give it two definitions that
+I think matter the most for us. And the first one is that abstraction is the root principle of design, where design is about discoverability and understanding.
+And if I take you back to this diagram here, you might remember this from earlier when we were talking about design. These are the two gulfs that you typically
+cross anytime you have a goal and you need to do some action in the world and then get some feedback and understand, hey, did I actually achieve the thing I
+wanted to achieve? Did that work or not? The first thing that we usually do is begin to take in our options. And that's what discoverability is all about. So
+what does this have to do with you as a developer? Why am I showing you this again? As a developer, you have key developer use cases you need to carry out. As a
+reminder, they are discover, understand, add, change, debug, test, and plan features. So you're doing feature development. As an example, imagine your goal is
+to add a feature and you just need to add a new feature because that's what you need to do for work. And imagine you're looking at this folder structure on the
+left-hand side for one project and you're looking at this folder structure on the right-hand side for a different project. Which of these is going to be easier
+for you to figure out how to add your feature in? Is it going to be the one on the left or the one on the right? If you guessed the one on the right, I would
+say, yeah, you would probably be right because it is a lot easier for us to look into the folder structure here to begin to discover what it is we would like to
+do next. Again, this is coming back to those two gulfs, trying to make discoverability and understanding a lot easier. And yes, on the left-hand side here, we
+have a bunch of different technical parts. We would call this packaging by infrastructure. And on the right-hand side, we would call this screaming architecture
+or packaging by feature, packaging by module or packaging by domain. Regardless of what we call it, this is always going to be a lot easier for us to carry out
+our key developer use cases because it's in alignment with what our goals actually are. And then, for example, let's say we needed to change a feature. You need
+to go into your code base and figure out where a feature is, what it's currently doing, how to change it, how to verify that it will have worked. And on the
+left-hand side here, we have some code. Right-hand side here, we have some code as well. Which of these two would probably be easier for us to figure out how to
+change a feature? On the left-hand side, we have to read through everything that's going on here. And it's very technical. It's also very nested. So there's a
+lot of work that's happening here that's a little bit ugly and hard for us to trace. And on the right-hand side, at the very top right, what you're seeing is
+what's called a Gherkins file. And this is something that will actually document specifically the feature that we're trying to achieve. And it will allow us to
+write out the scenarios. And then underneath that, we have something called an executable specification. All of this stuff, by the way, we will be getting into
+in the best practice first phase of Craftship. But here, what's going on is we have this feature file. And the feature file informs what needs to live in this
+executable specification, this test file. Now, if I had to argue which one of these would be a lot easier for me to go to in terms of how to figure out how to
+change a feature or to add a new scenario or add some edge cases, I'm going to say it's going to be the one on the right-hand side, specifically just because I
+can read through and almost drop in like a book or like a table of contents to figure out where the thing is that I need to change is. And I could read at a
+very high level what it is currently doing. All of this is abstraction at play, and it definitely influences the way that we write our code. The other
+definition I think is really good for abstraction is to think about it as separating the theoretical from the physical. So what I've got up on the screen here
+is something called the abstraction prism. In this, you can see the majority of the theoretical aspects we want to get clear on from the very top. And those
+aspects are actually going to influence how we write code. So what you can see here up at the top are all of the theoretical questions and things we want to get
+clear on before we write code. Who are we helping? What will we help them achieve? What are they going to be enabled to do? And this can continue to go
+downwards and downwards until we ultimately get to code, and then we could write code from there. And this abstraction prism is so powerful that I often just
+think back to this and use this in terms of answering questions to think about how to structure out my code and how to organize things. But if we're discussing
+the theoretical and the physical aspects of this, there is a lot of theory that we need to get clear on before we write any code. How would we go about
+decomposing a problem? What we would probably do is we would want to get very clear on the theoretical steps that would have to happen firsthand, right? If you
+had to wash your clothes or you had to go to the post office or you had to prepare a PowerPoint presentation, you would probably want to know what success looks
+like. You would want to get clear on what those steps are and you would want to be able to walk through all of those steps. So those things, those very high
+level events or steps, those things are the theoretical aspects of the problem. Because if I go back here, we're getting very clear on what the vision is, what
+the goal is, and ultimately those things are all theoretical. Now we could drop down a little bit deeper in, for example, if we were to think back to the idea
+of the washing machine and how I could go from having clothes that needed to be washed to going to having washed clothes. We could actually think through those
+high level steps, those high level events, perhaps. And this would help us actually create a bit of a state machine because state machines are those high level
+events, those high level steps that need to happen. And they help us get clear on the way that we can get to the goal in the first place. And then when we want
+to implement the physical parts, I just can take one of those, for example, start cycle, which is just one particular slice with all of the different low level
+steps, like parsing the options, getting access to the physical layer, maybe having to do stuff with chimes and lights and sounds and all kinds of other low
+level code things. What's really happening is in order for us to get from one high level step, one high level event to the next, we have to pass through a
+number of lower level physical things. And I like to think of this almost as if chapters of a book. We're going from chapter one to two to three to four,
+continuing all the way to the end. And these steps, the code, the actual implementation, the physical stuff. This is like the sub chapters, the things that need
+to happen along the path, along the story, where the high level events really are the truth of the story that we're telling here. It's the truth of how we can
+get to the very end and how we can achieve goals. So this might seem very abstract, what I'm describing to you, and it is very abstract, but ultimately this is
+the philosophical foundation for what it is that we're doing as software developers. And this is such a complex, difficult thing to fully grasp and understand
+until you can get a little bit of awareness of what's going on here and you can get some practice with it. But I promise you, this is going to become more clear
+as well as you start to see the other essentials and you see how the other essentials build on this in practice as well. So some guidelines for implementing
+abstraction are, we always want to number one, start from the very end and clarify the end goal. And in practice, this will actually mean using tests, writing
+tests, in following through with getting very clear on all of these theoretical guesses upfront, having all these things clear, and then having them get
+embedded into the code base as tests. These high level tests describe the features and functionality scenarios and use concrete examples to explain what it is
+our code is going to do from a very high level. The second thing is we want to think backwards because there's this thing that tends to happen where if we think
+backwards, it actually helps us constrain down the entire set of ways we can get to the goal and we can get there with minimal amounts of code. And that is
+actually something we value a lot because we want to write as little amount of code as possible. The less code that we have, the less code that we have to
+maintain, the better. So our task is to write the minimum amount of code that is going to get us to the goal. And we do that by getting very clear on the end
+goal first and then writing tests first. So this is why test driven development is so important in terms of getting high quality code. Now, as you go about
+trying to implement this, you're probably going to run into a number of challenges. The first challenge is that of perfectionism. Imagine you're trying to get
+from chapter one to chapter eight and you get stuck in chapter 1.1, 1.1.1, 1.1.2, 1.1.3. And we just get stuck going deeper and deeper. This is why starting
+from the end, thinking from the end goal is such an important thing for us to do. And this actually takes us into the topic of code first development, which is
+where we're trying to solve problems by throwing tools and technologies at the problem. But you can see here that there's actually a dynamic of directionality
+where we need to start from the theoretical first and then move to the physical. And when we implement the code in the physical, we're going to be writing a
+number of tests and code at the same time, which move us deeper and deeper into the core of the code base. And as we move into the physical, what you'll find is
+that these layers, these abstraction layers here in the physical, they're actually stereotypical. So what I mean by that is whether you're working on the front
+end or you're working on the back end or the desktop, there are layers in which we can move in just like we've seen with the theoretical where we have all those
+different theoretical layers. There's physical layers that are common and you'll see them everywhere as well. For example, imagine you're working on the front
+end with some React components. React components are like dealing with the outside world. They're interfacing with the outside world. So that would make them
+interfacers in a sense. And that would mean that they would belong to what's called the infrastructure layer. And if we were to think of the back end with a
+RESTful API, for example, a RESTful API, the express part of that, the part that handles the requests and takes in the network requests. That part there is also
+an interfacer, also an interfacer in an infrastructural concern as well. And there's all these other layers that we're going to talk about as well in various
+parts of the phases of craftship. So let's go over what we learned here. So ultimately, you are an abstraction designer. It is very important for you to
+structure your code, to write your code in such a way that not only can other developers understand what they're seeing and they can perform their key developer
+use cases. But ultimately, this art of abstraction is going from this space of potential, this theoretical space, to getting very clear on all of those
+theoretical aspects of solving a problem. Having those things be very clear on your mind and then having those things actually show up in your code base,
+whether it be through acceptance tests. Or other forms of tests. Having them finally take place and take shape. And then we implement the minimum amount of code
+in order to make that happen. That is fundamentally what abstraction is about. It is this process of doing that over. And every single time you create an
+abstraction, you want to be very clear on the purpose of what it is you're creating because there is a theoretical aspect. And also an aspect of directionality
+where we want to make sure that we really have clarity on the theoretical aspect first before we go ahead and implement the physical aspect. We also alluded to
+the idea at the very end that the physical aspects are stereotypical. You will see much, much more of that throughout the course because it's the stereotypical
+architecture. It's one of the most powerful things I could show you as a developer. It's just going to give you so much clarity and calmness and peace in terms
+of knowing where things belong and how to fit in architectural components, how to piece things together. I know that there was a lot, but this one is a
+foundational module really, truly. And we're going to attack this from a number of different angles with the other physical and theoretical essentials as well.
+So with that said, we're going to leave it here for now. I'll see you in the next one. And as always to mastery.

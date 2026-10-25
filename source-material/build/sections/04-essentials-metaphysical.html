@@ -1,0 +1,491 @@
+<section id="essentials-metaphysical" class="doc-section" data-title="12 Essentials I: Metaphysical">
+  <h2>12 Essentials I: Metaphysical — Abstraction &amp; The Feedback Loop</h2>
+  <p class="lede">The 12 essentials are practicable "thinking tools" one level below the <a href="#metaphysics">four pillars</a>. Two of them are metaphysical, meaning they describe how the world works: <strong>abstraction</strong> (split the what from the how and work top-down) and the <strong>feedback loop</strong> (everything is a guess, so make it, check it, refine it). The other ten derive from these two. <a class="src" data-lesson="13">L13</a> <a class="src" data-lesson="91">L91</a> <a class="src" data-lesson="93">L93</a></p>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-metaphysical--overview" data-title="The 12 Essentials at a Glance">
+    <h3>The 12 Essentials at a Glance <a class="src" data-lesson="13">L13</a> <a class="src" data-lesson="93">L93</a></h3>
+    <p>The four pillars (architecture, testing, design, strategy) are "the only things that actually really matter", but they form a "tangled maze". The essentials are a lower level of abstraction built on the pillars that you can practise as <em>skills</em> and apply to real use cases. <a class="src" data-lesson="13">L13</a> <a class="src" data-lesson="93">L93</a> <a class="src" data-lesson="82">L82</a> They exist because all three roles (customer, user, developer) must win at the same time, and that constraint is what gives them their meaning. <a class="src" data-lesson="93">L93</a></p>
+
+    <table class="tbl">
+      <thead><tr><th>Group</th><th>Essential</th><th>One-line essence</th><th>Covered in</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="2"><strong>Metaphysical</strong><br>how the world works</td><td>Abstraction <a class="src" data-lesson="14">L14</a></td><td>Separate the theoretical (what) from the physical (how). Work top-down from value to code.</td><td><a href="#essentials-metaphysical--abstraction">this section</a></td></tr>
+        <tr><td>Feedback Loop <a class="src" data-lesson="15">L15</a></td><td>Everything is a guess: feed forward, get feedback, refine.</td><td><a href="#essentials-metaphysical--feedback-loop">this section</a></td></tr>
+        <tr><td rowspan="3"><strong>Theoretical</strong><br>before code</td><td>Value Identification <a class="src" data-lesson="21">L21</a></td><td>Get clear on what is valuable: who, what impact, which capabilities.</td><td><a href="#essentials-theoretical">#essentials-theoretical</a></td></tr>
+        <tr><td>Domain Discovery <a class="src" data-lesson="22">L22</a></td><td>Get clear on the domain's language and make sure everyone shares it.</td><td><a href="#essentials-theoretical">#essentials-theoretical</a></td></tr>
+        <tr><td>Strategic Design <a class="src" data-lesson="23">L23</a></td><td>Stereotype, build, integrate and prioritize architectural components (core / supporting / generic).</td><td><a href="#essentials-theoretical">#essentials-theoretical</a></td></tr>
+        <tr><td rowspan="7"><strong>Physical</strong><br>writing code</td><td>Vertical Slicing <a class="src" data-lesson="16">L16</a></td><td>Features should be visible from the folder structure (modules and operations).</td><td><a href="#essentials-physical">#essentials-physical</a></td></tr>
+        <tr><td>Horizontal Decoupling <a class="src" data-lesson="17">L17</a></td><td>Know your abstractions and where each line belongs, then decouple them to gain control and testability.</td><td><a href="#essentials-physical">#essentials-physical</a></td></tr>
+        <tr><td>Temporal Decoupling <a class="src" data-lesson="18">L18</a></td><td>Reality is event-based, so use an event-based architecture from day one.</td><td><a href="#essentials-physical">#essentials-physical</a></td></tr>
+        <tr><td>Composition <a class="src" data-lesson="19">L19</a></td><td>Wire collaborating abstractions deliberately so the app is configurable from one place.</td><td><a href="#essentials-physical">#essentials-physical</a></td></tr>
+        <tr><td>Subject/System Verification <a class="src" data-lesson="20">L20</a></td><td>Put a boundary around the subject under test to validate one specific guess.</td><td><a href="#essentials-physical">#essentials-physical</a></td></tr>
+        <tr><td>Walking Skeleton <a class="src" data-lesson="24">L24</a></td><td>Deploy a minimal end-to-end slice first to expose early guesses.</td><td><a href="#essentials-physical">#essentials-physical</a></td></tr>
+        <tr><td>Deployment &amp; Delivery <a class="src" data-lesson="25">L25</a></td><td>Make it very hard to ship negative value, using a CD pipeline.</td><td><a href="#essentials-physical">#essentials-physical</a></td></tr>
+      </tbody>
+    </table>
+
+    <div class="cards">
+      <div class="card">
+        <h4>Principles &gt; tools <a class="src" data-lesson="13">L13</a></h4>
+        <p>The woodworker parable: he mastered the plane and the drill but never learned which types of wood to use, so he couldn't build the table when it mattered. Tools, techniques and patterns are useful, but principles are the thinking tools you orient yourself by.</p>
+      </div>
+      <div class="card">
+        <h4>Sophia vs Phronesis <a class="src" data-lesson="13">L13</a></h4>
+        <p><strong>Sophia</strong> is the love of knowledge (philosophy). <strong>Phronesis</strong> is practical wisdom, or mastery. The essentials were distilled from studying <em>phronimos</em> developers, the masterful ones. The course aims at phronesis.</p>
+      </div>
+      <div class="card">
+        <h4>Skills, not a menu <a class="src" data-lesson="93">L93</a> <a class="src" data-lesson="82">L82</a></h4>
+        <p>Each essential is a stat you level up, like character stats in Fallout. You can be "2 out of 10" on horizontal decoupling and still follow the workflow. <strong>You need all 12</strong>; you don't pick them per use case. The essentials have no order of their own. Ordering comes from the <a href="#workflow">ideal developer workflow and FA²STR</a>.</p>
+      </div>
+      <div class="card">
+        <h4>Why learn them early <a class="src" data-lesson="93">L93</a> <a class="src" data-lesson="91">L91</a></h4>
+        <p>They prime your subconscious (the "red Audi" effect), so you notice violations while moving through the <a href="#course-map">phases of craftship</a>. Without them, the demos were "quite confusing". Plant the seeds now and refine them later. <a class="src" data-lesson="13">L13</a></p>
+      </div>
+    </div>
+
+    <blockquote class="quote">“Tools, techniques, and patterns are important, yes, but principles, thinking tools upon which you can orient yourself, these things are foundational.”<cite><a class="src" data-lesson="13">L13</a></cite></blockquote>
+
+    <div class="callout def"><strong>Three categories</strong> <a class="src" data-lesson="13">L13</a>
+      <ul>
+        <li><strong>Metaphysical</strong>: the foundation, based on core mental models, especially <a href="#metaphysics">systems thinking</a>. "Basically the way the world works." They show up in every other essential. <a class="src" data-lesson="93">L93</a></li>
+        <li><strong>Theoretical</strong>: everything before code. Who we're helping, how, capabilities, features, use cases, concrete examples.</li>
+        <li><strong>Physical</strong>: writing the source code that implements features.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-metaphysical--abstraction" data-title="Abstraction: Taming Complexity">
+    <h3>Abstraction: Taming Complexity <a class="src" data-lesson="14">L14</a></h3>
+    <p>"Thought works by abstraction." The Chinese character for "man" started as a head-and-legs figure. It cuts out detail and leaves a simple image you can grasp. A washing machine's <em>start cycle</em> button and a TV remote's <em>power</em> button are public interfaces. The low-level steps behind them stay hidden and only the builders need to know them. <a class="src" data-lesson="14">L14</a></p>
+    <blockquote class="quote">“It's a way to tame complexity, which is the default state of the universe.” … “Never forget that you yourself are abstraction designer.”<cite><a class="src" data-lesson="14">L14</a></cite></blockquote>
+
+    <div class="callout def"><strong>Definitions of abstraction</strong>
+      <ol>
+        <li><strong>The root principle of design</strong>, where design means <em>discoverability + understanding</em> (Norman's two gulfs) for the key developer use cases: <em>discover, understand, add, change, debug, test, plan features</em>. <a class="src" data-lesson="14">L14</a> "It's what from how." <a class="src" data-lesson="82">L82</a></li>
+        <li><strong>Separating the theoretical from the physical</strong>, visualized by the <a href="#essentials-metaphysical--prism">abstraction prism</a>. <a class="src" data-lesson="14">L14</a></li>
+        <li><strong>Your highest-level understanding of the problem</strong> (getting from here to there) plus the concrete, discrete steps to get there, written as past-tense events, states or steps. Smaller steps sit behind them, "abstracted away from us". <a class="src" data-lesson="91">L91</a></li>
+      </ol>
+    </div>
+
+    <p><strong>Many names for the same split</strong>: essential vs accidental complexity, upfront vs emergent design, theoretical vs physical, what vs how, declarative vs imperative <a class="src" data-lesson="14">L14</a>. Also high vs low level, contract vs concretion, abstract vs real, type vs implementation <a class="src" data-lesson="93">L93</a>. It's hard to grasp because it is everywhere; it is "the fabric of how we achieve goals". The developer's job is to be a <strong>problem decomposer</strong> who uses abstraction to break problems down. <a class="src" data-lesson="93">L93</a> The "abstract vs real" axis is developed as <a href="#abstraction-rdd">levels of realness</a>. <a class="src" data-lesson="91">L91</a></p>
+
+    <div class="cards">
+      <div class="card">
+        <h4>Use case: add a feature <a class="src" data-lesson="14">L14</a></h4>
+        <p><strong>Package by infrastructure</strong> (folders named after technical parts) tells you nothing about where a feature goes. <strong>Screaming architecture / package by feature (module, domain)</strong> lines the folders up with goals, so it's obvious where to add one. See <a href="#architecture">Architecture</a>.</p>
+      </div>
+      <div class="card">
+        <h4>Use case: change a feature <a class="src" data-lesson="14">L14</a></h4>
+        <p>Deeply nested technical code is hard to trace. A <strong>Gherkin feature file</strong> (feature + scenarios) that informs an <strong>executable specification</strong> reads like a table of contents. You find the scenario to change, or add an edge case.</p>
+      </div>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L14</span> Public interface (<code>startCycle</code>) hides the low-level physical steps</figcaption>
+      <pre><code class="language-ts">class WashingMachine {
+  startCycle(options: CycleOptions): void {
+    // parse the options
+    // get access to the physical layer
+    // chimes, lights, sounds, other low-level steps
+  }
+}</code></pre>
+    </figure>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-metaphysical--prism" data-title="The Abstraction Prism">
+    <h3>The Abstraction Prism: Theoretical Above, Physical Below <a class="src" data-lesson="14">L14</a> <a class="src" data-lesson="93">L93</a></h3>
+    <p>The prism starts from the theoretical questions before any code (<em>Who are we helping? What will we help them achieve? What will they be enabled to do?</em>) and narrows down to code. Khalil returns to it whenever he decides how to structure or organize code. <a class="src" data-lesson="14">L14</a> He also built his course "topic map" on it (goals → capabilities → features → acceptance criteria → deeper). <a class="src" data-lesson="91">L91</a></p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 740 410" role="img" aria-label="Abstraction prism: theoretical layers from role down to concrete examples above a feature-file boundary, physical layers from interfacers down to the core below it">
+        <defs>
+          <marker id="em-arrow-prism" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+          </marker>
+        </defs>
+        <!-- theoretical bracket -->
+        <line x1="128" y1="20" x2="128" y2="266" stroke="var(--accent)" stroke-width="2"/>
+        <text x="14" y="136" font-size="13" font-weight="700" fill="var(--accent)">THEORETICAL</text>
+        <text x="14" y="154" font-size="12" fill="var(--fg)">what · chapters</text>
+        <!-- theoretical layers -->
+        <rect x="140" y="20" width="520" height="36" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <text x="400" y="43" font-size="13" text-anchor="middle" fill="var(--fg)">Role: who are we helping?</text>
+        <rect x="155" y="62" width="490" height="36" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <text x="400" y="85" font-size="13" text-anchor="middle" fill="var(--fg)">Goal: what will we help them achieve?</text>
+        <rect x="170" y="104" width="460" height="36" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <text x="400" y="127" font-size="13" text-anchor="middle" fill="var(--fg)">Features / capabilities: what can they now do?</text>
+        <rect x="185" y="146" width="430" height="36" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <text x="400" y="169" font-size="13" text-anchor="middle" fill="var(--fg)">User stories</text>
+        <rect x="200" y="188" width="400" height="36" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <text x="400" y="211" font-size="13" text-anchor="middle" fill="var(--fg)">Acceptance criteria / scenarios</text>
+        <rect x="215" y="230" width="370" height="36" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <text x="400" y="253" font-size="12" text-anchor="middle" fill="var(--fg)">Concrete examples (Given / When / Then)</text>
+        <!-- crossover -->
+        <line x1="140" y1="280" x2="660" y2="280" stroke="var(--svg-stroke)" stroke-dasharray="6 4"/>
+        <text x="400" y="298" font-size="12" text-anchor="middle" fill="var(--accent)">feature file / acceptance test = highest abstraction in code</text>
+        <!-- physical bracket -->
+        <line x1="128" y1="308" x2="128" y2="386" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="14" y="342" font-size="13" font-weight="700" fill="var(--accent-2)">PHYSICAL</text>
+        <text x="14" y="360" font-size="12" fill="var(--fg)">how · sub-chapters</text>
+        <!-- physical layers -->
+        <rect x="230" y="308" width="340" height="36" rx="6" fill="var(--svg-fill)" stroke="var(--accent-2)"/>
+        <text x="400" y="331" font-size="12" text-anchor="middle" fill="var(--fg)">Interfacers: React components, Express handlers</text>
+        <rect x="250" y="350" width="300" height="36" rx="6" fill="var(--svg-fill)" stroke="var(--accent-2)"/>
+        <text x="400" y="373" font-size="12" text-anchor="middle" fill="var(--fg)">Deeper physical layers → the core</text>
+        <!-- direction arrow -->
+        <line x1="692" y1="24" x2="692" y2="382" stroke="var(--accent)" stroke-width="2" marker-end="url(#em-arrow-prism)"/>
+        <text x="708" y="205" font-size="12" text-anchor="middle" fill="var(--fg)" transform="rotate(90 708 205)">always top → down</text>
+      </svg>
+      <figcaption>The abstraction prism. Layer names come from <a class="src" data-lesson="14">L14</a> <a class="src" data-lesson="93">L93</a> <a class="src" data-lesson="82">L82</a>. The drawing is <span class="badge copilot">Added by Copilot</span>.</figcaption>
+    </figure>
+
+    <ul>
+      <li><strong>Chapters vs sub-chapters.</strong> High-level events are the chapters (1 → 2 → … → end), "the truth of the story". Code is the sub-chapters along the path. Those events form a <strong>state machine</strong>: dirty clothes → … → washed clothes, where one event (<code>start cycle</code>) is a slice holding many low-level steps. <a class="src" data-lesson="14">L14</a></li>
+      <li><strong>Directionality.</strong> "We always need to start from the top and go downwards." Coding from the bottom up toward the vision "always results in a mess". Khalil calls this "the major big learning". <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Top-down sequence:</strong> who (roles) → why (goals) → what (features) → stories → acceptance criteria → concrete examples → validated → <em>then</em> code. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>The highest theoretical abstraction in code</strong> is the acceptance test / feature file, with stories, acceptance criteria and a table of concrete examples. If someone can read it and know exactly what the software should do, you have the top-level abstraction. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Code-first developers live only in the code levels</strong> of the prism. They can connect a frontend to a backend but can't connect an endpoint to acceptance criteria, goals or roles. <a class="src" data-lesson="91">L91</a></li>
+    </ul>
+
+    <div class="callout tip"><strong>Ideal codebase entry path</strong> <a class="src" data-lesson="93">L93</a>
+      <p>README says "go to the tests" → tests folder broken down by capability → one feature file per feature → stories → scenarios with concrete examples → then into the code.</p>
+    </div>
+
+    <div class="callout rule"><strong>Physical layers look alike everywhere</strong> <a class="src" data-lesson="14">L14</a> <a class="src" data-lesson="90">L90</a>
+      <p>React components and Express request handlers both deal with the outside world. Both are <em>interfacers</em> and belong to the infrastructure layer. The same stereotypical layers appear on frontend, backend and desktop: "We're doing the exact same things on the front end on the back end." Knowing this <strong>stereotypical architecture</strong> brings calm about where things belong. See <a href="#essentials-physical">Physical essentials</a> and <a href="#architecture">Architecture</a>.</p>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-metaphysical--abstraction-in-practice" data-title="Working Top-Down: Start From the End">
+    <h3>Working Top-Down: Start From the End, Think Backwards <a class="src" data-lesson="14">L14</a> <a class="src" data-lesson="93">L93</a></h3>
+    <ol class="steps">
+      <li><strong>Start from the very end</strong>: clarify the end goal. In practice, clarify your theoretical guesses upfront and embed them in the codebase as <strong>high-level tests</strong> that describe features and scenarios with <strong>concrete examples</strong>. <a class="src" data-lesson="14">L14</a></li>
+      <li><strong>Think backwards</strong>: this narrows the ways you could reach the goal. <a class="src" data-lesson="14">L14</a> (Deep dive: <a class="src" data-lesson="75">L75</a>.)</li>
+      <li><strong>Write the minimum code</strong> that reaches the goal. Less code means less to maintain, which is why TDD matters. <a class="src" data-lesson="14">L14</a></li>
+      <li><strong>Theoretical first, then physical.</strong> In the physical, write tests and code together and move deeper toward the core. <a class="src" data-lesson="14">L14</a></li>
+      <li><strong>Know the purpose</strong> (the theoretical side) of every abstraction before you implement it. <a class="src" data-lesson="14">L14</a></li>
+    </ol>
+
+    <p><strong>Role → goal → features → concrete examples → acceptance tests</strong> is the 1-2-3 chain that drives all work. "Never start a project without these four words clearly understood": <em>who, why, what, how</em>. <a class="src" data-lesson="82">L82</a> Example: DDD Forum had weak motivation while it was "just build these endpoints". Reframed, it serves a conference organizer whose goal is to "obtain an audience of devs curious about DDD to sell tickets to". Its features become <em>register, buy tickets, view ticket advertisement, ask questions about DDD</em>. <a class="src" data-lesson="82">L82</a> <a class="src" data-lesson="93">L93</a></p>
+
+    <div class="callout rule"><strong>Self-check while coding</strong> <a class="src" data-lesson="93">L93</a>
+      <p>"What is the actual value of me doing this thing… how can I connect this to a role's goal?" If you can't answer, you're <strong>thinking forwards</strong>, which means reacting without clarity on why.</p>
+    </div>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li><strong>Perfectionism / rabbit-holing</strong>: aiming for chapter 1 → 8 but stuck in 1.1 → 1.1.1 → 1.1.2… In code, the goal is a frontend app, yet you're deep in Webpack's nuances and then its plugins. Start from the end goal and stop once the problem is solved. <a class="src" data-lesson="14">L14</a> <a class="src" data-lesson="93">L93</a></li>
+        <li><strong>Code-first development</strong>: throwing tools and technologies at problems. <a class="src" data-lesson="14">L14</a> Thinking in endpoints instead of features, and skipping concrete examples to write code directly. <a class="src" data-lesson="82">L82</a></li>
+        <li><strong>API-first / code-level-first design</strong>: "extremely common". Khalil recommends <em>BDD in Action</em>. <a class="src" data-lesson="93">L93</a></li>
+      </ul>
+    </div>
+
+    <h4>Example A: code-first vs abstraction-first</h4>
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before: HOW first. The WHAT is never written down</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> "Just build the endpoint"</figcaption>
+          <pre><code class="language-ts">app.post('/users', async (req, res) =&gt; {
+  const { email, username, password } = req.body;
+  if (!email.includes('@')) return res.status(400).json({ error: 'bad email' });
+  const found = await db.query('SELECT id FROM users WHERE email = $1', [email]);
+  if (found.rows.length) return res.status(409).json({ error: 'taken' });
+  const user = await db.query('INSERT INTO users ...', [email, username, password]);
+  await sendWelcomeEmail(email);
+  res.status(201).json(user.rows[0]);
+});
+// Who is this for? Which scenarios matter? When are we done?
+// Verified by curl, by hand, once.</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After: WHAT as an executable spec, then the minimum HOW</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> 1. Feature file: stories + concrete examples (theoretical)</figcaption>
+          <pre><code class="language-gherkin">Feature: Registration
+  As a conference-curious developer
+  I want to register
+  So that I can ask questions about DDD
+
+  Scenario: Successful registration
+    Given I am a new user
+    When I register with valid account details
+    Then my account should have been created
+    And a welcome email should have been sent
+
+  Scenario: Email already in use
+    Given "sam@acme.com" is already registered
+    When a new user registers with "sam@acme.com"
+    Then they should be told the account already exists</code></pre>
+        </figure>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> 2. Test states WHAT; implementation comes after (physical)</figcaption>
+          <pre><code class="language-ts">test('Email already in use', async () =&gt; {
+  await driver.registerUser({ email: 'sam@acme.com' });   // Given
+
+  const result = await driver.registerUser({ email: 'sam@acme.com' }); // When
+
+  expect(result.error).toBe('AccountAlreadyExists');      // Then
+});
+// Only now write the thinnest controller → use case → repo that turns this green.</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <h4>Example B: a test as a "flag post in the future"</h4>
+    <blockquote class="quote">“Writing tests is just setting a flag post in the future to explain what we are about to realize.”<cite><a class="src" data-lesson="93">L93</a></cite></blockquote>
+    <p>Project into the future, then bridge the gap with code. The test declares the value you are about to deliver and tells you when you're <strong>done</strong>. <a class="src" data-lesson="93">L93</a> The concrete example below is the DDD Forum "buy tickets" scenario. Khalil narrowed "billed + emailed" down to "an order placed" because the rest should be temporally decoupled. <a class="src" data-lesson="82">L82</a></p>
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L82</span> The concrete example (written first)</figcaption>
+      <pre><code class="language-gherkin">Feature: Buy tickets
+  Scenario: James buys three tickets for his company
+    Given James has three tickets in cart
+    When James purchases tickets
+    Then an order should have been placed
+    And an email is sent</code></pre>
+    </figure>
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> Failing acceptance test bound to it. RED until the physical sub-chapters exist.</figcaption>
+      <pre><code class="language-ts">import { loadFeature, defineFeature } from 'jest-cucumber';
+import { TicketsDriver } from './drivers/ticketsDriver'; // protocol driver: acts as the user
+
+const feature = loadFeature('tests/features/buyTickets.feature');
+
+defineFeature(feature, (test) =&gt; {
+  const driver = new TicketsDriver();
+
+  test('James buys three tickets for his company', ({ given, when, then, and }) =&gt; {
+    given('James has three tickets in cart', () =&gt; driver.addToCart('james@acme.com', 3));
+    when('James purchases tickets', () =&gt; driver.purchase('james@acme.com'));
+    then('an order should have been placed', async () =&gt; {
+      expect(await driver.ordersFor('james@acme.com')).toHaveLength(1);
+    });
+    and('an email is sent', async () =&gt; {
+      expect(await driver.emailsSentTo('james@acme.com')).toHaveLength(1);
+    });
+  });
+});
+// Fails today: nothing implements purchase yet. When it passes, the feature is done.</code></pre>
+    </figure>
+    <p>The protocol driver and the four-layer acceptance-test stack are covered in <a href="#testing">Testing</a>. <a class="src" data-lesson="82">L82</a></p>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span>
+      <p>AI generates the physical (the sub-chapters) cheaply. Humans still own the chapters: role, goal, features and concrete examples. A feature file plus a failing acceptance test is the most precise prompt you can give an agent, and it caps over-generation at "minimum code to reach the goal".</p>
+    </aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-metaphysical--feedback-loop" data-title="The Feedback Loop: Everything Is a Guess">
+    <h3>The Feedback Loop: Everything Is a Guess <a class="src" data-lesson="15">L15</a></h3>
+    <p>Take a frontend-only <strong>registration</strong> feature. It already contains many guesses: present the form, maintain form state, validate, marshal data, make the request, show a spinner (that actually works), present errors, and navigate to onboarding on success. Each one is an acceptance criterion you need confidence in. <a class="src" data-lesson="15">L15</a></p>
+    <blockquote class="quote">“Everything that we do in software development is one big guess.” … “We're going to make a lot more mistakes than we will successes.”<cite><a class="src" data-lesson="15">L15</a></cite></blockquote>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 600 330" role="img" aria-label="Feedback loop cycle: feed forward, feedback, refinement, repeating">
+        <defs>
+          <marker id="em-arrow-loop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+          </marker>
+        </defs>
+        <rect x="215" y="20" width="170" height="56" rx="10" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="300" y="44" font-size="14" font-weight="700" text-anchor="middle" fill="var(--fg)">1. Feed forward</text>
+        <text x="300" y="63" font-size="12" text-anchor="middle" fill="var(--fg)">make a guess</text>
+        <rect x="400" y="232" width="170" height="56" rx="10" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="485" y="256" font-size="14" font-weight="700" text-anchor="middle" fill="var(--fg)">2. Feedback</text>
+        <text x="485" y="275" font-size="12" text-anchor="middle" fill="var(--fg)">tests · users · metrics</text>
+        <rect x="30" y="232" width="170" height="56" rx="10" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="115" y="256" font-size="14" font-weight="700" text-anchor="middle" fill="var(--fg)">3. Refinement</text>
+        <text x="115" y="275" font-size="12" text-anchor="middle" fill="var(--fg)">make a better guess</text>
+        <path d="M388 55 Q 480 90 485 228" fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#em-arrow-loop)"/>
+        <path d="M398 275 Q 300 320 204 275" fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#em-arrow-loop)"/>
+        <path d="M115 228 Q 120 90 211 55" fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#em-arrow-loop)"/>
+        <text x="300" y="160" font-size="15" font-weight="700" text-anchor="middle" fill="var(--accent-2)">Everything is a guess</text>
+        <text x="300" y="182" font-size="12" text-anchor="middle" fill="var(--fg)">tighter loop → earlier answers</text>
+        <text x="472" y="130" font-size="11" text-anchor="start" fill="var(--fg)">was it right?</text>
+        <text x="300" y="318" font-size="11" text-anchor="middle" fill="var(--fg)">learn</text>
+        <text x="50" y="130" font-size="11" text-anchor="start" fill="var(--fg)">next guess</text>
+      </svg>
+      <figcaption>"The three ways": feed forward → feedback → refinement. <a class="src" data-lesson="15">L15</a> <a class="src" data-lesson="91">L91</a> The drawing is <span class="badge copilot">Added by Copilot</span>.</figcaption>
+    </figure>
+
+    <ul>
+      <li><strong>Definition:</strong> feed forward, get feedback, learn, and make the next attempt faster and better. Refine one system before moving to the next. <a class="src" data-lesson="91">L91</a></li>
+      <li><strong>Never go too far</strong> without knowing whether the abstractions you just made work. That's why testing comes right after code-first. <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>The first guess is theoretical:</strong> "does anyone even care?" (e.g. an anime debate app). You validate it with <a href="#essentials-theoretical">value identification</a>. <a class="src" data-lesson="93">L93</a> A student summary Khalil endorsed: "Clarity means less guesses." <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>No known alternative:</strong> you can't reach a goal without splitting it into high and low levels (abstraction) and trying, failing, learning and retrying (feedback loop). <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>It takes the pressure off.</strong> The course itself was built by abstraction plus feedback loop. "You're not going to get whatever it is you're trying to do right the first time around… but do it again." This connects to the mindsets <em>kill your designs</em> and <em>design it twice</em>; see <a href="#mindsets">Mindsets</a>. <a class="src" data-lesson="90">L90</a></li>
+    </ul>
+
+    <h4>The 3 problems with guesses <a class="src" data-lesson="15">L15</a></h4>
+    <div class="cards">
+      <div class="card">
+        <h4>1. Not knowing what guesses you're making</h4>
+        <p>This is typical of code-first developers who don't know the abstraction prism or abstraction layers. <strong>Layers are buckets</strong> for your abstractions and for implementing guesses. Fix: <a href="#essentials-metaphysical--prism">abstraction prism</a> and <a href="#essentials-metaphysical--guess-points">guess points</a>.</p>
+      </div>
+      <div class="card">
+        <h4>2. Not knowing how to validate a guess</h4>
+        <p>Many developers only black-box test through E2E tests. Fix: more targeted tests via <a href="#essentials-physical">subject/system verification</a> and <a href="#testing">Testing</a>.</p>
+      </div>
+      <div class="card">
+        <h4>3. Loops that aren't tight enough</h4>
+        <p>Write code, save, wait to compile, eyeball it. Answers arrive late. Manual testing doesn't build confidence, and its cost grows with the code and the team.</p>
+      </div>
+    </div>
+
+    <div class="callout rule"><strong>Tests are the maintainable fix</strong> <a class="src" data-lesson="15">L15</a>
+      <p>Every feature is a guess, and the number of guesses only grows. The only <em>maintainable</em> way to keep re-validating all of them is to cover them with tests. Also: clarify before building, and check with users that you built the right thing.</p>
+    </div>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span>
+      <p>AI shrinks the feed-forward step to seconds, so <em>feedback</em> becomes the bottleneck. Generated code is still a guess. Humans own the theoretical guesses and the verification: tests, CI and real-user signals are what turn a generated guess into verified value.</p>
+    </aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-metaphysical--guess-points" data-title="Guess Points: Where the Guesses Live">
+    <h3>Guess Points: A Map of Where the Guesses Live <a class="src" data-lesson="15">L15</a></h3>
+    <p>The guess points are the <a href="#metaphysics">value creation system</a> seen through systems thinking. They apply abstraction and the feedback loop to decompose problems. Each guess point is a small input → output system with its own questions, mostly answered with tests. <strong>The output of one is the input of the next.</strong> "It's just systems thinking and it's just inputs and outputs." <a class="src" data-lesson="15">L15</a></p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 760 340" role="img" aria-label="Guess points ladder: theoretical problem, solution, architecture; crossover acceptance test; physical incoming adapter, application, stateful domain modelling, outgoing adapter; execution feeding back to problem">
+        <defs>
+          <marker id="em-arrow-gp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+          </marker>
+        </defs>
+        <text x="30" y="24" font-size="13" font-weight="700" fill="var(--accent)">THEORETICAL guess points</text>
+        <rect x="30" y="36" width="210" height="58" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="135" y="60" font-size="14" font-weight="700" text-anchor="middle" fill="var(--fg)">Problem</text>
+        <text x="135" y="80" font-size="11" text-anchor="middle" fill="var(--fg)">vision · role · goal · capabilities</text>
+        <rect x="275" y="36" width="210" height="58" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="380" y="60" font-size="14" font-weight="700" text-anchor="middle" fill="var(--fg)">Solution</text>
+        <text x="380" y="80" font-size="11" text-anchor="middle" fill="var(--fg)">language · event storming · process</text>
+        <rect x="520" y="36" width="210" height="58" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="625" y="60" font-size="14" font-weight="700" text-anchor="middle" fill="var(--fg)">Architecture</text>
+        <text x="625" y="80" font-size="11" text-anchor="middle" fill="var(--fg)">tools · tests · CI · structure</text>
+        <line x1="242" y1="65" x2="271" y2="65" stroke="var(--accent)" stroke-width="2" marker-end="url(#em-arrow-gp)"/>
+        <line x1="487" y1="65" x2="516" y2="65" stroke="var(--accent)" stroke-width="2" marker-end="url(#em-arrow-gp)"/>
+        <line x1="625" y1="96" x2="625" y2="124" stroke="var(--accent)" stroke-width="2" marker-end="url(#em-arrow-gp)"/>
+        <rect x="30" y="128" width="700" height="34" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)" stroke-dasharray="6 4"/>
+        <text x="380" y="150" font-size="12" text-anchor="middle" fill="var(--fg)">crossover: acceptance test / feature file (theoretical → physical)</text>
+        <line x1="380" y1="164" x2="380" y2="186" stroke="var(--accent)" stroke-width="2" marker-end="url(#em-arrow-gp)"/>
+        <text x="30" y="200" font-size="13" font-weight="700" fill="var(--accent-2)">PHYSICAL guess points (outside-in)</text>
+        <rect x="30" y="210" width="160" height="52" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="110" y="233" font-size="13" font-weight="700" text-anchor="middle" fill="var(--fg)">Incoming adapter</text>
+        <text x="110" y="251" font-size="11" text-anchor="middle" fill="var(--fg)">requests in</text>
+        <rect x="210" y="210" width="160" height="52" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="290" y="233" font-size="13" font-weight="700" text-anchor="middle" fill="var(--fg)">Application</text>
+        <text x="290" y="251" font-size="11" text-anchor="middle" fill="var(--fg)">actors · roles · use cases</text>
+        <rect x="390" y="210" width="160" height="52" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="470" y="233" font-size="12" font-weight="700" text-anchor="middle" fill="var(--fg)">Stateful domain model</text>
+        <text x="470" y="251" font-size="11" text-anchor="middle" fill="var(--fg)">state machines · invariants</text>
+        <rect x="570" y="210" width="160" height="52" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="650" y="233" font-size="13" font-weight="700" text-anchor="middle" fill="var(--fg)">Outgoing adapter</text>
+        <text x="650" y="251" font-size="11" text-anchor="middle" fill="var(--fg)">DBs · APIs · contract tests</text>
+        <line x1="191" y1="236" x2="207" y2="236" stroke="var(--accent-2)" stroke-width="2" marker-end="url(#em-arrow-gp)"/>
+        <line x1="371" y1="236" x2="387" y2="236" stroke="var(--accent-2)" stroke-width="2" marker-end="url(#em-arrow-gp)"/>
+        <line x1="551" y1="236" x2="567" y2="236" stroke="var(--accent-2)" stroke-width="2" marker-end="url(#em-arrow-gp)"/>
+        <rect x="470" y="286" width="260" height="40" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="600" y="311" font-size="12" text-anchor="middle" fill="var(--fg)">deploy → Execution guess point (KPIs)</text>
+        <line x1="650" y1="264" x2="650" y2="282" stroke="var(--accent)" stroke-width="2" marker-end="url(#em-arrow-gp)"/>
+        <path d="M468 306 L 14 306 L 14 65 L 26 65" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#em-arrow-gp)"/>
+        <text x="240" y="300" font-size="11" text-anchor="middle" fill="var(--fg)">one big feedback loop: results feed the next problem</text>
+      </svg>
+      <figcaption>Guess points ladder. Theoretical GPs, incoming adapter and stateful domain modelling come from <a class="src" data-lesson="15">L15</a>. Solution/architecture contents are from <a class="src" data-lesson="93">L93</a>. The application GP is from <a class="src" data-lesson="88">L88</a>, the outgoing adapter from <a class="src" data-lesson="87">L87</a>, and execution plus the acceptance-test crossover from <a class="src" data-lesson="81">L81</a>. The stateless GP (<a class="src" data-lesson="52">L52</a>) is the smallest system. The outside-in layout is <span class="badge copilot">Added by Copilot</span>.</figcaption>
+    </figure>
+
+    <ul>
+      <li><strong>Theoretical guess points:</strong> <em>problem</em> (vision, role, goal, capabilities; its output is the input to the solution), then <em>solution</em>, then <em>architecture</em>. Each contains smaller systems that bring the abstraction closer to code. <a class="src" data-lesson="15">L15</a></li>
+      <li><strong>Physical guess points</strong> (past architecture): e.g. <em>incoming adapter</em>, <em>stateful domain modelling</em> and others. Each has its own questions, answered mostly with tests. They come from heuristics, mostly the <strong>stereotypical architecture</strong> (responsibility-first phase). <a class="src" data-lesson="15">L15</a></li>
+      <li><strong>Frontend too?</strong> Yes. Frontend patterns come in pattern-first, then responsibility-first, then back to guess points in value-first. <a class="src" data-lesson="15">L15</a></li>
+      <li><strong>More guess points?</strong> Possibly. It's Khalil's decomposition layout. A <em>code review process</em>, for example, is another system with its own inputs, outputs, processes and environment. <a class="src" data-lesson="15">L15</a></li>
+      <li><strong>When to use:</strong> not right away. You first climb the <a href="#course-map">phases of craftship</a>. Guess points are the main decomposition approach in <em>value-first</em>, where you "just do the things that have the most value at the right time". <a class="src" data-lesson="15">L15</a> <a class="src" data-lesson="82">L82</a></li>
+    </ul>
+
+    <h4>Walked example: slot-booking system notifying ~7 services <a class="src" data-lesson="93">L93</a></h4>
+    <ol class="steps">
+      <li><strong>Problem clarity</strong>: value identification / impact mapping (who, what, impact, capabilities).</li>
+      <li><strong>Solution clarity</strong>: domain discovery. Big-picture event storming first, then process-model one story end to end.</li>
+      <li><strong>Problem-decomposition guess point</strong>: the experience, screens, data in and out, speed needs (maybe WebSockets).</li>
+      <li><strong>Architecture guess point</strong>: tools, tests, CI tests, and whether to go event-based from day one.</li>
+      <li><strong>Walking skeleton</strong>: then move into the physical.</li>
+    </ol>
+    <div class="callout tip"><strong>Psychic entropy</strong> <a class="src" data-lesson="93">L93</a>
+      <p>Without a consistent process, decomposing a problem feels overwhelming. Knowing which guess point you're at tells you whether you have enough clarity to move forward. The full process is in <a href="#workflow">FA²STR &amp; the ideal developer workflow</a>.</p>
+    </div>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span>
+      <p>Guess points show which questions a human must answer (problem, solution, architecture) before handing a physical guess point to an agent. Each guess point's tests then act as the acceptance gate for what the agent produced.</p>
+    </aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-metaphysical--zoom-out" data-title="Debugging by Zooming Out">
+    <h3>Debugging by Zooming Out <a class="src" data-lesson="82">L82</a></h3>
+    <p>If you keep changing something and it keeps failing, stop. "You're just so too deep into the how." Example: Khalil and a collaborator editing Dockerfile lines one at a time, with a 30-second feedback cycle on each change. <a class="src" data-lesson="82">L82</a></p>
+    <ol class="steps">
+      <li><strong>Stop</strong> the change-fail loop.</li>
+      <li><strong>Zoom out</strong> and draw it upfront.</li>
+      <li><strong>Clarify</strong> what needs to happen and which responsibilities are involved.</li>
+      <li><strong>Descend one level</strong> and act again.</li>
+    </ol>
+    <blockquote class="quote">“When I'm coding, I actually spend very, very little time debugging because I always make sure I start with the question, do I know what I'm doing?”<cite><a class="src" data-lesson="82">L82</a></cite></blockquote>
+    <div class="callout rule"><strong>Pre-flight questions</strong> <a class="src" data-lesson="82">L82</a>
+      <p>Do I know what I'm doing? Why? Who is it for? At what level does this need to happen?</p>
+    </div>
+    <p><span class="badge copilot">Added by Copilot</span> Read through the two essentials: the loop failed because each guess had no clear target. Zooming out goes back up the prism (abstraction) so the next feed-forward is aimed (feedback loop).</p>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span>
+      <p>Re-prompting an assistant through changes that keep failing is the Dockerfile loop at machine speed. Restate the <em>what</em> (expected behavior, responsibilities, level) before asking for another <em>how</em>.</p>
+    </aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="essentials-metaphysical--jargon-map" data-title="Mapping Jargon onto the Essentials">
+    <h3>Mapping Jargon onto the Essentials <a class="src" data-lesson="91">L91</a></h3>
+    <p>The hierarchy runs like this. Industry topics are interlinked (e.g. builder pattern → open-closed principle → …). Above them sit the <strong>12 essentials</strong>. Above those sit the <strong>two mental models</strong>, abstraction and the feedback loop. Every essential stems from at least one of the two. <a class="src" data-lesson="91">L91</a> "There's two mental models for this whole course: it's just the feedback loop and abstraction," tied together by systems thinking. <a class="src" data-lesson="90">L90</a></p>
+    <div class="callout rule"><strong>Learn the 12, then classify</strong> <a class="src" data-lesson="91">L91</a>
+      <p>Horizontal decoupling alone pulls in hexagonal, onion, ports and adapters, stereotypical, core vs infra, levels of abstraction, separation of concerns… "It destroys the mind." Learn the 12 essentials and map each new term onto one of them instead of chasing every term. Many terms are "the same concept said a little differently".</p>
+    </div>
+
+    <table class="tbl">
+      <thead><tr><th>Jargon you'll meet</th><th>Maps to essential</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Hexagonal, onion, ports &amp; adapters, stereotypical architecture, core vs infra, levels of abstraction, separation of concerns</td><td>Horizontal decoupling</td><td><a class="src" data-lesson="91">L91</a></td></tr>
+        <tr><td>CQS (read paths vs write paths)</td><td>Vertical slicing</td><td><a class="src" data-lesson="91">L91</a></td></tr>
+        <tr><td>Package by feature, screaming architecture, modules / bounded contexts, operations (API calls)</td><td>Vertical slicing</td><td><a class="src" data-lesson="14">L14</a> <a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td>Event-based architecture, coordinator, outbox, unidirectional flow</td><td>Temporal decoupling</td><td><a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td>Composition root, poor man's DI, DI containers; OOP/FP composition, encapsulation</td><td>Composition</td><td><a class="src" data-lesson="93">L93</a> <a class="src" data-lesson="91">L91</a></td></tr>
+        <tr><td>Contract tests; result / state / communication verification</td><td>Subject/system verification</td><td><a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td>Commit phase, acceptance phase, CD pipeline</td><td>Deployment &amp; delivery</td><td><a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td>Impact mapping</td><td>Value identification</td><td><a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td>Big-picture event storming, process modelling</td><td>Domain discovery</td><td><a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td>Core / supporting / generic subdomains; glue code (RDD)</td><td>Strategic design</td><td><a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td>Gherkin, executable specifications, TDD, what vs how, declarative vs imperative</td><td>Abstraction</td><td><a class="src" data-lesson="14">L14</a></td></tr>
+        <tr><td>Sagas, state machines</td><td>Abstraction (states/steps) + feedback loop, built at the stateful domain modelling guess point</td><td><a class="src" data-lesson="91">L91</a></td></tr>
+      </tbody>
+    </table>
+
+    <div class="cards">
+      <div class="card">
+        <h4>Deriving composition <a class="src" data-lesson="91">L91</a></h4>
+        <p><strong>Abstraction:</strong> composition is "inherently the art of abstraction", building up layers. <strong>Feedback loop:</strong> encapsulation makes it evident what you can and can't do, and that constraint makes feed-forward easier.</p>
+      </div>
+      <div class="card">
+        <h4>Deriving sagas <a class="src" data-lesson="91">L91</a></h4>
+        <p>Every app can be seen as states: signing up moves you from "not existing" to "just signed up". A saga chains events and state machines, e.g. Amazon's <em>place order</em> kicking off further events.</p>
+      </div>
+      <div class="card">
+        <h4>"No more room for <em>it depends</em>" <a class="src" data-lesson="91">L91</a></h4>
+        <p>Run the scenario through systems thinking: theoretical → physical → which guesses → time budget. Short on time? E2E tests on the main flows, then high-value unit tests. Stripe API behaving oddly? Add more outgoing tests. That is what it depends on.</p>
+      </div>
+      <div class="card">
+        <h4>Beyond hexagonal <a class="src" data-lesson="91">L91</a></h4>
+        <p>Hexagonal covers technical isolation from infrastructure. The course adds <strong>what drives development</strong>: BDD, DDD, impact mapping, value, pain and benefit. See <a href="#architecture">Architecture</a> and <a href="#abstraction-rdd">RDD</a>.</p>
+      </div>
+    </div>
+  </article>
+</section>

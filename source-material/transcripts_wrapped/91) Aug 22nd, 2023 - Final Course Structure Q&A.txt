@@ -1,0 +1,431 @@
+So we're recording and I'm going to share my screen. So you see what I've got going up here. What's planned for today? So yeah, ideally I wanted today to talk
+about, I really wanted to talk about front end architecture. But yeah, I didn't give myself enough time for that. Because what really takes priority here is
+these, the early modules for the course. And so just to kind of quick recap on where I'm at with this, with shipping out all this stuff. Yeah, so I was doing
+the best practice stuff for a minute. And then we realized, you know what? Trying to ship this best practice stuff is difficult because folks need to be aware
+of the 12 essentials and the stuff we're really trying to learn. When I first started the course, yeah, like I tried to ship that stuff out immediately. But I
+don't think my skill set was where I needed it to be in terms of filming, producing content, and just getting the ideas out of my brain into other people's
+minds. I don't think it was quite where it needed to be. With all that practice over the last few months, I've landed on this tool that I've dealt out for
+myself here. And it's based on that abstraction prism, if you're familiar with. But the idea is with the abstraction prism, we have goals, the capabilities. We
+have all of the different features. And then from the features, that goes into the acceptance criteria and it goes a little bit deeper. What I've been doing
+here is I pretty much just list out the topics. And this gives me exactly what it is I'm trying to tell you. And linking them together is almost like a context.
+So that's like a domain-driven design concept. And yeah, with this here, like this is pretty much what we have coming up. So I'm going to paste a quick
+photograph of what we're going to cover in the upcoming Q and A. I just. We're going to talk about the first principles effect. So if you've been around this
+community, you probably know what I'm going to say here. If you've been around in the last while. So the first principles effect, we need to get down to the
+depths of things to really just give ourselves a confidence to feel like we've seen it. We could stop trying to diverge and take in more information. Now it's
+time to converge and just do the right things. So that's the first principles effect. Why software? We're going to talk about this stuff down here. The four
+pillars. We need to be pretty clear on what those are. We know those. The two mental models. So yes, this is abstraction in the feedback loop. And then we're
+going to go into the guess points. I like the title of this one. How to use systems thinking, stereotypical architecture, faster and the ideal developer
+workflow to work consistently and confidently decompose any design problem. And that's pretty much the main value of this course. That's what we're looking at
+right there. is being able to do that at any level. Because this course is designed to be at a level of abstraction where we don't necessarily need to. It's
+designed to be at a level of abstraction higher than just the specific topics like DVD or testing or just functional programming. It's designed to just give you
+the mental models so that when you're ready to go deeper on those things, you know what to look for. And that's like the idea of principles. You just know what
+it is you should be looking for so that when you see new things, you can see the main patterns that you should be aligning yourself to. And then, of course, the
+sub patterns or the sub principles are the 12 essentials. So we'll do a quick gist on what all of these are, and then we'll finish it off with the software
+essentialist mindset. But you could just look through this here and get the main idea of what I'm trying to tell you. I believe this is in the platform. But
+this is what I've been working on this last week. I'm just getting the entire picture of what it is I'm going to teach you all in each of these sections just
+completely mapped out. Because that in and of itself is like the walking skeleton as well. I've had this stuff here for a minute, but I didn't have this tool,
+this like topic map. And I think this is really key to just use this as the North Star. Yeah, I'm moving a lot. And I'm moving with a lot of what's the word
+here? And fine, I'm not doing as much rework. And this is moving it. Yeah, I gave it a once over, but it's a lot of bubbles. It is a lot of bubbles. So those
+are just like all of them. That's just more for me, but a lot of it needs to go cleaned up. Because, for example, when we talk about the 12 essentials, looking
+at here, this is a lot of different bubbles. But the way that we're going to learn these 12 essentials is by going through the phases of craftship. So some of
+these topics we can't actually, we can't. Dude, this is one essential fully in that spot. We actually need to break up the way that we approach it. And the path
+that you're going to be taking is just the same path I took. It's relatively easy for me to trace out. The path is just getting it, getting all these little
+topics and details on these essentials. So, yeah, that's pretty much what I've been doing this last week. My intention this week is to just film this stuff, at
+least the intro stuff. And then next week, I would love to start on the best practice first and the pattern first. Just getting the lessons in there because we
+just have some demos that are quite confusing. If you don't have the essentials to frame your conceptual understanding of what it is. So any comments on that?
+That's what? Questions, comments? Hello, Daniel. Been a minute. It's been a minute. We've been up in it. I got one in the comments. It's pretty useful to have
+these visualizations or you called me. Yeah, topic summary. Yeah. Yeah, it's really because usually what I noticed is in the industry, either you have like many
+terms for the same concept or a concept that is really linked to our concepts. You're like saying sentences and you say, ah, this or this or that. So the way to
+grasp it is to visualize how connected. Yeah. Yeah. Absolutely. Thanks for, yeah. Thanks for leaving that comment in there. Like I found that is definitely. And
+then examples are the things that is going to really make it solid. So this thing here, this can only get us down to the level of just conceptual understanding,
+but the lessons themselves and then the examples afterwards and the demonstrations. I think that's how it really gets ingrained in the new doing it. But yeah,
+there's for someone coming into this industry, there are so many concepts and ideas and terms to be aware of. And if I just sat down, I could talk for three
+hours, just connecting. I can, I can create a connection from the builder pattern all the way to the open, close pattern and open, close principle all the way
+to something else. And I could just be talking for a really long time because these topics, a lot of them are related and that's the thing we're looking for
+here is the highest level of relation, which is the 12 essentials effectively. Or an even higher than that is just the two mental models, which is the feedback
+loop and abstraction from those two mental models. I love how you can really just explain everything. For example, here's something that I was, I was exploring
+today. Let's say that you, you don't know what sagas are, or you're like, how do I do sagas properly? Who here is, I know Daniel's familiar with sagas. Are
+y'all familiar with what sagas are? Danny and Yale and sorry, I always mess up your name. Is it Ozman or Ozman? It's Ozman. Ozman. All right. Gotcha. Yeah. That
+Maine, I think about Gucci Maine. That E at the end of the. Yeah. Well, yeah. And thank you, Danny. About what you said. How hard I've been pushing. Yeah, I've
+been. Yeah. Exactly. This thing here, I could see this bleeding out into the, this is the framework for the front end course. This is the flagship conceptual
+model for you to just quickly be able to do the subsequent front end course, the subsequent testing, object design course. All this other stuff that we want to
+get to later on. Much deeper. And yeah. Also probably not going to get to that stuff after, until after I finished the books. So books are coming straight after
+this, but following that stuff. Yeah. There's, this is just the architecture for everything we're going to do later on. It's the architecture for this whole
+community is this course right here. But yeah, what I was trying to say was. If you, if you have a question about like our. Actually, I would use my iPad to
+draw this out. Let's see if I could draw it out like this. The way I explain what abstraction is. It's it's, we have a problem. Cause we start at one place and
+they want to go to another place. Cause software is just for solving problems. Just from getting from here to there. So abstraction is. Just the highest, your
+highest level of understanding of what the problem is. And identifying the concrete, discrete steps for you to get there. Now we can explain these steps as past
+tense. Events, or we can just call them states, or we could call them steps. That's all of this is fine. But abstraction is just the highest level of us
+explaining this when really what's going on behind the scenes is there's smaller, tonier and lower and lower level steps abstracted away from us. We're not even
+aware of. That's what abstraction is fundamentally. Right. Right. And you can see how this connects to the feedback loop because the feedback loop itself is
+you're from here and you want to get there. And what you do is you take one feed forward and then you get feed back. And then you learn, and then you could make
+your next attempt a lot faster, a lot better. And we need to get feedback and we need to make sure that we refine one system first, before we go to the next
+system. So from here, this conceptual understanding, if we want to understand what sagas are, we can build off of this to understand sagas. Sagas are the state
+machines that represent what application actually is. So we could think about every app that exists as just states, right? Like when you sign up to Facebook,
+you didn't exist at all. Right. So we can do that. So we can do that. So we can do that. So we can do that. So we can do that. So we can do that. And then all
+of a sudden you signed up. Right. Now you have a state in the app. So what's going on is if this is a database down here, when you do this first command. So
+let's do this one's called sign up is the name of this sign up. And then what's going to happen is it's going to create some state in the database. And now your
+state is you're in the, I did just register, just signed up state. Sagas are about chaining things together. It's about chaining a sequence of events that might
+need to happen in sequence. If you were to purchase something off of a website, Amazon, once you purchase, once you've done place order, that kind of kicks off
+a bunch of other events and a bunch of other things. Sagas are all about the little state machines and events that kind of link together to create a sequence
+of. Yeah. That's like we're going to be doing here in the intro is just getting that foundation down. And then when we look at these things more deeply in, for
+example, the guest points, we would eventually end up at the, the stateful domain modeling guest point. And this is where we would thus be talking about sagas.
+And that stuff will finally make sense because we'll be doing it on a strong foundation of the mental models of gentlemen. Yeah. So that was a lot of words, but
+yeah. I'm just hyped about this stuff here. Does anyone have any questions, anything they wanted to go into today? And for everyone who's just joining in the,
+yeah, the major update here is one. Yeah. We got this baller main ideas of software essentialism doc here. This is just, this has all the main stuff. I'm using
+this as the North star to just piece everything out. So you can keep on checking back at this. Uh, today I'm just flushing up the rest of these topics in here.
+I'm going to link everything together. I've put like these red stickies just to signal where I have work to do. So there's quite a few of these. I still have a
+lot of work to do. Some of it might be a little overwhelming like this, but these are going to turn into the videos. So if you'll see like why software, the
+first principles effect, this is the slide that is pretty much at the beginning of the intro module that we're going to cover all of these things. Intro is
+going to go through all these different, each of these different lessons. And then that's pretty much it. So y'all can take a peek through that stuff. I still
+need to link these ones together. See, I'll look at that. Not that, but man, I'm just hyped. Finally, this is the little, how I put it. And this is just the
+little tool that I think I was looking for such a long time. And it finally emerged just this tool to piece everything together. Yeah. I'm loving this. There's
+a lot of stuff here in the, the 12 essentials. This is a good view to see how things relate to each other. For example, if I go over to which one. Oh, here's a
+good one. Let's go down to composition. So each of these 12 essentials, right? The what happens with the physical and the theoretical essentials. They all stem
+from the two main mental models, the two metaphysical ones. So the two main metaphysical ones are, of course, it's abstraction and it's the feedback loop.
+Right. So you'll see they're purple here. I should actually make these different colors. I'll make these. Yeah. I should make these ones a little bit different
+colors. That would make it. Yeah. Just more evident, but each of these 12 essentials stems from each of these essential stems from one of the, what, at least
+one of the metaphysical ones. So for composition, how was composition related to abstraction? It's inherently the art of abstraction. It's inherently composing
+together things to build up layers. And how does it relate to the feedback loop? When we encapsulate stuff, it makes it more evident what it is we can do and
+what it is you can't do. So that is like a constraint. So it makes it a lot easier for you to perform feed forward. And this is just a tool that helps you make
+your designs more readable and understandable. So it's like a design tool in that sense. But it's also, it's also an object oriented tool has a functional use
+and it has a more strategic, like human developer experience use as well, which is really cool. So this looks like a little bit of a mess right now, because I'm
+still moving this stuff around, but just look and see how this relates to object oriented programming, how it relates to functional programming, how it relates
+to the main principles of functional programming, like polymorphism, inheritance, encapsulation. Right. And we talked about this earlier on. We talked about the
+levels of realness, which is a really key concept, which is that, yeah, we could go from the least real like interfaces and types to the most real. This is why
+I don't really like the way that we often learn object oriented programming is we just, here's this, here's a class that does this. I only really want us to
+learn things for a purpose. And the purpose is we're learning the tools on position. In this case, we're learning the tools that are going to help us write
+scalable code. And we can trace this back to that purpose. So yeah, these two main metaphysical essentials, this is the feedback and abstraction. So yeah,
+that's my rant on where we're at with this. What's coming up? What's coming up is these modules. Yeah. Let's see how it goes, but I'm going to draw this entire
+thing out and then I'm going to start recording. That's the plan. And get the rest of it going. So a lot of these things will move to their appropriate
+sections. We're obviously not going to cover all this stuff. Just a big clump. But the phases of craftship, here's, sorry, this is the last thing I'll say on
+this. This is, this is the last thing I'll say on this. And then let's go to some bespoke questions from here. And then dive into whatever territory we'd like
+to go into. Last thing I'll say is the phases of craftship. I'm filling this out. You might've heard me say that the 12 essentials are things that we can rank
+how good you are with certain essentials. For example, when you're at the code first level, if you could just build. Dope. You could build, right? You can
+connect the front end to a back end, or you could just build an API and connect the back end to the database. So if we're ranking your horizontal decoupling
+skills, we might say that's a two out of 10 because great. You can connect some levels of the code abstraction together. And also you might be able to, it's
+like, why are you, what's the purpose of this endpoint in the first place? Can you connect that to acceptance criteria? Can you connect that to the actual
+goals? Can you connect that to the role? Maybe not. Maybe not. But there's a chunk of the levels of abstraction that you can actually achieve. And if I was to
+show you again, the, where did I put this? Yes, here it is. Not the image. We'll show you again. Yeah. Like you, you probably you're still in the code levels
+here. You're probably not thinking about any of this at the code first phase. None of the, sorry, I need to probably draw this. This is not easy drawn on block.
+Probably not thinking about any of this stuff at the code first level. Probably just more thinking about that. Okay. Forizontal decoupling, just mostly
+physical. And then as we move on, decoupling skills, because we're going to carve out that four layers. End to end testing infrastructure. We're going to
+introduce a three tier architecture on the backend. The controller is just going to be doing controller stuff. The, we're going to have something to encapsulate
+the database persistence logic. And then we're going to have application code. Pretty good. Right. And then also we've talked about some of those other things
+as well. There's more essentials as well that we're going to work on here too. But the way I see it is we go through the phases of craftship and we're going to
+build on each of these essentials. So by the time we get to value first, we need to be pretty good. Like this should have all of, all of the physical essentials
+should be here. And we should be feeling pretty confident about that. And if we know we have that, we have the skills. Now it's time to just, let's take on
+some, let's take on some challenges. Let's learn how to use faster to just solve like decompose problems. Cause now you have the skills. Now let's just make
+sure we know how to move stuff through the guest points. And decompose properly. This all makes sense, right? Hopefully. Just going to check the chat. Yeah, it
+is a process. In reality, this took me, geez. Yeah. Like six years, six, seven years or so. So it is a roadmap. I think by the time this course is done, the
+course is probably going to end up being like a 12 week course is what I think. If I can really consolidate this stuff down cleanly, I think it'll be around
+anywhere from eight to 12 weeks is probably what's going to happen. And then we might be able to remove stuff as well. But that process comes a little bit after
+we have all the main stuff in. So this is the roadmap, but yeah. So any other thoughts on that? I haven't seen anyone really approaching this subject matter in
+this way before. Yeah. Neither have I. Yeah. But you guys feel lucky to see it getting built. You guys are seeing all kinds of mad science behind the scenes
+here. All kinds of mad science. Yeah. Yeah. Daniel saw the, Daniel saw a lot of this stuff right at the front. You know what? Danny, you're saying most seniors
+and leads just hand you thick bucks and say, be better. Get good. Yeah. That was what I heard. I heard that a lot of that too. And also you hear a lot of, it
+depends. I'm like, yo, it depends on what? They're like, it just depends. So this is all just a process of figuring out what it depends on. That's what this is.
+Yeah. Oh, I hate that. I hate that. It depends. We don't, there's no more room for it depends now. Because if someone said, okay, what's the scenario? Okay,
+cool. Let's take that to the systems thinking then. Let's take it straight to systems thinking to see exactly what it depends on. Let's think theoretically.
+Okay. Now let's think physically. Okay. Now let's think, what are the guesses we want to make? Okay. Let's think how much time do we have? Okay, cool. Let's
+just do end-to-end testing then. And then we'll just do the main things. And then if we have time, we'll do some more high value unit tests. Great. Oh, you're
+saying that the Stripe API is weird. Okay, cool. So then we'll make sure that we do some, we'll do a lot of outgoing tests as well. Great. That's what it
+depends on. Or I need to build as I remember when Ryan joined this community, Ryan was asking something about scheduling. How do you even begin to think about
+scheduling and implement a feature like that? Okay, cool. Let's get clear on the theoretical. Can we come up with a concrete example for how this would even
+work in the real world? Like how is this supposed to be experienced, right? What is, who's involved in the process? So we get clear on that concrete example. So
+that's going to happen in the architecture guess point. Then we can just, there's something we need to do called the three-step RDD process. What we do is we
+list out all the responsibilities we possibly can, sign them into roles, identify what those roles are, how they collaborate. And then let's go find tools out
+there on the internet that will implement those roles. Oh, something called RabbitMQ. Oh, okay. Something called Mondodini. Oh, something called that. So we can
+systematically work our way through solving problems. And that's, that's what it depends on. Really. So yeah, that's pretty much what we're doing here is this,
+and that's going to give you, it's just the systems thinking is going to give you the confidence to solve the problems and figure out what it depends on. Hell
+yeah. Hexagonal architecture. Huge. So I'm going to just read that out. Some supplemental talks, literature to look into, might be stuff around hexagonal
+architecture. The ideas around isolation from infrastructure are there, but those are just the, yeah, the technical pieces. Khalil's course though broadens its
+scope by also including what drives development in the first place. Yes. It's the BDD stuff. It's the DDD stuff. The BDD stuff. Impact mapping, all that.
+Getting nice and weird talking about value, pain and benefit. The, that's the stuff. We love it. All right. I think we're good, but let's check the time. Let's
+do an hour of, is it this time? Q&A. Today is the, comes to seconds. All right, Q&A time. What are we getting into? I'm glad there's an emphasis on the mental
+models. It's the bits I think that gave me imposter syndrome for ages. Yeah. Yeah. It's the mental models, man. Yeah. It's, there's just two, two mental models.
+Just those two. That we start from there. We can draw out every other. One of those essentials. And it's such a cool thing. Right. I'm going to go too deep into
+it again. But as I was saying, look at this. What are we seeing? The vertical slice. What are we seeing here? It's also for horizontal decoupling, right? Cause
+if we were to. Get clear on what is this layer right here? Anyways, what is this? Right. This right here, we would say that is. This very well could end up
+being the domain. So then. That's going to be our. Yeah. This is going to be our horizontal decoupling here. Domain. And that'd be app. Activation there. Right.
+And then infrastructure. So vertical. Up and down. And then horizontal. Which is just the pieces here. And there's a million different ways to say horizontal.
+Let's look to this again. Horizontal. Decoupling. Look at all the topics involved with this. And I'm sure you've heard a lot of these out in the wild. There's
+so many topics involved with this. And that's not even all of it. Hexadonal. Onion. Works and adapters. Stereotypical. Core versus infra. Levels of abstraction.
+Separation of concerns. Roots. Right. There's so many different. Topics and concepts. It's just. It destroys the mind. So I said. Screw that. We have 12. It's
+12. Start with the 12. Let's make sure we understand the 12. Then when you encounter something weird in the world. And you're like. Wait. What is that? What is
+CQS? What does that mean? Ah. Okay. Cool. So CQS is just. Okay. Cool. So CQS is just talking about. Read paths and write paths. And that has to do with the
+vertical size. That's the idea. That's what we're trying to do. Brilliant. Hey. Having a vocabulary is important. It's one of the most important things. Yeah.
+We need to make sure we're all talking about the same stuff. Which was a very common problem I had. In the past. Working at. Friant Consultancy. We are talking
+about the same thing, my friend. Dan Abramov just said it a little differently. Okay. Yeah. You know. So anyone who have. What do y'all want to get into? The
+way I'm structuring this out. I had two for the last Q&A. What I wanted to do was. Let's dive into front end architecture. And I have it structured out real
+nice for y'all. But I didn't have time for that this week. Because I was doing this stuff. We're back to. Loosey goosey. In this Q&A. Anyone have any loosey
+goosey questions that they want to get into? Topics from the stuff. Otherwise I could just raise some stuff that I think might be useful for you. So I'll just.
+Pause here for a minute or two. Let you think about it. Let you think about what you're working on. And if no one has anything, I'll just drop what I want to
+talk about. Good question. What's my thing here about. Just some more front end stuff I did recently. Loading states. It's a good one. We covered this recently.
+Just in a side thread. I could just explain this here. This is a good one. I definitely get the most value by watching, participating. Okay. Yeah. That's a very
+good comment. This is very helpful, by the way, as I structure out the rest of what we're doing here in the course. So maybe I'll actually ask a couple of
+questions on this in a moment. This is really it. I think we kind of need some loosey goosey Q and A's every now and then, actually. Yep. Project section. This,
+that's actually related to this, this topic here. Very good. Gentlemen. I see. It doesn't. Let's do the swan. Very good stuff. That's going to mention here. Is
+just the. Humanity. So we're chased by a swan. Come on. We're scared. Anyone ever seen that episode of curbing enthusiasm with this one? What the, the golf
+course. Copy this one. All right. I think that should. And if y'all have more things y'all want to drop in here, please feel free to do. So make sure I see it.
+And we'll talk about that. I'm going to just start saying words now. Let's work through this y'all. Okay. So I see there's a couple of themes here. Right. The
+main theme is on just taking in content and some suggestions. For yeah. It's a lot of stuff. Yeah. We'll start with this. How far do the phases of mastery? Do
+you think we should start thinking of trying to apply what we know to a project? I'm not sure I fully understand, but maybe when I'm, if I could just. Extract
+what I think we're getting into here. Maybe if I gave you concrete next steps for each of the sections for, okay, now take this, what we just did here. Now go
+do this on your project. Maybe that's. Maybe that's. Would be more helpful for you to actually concretely know, okay, here's the next steps for you to go and
+do, go do this now. Cause we could do that every time we learn something new. As we move through the phases, pretty much. Like when we learn E2E testing, I say,
+okay, great. You guys now know how to do the four layers. If you don't have this and you're writing E2E tests and they're flaky. Here's the reason why. What
+should you do? You should do is you could do this on your next feature or. You could improve an existing feature, but just roll this out simultaneously, roll
+this out in a new branch. And yeah, just make this a part of your infrastructure. So maybe the question is how, maybe the, the, the ask is to make it more
+clear. How to begin to add this stuff into the project. Or maybe the question is when we will. Make that more clear. So questioning the question. By the way, if
+anyone has mics and they want to draw a font here on the mic, that's completely cool too. If it's easy. No worries. That's fun. I think it could be quite
+feasible. I did have that in mind initially for us to do this. Let me just drop this in here as well. We could probably do something like this. Just need to
+think about the, we just need to do the same stuff. Or we think about the goals. We need to be involved. What are you guys going to be bolded? So I could give
+y'all something to build. Is one way of looking at it. And then the other thing too is. You could just build something. On your own. That you want. That is
+interesting to you. And realistically, there's nothing stopping you from doing that. So maybe if the community was just designed in a better way to help you.
+Find people who would be interested in working on particular projects. Maybe that's something. We could talk about. And I have a quiz chat. Yes, sir. Hi. Hello.
+Thank you for this answer session. Of course. My question is, in my current company, we do the right test. As our managers believe that we don't have time for
+it. Lots of stuff. I don't, I don't agree with them. But they want us to come up with the architecture. And sometimes it's really hard to apply what we are
+learning. The real scenario, real projects that we are working. I'm not sure how, when can we apply these stuff in our real world pod. Huge. Okay. Let's talk
+about this. Because I've heard this a couple of different times. In a lot of different ways. The reality is you could apply it immediately. Like a lot of this
+stuff you could apply it immediately. It's just, seems like you need to get sign off, right? Correct me if I'm wrong. For example. Yeah. Correct me if I'm
+wrong. If you need to, let's say, end-to-end testing. Right? Okay. What's stopping you from doing? The main problem is hiring problems. They're coming with new
+projects. They have some deadlines. And we need to develop and implement those features by the timeline. And we, yes, adding entrance tests, adding unit tests,
+becomes some delays. And we don't have proper time to be prepared. Even for preparation, that's for starting those features, those unit tests, end-to-end tests.
+It's, it's mostly the time. Time. That it's always coming out of this time thing. Trust me. It's, it's never going to not be this problem. So I can give you
+everything you need to know, right? But at the end of the day, it's, it's doing it. And at the end of the day, it's like, it's the culture as well. Because if
+the culture is a culture where it's hard to convey the value in what it is you're doing, and they don't really care. You know, and also you're a developer. So
+when I go to the, when I go to get my car taken in to go change my tires, I'm not dictating how my tires get changed. I'm just, all I care is that my tires get
+changed. I mean, it gets changed properly. Realistically, this is a skill you need to develop and you should ideally develop it on your own time because you
+need to practice. But then when you go to work, you should implement the professional skills. So that's the, the ideal is you could learn on the job, but how
+would you feel if you went to get your tires taken and you get your tires checked and you were experimenting with the new approach to changing your tires. And
+that probably wouldn't make you feel very good or safe. Right? So I look at it the same way. And yeah, as Daniel says here, if you ship without any tests,
+you're trading off time for quality. So maybe that's something we need to make more clear. Cause I see that as a limiting belief where it's, I don't have time.
+I can't start doing this stuff. It's, it's just the, what do we value more? And sometimes we just value more shipping fast versus quality. And that's okay. But
+let's just be very clear. That's what happened. That's what's happening. It's strategy, right? That's a strategy part of this. So I'm going to actually just
+note that down. That's a good one. What do we have time? What do they say? You can have time. Sorry. You could have quality. You can only have two. What was it?
+Somebody knows what I'm about to say. Yes. Speed. Quality, speed. Or what was the other one? What was it like money or something about cost? I think it's that.
+It's a balance. You can only have two. I think it's like the ID, like the realistic. Fast, good, cheap. Yeah. So there's, this is actually another good thing
+that Daniel raises here too. We're going to talk about this in best practice. I'm going to just make a note because this is getting raised again. But yeah,
+fast, good or cheap. Depending on the architecture, right? Sorry, I'm just going to assume to Ryan. Do y'all do any tests at all or not really? No. All manual
+testing. Sorry. Just make sure I understand you're doing all manual testing. Yes. It's all manual. Yeah. That's an option, right? The feedback loop. What's your
+score? One. You get one on subject verification as your score. That's fine. It is what it is, right? Because sometimes you need to ship. But you still want the
+capacity to be able to do things the right way. But sometimes you will work on a project where it's just not feasible for you to do that. You still, there's a
+difference between not being able to do something and not doing something. There's a very, there's a difference. It's having the capability to do this. But not
+doing it because it's strategic versus I can't do this and I don't even know what the right thing to do is. All I really care about is giving you the ability to
+know what the right things to do are. And for you to be able to make the correct decisions. Because sometimes you will be on projects where. Yeah, it doesn't
+really matter. So don't do it just because it's like a craftsman to crafts person thing to do. Software craftsmanship. Don't do it just because of that. You're
+trying to help a customer succeed. So you got to do what you got to do. Make the customer succeed. And make your users happy. If it gets to the threshold where,
+oh, not having tests is now really messing up our ability to keep the user in benefit and to keep the customer in benefit. If not having tests is now messing up
+your ability to do that. Then. Explain that to the customers and make that very clear. Here's what's going on now. And we've made this decision. You should
+probably make this clear to them ahead of time too. Hey, we could keep going like this for now, but here's what's going to happen later on down the road. I
+think that's the win. Thoughts on that? That sounds reasonable. Yeah. Yeah. If I agree with on that. Yeah. That's reasonable. Yeah. It's totally cool. It's
+just, you want to make sure people are aware. You just have the responsibility to inform as a professional, right? Because ultimately they're paying for it. So
+you just have to inform them what the correct, what are the repercussions of the ways that we're working right now? If they're aware of that, they make the
+decisions. So customers supposed to make business decisions and developers make development decisions. If customers are like, Hey, we need this done in bare
+bones approach. That's going to take the absolute least amount of time possible. And you're like, okay, cool. Yeah. I guess this is the way. Cool. They've made
+the decision. It's about balancing those responsibilities. So I think that's a huge mindset thing too. I'll drop that actually in the mindset training that
+we're going to revise. Cause that's a very key thing. Know your role. I'll just also pin out here on. Yeah. Oh, excuse me. Know your role in this type of thing.
+It's a good discussion. Thanks for asking. This is a really good one. We happy on where we ended up with this one here? I think everyone. All right. So let's,
+let's see. Let's come back to this. We just talked about that. Boom. Boom. What's the next one? That's nice. This is related, right? I believe Danny asked this.
+How far in the phase of masturbation we start thinking? I'm trying to apply what we need to do with a project. Danny, you asked this question. Do you feel like
+some of what Ryan said echoes maybe what you were feeling when you asked this as well? And I'll just hang for a moment before I jump onto the next thing.
+Awesome. Awesome. Great stuff. Thank you. Good. So this is related. Let's just drop that over here too. Bing. Next. Let's get to the next thing. Thinking of the
+ways I learn. Definitely get the most value by watching, participating with someone reasoning out loud their thought process and designing and implementing a
+system. So hopefully there will be lots of that. Okay. So our system in general. So that's like from the very start. And then there's the thing about coding
+pair activities would be great. So if I'm just doing context map out some of the things we're talking about here. We're talking about what you call it like
+code. What's that code screens? Just like watching live. So there's that. And then we have something here like. I may need to delegate somebody in this
+community to take on this action. So I very well could end up climbing. Well, I'll comment on the part here that I can definitely solve. And that's, that's has
+to do with the course content. Right. And I think that's, I'll take this out. This is related to, right? For example, a project is being implemented or even
+just explored. Yes. And then this is also a pair stuff. And what's this one? We're starting a new project at work. Blah, blah, blah. So I think this is probably
+similar, but we'll get to this one as well. Separately. I think this is similar to what we were just talking about. Perhaps just, okay. Okay. Yeah. So we can
+dig into that a little bit more, but if that's also pretty much the same thing that was being asked just in a different way, it's totally cool. So let's talk
+about this. I think the projects, the code stream, maybe what we need to discuss here is a format. And then we'll talk about this. Here program is, and I'll
+drop out here. There are those great. Look at this. Figma is just the MVP of this. This whole queue. I swear to God. It's holding everything together. Okay.
+Yeah. How are we going to break this apart here? All right. What we'll do is maybe I'll explain what I had in mind for this. For this, I'll ask a couple of
+questions and then we could just do a quick little back and forth on this and make sure that things decent. That'll be very helpful for just the finale of this.
+The structure here, which is what we're looking at. We just know plan is. And then I'm going to talk about resolution. We're actually going. So I'll share that.
+So I'm decent. And before the current plan, so I have to actually ask the question. Question. Okay. So the first thing I need to do is I want to ask for those
+of you who have watched the, some of the best practice videos where I was like live coding. And I was saying some of the words as I was voting, is that kind of
+what you mean by watching me think out how I'm coding and why I'm doing what I'm doing? Or I see you're saying designing and implementing a system, right? Okay.
+So I haven't gotten to those yet, so I can't comment on those. Totally cool. But good to know that this is something that we really like and enjoy. I also enjoy
+this stuff myself. I'll just say that. I haven't quite seen it. For anyone who has seen it, I know some of it, like the audio is a little bit weird. Has anyone
+seen this stuff? Does anyone have any comments on this so far? Otherwise totally cool. This is great. This is a feedback loop right here. Haven't gotten there
+yet. No worries. There's tons of content folks. No worries. That's great. Content for days. I'm so silly. I thought this course was going to be designing and
+implementing systems. I was trying to be generic and come as more than coding. I think reasoning through architecture. All right, great. Yeah, this is good.
+Thanks for expanding on that. Thank you for it. Yes. Great. All right. This is definitely moving towards what I wanted to talk about and what I had in mind
+here. So if we extend this question with this, then yeah, let me show you what I had in mind. So let's go to the current plan. During the phases of craftship,
+we have, we're on a mission here, right? The mission is I need to teach you skills. To teach you skills. Yeah. A lot of stuff was leaped up. A lot of stuff was
+like muffled out for some reason. I think I used the wrong mic and then it just completely tanked the audio. I'm like, ah, I'll just put it there. They're going
+to have to re-record. But anyways, we are on a mission with the phases of craftship, right? So what we're doing is we're trying to learn these skills. So skills
+first, we could learn how all of these work in the way that we're going to do that is you've seen so far code first, just build something simply. Let's make it
+work. A couple endpoints. Best practice first. What are we doing here? I should probably make sure I actually have this. I'll just document it here for now. Do
+we do? Oh, it's actually the challenge right there. So we're going to build that best practice first. What do we do now? We realize that manual testing is bad.
+Oh, yes. So maybe I need to put the, the improvement. I should actually have that in here. I have another. I just quickly. Nope. Oh, yeah. Oh, actually. Yes.
+You can do this. Yes. Yes. I can. Yes, I can. Okay. So problem. Right. We talk, we go through the various problems and then we implement like how we're going to
+fix it. So problem. Climb maybe solution. And then what it is you have to do. For example, horizontal decoupling. What are we doing? We're doing manual testing.
+Not great. What do we need to do here? What we need to do is P2E test. Let's get the most valuable tests. It's also related to abstraction design as well.
+Right. So we're on a mission to learn some skills. So this part of the course is the way I see this is it's just lessons. Plus the lessons are going to be
+slideshows. Me just talking to you. And then you see me do it demo, and then you can go and do it as well. Assignment. But the assignment is going to be either
+you can do the assignment. Or apply this in your own. And gives you next steps to do that. That way, if you identify that there's, you have the same problem,
+you know how to fix that. Does this make sense? This is not the end of me answering this question, by the way. I'm just, I just want to check and make sure that
+what I'm saying right here makes sense. It's the vision for this. Okay, great. In that sense, we're going to get a little bit of this, right? A little bit of
+what you're asking is here. We're just doing it in what I call the straight lines. So this, the phases of craftship, this really truly is my experience that I
+went through myself. Learning all this stuff. I've just reverse engineered the path through the topics so that you can get a sense of, yeah, I've just reverse
+engineered the topics so that you can move through this stuff and learn the topics you need to when you need to learn them. Instead of just spending five months
+on domain-driven design. Okay, cool. Right now you spend five months on studying railway or in some programming. Not that useful. Let's solve problems, right?
+Topics for problems. So that's what we're doing here. So the straight line. So that's the vision for this. And we're going to keep on doing that until we get
+all the way down to the end. So I'm just going to quickly jot this out. Manual testing is bad. We're going to fix that. And we're also going to say, okay, we
+haven't done this on the front end as well. So architecture wise, we're going to go from just MVC, like the backend where it's JSON to we're going to go to MVC
+where it's, you actually have a front end as the view. And then you have the back, right? So we're going to do that. So this is again, more of a horizontal
+decoupling that we're improving. And then we will also make sure that this gets deployed because what's the first thing we need to do on any project? Remove as
+much uncertainty as possible. So deploy and we're going to deploy the walk and skeleton. All right. There's other things we need to do as well. But this, I
+would say the main theme here is encapsulation because it's like the author, we want to encapsulate infrastructure. And those are some of the main things here,
+but we will know how to do the end-to-end testing. And we'll also know how to do integration testing. And where did we do integration testing? We did this when
+we started and stopped the DB. Right. When we can start, stop the server. And we also use composition, which is like just a prerequisite to even be able to do
+any of this stuff. Because everything was just a big clumpy mess. So that was like the first thing we needed to do. So these are a lot of challenges that look
+just from code first. There's a lot of things, best practices we had to do. So again, I said, I want you to have the ability to do this stuff. Are you always
+going to do it? No. But you need to have the capabilities. You need to have the capability to do the right things. You might not always have to do them because
+it might not be strategic. But you need to know that you can and when you should. That's cool. We'll do that. And we'll pretty much get all the way up to a
+deployed. We all the way to a deployed, a deployed front end plus back end. And it's pretty much it. We're going to get there. And one other thing we have to
+cover in here as well is talk about project structure. All right. This is a big one for a lot of folks. Project structure. Big one. Where am I kind of
+discussing some of this? I think some of it was in a composition, but yeah, I probably need to list this out. So I'm going to just raise that. Cause that's a
+big one that I always get asked over and over and over. How do you structure this out? How do you structure this out? What's the best way to design your
+project? So related topics. Developer. Use cases. So that's some of the stuff that's really. See you later, Danny. Thank you for coming out, my friend. Check
+you later. Alex says a part of the project structure scares the hell out of me every time anxiety bumps up to the top. Yeah. So if we just have to think about
+project structure and we start from this. We're in good shape. If we understand the theoretical and the physical, we're in good shape. Everything we're doing
+with project structure wants to, we want to drive it through this fundamentally. Is the main thing. I'm here. I think somewhere I will module. Nope. I think I
+wrote domain. Interesting. Oh, there is. I didn't assign this stuff yet. Design. Abstraction prison. Package by feature. Infrastructure. Design.
+Discoverability. Understanding. Organizing. Combo with that. Yes. It's all this stuff right here. Coupling and cohesion. Yeah. This is a great conversation.
+Great conversation right here. That needs to be had. And this is project structure and sharing dependencies between front end and back end. Right. But very end.
+We'll be looking at. This. These things together. So that's best practices. I could go through the rest of these right now. I actually will do that because it's
+important to do. And then I'll ask for comments. Pattern first wise. What are we doing here? What do we have? Where are we starting out here? Pattern first.
+Start. Who we got? We have a front end. With D2E tests. It deploys. D2E tests. To the DB. Right. On the back end. What do we have? We also have some end-to-end
+tests. It's relatively just chill. But what we want to do now is our goal is. Goal. It's to learn how to write the high value unit tests. We want to learn how
+to do this. And in order to do this, we're going to have to learn some patterns. So this is where we'll get into all of the fun front end and back end patterns.
+Right. Some of these come from DDD. Some of them come from hexagonal architecture. Just general enterprise patterns. And. And if I show you the structure of
+this, what do we got? Down here in pattern first. This is what we're going to do in pattern first. First thing we'll do. Decouple from infrastructure. I'm going
+to have to teach you about hexagonal architecture. Dependency version. Might as well write some of this right here. And the many patterns. So we'll do this on
+back end first. And then front end after. Then we get to do the high value unit testing and we're just going to do result verification. This is a part of
+subject. Verification. Right. So this is just going to be validating the, the result. Pretty much. That's it. Here we're going to continue with subject
+verification, but now we're going to be using this fun one. We like to call communication. Communication. Or behavior. Verification. Which is validating that
+state changes happen when they should. Right. So that's what's going to happen next. Contract tests. We should know how this works now. I think we covered this
+in a Q and a previously. Osman. Yeah. We covered this where we talked about contrast contract testing. And the big problem with contract testing are like with
+using mocks is it was like, wait. I'm mocking. Is this even useful at all? Is it just actually covering my code or not? It is covering your code. If you do this
+thing called contract testing. If you don't do this thing called contract testing. You're going to be having two divergent code paths. You're going to have your
+code path where you're using mocks in your code path, where your production code is doing something. What you want is your production code and your test code to
+be the exact same. And the way that you do that is by introducing contracts. Send me integration. Contracts. Vision testing. Client. That there's. This is about
+the state machines, state changes, sagas. Right. How to listen for events. And chain business logic. Right. Instead of just putting everything, instead of just
+putting a ton of if statements at the end of your API calls. Let's be all been there. I know. So that's pattern first, right? Skills. It's all about skills,
+really. Three-step process. I'm moving through this. I understand I'm taking a minute to answer this question, but I really want to make sure that everyone
+understands what we're getting to. Once we have, let's talk. Where are we going to be by the end of this? By the end of pattern first? By the end of pattern
+first? The state of the universe. Let's describe that. This is what we'll be looking at. So pattern first. And what we're doing to our code base essentially
+here is we're making it like perfect. And you're never going to have the ability to make your code perfect in the real world. But that's what we're doing here
+because we're learning skills. Right. We're moving towards the ideal. And you're probably not going to be able to do the ideal in the real world, but you're
+going to be able to use aspects of this ideal. So by the end of this front end code is going to be minty as hell, right? Front end. It's got the right patterns.
+That you could test your app domain logic using high value unit tests and infra using contract. So this is going to be both front end and back. On the back end,
+you're going to have chained business logic using an observer. Okay. Perhaps we may use some infrastructure for this because it is a, this is, we're talking
+about messaging here really. And this can get very complex and involved if we're not using the right tools. So we'll discuss this. I still have to think about
+how I want us to do this. Um, if I want to dive deep into that abstraction or just keep it more high level and us to go lower level later on. But messaging is
+very important. So we're going to have that. And then what else here? Yeah. That's looking good. Just pretty much building up the core. Thank you, Yale. We'll
+check you later. Right. That's what we got. And then, yeah, moving into responsibility first. The problem we're going to have is sometimes you'll need to build
+stuff on your own. That doesn't quite exist inside of a pattern. And you can't just pull from a library or a framework. That's the big problem you're going to
+face here at this point. You can't really just yank this thing from the outside world. So I need to teach you how to now do object design. And you can actually
+teach you how to design from scratch. This is going to be roles, responsibilities, collaborations. And we got to talk about the stereotypical arc. And as a
+quick example of something that I had to do recently. Let's see if I can pull this up. Yes, I can. I was asked about. Momentally. I was asked about how to set
+up like. This is something I just quickly drew out using my responsibility first mindset. I just listed out all responsibilities. Let me see if I could show you
+some of the code here. I'll show you where it starts because we should always work outside in. Pretty much started here. Let me conceptualize how it would work.
+So presenter loads posts. Presenter is loading posts. Show loading. Presenter has loaded posts. Blah, blah, blah. That's pretty good. And then how does that
+happen? I could have put all the loading stuff in here. But I just created an abstraction called loading state. And then where's loading state? Loading theory.
+Simple. Nice and easy. And this is just one way we could do it. We could use abstraction. We could use abstract classes. So here's where we're going to go a
+little deeper into those topics. And know how you could do this stuff. So you could begin to solve the 9,000 different problems. Once you're done this course.
+And once you're out of this phase of your craft's journey. Guaranteed there's going to be 9 million other problems. Can't spell that. 9 million other problems
+that you're going to need to solve. This is the tool. This is like the foundational deepest level of abstraction tool. That you're going to be able to use to
+just design anything you need to design. So we'll have to build some custom abstractions. Things I had in mind were, yeah, like the loading state. Custom
+router. I also had the idea of a unit of work. Right? So dealing with transactions properly. So all of this stuff can get designed now. Or maybe something else.
+But this is the art of abstraction design. Which is, to me, probably the hardest part of software design in general. But I would say also the most important.
+Because if you can understand the doings and knowings. Doings. Doings. Knowings. If you understand the doings and knowings, you could design anything. If you
+know where those doings and knowings go. So that's what we'll do here. Value first. Let's just put it all together. And now, finally, y'all, we can use faster.
+Finally, we can use faster. Remember when I brought this up a long time ago. And I tried to get everyone to use this. We were just not quite there yet. And if
+I'm really being honest. You had. How could you have been there yet? Because you need to go through the same experience I went through. Where, finally, when you
+get to responsibility first. Then you learn about systems thinking. Alright, so. We're going to come back to systems thinking here. We're going to look at the
+guess points again. And once we finally get to that stuff. We could talk about the ideal developer workflow. How that goes again. First, you have to get the
+theoretical guesses. Then you drop into the. Physical. Deploy. Deploy. Walk. Skeleton. And then. What can you do? Then you can do your high value tests. So
+that's the ideal developer workflow. But now that we understand. How to use all the skills. Now you have the skills to do the work at each of these. Guess
+points. Now. So here, what I want us to do is actually just take on some unique challenges. Let's just chuck some. Problems at each other. Yo, can you build.
+Like, how would you design this aggregate to do this thing? Okay, cool. Let's break it down. From the theoretical to the physical. Let's break down problems. So
+here. Finally, I'm getting to the answer. I'm sorry. Wes. Sorry. I'm getting to answer your question. Here's where we're going to begin to do some of that
+really high level. Okay. How will we solve this? How would we approach this problem solve? Here's where we're going to begin to do that. If you've seen my like
+massive rants that I've written in the community, someone asking me how to solve a particular problem. Think Alex who left asking a question like this. And I
+just dropped the whole page of text telling them, here's how I break it down. What system is thinking. And this is the work to be done. So that's what we'll do
+here. So we'll start that. So let's say design problems. And I'm going to make a note. Make this. Do these. I'm just highlight this. So I remember Wes asked
+about this. Wes, you're, you're making it into the stuff you're in a man. Just doing a little note. So I can remember. And then for the guess points, this, I
+think this is just going to be more of like a reference thing. It'll be more reference, but there will also be exercises in here for you to do optionally. Now
+that we have the systems thinking understanding, we could just go through each of these guess points and do some exercises to make sure we know how to get the
+inputs, do the processes at that guess point, and then get the outputs that are required and pipe the outputs to the next guess. We'll do that for all of these
+here. Just get clear on some of the challenges and questions involved and just move on through. Finally, bridging the gaps. Okay. Coming back to the question.
+Designing and implementing a system. So let's talk about this. Let's talk about bridging the gaps. Initially, what I planned to do here was I wanted to do
+front-end, back-end, desktop, Chrome extension, custom integration. I've said here the desktop, Chrome extension, custom integration. We got to just get this
+thing wrapped. We got to wrap this. I think the two most powerful ones we could do are front-end and back-end. Now, in terms of the structure of this, I'm very
+open to how we want to do this. What I've done before is I had some threads in Discord when we first started the course. I asked, hey, what are some things you
+want us to make sure we cover in the front-end that are particularly challenging to you that you want to see us reason through, right? Things to reason through,
+challenging stuff. The idea here is to just. It is to do pretty much what you're asking. It's let's now think about how we would solve this problem using
+everything we've learned, using systems thinking. What strategically, what types of testing might we do strategically? Like how much horizontal decoupling is
+required strategically? Should we really, do we really need to make sure that we use a, like, what kind of database should we use? Like, these are the types of
+questions that we want to ask ourselves. And then the process of just implementing one or two features, using some of these challenging things that I'm trying
+to fit into the features that we want to build. I'll have to ask everyone again, pull up those threads in the community, but what are your thoughts on that so
+far based on what I said? This is the idea here. So this will be live coding. Just plow through it. From top to bottom. So these might end up being like two
+hours long. Yeah. These ones will be like a minute. Okay. Awesome, man. Thank you. So live coding. From top to bottom. Couple features. Pragmatic thinking.
+Moving through the systems. How from theoretical and physical. Includes challenges. Includes technical challenges. Awesome. This is huge. I really appreciate
+that question. This is exactly what I mean by early adopters. Yo. How else? We should probably continue this conversation a little bit later for the front end
+project. Actually, no. We should continue that as soon as possible. So what I'm going to do is I want to go to where we had this discussion. And I think it's in
+the, I can find it in the threads. If I search for front end project. Front end application. Yes. Copy link to thread. Open thread. Open thread. Open thread.
+Open thread. And this is old. It's taking a minute to load for me personally. Copy link. I'm going to just paste this in here. I don't know if it's taking a
+while to load for me, but, or just me or also y'all, but yeah, I, we want to come back to this because this is what I had the idea. And then the same thing for
+the backend one. Let me pull up the backend one. Backend. Copy link. And it's so small. Copy link. Boom. So that's it. Okay. And then we'll just finish things
+off with where to go next. Yeah. You can go and check out these discussions here. Preferred we do that soon because I'm, as y'all know, I'm piecing up the rest
+of this stuff now. Before I even begin recording the rest of what we have. Let's go back to the last questions. I think we're doing good. We have a few minutes
+left, but I think we've covered most of it. Pair programming. That's the last thing to discuss. Yes. Well, I love the idea. Although I just can't be the one in
+here doing that all the time. So I gotta be doing other stuff. So I would love if there was somebody who would just take on this initiative here. If anyone's
+interested, I can even put that out to the community. They can discuss time management. And even just getting someone to synchronize all these activities. But I
+think this would be a good one for sure. Yeah. Yeah. A community effort in general. Like maybe we should make a thread or something to talk about how to even
+put this together. I think we just need like a meeting, maybe even a community crafters meeting to talk about how we can make this possible. Cause I did have,
+this was something I wanted to do from the start of the course. Let me see. Okay. Something along the lines of an open coworking time. Something like that. What
+community members show up. People can meet and talk about their projects. Oh, this is really cool. Oh, this is really cool. Okay. So we can open coworking time.
+Community members show up. We can meet, talk about their projects, explore, explore group projects. If there was enough overlapping interest. Okay. So we need a
+place to store that. And there are definitely a number of accomplishing type platforms that can spread this. Yeah. I'm curious. You've not seen this in Discord
+or have you seen this in other? I'm even curious about what are those platforms? Yeah. Cause if this could be done at Discord, that's dope. Wow. Yeah. Let's get
+something else. Let's see. Coworking Wednesday. I join, announce what I aim to get done in two hours and just get to working. Bro, that's dope. What? I actually
+love that. Every week. Leveraging Discord events. Okay. Wonder me. Let's see. Let's see. Okay. Oh, it's crazy. Yeah. Yeah. Yeah. Perhaps. Probably number one
+thing to do is a community calendar. Yeah. And that should probably get put into the course, like at the top. Let me just jot down the words and things in here.
+I need a calendar. We need someone. Would you be open to leveraging the Discord event system? We'd be much less overhead. Yeah, I am. Actually. What do you
+mean? Is that something that you would just program? I guess you could programatically create events too, right? Yeah. Okay. Cool. Yeah, for sure. Reading,
+community events, community calendar. Because I'm just thinking about moderation. We cadence. I really like this idea though. The coworking stuff. I think
+that's awesome. This is really cool. We need to find a time that works for everyone. As for these Q and A's, I want these to, even these Q and A's, I'm trying
+to do these weekly. And just alternate. Let's just prioritize weekly cadence. I'm going to circle that, right? Because I think that seems to be a main theme.
+It's hard to balance productivity with community. Let's see. I could be up for something like a community organizer and meet up for those of us who want to
+connect brainstorming this stuff. Yo, awesome. Yeah, let's definitely chat. Like maybe shoot me a DM as well. I'll actually message you. Yeah. Hold on. Let me
+just also check too. We have a community graph group. Hold up. Let me fix this. Do something here. Wes, you are now a community crafter. If you weren't already.
+I don't think you are. You're in. Yeah, we should probably have a, we used to have some regular community crafters meetings, but then I got deep in the sauce
+just doing work. And there wasn't really a huge need for that. But. It's hard to balance. Exactly. It's hard to balance productivity with community. That's
+cool. Okay. Next steps here. Y'all let's do this. We're going to do the community calendar. For sure. We need to find a time that works for everyone. And this,
+I'm going to start by at least getting the Q and A's. Q and A's can be calendar. For sure. Right. So that's number one. And then number two is this other thing.
+Whoops. What we're calling. Something like just, yeah, regular co-working. Daniel, I actually would love to hear more about like how to make that work well.
+Because I, you said you've experienced it before too. Like in the healthy gamer community. You said you just joined, you announced what to get done. Like you're
+going to get done in two hours and you get to work in. Yeah. If there's other stuff we could do here too. I'm not sure. So maybe we should. Talk about that. Wes
+says for me, I will allocate our time. We, to his course, if another is a social component. Yeah, that's right. Yeah. That's, that's awesome. Something I wanted
+to know how to attack. Just have not put my brain cycle. If we want to communicate with each other, we just lose the associative voice. Text chat. Okay.
+Awesome. Great. So then the last step here I'll do probably is I'll, I'll announce the idea. And get a vote on the times. Or when to do them. Did they do the,
+what time of the day did those things happen by the way? And Wednesdays. Okay. 2 p.m. CST. Great. I think we already have a, we have this crafters chat, but
+yeah, maybe we should make that. And we could even open it up to the, the, the overall community as well. I think. I don't think it just has to be the justice
+offer essentialist. It could probably be like the whole community. Right? Yeah. All right. Let's do it. Done. Done. Whole community. Whole ass community. You
+guys asked for it. We got it. Let's pause it there. I will definitely sync up with y'all in community crafters. Wes. Daniel. I'll sync up with you two in there.
+We could talk a little bit more about this, but I would love your help. Just your thoughts, your ideas. Maybe even a tiny little bit of support on this. And
+then, yeah, we're just the delegate delegation is a really, yeah, it's like a big skill that I've had to begin to learn. Traditionally, not the best at it.
+Yeah. I have a microphone. I'm typing. Yeah, man. Would you be, I would like to challenge you. I would be super open to, I think me and Wes, but I specifically
+want you to be in there. Whenever we decide to schedule. That could be your community thing, but I want you specifically in there. So that encourages everybody
+to be in there. Whoever has a burning question for you, it makes you more excessive. Yeah. Okay. Let me see. Let me see. That's going to be an every week thing.
+Let me just think about my brain space. My brain space and getting this thing popping off here. So we have the Q and A's. We have the, we have this. So pretty
+much it's just like two different things we have each week. Yeah. I could probably do it. Can you, you're like, you're the reason why you're saying that is just
+pretty much. It's just like a minor, it's just one thing that means there's voice happened. So pretty much it's just like, relatively. Would you like to take
+care of yourself? Yeah.

@@ -1,0 +1,333 @@
+All right, so yeah, Mastery Foundations. So this is stuff that's coming up. This right here, what you're looking at, this is all kind of like what I've been
+working on over the past few days. This is the batch of content from the start of the program up till the stuff that we start doing when we're actually doing
+work in the physical guest points. So, you know, today I wanted to talk mostly about Mastery Foundations, but I also want to carve out some time to talk about
+this other stuff, because I'm mostly excited about that. But the intention here is each time I put out content, I want us to have a Q&A. So that we can go over
+and answer questions and tune up stuff. So here's what I'll do right now, real quick. What we're going to do here in this Q&A. So let's talk about Mastery
+Foundations real quick. This content coming up. And then we'll do some questions. How's that sound? Yeah. Okay, cool. I like it. All right. So I believe what's
+currently there in the platform right now, we have some topics on what's going to block you in Mastery. What is... And basically just some techniques to keep
+you focused and staying in the game. Because ultimately, this is just about staying in the game. There are phases and steps to this too, which we're going to
+get very clear on. But the stuff that went in there now, I wanted to make sure that was in there, just so that when everyone was doing their TDD assignments,
+you don't start losing focus of what we're actually trying to do. Because admittedly, some of those assignments are kind of tedious, in my opinion. But you need
+reference experiences. It's just a part of the process. And everything in context, the context, the container around what it is you're doing is really
+important. So, yeah, like, this is just, this is ultimately about staying in the game, as I said. So, what I'm shifting this stuff into now, right? I have a lot
+of this structured out in really strange ways here. I'm going to release this as text first. So that we can tune this really quickly. But this is kind of like a
+high-level overview of where this is going now. There's this thing called write action. So, I love this concept, by the way. This is like one of my favorite
+concepts recently. I've talked about quantum moments before, I believe, in the videos. But what really even is, like, the goal here? So, I think there's, like,
+moments where you're going to end up doing your work. And you're going to be faced with decisions that could send you down one path or another. And part of the
+goal here is to become aware of what those moments even are in the first place. And then, once you become aware of what those moments are, it's about learning
+what to do next. Because you could go down different paths. So, if you're starting a project from scratch, depending on your system of the way you see reality,
+depending on your system, if you're code first, if you're best practices first, if you're DDD first, if you're first principle first, or responsibility-driven
+first, you may not... Like, you're just going to take a different approach based on where you currently are. And part of what I want us to do in this program is
+to transcend those levels of going from those... I call those phases of craftship to take better, more right action. Because right action really, truly, is
+based on what you currently value. So, when you're first starting out, yeah, I'm going to record this... Actually, this is being recorded right now, Ryan. And
+it's going to go up onto the platform. And we're going to keep doing that for every single recording, every single Q&A that we ever do. We're going to put it in
+the platform. So, when you first start out, you're kind of in this code first mindset. And your goal at this point in time is make things work to solve problems
+with code. So, it's like, you kind of... Yeah, you kind of get a problem like, how do I start this project? A code first mindset, you might just go straight to,
+all right, databases plus APIs plus React plus CSS modules plus this plus that. And because you're kind of thinking in like a building block sort of mindset.
+mindset. And you will get to your goal because whatever you place your awareness on, what you place your focus on is what you're going to achieve. So, if your
+goal at that point is to... It's kind of to write code. You're going to achieve writing code. But that's a really important moment in time that if you... If
+your awareness was on something else, if what you valued was something else, such as if you valued best practices instead, well, then you're going to be like,
+okay, well, what best practices should I use to start a project? And then if you transcend that even more to the DDD first approach, it's like, okay, well,
+we're starting a project in DDD. It's kind of like your goal is to utilize the DDD patterns. So, you might be thinking, all right, starting a project, well, I
+need to talk to domain experts. So, instead... You know, I'm not even going to write the code first. I need to talk to domain experts first. You know, it's
+better. All this stuff is better and you keep getting a little bit better. But what I found is that these are kind of the natural levels that developers tend to
+go through. And this is actually the next section that we'll get to after Mastery Foundations. We're going to go from code first to DDD first. And there are
+important learnings to do in there. However, it doesn't end there. As you may have heard me say in like other Q&As before, it's really good that we could get to
+this point, but we need to move past that and we need to get into other ways of seeing code. And ultimately, the responsibility first approach is a really
+transformative way to look at code. And that's kind of like the metaphysical first principles of reality way to look at code. And from there, you can make
+really, really incredible connections. It's probably just the deepest level of design you could be at. And then from there, it's like you've broken all the
+formulas down to their most atomic parts. And then now you can have a better sense of what's going on in reality. In reality, what's really going on is we're
+playing a game of value, of creating value and maintaining value. And then at this point, let's start a project off from scratch. What's the first thing you're
+thinking of? We need to be creating value. Ah. So we've just kind of moved from something that was really static. Like, I'm going to start a project like this
+with these big building blocks. Or I'm going to use DDD, or I'm going to use the best practices, or I'm going to use these patterns, kind of these big chunky
+building blocks, this kind of static linear approach to something that is much more non-linear. In fact, kind of like non-linear dynamics. Like, try
+understanding, I kind of equate this to weather in a way. It's like, how can you really be on top of what the weather is going to be like? It's very complex.
+But that is ultimately the game that we're playing here. And that's where they say there's no silver bullets because we're playing a game of value. And anytime
+you're playing a game, recognize that what we're doing here is a game. Anytime you're playing a game, you need to know the players of the game, the way to win
+the game, the way to lose the game, and what the goals are of each of the players that are involved in the game. You also want to know the assistive elements
+and the contending elements of the game. So this whole section here is about just getting very clear on what the game is and how we can play it in various
+scenarios. And the way that we're going to win the game is utilizing the feedback loop. the way that we're going to win the game. So it's going to be making a
+lot of guesses over and over. And there's principles around making guesses. But I'm going to pause there for questions actually on any of these topics so far. I
+haven't even pulled out my trusty Figma yet for Figma-driven. Essentialist is basically aimbot. Yeah. That's great. Pretty much. Pretty much. Let me open up
+Figma and start drawing stuff out because I love drawing stuff. Yeah. Are there any questions on any of this stuff so far? Am I losing people? Not lost. Good.
+Yeah. Y'all are pros already. Y'all don't even need me here. Good. All right. I see some people typing. I'm going to wait a second until the typing converges
+because there may be questions in there before I go off onto my next tangent. Let's get this ready here too. Make sure I got everything good. Let's get rid of
+these. Don't want those. How much time will it take before I can apply these in code? Feel very overwhelmed seeing all these terms. Yeah. We're going to need
+still sounds a bit too abstract. Yeah. It's extremely abstract. So what I need us to do each like as we're moving through these sections is to be doing code. So
+let me show you where we're going to start getting into doing code. Not here. This is just about mindset. We're going to get into doing code right here because
+I don't want you to be moving too far along without actually getting any reference experience. So here the intention is and I actually think I wrote this down
+in this section. When I was doing this with students maybe I didn't write it down in here. I think it's in here this outline. Yes. So this is what we're going
+to start to do. Yeah. It would make sense if people could use the mic. Let's see. Yeah, Manny. If you want to moderate that somehow that could be actually
+really great. Some people jumping and using the mic. So anyways, it's pretty abstract at this high level. Yeah, it is. We need to have experiences because oh,
+people can request to speak. Nice. Yeah, it's too abstract at that high level. So we need to actually be doing things to gain experiences. So the intention here
+is for these modules. Let's get clear on how this works, what the process is. Then let's go and move up some of these levels of craftship. So here's where we're
+going to be actually beginning to touch code and the intention with these modules are, okay, well, how do you go from code first to the next one, which is best
+practices first? So the code first mindset is when you are, yeah, just solve, you're just creating anemic domain models. Essentially, you're just writing code.
+It's like problem to code. So some of the key milestones from you shifting from code first to best practices is, well, first of all, you just need clarity on
+what some of those things are. So here, what I want us to do is to refactor like a create user, for example, using basically everything you currently know about
+how you would do create user. Go ahead and do that first, the code first way. and then we're going to have to do this the best practice way because every single
+time we cross these paradigms, there's new skills and knowledge we need. But the real fun, the real work, the game is actually played over here. So if you're
+not at this point yet, you have work to do. I'm going to pause right there for questions. Does everyone kind of get that? Yeah. Confused. All right. Ask me a
+question, Rohan. Yeah. I'm going to pause while you guys are typing that out. I'm going to draw something out here. Yeah. Yeah. Rohan, ask me a question in
+particular. No statements, questions. What should I do for now? What do you want to achieve right now? What is your current goal, Rohan? You see, what I'm about
+to draw here is like, there's a reason why I'm asking Rohan to ask me the question because the problem that a lot of developers have is they don't even know
+what they need to know. right? This is why I'm asking you to formulate the question. So, as you may know, there are three stages to this whole process. step one
+of math, like this is the mastery process, is evaluate and execute, evaluate. Oh my God. Jeez, I can't even pull it out of my brain right now. Yeah, explore and
+evaluate. Jeez, what's going on? It's not quite right. Observe and evaluate. Yay! Yay! Yay! Yay! Yay! Yay! Okay. Number two is eliminate and number three is
+execute. So, the big problem here that is going on is when you embark on this journey of learning software development. There's so much to learn. There is just
+way, way, way too much. So, for example, when I started writing Solidbook, what stage was I in? Solidbook was pretty much the stage of observing and evaluating
+everything. this is getting a sense of I'm going to say I need to draw it like this. How many of these all of the topics in this domain of software development
+in general. topics are available in there. And this can take a really long time. But at some point, you're going to formulate a goal. So, my goal at that point
+was literally just to learn what I need to learn to make my code work. Because I was building a startup company at the time and my code was really bad. So, I
+learned pretty much just the necessary topics for me to go from point A to point B. And I didn't know when I was going to end up at point B, really. So, me
+learning was kind of like going through this and I don't know, through that. And I guess I picked up that topic too. And then, okay, now I know how to make this
+thing work. So, this was the first time I ever did domain driven design and some of these topics. But what's going on here is look at kind of like the path I
+had to take to learn that. And now when you have new challenges, you still don't fully know everything you need to know. what I'm trying to teach you guys here
+is the straight line path to learn what actually matters and how to play the game that matters. Because at that point in time, I was playing the game of BDD
+first dev. I was learning that stuff. I want to teach you guys how to play the game of value first development, which is a much better game to be playing
+because it's one that's based in reality, that's based in real life, and it's one that's going to change over and over. So in order for you guys to do that, we
+need to go through these three steps of observe and evaluate, eliminate, and execute. Of course, for you to do this on your own, this would mean you need to go
+and learn every single topic and figure out what matters and what doesn't. And this is pretty much what I did. I don't even know how many books I have, software
+development books. I did that. I went on Twitter. I pretty much bugged all of the front of most developers I could find. I bugged Vaughn Vernon, bugged Scott
+Bellware, I bugged Scott Wastgen. I just talked to pretty much everyone I could. And I read their books. And when I started to see patterns in all of the
+topics, I thought, okay, I'm done observing, evaluating now. I've found everything I think I really need to find. Then started the process of eliminating stuff
+that doesn't matter. matter. And in eliminating the stuff that didn't matter, so let's say that would have been like a way smaller subset of things that I
+actually needed. this ended up becoming the 12 essentials. So now that I have those 12 essentials, pretty much these little thingies here, each of these little
+tiny things, things. This is actually the path that I'm going to teach y'all. It's just to learn this stuff fast. And we're going to learn it in a straight
+line. That's what we're going to do. So, yeah, this, like, the thing about this is it's a little bit challenging to write this out. Like, I have to actually
+show you this process and you have to kind of walk through the process yourself. I think the way to actually explain it, it just, that needs to be done in a
+structured way. It's kind of hard to do that one off because there's a few different pieces involved in teaching this because it really is, like, in essence, a
+philosophy and metaphysical course. This is just a course about thinking. Anytime you have to teach something that is about thinking, it's probably going to be
+really hard. to do. But that's what design is. It's about you having awareness of how you think and how you learn. And we're going to try to do that as fast as
+we possibly can. Okay. Let's see, I'm going to read the rest of this comment here. Yeah, it took a while to understand. The approach of understanding modeling
+principles before delving into code is fundamental. Of course, it's just, if this course were just another one that piles up line after line of code, it would
+just be another one in the world. The difference is, yeah, this one really teaches us how to think. Yeah, that's why it's hard. And like, this is why I really
+want to make sure people ask questions, good questions. So, let's see, what should we get to next here? I think some folks are getting a little antsy about when
+we're going to get to doing code code. So, I kind of put this module here because when I first started teaching this content, one of the early students I had
+came from not even doing any, didn't know dimension of design, didn't know design patterns, didn't know hexagonal architecture, didn't know any of the stuff.
+Pretty much was just writing JavaScript code, doing everything in functions, writing all your code in Express, which we've all been at that point. We've been
+there. One of the first exercises I gave them was, all right, beautiful, that's all good, but I need you to see how this could be done differently. So what I
+got them to do was take a create user feature that I had an example for and also take some of your code and I want you to refactor your code to the pattern
+first approach, which is going to be, you know, everybody, well, not everyone knows, but a lot of us know this. This is the approach where we have entities,
+value objects, aggregates, use cases, domain events, repositories, external services, this side. Start to learn about these things, get a sense of what they
+are, because this part of the process is I want you to go from code first to best practices to pattern first to EDD first because eventually what we actually
+need to go to in our thinking is responsibility first. Some people who are on this call might not know at all what I'm saying. That's okay. You're going to know
+really soon. But ultimately what's going on here is we need to get down to the first principles of thinking about code. And this really truly is the first
+principles. When you get to this point right here, I talk about the big domino or knocking down the big domino or fighting the big duck. There's so many
+questions developers ask. How do you know when to split an abstraction? How should I organize my code? What should talk to what? Should I use microservices?
+Should I not use microservices? Should I use this? Should I use that? Should I use this library? Should I use this framework? What's going to happen is right
+now, as I said, you're kind of seeing everything in a blocky sort of way. Code first is like app plus like DB. Right? That's like the code first approach there.
+And then with the best practices, you start to kind of think a little bit more generic. Maybe a little more generic in your style of thinking. Right? Okay,
+well, this does this and this does that, whatever. With the pattern first approach, now you have actual building blocks to use. Let's put a star there, a circle
+here, maybe. With ddd first, you have even more sets of building blocks, but you also have the context in which you're going to be focusing on the domain itself
+first. So you have these building blocks and you have the context around when you even want to use them and the language upon which to even create these
+patterns and where to organize them. That's all good and all, but at this responsibility first level, you kind of end up looking at the fabric of reality
+itself. and this is like the lowest we could go in terms of thinking of design. We kind of need to get down to this level first because after that, you start to
+realize, oh, well, the fabric of reality is it's value-based and we're going to be playing these games based on value and you're going to make connections
+between that and here's where the game of software design or software development actually begins. So I think maybe, let's see, questions, comments, concerns,
+thoughts. Otherwise, I'm going to go into real quick a high level over the summary over these topics here where we're going to go and some of what we're going
+to do next. So in here we're going to have some action items which are like, yeah, refactor this using these patterns. And there's going to be some exercises
+about you actually using prerequisites. It's very important to know some of those best practices about object-oriented design or object-oriented programming,
+for example. Do you know abstraction, encapsulation, inheritance, and polymorphism? Are you aware of those things? So awareness of those things is kind of a
+prerequisite to get to playing the rest of this game properly. I'm not seeing any questions. I'm not seeing any questions. ones. It's probably going to be my
+favorite one here. Where do I put these notes? Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. I guess
+over here. I see some typing happening, some extreme typing. now we're going to cover all this stuff. yeah. So there's a question here. When you say that we
+should know these concepts, you're saying that the course should, we'll cover these or that we need to know them ourselves. Um, yeah, no, we'll, we'll link to
+stuff here. Um, ultimately what we've been doing, like if you'll recall, we jumped straight to feedback loop level one. Um, a lot of this content here, what I'm
+thinking we'll do is like it's probably a lot of it might have to get restructured because we could just begin. You don't really know anything and start TDDing
+from feedback loop level one, but I want you to have the awareness of the game that we're playing here and things in context. Um, there's just some foundational
+stuff that I think is more important for us to know right away. Um, but I very well will end up restructuring things around because I don't think it's very fun
+to have a course that's like all theory up front, not a lot of, uh, coding. But right now we're focused on just completeness and then we'll probably restructure
+things around a little bit later on. Yeah, like I've honestly, I really just want to get to the point where we can start adding the other exercises. I'm going
+to pull open this straight line for y'all right here just so you can see where we're going. Um, I initially was, um, hesitant about pulling this out and putting
+this forth front, like right away because I didn't want to overwhelm everyone, but I'm seeing like, okay, cool. Everyone's getting overwhelmed by the theory
+stuff. So yeah, maybe let's just start pulling this out ASAP. So here's like where we're going to be doing our, um, uh, testing at the guest points. By the way,
+I'm going to just open this up here too. Let's see if I can open that full screen. Just a drawing on my board, the original. Yeah, let's get in there. So these
+are some of the guest points. These are like the theoretical ones, problem, solution, architecture. So we're going to be doing that in the theoretical portion
+of the course. Um, but this whole thing here from left all the way from left to right. This is the game we're playing. We're trying to create artifacts of
+value. Take them all the way from theoretical so like they don't really exist yet and we don't even know if people want this all the way from the theoretical to
+done and in somebody's hands using it. That's the goal and that's the game we're playing and we want to do that as fast as possible and there's all these
+contending elements of playing the game like how complex is the domain? How many developers do we have on our team? Um, how many theoretical guesses have we
+made correctly in the past? For example, if you're starting on a new project and you've it or it's it doesn't even exist, you're an entrepreneur and you're
+creating a new product, you've made zero theoretical guesses. So if you've made zero theoretical guesses, should you really be doing TDD, double loop, triple
+loop, quadruple loop, TDD at every single one of these points? Maybe not. Maybe all you really need to do is patch one theoretical guess through as fast as
+possible. So you can start playing defense and adding tests at the physical level. It might be confusing to some, but we want to go from left to right. The game
+is like going from left to right here is the it's as if you're scoring a point in the soccer net. It's like we just pushed out a feature that created value for
+somebody. Uh, if you could do it once, that's awesome. And now you're in the game. And now the goal is to continually be able to keep doing that fast and fast
+and fast and fast without introducing negative value, which is bugs. So let's get some goals. That's pretty much what we want to do. It's a game. And every game
+has rules. We have to go from left to right. We need to have an understanding theoretically of the value we're going to create first. And then we could go
+around around. We could go about creating it. So theoretically first and then physical. Um, there's strategies to play this game. Well, that are really awesome.
+Like, for example, if you've already built your platform, like if you have a microservice, um, architecture, you've already built some features on top of it,
+you can design. Yeah. You can design your system out as a platform so that you can go across and score points even faster because you can skip having to make
+guesses at some of these guess points because you already have shared infrastructure. So you already have a, uh, deployment. You already have architecture. You
+already have, uh, pretty much understanding of the solution. Uh, the services you're going to use. You already have a lot of stuff, uh, tested and covered so
+you can make guesses way faster over time. And that's kind of the guess or the, the point of the game. Tenko says, I'm not overwhelmed, overwhelmed, but it's
+because I'm DDD first and my mental model has a large enough overlap with the responsibility first one that my brain can rearrange its mental model quickly. If
+you're starting code first, the crossover between mental models would overwhelm you because you must forget everything and everyone and everyone can jump into
+the void. Yes, absolutely. Um, however it has been done. Uh, I don't know if you're here, Luigi, but Luigi's, uh, one of the developers who literally started
+coding, uh, like a year or two before I met him and we started working together. And then, um, he's doing systems design interviews now, and he's using, uh, a
+responsibility driven design in those systems designed interviews. So yeah, like it's, it could be done. You could learn it pretty fast, but it is painful
+because you have to a lot, let a lot of stuff go. Anytime you have to rewire your brain and let stuff go, it is freaking painful. So yeah, we're gonna have to
+go about doing that in a, um, structured manner, of course. Uh, and there's going to be checkpoints too, so you can test where you are in your learning, test
+where you are in your thinking. I don't want you to be in the void and stuck in the void. Uh, this is why we're taking the mind. This is why we're taking the
+milestone driven approach. So perhaps this is going to answer your question, uh, Rohan. How can you, what is the best way of letting go of old stuff? Uh, let's
+set milestones. Um, yeah, in Risky Biscuit, we are going to have this uploaded, um, so you can watch it later on. Yes. So I also believe that these mental
+models are still very high level and we can't give a ton more feedback unless we continue feeding forward. something more concrete where the high level abstract
+stuff clicks. Yes. AKA going through a design loop with the mental models you propose and practice and then we can give better feedback. Absolutely. Yeah. So
+let's get to it. Let's probably just have that be the, um, probably one of the key things we want to start doing next. It doesn't have to be super fancy videos
+and cool. It's just seeing text. Yeah. To be quite honest, this whole process of me developing out this course, like you all know I'm the type of person who
+loves to do writing and that's kind of where I excel. This has been a really fun, interesting process of learning to do videos. Uh, those videos I put up for
+you all, the mastery foundations one. Yeah. Those are going to get ripped apart real fast already. Like they were up for like three days and then I wrote some
+new stuff and I'm like, okay, well we actually have to refactor those right away. So what we're going to do is take a text, um, first approach to building up
+the course. And we're going to put videos in when things converge and we're going to put videos in when you need to see a demonstration and when there's going
+to be a discussion or Q and A's like this. Um, yeah, I think MVP and text is just going to be the fastest, easiest thing to do. Um, I want to, ideally what I
+want to do here is let's get the whole course in text and then let's refine it. Cause I want you all to just start plugging away with some of these tools as
+fast as possible. Cause I, I think moving, moving forward with, um, videos is just going to be, um, the feedback loop is just way too long for that. So this, I
+think we can really shorten the feedback loop with just text. Yeah, really, truly. I just need y'all to be playing with it so that I could see where you are
+getting messed up and then we could just fix that. Um, so let me put this stuff in your hands as fast as possible. So, yeah, we're going to take the straight
+line, pretty much everything that's in here. Um, and I'm just going to move this into the course and the solid book stuff that you are all, uh, looking at and
+doing before as well with, uh, the, the TDD basics, that's all going to get taken out of the book and put it in the course platform as well. Now, here's one
+thing I could use some feedback on, um, the actual process of getting feedback. So here's what I was thinking. There is, it's called help this book really
+amazing tool. So how this works is you go and you create a version of your book. Uh, in the software essentialist alumni, we actually designed this out. Um, we
+event stormed pretty much building this, which is fun. It's cool to actually see the, the actual product here. So yeah, this tool here is really great. Um, how
+it works is I could take a version of the book, take a version of everything I have created, make it public. Y'all can go through and you can leave comments,
+notes, thoughts and stuff on it. And then we can create a another version of it really fast. So this is a tool I've been thinking about using. Um, I've been
+considering how I want to utilize this. Um, maybe when we do releases, I can see if I can, uh, get the majority of the content in the course platform and then
+find a way to get it into here as well. So that if you want to leave more detailed feedback, uh, or, or read through the content too, you could leave feedback
+directly on, um, the content itself, thinking about where people should be leaving feedback, whether you leave that as comments in the modules in Kajabi, or you
+would want to do that in something like a tool like this. Something I've been considering. I don't have a solid answer on that yet. I kind of figured to put
+that up to you guys. What do you think? I think it does need to go into the platform nonetheless, but maybe this additionally, it's kind of what I've been
+considering. It's kind of annoying. Um, not seeing, uh, not being able to see your progress through the course platform. So I think having some structure there
+is going to be really good, but a tool like this, I think has utility just thinking about how we want to utilize it. If we utilize it, the most valuable part
+for me so far it was the one-on-one call and seeing how you worked out the problem out loud. I got a lot of tips on how to think. I have a similar feeling. I
+have a feeling similar demonstration videos on the boundaries of each stage could be useful. Yeah. I want to do excess, uh, demonstration and discussion
+modules. So as you all are asking questions in the community discord, uh, what I want us to do is once I get a lot of this content in, I'm going to go into the
+community discord and go to some of the questions y'all have been asking, and we're going to figure out which buckets these essentials fit in because what ends
+up happening is once you learn the essentials, I'm sorry, y'all, this is still a little bit more high level stuff that I need to show you, but pretty much any
+problem or any question people ask me, it's going to be, you're going to be able to answer it like this. There's going to be a metaphysical essential plus a
+physical one or a metaphysical essential plus a theoretical one. I'll give you an example of that. I need to add plus. And you also probably need to know what
+the metaphysical ones are. This is Schaffer and Zion. There's three of them. I'm not going to write them all out right now, but some of them are. There's a few
+of them. And this is going to be the physical. Okay. So I'll give you an example. Someone asked me, how would you design, like, how do I do transactions? Like
+how, like, are we going to get to doing transactions? How's that work? Okay. Transactions. Okay. What, which one of these is that? So I'm like, all right,
+great. You need to figure out how to design, design transactions in your, in your use cases. Okay. Which one of the essentials is that going to be? Okay. This
+is almost always. So this one here, I'm like, okay, well, what is transactions about? What's physical essential? First of all, I know this is about the physical
+because it's transactions. It's actually writing code. So which physical essential? I'm like, okay, cool. That is temporal decoupling. So that's the topic. So
+we're going to get to that in the temporal decoupling part. And then which metaphysical essential? Well, you need to design transactions into your use cases,
+which means you need to fill responsibility gaps. So you're doing abstraction design. So that's the other essential. Because the thing about these metaphysical
+essentials is that they show up. They permeate every single thing that we do. So they're going to permeate the physical ones and the theoretical ones. All
+right. Let me take a look at some of the comments in here. So, yeah, the most valuable part for me was the one-on-one call, seeing how you worked out a problem
+out loud. I think we need to do, yeah, we need to do more of the faster framework. I'm so freaking excited about this for y'all. Like, this thing is sick. I
+honestly, it's, yeah, I can't wait to do more of this, to be honest. Like, I've had so many, I feel like a mad scientist these days, just seeing this tool and
+I'm like, I literally can't find a problem like this does not work for. It's just, I think it's so cool. Yeah, we will do more of those for sure. So, yeah,
+please ask questions in the discord on problems y'all have. If we don't get to it in the course, we'll do them as discussion modules and one-on-ones and stuff
+like this. We can even schedule some time for Q&As where we'll do them live in the Q&As as well. I think that'd be really fun. But content first, let's get the
+content out. Okay. Think in terms of process. Yes. Because I was asking about how should we utilize, help this book. So prioritize drawing the whole roadmap the
+whole way through. Done. Seeing which points for understanding drop off. Edit those portions. crystallize them and turn them into video. Yes, that is what we
+are doing. We are going through the, we're going to do the whole program text-based. And then I just want it in people's hands and then you're going to start
+messing around. Then we're going to do some rounds of refinement on that. And then we'll turn it into video. So that is pretty much the theoretical process
+we're going to follow here. The question was kind of like, should I utilize this tool or not? To me, it's not really seeming like I need to. Because the
+responsibility that I'm looking for is how are we going to collect feedback? I think this is a great tool for collecting feedback as close to the text as
+possible. That's what it helps us do. But if you all leave good comments and good feedback in the videos themselves, then that kind of renders the
+responsibility that we need. You could do that in Kajabi. I think the thing that's really neat about this, though, perhaps this is going to be good for when we
+turn all this course content into the book. That's probably where it's going to be most effective. Because then you could go in here and then you could just
+say, feel slow. You know, stuff like that. Yeah, I was thinking about placing the text in Kajabi. Oh, Figma cheat sheet. Woo! Okay. Okay. Now y'all are talking.
+I'm listening. Okay. Okay. Yeah. Okay. So a Figma cheat sheet. Let's take that down as a note. I'm fine. Okay. Yeah. I see Daniel's mentioning the event story
+main template. Yeah. We're going to need that for when we get to the theoretical. It comments in. So it seems like, yeah, it makes sense to wait on this
+platform for the book. Yeah. I'm kind of arriving at that myself. Comments in Kajabi. Text base. Yep. We're going to be doing user story mapping in the
+theoretical. That is between, let me pull this open again. In the theoretical, we have a couple of different guess points. We have the problem, solution, and
+architecture. Problem guess point. This is like when you're talking to users, you're trying to get a sense of what the problem is in general. That's the
+problem. Guess point. You don't even need to be writing code or doing domain driver design stuff. This is about idea generation in general for what even the
+problem is and validating that there is a problem to be solved. This is an input output system, by the way, the inputs to this are, it's pretty much phenomena
+you taking in the world. The outputs to this is your idea. Yeah. Impact mapping, those different tools, those things are in here. They exist. I think we're
+going to choose a few of them though. We might not do all of them, but knowing where they exist and which guess point we need to utilize them at is like, dang,
+massive simplification because that's a huge problem that I know developers have where it's like, which one of these tools should I use? When should I use them?
+It's like, it's just a game we're playing, get the artifact of value to the end of the net. And all you need to do is pass through each of these guess points
+here. So if you can use what do they call it? Like the event storming where you're just like gathering, everyone's just kind of getting a sense of the domain.
+We'll use that here in the problem guess point. And then the one where you're getting more tactical about your event storming, well then you're going to start
+using that around here. Right? Because now you're actually modeling out a solution how this could work. So you see, it's less about, it's less about the tool.
+It's more about the inputs, outputs of the system of creating value. the processes or things that you use within them can change. And we very well may end up
+with new processes. But this thing will never change the system of, like the value creation system is what I call this whole thing from left to right. And
+that's the game we're playing. Yeah. All right. Bless it. Yeah. You see, this is the thing about video. You know, you get so much more live feedback and
+encoding to see what's happening. Which is why I want to do everything in video. But I think we need to get the foundation down first. Yeah, we got to get the
+foundation down first. All right. Let's see what else we got here. We'll take a few more minutes here. We're at the time. But let's do a few more minutes of
+questions, comments. I'm just going to go through and collect some of the best parts of this conversation for me to refine on. So the figment cheat sheet. Can
+we talk about that a little bit? I want to talk about this figment cheat sheet. What are some of the things that you think that would be really effective to
+have in this cheat sheet? So far, based on everyone being in this program, what you've heard me rant and rave about, some of the things that you feel kind of
+confused about that you would want to see in here. Or I could just put all the main topics in a big cheat sheet page, kind of like, what's that thing? You know,
+like the Demandruff Design book, like page two. What is it? I have that thing where they all, kind of like this, where everything kind of maps together and you
+can see, get a sense of what thing. Oh, I think I made this. That's actually my, wait, hold on. Somebody did some work on that. That's cool. Yeah. I think I did
+this one too. Nice. Or yeah, so something like that, perhaps. Let's take a look at what y'all are saying. Visual chapter summaries, because that's one of the,
+your strengths. Strength is, aha. Strength is, strength is making silly jokes. That's awesome, wouldn't it? Yeah, okay. So the cheat sheet is basically having
+the atoms of essentialism where you can see it all. All right, I like that idea. Yeah, so pretty much what we were just looking at, like, getting a sense of
+everything and how it all fits together. I have pretty much the entire course written, but it's so freaking rough. And something I've realized too, is every
+single time I do a refinement, new ideas come out and even cleaner ways to express this stuff comes up. Because the way that it's currently written out, I get
+it. But it's a different thing taking it from my brain to your brain. Okay. Okay, so this cheat sheet. All right, this is actually really good feedback um thank
+you risky biscuit um this thing here should be uh people should be able to comment on it areas of confusion that's what i'm gathering right all right so you
+know what like this is initially what i was thinking of which was just put everything out for everyone uh and go ahead have at it um yeah maybe i could make a
+poll on that would y'all okay everyone's like yeah put everything out all right if that's really what you want oh y'all are wild for that all right cool yeah
+give me a caveat it's gonna be so freaking messy i'm gonna have to readjust this um uh all right so let's think let's talk about that real quick putting
+everything out because my priority right here like the where i have my focus like as a course developer it's like i could be um course developer of course
+designing i could be like yeah it needs to be like super pretty i could be pretty driven i don't know right now the way i'm i'm driven like i need res i just
+want results for y'all like as fast as possible i'm results driven so uh yeah if that's what you think is gonna create results then okay cool let me just chuck
+everything out as much as possible i want to take structured guesses but you know what maybe i just have to open the kraken because a principle here that i've
+been um honing in on is first of all me putting out all of this this is a big chunk of work because one of the principles i have is to make smaller like make
+small guesses so that you can refine on it really fast because i'm gonna probably get feedback and then it's gonna be the whole world um releasing everything on
+me uh uh so if you are are all okay with me ignoring chunks of feedback uh that i can't quite get to just yet to focus on earlier sections of feedback where i
+can focus on right now that's great okay cool let's do that then because uh well yeah see this is the other thing i was thinking of releasing a module per week
+so everyone can stay on track because if i do that then everyone is kind of maneuvering at the same point and then i can also see where people are getting stuck
+with that and we can keep moving along in a structured way so those are just two different ways to work and that is the way i had intended to work that is the
+way i had intended to work and to work and to work and to work and to work and to work it does depend on the level of the person consuming too um yeah i mean uh
+i fully i fully embrace um as soon as i drop everything there's probably gonna be a massive chunk of folks that want an immediate refund and jump out of the
+course because it's just cognitively painful to take in all of the notes but some of you would actually love that um that's just the reality of that too however
+i'm gonna listen to what y'all are telling me and i'm gonna just focus on whatever is going to bring the most results for the most uh the most people here we're
+gonna prioritize value for everyone so i'll think about that um yeah i think that's great actually um and kadabi is prod yeah okay cool uh i actually i'm
+starting to really like that idea um going fast is a recipe disaster yeah cool i like this idea the opt-in idea of if you want to see everything i could have an
+area for that to happen um that sounds really nice to me to be quite honest i think i'm leaning starting to lean towards that opt-in's nice you want the blue
+pill or the red pill you guys are jokes i want both yeah yeah we can bring the treats we can bring the pain and suffering you have both the full spectrum of
+human experience with all of us easy we got it we got it in the shop oh good all right i yeah i think that would be great uh so literally the blue and the red
+is it okay okay that's not too funny yeah all right cool so an opt-in so let's yeah i really like that idea opt-in let's see putting everything if you want to
+get access to the prod and that'd be great I mean we already have the software essentialist alumni students pretty much have access to a lot of the prod stuff
+which is a lot of this is the straight line stuff in here I just have to move it out from other areas into here yeah we did a lot of work a lot of stuff so that
+could be and one thing I do is just structure this all into one page and we do an opt-in and then we can all refine on that I love that idea sounds really cool
+book club cool so let me see how I'm gonna get everyone to opt-in I'll probably see if I need to create something for this whether we just have it as a module
+in Kajabi or yeah joining a channel sure yeah oh actually yeah that's great you could just like uh okay cool yeah you could just almost like what we call it the
+Rempel channel are you kidding oh my god where are your parents what is this yeah so let's do um a react or something a react roll and then you could get access
+to that channel if you want we have I think like some of my favorite moments so far like so far this community's jokes uh the best jokes we have are probably uh
+Daniel what's the one uh yeah maybe we need a dedicated jokes channel I don't know yeah wait would you say handles are made to be gripped handles are made to be
+gripped there's uh now we got the red pill you want the red pill or the blue pill yeah negative value yeah negative value yeah negative value we got negative
+value that's OG that's a deep cut you a real one for that if you know if you know that one you're a real one I'm even joking you a real one for that that's sick
+handles are made to be gripped I had no idea the level of hilarity that would be oh I have someone designing out the book for this by the way um and yeah they
+put a a mug on the front for one of the test uh designs yeah actually I gotta get them on the swag store handles are made negative value yeah I actually want
+that on that's my nice tattoo we do need a swag store though for real um we should talk more about that okay so um let's start wrapping this up here I said I
+was gonna leave it but y'all are too much fun to talk to um great great great great so I think we're good here for now um yes we have a new event coming up so
+Manny's running the Fizzbuzz Cato um this is gonna be some let's see what do we got going on here let me just click this up see if I can even open it on discord
+no Manny's running like EF10 Manny's running this event and also Daniel's going to be in there shadowing so jump in there don't add negative value I'll be
+running more events did I hear something about the book club by the way perhaps that nope yep invite to speak yes I think it's going to be like faster if I
+speak yes I will basically guys what we are going to do for this event is basically mob programming what I'm going to do is I'm going to explain the basics
+about TD TPP and a few other things also pay programming and mob programming and then I'll just break you into small rooms and we'll basically work on the
+feedback cata everyone in each room I'll be moving around each room with you and I'll be helping you if you get stuck at some point and also giving you feedback
+at the same time that you're coding so you don't have to wait for a peer review or someone else looking at your code that's going to be just the first event the
+idea is to have more events so I hope you enjoy it and if you just want to get to know peer programming or things like that just come back and see it and if you
+like it or you want to propose something else please also do so and we we can try to adapt that as well just let us know and thanks I'll just tip down so good
+thank you so much for taking that on and running this like amazing like honestly yeah this community is already becoming like way further than what I'd even
+imagined so just I was saying earlier it seems like that's kind of the law of the internet there's people that really care about something you're eventually
+going to find them so I'm super super grateful oh yeah and by the way I just jump in to say that yeah we were talking about the buck club that sounds
+interesting we Daniel and myself could just talk about it at some point I think he I mean if Daniel you're writing you may want to just jump if you can of
+course otherwise it's right it would be interesting okay well is it okay well I'm just going to jump on so okay question so were you wanting to do a general
+book club as in like let's say we go through like the DDD book or something or were you thinking about more so going through the course in Kajabi together I was
+thinking more like the second thing like going in the course in Kajabi together okay beautiful or reading the book that could be another thing also as well like
+yes just saying hey we are going to like read one chapter per two weeks or something like that we meet and we basically talk about the book that could be
+another solution so we align ourselves with this with the feedback that could be another thing so we can think on that as well those are just ideas I mean don't
+take this like we are like going to do this we are going to discuss it it sounds like interesting so you think it would be interesting for you as well you say
+it on chat because otherwise we are not getting any feedback yeah I would love to do the course thing to me it sounds good I mean it could be an interesting
+thing we can discuss it hell yeah especially if Khalil is going to release everything then people are going to have questions and I've seen some of those things
+the archives and I know people are going to have questions and people might it would be it would provide value to a lot of people if I guess people that have
+reviewed this or I don't know yeah like you said I guess we all get alignment on this one thing some people might have questions certain people help align and
+then boom we have community yeah I love it I think it sounds great to me so yeah step number one let me go into the archives start pulling out all this yanking
+out this stuff and get it out to those who are brave enough to take a glance at it I think that's probably the first step so let's do that and then go from
+there all right y'all this is amazing so I'm going to wrap it up right here I'm going to cut the recording and then get this the video editor get this on the
+platform but thank you everyone thank you everyone for coming out to this Q&A always a pleasure always a pleasure so what we're going to do next is yeah I'm
+going to go structure this stuff out I'm going to go through what we talked about here today I'm going to incorporate some of these refinements some of these
+ideas that we talked about today into what's coming next and I'll post an update for everyone so you know what to expect next and when I intend to have that out
+for you all right we'll leave it at that today's Friday it is 6 50 my time I gotta go take a drive to go see me mom we're gonna go hang out maybe eat some
+Chinese food and that's my evening so everybody enjoy hopefully you have a equally blessed evening it's 0 0 0 my time all right peace out everyone you

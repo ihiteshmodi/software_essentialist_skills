@@ -1,0 +1,78 @@
+All right crafters what is going on you've made it here to the software essentialist the training and it is time to level up yes yes it is so we're going to do
+here in this very first module this introduction is we're gonna go over the big picture for the whole course we're gonna do that from top to bottom because
+sometimes it's really good for you to get a sense of what is coming so that you can plan accordingly know what to expect and you have the high level clarity
+immediately of what we're getting into here so that's what we're going to cover in this vid so the main problem that developers have the reason why you're here
+would make sense is this kind of nagging feeling of just a lack of full confidence in your own design abilities there's this feeling of am i doing things right
+and the reality is you want to be the type of person who feels confident in your own design decisions your architecture decisions testing and strategy decisions
+because those are the things that really matter at the end of the day you're always going to get new requirements you're always going to get new challenges that
+you're going to need to face and those challenges are not always going to be the same they're going to be dynamic and they're going to require bespoke ways of
+approaching them what we need to do here is develop what i call the main skill problem decomposition i believe that great programmers like philosophers have
+metacognition which is awareness of your own thinking you have the ability to know how you're solving problems how you're thinking about solving problems and
+you can refine the way that you're solving problems so at the end of the day what we want to do here is we want to develop really solid mental models for how to
+consistently approach your work that's going to give you the ability to solve pretty much any problem you've run into in a consistent way that might sound like
+a big promise but it is possible if you have really good mental models so on my side a large motivation why i even wanted to make this course and put it
+together was because i've been piecing and crunching together this whole thing of how to do software development well for a while now and i've been trying to
+create my own conceptual understanding of it and i think i've landed on some really incredible stuff here that i'm excited to share with you so now let's talk
+about the course goals all right what are we going to do here so i want to convert you wherever you are right now into a confident crafter who knows what
+they're doing we want to learn the mental models for how to think about software development and what it even means for you to be a software developer and we're
+going to do this with what i call the 12 essentials which are going to give us a strong baseline in the things that actually matter and that's testing design
+architecture and strategy and this is going to cover important parts from a number of key topics if i mention a few of the key parts of this course it's going
+to be your ability to use systems thinking this thing called the guess points which is how we can break apart and decompose problems and this other tool called
+faster which is like a design method something you could use to actually convert a problem into action steps that you need to perform to systematically break
+down problems right and we're going to be getting into design and testing strategies along the way and we will get into testing and we'll get into this and we
+will get into testing strategies by the end of this course you should be able to go and take this and apply it to any side of the stack front end back end
+desktop wherever you could use this on new projects and existing projects because it's all just about problem decomposition so now let's talk about what to
+expect this is a programming course but it is very different from other programming courses we're not just going to be focused in on the topics particularly
+where a lot of other courses are focused in on topics this is more about you turning into the type of person who could think through problems this is more about
+turning into the type of person who could think through problems and if this is centered around mental models it is going to mean that it will somewhat touch on
+other topics like psychology philosophy strategy and subjectivity and what's going to help you develop that skill is practice and filling in the blanks now once
+you're done with this course some of the things i will expect you to be able to do are to transition into back-end or full-stack development if you're a
+front-end developer we are going to be spending time on some front-end architecture topics inside of what you will learn is called the phases of grep you'll be
+able to introduce testing strategies that actually scale that actually work you're going to have a really solid way of thinking through and approaching building
+your own products and you should also be able to take what we learn here and go on to help your team refactor messes now let's talk about some of the
+prerequisites what do you need to know where do you need to be right here you're good as long as you're comfortable building out something on the front end or
+if you're already a back-end developer you should be good later on in the course you're going to learn about this we call this the code first developer you
+might not know how to craft but you can build and that's about all that actually matters ideally if you've worked in a professional capacity that's also really
+good because you're going to just have more reference experiences you'll probably have experienced a fair amount of pain and you'll have a more deeper
+appreciation of what we're going to get into here if you've joined this course you probably have these last two bits here you know how to learn new technologies
+this shouldn't be something that is that hard for you to do and you know how to debug and solve technical snags the reason why i bring this up is because we
+won't be spending a lot of time debugging stuff it's going to be pretty fast-paced in terms of me doing some of the demonstrations and you doing your
+assignments so you will have to figure some of this out on your own you will want to spend a fair amount of time doing practice with the assignments which we'll
+get into and using the community if you run into any problems now let's talk about the program outline right so there's a couple of different sections to this
+course the first section here is called the metaphysics and this is where i'm going to just drop all the mental models on you now the reason why i want to drop
+this on you immediately is because i want to plant some seeds in your mind so that when we go through the rest of the course you already know what the mental
+models are you know what the 12 essentials are you know what these skills that we're going to be developing are and how they ideally work so that when we're
+going through the next section the phases of craftship you're going to be able to start to put them into practice because that's where we're actually going to
+be developing the 12 essentials that i mentioned earlier in the metaphysics we're going to get very clear on foundational ideas what even is software why do we
+write software who are we writing software for these are questions that aren't commonly asked but it's so important to get these things correct because they
+need to be really solidly aligned to our understanding and interpretation of reality now the phases of craftship this is where we're going to put the mental
+models into practice this is going to be like a sort of apprenticeship where i will give you some lessons and i'll give you some assignments we're going to be
+doing here is developing those 12 essentials and continuing to refine them moving through the phases of craftship and there's five of those phases this is
+something that's taken me around six or seven years of study and practice to piece together and reverse engineer this path and i've created this path for you so
+that you can go and walk it as well and at the end of this in the value first phase of craftship you're going to know how to use some of those tools i was
+mentioning earlier to think through and decompose problems in different contexts following that we'll have the optional final project this is where you can take
+everything you've learned throughout the phases of craftship and you can build something that gives back time enriches time something that is valuable you'll be
+able to do this either just by yourself or through a community-based project and the fourth part of the course is something i call the guest points this is just
+a catalog of problem decomposition steps that you can use and keep on coming back to for further study and finally we're going to wrap up and talk about how you
+can take these mental models not only apply them to your code but apply them to your life and try out your next path now go into that just a little bit deeper
+here so the metaphysics we're going to be talking about the general mental models first let us get clear on some of the foundational questions what is software
+why do we write software what is scalability how do you get scalable code what's stopping you from getting scalable code these are questions that are not
+commonly asked but they're very important to ask because unless we have clarity here it's not going to be possible for us to actually achieve those things then
+we're going to talk about the 12 essential principles these 12 essential principles are pretty much the 80 20 of what i've learned studying all of the greats
+and piecing together the teachings from the books and the pioneers of our craft i'm also going to show you some of the skills we have something called the ideal
+developer workflow we also have something called faster this is going to help us decompose stuff into problem steps and then when we get to the phases of
+craftship there are five phases the first phase is called code first this is where we're going to focus on learning to be full stack the second one is called
+best practice first here's where we will actually introduce a lot of the 12 essentials in best practice first because we're going to refactor what we've done in
+code first and in the pattern first phase this is the fun one that i'm sure a lot of developers have been looking for and waiting for i'm going to actually show
+you the front end and back end patterns and how to apply these now the responsibility first phase is one that's not often traveled this is where a lot of
+developers get stuck but in the responsibility first phase this is where you now need to learn how to actually design bespoke solutions this is the phase of
+actual object oriented design this is something i've been super excited about honestly right now this is one of my favorite topics in particular responsibility
+driven design and after we finish up with that we're going to be at the value first phase where we have pretty much learned everything that we needed to learn
+in order to get to the ability to start to do problem decomposition where responsibility driven design the responsibility first phase is the most granular level
+we can use to think about code now we're thinking more about what we want to do and the strategic ways for us to work and this is where we're really going to
+step up using some of the tools and now for the optional final project we're going to gain the most experience in the real world by actually building it putting
+it all together so you could do this as a solo project just by yourself or you could do it with the community if you do with the community you're going to get
+the ability to pair up with other devs you can share your interests this is going to be fun because you can go and build something that's valuable using the
+skills that we've learned here and you'll always have this community in order to share and learn together and then finally here we have the guest points which
+as i've mentioned is like a catalog of individual parts of the problem decomposition process that we will use to think through how we decompose problems so
+that's what we've got and with all of that said let us begin so excited for you to be here and as always to master you

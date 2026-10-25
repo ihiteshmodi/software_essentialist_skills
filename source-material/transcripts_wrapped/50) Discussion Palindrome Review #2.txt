@@ -1,0 +1,55 @@
+All righty. What's going on crafters? Khalil here again. We are back with yet another one of these palindrome reviews. So let's get into that right now. Let's
+take a look at this one here. Actually going to read this comment first. So this assignment was straightforward for me. I think my second comment was too big.
+We'll take a look at that. I was impatient. Sometimes it happens. We included tests for palindromes and non-palindromes. The code for each test should probably
+have been in two commits. Yes. Usually yes. I also wanted my solution to be pure. Nice. Since I declared local variables, I was questioning if my solution met
+the criteria for a pure function. Pure functions. After reviewing the definition of a pure function, yeah, means there's no declarations. There's no declaring
+of a variable and then declaring of another variable and declaring of another variable. There's not a vet. It's just you return immediately and you chain into
+other things as you're returning. After you got clear on that, same input, given the same output, no side effects. Correct. The side effect being creating
+state, making a assignment, using the assignment operation. I think my solution meet that criteria. Let me know if you disagree. Let's take a peek at that then.
+Yes. We've got one open here. All right. So what I'm going to do here is I'm going to immediately look at the complete results. All right. So we've got a bunch
+of palindromes. I like this. A bunch of non-palindromes. Some books and movies in there. Places. Non-string types. Nice. This is actually quite a good way to
+express things here. Like it's pretty easy to read. Actually. I just want to quickly comment on that. I already know where we're going by looking at this. So
+that's pretty well done. And describe it dot each palindromes. Right. Should return when the parameter is a palindrome. So it's using this wonderful aspect
+here. Going through each of these palindrome checker. When the parameter value is not a palindrome. Okay. All right. To be false. This is a really nicely,
+easily readable test here. Actually very easily readable test. It should throw an error if the parameter is not a string. Okay. And yep. The argument type of
+type volume is only. So this is the type of error we want to see coming back. Great. I love the way that this is being expressed. This is really easy to
+understand and it's pretty clean. Water break. That stuff is delicious. All right. Let's take a look at the solution here. Okay. So you were asking earlier
+about if this is a pure function. What I will say is this definitely does not have any side effects against external outputs. There's no side effects against.
+Collaborators. Correct. It's an input output system. So there's nothing you could perform a side effect against. However, this is where if we're really talking
+about pure functions. It's not a pure function. So in imperative programming, the idea is it's line by line. And every time you go line by line, there is
+statefulness involved there. The program has to understand where you currently are, which line you're at. That's where state is being used with pure functions.
+Pure functions do not even have the idea or essence or element of going line by line and knowing where you are in the program. With pure functions. The idea is.
+It can just be evaluated. Just it's more like piping. Piping. I've heard this also referred to as railroad oriented programming. It's like you're creating pipes
+and functions quite similarly to mathematical equations. However, what you're doing here is as soon as you use the const keyword, you've just introduced state
+because the state you've introduced is a local variable to this function here. Normalized value. So no, it's not a pure function, but it's good enough. It's
+functional, but it's not a pure function. So that's how you come back to answering your query about if this is a pure function or not. Okay. So, you know, this
+looks pretty much exactly like the previous solution and I'm sure we're going to arrive on this in a similar way. Okay. So where are we at? We've got the first
+test up here and let's see what we got. Is palindrome mom to be true? Okay. So what do I expect? Add module with fake implementation to get started. So you've
+done the fake implementation at the start. Normally we want to go to red and then of course do the implementation afterwards. However, all of those things are
+not hard, hard rules. They're generally guidelines again for these simple problems. I can understand why you might want to move forward a little bit faster with
+some of these because it is quite trivial. However, in the more complex problems, definitely don't want to skip that stuff. So you've added all the examples
+here. Add capability to normalize. Perimeter value to lowercase. Reverse it. Compare it. That's a lot in this second commit. And I believe you mentioned this.
+The second commit was too big. Yeah. You want your commits to be small. So this is really where the trade-off is. If you go one example at a time, it could take
+longer. But if you do a lot of examples all at once, it could be more complex. So really it's how much can you tolerate? How much complexity can you tolerate in
+the amount of examples and the amount you take on in one of these commits? Ideally, you want to just be doing one thing at a time, one example at a time. And
+that's what I talk about when we start using faster. I want you to use one example at a time because the problems you're going to be using in the next guest
+point, by the way, they're going to be more complex examples. So. Yeah, you've got a bunch here, but you're starting with it.each. That's not necessarily a bad
+thing to do. It really is that trade-off. So should return true when the parameter value is palindrome, but definitely don't be doing two of these at the same
+time. You've already called that out. You're aware of that. And yeah, you've done a lot here. You've practically done the entire solution all in one. So let's
+go ahead and see the next one. I also want to see in your commit messages. I want to see which phase you're on. I want to see if you're in red, green or
+refactor. So I would recommend you ensure that you have that reflected in your commit messages here. Again, yeah, you're doing a lot all at one time. Not the
+end of the world at this level. However, do be aware of that. They make it harder for you later on. I don't really know if this is a transformation and this is
+you going from red to green because you're starting in green, adding an example, which should could take us to red. And then the next thing you're going to do
+after we get to red is you're going to write the minimum amount of code to make it green. You've done all of that in the same commit. So you're not necessarily
+following the guidelines in terms of what it is we want to be focused on here at this guest point, the emergent part, which is red, green, refactor. While your
+code works, I would say let's go back in really home that in if you haven't done it before. However, if you have done it before, you've collected that learning,
+you're feeling comfortable about your ability to red, green, refactor. Then sure, let's evaluate this different. So palindrome add feature to throw an error
+when the argument type is not a string could not create a test for big int because typescript is targeting ES 2020 or greater. Okay. Let's take a look at some
+of this is again, lots of different examples at one time. The way that you're expressing it here, it does work. I would just make that one commit. And then I
+would do the rest of this as a separate thing. So I recommend that next time. All right. So all in all, what's my main feedback on this? Main feedback is if
+you've already done this assignment, because I think this says palindrome attempt one, it's straightforward for you. So I'm going to say this is your first
+attempt. You would probably want to do this again, do it, but make sure that you could step through it doing red, green, refactor and commit on red and green
+and on the refactor. But ultimately the way you've done this is great. The solution looks good. The code that you have here. I think it's really nice. However,
+you don't need this comment. That comment is unnecessary. So get rid of that. Other than that, I don't have any other feedback. This is exceptionally done. So
+good job on this. Consider if you want to go and practice your red, green, refactor skills and otherwise go ahead and move along to the next assignment. And to
+everyone else watching this, that's it for the video. So as always to mastery, let's get into the next one.

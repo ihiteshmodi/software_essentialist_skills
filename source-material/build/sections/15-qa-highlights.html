@@ -1,0 +1,445 @@
+<section id="qa-highlights" class="doc-section" data-title="Live Q&amp;A Highlights">
+  <h2>Live Q&amp;A Highlights (by Session)</h2>
+  <p class="lede">A per-session digest of the 15 live Q&amp;As, office hours and 1-on-1s, from the first early-adopter call (March 2023) to the 12-essentials reveal (November 2023). The same insights are also merged into the topic sections. Use this section to revisit one session’s arc: context, top insights, the best exchanges, and where each idea lives in the guide. <a class="src" data-lesson="84">L84</a> <a class="src" data-lesson="93">L93</a></p>
+
+  <table class="tbl">
+    <thead><tr><th>Date</th><th>Session</th><th>Lesson</th><th>Main themes</th></tr></thead>
+    <tbody>
+      <tr><td>Mar 14, 2023</td><td><a href="#qa-highlights--mar14-fdd">FDD (Figma-Driven Design)</a></td><td><a class="src" data-lesson="84">L84</a></td><td>Microservices as guesses, core vs infra code, 3 verification types, repository = role</td></tr>
+      <tr><td>Mar 31, 2023</td><td><a href="#qa-highlights--mar31-mastery">Mastery Foundations</a></td><td><a class="src" data-lesson="85">L85</a></td><td>Right action, phases of craftship, game of value, tools per guess point</td></tr>
+      <tr><td>Apr 22, 2023</td><td><a href="#qa-highlights--apr22-stateful">First Milestone Review &amp; Stateful Guess Point</a></td><td><a class="src" data-lesson="86">L86</a></td><td>FA²STR at any level (n loops), code organization, state machines, invariants, builders</td></tr>
+      <tr><td>May 5, 2023</td><td><a href="#qa-highlights--may05-most-valuable">Most Valuable Ideas, Frontend Arch &amp; Ideal Workflow</a></td><td><a class="src" data-lesson="87">L87</a></td><td>Stereotypical architecture, GOOS double loop, presenter/controller, verification per guess point</td></tr>
+      <tr><td>~May 2023</td><td><a href="#qa-highlights--front-loading">Front-Loading Value for Early Adopters</a></td><td><a class="src" data-lesson="83">L83</a></td><td>Short pointer to the May 5 Q&amp;A; V1 = brain-dump the most valuable ideas</td></tr>
+      <tr><td>May 25, 2023</td><td><a href="#qa-highlights--may25-office-hours">Office Hours: Decoupling From Infra</a></td><td><a class="src" data-lesson="88">L88</a></td><td>Dependency inversion, application interface, incoming tests, aggregates, pure domain</td></tr>
+      <tr><td>Jun 7, 2023</td><td><a href="#qa-highlights--jun07-aggregates">Office Hours: Aggregates, State Machines, Time</a></td><td><a class="src" data-lesson="89">L89</a></td><td>What before how, systems as state machines, aggregate = transaction boundary, FakeClock</td></tr>
+      <tr><td>Jul 4, 2023</td><td><a href="#qa-highlights--jul04-best-practice">Code-First → Best-Practice First</a></td><td><a class="src" data-lesson="82">L82</a></td><td>Phases as course spine, role→goal→examples→tests, 4-layer acceptance tests, minimal pipeline</td></tr>
+      <tr><td>Jul 27, 2023</td><td><a href="#qa-highlights--jul27-walking-skeleton">Walking Skeleton, Pipeline &amp; Contract Tests</a></td><td><a class="src" data-lesson="81">L81</a></td><td>Characterization tests, walking skeleton, CI phases, 6 test levels, “only testing our mocks”</td></tr>
+      <tr><td>Aug 15, 2023</td><td><a href="#qa-highlights--aug15-frontend-1">Frontend Architecture 1 of 2</a></td><td><a class="src" data-lesson="90">L90</a></td><td>Scalability = 3 roles winning, coupling vs contracts, read/write paths on the frontend</td></tr>
+      <tr><td>Aug 22, 2023</td><td><a href="#qa-highlights--aug22-structure">Final Course Structure</a></td><td><a class="src" data-lesson="91">L91</a></td><td>Topic map, “no more room for it depends”, no-time-to-test, phases in detail</td></tr>
+      <tr><td>Aug 30, 2023</td><td><a href="#qa-highlights--aug30-frontend-2">Frontend Architecture 2 of 2</a></td><td><a class="src" data-lesson="92">L92</a></td><td>Organize by feature, modules vs shared, NFR-driven choice, two test strategies</td></tr>
+      <tr><td>Nov 7, 2023</td><td><a href="#qa-highlights--nov07-essentials">Introducing the 12 Essentials</a></td><td><a class="src" data-lesson="93">L93</a></td><td>Walkthrough of all 12, top-down directionality, temporal coupling, composition root</td></tr>
+      <tr><td>Undated</td><td><a href="#qa-highlights--1on1-rdd">1-on-1 Part 1: Metaphysics &amp; RDD</a></td><td><a class="src" data-lesson="94">L94</a></td><td>Canvas app design, essence/purpose/form, essence of software, object stereotypes</td></tr>
+      <tr><td>Undated</td><td><a href="#qa-highlights--1on1-review">1-on-1 Part 2: Reviewing the Upfront Design</a></td><td><a class="src" data-lesson="95">L95</a></td><td>Zoom use-case review, controllers don’t subscribe, small guesses, next = use-case test</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout tip"><strong><span class="badge copilot">Added by Copilot</span> Threads that recur across sessions</strong>
+    <ul>
+      <li><strong>Contract tests keep fakes honest</strong>: clock contract <a class="src" data-lesson="84">L84</a>, repo parity <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="87">L87</a>, FakeClock <a class="src" data-lesson="89">L89</a>, divergent code paths <a class="src" data-lesson="91">L91</a>, incoming contract tests <a class="src" data-lesson="92">L92</a>.</li>
+      <li><strong>Walking skeleton + deploy early</strong>: <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="82">L82</a> <a class="src" data-lesson="86">L86</a> <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="93">L93</a>.</li>
+      <li><strong>Take the control center back from React</strong>: <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a> <a class="src" data-lesson="94">L94</a>.</li>
+      <li><strong>Small aggregates / one state change at a time</strong>: <a class="src" data-lesson="84">L84</a> <a class="src" data-lesson="88">L88</a> <a class="src" data-lesson="89">L89</a>.</li>
+      <li><strong>Phases of craftship as the lens on “where am I stuck?”</strong>: <a class="src" data-lesson="82">L82</a> <a class="src" data-lesson="85">L85</a> <a class="src" data-lesson="91">L91</a> <a class="src" data-lesson="94">L94</a>.</li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--mar14-fdd" data-title="Mar 14 · FDD (Figma-Driven Design)">
+    <h3>Mar 14, 2023: FDD (Figma-Driven Design) <a class="src" data-lesson="84">L84</a></h3>
+    <p>First day of the early-adopter cohort. Khalil draws architecture and writes TypeScript straight onto a Figma canvas. “FDD” is a joke, not a method. The session opens with a tech lead about to rewrite an MVP as microservices with two backend devs.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>An architecture choice is a theoretical guess that multiplies physical guesses</strong> (observability across deployables, messaging infra). It must be “solidly justified” against potential <em>negative value</em>. Fewer components → fewer guesses, which is why serverless is popular. <a class="src" data-lesson="84">L84</a></li>
+      <li><strong>Extensibility comes from first principles, not microservices</strong>: vertical slicing + horizontal decoupling. A modular monolith (Vaughn Vernon, <em>Strategic Monoliths</em>) can give you the same. <a class="src" data-lesson="84">L84</a></li>
+      <li><strong>Core vs infrastructure code</strong>: classify code by what it touches (DB, file system, network, system clock, random generator), not where it comes from. <code>new Date()</code> and <code>Math.random()</code> are infra, so wrap them behind a clock contract. <a class="src" data-lesson="84">L84</a></li>
+      <li><strong>Everything in the Express controller = anemic domain model.</strong> With no layers you can only black-box test, and E2E only allows result verification. Edge cases like “deactivated, rejoins → welcome back” become nearly impossible to reach. <a class="src" data-lesson="84">L84</a></li>
+      <li><strong>Three verification types</strong>: result (palindrome), state (checkers, found via wishful thinking <code>getCurrentPlayer()</code>), communication (use case ↔ injected contracts). Communication is “the hardest one” but gives the most valuable tests. <a class="src" data-lesson="84">L84</a></li>
+      <li><strong>The repository <em>is</em> the adapter.</strong> An interface is a role; <code>FirebaseUserRepo</code> and <code>SequelizeUserRepo</code> are actors that play it. <code>CreateUser</code> depends only on the role. <a class="src" data-lesson="84">L84</a></li>
+      <li><strong>Abstract → concrete spectrum</strong>: start with an interface. Move to an abstract class only after the rule of three, and pair it with YAGNI. “This game is really just fighting your own self.” <a class="src" data-lesson="84">L84</a></li>
+      <li><strong>Gherkin as training wheels</strong> for application-level-3 use-case tests, where setting up “the state of the world” is complex. <a class="src" data-lesson="84">L84</a></li>
+      <li><strong>External services</strong> (Stripe, PayPal, mail) get the minimum integration code wrapped in a service. A capability you buy “becomes pretty much that bounded context”. <a class="src" data-lesson="84">L84</a></li>
+      <li><strong>Essentialism’s steps</strong> (explore/evaluate the phronimos → eliminate → execute) are how Khalil distilled the 12 essentials. <a class="src" data-lesson="84">L84</a></li>
+    </ul>
+    <h4>Best Q&amp;A exchanges</h4>
+    <div class="callout tip"><strong>Q: Is microservices a good decision for a team of two backend devs?</strong> It’s a theoretical architecture guess that forces many physical guesses you may not be aware of. Justify it against negative value first. Vertical slicing and horizontal decoupling in a modular monolith give the same maintainability and extensibility. <a class="src" data-lesson="84">L84</a></div>
+    <div class="callout tip"><strong>Q: Is it fair to say infra code = packages you install?</strong> “Not completely fair.” An npm library that only returns a string is core. Express is infra because it opens a port and touches the network. <a class="src" data-lesson="84">L84</a></div>
+    <div class="callout tip"><strong>Q: Navigating interfaces is painful because I can’t ctrl-click to implementations.</strong> Three-part fix: slice features into feature folders, use cohesive naming and folders, and follow the layered rules so you always know use cases reference interfaces. <a class="src" data-lesson="84">L84</a></div>
+    <div class="callout tip"><strong>Q: Is a user an aggregate?</strong> “Depends.” Talk about the data and behavior each feature needs instead. That exposes what an aggregate is and isn’t. <a class="src" data-lesson="84">L84</a></div>
+    <blockquote class="quote">“It’s not about where it comes from it’s about what it touches.”<cite><a class="src" data-lesson="84">L84</a></cite></blockquote>
+    <blockquote class="quote">“The repository is the adapter... it is a role to be played.”<cite><a class="src" data-lesson="84">L84</a></cite></blockquote>
+    <blockquote class="quote">“My goal here is for everyone to become their own coach to make myself redundant.”<cite><a class="src" data-lesson="84">L84</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#essentials-physical--horizontal-decoupling">Horizontal Decoupling</a> · <a href="#essentials-physical--subject-system-verification">Subject/System Verification</a> · <a href="#testing--verification">Verification per Guess Point</a> · <a href="#testing--contract-tests">Contract Tests &amp; FakeClock</a> · <a href="#essentials-theoretical--strategic-design">Strategic Design</a> · <a href="#architecture--monolith-vs-microservices">Modular Monolith vs Microservices</a> · <a href="#abstraction-rdd--roles-actors">Roles &amp; Actors</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--mar31-mastery" data-title="Mar 31 · Mastery Foundations">
+    <h3>Mar 31, 2023: Mastery Foundations <a class="src" data-lesson="85">L85</a></h3>
+    <p>A preview of the Mastery Foundations section, which sits between the “stay in the game” mindset material and the physical guess points. It’s mindset-heavy (“It’s extremely abstract”), followed by course logistics.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>Right action</strong>: work is full of <em>quantum moments</em>, decisions that send you down different paths. What you do in them depends on what you currently value. <a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Phases of craftship</strong>: code-first → best-practices-first → pattern-first → DDD-first → responsibility-first → value. At the deepest level, software development is a <strong>game of value</strong> won with the feedback loop. It’s non-linear, so there are “no silver bullets”. <a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Mastery process</strong>: observe &amp; evaluate → eliminate → execute. Khalil’s elimination produced the 12 essentials, taught as a “straight line” instead of wandering topic to topic. <a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Value creation system, left → right</strong>: theoretical guess points (problem, solution, architecture) come before physical ones. Scoring = shipping value; negative value = bugs. <a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Zero validated theoretical guesses?</strong> Don’t run multi-loop TDD at every guess point. Push one guess through fast, then “start playing defense” with tests at the physical level. <a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Platform strategy</strong>: shared infrastructure (known deploy, architecture, tested services) lets later features skip guess points and score faster. <a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Tools belong to guess points</strong>: big-picture event storming → problem; tactical event storming → solution; impact mapping and user story mapping → theoretical guess points. <a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Any question = one metaphysical essential + one physical/theoretical essential.</strong> “How do I do transactions in use cases?” = abstraction design + temporal decoupling. <a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Small guesses applied to the course</strong>: MVP in text first (video feedback loops are too long), with opt-in access to rough “prod” content. <a class="src" data-lesson="85">L85</a></li>
+    </ul>
+    <h4>Best Q&amp;A exchanges</h4>
+    <div class="callout tip"><strong>Q (Rohan): I’m confused. What should I do now?</strong> Ask a goal-based question: “What is your current goal?” Developers often don’t know what they need to know. The course is the straight-line path that came out of observe → eliminate → execute. <a class="src" data-lesson="85">L85</a></div>
+    <div class="callout tip"><strong>Q: Should we TDD at every guess point?</strong> Not with zero theoretical guesses validated. Push one artifact through fast and add tests afterwards. With a platform in place you can skip some guess points altogether. <a class="src" data-lesson="85">L85</a></div>
+    <div class="callout tip"><strong>Q: Where do event storming, user story mapping and impact mapping fit?</strong> In the theoretical guess points. Knowing which guess point each tool serves is a “massive simplification”. <a class="src" data-lesson="85">L85</a></div>
+    <div class="callout tip"><strong>Q: What’s the best way of letting go of old paradigms?</strong> It’s painful (Luigi went from code-first to using RDD in interviews). Structure it with milestones and checkpoints so you don’t get stuck “in the void”. <a class="src" data-lesson="85">L85</a></div>
+    <blockquote class="quote">“Right action really, truly, is based on what you currently value.”<cite><a class="src" data-lesson="85">L85</a></cite></blockquote>
+    <blockquote class="quote">“It’s less about the tool. It’s more about the inputs, outputs of the system of creating value.”<cite><a class="src" data-lesson="85">L85</a></cite></blockquote>
+    <blockquote class="quote">“The problem that a lot of developers have is they don’t even know what they need to know.”<cite><a class="src" data-lesson="85">L85</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#mindsets--right-action">Right Action</a> · <a href="#course-map--phases">Phases of Craftship</a> · <a href="#metaphysics--value-creation-system">Value Creation System</a> · <a href="#essentials-theoretical--tools-per-guess-point">Tools Belong to Guess Points</a> · <a href="#essentials-metaphysical--jargon-map">Mapping Jargon onto the Essentials</a> · <a href="#workflow--mvp">When to Go Light</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--apr22-stateful" data-title="Apr 22 · Stateful Guess Point Intro">
+    <h3>Apr 22, 2023: First Milestone Review &amp; Intro to the Stateful Guess Point <a class="src" data-lesson="86">L86</a></h3>
+    <p>The TDD content had just moved from the book into the platform. Despite the title, no milestone code is reviewed. The session covers FA²STR at any level, how to organize code, and a long introduction to state machines, invariants and fixtures.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>FA²STR is an input → output tool usable at any level of abstraction</strong>, from a pure function up to a job queue. For simple problems it happens in your head. <a class="src" data-lesson="86">L86</a></li>
+      <li><strong>“n loops”, not an nth-layer loop</strong>: start at any level, run FA²STR, emergent design surfaces new constructs, and you drill in again. You can shortcut levels depending on “the score of the game”. <a class="src" data-lesson="86">L86</a></li>
+      <li><strong>Stack theoretical guesses</strong> (architecture, platform, process) so physical guesses go faster. That’s the case for strategic monoliths and good platforms. <a class="src" data-lesson="86">L86</a></li>
+      <li><strong>Organize code from developer use cases</strong> (find/add/remove/change/extend/understand a feature, run its test) rather than folder conventions. The README should show them within ~10 seconds (Don Norman’s discoverability; Cockburn’s use cases). <a class="src" data-lesson="86">L86</a></li>
+      <li><strong>Problems are stateful.</strong> The hand-washing-clothes state machine is built backwards from the end state. <strong>Invariant = rule = business logic</strong>; it blocks invalid transitions like “gathered clothes → clothes clean”. <a class="src" data-lesson="86">L86</a></li>
+      <li><strong>States and events are two sides of one coin</strong>, and the purpose of encapsulation is “to protect the way the model changes”. <a class="src" data-lesson="86">L86</a></li>
+      <li><strong>Fixture = initial state.</strong> Don’t act out 20 chess moves per test. Use <code>GameBuilder.fromCommonGameState(GameStates.theMostBrutalGameEver)</code>. <a class="src" data-lesson="86">L86</a></li>
+      <li><strong>“Planning is a lie”</strong>: you have plans, not a plan. Give estimates, not dates. Don’t push the team to adopt named techniques; value-first is about <em>you</em> deciding better. <a class="src" data-lesson="86">L86</a></li>
+      <li><strong>Tracer bullets / walking skeleton</strong> show how fast you actually work, which makes estimates better. <a class="src" data-lesson="86">L86</a></li>
+    </ul>
+    <h4>Best Q&amp;A exchanges</h4>
+    <div class="callout tip"><strong>Q: Is there a particular way to organize code?</strong> Start from the developer role’s goal and the actors and impacts (impact mapping), then list developer use cases. Make them discoverable: the README first, then module folders that reveal features. <a class="src" data-lesson="86">L86</a></div>
+    <div class="callout tip"><strong>Q: What is a fixture?</strong> The initial state. The line-by-line chess checkmate test was refactored live into a builder with named, team-known game states. <a class="src" data-lesson="86">L86</a></div>
+    <div class="callout tip"><strong>Q: How do I fit FA²STR into team planning and meetings?</strong> “Planning is a lie… You have plans.” Many practitioners use these techniques without naming them, so don’t evangelize. Use them to make better decisions yourself. <a class="src" data-lesson="86">L86</a></div>
+    <blockquote class="quote">“It doesn’t matter where you start… you need to drill in with several loops.”<cite><a class="src" data-lesson="86">L86</a></cite></blockquote>
+    <blockquote class="quote">“What is the purpose of encapsulation? To protect the way the model changes.”<cite><a class="src" data-lesson="86">L86</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#workflow--n-loops">FA²STR at Any Level: n Loops</a> · <a href="#workflow--fa2str-stateless">FA²STR at the Stateless Guess Point</a> · <a href="#ddd-feedbook--state-machines">State Machines &amp; Invariants</a> · <a href="#testing--builders">Fixtures with Builders</a> · <a href="#mindsets--thinking-backwards">Thinking Backwards</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--may05-most-valuable" data-title="May 5 · Most Valuable Ideas">
+    <h3>May 5, 2023: The Most Valuable Ideas, Frontend Architecture &amp; the Ideal Developer Workflow <a class="src" data-lesson="87">L87</a></h3>
+    <p>Khalil front-loads the “game-changing” ideas so students don’t wait for them: the <strong>stereotypically testable architecture</strong> and the <strong>ideal developer workflow</strong> from GOOS. Much of the Q&amp;A applies them to the frontend.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>There is one stereotypically testable architecture</strong> on frontend, backend and desktop; only the terminology changes. Place any tool (Next.js, Nest.js, Redux, NgRx) by asking which responsibility it handles. Find problem points by measuring the gap to it. Source: <em>Object Design</em> (Wirfs-Brock). <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>The guess points exist to let you write tests strategically</strong>: stateless (1), stateful (2), application (3, “quite literally life-changing”), outgoing adapter (4), system/E2E (5), with incoming adapters mentioned alongside as “four and six”. <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>Ideal developer workflow (GOOS double loop)</strong>: once per project, Find/Architect/Automate and deploy a walking skeleton. Per feature, write a failing E2E acceptance test → a failing level-3 use-case test (~80% of time) → the remaining ~20% on adapters, E2E pass and UI hookup. <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>If you need to start React to test your features, React is doing the coordination.</strong> A library becomes a framework when it coordinates and controls. A plain <strong>Presenter</strong> (read) and <strong>Controller</strong> (write) let you test the whole app without React or the API. <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>One acceptance test per feature</strong>, shared by frontend, backend, mobile and desktop (Dave Farley). Each team validates it its own way. <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>Verification per guess point</strong>: stateless → result; stateful → state; application → adds communication (the only place for it); E2E → result only. State or communication checks at E2E are “bad practice”. <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>Frontend state flow</strong>: API-client cache → global state → domain + view models → component initial state → local component state. Interactions go through the controller. <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>Redux mapped to the stereotype</strong>: store/reducer = cache/gateway, selectors = reactive queries that belong in the presenter (never in component files). Use-case tests never mention Redux. <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>Domain objects are for writes only.</strong> Queries go straight to the store and return the simplest shape, which avoids “mapper hell”. <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>The answer to “stop mocking”</strong>: handwritten spies and in-memory repos (turned into builders), kept in sync with the real ones by contract tests. <a class="src" data-lesson="87">L87</a></li>
+    </ul>
+    <h4>Best Q&amp;A exchanges</h4>
+    <div class="callout tip"><strong>Q (Tim): Does the first deployed slice have to be the first feature?</strong> No. That’s the walking skeleton (via tracer bullets). It can be as small as getting data from the DB onto the screen. The point is to surface infra problems before feature work. <a class="src" data-lesson="87">L87</a></div>
+    <div class="callout tip"><strong>Q (Daryl): How do I handle “then I get an email” at E2E when frontend and backend deploy separately?</strong> There’s still one acceptance test. E2E does result verification only (e.g. a 201), and email can be a no-op there. Verify the email at the application level with an email spy. A provider sandbox only saves cost; it doesn’t prove delivery. <a class="src" data-lesson="87">L87</a></div>
+    <div class="callout tip"><strong>Q: How do controller tests work with Redux/NgRx?</strong> Read the docs for its doings and knowings and map them to stereotypes. Selectors live in the presenter. Test cache hydration separately as an outgoing adapter test. “Keep them separate.” <a class="src" data-lesson="87">L87</a></div>
+    <div class="callout tip"><strong>Q: Does DDD belong on the frontend?</strong> Yes for logic-heavy apps (a DAW, a drag-and-drop call-flow editor, a pedal-board chain). Daryl added that it also speeds up feedback because there’s no network round trip. <a class="src" data-lesson="87">L87</a></div>
+    <blockquote class="quote">“If you want to test your features, if you need to start react, then react is doing the coordination.”<cite><a class="src" data-lesson="87">L87</a></cite></blockquote>
+    <blockquote class="quote">“You only ever have one acceptance test. You don’t switch the test for different environments.”<cite><a class="src" data-lesson="87">L87</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#workflow--ideal-workflow">The Ideal Developer Workflow</a> · <a href="#workflow--guess-points">Guess Points as Test Levels</a> · <a href="#testing--verification">Verification per Guess Point</a> · <a href="#testing--test-doubles">Hand-Written Spies</a> · <a href="#testing--contract-tests">Contract Tests</a> · <a href="#essentials-physical--walking-skeleton">Walking Skeleton</a> · <a href="#frontend--control-center">React Must Not Run the Show</a> · <a href="#frontend--state">Frontend State Management</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--front-loading" data-title="~May · Front-Loading Value (short)">
+    <h3>Front-Loading the Value for Early Adopters (short intro) <a class="src" data-lesson="83">L83</a></h3>
+    <p>A short, undated intro video recorded a few days after the <a href="#qa-highlights--may05-most-valuable">May 5 Q&amp;A</a>. It points to that ~2-hour recording and its written key takeaways. The recording itself has no Q&amp;A.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>V1’s goal</strong> was to brain-dump the main, most valuable ideas into the early-adopter version. <a class="src" data-lesson="83">L83</a></li>
+      <li><strong>Two reasons to front-load</strong>: students get results as fast as possible, and Khalil can see how the course is used, a feedback loop on the course itself. <a class="src" data-lesson="83">L83</a></li>
+      <li><strong>Watching the full Q&amp;A is optional.</strong> Read the key takeaways; the important clips get cut into standalone videos in the fast track and the relevant sections. <a class="src" data-lesson="83">L83</a></li>
+      <li><strong>Frontend teaser</strong>: the frontend uses the same object stereotypes and architecture as the backend. <a class="src" data-lesson="83">L83</a></li>
+    </ul>
+    <blockquote class="quote">“My goal for V1 of this course is to pretty much just brain dump all of the main, most valuable ideas of the course into here.”<cite><a class="src" data-lesson="83">L83</a></cite></blockquote>
+    <blockquote class="quote">“It’s all the same stereotypical architecture.”<cite><a class="src" data-lesson="83">L83</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#course-map--evolution">How the Structure Evolved</a> · <a href="#course-map--mvp">Ship an MVP Fast</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--may25-office-hours" data-title="May 25 · Decoupling From Infra">
+    <h3>May 25, 2023 (Office Hours): Decoupling From Infra &amp; the Stateful Domain Modelling Guess Point <a class="src" data-lesson="88">L88</a></h3>
+    <p>The first “office hours”, where Khalil teaches live to get the tightest feedback loop. It starts from a student’s naive Express <code>createUser</code> (“a lot of missed concerns”, “no domain model”) and ends on aggregates and keeping the domain pure. The stateful guess point is renamed the <strong>Stateful Domain Modeling Guess Point</strong>.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>Two problems with a naive backend</strong>: (1) E2E tests don’t scale, because DB fixtures are complex and slow and the granularity is wrong; (2) the controller, app logic and business logic are fused. <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Fix 1, dependency inversion</strong>: core code uses a persistence contract; the real DB and an in-memory fake both “play the role”. The same goes for a fake <code>PaymentService</code> instead of Stripe. <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Fix 2, the application interface</strong>: all use cases composed into one pure object that the web server uses (the composition essential). <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Incoming adapter tests</strong> only check that endpoints call the right use cases with the right parameters. They catch the “works in tests, fails when deployed” class of bug (e.g. CORS). <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Avoid the word “integration”</strong> (“means so many different things”) and avoid packaging by infrastructure. <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Nth looping</strong> (renamed from double looping): <code>Student</code> entity (L2) → <code>FirstName</code>/<code>LastName</code> value objects → level-1 validation. Level 2 uses state verification plus domain events to prove objects change for the right reason. <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Aggregate = the minimum data needed to perform a command.</strong> Command-specific shapes (<code>UserForEditUser</code>) → rule of three → an abstract <code>User</code>. Can’t find the boundary? You’re doing too much in one command → temporal decoupling. <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Transaction-script danger</strong>: a <code>makePurchase</code> that crashes between billing and the inventory update leaves an invalid state. Khalil hit this on the solidbook site, made worse by serverless cold starts. <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Order of work</strong>: never make physical guesses before the theoretical ones are sorted. Problem → solution space (core/supporting/generic) → architecture (build vs buy) → physical. <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>The domain must be pure</strong>: no <code>new Date()</code>, <code>Math.random()</code> or <code>setTimeout</code>, so inject a clock. Frontends are connected domains too; React Router has its own domain layer. <a class="src" data-lesson="88">L88</a></li>
+    </ul>
+    <h4>Best Q&amp;A exchanges</h4>
+    <div class="callout tip"><strong>Q (Talib): Is my test structure right (acceptance tests on business logic, double-loop TDD)?</strong> Mostly. Fix the two problems with fakes plus an application interface. Then follow the ideal developer workflow: one production-like E2E, most tests at level 3, ~20% infra tests. <a class="src" data-lesson="88">L88</a></div>
+    <div class="callout tip"><strong>Q: Can the web server depend on use cases directly?</strong> Use incoming adapter tests with an application interface so the tests don’t have to configure every real use case. Daniel added: without it “you end up building your app within your framework”, and Khalil agreed. <a class="src" data-lesson="88">L88</a></div>
+    <div class="callout tip"><strong>Q: How do I design aggregates / aggregate roots?</strong> Include only the data a command needs to execute and check its rules (edit user doesn’t need the password). Event storming comes first, and it’s “non-negotiable”. <a class="src" data-lesson="88">L88</a></div>
+    <blockquote class="quote">“An aggregate is the minimum amount of information required for you to perform a command.”<cite><a class="src" data-lesson="88">L88</a></cite></blockquote>
+    <blockquote class="quote">“You never want to be making physical guesses unless you have your theoretical guesses sorted.”<cite><a class="src" data-lesson="88">L88</a></cite></blockquote>
+    <blockquote class="quote">“The domain model needs to be super pure. It’s not allowed to know about system time.”<cite><a class="src" data-lesson="88">L88</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#essentials-physical--horizontal-decoupling">Horizontal Decoupling</a> · <a href="#essentials-physical--composition">Composition</a> · <a href="#ddd-feedbook--aggregates">Aggregates</a> · <a href="#ddd-feedbook--event-storming">Event Storming</a> · <a href="#essentials-physical--temporal-decoupling">Temporal Decoupling</a> · <a href="#workflow--ideal-workflow">Ideal Developer Workflow</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--jun07-aggregates" data-title="Jun 7 · Aggregates, State Machines, Time">
+    <h3>Jun 7, 2023 (Office Hours): Theoretical Guess Points, Aggregates, State Machines <a class="src" data-lesson="89">L89</a></h3>
+    <p>Held after the theoretical content (problem, solution and architecture spaces) shipped. The theme: the hard part is the <em>what</em>. Most of the session is about aggregates as transaction boundaries and decoupling from time.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>The hard part of programming is determining the “what”</strong>, which is about language. Anxiety at work signals a lack of clarity. Write the process down first and execution “feels like typing”. <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Information systems are state machines</strong>: one emits an event that triggers the next. Keep to one state change at a time within a context. <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Events may branch across contexts</strong> (<code>OrderPlaced</code> → billing + email) but never into two paths in the same namespace. <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Aggregate = transaction/consistency boundary</strong>, a level-3 (application) concept; entities and value objects are level 2. Test: if the system dies halfway through, is it inconsistent? <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Relationships go by identifier.</strong> A playlist reorder uses a linked list (previous/next IDs), so one small transaction does the move and the rest is eventually consistent. <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Applications force purposefulness</strong>: work from level 3 (developer boundary) or level 5 (customer boundary), or you’ll model dogs → owners → houses → cities forever. <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Time is an application concern.</strong> Use a <code>Clock</code> role with <code>SystemClock</code> and <code>FakeClock</code>, kept in parity by a level-4 contract test that loops over both. <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Why level 3 is hard</strong>: FA²STR’s find step must surface every responsibility there (time, repos, transactions, events, auth). That’s why the course teaches inside-out. <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>On AI</strong>: it “crunches down” decision-making logic, but you still need the inputs, outputs and goalpost it plugs into. <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Laurent on slicing</strong>: a slice is a slice of <em>value</em>, not a technical slice. Technical enablers are chores. Ship behind feature flags and migrate incrementally (nullable column → required). <a class="src" data-lesson="89">L89</a></li>
+    </ul>
+    <h4>Best Q&amp;A exchanges</h4>
+    <div class="callout tip"><strong>Q (Lucas): Is finding the aggregate per event always a good approach?</strong> It’s the best way to find the <em>required input</em>. Khalil avoids the word “aggregate” while event storming and looks at inputs and outputs instead. After the process model, drop straight into level 3. <a class="src" data-lesson="89">L89</a></div>
+    <div class="callout tip"><strong>Q: Is an aggregate the same as a DTO?</strong> No. A DTO is data in a shape with no behavior. An aggregate is the data that must change together in one transaction. <a class="src" data-lesson="89">L89</a></div>
+    <div class="callout tip"><strong>Q: How do I handle time in the traffic-light / Pomodoro assignments?</strong> Time belongs to the application: a Clock role, a fake that fast-forwards an hour instantly, and a contract test against the real clock. <a class="src" data-lesson="89">L89</a></div>
+    <div class="callout tip"><strong>Q: What is a feature/slice?</strong> Laurent: the smallest shippable, usable result that solves part of the problem. Use user story mapping for value slices and event storming for developers. <a class="src" data-lesson="89">L89</a></div>
+    <blockquote class="quote">“Information systems are just state machines.”<cite><a class="src" data-lesson="89">L89</a></cite></blockquote>
+    <blockquote class="quote">“It’s okay to mock... but just make sure you mock correctly... You want to create parity between what’s real and fake.”<cite><a class="src" data-lesson="89">L89</a></cite></blockquote>
+    <blockquote class="quote">“If you don’t have clarity on what matters, everything’s gonna seem like a threat.”<cite><a class="src" data-lesson="89">L89</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#ddd-feedbook--aggregates">Aggregates</a> · <a href="#ddd-feedbook--state-machines">State Machines &amp; Invariants</a> · <a href="#testing--contract-tests">Contract Tests &amp; FakeClock</a> · <a href="#mindsets--clarity-strategies">Clarity Strategies</a> · <a href="#essentials-physical--temporal-decoupling">Temporal Decoupling</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--jul04-best-practice" data-title="Jul 4 · Code-First → Best-Practice First">
+    <h3>Jul 4, 2023: From Code-First to Best-Practice First <a class="src" data-lesson="82">L82</a></h3>
+    <p>The course is restructured around the phases of craftship, and Khalil previews what best-practice-first will fix in code-first projects.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>Phases of craftship are the course spine.</strong> Guess points, FA²STR and the ideal workflow only make sense once you’ve climbed them. <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Why the course is built incrementally</strong>: Khalil first wrote “thousands and thousands of pages of theory” up front. Now he adds foundational theory only when it’s needed. <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Code-first problems</strong>: manual testing with curl, thinking in endpoints instead of features, and a DB installed on the local machine. <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Debugging loop</strong>: if you keep changing something and it keeps failing (Dockerfile edits on a 30-second cycle), stop, zoom out, draw it, clarify responsibilities, then descend. <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Role → goal → features → concrete examples → acceptance tests.</strong> DDD Forum reframed: a conference organizer wants an audience of DDD-curious developers to sell tickets to. <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Acceptance test = shared executable spec</strong> for frontend and backend. Four layers: example → runner → test code → protocol driver (a page object on the frontend) → system. <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Three test categories</strong>: acceptance (“does it do what the customer wants?”), unit (~80%), infrastructure (start/stop DB, web server). <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Minimal pipeline (after Dave Farley)</strong>: commit phase → release candidate → acceptance phase in a production-like environment → infra tests → deploy. <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Architecture progression</strong>: view-controller-DB → service layer (four-tier, slim controllers) → pure application/domain core. Add a composition root and Docker for the dev DB. <a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Monorepo</strong> with <code>frontend/</code>, <code>backend/</code>, <code>shared/</code> (acceptance tests, later DTOs). Each non-trivial frontend gets its own MVC with presenters. <a class="src" data-lesson="82">L82</a></li>
+    </ul>
+    <h4>Best Q&amp;A exchanges</h4>
+    <div class="callout tip"><strong>Q: One acceptance test for the whole app, or separate ones for frontend and backend?</strong> Write it so it can run on either side, as a shared executable specification. Run it against the backend, or end to end through a page-object protocol driver. <a class="src" data-lesson="82">L82</a></div>
+    <div class="callout tip"><strong>Q: Should “Then” be past tense, like an event?</strong> Usually (“order should have been placed”, “email sent”). Present tense is fine for UI experience (“I should now be logged in”). The hard rule is to describe the system the way the user interacts with it. <a class="src" data-lesson="82">L82</a></div>
+    <div class="callout tip"><strong>Q: Our team of three has strong product ownership. Which artifacts should we use?</strong> Role-goal (≈ impact mapping, feature injection), process modeling, user story mapping and example mapping. Documents are a side effect of shared understanding and go stale. Read <em>BDD in Action</em> or <em>Specification by Example</em>. <a class="src" data-lesson="82">L82</a></div>
+    <blockquote class="quote">“You’re just so too deep into the how. What you need to do is stop, zoom out, draw it up front.”<cite><a class="src" data-lesson="82">L82</a></cite></blockquote>
+    <blockquote class="quote">“Never start a project without these four words clearly understood.”<cite><a class="src" data-lesson="82">L82</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#essentials-metaphysical--zoom-out">Debugging by Zooming Out</a> · <a href="#essentials-theoretical--role-goal-chain">Role → Goal → Features → Examples → Tests</a> · <a href="#testing--acceptance">4-Layer Acceptance Tests</a> · <a href="#essentials-physical--deployment-delivery">Deployment &amp; Delivery</a> · <a href="#course-map--phases">Phases of Craftship</a> · <a href="#architecture--monorepo">Monorepo</a> · <a href="#career--books">Recommended Books</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--jul27-walking-skeleton" data-title="Jul 27 · Walking Skeleton &amp; Contract Tests">
+    <h3>Jul 27, 2023: The Walking Skeleton, Pipeline &amp; Contract Tests <a class="src" data-lesson="81">L81</a></h3>
+    <p>More restructuring: the DDD Forum build assignments become optional, and students apply the 4-layer E2E setup to their own work instead. The session ends with the definitive answer to “we’re only testing our mocks”.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>Developers do two things</strong>: improve existing features and add new ones. To improve, write a <strong>characterization test</strong> around the black box, then move in a layer and distill (Evans). Don’t rewrite from scratch. <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>New flow</strong>: code-first → testing basics → best practices (E2E backend with Docker → E2E frontend → walking skeleton → deploy → minimal pipeline → improve the design) → pattern-first. <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>Walking skeleton = tracer bullet.</strong> Khalil’s own mistake was writing all the pure core first, then hitting “all these weird CORS errors” on deploy. <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>Execution guess point</strong>: after users use the code, check the KPIs. That closes the loop back to the start of the value creation system. <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>Pipeline</strong>: commit phase (lint, build, unit tests giving ~80% confidence, package) → acceptance phase (staging + E2E) → production. Put tests in CI, not only in Husky hooks. <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>Six test levels via systems thinking</strong>: L6 incoming, L5 system, L4 outgoing, L3 app, L2 stateful, L1 stateless. “It is just all inputs and outputs.” <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>Test mix</strong>: E2E for the happy path plus one or two sad paths, then ~12–20 high-value tests with concrete examples, parameterized. <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>Library mocks only for trivial stubs</strong> (a logger). Stateful dependencies are indirect inputs, so use fakes covered by contract tests. <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>React hooks “really force you to completely mangle your code”.</strong> Use a plain observer store and extract a routing service. <a class="src" data-lesson="81">L81</a></li>
+    </ul>
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L81</span> One spec, every implementation: test parity</figcaption>
+      <pre><code class="language-ts">const allUserRepos: UserRepo[] = [new InMemoryUserRepo(), new ProductionUserRepo()];
+
+allUserRepos.forEach((userRepo) =&gt; {
+  it('can save users', async () =&gt; {
+    await userRepo.save(user);
+    expect(await userRepo.get(user.email)).toEqual(user);
+  });
+});</code></pre>
+    </figure>
+    <h4>Best Q&amp;A exchanges</h4>
+    <div class="callout tip"><strong>Q: Should these tests run locally via Husky?</strong> Devs can turn hooks off and push broken code, so run tests in the pipeline (GitHub Actions). A student’s rule, endorsed: fast things pre-commit, slow things in CI. The minimum is that you can deploy and the E2E tests run. <a class="src" data-lesson="81">L81</a></div>
+    <div class="callout tip"><strong>Q: When we mock the use case’s repo, devs feel “we’re just testing what we put into the tests”.</strong> That feeling is a symptom of missing contracts. Run one integration spec over every repo implementation, fake and prod, so if one breaks they all break. <a class="src" data-lesson="81">L81</a></div>
+    <div class="callout tip"><strong>Q: What if the repo has complex filters and aggregations that are hard to fake?</strong> Pull the filtering into its own abstraction or subdomain (e.g. search). If the DB does the heavy lifting, test the contract and “let the external tool do the external tooling”. <a class="src" data-lesson="81">L81</a></div>
+    <blockquote class="quote">“You’re testing the contract, not the implementation.”<cite><a class="src" data-lesson="81">L81</a></cite></blockquote>
+    <blockquote class="quote">“If you could deploy, and if you can run the E2E tests, and the E2E tests run, you’re good.”<cite><a class="src" data-lesson="81">L81</a></cite></blockquote>
+    <blockquote class="quote">“Raise the level of abstraction of what it is you’re looking at to test.”<cite><a class="src" data-lesson="81">L81</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#testing--contract-tests">Contract Tests</a> · <a href="#essentials-physical--walking-skeleton">Walking Skeleton</a> · <a href="#essentials-physical--deployment-delivery">Deployment &amp; Delivery</a> · <a href="#testing--acceptance">4-Layer Acceptance Tests</a> · <a href="#workflow--guess-points">Guess Points as Test Levels</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--aug15-frontend-1" data-title="Aug 15 · Frontend Architecture 1">
+    <h3>Aug 15, 2023: New Q&amp;A Structure + Frontend Architecture 1 of 2 <a class="src" data-lesson="90">L90</a></h3>
+    <p>This session introduces the new format: topics proposed in the office-hours channel and voted on. Frontend architecture beats high-value unit testing, and Khalil draws the whole frontend architecture on an iPad.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>Two mental models (feedback loop + abstraction), tied together by systems thinking</strong>: “If you understand those things that is the entire course really.” <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>Architecture’s goal is scalability, meaning all three roles win</strong> (users, customers, developers). You achieve or lose it through the four pillars. <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>Bad design example</strong>: packaging by infrastructure (<code>routes/</code>, <code>controllers/</code>). Structure should “progressively move inwards”. <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>Coupling is the enemy of testing.</strong> Insert a contract between two clumps (one implements it, one relies on it) and repeat to isolate smaller clumps. <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>Framework patterns map to agnostic patterns</strong> (Redux store, single-file components → DTO, controller, presenter, observer, gateway, view model), which derive from the six RDD stereotypes. <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>Read path</strong>: gateway/API client → cache → observer/coordinator → presenter → view model → component, bound via <code>useEffect</code> or MobX. <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>Write path</strong>: component → controller (use cases/command handlers) → domain object (e.g. <code>RegistrationForm</code>) → repository → gateway. Any state-changing command should pass through a domain object first. <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>Component state</strong> (ephemeral, <code>useState</code>) is separate from app state (the cache). <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>Strategy</strong>: small and medium frontends start with E2E tests. Carve out the pure middle (the high-value unit test zone) only when complexity justifies it. <a class="src" data-lesson="90">L90</a></li>
+    </ul>
+    <h4>Best Q&amp;A exchanges</h4>
+    <div class="callout tip"><strong>Q: What’s the goal of frontend architecture?</strong> Students offered easy to change, many devs on one codebase, easy to navigate. Khalil abstracted all of them into scalability: all three roles winning, via the four pillars. <a class="src" data-lesson="90">L90</a></div>
+    <div class="callout tip"><strong>Q: Don’t React Query or Apollo abstract all this?</strong> They handle fetching, caching and hooks. At responsibility-first you see their doings and knowings, map them to stereotypes, and either vet the tool or compose the missing responsibilities yourself. <a class="src" data-lesson="90">L90</a></div>
+    <div class="callout tip"><strong>Q: Is it OK to share models between frontend and backend?</strong> Yes. Share value objects and their validation from a shared package. Frontend-only domain objects like <code>RegistrationForm</code> still exist. <a class="src" data-lesson="90">L90</a></div>
+    <div class="callout tip"><strong>Q: Is this necessary for small or medium companies?</strong> Often no. Start with E2E per the ideal workflow, and decouple only when internal complexity grows. “This is why I cannot prescribe to you a single approach.” <a class="src" data-lesson="90">L90</a></div>
+    <blockquote class="quote">“Scalability is when one two three are winning.”<cite><a class="src" data-lesson="90">L90</a></cite></blockquote>
+    <blockquote class="quote">“Coupling... is the enemy of testing.”<cite><a class="src" data-lesson="90">L90</a></cite></blockquote>
+    <blockquote class="quote">“The presenter’s whole job is to build the view models.”<cite><a class="src" data-lesson="90">L90</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#metaphysics--three-roles">The 3 Roles</a> · <a href="#metaphysics--four-pillars">The 4 Pillars</a> · <a href="#essentials-physical--horizontal-decoupling">Horizontal Decoupling</a> · <a href="#testing--strategies">Value-First Test Strategies</a> · <a href="#frontend--read-side">Read Side</a> · <a href="#frontend--write-side">Write Side</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--aug22-structure" data-title="Aug 22 · Final Course Structure">
+    <h3>Aug 22, 2023: Final Course Structure <a class="src" data-lesson="91">L91</a></h3>
+    <p>Khalil shows his <strong>topic map</strong>, built on the abstraction prism and his North Star for re-recording the course. He derives advanced topics from the two mental models, then walks the final phase plan.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>The topic map is a walking skeleton for the curriculum</strong>: goals → capabilities → features → acceptance criteria, linked “almost like a context”. It means less rework. <a class="src" data-lesson="91">L91</a></li>
+      <li><strong>Every essential stems from abstraction or the feedback loop.</strong> Derived live: sagas (state machines chained by events) and composition (layering = abstraction; encapsulation as a constraint that aids feed-forward). <a class="src" data-lesson="91">L91</a></li>
+      <li><strong>“No more room for <em>it depends</em>”</strong>: systems thinking tells you what it depends on. Short on time? E2E on the main things, then high-value unit tests. Weird Stripe API? More outgoing tests. <a class="src" data-lesson="91">L91</a></li>
+      <li><strong>Why only 12</strong>: horizontal decoupling alone has a dozen synonyms (hexagonal, onion, ports &amp; adapters…). Learn the 12 and map new jargon onto them (CQS → vertical slicing). <a class="src" data-lesson="91">L91</a></li>
+      <li><strong>Capability ≠ choice</strong>: the course gives you the ability; whether to use it is a strategy decision. <a class="src" data-lesson="91">L91</a></li>
+      <li><strong>Final phases</strong>: Code First → Best Practice First (E2E, 4-layer infra, walking skeleton) → Pattern First (decouple; result → communication → contract tests; state machines and sagas) → Responsibility First (custom abstractions: <code>LoadingState</code>, router, unit of work) → Value First (FA²STR, guess points) → Bridging the Gaps (long live-coded builds). <a class="src" data-lesson="91">L91</a></li>
+      <li><strong>Three-step RDD</strong>: list responsibilities → assign roles → define collaborations; then find tools that implement those roles. <a class="src" data-lesson="91">L91</a></li>
+      <li><strong>Flaky E2E tests are usually a symptom of missing the four-layer structure.</strong> <a class="src" data-lesson="91">L91</a></li>
+      <li><strong>Mocks without contracts create two divergent code paths.</strong> Production and test code should follow the same path. <a class="src" data-lesson="91">L91</a></li>
+    </ul>
+    <h4>Best Q&amp;A exchanges</h4>
+    <div class="callout tip"><strong>Q: Our managers say there’s no time for tests. How do we apply this at work?</strong> Fast/good/cheap is a strategy trade-off, and “I don’t have time” is really a value decision. Customers make business decisions and developers make development decisions. Your professional responsibility is to tell them the consequences, ideally in advance. Practice new techniques on your own time (the car-tire analogy). <a class="src" data-lesson="91">L91</a></div>
+    <div class="callout tip"><strong>Q: How do two mental models explain advanced topics like sagas?</strong> Apps are states (sign up = nonexistent → “just signed up”). Sagas chain those state machines with events, e.g. Amazon’s place order. They’re taught at the stateful domain modelling guess point. <a class="src" data-lesson="91">L91</a></div>
+    <div class="callout tip"><strong>Q: I learn best by watching someone reason through designing a whole system.</strong> That’s <strong>Bridging the Gaps</strong>: ~2-hour live builds, top to bottom, with strategic decisions (test types, how much decoupling, DB choice) made out loud. <a class="src" data-lesson="91">L91</a></div>
+    <blockquote class="quote">“There’s no more room for it depends now.”<cite><a class="src" data-lesson="91">L91</a></cite></blockquote>
+    <blockquote class="quote">“There’s a difference between not being able to do something and not doing something.”<cite><a class="src" data-lesson="91">L91</a></cite></blockquote>
+    <blockquote class="quote">“If you understand the doings and knowings, you could design anything.”<cite><a class="src" data-lesson="91">L91</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#course-map--phases">Phases of Craftship</a> · <a href="#course-map--structure">The Big Map</a> · <a href="#essentials-metaphysical--jargon-map">Mapping Jargon onto the Essentials</a> · <a href="#testing--no-time">“No Time to Test”</a> · <a href="#testing--contract-tests">Contract Tests</a> · <a href="#career--teams">Working in Teams &amp; Companies</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--aug30-frontend-2" data-title="Aug 30 · Frontend Architecture 2">
+    <h3>Aug 30, 2023: Frontend Architecture 2 of 2: Structure, NFRs &amp; Test Strategies <a class="src" data-lesson="92">L92</a></h3>
+    <p>Part 2 revises Khalil’s own earlier structure advice, demos discoverability on DDD Forum, explains how to choose a frontend architecture, and contrasts two complete test strategies.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>Organize by feature, not by pages and components</strong> (Khalil retracts his earlier advice). Features are where all three roles meet on the abstraction prism: feature → story → scenario → acceptance criteria. <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>Drive work outside-in from the customer boundary.</strong> Building a component library or small functions first is “a fundamentally flawed approach”. <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>Three north stars for structure</strong>: key developer use cases, customers decide, and 1–2 second discoverability starting from the README. <a class="src" data-lesson="92">L92</a></li>
+      <li><strong><code>modules/</code> vs <code>shared/</code></strong>: essential complexity (the customer’s) vs accidental complexity (the developer’s: base classes, drivers). Ask this for every new abstraction. <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>Tree vs network</strong>: the folder tree holds features, modules and slices. Inside a module, objects follow the stereotypical architecture. <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>Choosing a frontend architecture is an architecture-guess-point decision driven by NFRs</strong> (speed/bundle size, SEO, security, availability). The main lever is moving responsibilities between client and server (SSR, pre-rendering). <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>Stop the bleeding</strong>: in a messy codebase, wrap everything in E2E tests first (the tailor pinning the fit), then refactor to patterns. <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>Two test strategies</strong>: (A) E2E + high-value unit tests, or (B) incoming (contract) tests + high-value integration tests. Judge them by confidence, and mix freely. <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>Incoming test</strong>: mock the app behind the application interface and verify the controller extracts and validates the request, then calls the right use case. <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>Automated testing is an investment, and the customer decides.</strong> A friend’s four-tier E2E with reusable page objects made new features “plug and play”. <a class="src" data-lesson="92">L92</a></li>
+    </ul>
+    <h4>Best Q&amp;A exchanges</h4>
+    <div class="callout tip"><strong>Q: So use cases define features, which define modules, which define sub-modules?</strong> “That’s precisely it.” But feature vs use case (account management vs registration) takes constant philosophizing about cohesion. <a class="src" data-lesson="92">L92</a></div>
+    <div class="callout tip"><strong>Q: Which frontend architecture should we choose?</strong> Decide it at the architecture guess point: list functional requirements and NFRs, decompose with RDD, assign roles, then pick tools. A multiplayer “join game” is a trivial slice functionally; the NFRs are “where the real complexity lies”. <a class="src" data-lesson="92">L92</a></div>
+    <div class="callout tip"><strong>Q: I’m a junior dev in a messy codebase with no seniors. How do I do what’s best?</strong> You can’t fully yet, because it takes experience. Get reps on your own project: kill designs, redo them (Luigi got hired this way). “You’re structuring your consciousness now.” <a class="src" data-lesson="92">L92</a></div>
+    <div class="callout tip"><strong>Q: Aren’t unit and integration tests of business logic more important than E2E?</strong> E2E tests “suck” to write but give customer confidence like little else. For task-based UI apps, start with a few E2E tests and carve inward. Either strategy is valid. <a class="src" data-lesson="92">L92</a></div>
+    <blockquote class="quote">“It’s almost like this modules folder is for the customer. And this folder is like for the developer.”<cite><a class="src" data-lesson="92">L92</a></cite></blockquote>
+    <blockquote class="quote">“Just stop the bleeding… It’s the end to end test, man.”<cite><a class="src" data-lesson="92">L92</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#essentials-physical--vertical-slicing">Vertical Slicing</a> · <a href="#essentials-metaphysical--prism">The Abstraction Prism</a> · <a href="#testing--strategies">Value-First Test Strategies</a> · <a href="#testing--acceptance">4-Layer Acceptance Tests</a> · <a href="#ddd-feedbook--architecture">Architecture Guess Point</a> · <a href="#frontend--structure-nfrs">Structure &amp; Choosing an Architecture</a> · <a href="#frontend--testing">Frontend Testing Strategy</a> · <a href="#architecture--app-interface">Modules as Mini-Applications</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--nov07-essentials" data-title="Nov 7 · Introducing the 12 Essentials">
+    <h3>Nov 7, 2023: Introducing the 12 Essentials <a class="src" data-lesson="93">L93</a></h3>
+    <p>The first live Q&amp;A after a months-long break. Khalil walks the FigJam board of all 12 essentials (“the ubiquitous language of software essentialism”), then reviews a student’s slot-booking plan and another student’s composition roots.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>Abstraction is essential #1, and it has a direction</strong>: role → goal → features → stories → acceptance criteria → examples → code. Working from code up “always results in a mess”. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>A test is “a flag post in the future”.</strong> Self-check while coding: can you link what you’re doing to a role’s goal? If not, you’re “thinking forwards”. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>The highest theoretical abstraction in code is the feature file</strong>: stories, acceptance criteria and a concrete-examples table. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Vertical slicing</strong>: features should be visible from the folder structure. There are two slice types: the module/bounded context and the operation (an API call). <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Horizontal decoupling has two parts</strong>: know the buckets and where each line belongs, then practice decoupling to gain control (fast CI tests). Quiz: <code>await this.repo.save(post)</code> belongs in the application service/use case. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Temporal coupling</strong> (a chain of awaited side effects after “job posted”) is “only solvable… from the very start”. Go event-based from day one: start with a coordinator and keep the flow unidirectional. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Composition</strong>: <code>if (env === 'prod')</code> is a smell. Wire swappable components in a composition root, and move to a DI container only when it gets messy (Mark Seemann). <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Strategic design, Khalil’s four abilities</strong>: stereotype components quickly, build them, integrate them (glue code = RDD), and prioritize core/supporting/generic. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Deployment &amp; delivery</strong>: make it very hard to ship negative value. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>You need all 12</strong>; you don’t pick them per use case. They’re a practicable layer below the four pillars. <a class="src" data-lesson="93">L93</a></li>
+    </ul>
+    <h4>Best Q&amp;A exchanges</h4>
+    <div class="callout tip"><strong>Q: Is there an order to the 12 essentials when starting a project?</strong> No, they’re skills. The order comes from the ideal developer workflow (a checklist that starts with the theoretical guesses) and FA²STR. You can be “2 out of 10” on one essential and still follow the workflow. <a class="src" data-lesson="93">L93</a></div>
+    <div class="callout tip"><strong>Q: My slot-booking system notifies ~7 services after a booking. Where do I start?</strong> Walk the guess points: impact mapping → big-picture event storming → process modeling of one story → problem decomposition (screens, data, speed) → architecture (event-based from day one?) → walking skeleton. <a class="src" data-lesson="93">L93</a></div>
+    <div class="callout tip"><strong>Q (Eric): I build repos at request time to avoid long-lived DB connections. Good idea?</strong> The code is clean, but async builds invite a forgotten <code>await</code>, and per-request connections cost handshakes and cold starts. Create one <code>DbConnection</code> at bootstrap and inject it into thin repos via the composition root. <a class="src" data-lesson="93">L93</a></div>
+    <blockquote class="quote">“We always need to start from the top and go downwards.”<cite><a class="src" data-lesson="93">L93</a></cite></blockquote>
+    <blockquote class="quote">“Writing tests is just setting a flag post in the future to explain what we are about to realize.”<cite><a class="src" data-lesson="93">L93</a></cite></blockquote>
+    <blockquote class="quote">“If you can’t see your features from the folder structure alone, there’s a good chance maintainability is under pressure.”<cite><a class="src" data-lesson="93">L93</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#essentials-metaphysical--overview">The 12 Essentials at a Glance</a> · <a href="#essentials-metaphysical--abstraction-in-practice">Working Top-Down</a> · <a href="#essentials-physical--temporal-decoupling">Temporal Decoupling</a> · <a href="#essentials-physical--composition">Composition</a> · <a href="#essentials-theoretical--strategic-design">Strategic Design</a> · <a href="#essentials-physical--deployment-delivery">Deployment &amp; Delivery</a> · <a href="#architecture--code-placement">Code Placement Quiz</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--1on1-rdd" data-title="1-on-1 · Metaphysics &amp; RDD">
+    <h3>1-on-1 Part 1: Category Theory, Frontend Architecture, Metaphysics &amp; RDD <a class="src" data-lesson="94">L94</a></h3>
+    <p>Undated. Student Lucas is building a canvas drawing app like Excalidraw or Figma, and his canvas object is being passed to and changed by everything. Khalil goes down to first principles, then runs upfront FA²STR on a “zoom in/out” feature.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>Diagnosis: clarity and overwhelm.</strong> “Camera service” is too big and vague a building block; “everyone calls everything a service”. <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>Phases</strong>: code-first → pattern-first → first principles. The gateway to first principles is RDD, where responsibilities (doing/knowing) are the smallest building blocks (an idea from Scott Bellware). <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>Metaphysics chain</strong>: essence → actor/role/goal → purpose → form. For drinking coffee, the mug’s hole is essential and “printable” is not. A stone is a toy, a weapon or a tool depending on who uses it. <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>Essence of software</strong>: computing solves problems through sequence, selection and iteration. A problem = state A → state B. Transition = behavior, event = the fact it happened, data = initial state + events, namespacing = abstraction for understanding. <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>“The correct architecture is the event-based one”</strong>, because it works with the grain of reality. Event sourcing and CQRS strip away everything but that essence. <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>Pick the guess point first.</strong> Zoom is most likely level 3 (application), since it involves coordination and control. <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>Stereotypes assigned</strong>: Canvas = interfacer; MouseEvent = information holder; app events observer = coordinator; CameraController = controller (delegates the change); Camera = structurer (≈ aggregate); the math = likely service provider. <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>Control center = coordinator + controller.</strong> Take it back from React and push React to infrastructure, and ~90% of core use cases become testable without starting React. <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>Match rigor to product stage.</strong> Ship fast in React until the value is validated, then play defense. “There’s no right tests always.” <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>Frontend state</strong>: delegated (watch specific objects) or centralized (a Redux-like application data model). Both have trade-offs. <a class="src" data-lesson="94">L94</a></li>
+    </ul>
+    <h4>Best Q&amp;A exchanges</h4>
+    <div class="callout tip"><strong>Q: Is the camera an entity rather than a service?</strong> Partly right: it has rules. But the “service” should break into several smaller objects linked by stereotypical rules, for testability and fast extension. <a class="src" data-lesson="94">L94</a></div>
+    <div class="callout tip"><strong>Q: Isn’t abstraction essential to computing, since even reading voltage as binary is abstraction?</strong> “Good point.” Abstraction is the first of the three metaphysical essentials, and understanding may be the essence of everything. <a class="src" data-lesson="94">L94</a></div>
+    <div class="callout tip"><strong>Q: Does the controller make the change itself?</strong> Usually not. It orchestrates, and a stateful updater (a “camera repo”, like a repo saving a post) performs it. <a class="src" data-lesson="94">L94</a></div>
+    <blockquote class="quote">“You should be writing no code unless you’re very clear on who plays what role and why do they need that.”<cite><a class="src" data-lesson="94">L94</a></cite></blockquote>
+    <blockquote class="quote">“Vagueness does not compile.”<cite><a class="src" data-lesson="94">L94</a></cite></blockquote>
+    <blockquote class="quote">“You can actually test out 90% of the core use cases without ever even starting react.”<cite><a class="src" data-lesson="94">L94</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#metaphysics--essence-purpose-form">Essence → Role/Goal → Purpose → Form</a> · <a href="#course-map--phases">Phases of Craftship</a> · <a href="#workflow--fa2str">FA²STR</a> · <a href="#abstraction-rdd--rdd">Responsibility-Driven Design</a> · <a href="#abstraction-rdd--stereotypes">Object Stereotypes</a> · <a href="#abstraction-rdd--zoom-example">Worked Example: Zoom</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="qa-highlights--1on1-review" data-title="1-on-1 · Reviewing the Upfront Design">
+    <h3>1-on-1 Part 2: Reviewing the Upfront Design &amp; Next Steps <a class="src" data-lesson="95">L95</a></h3>
+    <p>Undated. A Loom-style review of Lucas’s upfront RDD diagram for the zoom use case, following <a href="#qa-highlights--1on1-rdd">Part 1</a>. Most of his decisions are confirmed; one is corrected.</p>
+    <h4>Top insights</h4>
+    <ul>
+      <li><strong>Core-value, granular problems (canvas manipulation) need RDD.</strong> Blocky or library-first thinking gets you part of the way, then breaks as use cases grow. <a class="src" data-lesson="95">L95</a></li>
+      <li><strong>Objects playing more than one stereotype is normal.</strong> A canvas service that adds caching becomes structurer + interfacer. <a class="src" data-lesson="95">L95</a></li>
+      <li><strong>Design without infrastructure first.</strong> Sending delta-Y to a backend adds reconciliation and offline concerns, so postpone it: “lead with the guess, but make small guesses”. <a class="src" data-lesson="95">L95</a></li>
+      <li><strong>Roles confirmed</strong>: window API = interfacer (like Express’s network handler); application observer = control center; <code>ZoomController</code> ≈ DDD application service; <code>Camera</code> = information holder (origin, zoom factor); <code>CanvasService</code> = stateless service provider. <a class="src" data-lesson="95">L95</a></li>
+      <li><strong>One transaction vs after-the-fact</strong>: changing the zoom factor is the vertical slice. Updating the canvas projection on <code>ZoomUpdated</code> is a separate feature, which is temporal decoupling. <a class="src" data-lesson="95">L95</a></li>
+      <li><strong>The correction</strong>: controllers and use cases don’t subscribe. Put an intermediary subscription/event-handler object between events and side-effect use cases. <a class="src" data-lesson="95">L95</a></li>
+      <li><strong>State management is the root of most complexity</strong>: where data belongs, who operates on it, which namespace. <a class="src" data-lesson="95">L95</a></li>
+      <li><strong>Pedantic placement serves subject/system verification.</strong> Keep IO at the ports, out of the application layer. <a class="src" data-lesson="95">L95</a></li>
+      <li><strong>Next step</strong>: move from upfront (theoretical) to emergent (physical) by writing an application-level Gherkin use-case test for the dominant zoom use case. <a class="src" data-lesson="95">L95</a></li>
+    </ul>
+    <h4>Best Q&amp;A exchanges</h4>
+    <div class="callout tip"><strong>Q: Several stereotypes seem right for one object. Which is correct?</strong> Usually more than one. Choosing is abstraction design and a coupling/cohesion call; “there is no statically right answer”. <a class="src" data-lesson="95">L95</a></div>
+    <div class="callout tip"><strong>Q: Is updating the canvas projection part of the zoom use case?</strong> No. Zoom ends at updating the zoom factor and emitting <code>ZoomUpdated</code>. The projection update is a separate, temporally decoupled feature. <a class="src" data-lesson="95">L95</a></div>
+    <div class="callout tip"><strong>Q: What next?</strong> Relax on certainty: this is all upfront. Write the first test at the application guess point for the dominant use case, and skip subscriptions and outside coordination for now. <a class="src" data-lesson="95">L95</a></div>
+    <blockquote class="quote">“It’s very rare that an object plays exactly one stereotypical role.”<cite><a class="src" data-lesson="95">L95</a></cite></blockquote>
+    <blockquote class="quote">“Controllers, use cases, they don’t normally subscribe to things. They’re normally just called upon.”<cite><a class="src" data-lesson="95">L95</a></cite></blockquote>
+    <p><strong>Where this is covered:</strong> <a href="#essentials-physical--temporal-decoupling">Temporal Decoupling</a> · <a href="#essentials-physical--vertical-slicing">Vertical Slicing</a> · <a href="#essentials-physical--subject-system-verification">Subject/System Verification</a> · <a href="#workflow--to-physical">From Theoretical to Physical</a> · <a href="#abstraction-rdd--critique-next-steps">Critique &amp; Next Steps</a></p>
+  </article>
+
+  <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span>
+    <p>Which Q&amp;A ideas matter most when agents write much of the code:</p>
+    <ul>
+      <li><strong>Contract tests across fake and real implementations</strong> (Jul 27, Jun 7). Agent-generated fakes and adapters drift quietly; a shared spec catches the drift at once.</li>
+      <li><strong>Walking skeleton + commit/acceptance pipeline</strong>. This is the gate that turns high-volume generated code into deployable code without shipping negative value.</li>
+      <li><strong>Own the control center and the application interface</strong> (May 5, May 25, 1-on-1). Agents can then verify features with fast level-3 tests, with no browser or server.</li>
+      <li><strong>Top-down specs</strong>: role → goal → feature file → examples. “Vagueness does not compile” applies to prompts too. Khalil’s own view is that AI shrinks decision logic but you still supply the inputs, outputs and goalpost. <a class="src" data-lesson="89">L89</a></li>
+    </ul>
+  </aside>
+</section>

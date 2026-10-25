@@ -1,0 +1,1045 @@
+<section id="ddd-feedbook" class="doc-section" data-title="DDD: The FeedBook Case Study">
+  <h2>Theoretical Design &amp; DDD: The FeedBook Case Study</h2>
+  <p class="lede">One running example goes all the way from the problem to tested code. FeedBook lets authors run feedback cycles on a book in progress with pre-readers. The path: problem guess point (impact map, glossary, subdomains) → solution guess point (bounded contexts, context map, event storming, views, state machines) → architecture guess point (modular monolith, event bus) → stateful domain modelling guess point (the <code>PreReaderInvite</code> entity). <a class="src" data-lesson="65">L65</a> <a class="src" data-lesson="88">L88</a></p>
+
+  <table class="tbl">
+    <thead><tr><th>Step</th><th>Guess point</th><th>Output artifact</th><th>Lessons</th></tr></thead>
+    <tbody>
+      <tr><td><a href="#ddd-feedbook--problem">Understand the problem</a></td><td>Problem</td><td>Impact map (actor → role → goal → features), concrete examples, glossary</td><td><a class="src" data-lesson="66">L66</a></td></tr>
+      <tr><td><a href="#ddd-feedbook--subdomains">Find subdomains</a></td><td>Problem</td><td>Raw, ungrouped list of problem categories</td><td><a class="src" data-lesson="66">L66</a></td></tr>
+      <tr><td><a href="#ddd-feedbook--bounded-contexts">Group by language</a></td><td>Solution</td><td>Bounded contexts</td><td><a class="src" data-lesson="67">L67</a> <a class="src" data-lesson="68">L68</a></td></tr>
+      <tr><td><a href="#ddd-feedbook--consolidating">Classify &amp; map</a></td><td>Solution</td><td>Core/supporting/generic, build vs buy, context map, folders</td><td><a class="src" data-lesson="68">L68</a></td></tr>
+      <tr><td><a href="#ddd-feedbook--event-storming">Event storm a scenario</a></td><td>Solution</td><td>Events → commands → actors → aggregates → boundaries</td><td><a class="src" data-lesson="69">L69</a></td></tr>
+      <tr><td><a href="#ddd-feedbook--refining">Add views &amp; data</a></td><td>Solution</td><td>Screens, input/output per command–event, relationships</td><td><a class="src" data-lesson="70">L70</a></td></tr>
+      <tr><td><a href="#ddd-feedbook--architecture">Decide the shape</a></td><td>Architecture</td><td>Modules, deployable units, event bus</td><td><a class="src" data-lesson="71">L71</a></td></tr>
+      <tr><td><a href="#ddd-feedbook--state-machines">Model state</a></td><td>Solution → stateful</td><td>State machines with invariants</td><td><a class="src" data-lesson="74">L74</a> <a class="src" data-lesson="76">L76</a></td></tr>
+      <tr><td><a href="#ddd-feedbook--aggregates">Size the boundaries</a></td><td>Stateful / application</td><td>Small aggregates, references by ID</td><td><a class="src" data-lesson="88">L88</a> <a class="src" data-lesson="89">L89</a></td></tr>
+      <tr><td><a href="#ddd-feedbook--prereaderinvite">Implement</a></td><td>Stateful domain modelling</td><td>Tested entity + value objects + Guard</td><td><a class="src" data-lesson="77">L77</a></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="ddd-feedbook--roadmap" data-title="Roadmap: Theoretical Guess Points">
+    <h3>Roadmap: The Theoretical Guess Points <a class="src" data-lesson="65">L65</a> <a class="src" data-lesson="88">L88</a></h3>
+
+    <div class="callout def"><strong>Design = abstraction</strong>
+      <p>“If nothing else, the most important thing to understand is abstraction. It's the thinking before doing.” What vs how, declarative vs imperative, theoretical vs physical, upfront vs emergent are all the same idea. It follows that <strong>theoretical guesses come before physical ones</strong>. Why model a domain before you know the problem, its solution and the architecture that will implement it? <a class="src" data-lesson="65">L65</a></p>
+    </div>
+
+    <figure class="diagram" id="dd-roadmap">
+      <svg viewBox="0 0 920 262" role="img" aria-label="Problem guess point to solution guess point to architecture guess point, then down to the stateful domain modelling guess point">
+        <defs>
+          <marker id="dd-arrow-roadmap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+        </defs>
+        <text x="460" y="20" text-anchor="middle" font-size="12" fill="var(--fg)">theoretical guess points: guesses about the “what” (all three are guesses)</text>
+        <rect x="10" y="34" width="280" height="130" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="320" y="34" width="280" height="130" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="630" y="34" width="280" height="130" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="150" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">1 · Problem</text>
+        <text x="150" y="82" text-anchor="middle" font-size="11" fill="var(--fg)">problem · people · role → goal</text>
+        <text x="150" y="102" text-anchor="middle" font-size="11" fill="var(--fg)">concrete examples (what + why)</text>
+        <text x="150" y="122" text-anchor="middle" font-size="11" fill="var(--fg)">domain knowledge / glossary</text>
+        <text x="150" y="142" text-anchor="middle" font-size="11" fill="var(--fg)">subdomains</text>
+        <text x="460" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">2 · Solution</text>
+        <text x="460" y="82" text-anchor="middle" font-size="11" fill="var(--fg)">bounded contexts (shared language)</text>
+        <text x="460" y="102" text-anchor="middle" font-size="11" fill="var(--fg)">core · supporting · generic</text>
+        <text x="460" y="122" text-anchor="middle" font-size="11" fill="var(--fg)">event storming + views</text>
+        <text x="460" y="142" text-anchor="middle" font-size="11" fill="var(--fg)">state machines</text>
+        <text x="770" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">3 · Architecture</text>
+        <text x="770" y="82" text-anchor="middle" font-size="11" fill="var(--fg)">build vs buy per context</text>
+        <text x="770" y="102" text-anchor="middle" font-size="11" fill="var(--fg)">modules · deployable units</text>
+        <text x="770" y="122" text-anchor="middle" font-size="11" fill="var(--fg)">components · NFRs</text>
+        <text x="770" y="142" text-anchor="middle" font-size="11" fill="var(--fg)">event bus</text>
+        <line x1="292" y1="99" x2="316" y2="99" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#dd-arrow-roadmap)"/>
+        <line x1="602" y1="99" x2="626" y2="99" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#dd-arrow-roadmap)"/>
+        <line x1="770" y1="166" x2="770" y2="190" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#dd-arrow-roadmap)"/>
+        <rect x="630" y="194" width="280" height="58" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2.5"/>
+        <text x="770" y="218" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Stateful domain modelling</text>
+        <text x="770" y="238" text-anchor="middle" font-size="11" fill="var(--fg)">entities · value objects · events</text>
+        <text x="310" y="222" text-anchor="middle" font-size="12" fill="var(--fg)">abstract / theoretical (what)  →  concrete / physical (how)</text>
+      </svg>
+      <figcaption><span class="badge copilot">Added by Copilot</span> The guess-point roadmap drawn in <a class="src" data-lesson="65">L65</a> and <a class="src" data-lesson="66">L66</a>, with contents from <a class="src" data-lesson="68">L68</a>–<a class="src" data-lesson="71">L71</a>. “That's why it's called problem, solution and architecture guess points. These are all guesses.” <a class="src" data-lesson="70">L70</a></figcaption>
+    </figure>
+
+    <ul>
+      <li><strong>Start from the problem and the people</strong>, not the code. Crunch domain knowledge with your boss or the domain experts. <a class="src" data-lesson="65">L65</a></li>
+      <li><strong>Carry three things into the solution space:</strong> the problem, concrete examples of <em>what</em> you’re building, and concrete examples of <em>why</em>. Several techniques get you there: BDD’s feature injection, impact mapping, user story mapping, and Khalil’s role-goal “mishmash”. <a class="src" data-lesson="65">L65</a></li>
+      <li><strong>Drive everything through a concrete scenario:</strong> “Person is at state A, person wants to be at state B, and here's their experience.” Event storming without one leaves your brain “like mush”. <a class="src" data-lesson="65">L65</a></li>
+      <li><strong>Framing changes the work.</strong> “Build tic-tac-toe” vs “web-based multiplayer tic-tac-toe” adds concurrency, client and server domains, rooms and network issues. On a McDonald’s order terminal it changes again. <a class="src" data-lesson="65">L65</a></li>
+      <li><strong>Order, via the value creation system:</strong> problem → solution space (domains; core/supporting/generic) → architecture (build vs buy, tools per subdomain) → physical guess points via the ideal developer workflow. “You never want to be making physical guesses unless you have your theoretical guesses sorted.” <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>The hard part is the what.</strong> “What makes programming really hard is not the programming part.” Anxiety at work signals a lack of clarity. <a class="src" data-lesson="89">L89</a></li>
+    </ul>
+
+    <h4>Assignment sequence</h4>
+    <ol class="steps">
+      <li><strong>Find the subdomains</strong> — FeedBook first, then the other assignments. <a class="src" data-lesson="65">L65</a></li>
+      <li><strong>Consolidate into bounded contexts</strong> <a class="src" data-lesson="65">L65</a></li>
+      <li><strong>Process-model (event storm)</strong> a concrete scenario. <a class="src" data-lesson="65">L65</a></li>
+      <li><strong>Classify</strong> core, supporting and generic. Khalil later suggests classifying <em>before</em> process modelling. <a class="src" data-lesson="65">L65</a> <a class="src" data-lesson="69">L69</a></li>
+      <li><strong>Implement the domain model</strong> at the stateful guess point with value objects, entities and identifiers. <a class="src" data-lesson="65">L65</a></li>
+    </ol>
+
+    <blockquote class="quote">“You can't really do the stateful part unless you made your theoretical guesses first.”<cite><a class="src" data-lesson="65">L65</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="ddd-feedbook--problem" data-title="The FeedBook Problem & Impact Map">
+    <h3>The FeedBook Problem: Impact Map, Concrete Examples &amp; Glossary <a class="src" data-lesson="65">L65</a> <a class="src" data-lesson="66">L66</a></h3>
+
+    <p><strong>FeedBook:</strong> an author invites a group of readers to review a book, then creates a <strong>feedback cycle</strong> that runs at a particular time. Readers leave reactions (hearts, thumbs up) and feedback per chapter. The author drills in to see where people react, comment and “fall off” in the book. <a class="src" data-lesson="65">L65</a></p>
+
+    <div class="callout def"><strong>Problem guess point outputs</strong>
+      <ol>
+        <li>Know the problem.</li>
+        <li>A few concrete examples (the most valuable ones).</li>
+        <li>Domain knowledge.</li>
+        <li>Clarity on subdomains.</li>
+      </ol>
+      <p>Stay on the <em>what</em> and <em>why</em>. The <em>how</em> belongs to the solution guess point. <a class="src" data-lesson="66">L66</a></p>
+    </div>
+
+    <h4>Impact map (Khalil’s variant: actor → role → goal → capabilities)</h4>
+    <p>Impact mapping puts the impact front and centre, which protects you from building things that “just don't matter”. Khalil finds the standard diagram “a little bit backwards” and starts from role and goal, because goals are easier to drive for real people. <a class="src" data-lesson="66">L66</a></p>
+    <table class="tbl">
+      <thead><tr><th>Actor</th><th>Role</th><th>Goal / notes</th></tr></thead>
+      <tbody>
+        <tr><td>Entrepreneur (Khalil)</td><td>Author</td><td>A final version of the book, written with high quality (desirable, effective, …)</td></tr>
+        <tr><td>SolidBook readers</td><td>New pre-readers</td><td>Invited to give feedback</td></tr>
+        <tr><td>SolidBook OGs</td><td>Existing pre-readers</td><td>Have already read the book</td></tr>
+      </tbody>
+    </table>
+    <p>Source: <a class="src" data-lesson="66">L66</a>.</p>
+
+    <figure class="diagram" id="dd-impact-map">
+      <pre class="mermaid">flowchart LR
+  E["Actor: Entrepreneur"] --&gt; A["Role: Author"] --&gt; G["Goal: final version of book, high quality"]
+  G --&gt; F1["Upload book from Notion link"]
+  G --&gt; F2["Invite pre-readers to book project"]
+  G --&gt; F3["Create, invite pre-readers to and manage feedback cycles"]
+  G --&gt; F4["Review results of feedback cycles"]
+  G --&gt; F5["Upload / update project with new book versions"]
+  SR["Actor: SolidBook readers"] --&gt; NP["Role: New pre-readers"]
+  OG["Actor: SolidBook OGs"] --&gt; EP["Role: Existing pre-readers"]</pre>
+      <figcaption><span class="badge recon">Reconstructed from L66</span> The FeedBook impact board. Capabilities are “a very general high level experience of using a platform to get to this goal.” Possibly also: run more feedback cycles. <a class="src" data-lesson="66">L66</a></figcaption>
+    </figure>
+
+    <ul>
+      <li><strong>It isn’t the only solution.</strong> Collecting buyers’ emails and emailing back and forth works, but it isn’t a fun experience. A platform gives back or enriches time. <a class="src" data-lesson="66">L66</a></li>
+      <li><strong>Each feature → a concrete example or design story</strong> (e.g. Khalil uploading the book). <a class="src" data-lesson="66">L66</a></li>
+      <li><strong>What a concrete example needs:</strong> the starting state, the ending state, what the person does, and what they should see. “If we're getting really fancy”, add what they experience and how they feel about it. GWT or user-story format both work. <a class="src" data-lesson="68">L68</a></li>
+      <li>Khalil skipped the concrete example here and had to write it at the solution guess point. <a class="src" data-lesson="69">L69</a> See <a href="#ddd-feedbook--event-storming">event storming</a>.</li>
+    </ul>
+
+    <h4>Domain knowledge &amp; glossary</h4>
+    <div class="cards">
+      <div class="card"><h4>What it is</h4><p>Facts about the conceptual (“metaphysical”) reality you’re creating. It is “locked in the domain experts' heads”, so extract it and get it on the page. For the assignments, Khalil plays the domain expert. Ask him “what happens if…”. <a class="src" data-lesson="66">L66</a></p></div>
+      <div class="card"><h4>Questions to ask</h4><p>“What is true of this metaphysical reality you're creating? What is not quite true? How do these things interact? What belongs where?” And what must happen before what? <a class="src" data-lesson="66">L66</a></p></div>
+      <div class="card"><h4>Why write it down</h4><p>You’re building a <strong>conceptual model</strong>, “not a real one yet”. If a consultancy parts ways with the client halfway through, the knowledge survives in documents. Start with facts like “a feedback cycle is…”, “a feedback cycle has…”. <a class="src" data-lesson="66">L66</a></p></div>
+      <div class="card"><h4>Open questions are normal</h4><p>“What are the results of feedback cycles going to be?” Khalil had no answer yet. Wireframes or talking to real authors would help. <a class="src" data-lesson="66">L66</a></p></div>
+    </div>
+
+    <blockquote class="quote">“We want to know what it is we're building. We want to know why we're building it. But we don't really care about how we're going to build it just yet.”<cite><a class="src" data-lesson="66">L66</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="ddd-feedbook--subdomains" data-title="Finding Subdomains">
+    <h3>Finding Subdomains <a class="src" data-lesson="66">L66</a></h3>
+
+    <div class="callout def"><strong>Subdomain</strong>
+      <p>Whatever category of the problem comes straight to mind. “They're parts of the problem that could be solved. They don't really have a solid grouping to them.” They can be big or tiny. The <strong>domain</strong> is the big problem: “literally everything involved in me operating this business.” <a class="src" data-lesson="66">L66</a></p>
+    </div>
+
+    <ol class="steps">
+      <li><strong>Brain-dump</strong> — “Just get as much as you can out of your brain. What are the major categories?” Don’t worry about size or grouping. <a class="src" data-lesson="66">L66</a></li>
+      <li><strong>Stop when exhausted</strong> — you’re done when you can’t think of more categories needed to solve the problem. <a class="src" data-lesson="66">L66</a></li>
+      <li><strong>Group later</strong> — turning subdomains into bounded contexts belongs to the solution space. <a class="src" data-lesson="66">L66</a></li>
+    </ol>
+
+    <table class="tbl">
+      <thead><tr><th>Subdomain (as named)</th><th>Why it showed up</th></tr></thead>
+      <tbody>
+        <tr><td>Notion integration · Book / text parsing</td><td>Upload the book from a Notion link, then parse it</td></tr>
+        <tr><td>Pre-readers / pre-reading · Feedback cycles</td><td>The core activity</td></tr>
+        <tr><td>Invitations</td><td>Inviting pre-readers</td></tr>
+        <tr><td>Users &amp; identity · Sign-up / registration</td><td>“For sure”</td></tr>
+        <tr><td>Scheduler / scheduled jobs</td><td>Feedback cycles run on a schedule</td></tr>
+        <tr><td>Payments · Credit card management</td><td>Authors could pay for it</td></tr>
+        <tr><td>Pre-reading sessions · Browser sessions</td><td>How long a reader stays on a page, when they leave</td></tr>
+        <tr><td>Emails</td><td>Invitations</td></tr>
+        <tr><td>Book feedback · Emoji management</td><td>Feedback left via emojis</td></tr>
+        <tr><td>Versioning</td><td>New book versions</td></tr>
+        <tr><td>Project source</td><td>Chat suggestion, not elaborated</td></tr>
+      </tbody>
+    </table>
+    <p>The raw brainstorm from <a class="src" data-lesson="66">L66</a>. It shows “this is actually a very complex problem to solve.”</p>
+
+    <div class="cards">
+      <div class="card"><h4>Core</h4><p>What makes your business unique. You must build it. <a class="src" data-lesson="66">L66</a> “The unique new stuff that matters that you can't get anywhere. You can only get here.” <a class="src" data-lesson="68">L68</a></p></div>
+      <div class="card"><h4>Supporting</h4><p>Not tied to the problem you’re <em>currently</em> solving, but strategic, so you build it rather than buy it (e.g. reporting). <a class="src" data-lesson="66">L66</a> You also end up building one when no off-the-shelf tool plugs in. <a class="src" data-lesson="68">L68</a> You “have to build anyway but don't really want to”. <a class="src" data-lesson="71">L71</a></p></div>
+      <div class="card"><h4>Generic</h4><p>Something you can pay an external service to do (email, auth). <a class="src" data-lesson="66">L66</a> Don’t build email or auth yourself. But if you’re building a Google Calendar, scheduling is core, so keep control of it. <a class="src" data-lesson="65">L65</a></p></div>
+    </div>
+
+    <div class="callout anti"><strong>Anti-pattern</strong>
+      <p>Treating neat, granular splits like “delivery, shop” as subdomains. Khalil would call those bounded contexts. Real subdomains are rarely that neat, and the line is “incredibly subjective”. <a class="src" data-lesson="66">L66</a></p>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="ddd-feedbook--bounded-contexts" data-title="Bounded Contexts, Cohesion & Category Theory">
+    <h3>Bounded Contexts, Cohesion &amp; “Be Aristotle” <a class="src" data-lesson="67">L67</a> <a class="src" data-lesson="68">L68</a></h3>
+
+    <div class="callout def"><strong>Bounded context</strong>
+      <p>A major domain formed by combining subdomains that use the <strong>same language</strong>. <a class="src" data-lesson="67">L67</a> Khalil’s extension: “placing a boundary around the context of language that is allowed to be used within a sphere of the domain of that problem or knowledge space.” A chat definition he liked: subdomains are what your app needs, and bounded contexts categorize them. <a class="src" data-lesson="68">L68</a></p>
+    </div>
+
+    <ul>
+      <li><strong>Skip subdomains?</strong> Fine if you’re experienced. Khalil usually goes straight to bounded contexts. <a class="src" data-lesson="67">L67</a></li>
+      <li><strong>“Act like you're Aristotle”:</strong> for each item, ask “is this actually part of that topic?”, then combine and name. Example: book feedback + emoji management share language → <strong>Feedback</strong>. <a class="src" data-lesson="67">L67</a></li>
+      <li><strong>It’s all language.</strong> “This is all language. So it's language and it's crunching language.” That’s why it’s hard, and hardest for people who struggle with English or creative thinking. <a class="src" data-lesson="68">L68</a></li>
+      <li><strong>Add rather than take away</strong> while grouping (e.g. add “Google integration” next to Notion). New language emerges. In Feedback, <em>reactions</em>, comments on lines and comments on whole chapters appeared, with the verbs <em>posting a comment</em> and <em>posting a reaction</em>. <a class="src" data-lesson="68">L68</a></li>
+    </ul>
+
+    <h4>Coupling &amp; cohesion at every level</h4>
+    <p>Grouping subdomains is “coupling and cohesion at the problem level. We're doing coupling and cohesion everywhere.” Khalil files coupling, cohesion, RDD and category theory under one umbrella he calls <strong>abstraction design</strong>: “what belongs together. What doesn't belong together?” <a class="src" data-lesson="67">L67</a></p>
+    <div class="cards">
+      <div class="card"><h4>Cohesion</h4><p>How well things belong together. Given <code>JobScheduler</code> and <code>BurgerCreator</code>, lettuce goes with <code>BurgerCreator</code>. <a class="src" data-lesson="67">L67</a></p></div>
+      <div class="card"><h4>Coupling</h4><p>Referring to something you aren’t related to. “It's just really about a relatedness and it's about tightness to what it relates to.” Khalil admits his example isn’t the best. <a class="src" data-lesson="67">L67</a></p></div>
+      <div class="card"><h4>SRP at two levels</h4><p>Problem level: “single bounded context, with clear responsibilities.” Class level: a class whose responsibilities are cohesive. <a class="src" data-lesson="68">L68</a></p></div>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L67</span> The same test at class level: one method and one dependency don’t belong</figcaption>
+      <pre><code class="language-ts">class User {
+  constructor(private spinnyHatCounter: SpinnyHatCounter) {} // coupling to an unrelated dependency
+
+  getEmail() {}          // fine
+  changePassword() {}    // fine
+  getNumberOfSpinnyHatsWornInPastWeek() {} // breaks cohesion
+}</code></pre>
+    </figure>
+
+    <blockquote class="quote">“You're placing a boundary around the context of language that is allowed to be used within a sphere of the domain.”<cite><a class="src" data-lesson="68">L68</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="ddd-feedbook--consolidating" data-title="Consolidating: Build/Buy, Context Map, Folders">
+    <h3>Consolidating Into Bounded Contexts: Build/Buy, Context Map &amp; Folders <a class="src" data-lesson="68">L68</a></h3>
+
+    <ol class="steps">
+      <li><strong>Clone the domain board</strong> and drag the subdomain stickies into clusters. <a class="src" data-lesson="68">L68</a></li>
+      <li><strong>Group by shared language</strong> and name each cluster. If two things are similar but your domain is really about one of them, keep them apart (feedback cycles ≠ scheduling). <a class="src" data-lesson="68">L68</a></li>
+      <li><strong>Classify</strong> each context as core, supporting or generic. <a class="src" data-lesson="68">L68</a></li>
+      <li><strong>Decide build / buy / must-build.</strong> This is “how you find and fill these responsibility gaps and how you determine what you want to be an external service and what you want to build yourself and how you vet libraries and frameworks.” <a class="src" data-lesson="68">L68</a></li>
+      <li><strong>Draw the context map:</strong> “What relies on what?” <a class="src" data-lesson="68">L68</a></li>
+    </ol>
+
+    <table class="tbl">
+      <thead><tr><th>Subdomain(s)</th><th>Reasoning</th><th>Bounded context</th></tr></thead>
+      <tbody>
+        <tr><td>Payments + credit card management</td><td>Similar enough</td><td><strong>Billing</strong></td></tr>
+        <tr><td>Scheduling / jobs</td><td>Jobs, failed jobs, completed jobs, retries</td><td><strong>Scheduling</strong></td></tr>
+        <tr><td>Browser + pre-reading sessions</td><td>A thing of its own; involves the browser</td><td><strong>Sessions</strong></td></tr>
+        <tr><td>Pre-reading data</td><td>Tracking reader interaction</td><td><strong>Analytics</strong></td></tr>
+        <tr><td>Book feedback + emoji management</td><td>Same language</td><td><strong>Feedback</strong></td></tr>
+        <tr><td>Versioning</td><td>The book is what’s versioned</td><td><strong>Books</strong></td></tr>
+        <tr><td>Notion integration + book parsing</td><td>Parse the book from a source; parsing split out</td><td><strong>Importing</strong> + <strong>Text parsing</strong></td></tr>
+        <tr><td>Pre-reading, invitations, feedback cycles, pre-readers, authors</td><td>Converge on the actual product</td><td><strong>FeedBook</strong> (core)</td></tr>
+        <tr><td>Emails · Users &amp; identity · Notion API</td><td>Off the shelf / external</td><td><strong>Emails</strong> · <strong>Users</strong> · <strong>Notion</strong></td></tr>
+      </tbody>
+    </table>
+    <p>Consolidation moves from <a class="src" data-lesson="68">L68</a>. Some placements (authors in FeedBook) are Khalil thinking aloud: “that's probably going to go in here as well.”</p>
+
+    <table class="tbl">
+      <thead><tr><th>Bounded context</th><th>Type</th><th>Build / buy</th></tr></thead>
+      <tbody>
+        <tr><td>FeedBook</td><td>Core</td><td>Build: our codebase (“you can only get here”)</td></tr>
+        <tr><td>Sessions</td><td>Supporting</td><td>Build: no plug-and-play library known, so fill the gap with RDD / object design</td></tr>
+        <tr><td>Importing</td><td>Supporting (“probably have to build this myself”, at least parts)</td><td>Own code + Notion API</td></tr>
+        <tr><td>Scheduling</td><td>Generic</td><td>Buy: external service (“really don't want to build”)</td></tr>
+        <tr><td>Analytics</td><td>Generic</td><td>Buy: Mixpanel or similar</td></tr>
+        <tr><td>Billing</td><td>Generic</td><td>Buy: Stripe</td></tr>
+        <tr><td>Emails</td><td>Generic</td><td>Buy: Mailchimp</td></tr>
+        <tr><td>Notion</td><td>Generic</td><td>External API</td></tr>
+        <tr><td>Users</td><td>Generic <a class="src" data-lesson="69">L69</a></td><td>—</td></tr>
+        <tr><td>Feedback · Books · Text parsing</td><td>Not explicitly classified</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <p>Classification from <a class="src" data-lesson="68">L68</a>.</p>
+
+    <div class="callout rule"><strong>Always one core context</strong>
+      <p>“You always want to have one bounded context that represents your actual domain.” For FeedBook it’s named <strong>FeedBook</strong>. Choose tools only after listing needs. For example, to pick a frontend framework, start at the problem guess point (do you need SSR?), then find tools that fill the gaps. “Architecture is not technology.” <a class="src" data-lesson="68">L68</a></p>
+    </div>
+
+    <figure class="diagram" id="dd-context-map">
+      <pre class="mermaid">flowchart LR
+  FB["FeedBook · core"] --- SCH["Scheduling · generic"]
+  FB --- SES["Sessions · supporting"]
+  SES --&gt; AN["Analytics · generic"]
+  FB --- BIL["Billing · generic / Stripe"]
+  BIL --- USR["Users · generic"]
+  USR --- EM["Emails · generic / Mailchimp"]
+  BIL --&gt;|after payment, send email| EM
+  FB --- FEED["Feedback"]
+  FB --- TP["Text parsing"]
+  IMP["Importing · supporting"] --&gt; NOT["Notion · external"]
+  IMP --- FB
+  FB -.-&gt;|"FeedbackCycleScheduled: Scheduling creates a Job"| SCH</pre>
+      <figcaption><span class="badge recon">Reconstructed from L68</span> First-pass context map. Undirected links are “related; direction unknown”, which is “good enough for now”. Event storming clarifies them. <a class="src" data-lesson="68">L68</a></figcaption>
+    </figure>
+
+    <ul>
+      <li><strong>Links between contexts are events.</strong> When a feedback cycle is scheduled or created, Scheduling listens, creates a <strong>Job</strong>, and the Job state machine starts. <a class="src" data-lesson="68">L68</a></li>
+      <li><strong>The context map is the foundation</strong> for understanding state machines, sagas and temporal decoupling. <a class="src" data-lesson="68">L68</a></li>
+      <li><strong>Don’t force the dependency rule between contexts.</strong> Sometimes it’s unavoidable. Example: Stripe sends a credit-card-expired webhook and you adjust the account. DDD calls these relationships <strong>customer–supplier</strong> and <strong>upstream/downstream</strong>. “Sometimes you don't really have a choice.” Inside a context the rule still holds: a value object or entity doesn’t rely directly on a repository. <a class="src" data-lesson="68">L68</a></li>
+      <li>“It's just a network of systems talking to each other.” Companies work the same way. <a class="src" data-lesson="68">L68</a></li>
+    </ul>
+
+    <h4>Folder structure falls out of the contexts</h4>
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — package by infrastructure: “just know you're screwed”</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L68</span> Little cohesion, lots of coupling, no clean boundaries</figcaption>
+          <pre><code class="language-text">src/
+  controllers/
+  routes/
+  models/</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — package by domain: one folder per bounded context</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L68</span> Modular monolith; external-service contexts get thinner folders</figcaption>
+          <pre><code class="language-text">src/
+  sessions/        # only session-related things
+  feedback/
+  books/
+  integrations/    # later: importing
+  scheduling/      # thinner: the external service does most work,
+                   # but its integration logic + concepts stay separate
+  ...</code></pre>
+        </figure>
+      </div>
+    </div>
+    <ul>
+      <li><strong>Team adoption:</strong> get buy-in before changing a team’s conventions. <strong>TS-Arch</strong> can enforce rules as tests, e.g. value objects and entities may not import Express controllers or DB models. Persuade with first principles, expert precedent and questions. <a class="src" data-lesson="68">L68</a></li>
+      <li>Tech-first conventions (e.g. Angular’s) serve you early on. Once a project has many capabilities, structure the code closest to “the essence of the hard problem”. <a class="src" data-lesson="68">L68</a></li>
+      <li><strong>Design it twice.</strong> Seeing an upfront design in a new light yields different solutions. <a class="src" data-lesson="68">L68</a></li>
+    </ul>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="ddd-feedbook--event-storming" data-title="Event Storming the Concrete Example">
+    <h3>Event Storming (Process Modelling) the Concrete Example <a class="src" data-lesson="69">L69</a></h3>
+
+    <p>“The first thing we need is a story, concrete example.” The feature is “create and invite pre-readers to and manage feedback cycles”. The scenario goes a bit beyond one feature so it’s interesting enough to model. <a class="src" data-lesson="69">L69</a></p>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L69</span> Given/When/Then: only one of three invites is accepted</figcaption>
+      <pre><code class="language-gherkin">Feature: Invite pre-readers
+Scenario: Inviting pre-readers to the platform
+  Given I'm an author
+    And I'm already on the platform
+    And I already have my book uploaded
+    And I haven't invited any pre-readers yet
+  When I invite the following pre-readers in bulk: James@gmail.com, Bill@email.com, Sally
+  Then they should get sent an email inviting them to be pre-readers
+  When Sally accepts the invite
+  Then I (author) should get an email knowing it was accepted
+    And Sally should have a pre-reader account / be a valid pre-reader
+    And there should be unaccepted invites for James and Bill</code></pre>
+    </figure>
+
+    <h4>The procedure</h4>
+    <ol class="steps">
+      <li><strong>Concrete example</strong> — GWT (or a user story) with a clear beginning and end. <a class="src" data-lesson="69">L69</a></li>
+      <li><strong>Domain events</strong> — past tense, unordered at first (“just get these events… out of our head”), then ordered. Consolidate language as you go (“Invite sent” / “Invite accepted” → “Pre-reader invite …”). <a class="src" data-lesson="69">L69</a></li>
+      <li><strong>Commands</strong> — the same phrase in the imperative. “Pre-reader invite created” → “Create pre-reader invite”. “All we really do is we just write it in the imperative.” <a class="src" data-lesson="69">L69</a></li>
+      <li><strong>Actors</strong> — a person or role (Author, Pre-reader), or the <strong>System</strong> for automatic follow-ups, “because this is event based”. <a class="src" data-lesson="69">L69</a></li>
+      <li><strong>Aggregates</strong> — “the data that we're doing work against.” <a class="src" data-lesson="69">L69</a></li>
+      <li><strong>Bounded contexts</strong> — they were found upfront, so “all we have to do is just place the boundaries around these properly.” <a class="src" data-lesson="69">L69</a></li>
+      <li><strong>Critique</strong> — hunt for same-context event chains and fix them with state machines. <a class="src" data-lesson="69">L69</a></li>
+    </ol>
+
+    <h4>First model (with the smell)</h4>
+    <table class="tbl">
+      <thead><tr><th>#</th><th>Command</th><th>Actor</th><th>Aggregate</th><th>Domain event</th><th>Context</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Create pre-reader invites</td><td>Author</td><td>Pre-reader invite</td><td>Pre-reader invite created</td><td>FeedBook</td></tr>
+        <tr><td>2</td><td>Send email</td><td>System</td><td>Email</td><td>Email sent</td><td>Email</td></tr>
+        <tr><td>3</td><td>Accept pre-reader invite</td><td>Pre-reader</td><td>Pre-reader invite</td><td>Pre-reader invite accepted</td><td>FeedBook</td></tr>
+        <tr><td>4a</td><td>Create pre-reader account</td><td>System</td><td>Pre-reader account</td><td>Pre-reader account created</td><td><strong>FeedBook: same context, same process</strong></td></tr>
+        <tr><td>4b</td><td>Send email (to author)</td><td>System</td><td>Email</td><td>Email sent</td><td>Email</td></tr>
+      </tbody>
+    </table>
+    <p>Source: <a class="src" data-lesson="69">L69</a>. The invite being sent and the email being sent were split after a question from chat.</p>
+
+    <div class="callout anti"><strong>The smell: same-context events changing the same concept</strong>
+      <p>An accepted invite triggers “create pre-reader account” within the same process and context. “Whenever I see this relationship here, I don't really love this.” The rule of thumb: “When you have domain events occurring within the same domain… to change the same concept, you want to be very wary of that.” “You might be missing a potential state change, or you just might've modeled your state changes a little bit wrong.” Events that <em>cross</em> contexts are fine, because another context listens and time passes. <a class="src" data-lesson="69">L69</a></p>
+    </div>
+
+    <h4>Redesign with a state machine</h4>
+    <p>Ask how a pre-reader can come to exist in the platform. The answer: “You can't really be created without being invited.” So a pre-reader is created in the <code>Invited</code> state and moves to <code>Accepted</code>, and the separate create-account step disappears. The domain rule goes on the board as a note: “In order to create a pre-reader, they start out invited.” <a class="src" data-lesson="69">L69</a></p>
+    <table class="tbl">
+      <thead><tr><th>Command</th><th>Actor</th><th>Aggregate</th><th>Event</th><th>Resulting state</th></tr></thead>
+      <tbody>
+        <tr><td>Invite new pre-reader(s)</td><td>Author</td><td>Pre-reader</td><td>Pre-reader invited</td><td><code>Invited</code> (initial)</td></tr>
+        <tr><td>Send email</td><td>System</td><td>Email</td><td>Email sent</td><td>—</td></tr>
+        <tr><td>Accept pre-reader invite</td><td>Pre-reader</td><td>Pre-reader</td><td>Pre-reader accepted</td><td><code>Accepted</code></td></tr>
+        <tr><td>Send email</td><td>System</td><td>Email</td><td>Email sent</td><td>—</td></tr>
+      </tbody>
+    </table>
+
+    <figure class="diagram" id="dd-event-storm">
+      <pre class="mermaid">flowchart LR
+  subgraph FB["FeedBook"]
+    C1["Invite new pre-readers · Author"] --&gt; E1(["Pre-reader invited"])
+    C3["Accept pre-reader invite · Pre-reader"] --&gt; E3(["Pre-reader accepted"])
+  end
+  subgraph EM["Email"]
+    C2["Send email · System"] --&gt; E2(["Email sent"])
+    C4["Send email · System"] --&gt; E4(["Email sent"])
+  end
+  E1 --&gt; C2
+  E2 -.-&gt;|time passes| C3
+  E3 --&gt; C4</pre>
+      <figcaption><span class="badge recon">Reconstructed from L69</span> The redesigned event storm as a timeline: rectangles are commands (with actors), stadiums are past-tense events, subgraphs are bounded contexts. <a class="src" data-lesson="69">L69</a></figcaption>
+    </figure>
+
+    <ul>
+      <li><strong>Criticize names hard.</strong> “It's worthwhile spending time really criticizing this language here”, because it becomes the code. Khalil considered “Accept invite” but kept “Accept pre-reader invite” to stay specific for now. <a class="src" data-lesson="69">L69</a></li>
+      <li><strong>User ≠ Pre-reader.</strong> <em>User</em> lives in the generic Users context. <em>Pre-reader</em> lives in FeedBook. <a class="src" data-lesson="69">L69</a></li>
+      <li><strong>Order:</strong> classify core/supporting/generic first and process-model last. The process model is “probably the most key part”. It gives clarity on the <strong>data, behavior, relationships and process</strong> that the domain model must codify. <a class="src" data-lesson="69">L69</a></li>
+      <li><strong>Two forms (“non-negotiable”):</strong> big-picture event storming, to understand an existing project, and process modelling of one feature, for new work. <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Events may branch across contexts</strong>, e.g. <code>OrderPlaced</code> → billing + email. Don’t branch into two paths in the same namespace. <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Look for required inputs and outputs</strong> rather than trying to name “aggregates”. Khalil avoids the word because there are so many ways to model it. <a class="src" data-lesson="89">L89</a></li>
+    </ul>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Grouping by language, placing boundaries and spotting a same-context event chain are human judgment calls. An agent will generate an extra <code>PreReaderAccount</code> entity and a synchronous “accept then create” just as happily. Hand it the GWT scenario and the redesigned event table as the spec, and review its output against the smell rule.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="ddd-feedbook--refining" data-title="Refining with Views & State Changes">
+    <h3>Refining the Process Model with Views &amp; State Changes <a class="src" data-lesson="70">L70</a></h3>
+
+    <p>When Khalil started coding, details were missing. That’s emergent design: recalibrate. “It's very easy to miss details if we don't actually have a concrete example of what it is we're trying to build.” A story is still abstract, and wireframes or screens make it real. <a class="src" data-lesson="70">L70</a></p>
+
+    <ol class="steps">
+      <li><strong>Add views</strong> — attach screens to the event storm: invite form → Gmail inbox → accept page → register page → dashboard. <a class="src" data-lesson="70">L70</a></li>
+      <li><strong>Tally input and output data</strong> — for every command–event pair. <a class="src" data-lesson="70">L70</a></li>
+      <li><strong>Identify the types of state</strong> to model. <a class="src" data-lesson="70">L70</a></li>
+      <li><strong>Identify state machines and transitions</strong> — “It will dictate what moves to change and in what sequence. And it's going to dictate the state machine.” <a class="src" data-lesson="70">L70</a></li>
+      <li><strong>Implement the domain model.</strong> <a class="src" data-lesson="70">L70</a></li>
+    </ol>
+
+    <div class="callout tip"><strong>What the views surfaced</strong>
+      <p>How does an invited pre-reader log in again? Username? First and last name? An auto-generated password, or one asked for right away? “These are all things that will get missed if you don't do the problem space correctly.” Take these questions back to the <strong>domain experts</strong> or a <strong>designer</strong>. The chosen answer: after Accept, go to a <strong>Register</strong> screen, then the Dashboard. Question even polished, pre-made stories and screens. <a class="src" data-lesson="70">L70</a></p>
+    </div>
+
+    <table class="tbl">
+      <thead><tr><th>View</th><th>Actor</th><th>Command</th><th>Input data</th><th>Event</th><th>Context</th></tr></thead>
+      <tbody>
+        <tr><td>Invite form</td><td>Author</td><td>Invite pre-readers</td><td>many × <code>authorId</code>, <code>email</code></td><td>Pre-readers invited (carries <code>preReaderInviteId</code>)</td><td>FeedBook</td></tr>
+        <tr><td>—</td><td>System</td><td>Send email(s)</td><td>invite details; <code>preReaderInviteId</code> templated into the link</td><td>Email(s) sent</td><td>Email</td></tr>
+        <tr><td>Gmail → accept page</td><td>Invitee (guest-like)</td><td>Accept pre-reader invite</td><td><code>preReaderInviteId</code></td><td>Pre-reader invite accepted</td><td>FeedBook</td></tr>
+        <tr><td>—</td><td>System</td><td>Send email</td><td>—</td><td>Email sent</td><td>Email</td></tr>
+        <tr><td>Register page</td><td>Invitee</td><td>Create user account</td><td>first name, last name, password (email known)</td><td>User account created</td><td>Users &amp; Identity</td></tr>
+        <tr><td>—</td><td>System</td><td>Create pre-reader</td><td>valid invite + user account</td><td>Pre-reader created</td><td>FeedBook</td></tr>
+        <tr><td>Dashboard</td><td>—</td><td>(none)</td><td>—</td><td>(none: no state change, so not modelled)</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <p>Tally from <a class="src" data-lesson="70">L70</a>. Required inputs like <code>authorId</code> and <code>preReaderInviteId</code> are <strong>application rules</strong>: needed to operate, but not domain invariants.</p>
+
+    <figure class="diagram" id="dd-refined-flow">
+      <pre class="mermaid">flowchart LR
+  V1[/"Invite form: emails + Submit"/] --&gt; C1["Invite pre-readers"] --&gt; E1(["Pre-readers invited"])
+  E1 --&gt; S1["System: Send emails"] --&gt; E2(["Emails sent"])
+  E2 -.-&gt;|minutes pass| V2[/"Gmail inbox"/] --&gt; V3[/"Accept page"/]
+  V3 --&gt; C2["Accept pre-reader invite"] --&gt; E3(["Pre-reader invite accepted"])
+  E3 --&gt; S2["System: Send email"] --&gt; E4(["Email sent"])
+  E3 --&gt; V4[/"Register page: first, last, password"/]
+  V4 --&gt; C3["Create user account"] --&gt; E5(["User account created"])
+  E5 --&gt; S3["System: Create pre-reader"] --&gt; E6(["Pre-reader created"])
+  E5 --&gt; S4["System: Send email"] --&gt; E7(["Email sent"])
+  E6 --&gt; V5[/"Dashboard"/]</pre>
+      <figcaption><span class="badge recon">Reconstructed from L70</span> Views (parallelograms) anchored to commands and events. System reactions sit right under their triggers; user steps come later. The new Users step emerged from walking the screens. <a class="src" data-lesson="70">L70</a></figcaption>
+    </figure>
+
+    <div class="callout rule"><strong>One state change per step, per context, linked by events</strong>
+      <p>“Design out state changes that are happening one step at a time within one subdomain or one context at a time.” Doing 3–4 state changes at once needs a transaction around them all, which is hard. Linking steps by events means “your system could fail any of these steps and you could bring it back up and you know that your system is going to be in a consistent state”. The course calls this idempotency. <a class="src" data-lesson="70">L70</a> See the <a href="#essentials-physical--temporal-decoupling">terminology note</a>. Order matters: “You can't create a pre-reader account until you have a user account for them.” <a class="src" data-lesson="70">L70</a></p>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L70</span> The <code>PreReaderInvite</code> shape derived from the tally (later statuses: <code>Invited</code>/<code>Accepted</code>)</figcaption>
+      <pre><code class="language-ts">type PreReaderInviteStatus = 'notAccepted' | 'accepted'; // initial: notAccepted
+
+interface PreReaderInvite {
+  id: string;        // preReaderInviteId, templated into the email link
+  authorId: string;  // application rule / relationship back to Author
+  email: string;     // invitee email
+  status: PreReaderInviteStatus;
+}
+
+// command inputs
+type InvitePreReadersInput = { authorId: string; email: string }[];
+type AcceptPreReaderInviteInput = { preReaderInviteId: string };
+type CreateUserAccountInput = { firstName: string; lastName: string; password: string; email: string };</code></pre>
+    </figure>
+
+    <figure class="diagram" id="dd-relationships">
+      <pre class="mermaid">classDiagram
+  Author "1" -- "*" PreReaderInvite
+  PreReaderInvite "1" -- "0..1" PreReader
+  PreReader --&gt; User
+  Author --&gt; User</pre>
+      <figcaption><span class="badge recon">Reconstructed from L70</span> Relationships that emerged: “three different pieces of state… they can all change in different ways.” Author and PreReader both relate to the generic User. <a class="src" data-lesson="70">L70</a></figcaption>
+    </figure>
+
+    <blockquote class="quote">“Even if someone else has done this work… do question and do continue to question that things might be missing.”<cite><a class="src" data-lesson="70">L70</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="ddd-feedbook--architecture" data-title="Architecture Guess Point">
+    <h3>Architecture Guess Point: Modular Monolith &amp; Event Bus <a class="src" data-lesson="71">L71</a></h3>
+
+    <p>This is the last theoretical step. “Once we get to this architect step, we've done the majority of the hard work.” The modules are already known from the bounded contexts. <a class="src" data-lesson="71">L71</a></p>
+
+    <h4>Questions Khalil asks</h4>
+    <ul>
+      <li>External systems, components, modules and <strong>deployable units</strong> (modular monolith vs microservices). <a class="src" data-lesson="71">L71</a></li>
+      <li>Components such as Redis, which can play many roles: caching, Pub/Sub, key-value storage, and queuing/scheduling with BullMQ. These come up again at the outgoing adapter guess point. <a class="src" data-lesson="71">L71</a></li>
+      <li>How do we organize our code? Classification decides it: core = build, generic = import a library, supporting = build reluctantly. <a class="src" data-lesson="71">L71</a></li>
+      <li>Non-functional requirements. The three-step RDD process can find the right architectural components (mentioned only). <a class="src" data-lesson="71">L71</a></li>
+    </ul>
+
+    <div class="cards">
+      <div class="card"><h4>Modular monolith ≠ single process</h4><p>“Modular monolith does not mean modular process. This is just how you organize your code.” At bootstrap you choose which modules share a process. For FeedBook: billing is external, the core runs together, and sessions/scheduling likely run in a separate process. “Just usually a better place to start than microservices.” <a class="src" data-lesson="71">L71</a></p></div>
+      <div class="card"><h4>Event bus</h4><p>A required component that lets modules talk: everyone registers events and subscribes. Start with everything in one process. Students suggested SOA without a bus, or WebSockets. The course goes event-driven. “At the end of the day, we just need coordinators.” <a class="src" data-lesson="71">L71</a></p></div>
+      <div class="card"><h4>Encapsulation: FP vs OOP</h4><p>Encapsulation means data and related behavior together, with the data protected. FP does it by co-location. OOP does it with a private constructor, a static factory, and restricted getters/setters. “The technique is encapsulation, but the way you implement it is a little bit different.” <a class="src" data-lesson="71">L71</a></p></div>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L71</span> Modules plus a shared folder</figcaption>
+      <pre><code class="language-text">src/
+  modules/
+    feedbook/      (core)
+    sessions/      (scheduling; likely separate process)
+    billing/       (external/generic)
+  shared/
+    core/          (utilities)
+    domain/        (shared domain descriptions)</code></pre>
+    </figure>
+
+    <p><strong>Next, moving to the physical:</strong> the ideal workflow is deployment pipeline → E2E test in a production-like environment → level-3 tests. For learning, the course jumps to level two, the stateful guess point, to “encapsulate the hell out of the object correctly” with value objects, entities, domain events, <code>Result</code> and <code>Guard</code>. <a class="src" data-lesson="71">L71</a> More in <a href="#architecture">Architecture &amp; Code Structure</a>.</p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="ddd-feedbook--state-machines" data-title="State Machines & Invariants">
+    <h3>State Machines, Invariants, Transitions &amp; Events <a class="src" data-lesson="74">L74</a> <a class="src" data-lesson="76">L76</a> <a class="src" data-lesson="86">L86</a></h3>
+
+    <p>Stateless FA²STR work (feedback loop level one) only transforms data: “mom” in, a result out. “In the real world, we're always dealing with statefulness. Problems are stateful.” You solve them by introducing state, which then has to change correctly, at the right time, and never at the wrong time. <a class="src" data-lesson="74">L74</a> <a class="src" data-lesson="86">L86</a></p>
+
+    <div class="cards">
+      <div class="card"><h4>State</h4><p>A position the system can be in. Being at a state is itself data. <a class="src" data-lesson="74">L74</a></p></div>
+      <div class="card"><h4>Transition</h4><p>A move from one state to the next. It “feels functional because it is functional”, so the paradigm doesn’t matter. <a class="src" data-lesson="74">L74</a> <a class="src" data-lesson="86">L86</a></p></div>
+      <div class="card"><h4>Event</h4><p>Created on every transition: data saying “we just moved to this state”. States and events are two sides of the same coin. <a class="src" data-lesson="74">L74</a></p></div>
+      <div class="card"><h4>Invariant</h4><p>“Invariance equals a rule, which really equals business logic.” It blocks invalid transitions. <a class="src" data-lesson="74">L74</a> Also: which states your concepts may be in, e.g. a washing machine can’t be “off” with settings selected. <a class="src" data-lesson="89">L89</a></p></div>
+      <div class="card"><h4>Encapsulation’s purpose</h4><p>“To protect the way the model changes.” “You don't want to be able to put the system in an invalid state.” <a class="src" data-lesson="74">L74</a> <a class="src" data-lesson="86">L86</a></p></div>
+    </div>
+
+    <h4>Washing clothes by hand, built from the end</h4>
+    <p>Start at the goal (clothes clean) and work backwards: clean ← dry ← washed ← washing materials assembled ← clothes gathered. “You see what happens when you start from the end? I'm telling you. It's the technique.” <a class="src" data-lesson="74">L74</a> Thinking backwards gets its own lesson. <a class="src" data-lesson="75">L75</a></p>
+    <figure class="diagram" id="dd-washing-clothes">
+      <pre class="mermaid">stateDiagram-v2
+  [*] --&gt; ClothesNotWashed
+  ClothesNotWashed --&gt; GatheredClothes: gather clothes
+  GatheredClothes --&gt; AssembledWashingMaterials: assemble washing materials
+  AssembledWashingMaterials --&gt; ClothesWashed: wash
+  ClothesWashed --&gt; ClothesDry: dry
+  ClothesDry --&gt; ClothesClean
+  ClothesClean --&gt; [*]
+  note right of GatheredClothes
+    Jumping straight to ClothesClean
+    is an INVALID transition (invariant)
+  end note</pre>
+      <figcaption><span class="badge recon">Reconstructed from L74</span> The ordering of the early states is partly inferred. Every arrow emits an event named after its state (e.g. <code>GatheredClothes</code>). <a class="src" data-lesson="74">L74</a> <a class="src" data-lesson="86">L86</a></figcaption>
+    </figure>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L74</span> “If it's new, should I be able to say dry clothes?” The model must reject it (class and state names inferred)</figcaption>
+      <pre><code class="language-ts">type LaundryState =
+  | 'new'
+  | 'gatheredClothes'
+  | 'assembledWashingMaterials'
+  | 'clothesWashed'
+  | 'clothesDry'
+  | 'clothesClean';
+
+class Laundry {
+  private state: LaundryState = 'new';
+
+  dryClothes() {
+    // invariant: can only dry clothes that have been washed
+    if (this.state !== 'clothesWashed') {
+      throw new Error(`Invalid transition from ${this.state} to clothesDry`);
+    }
+    this.state = 'clothesDry';
+    // emit ClothesDried event (inferred)
+  }
+}</code></pre>
+    </figure>
+    <p>This sketch throws. By the implementation demo, expected domain failures are <em>returned</em> as typed errors instead (<a href="#ddd-feedbook--prereaderinvite">below</a>). <a class="src" data-lesson="77">L77</a> Real-world invalid states include blowing into a Nintendo cartridge, restarting the router, and an Uber Eats order placed by accident during a phone call. <a class="src" data-lesson="74">L74</a></p>
+
+    <h4>FeedBook: tally the state, then model each piece</h4>
+    <table class="tbl">
+      <thead><tr><th>Piece of state</th><th>Managed by</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Pre-reader invite</td><td>Us (FeedBook)</td><td><code>Invited</code> → <code>Accepted</code> via <code>accept</code></td></tr>
+        <tr><td>Email</td><td>External (generic)</td><td>Created “all over the place”</td></tr>
+        <tr><td>User</td><td>Users context</td><td>Needed before a pre-reader can exist</td></tr>
+        <tr><td>Pre-reader</td><td>Us (FeedBook)</td><td>Little change. Its complexity is in valid <em>creation</em>.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Sequence of creation:</strong> author (created long before) → pre-reader invite → user → pre-reader. “A pre-reader can only really come to be if an author is there first, then a pre-reader invite is there, and then a user exists.” A domain model must encapsulate <strong>data, rules, processes and relationships</strong>. Use a state machine first to get clear on how each thing can change over time. <a class="src" data-lesson="76">L76</a></p>
+
+    <figure class="diagram" id="dd-prereaderinvite-sm">
+      <pre class="mermaid">stateDiagram-v2
+  [*] --&gt; Invited: create(preReaderInviteId, authorId, preReaderEmail)
+  Invited --&gt; Accepted: acceptInvite / InviteAccepted
+  note right of Accepted
+    accepting again returns an error
+    (no Accepted to Accepted)
+    exactly one InviteAccepted event
+  end note</pre>
+      <figcaption><span class="badge recon">Reconstructed from L76</span> The <code>PreReaderInvite</code> state machine, with the invariant and event from the next-step tests described in <a class="src" data-lesson="77">L77</a>. <a class="src" data-lesson="76">L76</a></figcaption>
+    </figure>
+
+    <ul>
+      <li><strong>Few transitions → focus rigor on creation.</strong> Pass in all the correct pieces and “make sure that they can't be created without those things.” The pre-reader also gets a demo rule: edit the display name, which defaults to a combination of first and last name. The exact format was fuzzy in narration. <a class="src" data-lesson="76">L76</a></li>
+      <li><strong>Richer example:</strong> a washing machine goes Off → Idle (waiting for cycle selection) → Sensing. Off → Sensing is invalid. <a class="src" data-lesson="76">L76</a></li>
+      <li><strong>Information systems are state machines.</strong> One machine emits an event that creates or triggers another. Follow the inputs, outputs and flow of data. <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Keep time out.</strong> A state machine holds and protects data and changes correctly when told to. <em>Knowing when</em> to tell it is an application concern. <a class="src" data-lesson="89">L89</a> The domain model must be pure: no <code>new Date()</code>, <code>Math.random()</code> or <code>setTimeout</code>. Inject a clock. <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Fixtures = initial state.</strong> Encapsulate complex starting states with a builder instead of acting them out line by line. <a class="src" data-lesson="86">L86</a> <a class="src" data-lesson="78">L78</a></li>
+    </ul>
+
+    <blockquote class="quote">“Every single time we do a transition, we get something called an event created.”<cite><a class="src" data-lesson="74">L74</a></cite></blockquote>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Agents generate public setters freely. Invariants encoded <em>inside</em> the domain object (a guarded <code>acceptInvite()</code>, no public status setter) mean AI-generated callers can’t push the system into an invalid state, whatever they do. The state diagram doubles as a checklist: one test per arrow and one per forbidden arrow.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="ddd-feedbook--aggregates" data-title="Aggregates">
+    <h3>Aggregates: Minimum Data, Transaction Boundaries <a class="src" data-lesson="88">L88</a> <a class="src" data-lesson="89">L89</a></h3>
+
+    <div class="cards">
+      <div class="card"><h4>Minimum data for a command</h4><p>“An aggregate is the minimum amount of information required for you to perform a command.” It’s the absolute minimum needed to execute the command and evaluate its rules, and the result is saved into an event. It isn’t necessarily the input data. <a class="src" data-lesson="88">L88</a></p></div>
+      <div class="card"><h4>Transaction / consistency boundary</h4><p>“It's a transaction boundary”: the essential data that changes together in one transaction. Aggregates are application-level (feedback loop level 3). Entities and value objects are level 2. “More of a philosophical thing”, and maybe not a real code construct. <a class="src" data-lesson="89">L89</a></p></div>
+      <div class="card"><h4>Not a DTO</h4><p>A DTO is “data in a certain shape” with no behavior, e.g. the input that invokes a command. A student’s definition, “objects that enforce invariants”, got “fair enough”. <a class="src" data-lesson="89">L89</a></p></div>
+    </div>
+
+    <h4>Keep them small</h4>
+    <ul>
+      <li><strong>Per-command aggregates.</strong> <code>createUser</code> needs an email and password (email unique, password valid). <code>editUser</code> needs id, names and email, but not the password. A new rule (edit only if verified) turns <code>Email</code> into a value object with a status. Otherwise the <code>User</code> aggregate grows with every command until a simple edit loads “9,000 other things”. <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Rule of three:</strong> command-specific aggregates may later refactor into a common abstract <code>User</code>. <a class="src" data-lesson="88">L88</a> “I don't even like to give things concrete base classes until I absolutely need them”, so skip an early <code>AggregateRoot</code>. <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Reference by ID.</strong> Loading an Author with 30 feedback cycles for every request is bad and may crash things. <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Lists: design for the worst case.</strong> Moving a playlist track from position 3 to 50 shouldn’t update every item in between. Use previous/next pointers, and update the rest later (eventual consistency). <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Boundary test:</strong> walk the state-change code line by line. If the system could die midway and restart half-done, the boundary is wrong. <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Two state machines → a domain service</strong>, e.g. syncing a tasks list with a calendar into a sync plan (adds, updates, removes) that the application layer applies. <a class="src" data-lesson="88">L88</a> <a class="src" data-lesson="89">L89</a></li>
+      <li><strong>Three ways to model them:</strong> an OO <code>Order</code> class, per-command data slices, or pure functional inputs → outputs. Khalil won’t give “solid statements” on which is right. <a class="src" data-lesson="89">L89</a></li>
+    </ul>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Aggregate per command</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L88</span> Only the data each command’s rules need</figcaption>
+          <pre><code class="language-ts">class Email { constructor(readonly value: string, readonly status: 'verified' | 'not-verified') {} }
+class UserForCreateUser { email: Email; password: Password; }
+class UserForEditUser { id: UserId; firstName: FirstName; lastName: LastName; email: Email; }
+// after rule of three: abstract class User { /* common parts pulled up */ }</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">Reorder in one small transaction</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L89</span> Linked-list playlist: reorder touches only pointers</figcaption>
+          <pre><code class="language-ts">class PlaylistItem {
+  constructor(
+    public readonly id: string,
+    public previous: string | null, // id of previous item
+    public next: string | null      // id of next item
+  ) {}
+}</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <h4>Can’t find the boundary? You’re doing too much in one command</h4>
+    <div class="callout anti"><strong>Transaction script: <code>makePurchase</code></strong>
+      <p>One call gets cart items, checks inventory, bills the card, updates inventory and sends an email. A crash between billing and the inventory update leaves an invalid state. Khalil did this on the solidbook website and suffered, including serverless cold starts that cut requests off. The fix is temporal decoupling: each subdomain’s state machine reacts to events. Model the success scenario, then the failures (billing fails → email, wait, cancel after 3 days, release inventory). <a class="src" data-lesson="88">L88</a></p>
+    </div>
+    <figure class="diagram" id="dd-make-purchase">
+      <pre class="mermaid">flowchart LR
+  A(["Item Added To Cart · e-commerce"]) --&gt; B(["Order Placed · orders"]) --&gt; C(["Customer Billed · billing"]) --&gt; D(["Email Sent · emails"]) --&gt; E(["Shopping Cart Emptied · e-commerce"]) --&gt; F(["Inventory Updated · inventory"])</pre>
+      <figcaption><span class="badge recon">Reconstructed from L88</span> The make-purchase process model (success path, time left → right). Each event belongs to its own subdomain. Cart, order, payment method and email are separate state machines interacting via events. “You can understand an entire domain just by looking at the events.” <a class="src" data-lesson="88">L88</a></figcaption>
+    </figure>
+
+    <h4>The planned stateful section</h4>
+    <table class="tbl">
+      <thead><tr><th>Part</th><th>What it trains</th></tr></thead>
+      <tbody>
+        <tr><td>Stereotypical architecture</td><td>Domain concerns: data, rules, relationships, processes</td></tr>
+        <tr><td>Visualizations (tic-tac-toe, traffic light, blog post)</td><td>Process modelling → data and behavior; class diagrams → relationships; state machines → rules</td></tr>
+        <tr><td>Nth looping</td><td><code>Student</code> entity (L2) → <code>FirstName</code>/<code>LastName</code> value objects → level-1 validation. State verification plus domain events</td></tr>
+        <tr><td>Tic-tac-toe</td><td>Object calisthenics + the six object stereotypes</td></tr>
+        <tr><td>Fixtures with builders</td><td>Test <code>editUser</code> without implementing <code>createUser</code></td></tr>
+        <tr><td>Domain services</td><td>Sync plan, call-flow rules, maybe RBAC</td></tr>
+        <tr><td>Full RDD domain modelling</td><td>Doings/knowings → stereotypes; role-goal then helps size aggregates</td></tr>
+      </tbody>
+    </table>
+    <p>Outline shown in <a class="src" data-lesson="88">L88</a>. The course teaches inside-out (level 2 before level 3) because level 3 has too many responsibilities to find at once. In practice Khalil often jumps from the process model straight to level 3. <a class="src" data-lesson="89">L89</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="ddd-feedbook--prereaderinvite" data-title="Implementing PreReaderInvite">
+    <h3>Implementing the <code>PreReaderInvite</code> Domain Object <a class="src" data-lesson="77">L77</a></h3>
+
+    <p>Goal: move “from state machine to domain model.” Domain objects are “really simple state machines at the class level, but these are the decision-making objects that happen in most information systems.” <a class="src" data-lesson="77">L77</a></p>
+
+    <ol class="steps">
+      <li><strong>Find</strong> — responsibilities (data, behavior, processes, rules). The state machines already did most of this. <a class="src" data-lesson="77">L77</a></li>
+      <li><strong>Architect</strong> — map doings and knowings onto DDD tactical patterns: entities, value objects, domain events (domain services aren’t needed here). <a class="src" data-lesson="77">L77</a></li>
+      <li><strong>Automate</strong> — Jest is enough. GWT/feature files can come later. <a class="src" data-lesson="77">L77</a></li>
+      <li><strong>TDD each transition</strong> — work backwards: input → act → assert → make it exist. Drop inward to value objects and <code>Guard</code> (level 1), then come back out to the entity (level 2). <a class="src" data-lesson="77">L77</a> <a class="src" data-lesson="88">L88</a></li>
+    </ol>
+
+    <div class="cards">
+      <div class="card"><h4>Entity vs value object</h4><p>Compared by value → value object (<code>PreReaderEmail</code>, and IDs too: “a little bit of a tricky one”). Compared by identity → entity (<code>PreReaderInvite</code>). <a class="src" data-lesson="77">L77</a></p></div>
+      <div class="card"><h4>Input vs state</h4><p><code>PreReaderInviteInput</code> is raw strings. <code>PreReaderInviteState</code> holds value objects plus a status. Converting input into state is where validation happens. <a class="src" data-lesson="77">L77</a></p></div>
+      <div class="card"><h4>Props pattern</h4><p>All state lives on one props object instead of separate fields. It’s easier to maintain and makes immutability easy. <a class="src" data-lesson="77">L77</a></p></div>
+      <div class="card"><h4>Only non-initial input</h4><p>Status is set to <code>Invited</code> internally, so <code>create</code> takes just 3 inputs: invite ID, author ID, pre-reader email. <a class="src" data-lesson="77">L77</a></p></div>
+    </div>
+
+    <h4>1 · Test layout: one <code>describe</code> per transition</h4>
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L77</span> <code>create</code> (initial state): success and failure cases</figcaption>
+      <pre><code class="language-ts">describe('PreReaderInvite', () =&gt; {
+  describe('create', () =&gt; {
+    it('successfully creates a pre-reader invite, initially invited', () =&gt; {
+      const input = { preReaderInviteId: SAMPLE_UUID, authorId: SAMPLE_UUID, preReaderEmail: 'reader@example.com' };
+      const invite = PreReaderInvite.create(input) as PreReaderInvite;
+      expect(invite.getId().getValue()).toEqual(SAMPLE_UUID);
+      expect(invite.getInviteStatus()).toEqual('Invited');
+    });
+
+    it.each([
+      [{ authorId: SAMPLE_UUID, preReaderEmail: 'reader@example.com' }, 'preReaderInviteId'],
+      [{ preReaderInviteId: SAMPLE_UUID, preReaderEmail: 'reader@example.com' }, 'authorId'],
+    ])('fails to create when value missing', (input, property) =&gt; {
+      const error = PreReaderInvite.create(input as any) as DomainError;
+      expect(error).toBeInstanceOf(MissingValueError);
+      expect(error.getMessage()).toContain(property);
+    });
+  });
+});</code></pre>
+    </figure>
+    <p>Failure tests are named by reason: “fails to create when value missing”. “Missing value” beats “missing property”. Placeholder IDs like <code>'123'</code> aren’t valid UUIDs and caused confusing <code>ValidationError</code>s, so keep a known-valid <code>SAMPLE_UUID</code>. Remember to unwrap with <code>getId().getValue()</code>. <a class="src" data-lesson="77">L77</a></p>
+
+    <h4>2 · Errors are returned, not thrown</h4>
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L77</span> Error hierarchy: an abstract base, so a concrete subclass must “play this role”</figcaption>
+      <pre><code class="language-ts">type DomainErrorState = { type: string; message: string };
+
+export abstract class DomainError {
+  constructor(private readonly state: DomainErrorState) {}
+  getType() { return this.state.type; }
+  getMessage() { return this.state.message; }
+}
+
+export class MissingValueError extends DomainError {
+  constructor(property: string) {
+    super({ type: 'MissingValue', message: `Couldn't find a value for ${property}` });
+  }
+}
+
+export class ValidationError extends DomainError {
+  constructor(property: string) {
+    super({ type: 'ValidationError', message: `Invalid value for ${property}` });
+  }
+}</code></pre>
+    </figure>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — classful <code>Result</code>: “way too confusing, especially if you're just starting out”</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L77</span> The first attempt, later abandoned</figcaption>
+          <pre><code class="language-ts">export class Result&lt;T&gt; {
+  private constructor(
+    private readonly success: boolean,
+    private readonly value?: T,
+  ) {}
+
+  public static ok&lt;T&gt;(value: T): Result&lt;T&gt; {
+    return new Result&lt;T&gt;(true, value);
+  }
+
+  public static fail&lt;T&gt;(value?: any): Result&lt;T&gt; {
+    return new Result&lt;T&gt;(false, value);
+  }
+
+  get isSuccess() { return this.success; }
+  get isFailure() { return !this.success; }
+  getValue(): T { return this.value as T; }
+}</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — plain union return types: “this is how you say or”</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L77</span> Signatures used by the end of the demo</figcaption>
+          <pre><code class="language-ts">PreReaderInvite.create(input): PreReaderInvite | DomainError
+PreReaderInviteId.create(value): PreReaderInviteId | ValidationError
+
+// strict discriminated union so TypeScript can narrow
+type SuccessGuardResult = { success: true };
+type FailureGuardResult = { success: false; data: { firstMissingKey: string } };
+export type NullOrUndefinedGuardResult = SuccessGuardResult | FailureGuardResult;</code></pre>
+        </figure>
+      </div>
+    </div>
+    <p>“This could have just been so much simpler… It just gets way too complex using the result.” Model result types strictly. Avoid optional fields that are really variant-specific. <a class="src" data-lesson="77">L77</a></p>
+
+    <h4>3 · Value objects own validation</h4>
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L77</span> Private constructor, validating factory, union return</figcaption>
+      <pre><code class="language-ts">export class PreReaderInviteId {
+  private constructor(private readonly props: { value: string }) {}
+
+  public static create(value: string): PreReaderInviteId | ValidationError {
+    if (!this.validateIdentifier(value)) {
+      return new ValidationError('preReaderInviteId');
+    }
+    return new PreReaderInviteId({ value });
+  }
+
+  // non-regex UUID check found online; not cohesive here, should move (shared with AuthorId)
+  private static validateIdentifier(value: string): boolean { /* ... */ return true; }
+
+  getValue() { return this.props.value; }
+}
+
+// spec
+it('knows when id is valid', () =&gt; {
+  expect(PreReaderInviteId.create('123')).toBeInstanceOf(ValidationError);
+});</code></pre>
+    </figure>
+    <p><code>AuthorId</code> and <code>PreReaderEmail</code> follow the same pattern. The UUID check ended up copied three times. “When you see things three times, it's a good chance to refactor.” The refactor was deferred, but Khalil noted where it belongs. Prefer a validation package, since regex “can be pretty expensive”. <a class="src" data-lesson="77">L77</a></p>
+
+    <h4>4 · <code>Guard</code> from programming by wishful thinking</h4>
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L77</span> Both guards converge on one tell-don’t-ask API</figcaption>
+      <pre><code class="language-ts">export class GuardResult {
+  constructor(private readonly errors: DomainError[]) {}
+  hasErrors() { return this.errors.length &gt; 0; }
+  getFirstError() { return this.errors[0]; }
+}
+
+export class Guard {
+  // first version returned NullOrUndefinedGuardResult; later consolidated onto GuardResult
+  public static againstNullOrUndefined(data: any, keys: string[]): GuardResult {
+    const missingValues: string[] = [];
+    for (const key of keys) {
+      if (data[key] === null || data[key] === undefined) missingValues.push(key);
+    }
+    return new GuardResult(missingValues.map((key) =&gt; new MissingValueError(key)));
+  }
+
+  public static againstValidationErrors(items: (ValidationError | unknown)[]): GuardResult {
+    return new GuardResult(items.filter((i): i is ValidationError =&gt; i instanceof ValidationError));
+  }
+}
+
+// guard.spec.ts
+it('returns first validation error from a list of potential validation errors', () =&gt; {
+  const result = Guard.againstValidationErrors([{}, new ValidationError('x')]);
+  expect(result.hasErrors()).toBeTruthy();
+  expect(result.getFirstError()).toBeInstanceOf(ValidationError);
+  expect(result.getFirstError().getMessage()).toContain('x');
+});</code></pre>
+    </figure>
+    <p>The return type evolved: boolean → result → <code>{ success, data?: { keysMissing } }</code> → <code>firstKeyMissing</code> → discriminated union → <code>hasErrors()</code>/<code>getFirstError()</code>. “This is telling it instead of asking. Tell don't ask. This is much nicer of an API.” <code>Guard</code> is a level-one construct, and the entity is level two. <a class="src" data-lesson="77">L77</a></p>
+
+    <h4>5 · The entity: private constructor + static <code>create</code></h4>
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L77</span> <code>create</code> = presence → validity → construct, returning the first error early</figcaption>
+      <pre><code class="language-ts">type PreReaderInviteInput = { preReaderInviteId: string; authorId: string; preReaderEmail: string };
+
+type PreReaderInviteState = {
+  preReaderInviteId: PreReaderInviteId;
+  authorId: AuthorId;
+  preReaderEmail: PreReaderEmail;
+  inviteStatus: 'Invited'; // further statuses (e.g. accepted) come with the accept transition (inferred)
+};
+
+export class PreReaderInvite {
+  private constructor(private readonly props: PreReaderInviteState) {}
+
+  public static create(input: PreReaderInviteInput): PreReaderInvite | DomainError {
+    const presence = Guard.againstNullOrUndefined(input, ['preReaderInviteId', 'authorId', 'preReaderEmail']);
+    if (presence.hasErrors()) return presence.getFirstError();
+
+    const preReaderInviteId = PreReaderInviteId.create(input.preReaderInviteId);
+    const authorId = AuthorId.create(input.authorId);
+    const preReaderEmail = PreReaderEmail.create(input.preReaderEmail);
+
+    const validity = Guard.againstValidationErrors([preReaderInviteId, authorId, preReaderEmail]);
+    if (validity.hasErrors()) return validity.getFirstError();
+
+    return new PreReaderInvite({
+      preReaderInviteId: preReaderInviteId as PreReaderInviteId,
+      authorId: authorId as AuthorId,
+      preReaderEmail: preReaderEmail as PreReaderEmail,
+      inviteStatus: 'Invited',
+    });
+  }
+
+  getId() { return this.props.preReaderInviteId; }
+  getInviteStatus() { return this.props.inviteStatus; }
+}</code></pre>
+    </figure>
+    <p>A class plays two roles: a <strong>service provider</strong> (static <code>create</code>) and a <strong>blueprint</strong> (constructor, private props, instance methods). The private constructor stops consumers from building invalid objects with <code>new</code>. “If this feels like a lot of typing, it is a lot of typing. But this is what is required in order to encapsulate and protect the ways state can change in your app.” <a class="src" data-lesson="77">L77</a></p>
+
+    <h4>6 · Next transition: <code>acceptInvite</code></h4>
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L77</span> Described as next tests. Not implemented in the lesson.</figcaption>
+      <pre><code class="language-ts">describe('acceptInvite', () =&gt; {
+  it('accepts the invite', () =&gt; { /* invite.acceptInvite(); assert accepted */ });
+  it('returns an error when accepting an already-accepted invite', () =&gt; { /* accepted -&gt; accepted is invalid */ });
+  it('records exactly one InviteAccepted event', () =&gt; { /* call multiple times; only one event */ });
+});</code></pre>
+    </figure>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — anemic model: public setters, thrown errors, rules somewhere else</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Any caller can reach any state; nothing records why it changed</figcaption>
+          <pre><code class="language-ts">export class PreReaderInvite {
+  public id!: string;
+  public authorId!: string;
+  public email!: string;
+  public status!: string;             // 'invited' | 'accepted' | 'acepted' | anything
+
+  setStatus(status: string) { this.status = status; }
+}
+
+// acceptInvite.ts: rules scattered in a service, failures thrown
+export async function acceptInvite(id: string) {
+  const invite = await repo.findById(id);
+  if (!invite) throw new Error('Not found');
+  invite.setStatus('accepted');       // accepting twice? nobody checks
+  await repo.save(invite);
+  await emails.send(invite.authorId, 'Your invite was accepted'); // 2nd state change, same process
+}
+
+const invite = new PreReaderInvite(); // no id, no email: still "valid"
+invite.setStatus('clean');</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — encapsulated entity: the invariant lives in the transition</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Extends the L77 entity with the described accept transition and event</figcaption>
+          <pre><code class="language-ts">type InviteStatus = 'Invited' | 'Accepted';
+
+export type InviteAccepted = {
+  type: 'InviteAccepted';
+  preReaderInviteId: string;
+  authorId: string;
+};
+
+export class InvalidTransitionError extends DomainError {
+  constructor(from: InviteStatus, to: InviteStatus) {
+    super({ type: 'InvalidTransition', message: `Can't go from ${from} to ${to}` });
+  }
+}
+
+export class PreReaderInvite {
+  private events: InviteAccepted[] = [];
+
+  // props.inviteStatus widened to InviteStatus
+  private constructor(private props: PreReaderInviteState) {}
+
+  public static create(input: PreReaderInviteInput): PreReaderInvite | DomainError {
+    /* presence → validity → construct (as above) */
+  }
+
+  acceptInvite(): InvalidTransitionError | undefined {
+    if (this.props.inviteStatus === 'Accepted') {
+      return new InvalidTransitionError('Accepted', 'Accepted');
+    }
+    this.props = { ...this.props, inviteStatus: 'Accepted' };
+    this.events.push({
+      type: 'InviteAccepted',
+      preReaderInviteId: this.props.preReaderInviteId.getValue(),
+      authorId: this.props.authorId.getValue(),
+    });
+    return undefined;
+  }
+
+  getInviteStatus(): InviteStatus { return this.props.inviteStatus; }
+  getEvents(): readonly InviteAccepted[] { return [...this.events]; }
+}
+// the Email context reacts to InviteAccepted via the event bus, not in this call</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> The L77 <code>acceptInvite</code> skeleton filled in against the entity above</figcaption>
+      <pre><code class="language-ts">describe('acceptInvite', () =&gt; {
+  const anInvite = () =&gt; PreReaderInvite.create({
+    preReaderInviteId: SAMPLE_UUID, authorId: SAMPLE_UUID, preReaderEmail: 'reader@example.com',
+  }) as PreReaderInvite;
+
+  it('accepts the invite', () =&gt; {
+    const invite = anInvite();
+    expect(invite.acceptInvite()).toBeUndefined();
+    expect(invite.getInviteStatus()).toEqual('Accepted');
+  });
+
+  it('returns an error when accepting an already-accepted invite', () =&gt; {
+    const invite = anInvite();
+    invite.acceptInvite();
+    expect(invite.acceptInvite()).toBeInstanceOf(InvalidTransitionError);
+    expect(invite.getInviteStatus()).toEqual('Accepted');
+  });
+
+  it('records exactly one InviteAccepted event', () =&gt; {
+    const invite = anInvite();
+    invite.acceptInvite();
+    invite.acceptInvite();
+    expect(invite.getEvents()).toHaveLength(1);
+    expect(invite.getEvents()[0].type).toEqual('InviteAccepted');
+  });
+});</code></pre>
+    </figure>
+
+    <div class="callout rule"><strong>Rules from the demo</strong>
+      <ul>
+        <li>Structure tests by transition, with success and failure cases for each. <a class="src" data-lesson="77">L77</a></li>
+        <li>In <code>create</code>, check presence, then validity, then construct. Return early with the first error. <a class="src" data-lesson="77">L77</a></li>
+        <li>Put validation in value objects. The entity composes them. <a class="src" data-lesson="77">L77</a></li>
+        <li>“Never just want to be creating stuff and not testing it.” Every new abstraction (Result, Guard, each value object) gets a test. A failing placeholder spec is an acceptable reminder. <a class="src" data-lesson="77">L77</a></li>
+        <li>Failure output should say <em>which</em> property failed. <a class="src" data-lesson="77">L77</a></li>
+        <li>“Naming is a process as well”: <code>InvalidProperty</code> → <code>ValidationError</code>, <code>keysMissing</code> → <code>firstKeyMissing</code>, <code>validateUUID</code> → <code>validateIdentifier</code>. <a class="src" data-lesson="77">L77</a></li>
+        <li>“Takes just sitting in like a little bit awkwardness for it to get cleaner.” <a class="src" data-lesson="77">L77</a></li>
+      </ul>
+    </div>
+
+    <div class="callout anti"><strong>Mistakes called out (several self-admitted)</strong>
+      <ul>
+        <li>Public constructors that bypass validation. Throwing for expected domain failures. Validation inside the entity. <a class="src" data-lesson="77">L77</a></li>
+        <li>Over-engineering early with a full <code>Result</code> class. <a class="src" data-lesson="77">L77</a></li>
+        <li>Silencing a type error once (“It's not the best”). Barely writing value-object tests. Skimping on commits. Khalil admits all three and says not to copy them. <a class="src" data-lesson="77">L77</a></li>
+      </ul>
+    </div>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Ask an agent for “a PreReaderInvite model” and you’ll typically get the <em>Before</em> column. Specify the shape instead: private constructor, static <code>create</code> returning <code>Entity | DomainError</code>, value objects owning validation, one <code>describe</code> per transition. Then point the agent’s tests at the invariants: accepted → accepted errors, exactly one <code>InviteAccepted</code>.</p></aside>
+
+    <p>Continue with fixtures and builders in <a href="#testing">Testing</a> and object design in <a href="#abstraction-rdd">Abstraction Levels, OOP &amp; RDD</a>.</p>
+  </article>
+</section>

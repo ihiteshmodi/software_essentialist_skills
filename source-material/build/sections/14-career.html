@@ -1,0 +1,251 @@
+<section id="career" class="doc-section" data-title="Learning Path, Books &amp; Career">
+  <h2>Learning Path, Books &amp; Career</h2>
+  <p class="lede">How the course says to learn: climb the phases of craftship in order, learn “topics for problems”, and read a small shelf of books that each feed one essential. It also covers how to stand out as a developer and how to work inside a team. That means knowing your role, being honest about trade-offs, and giving estimates rather than dates. <a class="src" data-lesson="28">L28</a><a class="src" data-lesson="34">L34</a><a class="src" data-lesson="80">L80</a><a class="src" data-lesson="91">L91</a></p>
+
+  <article class="topic" id="career--ddd-code-first" data-title="Learning DDD as a Code-First Dev">
+    <h3>Learning DDD as a Code-First Developer: Don't Jump In Yet <a class="src" data-lesson="28">L28</a></h3>
+    <p>DDD's toolkit (impact mapping, event storming, process modelling) is held together by <strong>systems thinking</strong>: problem → solution → architecture → deployment → system → functions. A code-first mind can't “compute” that chain yet. The way in is to <em>climb the phases of craftship</em>, not to read DDD books first. <a class="src" data-lesson="28">L28</a></p>
+    <ol class="steps">
+      <li><strong>Code-first</strong> — Build the API/app any way you can. Expect manual curl testing, “endpoints instead of features”, and a DB on your own machine. <a class="src" data-lesson="28">L28</a><a class="src" data-lesson="82">L82</a></li>
+      <li><strong>Best-practice-first</strong> — Start from an acceptance test. Add E2E on the backend, then the front end, then deploy. Refactor to a monorepo so front and back end can share DTOs and value objects. This is where you get the “tiny hints” of DDD. <a class="src" data-lesson="28">L28</a></li>
+      <li><strong>Pattern-first</strong> — Learn the patterns in order to carve out a <em>domain layer</em>. Backend: value objects, entities, use cases. Front end: presenters, domain models, controllers, view models. <a class="src" data-lesson="28">L28</a></li>
+      <li><strong>(DDD-first →) Responsibility-first</strong> — Talk to domain experts before writing code. Then move on to object design and roles/responsibilities. Stopping at DDD-first is “good progress, but we need to move past that”. <a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Value-first</strong> — Guess points, FA²STR and the ideal developer workflow. These only make sense once you've climbed the earlier phases. <a class="src" data-lesson="28">L28</a><a class="src" data-lesson="82">L82</a></li>
+    </ol>
+    <div class="cards">
+      <div class="card"><h4>Why this order</h4>
+        <ul>
+          <li>Layers (domain, application…) exist mainly to give you <strong>different places to write tests</strong>. Learn testing first, or the layers won't make sense. <a class="src" data-lesson="28">L28</a></li>
+          <li>Application-layer tests run without React, a DB or a web server. They're “incredibly valuable”. <a class="src" data-lesson="28">L28</a></li>
+          <li>Ratio heuristic: about 1 E2E test to 10 high-value unit tests. <a class="src" data-lesson="28">L28</a></li>
+        </ul>
+      </div>
+      <div class="card"><h4>How learning actually sticks</h4>
+        <ul>
+          <li><strong>Chunking</strong>: your bandwidth is limited, so you need <em>experiences</em>. Redo assignments using a new approach each time. <a class="src" data-lesson="28">L28</a></li>
+          <li>You need <strong>reference experiences</strong> from the tedious katas before abstract ideas have anything to attach to. <a class="src" data-lesson="85">L85</a></li>
+          <li>Rewiring from an old paradigm is “freaking painful”. Set milestones and checkpoints so you don't get stuck “in the void”. <a class="src" data-lesson="85">L85</a></li>
+        </ul>
+      </div>
+      <div class="card"><h4>“Topics for problems”</h4>
+        <ul>
+          <li>Learn a topic when a problem needs it. Don't spend “five months on domain-driven design” or on railway-oriented programming in isolation. <a class="src" data-lesson="91">L91</a></li>
+          <li>Learn the 12 essentials first, then file new jargon under them. CQS goes under vertical slicing, for example. <a class="src" data-lesson="91">L91</a></li>
+          <li>A DDD practice project with no real value only teaches you the patterns. You skip the part where you crunch the domain model. <a class="src" data-lesson="93">L93</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout anti"><strong>Khalil's own mistake</strong> — “I learned DDD before I even knew how to write tests.” If you jump into patterns without knowing <em>why</em> they exist, you get stuck on the patterns. <a class="src" data-lesson="28">L28</a></div>
+    <div class="callout rule"><strong>Mastery process (how the 12 essentials were found)</strong> — First <em>Observe &amp; evaluate</em>: study the <em>phronimos</em> (practitioners who did it well) and experiment until you reach their conclusions yourself. Then <em>Eliminate</em> what doesn't matter. Then <em>Execute</em> the rest as a “straight line”. <a class="src" data-lesson="84">L84</a><a class="src" data-lesson="85">L85</a></div>
+    <p>Deep dive: <a href="#ddd-feedbook">FeedBook DDD case study</a> · <a href="#course-map">Course map &amp; phases</a>.</p>
+  </article>
+
+  <article class="topic" id="career--get-better-at" data-title="“How to Get Better at X” Roadmaps">
+    <h3>“How to Get Better at X” Roadmaps <a class="src" data-lesson="29">L29</a><a class="src" data-lesson="30">L30</a><a class="src" data-lesson="31">L31</a><a class="src" data-lesson="32">L32</a><a class="src" data-lesson="39">L39</a></h3>
+    <p>The FAQ answers share one pattern: go through the phases of craftship in order, anchor everything to the abstraction prism, and practice on real problems. Only the learning advice is summarised here. Each card links to the section with the details.</p>
+    <div class="cards">
+      <div class="card"><h4>Design <a class="src" data-lesson="30">L30</a></h4>
+        <ul>
+          <li>Design = <strong>discoverability + understanding</strong>. Can you and others find, add, change and test features? <a class="src" data-lesson="30">L30</a></li>
+          <li>Structure projects by the abstraction prism (capabilities → features). <a class="src" data-lesson="30">L30</a></li>
+          <li>Use patterns everyone already understands, and agree the pattern set as a team at the start. <a class="src" data-lesson="30">L30</a></li>
+          <li>Practice <strong>metacognition + empathy</strong>: why do <em>I</em> understand this, and would someone else? Study Norman's seven stages of action. <a class="src" data-lesson="30">L30</a></li>
+        </ul>
+        <p>→ <a href="#abstraction-rdd">Abstraction, OOP &amp; RDD</a></p>
+      </div>
+      <div class="card"><h4>Testing <a class="src" data-lesson="31">L31</a></h4>
+        <ul>
+          <li>Learn on the <strong>backend first</strong>. It's “raw”, with no front-end tooling noise. <a class="src" data-lesson="31">L31</a></li>
+          <li>Order: TDD mechanics (examples, parameterisation) → non-flaky E2E with 4 layers of abstraction → decouple core from infra → high-value unit/integration tests and the 3 verification types → choose test strategies. <a class="src" data-lesson="31">L31</a></li>
+          <li>Core skill: move responsibilities so you can “isolate exactly what it is you would like to test and forget everything else”. <a class="src" data-lesson="31">L31</a></li>
+          <li>Aim for the highest confidence for the least work, given where you are now. <a class="src" data-lesson="31">L31</a></li>
+        </ul>
+        <p>→ <a href="#testing">Testing: Principles &amp; Techniques</a></p>
+      </div>
+      <div class="card"><h4>Architecture <a class="src" data-lesson="32">L32</a></h4>
+        <ul>
+          <li>An architect makes the smart decisions at the <em>start</em> of a project. That takes experience <em>plus</em> education. <a class="src" data-lesson="32">L32</a></li>
+          <li>Learn the <strong>stereotypical architecture</strong>: CQS read/write paths, event-based design, layers of concerns, the dependency rule. <a class="src" data-lesson="32">L32</a></li>
+          <li>Try tools on your own time (Docker, Kubernetes, event bus, MongoDB). Know their <em>non-functional</em> reason for existing. <a class="src" data-lesson="32">L32</a></li>
+          <li>“It all comes down to responsibilities”: choose the best tool for the non-functional task. <a class="src" data-lesson="32">L32</a></li>
+        </ul>
+        <p>→ <a href="#architecture">Architecture &amp; Code Structure</a></p>
+      </div>
+      <div class="card"><h4>Backend <a class="src" data-lesson="39">L39</a></h4>
+        <ul>
+          <li>Pick a problem in your life where you want <strong>time back</strong>. Build the backend for it and see it through until it actually saves you time. <a class="src" data-lesson="39">L39</a></li>
+          <li>Make it <strong>public</strong>. That “is going to propel you”. The course final project (solo or with a community member) is the place to do this. <a class="src" data-lesson="39">L39</a></li>
+          <li>Progression: just build it → acceptance tests + a Docker production-like environment + patterns → roles/responsibilities/collaborations “guided by objects”. <a class="src" data-lesson="39">L39</a></li>
+          <li>Do the theoretical work up front, using the abstraction prism. <a class="src" data-lesson="39">L39</a></li>
+        </ul>
+        <p>→ <a href="#essentials-physical">Physical essentials</a></p>
+      </div>
+      <div class="card"><h4>Large codebases <a class="src" data-lesson="29">L29</a></h4>
+        <ul>
+          <li>Your work is “entirely on features”, so go into the codebase <em>looking for features</em>. That's the 80/20. <a class="src" data-lesson="29">L29</a></li>
+          <li>No acceptance tests? Find the common features by asking people, reading tickets and using the front end. Then <strong>trace</strong> how each one is realised in code. <a class="src" data-lesson="29">L29</a></li>
+          <li>The trace shows you how the original developers thought. <a class="src" data-lesson="29">L29</a></li>
+          <li>Target structure: <code>src/modules/&lt;capability&gt;/&lt;feature&gt;</code>, mirrored in <code>tests/</code> with acceptance tests. <a class="src" data-lesson="29">L29</a></li>
+        </ul>
+        <p>→ <a href="#architecture">Architecture &amp; Code Structure</a></p>
+      </div>
+      <div class="card"><h4>Any new field, fast <a class="src" data-lesson="82">L82</a></h4>
+        <ul>
+          <li>Everything is a system: inputs, outputs, environments, processes. <a class="src" data-lesson="82">L82</a></li>
+          <li>Isolate inputs and outputs. Start with the role and the goal. <a class="src" data-lesson="82">L82</a></li>
+          <li>Go as deep as you can, down to something foundational (money, value). Then climb back up, connecting the pieces. <a class="src" data-lesson="82">L82</a></li>
+        </ul>
+        <p>→ <a href="#metaphysics">Metaphysics &amp; Systems</a></p>
+      </div>
+    </div>
+    <div class="callout tip"><strong>Self-assessment</strong> — Treat the essentials as game-style <em>stats</em> you level up. At code-first, horizontal decoupling might be about 2/10, and nobody expects 10/10 during best-practice-first. By value-first, all the physical essentials should be solid. <a class="src" data-lesson="82">L82</a><a class="src" data-lesson="91">L91</a><a class="src" data-lesson="93">L93</a></div>
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span>
+      <p>The course already notes that ChatGPT can do code-first (“we need to take it a little bit further”). <a class="src" data-lesson="39">L39</a> AI speeds up phase 1, not the climb. Every roadmap above ends with a <em>judgment</em> skill: where a responsibility belongs, what to isolate in a test, which tool fits a non-functional need, how to trace a feature. Put your practice hours into those.</p>
+    </aside>
+  </article>
+
+  <article class="topic" id="career--books" data-title="Recommended Books">
+    <h3>Recommended Books, Mapped to Essentials <a class="src" data-lesson="34">L34</a></h3>
+    <p>Khalil's list of the books that shaped the course, collected from the FAQ and the live Q&amp;As. <em>(inferred)</em> means the notes flag the author or title as not stated in the transcript.</p>
+    <table class="tbl">
+      <thead><tr><th>Book</th><th>Author</th><th>What it gives you</th><th>Maps to</th><th>Src</th></tr></thead>
+      <tbody>
+        <tr><td><em>BDD in Action</em></td><td>John Ferguson Smart <em>(inferred)</em></td><td>Source of the <strong>abstraction prism</strong>: reasoning from role/goal/vision down to code. “BDD is fundamentally what we're doing here.” Recommended to API-first developers and product-minded teams.</td><td><a href="#essentials-metaphysical">Abstraction</a>, <a href="#essentials-theoretical">Value Identification</a></td><td><a class="src" data-lesson="34">L34</a><a class="src" data-lesson="82">L82</a><a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td><em>Specification by Example</em></td><td>Not stated · Gojko Adzic <span class="badge copilot">Added by Copilot</span></td><td>Alternative to <em>BDD in Action</em> for teams with strong product ownership: concrete examples as executable specs.</td><td><a href="#essentials-theoretical">Value Identification</a>, <a href="#testing">Acceptance tests</a></td><td><a class="src" data-lesson="82">L82</a></td></tr>
+        <tr><td><em>Object Design</em></td><td>Rebecca Wirfs-Brock &amp; Alan McKean <em>(inferred in L34)</em></td><td>Object stereotypes, RDD, the source of the stereotypical architecture. “I don't really see if there's much more to this thing of design other than object design.” Read it <em>after</em> the DDD books.</td><td><a href="#abstraction-rdd">RDD</a>, Strategic Design</td><td><a class="src" data-lesson="34">L34</a><a class="src" data-lesson="87">L87</a></td></tr>
+        <tr><td><em>Growing Object-Oriented Software, Guided by Tests</em> (GOOS)</td><td>Steve Freeman; Nat Pryce <em>(inferred)</em></td><td>Builders, the walking skeleton, and the <strong>ideal developer workflow</strong> (double-loop TDD).</td><td><a href="#workflow">Ideal workflow</a>, Walking Skeleton</td><td><a class="src" data-lesson="34">L34</a><a class="src" data-lesson="87">L87</a></td></tr>
+        <tr><td><em>Continuous Delivery</em></td><td>Jez Humble &amp; David Farley <em>(inferred)</em></td><td>Deployment pipeline: commit phase → release candidate → acceptance phase → deploy.</td><td><a href="#essentials-metaphysical">Feedback Loop</a>, Deployment &amp; Delivery</td><td><a class="src" data-lesson="34">L34</a><a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td><em>The DevOps Handbook</em></td><td>Not stated</td><td>“The DevOps movement is just a massive feedback loop.”</td><td>Feedback Loop, Deployment &amp; Delivery</td><td><a class="src" data-lesson="34">L34</a></td></tr>
+        <tr><td><em>Extreme Programming Explained</em></td><td>Kent Beck <em>(inferred)</em></td><td>Supports “everything is a guess, so build feedback loops”.</td><td>Feedback Loop</td><td><a class="src" data-lesson="34">L34</a></td></tr>
+        <tr><td>DDD “blue book” (<em>Domain-Driven Design</em>) and “red book” (<em>Implementing DDD</em>)</td><td>Eric Evans; Vaughn Vernon <em>(both inferred in L34)</em></td><td>Get you out of “a big spaghetti mess” and into pattern-first. They don't take you further than that. Strategic design: core/supporting/generic subdomains.</td><td><a href="#essentials-theoretical">Domain Discovery, Strategic Design</a>, <a href="#ddd-feedbook">FeedBook</a></td><td><a class="src" data-lesson="34">L34</a><a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td><em>Strategic Monoliths and Microservices</em></td><td>Vaughn Vernon</td><td>A modular monolith can be extensible. Extensibility comes from first principles, not from microservices.</td><td><a href="#architecture">Architecture</a>, Vertical Slicing</td><td><a class="src" data-lesson="84">L84</a></td></tr>
+        <tr><td><em>Dependency Injection (Principles, Practices, and Patterns)</em></td><td>Mark Seemann (title inferred in L34)</td><td>Start with a composition root (“poor man's DI”). Switch to a DI container only past the effort-vs-messiness cutoff.</td><td><a href="#essentials-physical">Composition</a></td><td><a class="src" data-lesson="34">L34</a><a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td><em>Domain Modeling Made Functional</em></td><td>Scott Wlaschin</td><td>FP seen as composing steps/events from state A to state B. The suggested FP starting point <em>after</em> the course.</td><td><a href="#mindsets">Thinking backwards</a>, Composition</td><td><a class="src" data-lesson="34">L34</a></td></tr>
+        <tr><td><em>The Design of Everyday Things</em></td><td>Don Norman</td><td>Discoverability → understanding, and the seven stages of action. “Your code is the interface for someone else to do their work.”</td><td><a href="#abstraction-rdd">Design</a>, Vertical Slicing</td><td><a class="src" data-lesson="30">L30</a><a class="src" data-lesson="86">L86</a></td></tr>
+        <tr><td>Use-cases book (<em>Writing Effective Use Cases</em>, title inferred)</td><td>Alistair Cockburn</td><td>Developer use cases (find/add/change/test a feature) as the driver for project structure and the README.</td><td><a href="#architecture">Code structure</a></td><td><a class="src" data-lesson="86">L86</a></td></tr>
+        <tr><td><em>The Pragmatic Programmer</em></td><td>Not stated</td><td>Tracer bullets, which the course treats as the same thing as the walking skeleton.</td><td>Walking Skeleton</td><td><a class="src" data-lesson="87">L87</a></td></tr>
+        <tr><td><em>Essentialism</em></td><td>Greg McKeown</td><td>Explore/evaluate → eliminate → execute, plus a daily thinking-backwards ritual.</td><td><a href="#mindsets">Mindsets</a></td><td><a class="src" data-lesson="84">L84</a><a class="src" data-lesson="86">L86</a></td></tr>
+        <tr><td>A systems-thinking book</td><td>Title not recalled (possibly <em>Thinking in Systems</em>, Donella Meadows, unconfirmed)</td><td>Systems thinking is how you learn any field fast.</td><td><a href="#metaphysics">Systems thinking</a></td><td><a class="src" data-lesson="34">L34</a><a class="src" data-lesson="82">L82</a></td></tr>
+        <tr><td><em>solidbook</em></td><td>Khalil Stemmler</td><td>The clarity/depth companion (“humans and code”, organizing code). The course is the 80/20; solidbook is where you go deeper.</td><td>Design, Code structure</td><td><a class="src" data-lesson="84">L84</a><a class="src" data-lesson="86">L86</a></td></tr>
+      </tbody>
+    </table>
+    <div class="cards">
+      <div class="card"><h4>Philosophy shelf <a class="src" data-lesson="82">L82</a></h4>
+        <ul>
+          <li>Aristotle's <em>Metaphysics</em> (first principles, cause and effect) and <em>Nicomachean Ethics</em>. <a class="src" data-lesson="82">L82</a></li>
+          <li>Sartre's existentialism (“first you exist and then you decide your essence”), which Khalil maps to RDD roles and responsibilities. <a class="src" data-lesson="82">L82</a></li>
+          <li>Ayn Rand's objectivism on value (flagged as controversial) and Camus, <em>The Fall</em>. Summaries are fine, since the originals are “flowery” and huge. <a class="src" data-lesson="82">L82</a></li>
+        </ul>
+      </div>
+      <div class="card"><h4>Reading order hints</h4>
+        <ul>
+          <li>On the DDD path, read <em>Object Design</em> afterwards to get past patterns. <a class="src" data-lesson="34">L34</a></li>
+          <li>Hexagonal-architecture material is fine as a supplement. It covers isolating infrastructure but not <em>what drives</em> development (BDD, value). <a class="src" data-lesson="91">L91</a></li>
+          <li>A thick book is not a mentorship plan. Seniors who hand juniors “thick books” and say “be better” are named as an anti-pattern. <a class="src" data-lesson="91">L91</a></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="topic" id="career--differentiate" data-title="Differentiating Yourself">
+    <h3>Differentiating Yourself as a Developer <a class="src" data-lesson="80">L80</a></h3>
+    <blockquote class="quote">“Gone are the days of just farming content with putting in little effort.”<cite><a class="src" data-lesson="80">L80</a></cite></blockquote>
+    <div class="callout def"><strong>Value differential</strong> — The shift in what's valuable caused by tools like ChatGPT. Generic how-to content and basic front-end work got cheaper, so authentic human experience got more valuable. <a class="src" data-lesson="80">L80</a></div>
+    <ol class="steps">
+      <li><strong>List problems</strong> — Problems you want to solve in your life or at work. <a class="src" data-lesson="80">L80</a></li>
+      <li><strong>List curiosities</strong> — For example, building AI apps or a product that makes money. <a class="src" data-lesson="80">L80</a></li>
+      <li><strong>Pick a non-trivial goal</strong> — One you're genuinely motivated by. It's a journey. <a class="src" data-lesson="80">L80</a></li>
+      <li><strong>Chart the path, then teach it</strong> — Show what you did and what you saw (the “hero's journey”). <a class="src" data-lesson="80">L80</a></li>
+    </ol>
+    <table class="tbl">
+      <thead><tr><th>Low value now</th><th>High value now</th></tr></thead>
+      <tbody>
+        <tr><td>“How to build a to-do list in React”</td><td>“Here are the to-do libraries I tried for <em>my</em> project, this one won, and here's why” <a class="src" data-lesson="80">L80</a></td></tr>
+        <tr><td>Hunting for a “unique coding angle”</td><td>Solving problems <em>you</em> have and sharing them. “It becomes unique when it's intertwined with your experience of life.” <a class="src" data-lesson="80">L80</a></td></tr>
+        <tr><td>Coding for coding's sake</td><td>Code as a medium to give back or enrich time. “Solving problems is always valuable.” <a class="src" data-lesson="80">L80</a></td></tr>
+        <tr><td>A persona that's only about code</td><td>A <strong>personal brand</strong> that blends your life domains (Rohan: mental health, logistics, crypto, overcoming poverty) <a class="src" data-lesson="80">L80</a></td></tr>
+      </tbody>
+    </table>
+    <div class="cards">
+      <div class="card"><h4>Write, build, sell</h4>
+        <p>Attributed to Naval. Coding is <em>build</em>. Selling is selling who you are, and you do it through writing. <a class="src" data-lesson="80">L80</a></p>
+      </div>
+      <div class="card"><h4>Company alignment</h4>
+        <p>Writing about what you care about signals your values, so aligned companies can find you. A mental-health writer ends up at Headspace, for example. “You're going to find the people that you need to find if you put yourself out there.” <a class="src" data-lesson="80">L80</a></p>
+      </div>
+      <div class="card"><h4>Value-first career question</h4>
+        <p>At value-first, the question changes from “how do I do things” to “what do I want to do”: which companies, which problems, what personal vision. It's the era of the solopreneur. <a class="src" data-lesson="93">L93</a><a class="src" data-lesson="80">L80</a></p>
+      </div>
+    </div>
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span>
+      <p>This is Kent Beck's 90/10 applied to careers <a class="src" data-lesson="3">L3</a>. Generic tutorials and boilerplate are the 90% that dropped to zero. Your judgment calls (the trade-offs you made, the paths you tried and dropped, why X beat Y on a real project) are the 10% that gained leverage. Writing them down is proof of judgment that generated content can't fake.</p>
+    </aside>
+  </article>
+
+  <article class="topic" id="career--teams" data-title="Working in Teams &amp; Companies">
+    <h3>Working in Teams: Know Your Role, Trade-offs, Plans &amp; Estimates <a class="src" data-lesson="91">L91</a><a class="src" data-lesson="86">L86</a></h3>
+    <div class="cards">
+      <div class="card"><h4>Know your role <a class="src" data-lesson="91">L91</a></h4>
+        <ul>
+          <li>“Customers [are] supposed to make business decisions and developers make development decisions.” <a class="src" data-lesson="91">L91</a></li>
+          <li>You have a <strong>professional responsibility</strong> to tell stakeholders the consequences of the current way of working, ideally ahead of time. <a class="src" data-lesson="91">L91</a></li>
+          <li>If missing tests start to hurt your ability to keep users and customers “in benefit”, say so explicitly. <a class="src" data-lesson="91">L91</a></li>
+        </ul>
+      </div>
+      <div class="card"><h4>“No time to test” <a class="src" data-lesson="91">L91</a></h4>
+        <ul>
+          <li><strong>Fast / good / cheap</strong>: shipping without tests trades quality for time. That's a <em>strategy</em> choice, so name it as one. <a class="src" data-lesson="91">L91</a></li>
+          <li>“I don't have time” is a limiting belief. It's really a value decision. <a class="src" data-lesson="91">L91</a></li>
+          <li>Short on time? Write E2E tests for the main paths, then add high-value unit tests if there's time left. That's what “it depends” depends on. <a class="src" data-lesson="91">L91</a></li>
+          <li>“There's a difference between not being able to do something and not doing something.” Don't test only for craftsmanship's sake. <a class="src" data-lesson="91">L91</a></li>
+        </ul>
+      </div>
+      <div class="card"><h4>Practice on your own time <a class="src" data-lesson="91">L91</a></h4>
+        <ul>
+          <li>Tire-change analogy: the customer wants the outcome, not your experiments. Use proven skills on paid work and try new techniques on your own time. <a class="src" data-lesson="91">L91</a></li>
+          <li>Roll course material into work on the <em>next</em> feature, or on an existing feature in a new branch. Then make it part of your infrastructure. <a class="src" data-lesson="91">L91</a></li>
+          <li>Try unfamiliar tools outside work too. <a class="src" data-lesson="32">L32</a></li>
+        </ul>
+      </div>
+      <div class="card"><h4>Planning is a lie <a class="src" data-lesson="86">L86</a></h4>
+        <ul>
+          <li>“You have plans. You don't have a plan.” Be ready to throw out an approach when reality or users push back. <a class="src" data-lesson="86">L86</a></li>
+          <li>Give <strong>estimates, not dates</strong>. Everything is a guess. Keep personal deadlines from turning into other people's expectations. <a class="src" data-lesson="86">L86</a></li>
+          <li>Estimation is a strategy game: look at your current pieces, their state, and where you are. There's no blanket formula. <a class="src" data-lesson="86">L86</a></li>
+          <li>Ship a <strong>walking skeleton / tracer bullet</strong> early. You learn how fast you work and your estimates get better. <a class="src" data-lesson="86">L86</a></li>
+        </ul>
+      </div>
+      <div class="card"><h4>Don't evangelise <a class="src" data-lesson="86">L86</a></h4>
+        <ul>
+          <li>Don't try to get the team to buy into every named technique. Many practitioners already use event storming or impact mapping without naming them. <a class="src" data-lesson="86">L86</a></li>
+          <li>Being value-first is about <em>you</em> making better decisions. <a class="src" data-lesson="86">L86</a></li>
+          <li>Swap some meetings for async video (Loom), with a grain of salt: “can you give back time and enrich time with meetings?” <a class="src" data-lesson="86">L86</a></li>
+        </ul>
+      </div>
+      <div class="card"><h4>Growing shop, no clear process <a class="src" data-lesson="86">L86</a></h4>
+        <ul>
+          <li>Learn thinking backwards and impact mapping first. <a class="src" data-lesson="86">L86</a></li>
+          <li>Build your decision-making: what to focus on, when things get done, how to estimate. <a class="src" data-lesson="86">L86</a></li>
+          <li>Stack theoretical guesses (architecture, platform, process) so that physical work speeds up over time. <a class="src" data-lesson="86">L86</a></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="topic" id="career--milestones" data-title="Career Milestones">
+    <h3>Career Milestones &amp; Confidence <a class="src" data-lesson="84">L84</a></h3>
+    <table class="tbl">
+      <thead><tr><th>Milestone</th><th>What changes</th><th>Src</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Mastering contracts</strong> (interfaces as roles, concretions as actors)</td><td>“When I realized how to do this and I got really good at it everything changed.” Use cases become pure core code, communication verification becomes possible, and infrastructure becomes swappable.</td><td><a class="src" data-lesson="84">L84</a></td></tr>
+        <tr><td><strong>Knowing the stereotypical architecture</strong></td><td>You can be dropped into any project, front end or back end, and know where things go.</td><td><a class="src" data-lesson="87">L87</a><a class="src" data-lesson="32">L32</a></td></tr>
+        <tr><td><strong>Knowing doings &amp; knowings</strong></td><td>“If you understand the doings and knowings, you could design anything.” This is custom abstraction design, the hardest and most important part.</td><td><a class="src" data-lesson="91">L91</a></td></tr>
+        <tr><td><strong>Replacing “it depends”</strong></td><td>You use systems thinking to say <em>what</em> it depends on: scenario → theoretical → physical → which guesses → time budget.</td><td><a class="src" data-lesson="91">L91</a></td></tr>
+        <tr><td><strong>Rite of passage</strong></td><td>Confidence comes when you're “done taking in information”. You get there by observing and evaluating everything yourself, or through a mentor's sign-off. Then you stop diverging and start converging.</td><td><a class="src" data-lesson="86">L86</a><a class="src" data-lesson="91">L91</a></td></tr>
+        <tr><td><strong>Becoming your own coach</strong></td><td>The stated goal of the course is “for everyone to become their own coach to make myself redundant.”</td><td><a class="src" data-lesson="84">L84</a></td></tr>
+      </tbody>
+    </table>
+    <div class="callout rule"><strong>Right action</strong> — At each “quantum moment” (for example, “how do I start this project?”), what you do depends on what you value right now. “Whatever you place your awareness on… is what you're going to achieve.” Value code and you'll get code. Value value and you'll get value. <a class="src" data-lesson="85">L85</a></div>
+    <div class="callout tip"><strong>Prerequisites check</strong> <span class="badge course">Course</span> — Before starting: you can build an Express API that talks to a DB, deploy it (e.g. to Heroku), and you know types vs interfaces in TS. You should also know the OOP basics: abstraction, encapsulation, inheritance, polymorphism. <a class="src" data-lesson="84">L84</a><a class="src" data-lesson="85">L85</a></div>
+  </article>
+</section>

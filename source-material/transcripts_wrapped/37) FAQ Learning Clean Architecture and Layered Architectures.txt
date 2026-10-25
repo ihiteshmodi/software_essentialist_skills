@@ -1,0 +1,10 @@
+and the layered architecture and the onion architecture and there's all sorts of names for it layered is actually a little bit different but it's the same thing
+so yeah we're gonna get our first dose of this in the best practice phase of development phases of craftship rather we're gonna get our first taste of this
+there when we need to decouple from the database because we're gonna need to just test that works we're gonna integration test that a little bit and we could
+also just move some things around so that's where we're just going to start to carve out a more of a layered architecture but then we're going to take it a
+little bit further in pattern first which is where we then insert adapter layer and that's when it becomes the hexagonal or the clean architecture is when
+there's a decoupling from core code to infrastructure code so that's how we're going to get into that and then from that architecture we're going to do a lot of
+different work with testing and with building features and just exploring that particular layout in the responsibility first phase of craftship i don't think we
+were really going to do a whole lot more with that other than by introducing an event based architecture how i'm going to learn clean architecture in ports and
+adapters and onion and all that stuff just go through the phases of craft best practice first is where we're going to get our first dose but we're going to do
+the majority of that work you can be pattern first phase

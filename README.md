@@ -13,6 +13,7 @@ It is 23 skills plus one router file (`AGENTS.md`), written to be language-agnos
 |---|---|---|
 | [`agent-skills/`](./agent-skills/) | The skill pack: `AGENTS.md` router, `.agents/skills/` (23 skills), installer, validator, trigger tests, hook templates | **Yes** |
 | [`essentials-lab/`](./essentials-lab/) | TypeScript before/after mini-projects for the 7 physical essentials (vertical slicing, decoupling, composition, testing, walking skeleton, delivery) | No, learning reference only |
+| [`source-material/`](./source-material/) | What the skills were built from: lesson transcripts, notes, the course guide HTML and its build scripts, the earlier FastAPI/GenAI skill pack, trigger-test results | No, reference only |
 
 ## Requirements
 - `bash` (macOS, Linux, or Windows via WSL / Git Bash) to run the installer.

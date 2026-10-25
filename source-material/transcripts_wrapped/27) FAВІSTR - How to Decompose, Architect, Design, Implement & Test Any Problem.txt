@@ -1,0 +1,55 @@
+What's going on crafters, Khalil here, and we are back with the final video in the metaphysics. Let's talk about faster, how to decompose, architect, design,
+implement, and test anything on any side of the step. So this is really truly piecing it all together now. So let's remember where all of this leads, right? And
+what we're trying to do in the first place. The goal here is to develop your problem decomposition skills, because this is the main skill. So the ideal
+developer workflow is great, but in reality, there's a lot of different pieces and parts to it. It can be hard to remember all of those. When we encounter
+design problems and features that we need to build, we really want the ability to just systematically approach how we're going to solve our problems. For
+example, if I was building something like a Spotify type app where I had to handle playlists reordering or reordering the tracks in the playlist, how would I
+design that feature on the backend? And how would I just walk through it? If you write down the ideal developer workflow, great. Or maybe you're dealing with
+auth on the front end. How would you think that through properly? Basically what happens is when a problem seems like it's out of your wheelhouse, because you
+haven't done that thing before, there's a tendency towards feeling like you don't have the tools, like you're not quite equipped to do that. What I want you to,
+what I want you to have is a tool where you can tell yourself, no, I actually do have the tool to do this. I know how to walk through this properly. I've done
+this before. And we're going to practice developing that skill by moving through the phases of craftship. When we get to the value first phase, the final tool
+that I can give to you is this tool called faster. And it is something that we can use to go from having a non-trivial design challenge in front of us to merely
+decomposing the problem into action steps, doing the architecture work, doing the design work, doing the implementation work, and the testing work. So the
+reason why I wanted us to have a design method was because I wanted us to have a community where we could take this tool, think things through, make sure that
+we're all on the same page, and contribute to discussions, and contribute to communication and discussion in breaking these problems down in a sort of
+consistent way. So this is faster. It's made out of six steps, and it goes find, architect, automate, specify, test, and refine. So this is the model. This is a
+relatively easy thing to remember. And this is the design method that I personally use in my head, in my mind, every single time I need to think through the
+design problem. So let me explain the way that this works. So here are each of the steps. And this is just another level of abstraction on top of the ideal
+developer workflow. This is just something that is a little bit more effective for us to think with and to work with. So let's walk through an example. I'll
+explain to you how I would think through the design of a feature. And let's say that feature is us synchronizing Notion to Google Calendar. So let's say that
+what I wanted to do was to synchronize my tasks in Google to my Google Calendar. And when I have a new Google Calendar event get created, what it does is it
+synchronizes that to my Notion. So it's like a two-way sync. So the find step is really about finding the concrete examples. And this is going to be basically
+the problem guess point in the solution guess point. So who that would be me and what would be my role? Let's say I am a business owner. Why would I need this?
+I might need this because it would actually speed me up a fair amount. And let's say I do the majority of my work from Notion. Then I would think a little bit
+about the capabilities. So we have to think about synchronizing. We have to think about being able to write into Google, being able to write into Notion. Those
+are some of the capabilities that need to happen. There's also updates. Things like this need to float to the surface as I begin to think through the problem.
+Then as I get into the solution guess point, I would actually begin to think through some features and some concrete stories. So I might actually sit down and
+write out some stories, some actual experiences of how I would intend to use this. And then I would document the acceptance criteria, get some scenarios going,
+and then pass in some actual concrete examples. Once I have those concrete examples, I'm ready to move to the next step, which is the architect step. And here's
+where I need to determine the patterns. We're going to use any new components, the testing strategy. And if we already have an existing architecture and a
+testing strategy and well-established patterns, then this step here is actually really quite easy, but it's good to have a bit of a checklist. Then I would
+create a broad stroke architecture of what it is I'm going to build. And finally, and then I could start to think about actually building this out. Now, when we
+get to the automate step, this could be a little bit different for everyone, depending on where you are. If it's a new project, I definitely want to think about
+setting up that initial test infrastructure. If it's existing and we have none, that's another thing to think about. Ultimately, this is just about framing your
+mind to think test infrastructure. What are we going to do here in terms of making sure that this thing works and being able to have that work potentially in a
+deployment pipeline? So I want to get very clear ahead of time on how I'm going to test my feature. This is one of the first things I do before I even write any
+code. Think backwards, start at the end, and I define the success criteria. From there, we get to practice specify test refine. And this is the exact same thing
+as red green refactor. If you're familiar with TDD, if you're not, we will be talking about TDD in the best practice first phase of craftship. But again, I'm
+going to start with that outer loop test, and this is going to have the acceptance criteria. One of the main things that we needed from the theoretical aspect
+of solving the problem, we're going to take that, turn that into an outer test, and then move inwards with that test. And we're going to do that a number of
+times, and we're going to practice end-flooping coding inwards and inwards. And this is fundamentally how I would think through the design of how to build a new
+feature. I'm going to walk through everything that actually matters from the theoretical to the physical. So this is a lot. I admittedly understand that we've
+covered so much content to get to this point right here, right? The majority of this stuff being theoretical content. In order to frame your mind with some
+mental models that we're going to use and build on and refine on in the phases of craftship. However, I think it's quite good that we've put this stuff here for
+now, because now you have clarity on the ideas, and you can always watch these videos when you need to understand at a high level what those ideas are. We're
+going to be building on each of these, and potentially later on in the future, we might move these videos to live somewhere else. But I just want to express
+what we now have. We now have a design method that integrates the four pillars. That is design, testing, architecture, and strategy. And we have a single to
+encapsulate and abstract that entire thing. And that is actually a momentous thing, building all of that up from nothing to something here. So yes, we covered a
+hell of a lot in all of these modules in the metaphysics. What you're going to see next is a number of guides that you can take a look at that will give you
+some more high level clarity on common questions, roadmaps that you might have questions on and want to figure out how you're going to learn this potential
+particular topic. So in this video, we covered faster at a high level, we talked about why we're using you what it's for, how using this encapsulates and
+actually helps us implement the four pillars of scalable code as a very abstract design method. And I am looking forward to you going through the phases of
+craft ship building up your skills with each of the 12 essentials to get to the point where you can finally use this tool. So with that being said, we're going
+to leave the video right here. And that's going to do it for the majority of the videos in the metaphysics. So I'll see you in the next section. And as always,
+two minutes straight.

@@ -1,0 +1,55 @@
+What is going on crafters? Khalil here and in this video we're going to talk about metaphysics and mental models. Let's dive into it. So what comes up in your
+mind when you hear or in this case read this word dog? Something popped up in your mind didn't it? And then what do you imagine when you hear and read this
+word? Red. This one's a little bit cheeky. That's not red. So something is popping up into your mind and this is an internal representation. Now why does this
+matter? This actually matters a lot because you're a software developer and so much of what you're doing as a software developer is creating internal
+representations not only for yourself to understand but for other developers to understand when they look at your code. So this is a huge part about being a
+good developer. It means that you're also an abstraction designer. You are someone who is creating and using mental models. So we need to make sure we
+understand mental models and just how important this actually is. So in this video we're going to cover metaphysics, mental models and how they affect the way
+that you write code. We're going to learn the key to excellent mental models and we are going to learn how we'll develop these mental models that are going to
+give us the most success in the program. So what is the metaphysics? Perhaps you've heard me say this a couple of times already. The metaphysics, let's debunk
+this. It's just the branch of philosophy that helps us define reality and our understanding of it. So this is really cause and effect. When you kick the ball,
+it moves. The reality is that the brain just loves to try to make sense of things. This is called what? And what is this? And what is this? And perhaps what is
+this? Water. We don't really do all that well with uncertainty. The subconscious part of the mind, which is about 90% of it, is responsible for holding these
+maps of meaning, these pieces of understanding the world and these mental models that help us interpret reality. And that's what they are. They are
+simplifications of the world. They help us discover and understand what it is we need to do in the future so that we don't really have to think these things
+through anymore. Hopefully you're understanding how important it is for you as a developer to take ownership of how this subconscious part of your mind is
+programmed. Because whatever it was you thought about earlier on when I called out dog or called out red, I guarantee those are not things you consciously said,
+you know what? I can think about this one dog I saw in this meme once when I think about the word dog. Right? So we want to be aware of this because when you're
+a software developer, you are working with your own mental models and your own interpretations of reality. And those things could be good or bad. For example,
+if there was a graphic designer that just wanted to have fun and just do their art, their own particular style, and they realized that no one was buying their
+art, probably means that they're working from some sort of mental model that's just not quite right. Something might be missing. And in the same way, there
+might be a coder that just wants to have fun and write code, experiment, maybe just try out new tech, but maybe they're not really sure why no one is hiring.
+Again, there's something that is missing here that needs to be filled in. And really what's going on here is the fact that a mental model is only as good as how
+close it maps to reality. If we can get beneficial outcomes from our mental models, we could think through where we are and where we want to be in those mental
+models to help us get there. Then it's a good mental model. And for a lot of us, our goal is to know how to write scalable code. And this is something I wanted
+to figure out for quite some time, but I didn't know how it worked. And that was because I was working with mental models that were just not based in reality.
+For example, one of them is this mental model that all I really need to do is focus on building out the API. I saw this in terms of, let me build this REST
+endpoint, that REST endpoint, and let me just connect the front end and connect the back end to it. That was how I saw software development fundamentally. Now
+this worked pretty well for a certain amount of time, but it got to a point where I was just making really expensive messes in my code bases. And again, this is
+because reality is not based on APIs or RESTful endpoints. Reality is much more nuanced and complex than that. And then from there, another common approach is
+to take the database or the database model first approach where, all right, let's stop thinking about the APIs. Let's think more about the data itself. So you
+might actually start out your projects or think predominantly through from a code level, what is the data in the relationships between that data? Let me start
+from that and then things will be right. Again, this is a mental model that I used to use in order to think my way through development. But again, it wasn't
+quite correct. And as a result, I often ended up with code that wasn't scalable as well. There's a whole slew of these different conceptual ways we can think
+about software development and how we should work with respect to our goals. And I actually call these the phases of craftship. On the code first level, the
+thinking is predominantly about code. And then we move towards best practices and then towards patterns and then this level called responsibility first. And
+then finally, we get towards what is most valuable. Now, don't worry about all these little pieces and parts just now. We're going to get to this in the course.
+I just really want you to take home the idea right now that good mental models are based in reality and they will help you get the outcomes you want if they are
+really closely aligned. And to achieve this, it means we're going to have to seek a level of first principles clear. And if we could develop these, you'll have
+the ability to access something I call quantum moments, which are moments in time that are a little bit more important than others. But if you take the correct
+action or right action, you'll end up with some really good results. For example, at the start of a project is often one of the most important parts. We can
+either go down a path that's going to lead us to good outcomes, or we could go down a path that's going to lead us towards less desirable ones. Now, if you're
+thinking from a code first level, you might take the approach of just designing things out from the database first. And this might lead us in a direction, as I
+said before, that isn't ideal. Versus if you're operating through a level of consciousness that is more based on value and you have more clarity on what is
+actually valuable because you have more clarity on the way reality works and how software is intertwined in it. Then you might start off with some other
+techniques that are going to lead us more towards what it is that we actually want, which is of course, scalable code. So the key to all of this is we need to
+ask some essential questions. Just like I was asking you questions earlier, delivering some prompts earlier, getting you to think about dog or the color red. We
+need to dig into the database that is your subconscious mind and pluck through, reprogram, and reorient mental models around the software development, scalable
+code, your role as a developer, how we do this well. The reality is this stuff normally takes a long time to learn in practice. And my story is that this did
+take me quite a fair amount of time to learn and practice. But I'm here with you today after going through this essentialism process of taking in as much
+content as I possibly could, playing with it, practicing it, talking to the experts, seeing what works and seeing what doesn't work. And now I'm here with you
+today to share with you these internal representations that I think are going to lead you towards the outcomes you're looking for. So in this video, we covered
+a lot. We talked about mental models, the metaphysics, and ultimately the most important thing is I want you to have first principles clarity on some of the
+foundational questions around software development and what your role is as a developer so that you can develop the mental models that are going to lead you
+towards the outcomes you want. So that's going to do it for this video. I'm going to leave it here for now and I'll see you in the next one. As always,
+Timaster.

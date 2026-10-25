@@ -1,0 +1,72 @@
+What's going on crafters, Khalil here and today we're going to talk about how to defeat overwhelm. And namely we're going to do that by working backwards and
+using a technique called program by wishful thinking. Okay, so when you start to get into some of your next challenges here, I can almost guarantee this because
+this happened to me. This happened to the software essentialist mentorship students, and this should just happen for everybody. You're likely to run into a
+little bit of some challenge. And the challenge is you might be experiencing some anxiety and overwhelm. Maybe you don't really know where to start and you just
+have a lack of clarity on how to just kick off your next assignments. So why might this be the case? Well, the reason is because you just might not really know
+how you're going to make the thing you need to make work. And this is why I say that you should start at the end. This is why I'm often recommending this. It's
+just a core part of the software essentialism philosophy is to just start at the end. Because when we start at the end, we get very clear on how something could
+work. Because there are less paths for you to take in order for you to move from the end to where you currently are. Versus if you're starting from where you
+currently are, it's like really hard for you to maneuver towards a vague idea of what the end solution is. Vagueness does not compile. So we want to avoid this
+vagueness and we want to get as clear as possible about the solution as we can. So that it's very easy for us to just get in there and get in flow and just do
+the work. So what do I mean? Let me look at an example here. Well, this is one you're going to have to do shortly. And this is the password validator example.
+So what you need to do is validate some passwords that are going to be incoming. And there's some rules here, like making sure that passwords are between five
+and 15 characters, so on and so forth. However, there's this line here that I've circled in red because this one specifically is a little bit different from
+anything else you've been asked to do so far. This one specifically is asking you to do a little bit of API design. It's asking you to design out the shape of
+an object that's going to come back. Now you can make this happen, of course, but it might be a little bit challenging for you to do this going forwards because
+anytime you're being asked to do API design, you want to remember that it's really important that you design an API that is easily used by yourself, by other
+developers that's understandable and it's not painful. So every single time that you're writing code or you're organizing your project or test scripts, pretty
+much anything you're doing in your code base is you designing an API for someone else to use. This is a massive, massive mindset shift because it forces you to
+place an extreme amount of awareness on the actions you're taking and what it is you're doing and asking yourself, is this clear enough for someone else to be
+able to execute on their tasks as well? Are they going to hate using this API? Are they going to get confused? It forces you to be very empathetic about the
+other people who might be using your code and yourself as well, because if you don't like the API that you've designed, well, you're not going to want to use
+it. And that's a path of flow and the path of least resistance. You're going to always want to take the easiest way out and people are going to find ways to
+mitigate using your abstractions to circumvent them if they find them not pleasurable to use. So with that being said, the solution here is to start at the end.
+Now, if you remember the technique here is called arrange act and assert, and this is how we should be structuring out our test code. What you want to do here
+is start at the assert. So what I've done is I've taken this pretty much this last example here, the most complex one and actually just begun by just
+structuring up that object that they're talking about. They're saying it needs to be an object containing a boolean result. First thing I did was okay, cool. A
+boolean results. And it has to have an errors key that when provided it with an invalid password, contains an error message. And when I first did that, I wrote
+like, okay, error key right there. But then I continued reading and it said, contains an error message or type for all errors in occurrence. There could be
+multiple errors at a single time. Ah, okay. So then that told me I need to switch this to an array and actually nest those things in here. So just by reading
+this out and starting at the end and then getting very clear on how I will verify this. And you can see what we're doing here is we're just using the same form
+of subject verification that we're going to be using in this section in general, the stateless level, which is, um, it's result verification. You can see we're
+doing that here. Starting from this allowed me to get very, very clear on what needs to be done. And I have pretty much the hardest part already ideated out.
+And to me, this looks good. And I feel like I would actually benefit from this API and I feel like others would also benefit from this API as well. And this
+technique is sometimes referred to as programming by wishful thinking because none of this exists. And I didn't actually do this upfront with the faster design
+process. When you're working at the stateless level, because the problems are not that complex, a lot of the times, as I've mentioned before, you could do them
+in your mind and that's okay. And the way to do them in your mind, at least to do them on the fly and in front of you is to use this programming by wishful
+thinking technique, which really just means imagine it in front of you, do it piece by piece and just kind of consider that it already exists, even though it
+won't compile, even though it's not quite right. Just what if it was real? Think about that. And this allows you to feel out in real time, the design of the API
+you're creating. And this is super powerful because you can get really high developer experience right off the bat. And it creates a really fast feedback.
+Because if you don't like what you're doing right here, you kind of get a sense of that right away. And you don't have to wait 10, 15 minutes to try to feel it
+out. And, and you don't have to wait 10, 15 minutes, you know, you trying to do the first parts, doing the arranged part and then the act part. And then you get
+down to the assert and you realize, oh, this is not even going to work anyways. By starting at the end, you get a sense of how this is going to work and you get
+the API in front of you. This is why I also do not recommend you just copy someone else's utility classes because we're going to get to this in some of the
+other modules, but there's something called the result class that we'll use to get a sort of functional error handling phenomenon going on. There's a value
+object that we're also going to explore. We're going to have to talk about entities. Some of these other objects and common classes that we'll use very often,
+you could just go ahead and copy the stuff that I've done on other projects or from my blog, or you can use this emergent design process and actually carve out
+an API that works for your brain that you like, that you know you're going to use right in front of you. Because for example, this result class here that we're
+going to get into, historically, I've seen developers go and copy this straight from one of my projects on GitHub and complaining, Hey, why don't we do it this
+way? It's kind of annoying. I don't really like it. Could we do it this way instead? My answer to that is don't copy mine, just do your own. And if you're using
+this emergent design process, it's going to be very easy for you to do your own. And you're going to be able to make it as minimal as you need when you're
+feedback looping through it. So that's kind of the brilliant aspect of why it's so good to use TDD or why it's great to use the faster framework to design these
+utilities when you need them, because you get to do it safely and iteratively. So another benefit from starting at the end is that you get more done faster. And
+the reason is because you can strain down all the possible ways that you could actually make this thing work. And you do that right at the start. This means
+that you have a lot less decision fatigue, you spend a lot less time kind of refining and refactoring this design that sure you want it to emerge. But if you
+start with the hardest problem, you could just have that figured out from the start. And that's kind of what I've done here with this example. And I would
+recommend you do Moodle forward as well. And then finally, you've exposed design flaws immediately. So yeah, instead of you spending time going ahead and
+carving out all these new things that you probably won't really need, begin by clarifying how you're going to verify. And this is going to be super important as
+we get to the other guest points, because some of the other guest points, you're not going to be able to use this form of subject verification that we've been
+exploring so far called result verification. You're going to have to use some of the other ones. And this forces you to really understand how your designs are
+set up and really understand the collaborations between the abstractions that you're going to need to utilize in your designs. This is what I mean when I say
+that test-driven development and just using tests in general is going to teach you so much about object-oriented design, because you're going to see how these
+relationships work. And so much of design is just structuring out relationships properly. So after you've done the last part, which is for you to start at the
+end, program by wishful thinking and arrange backwards, well, you just go ahead and do that. You do the other parts. So you act and then arrange. And just look
+at that. Imagine if I started from the beginning, I probably would have been feeling around here a lot of cognitive, just not niceness. Like, how am I going to
+make this work really? Because while the API is not really shown here, right? See what we did here is where we got very clear on this return object right away.
+We can actually see it in front of us. It's not abstracted away like this is because with this, you can't really read what it is you're trying to say. We just
+built out the object right here at the start. And then that found its way into the abstracted encapsulated validate function here that I could just come up with
+and be like, yeah, okay, well, it's just going to return an object like that. And since we already have these things, we don't really need to have the object
+splayed out here either. So that is the beauty of arranging and acting and asserting backwards and programming by wishful thinking. It gives you this ability to
+abstract things away. And the way that I'm going to summarize this all is a couple of design principles to remember here is think backwards, start at the end.
+And I like this one, clarify how you'll verify. So with that said, I'm going to leave it there. Go ahead and move on to the next module. And I'll see you in the
+next ones. Always to master it.

@@ -1,0 +1,74 @@
+What's up crafters, Khalil here. And in this video, we're going to talk about the feedback loop, guesses, and the guess points. So let's think about a very
+basic feature here. Just registration, just signing up, registering. Maybe there's a loading spinner when you're waiting for the page to finish loading. And
+then if it successfully went through, then you end up on an onboarding page. Seems pretty basic and simple, right? Realistically, there is a lot going on behind
+the scenes here in this work. If we really walk through all of the work that needs to happen, let's say, just on the front end, let's just consider the front
+end for now. We have to present the form. We have to maintain the state of the form. We have to do things like validating it, marshalling the data, making a
+request, displaying the spinner, making sure that the spinner works properly, presenting errors. There's all sorts of stuff that we have to do here. And in
+reality, all of these things would eventually end up being acceptance criteria. Things that we need to ensure are actually working. And we want to feel
+confident about that in order to feel confident in our code. Now, the reality of that is that we're going to make a lot more mistakes than we will successes.
+That means it is way more likely for you to try to implement this stuff and get it wrong a number of times. We're going to introduce bugs. We're going to
+introduce errors. We're going to implement the requirements a little bit off. We're going to run into some snags with our tools. We're going to have some silly
+stuff going on. And that is just the name of the game. So consider this. Everything that we do in software development is one big guess. We don't actually fully
+know if the edge cases are going to work. We don't actually know if our API calls will, in fact, reach the backend. We don't even know if this is something that
+the user actually is going to use. Everything we're doing is one big tremendous guess. And the way that we deal with this guess is the metaphysical essential I
+call feedback. So in this video, we're going to cover what the feedback loop is and why it's so important. And then we're going to also talk about how we can
+use something called the guess points to practice the feedback loop. And this will make it a lot easier for us to solve problems and implement your guesses on
+any side of this. What are feedback loops in the first place? You know what feedback loops are because every single time you've tried to do something, you
+failed at it, you learned, and then you refined, and then you tried it again. And that's what we refer to as the three ways. It's feed forward, feedback, and
+refinement. You're going to make your guess, and then you're going to make a better guess again. And this idea is foundational to many different movements in
+software development throughout the years. You're going to find this everywhere you look when we're referring to the software development lifestyle. This is why
+it is so imperative that we clarify things before we build them. This is why it's so imperative that we write tests. This is why it's so imperative that we get
+feedback in terms of if we're even writing the correct thing in front of us. If the users actually are using the software, if the users are even using our code
+in the ways that we want, it's always been a guessing game. Now, there are some challenges that we will run into when we have to implement guesses. The first
+challenge is when we don't even know what guesses we're making. For example, if you are a front-end developer and you're what we refer to as a code-first
+developer, meaning you primarily think in terms of code and solving problems from code, you probably haven't yet been aware of those concepts from the
+abstraction prism. And you're probably also not quite aware of how to organize your code properly either. You might not be aware of the concept of abstraction
+layers, which we talked about in the abstraction video. And those abstraction layers are fundamentally buckets for where we're going to dump our abstractions as
+we're coding. Those become areas that we use to implement our guesses as well. The second thing is when we don't know how to validate a guess. We don't know how
+to test things that we want to test. So if you wanted to test a feature in particular, and perhaps the only way that a lot of devs go about writing tests for
+features is to test your entire application as a black box to write end-to-end tests. If you wanted to test in more depth and more specifically, we have to
+learn methods for doing that. And there is an essential that I'm going to introduce to you called subject or system verification, which is going to help us with
+this. But ultimately, this is a major problem that holds a lot of developers back, just not knowing how to validate the guesses that they're making. And then
+the third thing is when we're not using tight enough feedback loops. We're not getting the answers to our guesses very early. We're getting the answers to them
+quite late. What I mean by this is you might be in the position where you're just writing code and saving and then waiting for it to compile and then taking a
+look at it to see if it's right. And this could be very time consuming and costly. And not only that, but over time, if this is the only way that we could
+validate that our code works properly by manually testing the features, this does not breed a whole lot of confidence because as we change and add new things
+and new developers onto the code base, means that all that work has to continually get done. And it will only take more and more time for it to get done. So all
+of this is a great argument for why we need tests, because the first principles here, the foundational thing I'm telling you is that we are making guesses. And
+the only way for us to maintainably make more and more guesses, because when we implement a feature, that's a guess, is we need to make sure we're covering that
+ground with tests. So to make this easier, the best mental model I have for this in order to know what the guesses are, where to test things, how to test
+things, the guess points. Now, we've already referred to this as the value creation system earlier on in the general mental models. But now let's take another
+look at this from more of a systems thinking point of view that is going to help us with thinking through testing. If I'm to think through the theoretical
+guesses, what we're dealing with here is we have the problem, solution, and architecture guess points. If we have to think through the theoretical aspect of
+abstraction, what we're really thinking through are the theoretical guesses that we're making. And I break it down into these systems specifically, the problem,
+the solution, and the architecture systems. And inside of those systems, we have smaller ones that integrate and incorporate these aspects of abstraction and
+move us closer towards code. For example, in the problem guess point, the thing we're most concerned with figuring out is what is the vision, what's the role,
+goal, and what are the capabilities? What should someone be able to now do with the thing that we want to build? And that is used as an input, which takes us to
+the solution guess point. So hopefully you can see that this is a way to apply everything that we've learned from abstraction and everything that we've learned
+from the feedback loop to create a sort of systems thinking problem decomposition system for ourselves. And as we move from the theoretical into the physical,
+past the architecture guess point, we can start to think through how we are going to implement things in code. We move into the physical one, and that contains
+the guess points like the incoming adapter system applications, stateful domain modeling. Each of these guess points have their own questions that they're
+asking, and we want to find answers to those questions. And we're going to use tests for the majority of these. And the really awesome thing about this
+technique here is this makes problem decomposition very straightforward. We now have a way of describing how to break down problems, how to decompose them. And
+with a consistent language for communication, even just within this community, it's going to improve the way that we can think through and break down problems.
+And we can all make sure that we're on the same page with things because it's just systems thinking and it's just inputs and outputs. Now, we're not going to
+use this immediately, this technique of thinking through problems using guess points and systems thinking and decomposing problems in these small systems. We're
+going to get there, but it's a bit much for us to do immediately. We first need to move up the phases of craftship. We need to get some experience with some
+other things. But I do want you to be aware of this so that you know where we're going, because when we get to the value first phase of craftship, this is
+primarily how we're going to be thinking about decomposing problems in these guess points. Now, one question I expect is how do you know what the physical guess
+points are? Where exactly do those come from? The guess points, this is all just heuristics for the most part. However, I found this to be pretty helpful for me
+in terms of decomposing problems and thinking them through. However, one place I would say that they all come from is the stereotypical architecture, which we
+are going to get more acquainted with in the responsibility first phase. But that also takes us into another question, which is, will this work on the front end
+as well? And the answer to that is yes, of course. And we will cover the front end patterns in particular in the pattern first phase. And then with those
+patterns shared and known, everything's going to make a lot more sense when we get to responsibility first. And then, of course, when we get to value first,
+we're going to return to thinking our problems through using the guess points. One other question here is, are there more guess points or is that it? Again, as
+I said, this is a way to think through how I decompose these problems. There very well could be more systems. You very well could be working on a different sort
+of problem decomposition system layout. And there perhaps are more systems as well. For example, if we are to think about the code review process, that's
+definitely a system that's going to live in there somewhere. And that's going to have its own set of inputs, outputs, models, processes, environments as well.
+So fundamentally, systems thinking is a tool for us to decompose systems at a meta level. And once we have those clear and understood, we could use those to
+communicate a consistent approach for us all to understand and make sense of the problems we're trying to decompose. So what did we cover here? We talked about
+the feedback loop. We talked about the guess points. We learned that every single thing we're doing in software development is a guess. There's a extremely high
+likelihood that we are going to get our guesses wrong. So what do we need to do? We need to use the feedback loop. And one way for us to use the feedback loop
+as software developers is for us to use this thing called the guess points. And I showed you how that worked. And I showed you some of the guesses that we're
+making. And we're going to get into that in a lot more detail, a lot more depth in the course. But with all that said, we could leave the video right here for
+now. That's going to do it. I'll see you in the next one. And as always, to Mastery. Mastery.

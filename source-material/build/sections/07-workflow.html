@@ -1,0 +1,780 @@
+<section id="workflow" class="doc-section" data-title="FA²STR &amp; Workflow">
+  <h2>FA²STR, Guess Points &amp; The Ideal Developer Workflow</h2>
+  <p class="lede">Three tools fit together. <strong>FA²STR</strong> is the design method you run on any problem. The <strong>guess points</strong> tell you which level you are testing at. The <strong>ideal developer workflow</strong> orders the work from theoretical clarity to a deployed feature. The workflow is the same for an MVP and for a mature product; only the effort per step changes. <a class="src" data-lesson="27">L27</a> <a class="src" data-lesson="26">L26</a> <a class="src" data-lesson="40">L40</a></p>
+
+  <div class="cards">
+    <div class="card"><h4>FA²STR</h4><p>Find → Architect → Automate → Specify → Test → Refine. An abstraction over the ideal developer workflow that is easier to remember. It trains the main skill, <strong>problem decomposition</strong>. <a class="src" data-lesson="27">L27</a> <a href="#workflow--fa2str">↓</a></p></div>
+    <div class="card"><h4>Guess points / test levels</h4><p>Stateless (1), stateful (2), application (3), outgoing adapter (4), system (5), incoming adapter (6). “It is just all inputs and outputs… It's feature decomposition.” <a class="src" data-lesson="81">L81</a> <a href="#workflow--guess-points">↓</a></p></div>
+    <div class="card"><h4>Ideal developer workflow</h4><p>Clarify theoretical guesses → broad-stroke architecture → walking skeleton → feature work with outer-loop and inner-loop tests. Based on the GOOS double loop. <a class="src" data-lesson="26">L26</a> <a class="src" data-lesson="87">L87</a> <a href="#workflow--ideal-workflow">↓</a></p></div>
+  </div>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="workflow--fa2str" data-title="FA²STR: The Design Method">
+    <h3>FA²STR: The Design Method <a class="src" data-lesson="27">L27</a> <a class="src" data-lesson="52">L52</a></h3>
+
+    <div class="callout def"><strong>Definition</strong>
+      <p>A six-step design method: <strong>F</strong>ind, <strong>A</strong>rchitect, <strong>A</strong>utomate, <strong>S</strong>pecify, <strong>T</strong>est, <strong>R</strong>efine. It takes you from a non-trivial design challenge to action steps covering decomposition, architecture, design, implementation and testing, on any side of the stack. It integrates the <a href="#metaphysics">four pillars</a> (design, testing, architecture, strategy) into one method. <a class="src" data-lesson="27">L27</a></p>
+    </div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 960 272" role="img" aria-label="FA²STR pipeline: Find, Architect, Automate form upfront design; Specify, Test, Refine form emergent design with a loop back to Specify, and a dashed loop back to Find one level down">
+        <defs>
+          <marker id="wf-arrow-fa2str" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+          <marker id="wf-arrow-fa2str-loop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent-2)"/></marker>
+        </defs>
+        <text x="246" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">UPFRONT design (theoretical) · in your head at level 1, on paper above</text>
+        <path d="M20,44 L20,32 L472,32 L472,44" fill="none" stroke="var(--accent)" stroke-width="2"/>
+        <text x="716" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent-2)">EMERGENT design (physical) · red → green → refactor</text>
+        <path d="M490,44 L490,32 L942,32 L942,44" fill="none" stroke="var(--accent-2)" stroke-width="2"/>
+
+        <rect x="20" y="52" width="140" height="58" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <rect x="176" y="52" width="140" height="58" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <rect x="332" y="52" width="140" height="58" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <rect x="490" y="52" width="140" height="58" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <rect x="646" y="52" width="140" height="58" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <rect x="802" y="52" width="140" height="58" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="90" y="77" text-anchor="middle" font-size="15" font-weight="700" fill="var(--fg)">Find</text>
+        <text x="246" y="77" text-anchor="middle" font-size="15" font-weight="700" fill="var(--fg)">Architect</text>
+        <text x="402" y="77" text-anchor="middle" font-size="15" font-weight="700" fill="var(--fg)">Automate</text>
+        <text x="560" y="77" text-anchor="middle" font-size="15" font-weight="700" fill="var(--fg)">Specify</text>
+        <text x="716" y="77" text-anchor="middle" font-size="15" font-weight="700" fill="var(--fg)">Test</text>
+        <text x="872" y="77" text-anchor="middle" font-size="15" font-weight="700" fill="var(--fg)">Refine</text>
+        <text x="90" y="97" text-anchor="middle" font-size="11" fill="var(--fg)">concrete examples</text>
+        <text x="246" y="97" text-anchor="middle" font-size="11" fill="var(--fg)">broad-stroke design</text>
+        <text x="402" y="97" text-anchor="middle" font-size="11" fill="var(--fg)">test infrastructure</text>
+        <text x="560" y="97" text-anchor="middle" font-size="11" fill="var(--fg)">red</text>
+        <text x="716" y="97" text-anchor="middle" font-size="11" fill="var(--fg)">green</text>
+        <text x="872" y="97" text-anchor="middle" font-size="11" fill="var(--fg)">refactor</text>
+        <line x1="161" y1="81" x2="174" y2="81" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#wf-arrow-fa2str)"/>
+        <line x1="317" y1="81" x2="330" y2="81" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#wf-arrow-fa2str)"/>
+        <line x1="473" y1="81" x2="488" y2="81" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#wf-arrow-fa2str)"/>
+        <line x1="631" y1="81" x2="644" y2="81" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#wf-arrow-fa2str)"/>
+        <line x1="787" y1="81" x2="800" y2="81" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#wf-arrow-fa2str)"/>
+        <path d="M872,112 C872,140 560,140 560,114" fill="none" stroke="var(--accent-2)" stroke-width="2" marker-end="url(#wf-arrow-fa2str-loop)"/>
+        <text x="716" y="146" text-anchor="middle" font-size="11" fill="var(--fg)">next example (loop)</text>
+
+        <text x="90" y="166" text-anchor="middle" font-size="11" fill="var(--fg)">responsibilities:</text>
+        <text x="90" y="182" text-anchor="middle" font-size="11" fill="var(--fg)">doing / knowing</text>
+        <text x="90" y="198" text-anchor="middle" font-size="11" fill="var(--fg)">+ concrete examples</text>
+        <text x="90" y="214" text-anchor="middle" font-size="11" fill="var(--fg)">+ starting guess point</text>
+        <text x="246" y="166" text-anchor="middle" font-size="11" fill="var(--fg)">subject under test</text>
+        <text x="246" y="182" text-anchor="middle" font-size="11" fill="var(--fg)">patterns · components</text>
+        <text x="246" y="198" text-anchor="middle" font-size="11" fill="var(--fg)">testing strategy</text>
+        <text x="402" y="166" text-anchor="middle" font-size="11" fill="var(--fg)">test harness / scripts</text>
+        <text x="402" y="182" text-anchor="middle" font-size="11" fill="var(--fg)">runs in the pipeline</text>
+        <text x="402" y="198" text-anchor="middle" font-size="11" fill="var(--fg)">success criteria first</text>
+        <text x="560" y="166" text-anchor="middle" font-size="11" fill="var(--fg)">pick one example</text>
+        <text x="560" y="182" text-anchor="middle" font-size="11" fill="var(--fg)">write the failing test</text>
+        <text x="560" y="198" text-anchor="middle" font-size="11" fill="var(--fg)">(AAA backwards)</text>
+        <text x="716" y="166" text-anchor="middle" font-size="11" fill="var(--fg)">pass it: fake it or</text>
+        <text x="716" y="182" text-anchor="middle" font-size="11" fill="var(--fg)">obvious implementation</text>
+        <text x="716" y="198" text-anchor="middle" font-size="11" fill="var(--fg)">commit</text>
+        <text x="872" y="166" text-anchor="middle" font-size="11" fill="var(--fg)">remove duplication</text>
+        <text x="872" y="182" text-anchor="middle" font-size="11" fill="var(--fg)">(rule of three)</text>
+        <text x="872" y="198" text-anchor="middle" font-size="11" fill="var(--fg)">commit → next example</text>
+
+        <path d="M872,222 L872,244 L90,244 L90,224" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#wf-arrow-fa2str)"/>
+        <text x="480" y="264" text-anchor="middle" font-size="11" fill="var(--fg)">emergent design needs a construct that doesn't exist yet → run FA²STR again, one level down (n loops)</text>
+      </svg>
+      <figcaption><span class="badge course">Course</span> Steps and their inputs/outputs from <a class="src" data-lesson="52">L52</a>. The upfront/emergent split is from <a class="src" data-lesson="52">L52</a>, the S-T-R loop from <a class="src" data-lesson="27">L27</a>, and the dashed drill-in loop from <a class="src" data-lesson="86">L86</a>. The layout is <span class="badge copilot">Added by Copilot</span>.</figcaption>
+    </figure>
+
+    <h4>Inputs and outputs of each step</h4>
+    <table class="tbl">
+      <thead><tr><th>Step</th><th>Input</th><th>Output</th><th>Maps to</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Find</strong></td><td>Problem statement, design story, rough description or vague example</td><td>Responsibilities (<em>doing</em> / <em>knowing</em>) plus concrete examples, and the <strong>starting guess point</strong> (the system under test). At higher levels: who / role, why, capabilities, then features, stories, acceptance criteria, scenarios and examples. <a class="src" data-lesson="52">L52</a> <a class="src" data-lesson="27">L27</a></td><td>Problem + solution guess points; workflow step 1 <a class="src" data-lesson="27">L27</a></td></tr>
+        <tr><td><strong>Architect</strong></td><td>Responsibilities + examples</td><td>The subject under test (stateless → a function or static method). At higher levels: patterns, new components, the testing strategy and a broad-stroke architecture. <a class="src" data-lesson="52">L52</a> <a class="src" data-lesson="27">L27</a></td><td>Architecture guess point; workflow step 2</td></tr>
+        <tr><td><strong>Automate</strong></td><td>Responsibilities, examples, SUT</td><td>A clear picture of <em>how you will test it</em>: a test harness/scripts that also work in the deployment pipeline. Success criteria are defined before any code (“think backwards, start at the end”). <a class="src" data-lesson="52">L52</a> <a class="src" data-lesson="27">L27</a></td><td>Test infrastructure / pipeline; workflow step 3</td></tr>
+        <tr><td><strong>Specify</strong></td><td>One example</td><td>A failing test specification (<strong>red</strong>). At feature level, the first one is the outer-loop acceptance test built from the acceptance criteria. <a class="src" data-lesson="52">L52</a> <a class="src" data-lesson="27">L27</a></td><td>Red</td></tr>
+        <tr><td><strong>Test</strong></td><td>The failing spec</td><td>Test and production code using arrange-act-assert and subject verification. Pass with <em>fake it</em> or the <em>obvious implementation</em>, then commit (<strong>green</strong>). <a class="src" data-lesson="52">L52</a></td><td>Green</td></tr>
+        <tr><td><strong>Refine</strong></td><td>Passing code</td><td>Refactor, removing duplication only when you've seen it <strong>three times</strong>. Commit, line up the next test, loop back to Specify (<strong>refactor</strong>). <a class="src" data-lesson="52">L52</a></td><td>Refactor; nth looping <a class="src" data-lesson="27">L27</a></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout rule"><strong>Upfront vs emergent</strong>
+      <p><strong>Upfront</strong> = Find, Architect, Automate (theory). <strong>Emergent</strong> = Specify, Test, Refine (the physical mechanics: red-green-refactor and the three laws of TDD). They are hard to learn together, so the course drilled the emergent part first on FizzBuzz and Palindrome, then added the upfront part with the Password Validator (see <a href="#katas">Kata Walkthroughs</a>). <a class="src" data-lesson="52">L52</a> Find + Architect + Automate is “pretty much all of the upfront design we need to do”; after that comes emergent design and feature work. <a class="src" data-lesson="87">L87</a></p>
+    </div>
+
+    <h4>Why it exists</h4>
+    <ul>
+      <li><strong>The main skill is problem decomposition.</strong> The ideal developer workflow has many parts and is hard to remember. FA²STR is a more useful level of abstraction to think with. <a class="src" data-lesson="27">L27</a></li>
+      <li><strong>It works for unfamiliar problems.</strong> Faced with, say, Spotify-style playlist reordering on the backend or auth on the frontend, you can tell yourself: “No, I actually do have the tool to do this. I know how to walk through this properly.” <a class="src" data-lesson="27">L27</a></li>
+      <li><strong>A shared vocabulary</strong> lets a team or community break problems down the same way. <a class="src" data-lesson="27">L27</a></li>
+      <li>Khalil uses it “in my head every single time I need to think through a design problem.” <a class="src" data-lesson="27">L27</a> He “can't find a problem” it does not work for. <a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Phase:</strong> it's the final tool, used in the value-first phase of craftship once the essentials are in place (see <a href="#essentials-metaphysical">12 Essentials</a>). <a class="src" data-lesson="27">L27</a></li>
+    </ul>
+
+    <h4>Course worked example: Notion ↔ Google Calendar two-way sync <a class="src" data-lesson="27">L27</a></h4>
+    <p>The feature: Notion tasks sync to Google Calendar, and new Google Calendar events sync back to Notion.</p>
+    <ol class="steps">
+      <li><strong>Find</strong> — <em>who</em>: Khalil. <em>Role</em>: business owner. <em>Why</em>: it speeds him up, since he does most of his work from Notion. <em>Capabilities</em>: synchronizing, writing into Google, writing into Notion, updates. Then write stories of intended use, document acceptance criteria and scenarios, and pass in concrete examples.</li>
+      <li><strong>Architect</strong> — patterns, any new components, testing strategy, broad-stroke architecture. If the architecture, testing strategy and patterns already exist, this step is a checklist.</li>
+      <li><strong>Automate</strong> — decide how the feature will be tested and set up the infrastructure. “Think backwards, start at the end, and I define the success criteria.”</li>
+      <li><strong>Specify / Test / Refine</strong> — turn the acceptance criteria into an outer-loop acceptance test, then work inwards with red-green-refactor, loop after loop.</li>
+    </ol>
+
+    <div class="callout tip"><strong><span class="badge copilot">Added by Copilot</span> Filling in the Architect and Automate steps for this example</strong>
+      <ul>
+        <li><strong>Patterns / components:</strong> a <code>SyncTasks</code> use case, a <code>TaskSource</code> gateway (Notion API), a <code>CalendarGateway</code> (Google API), a <code>SyncLinks</code> store mapping task id → event id, and a scheduled trigger.</li>
+        <li><strong>Testing strategy:</strong> one E2E acceptance test against a test Notion workspace and a test calendar (outer loop). Use-case tests with in-memory fakes and a calendar spy (inner loop). Contract tests over the fake and real gateways (level 4).</li>
+        <li><strong>Automate:</strong> <code>npm test</code> in the commit phase, with E2E in the acceptance phase against staging (see <a href="#essentials-physical--deployment-delivery">Deployment &amp; Delivery</a>).</li>
+      </ul>
+      <p>The code for this lives in <a href="#workflow--worked-example">the worked example</a> and <a href="#workflow--ideal-workflow">the ideal workflow</a>.</p>
+    </div>
+
+    <blockquote class="quote">“The goal here is to develop your problem decomposition skills, because this is the main skill.”<cite><a class="src" data-lesson="27">L27</a></cite></blockquote>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span>
+      <ul>
+        <li><strong>Find + Architect + Automate is the spec you hand an agent:</strong> responsibilities, a table of concrete examples, the subject under test with its signature, and a runnable test command.</li>
+        <li><strong>Specify + Test are how you verify its output.</strong> Write or approve the failing test yourself, and the agent's “done” becomes a green run rather than a claim.</li>
+        <li><strong>Refine stays human-led.</strong> Agents tend to abstract too early. The rule of three is a good review filter.</li>
+      </ul>
+    </aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="workflow--fa2str-stateless" data-title="FA²STR at the Stateless Guess Point">
+    <h3>FA²STR at the Stateless Guess Point <a class="src" data-lesson="52">L52</a> <a class="src" data-lesson="51">L51</a> <a class="src" data-lesson="86">L86</a></h3>
+    <p>The stateless guess point is the first feedback-loop level: data in, data out, maybe some processing. Problems are simple enough to design in your head. The new idea at this level is <strong>awareness that the upfront work exists</strong>, even when it happens mentally. <a class="src" data-lesson="52">L52</a> <a class="src" data-lesson="86">L86</a></p>
+
+    <div class="callout def"><strong>Responsibilities: doing vs knowing</strong> (from Responsibility-Driven Design)
+      <p>Every responsibility is either a <strong>doing</strong> (an action, e.g. a <code>User</code>'s <code>setName</code>) or a <strong>knowing</strong> (knowledge implied by a rule, e.g. <code>getName</code>, or “knows passwords without a digit are invalid”). “All of your requirements ever are going to be things that are done or they're going to be things that are known.” <a class="src" data-lesson="52">L52</a></p>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L52</span> Find and Architect artifacts for the Password Validator, jotted in a notes file</figcaption>
+      <pre><code class="language-ts">// Find — responsibilities
+// Doing:
+//   - validate password
+// Knowing:
+//   - knows passwords between 5 and 15 characters long are valid
+//   - knows passwords outside 5–15 characters are not valid
+//   - knows passwords without at least one digit are not valid
+//   - ... (remaining criteria from the problem statement)
+//
+// Find — starting guess point: stateless (data in, data out)
+// Architect — subject under test: a function or static method</code></pre>
+    </figure>
+    <p>That's one doing with many knowings, and “this is really going to be the majority of the tests that we're writing.” <a class="src" data-lesson="52">L52</a></p>
+
+    <h4>Rules for each upfront step at this level</h4>
+    <ul>
+      <li><strong>Find the guess point from the problem statement.</strong> The statement hints at the system under test. Later assignments won't tell you where to start, so you find it by elimination and by mapping the statement to a subject under test. The same problem could be tackled at the end-to-end, application or stateful points. <a class="src" data-lesson="52">L52</a></li>
+      <li><strong>Know when to go to paper.</strong> “The mind can only hold up to, I think like four pieces of information at a time.” Collaborating objects exceed that, for example autosuggestion in a text editor or assigning a skin to a weapon in CS:GO. “Relationships… implies collaborations, which implies that they're going to be more complex and there's more moving parts.” Use paper, a whiteboard or the responsibility-driven design process (see <a href="#abstraction-rdd">Abstraction &amp; RDD</a>). <a class="src" data-lesson="52">L52</a></li>
+      <li><strong>Automate before code.</strong> Have “at least a picture of that… before you begin to write your code.” Sometimes it's genuinely unclear, as with cross-system integrations, web scrapers, browser automation and Chrome extensions. In the course the starter project already provides the scripts. <a class="src" data-lesson="52">L52</a></li>
+      <li><strong>Build metacognition now.</strong> Practise noticing the upfront steps on easy problems, because higher guess points will demand them on paper. <a class="src" data-lesson="52">L52</a></li>
+    </ul>
+
+    <h4>Two techniques inside Specify: AAA backwards &amp; programming by wishful thinking <a class="src" data-lesson="51">L51</a></h4>
+    <p>Overwhelm comes from starting where you are and heading toward a vague end. <strong>Start at the end</strong> instead: write the <em>assert</em>, then the <em>act</em>, then the <em>arrange</em>. While doing so, pretend the API already exists (“What if it was real?”) so you feel out its design in real time. Start with the <strong>most complex example</strong>, which settles most of the design early. “Vagueness does not compile.” <a class="src" data-lesson="51">L51</a></p>
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L51</span> Password Validator test written backwards (key names beyond <code>result</code>/<code>errors</code> and the example values were not given)</figcaption>
+      <pre><code class="language-ts">it("returns all errors for an invalid password", () =&gt; {
+  // 3. Arrange (written last)
+  const password = "...";
+
+  // 2. Act (written second) — wishful thinking: validate() doesn't exist yet
+  const output = validate(password);
+
+  // 1. Assert (written first). A first draft had a single `error` key; re-reading
+  //    "for all errors in occurrence" turned it into an array.
+  expect(output.result).toBe(false);
+  expect(output.errors).toEqual([/* an error message or type per error */]);
+});</code></pre>
+    </figure>
+    <ul>
+      <li><strong>Everything you write is an API for someone else</strong>: code, project organisation, test scripts. People “find ways to… circumvent” abstractions they don't enjoy using. <a class="src" data-lesson="51">L51</a></li>
+      <li><strong>Don't copy utility classes</strong> such as Khalil's <code>Result</code>, value object or entity classes. Students who did ended up complaining about the API. Grow your own through emergent design. <a class="src" data-lesson="51">L51</a></li>
+      <li>At the stateless level you only get <em>result verification</em>. Higher guess points need state and communication verification, which is how TDD teaches OO design: “So much of design is just structuring out relationships properly.” <a class="src" data-lesson="51">L51</a></li>
+      <li>Use the same backwards technique to design fixtures and builders at the stateful level, “treating your code as your paintbrush.” <a class="src" data-lesson="86">L86</a></li>
+    </ul>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>Jumping straight to code on problems with collaborating objects, skipping upfront design. <a class="src" data-lesson="52">L52</a></li>
+        <li>Writing code before knowing how it will be tested. <a class="src" data-lesson="52">L52</a></li>
+        <li>Refactoring before you've seen the duplication three times. <a class="src" data-lesson="52">L52</a></li>
+        <li>Starting at <em>arrange</em> and fumbling toward a vague goal, only to find at the assert that the design doesn't work. <a class="src" data-lesson="51">L51</a></li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="workflow--worked-example" data-title="Worked Example: FA²STR End to End">
+    <h3>Worked Example: FA²STR End to End <span class="badge copilot">Added by Copilot</span></h3>
+    <p>This takes one stateless piece of the course's Notion ↔ Google Calendar sync <a class="src" data-lesson="27">L27</a> and runs all six steps on it, following the inputs/outputs from <a class="src" data-lesson="52">L52</a>. The problem and code are illustrative, not from the course.</p>
+    <p><strong>Problem statement:</strong> <em>“When a Notion task is synced, decide whether it becomes a Google Calendar event and what that event looks like. Timed tasks become timed events (30 minutes unless the task has a duration). Date-only tasks become all-day events. Tasks without a date, and archived tasks, are not synced.”</em></p>
+
+    <h4>1 · Find: responsibilities + concrete examples</h4>
+    <p><strong>Doing:</strong> decide the calendar event for a task. <strong>Starting guess point:</strong> stateless, since it's data in and data out with no stored state or I/O.</p>
+    <table class="tbl">
+      <thead><tr><th>Knowing</th><th>Example input (task)</th><th>Expected output</th></tr></thead>
+      <tbody>
+        <tr><td>Knows undated tasks are not synced</td><td><code>{ title: 'Someday idea' }</code></td><td><code>{ kind: 'skip', reason: 'no-date' }</code></td></tr>
+        <tr><td>Knows archived tasks are not synced</td><td><code>{ title: 'Old plan', date: '2026-10-01', time: '09:00', archived: true }</code></td><td><code>{ kind: 'skip', reason: 'archived' }</code></td></tr>
+        <tr><td>Knows date-only tasks become all-day events</td><td><code>{ title: 'Pay invoices', date: '2026-10-02' }</code></td><td><code>allDay: true, date: '2026-10-02'</code></td></tr>
+        <tr><td>Knows timed tasks default to 30 minutes</td><td><code>{ title: 'Write newsletter', date: '2026-10-01', time: '09:00' }</code></td><td><code>start: '2026-10-01T09:00', end: '2026-10-01T09:30'</code></td></tr>
+        <tr><td>Knows a duration is respected, even past midnight (the most complex example)</td><td><code>{ title: 'Deploy window', date: '2026-10-01', time: '23:30', durationMinutes: 90 }</code></td><td><code>start: '2026-10-01T23:30', end: '2026-10-02T01:00'</code></td></tr>
+      </tbody>
+    </table>
+
+    <h4>2 · Architect: the subject under test</h4>
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> A pure function; the output shape comes from the examples table</figcaption>
+      <pre><code class="language-ts">// src/sync/toCalendarEvent.ts
+export type NotionTask = {
+  title: string;
+  date?: string;             // 'YYYY-MM-DD'
+  time?: string;             // 'HH:mm', floating local time
+  durationMinutes?: number;
+  archived?: boolean;
+};
+
+export type CalendarEvent =
+  | { summary: string; allDay: true; date: string }
+  | { summary: string; allDay: false; start: string; end: string };
+
+export type SkipReason = 'no-date' | 'archived';
+
+export type SyncDecision =
+  | { kind: 'sync'; event: CalendarEvent }
+  | { kind: 'skip'; reason: SkipReason };
+
+export function toCalendarEvent(task: NotionTask): SyncDecision {
+  throw new Error('not implemented');
+}</code></pre>
+    </figure>
+
+    <h4>3 · Automate: know how it runs before writing logic</h4>
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> Test runner and scripts (<code>package.json</code> excerpt + <code>jest.config.js</code>); CI runs <code>npm test</code> in the commit phase</figcaption>
+      <pre><code class="language-json">{
+  "scripts": {
+    "test": "jest",
+    "test:dev": "jest --watchAll"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.4.0"
+  }
+}</code></pre>
+      <pre><code class="language-js">// jest.config.js
+module.exports = { preset: 'ts-jest', testEnvironment: 'node' };</code></pre>
+    </figure>
+
+    <h4>4–5 · Specify &amp; Test: one example at a time</h4>
+    <ol class="steps">
+      <li><strong>Undated → skip</strong> — red, then <em>fake it</em>: <code>return { kind: 'skip', reason: 'no-date' }</code>. Commit.</li>
+      <li><strong>Archived → skip</strong> — red. The fake no longer holds, so add a guard. Commit. The two skip cases share a shape, so parameterize them.</li>
+      <li><strong>Date-only → all-day</strong> — red, then the obvious implementation. Commit.</li>
+      <li><strong>Timed, default 30 min</strong> and <strong>timed with duration past midnight</strong> — red, green, commit each.</li>
+    </ol>
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> The spec after five examples; each assert was written first</figcaption>
+      <pre><code class="language-ts">// src/sync/toCalendarEvent.spec.ts
+import { toCalendarEvent } from './toCalendarEvent';
+
+describe('toCalendarEvent', () =&gt; {
+  it.each([
+    [{ title: 'Someday idea' }, 'no-date'],
+    [{ title: 'Old plan', date: '2026-10-01', time: '09:00', archived: true }, 'archived'],
+  ])('knows %o is not synced (%s)', (task, reason) =&gt; {
+    expect(toCalendarEvent(task)).toEqual({ kind: 'skip', reason });
+  });
+
+  it('knows a date-only task becomes an all-day event', () =&gt; {
+    const task = { title: 'Pay invoices', date: '2026-10-02' };
+
+    const decision = toCalendarEvent(task);
+
+    expect(decision).toEqual({
+      kind: 'sync',
+      event: { summary: 'Pay invoices', allDay: true, date: '2026-10-02' },
+    });
+  });
+
+  it('knows a timed task without a duration lasts 30 minutes', () =&gt; {
+    const decision = toCalendarEvent({ title: 'Write newsletter', date: '2026-10-01', time: '09:00' });
+
+    expect(decision).toEqual({
+      kind: 'sync',
+      event: { summary: 'Write newsletter', allDay: false, start: '2026-10-01T09:00', end: '2026-10-01T09:30' },
+    });
+  });
+
+  it('knows a duration is respected, even past midnight', () =&gt; {
+    const decision = toCalendarEvent({ title: 'Deploy window', date: '2026-10-01', time: '23:30', durationMinutes: 90 });
+
+    expect(decision).toEqual({
+      kind: 'sync',
+      event: { summary: 'Deploy window', allDay: false, start: '2026-10-01T23:30', end: '2026-10-02T01:00' },
+    });
+  });
+});</code></pre>
+    </figure>
+
+    <h4>6 · Refine: duplication seen three times</h4>
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — green, but the result wrapper and the date maths repeat</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Obvious implementation after example 5</figcaption>
+          <pre><code class="language-ts">export function toCalendarEvent(task: NotionTask): SyncDecision {
+  if (task.archived) return { kind: 'skip', reason: 'archived' };
+  if (!task.date) return { kind: 'skip', reason: 'no-date' };
+  if (!task.time) {
+    return { kind: 'sync', event: { summary: task.title, allDay: true, date: task.date } };
+  }
+  if (task.durationMinutes) {
+    const end = new Date(Date.parse(`${task.date}T${task.time}:00Z`) + task.durationMinutes * 60_000);
+    return { kind: 'sync', event: { summary: task.title, allDay: false,
+      start: `${task.date}T${task.time}`, end: end.toISOString().slice(0, 16) } };
+  }
+  const end = new Date(Date.parse(`${task.date}T${task.time}:00Z`) + 30 * 60_000);
+  return { kind: 'sync', event: { summary: task.title, allDay: false,
+    start: `${task.date}T${task.time}`, end: end.toISOString().slice(0, 16) } };
+}</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — each rule reads like its knowing; tests unchanged and green</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Refactored; commit, then line up the next example</figcaption>
+          <pre><code class="language-ts">const DEFAULT_DURATION_MINUTES = 30;
+
+export function toCalendarEvent(task: NotionTask): SyncDecision {
+  if (task.archived) return skip('archived');
+  if (!task.date) return skip('no-date');
+  if (!task.time) return sync({ summary: task.title, allDay: true, date: task.date });
+
+  const start = `${task.date}T${task.time}`;
+  const end = addMinutes(start, task.durationMinutes ?? DEFAULT_DURATION_MINUTES);
+  return sync({ summary: task.title, allDay: false, start, end });
+}
+
+const skip = (reason: SkipReason): SyncDecision =&gt; ({ kind: 'skip', reason });
+const sync = (event: CalendarEvent): SyncDecision =&gt; ({ kind: 'sync', event });
+
+// Floating local time: computed as UTC so day rollover works; the adapter applies the timezone.
+function addMinutes(localDateTime: string, minutes: number): string {
+  const ms = Date.parse(`${localDateTime}:00Z`) + minutes * 60_000;
+  return new Date(ms).toISOString().slice(0, 16);
+}</code></pre>
+        </figure>
+      </div>
+    </div>
+    <p>This function is a level-1 construct. In the real feature you'd reach it by drilling in from the <code>SyncTasks</code> use case, as shown in <a href="#workflow--ideal-workflow">the ideal workflow</a>. That drill-in is the <a href="#workflow--n-loops">n-loops</a> idea. More katas using the same loop are in <a href="#katas">Kata Walkthroughs</a>.</p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="workflow--n-loops" data-title="FA²STR at Any Level: n Loops">
+    <h3>FA²STR at Any Level: n Loops <a class="src" data-lesson="86">L86</a> <a class="src" data-lesson="89">L89</a></h3>
+    <p>FA²STR is an input → output system, so the same tool works from a pure function up to an architectural problem such as designing a <strong>job queue</strong>. <a class="src" data-lesson="86">L86</a> The same system-finding works for, say, a Chrome extension: what's its incoming adapter, and what's its system-level test? <a class="src" data-lesson="89">L89</a></p>
+
+    <figure class="diagram">
+      <pre class="mermaid">flowchart LR
+  P["Problem arrives at any level"] --&gt; F["Find: responsibilities + examples"]
+  F --&gt; G["Discover the subject under test = the guess point to write the test at"]
+  G --&gt; A["Architect + Automate the infrastructure for that level"]
+  A --&gt; E["Emergent loop: Specify, Test, Refine"]
+  E --&gt; Q{"Needs a construct that doesn't exist yet?"}
+  Q --&gt;|yes| D["Run FA²STR again, one level down"]
+  D --&gt; F
+  Q --&gt;|no| U["Back up a level: the outer test passes"]</pre>
+      <figcaption><span class="badge course">Course</span> “How TDD works in the real world” drill-in process from <a class="src" data-lesson="86">L86</a>. The number of loops is <em>n</em>, not a fixed count of layers.</figcaption>
+    </figure>
+
+    <ul>
+      <li><strong>Start anywhere, then drill in.</strong> “It doesn't matter where you start. What always tends to happen. Is you need to drill in. With several. Loops.” A student, Lucas, framed it as “n number of loops” rather than an “nth layer loop.” <a class="src" data-lesson="86">L86</a></li>
+      <li><strong>Shortcuts are allowed.</strong> You don't have to test at every level. Double, triple or quadruple TDD versus one E2E level and “call it a day” depends on “the score of the game we're playing.” <a class="src" data-lesson="86">L86</a></li>
+      <li><strong>Stack theoretical guesses.</strong> An extendable architecture or platform lets you skip the Architect step for infrastructure, so physical guesses go faster. That's the case for strategic monoliths and well-designed platforms. <a class="src" data-lesson="86">L86</a> <a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Level 3 Find is the hard one.</strong> See <a href="#workflow--guess-points">why level 3 is hard</a>. <a class="src" data-lesson="89">L89</a></li>
+    </ul>
+    <p>On AI, Khalil's view is that it “crunches down and minimizes” some of the state-change and decision-making logic you'd otherwise write. The skill left is knowing the inputs and outputs you plug it into and the goalpost, and it still has to connect to the rest of the process model. <a class="src" data-lesson="89">L89</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="workflow--guess-points" data-title="Guess Points as Test Levels">
+    <h3>Guess Points as Test Levels <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="89">L89</a></h3>
+    <p>The physical guess points exist “to carve out your ability to write tests strategically.” <a class="src" data-lesson="87">L87</a> They come from systems thinking plus vertical slicing, so each level is an input → output system with its own subject under test. <a class="src" data-lesson="81">L81</a> The theoretical guess points (problem, solution, architecture) are mapped in <a href="#essentials-metaphysical--guess-points">12 Essentials I</a>.</p>
+
+    <table class="tbl">
+      <thead><tr><th>Level</th><th>Guess point</th><th>What's verified</th><th>Typical test</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td>Stateless</td><td>Data transformation. <strong>Result verification</strong> only: data in, data out.</td><td>Unit test on a pure function or static method; concrete examples, then parameterized</td><td>FizzBuzz, Palindrome, Password Validator; utilities and validation. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="52">L52</a> <a class="src" data-lesson="81">L81</a></td></tr>
+        <tr><td><strong>2</strong></td><td>Stateful</td><td>One state machine: invariants, valid and invalid transitions. <strong>State verification</strong> (state “loiters”, so you inquire into it).</td><td>Unit tests on entities / value objects, with fixtures and builders for initial state</td><td>“Problems are stateful.” Encapsulation protects how the model changes. <a class="src" data-lesson="86">L86</a> <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="89">L89</a></td></tr>
+        <tr><td><strong>3</strong></td><td>Application</td><td>Use cases: coordination and control, indirect inputs/outputs, time, transactions. A mixture, <strong>adding communication verification</strong>, the only level where you do it.</td><td>High-value unit test / use-case test with in-memory repos and handwritten spies</td><td><strong>Developer boundary.</strong> ~80% of the work. Khalil's favorite guess point. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="89">L89</a></td></tr>
+        <tr><td><strong>4</strong></td><td>Outgoing adapter</td><td>That external infra (DB, APIs, clock) behaves as the contract says, so fakes stay in <strong>parity</strong> with real implementations.</td><td>Contract / integration test (<code>.ispec.ts</code>) looping one spec over every implementation</td><td>“You're testing the contract, not the implementation.” <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="89">L89</a></td></tr>
+        <tr><td><strong>5</strong></td><td>System (end to end)</td><td>The whole system as a black box. <strong>Result verification</strong> only; other types here are “bad practice.”</td><td>E2E acceptance test: Gherkin → executable spec → protocol driver → system. Happy path + 1–2 sad paths</td><td><strong>Customer boundary.</strong> The one acceptance test per feature. <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="89">L89</a></td></tr>
+        <tr><td><strong>6</strong></td><td>Incoming adapter</td><td>Routes and allowed request shapes haven't changed.</td><td>API / driver test</td><td>Matters less on the frontend. <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="87">L87</a></td></tr>
+        <tr><td>—</td><td>Execution</td><td>After users use it: “are we getting the KPIs we want?” (usage, sales…)</td><td>Metrics, not tests</td><td>Closes the value-creation feedback loop. <a class="src" data-lesson="81">L81</a></td></tr>
+      </tbody>
+    </table>
+    <p>The verification mapping is “not strict”; these are the predominant types. <a class="src" data-lesson="87">L87</a> L89 also mentions a “level 7” in passing, near deployments and feature flags, without defining it. <a class="src" data-lesson="89">L89</a> Techniques for each level (spies, builders, contract tests) are in <a href="#testing">Testing</a>, and verification types in <a href="#essentials-physical--subject-system-verification">Subject/System Verification</a>.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 960 412" role="img" aria-label="Test levels on the stereotypical architecture: level 5 system on top; level 6 incoming adapter, level 3 application and level 4 outgoing adapter in the middle; level 2 stateful and level 1 stateless below; outside-in for the workflow, inside-out for the course order">
+        <defs>
+          <marker id="wf-arrow-ladder-out" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker>
+          <marker id="wf-arrow-ladder-in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent-2)"/></marker>
+        </defs>
+        <rect x="200" y="34" width="560" height="54" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="480" y="56" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">Level 5 · System / end-to-end</text>
+        <text x="480" y="76" text-anchor="middle" font-size="11" fill="var(--fg)">customer boundary · one acceptance test per feature · result verification only</text>
+
+        <rect x="200" y="104" width="170" height="84" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)" stroke-dasharray="6 4"/>
+        <text x="285" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">Level 6 · Incoming adapter</text>
+        <text x="285" y="148" text-anchor="middle" font-size="11" fill="var(--fg)">API / driver tests</text>
+        <text x="285" y="166" text-anchor="middle" font-size="11" fill="var(--fg)">routes &amp; request shapes</text>
+
+        <rect x="385" y="104" width="190" height="84" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="3"/>
+        <text x="480" y="124" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Level 3 · Application</text>
+        <text x="480" y="142" text-anchor="middle" font-size="10" fill="var(--fg)">use-case tests · developer boundary</text>
+        <text x="480" y="158" text-anchor="middle" font-size="10" fill="var(--fg)">result + state + communication</text>
+        <text x="480" y="177" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">~80% of the work</text>
+
+        <rect x="590" y="104" width="170" height="84" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)" stroke-dasharray="6 4"/>
+        <text x="675" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">Level 4 · Outgoing adapter</text>
+        <text x="675" y="148" text-anchor="middle" font-size="11" fill="var(--fg)">contract tests: one spec,</text>
+        <text x="675" y="166" text-anchor="middle" font-size="11" fill="var(--fg)">every implementation</text>
+
+        <text x="285" y="210" text-anchor="middle" font-size="11" fill="var(--fg)">infra edge (slow, few tests)</text>
+        <text x="675" y="210" text-anchor="middle" font-size="11" fill="var(--fg)">infra edge (slow, few tests)</text>
+
+        <rect x="385" y="198" width="190" height="54" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="480" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Level 2 · Stateful</text>
+        <text x="480" y="240" text-anchor="middle" font-size="11" fill="var(--fg)">state machines · state verification</text>
+
+        <rect x="385" y="262" width="190" height="54" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="480" y="284" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Level 1 · Stateless</text>
+        <text x="480" y="304" text-anchor="middle" font-size="11" fill="var(--fg)">pure functions · result verification</text>
+
+        <path d="M385,326 L385,336 L575,336 L575,326" fill="none" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="480" y="354" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fg)">core code: pure, no I/O, fast · exponentially more tests here</text>
+
+        <line x1="170" y1="40" x2="170" y2="310" stroke="var(--accent)" stroke-width="2" marker-end="url(#wf-arrow-ladder-out)"/>
+        <text transform="translate(156,175) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">ideal workflow: outside-in</text>
+        <line x1="790" y1="310" x2="790" y2="40" stroke="var(--accent-2)" stroke-width="2" marker-end="url(#wf-arrow-ladder-in)"/>
+        <text transform="translate(810,175) rotate(-90)" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent-2)">course teaching order: inside-out</text>
+
+        <rect x="200" y="368" width="560" height="36" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-dasharray="6 4"/>
+        <text x="480" y="391" text-anchor="middle" font-size="11" fill="var(--fg)">after deploy → Execution guess point: are we hitting the KPIs? → feeds the next problem</text>
+      </svg>
+      <figcaption><span class="badge course">Course</span> Level numbering from <a class="src" data-lesson="81">L81</a> and <a class="src" data-lesson="87">L87</a> (adapters are “four and six”). Boundaries are from <a class="src" data-lesson="89">L89</a>, core vs infra and the execution guess point from <a class="src" data-lesson="81">L81</a>, and the inside-out teaching order from <a class="src" data-lesson="89">L89</a>. The layout is <span class="badge copilot">Added by Copilot</span>.</figcaption>
+    </figure>
+
+    <blockquote class="quote">“Level 3 is the developer boundary and level 5 is the customer boundary.”<cite><a class="src" data-lesson="89">L89</a></cite></blockquote>
+
+    <div class="callout rule"><strong>Why level 3 matters most</strong>
+      <ul>
+        <li>It's “the heart, the core” of what makes your app special. It's pure code with fast tests, full control and easy edge cases, and it gives “crystal clear clarity on the way that our system is interacting with libraries, APIs, and also how it's being called.” Khalil calls it “quite literally life-changing.” <a class="src" data-lesson="87">L87</a></li>
+        <li>High-value unit tests on core code should give about <strong>80% confidence</strong> in the commit phase. That needs a testing strategy and decoupling from infrastructure. <a class="src" data-lesson="81">L81</a></li>
+        <li>Applications force purposefulness: working from level 3 or level 5 stops you modelling an infinite world of entities. <a class="src" data-lesson="89">L89</a></li>
+      </ul>
+    </div>
+
+    <div class="callout anti"><strong>Why level 3 is hard (and so rarely done)</strong>
+      <p>In FA²STR's <strong>Find</strong> step at level 3 you have to find <em>every</em> responsibility at that level: time, repositories, inputs, saving transactions, pulling events out of aggregates, and cross-cutting concerns like auth. That's why so few people write high-value use-case tests, and why the course teaches <strong>inside-out</strong> (level 2 first) while the projects go top to bottom. <a class="src" data-lesson="89">L89</a> Testing is hard to learn more broadly because “you can't really get good at testing without getting good at object oriented design and also understanding architecture.” <a class="src" data-lesson="87">L87</a> Guess point 3 was expected to need 3–4 parts to teach. <a class="src" data-lesson="86">L86</a></p>
+    </div>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span>
+      <p>Picking the level is the judgment call agents get wrong most often. Left alone they write either browser-driven E2E tests for every edge case or mock-heavy tests of private helpers. Name the level and the verification type in the prompt: “level-3 use-case test, in-memory repo, spy on the mailer.”</p>
+    </aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="workflow--ideal-workflow" data-title="The Ideal Developer Workflow">
+    <h3>The Ideal Developer Workflow <a class="src" data-lesson="26">L26</a> <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="81">L81</a></h3>
+
+    <div class="callout def"><strong>Definition</strong>
+      <p>A way to put the 12 essentials together to move from the theoretical to the physical through the guess points, on any side of the stack. <a class="src" data-lesson="26">L26</a> Khalil pieced it together from the experts: GOOS (Steve Freeman), <em>Continuous Delivery</em>, <em>Clean Architecture</em>, DDD and BDD. <a class="src" data-lesson="40">L40</a> It's a consistent way to work “95% of the time,” frontend or backend. <a class="src" data-lesson="87">L87</a></p>
+    </div>
+
+    <ol class="steps">
+      <li><strong>Clarify the theoretical guesses</strong> (non-negotiable) — work through the <a href="#essentials-metaphysical--prism">abstraction prism</a>: vision, role, goal, capabilities, down to concrete examples. Khalil's standard answer to problem questions on Discord is “first, we need to clarify the theoretical guesses.” <a class="src" data-lesson="26">L26</a></li>
+      <li><strong>Broad-stroke architecture</strong> — relatively high level, but clarify the patterns, architectural components and the <strong>testing strategy</strong>: how you'll verify features work and how tests plug into the deployment pipeline. <a class="src" data-lesson="26">L26</a> This step is for developers: shared clarity on patterns, tools, roles and responsibilities. <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>Build, test and deploy a walking skeleton</strong> — one slice of functionality taken all the way to deployment, even if tiny. <a class="src" data-lesson="26">L26</a> (See <a href="#essentials-physical--walking-skeleton">Walking Skeleton</a>.)</li>
+      <li><strong>Feature work with nth looping</strong> — outer-loop tests plus inner-loop tests, then fill in the remaining gaps (~20% of the work) before shipping and moving to the next feature. <a class="src" data-lesson="26">L26</a></li>
+    </ol>
+
+    <table class="tbl">
+      <thead><tr><th>Workflow step</th><th>FA²STR</th><th>Guess points touched</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Clarify theoretical guesses</td><td>Find</td><td>Problem, solution</td><td>Stories, acceptance criteria, concrete examples <a class="src" data-lesson="27">L27</a></td></tr>
+        <tr><td>2 · Broad-stroke architecture</td><td>Architect</td><td>Architecture</td><td>Patterns, components, testing strategy <a class="src" data-lesson="27">L27</a></td></tr>
+        <tr><td>3 · Walking skeleton</td><td>Automate</td><td>All physical levels, thinly</td><td>Testable architecture + deployed tiny slice + pipeline <a class="src" data-lesson="87">L87</a></td></tr>
+        <tr><td>4 · Feature work</td><td>Specify, Test, Refine (n loops)</td><td>5 → 3 → 2/1 → 4/6</td><td>A shipped feature; next feature <a class="src" data-lesson="87">L87</a></td></tr>
+      </tbody>
+    </table>
+    <p>FA²STR is the abstraction layer over this workflow. <a class="src" data-lesson="27">L27</a> Steps 1–3 are the upfront part and step 4 is emergent. <a class="src" data-lesson="87">L87</a> The first steps apply to new features on existing projects too: clarify the theory, know the architecture, know how features are verified, and have infrastructure to run high-value tests. <a class="src" data-lesson="26">L26</a></p>
+
+    <h4>Outer loop vs inner loop</h4>
+    <div class="cards">
+      <div class="card"><h4>Outer loop · customer</h4><p>Acceptance tests that turn user stories into proof that “this is what the customer wants.” <a class="src" data-lesson="40">L40</a> Written in the user's language at the system boundary (level 5). <strong>One acceptance test per feature</strong>, shared by frontend, backend, mobile and desktop teams (Dave Farley), and never rewritten per environment. Result verification only. <a class="src" data-lesson="87">L87</a> Run it as E2E or as a high-value unit/integration test. <a class="src" data-lesson="26">L26</a></p></div>
+      <div class="card"><h4>Inner loop · developer</h4><p>Things developers need to know about: logic that isn't a feature but could cause problems if untested, e.g. a validation object for a <code>User</code> or <code>JobPosting</code>. <a class="src" data-lesson="26">L26</a> Unit tests plus incoming and outgoing contract tests. You don't need all of them, and choosing is the “strategy” part. <a class="src" data-lesson="40">L40</a> The main inner test is the <strong>level-3 use-case test</strong>. <a class="src" data-lesson="87">L87</a></p></div>
+    </div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 960 420" role="img" aria-label="Double-loop TDD: outer loop starts with a failing acceptance test, moves in a layer to the inner loop of failing use-case test, make it pass, refactor, then fill the gaps, acceptance passes, deploy, next feature">
+        <defs>
+          <marker id="wf-arrow-outer" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker>
+          <marker id="wf-arrow-inner" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent-2)"/></marker>
+        </defs>
+        <ellipse cx="480" cy="215" rx="400" ry="170" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-opacity="0.45"/>
+        <path d="M250.6,354.3 A400,170 0 0,1 104.1,273.1" fill="none" stroke="var(--accent)" stroke-width="3" marker-end="url(#wf-arrow-outer)"/>
+        <path d="M104.1,156.9 A400,170 0 0,1 250.6,75.7" fill="none" stroke="var(--accent)" stroke-width="3" marker-end="url(#wf-arrow-outer)"/>
+        <text x="760" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="var(--accent)">OUTER LOOP</text>
+        <text x="760" y="223" text-anchor="middle" font-size="11" fill="var(--fg)">customer / acceptance</text>
+        <text x="760" y="239" text-anchor="middle" font-size="11" fill="var(--fg)">result verification only</text>
+
+        <rect x="300" y="22" width="360" height="50" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="480" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">① Write a failing acceptance test (level 5)</text>
+        <text x="480" y="60" text-anchor="middle" font-size="11" fill="var(--fg)">user's language · customer boundary · one per feature</text>
+
+        <line x1="480" y1="74" x2="480" y2="106" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#wf-arrow-outer)"/>
+        <text x="490" y="94" font-size="11" fill="var(--fg)">move in a layer</text>
+
+        <circle cx="480" cy="225" r="100" fill="none" stroke="var(--accent-2)" stroke-width="1.5" stroke-opacity="0.45"/>
+        <path d="M544.3,148.4 A100,100 0 0,1 578.5,242.4" fill="none" stroke="var(--accent-2)" stroke-width="3" marker-end="url(#wf-arrow-inner)"/>
+        <path d="M514.2,319 A100,100 0 0,1 445.8,319" fill="none" stroke="var(--accent-2)" stroke-width="3" marker-end="url(#wf-arrow-inner)"/>
+        <path d="M381.5,207.6 A100,100 0 0,1 415.7,148.4" fill="none" stroke="var(--accent-2)" stroke-width="3" marker-end="url(#wf-arrow-inner)"/>
+        <rect x="380" y="111" width="200" height="28" rx="14" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="480" y="130" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fg)">red: failing use-case test (L3)</text>
+        <rect x="500" y="261" width="140" height="28" rx="14" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="570" y="280" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fg)">green: make it pass</text>
+        <rect x="320" y="261" width="140" height="28" rx="14" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="390" y="280" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fg)">refactor · commit</text>
+        <text x="480" y="208" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent-2)">② INNER LOOP</text>
+        <text x="480" y="226" text-anchor="middle" font-size="11" fill="var(--fg)">developer · each scenario</text>
+        <text x="480" y="242" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fg)">~80% of the work</text>
+
+        <line x1="480" y1="327" x2="480" y2="362" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#wf-arrow-outer)"/>
+        <text x="490" y="349" font-size="11" fill="var(--fg)">all scenarios green</text>
+
+        <rect x="290" y="366" width="380" height="46" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="480" y="385" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">③ Fill the gaps (~20%): L4 / L6 adapter tests, hook up the UI</text>
+        <text x="480" y="402" text-anchor="middle" font-size="11" fill="var(--fg)">→ the acceptance test passes</text>
+
+        <rect x="10" y="190" width="140" height="50" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="80" y="211" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">④ Done → deploy</text>
+        <text x="80" y="229" text-anchor="middle" font-size="11" fill="var(--fg)">next feature</text>
+      </svg>
+      <figcaption><span class="badge course">Course</span> The GOOS double loop as Khalil describes it in <a class="src" data-lesson="87">L87</a> and <a class="src" data-lesson="81">L81</a>, with outer/inner loop roles from <a class="src" data-lesson="26">L26</a>. Levels 2 and 1 are reached by recursing from the inner loop. The drawing is <span class="badge copilot">Added by Copilot</span>.</figcaption>
+    </figure>
+
+    <h4>Per feature, step by step <a class="src" data-lesson="87">L87</a></h4>
+    <ol class="steps">
+      <li><strong>Failing E2E acceptance test</strong> — system boundary (level 5), in the user's language, from the user's perspective. It can mention pages or things that don't exist yet.</li>
+      <li><strong>Move in one level</strong> — write a failing <strong>use-case test</strong> at the developer boundary (level 3). About 80% of the time is spent here.</li>
+      <li><strong>Loop over every scenario</strong> — a feature is one success case and many failure cases (“five, six, seven, eight, nine”). Mention things that don't exist yet and carve them out, recursing into smaller objects and back up.</li>
+      <li><strong>The remaining ~20%</strong> — make the E2E test pass by filling in the other guess points (outgoing and incoming adapter tests), then hook up the view: components plus component tests.</li>
+      <li><strong>Connect everything</strong> — the feature is done. Deploy, then tidy up with infrastructure tests (DB, service connections: contract/driver tests). <a class="src" data-lesson="81">L81</a></li>
+    </ol>
+
+    <h4>Outer + inner loop pair for the sync feature</h4>
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> Outer loop (level 5): acceptance criteria in Gherkin, then the executable spec driving the deployed system through test drivers</figcaption>
+      <pre><code class="language-gherkin">Feature: Sync Notion tasks to Google Calendar
+  Scenario: A dated task appears on my calendar
+    Given I have a Notion task "Write newsletter" on 2026-10-01 at 09:00
+    When the sync runs
+    Then my Google Calendar shows "Write newsletter" from 09:00 to 09:30 on 2026-10-01</code></pre>
+      <pre><code class="language-ts">// tests/e2e/syncTasks.e2e.ts — result verification only; drivers hide Notion/Google/HTTP details
+describe('Sync Notion tasks to Google Calendar', () =&gt; {
+  const notion = new NotionTestDriver(process.env.NOTION_TEST_WORKSPACE!);
+  const calendar = new CalendarTestDriver(process.env.GCAL_TEST_CALENDAR!);
+  const app = new SyncAppDriver(process.env.APP_URL!);
+
+  beforeEach(async () =&gt; {
+    await notion.reset();
+    await calendar.reset();
+  });
+
+  it('a dated task appears on my calendar', async () =&gt; {
+    await notion.createTask({ title: 'Write newsletter', date: '2026-10-01', time: '09:00' }); // Given
+    await app.triggerSync();                                                                  // When
+    const events = await calendar.eventsOn('2026-10-01');                                     // Then
+    expect(events).toContainEqual(expect.objectContaining({
+      summary: 'Write newsletter', start: '2026-10-01T09:00', end: '2026-10-01T09:30',
+    }));
+  });
+});</code></pre>
+    </figure>
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> Inner loop (level 3): use-case tests with in-memory fakes and a calendar spy; no network, runs in milliseconds</figcaption>
+      <pre><code class="language-ts">// src/sync/syncTasks.spec.ts
+describe('SyncTasks', () =&gt; {
+  const dated = { id: 't1', title: 'Write newsletter', date: '2026-10-01', time: '09:00' };
+
+  it('creates a calendar event for a new dated task', async () =&gt; {
+    const calendar = new CalendarSpy();
+    const links = new InMemorySyncLinks();
+    const syncTasks = new SyncTasks(new InMemoryTaskSource([dated]), calendar, links);
+
+    const result = await syncTasks.execute();
+
+    expect(result).toEqual({ created: 1, skipped: 0 });        // result
+    expect(calendar.createdEvents()).toHaveLength(1);          // communication
+    expect(await links.eventIdFor('t1')).toBeDefined();         // state
+  });
+
+  it('does not duplicate a task that was already synced', async () =&gt; {
+    const calendar = new CalendarSpy();
+    const links = new InMemorySyncLinks({ t1: 'evt_42' });     // indirect input
+    const syncTasks = new SyncTasks(new InMemoryTaskSource([dated]), calendar, links);
+
+    const result = await syncTasks.execute();
+
+    expect(result).toEqual({ created: 0, skipped: 1 });
+    expect(calendar.createdEvents()).toHaveLength(0);
+  });
+});</code></pre>
+    </figure>
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> The use case that made the inner tests pass. Writing it called for <code>toCalendarEvent</code>, which triggered another FA²STR loop one level down (<a href="#workflow--worked-example">worked example</a>)</figcaption>
+      <pre><code class="language-ts">export class SyncTasks {
+  constructor(
+    private readonly tasks: TaskSource,
+    private readonly calendar: CalendarGateway,
+    private readonly links: SyncLinks,
+  ) {}
+
+  async execute(): Promise&lt;{ created: number; skipped: number }&gt; {
+    let created = 0;
+    let skipped = 0;
+    for (const task of await this.tasks.listChangedTasks()) {
+      const decision = toCalendarEvent(task);
+      if (decision.kind === 'skip' || (await this.links.eventIdFor(task.id))) {
+        skipped++;
+        continue;
+      }
+      const eventId = await this.calendar.createEvent(decision.event);
+      await this.links.link(task.id, eventId);
+      created++;
+    }
+    return { created, skipped };
+  }
+}</code></pre>
+    </figure>
+    <p>The <code>CalendarSpy</code> and in-memory fakes need contract tests against the real gateways (level 4) to stay honest. See <a href="#testing">Testing</a>. <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="87">L87</a></p>
+
+    <div class="callout rule"><strong>Heuristics</strong>
+      <ul>
+        <li><strong>E2E:</strong> the happy path plus one or two sad paths (check that error messages reach the screen). Then about 12–20 high-value tests with concrete examples, parameterized to add data cheaply. <a class="src" data-lesson="81">L81</a></li>
+        <li><strong>Push what E2E can't see down to level 3.</strong> You can't sensibly assert “I should get an email” at E2E (automate logging into Gmail?). Verify it with an email spy at the application level. <a class="src" data-lesson="87">L87</a></li>
+        <li><strong>New abstraction → new tests.</strong> “Anytime we mention a new abstraction, we're going to want to write some new tests.” <a class="src" data-lesson="26">L26</a></li>
+        <li><strong>If testing a feature means starting React, React is doing the coordinating.</strong> Keep features and their specs apart from the UI, libraries and APIs. <a class="src" data-lesson="87">L87</a></li>
+        <li><strong>It's an ideal.</strong> Legacy code and cut corners are real. Work toward it, and use it to measure how far off you are. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="26">L26</a></li>
+      </ul>
+    </div>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>Khalil's own mistake: writing all the pure application-layer code first, then trying to deploy, and hitting “all these weird CORS errors.” Deploy as early as possible. <a class="src" data-lesson="81">L81</a></li>
+        <li>Building for a month, then finding deployment is hard: “a very bad situation to be in.” <a class="src" data-lesson="87">L87</a></li>
+        <li>Mixing feature development with architecture setup, e.g. discovering DB issues mid-feature. It's “a lot cognitively.” <a class="src" data-lesson="87">L87</a></li>
+        <li>E2E-only or unit-only strategies: “You're always going to fail.” <a class="src" data-lesson="87">L87</a></li>
+        <li>Leaving internal logic untested because “it's not a feature.” <a class="src" data-lesson="26">L26</a></li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“It is an ideal and ideals are never perfect. But having this as something that we could use to determine and know how far off we are is incredibly powerful.”<cite><a class="src" data-lesson="26">L26</a></cite></blockquote>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span>
+      <ul>
+        <li><strong>Humans own the outer loop.</strong> Write or approve the acceptance test. It is the one spec the agent can't negotiate with.</li>
+        <li><strong>Agents are good in the inner loop.</strong> Level-3 tests are fast and have no I/O, so an agent can go red → green → refactor through many scenarios quickly. Review the scenario list, not only the code.</li>
+        <li><strong>The workflow gives fixed checkpoints</strong> (skeleton deployed, acceptance test red, inner tests green, acceptance green) at which you review agent output.</li>
+      </ul>
+    </aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="workflow--to-physical" data-title="From Theoretical to Physical">
+    <h3>From Theoretical to Physical <a class="src" data-lesson="72">L72</a> <a class="src" data-lesson="89">L89</a></h3>
+    <p>After the theoretical guess points (the FeedBook case study, see <a href="#ddd-feedbook">Theoretical Design &amp; DDD</a>), you already know how to organise code, you're aware of the stereotypical architecture, and you're committed to vertical slices. “When we move to the physical, we have literally all of this stuff.” <a class="src" data-lesson="72">L72</a> The crossover from <em>what</em> to <em>how</em> is the <strong>acceptance test</strong>. <a class="src" data-lesson="81">L81</a></p>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Ideal kickoff on a real project</div>
+        <ol class="steps">
+          <li><strong>Get the deployment pipeline working.</strong> <a class="src" data-lesson="72">L72</a></li>
+          <li><strong>Write the end-to-end test</strong> — “Make sure that end-to-end test works in a prod-like environment.” <a class="src" data-lesson="72">L72</a></li>
+          <li><strong>Jump into level-three tests</strong> — “where all the fun stuff starts.” <a class="src" data-lesson="72">L72</a></li>
+        </ol>
+        <p>In practice, with a familiar standard architecture, Khalil plans, clarifies the inputs and outputs, process-models, then goes straight to level 3 and uses the required inputs to create the needed entities and value objects. <a class="src" data-lesson="89">L89</a></p>
+      </div>
+      <div class="after"><div class="compare-label">The course's learning order (inside-out)</div>
+        <ol class="steps">
+          <li><strong>Level 2, stateful</strong> first — “Because we're still learning the physical, we're actually going to jump to level two.” <a class="src" data-lesson="72">L72</a></li>
+          <li><strong>Then level 3</strong> — do the modules in sequence (theoretical → level 2 → level 3), because level 3 has too many responsibilities to find at once. <a class="src" data-lesson="89">L89</a></li>
+          <li><strong>Projects go top to bottom</strong> — the backend and frontend projects apply the workflow outside-in for real. <a class="src" data-lesson="89">L89</a></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="callout tip"><strong>Starting level 3 from one feature</strong> <a class="src" data-lesson="89">L89</a>
+      <p>Create a use case and go through all its success and failure scenarios, letting the needed concepts emerge. Forget the word “aggregate” at first. Ask what goes in, what must come out, and what must change all at once. Don't create base classes such as <code>AggregateRoot</code> until you absolutely need them.</p>
+    </div>
+    <p>Khalil considered a faster path (skip entities, build success/failure cases, then discover you need entities) because jumping straight to a feature is more motivating, but kept the current order for now. <a class="src" data-lesson="89">L89</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="workflow--mvp" data-title="Shipping an MVP &amp; When to Go Light">
+    <h3>Shipping an MVP &amp; When to Go Light <a class="src" data-lesson="40">L40</a> <a class="src" data-lesson="85">L85</a></h3>
+    <p>Asked by a student (Aaron) who already had designs ready how to ship an MVP fast, Khalil's answer was to use the <strong>same workflow</strong>. “Those steps are going to be the same, regardless of if you're shipping an MVP or you're going to be developing a new feature on an existing product.” <a class="src" data-lesson="40">L40</a></p>
+
+    <div class="callout rule"><strong>What changes between an MVP and a mature product</strong> <a class="src" data-lesson="40">L40</a>
+      <ol>
+        <li>How much time you have.</li>
+        <li>How much effort you're willing to put in.</li>
+        <li>The quality of the guesses you've made.</li>
+      </ol>
+    </div>
+
+    <h4>The MVP path: theoretical → testing strategy → physical <a class="src" data-lesson="40">L40</a></h4>
+    <ol class="steps">
+      <li><strong>Step 0: learn the mental models</strong> — metaphysics and at least the 12 essentials. They work “like landmines and the opposite of landmines,” telling you what to avoid and what to move toward.</li>
+      <li><strong>Problem guess point</strong> — do you have clarity on the problem?</li>
+      <li><strong>Solution guess point</strong> — how you'll solve it and the <strong>boundaries</strong> between domains. Process-model the one or two user stories you most want to build first.</li>
+      <li><strong>Architecture guess point</strong> — decide the patterns, tools and architectural components.</li>
+      <li><strong>Testing strategy (the bridge)</strong> — outer-loop acceptance tests from user stories, plus inner-loop developer tests (unit, incoming/outgoing contract).</li>
+      <li><strong>Walking skeleton</strong> — draw the architecture, build one user story as a vertical slice from UI to DB, decide the project structure, and <strong>deploy</strong> it. Expect it to be messy and slow. It's worth it because it sets up the initial testing strategy for the whole product.</li>
+      <li><strong>Recommended MVP tests</strong> — start with <em>either</em> E2E tests or a high-value integration test. Either way you need an acceptance test for customer correctness and a set of tests for the internals.</li>
+    </ol>
+
+    <h4>When to go light</h4>
+    <div class="cards">
+      <div class="card"><h4>Unvalidated MVP · zero theoretical guesses</h4><p>The priority is getting real answers from customers. Heavy testing and top quality aren't critical, but build “on a good foundation of guesses.” <a class="src" data-lesson="40">L40</a> Multi-loop TDD at every guess point? “Maybe not.” Push one theoretical guess through as fast as possible, then “start playing defense and adding tests at the physical level.” <a class="src" data-lesson="85">L85</a></p></div>
+      <div class="card"><h4>New feature, existing product</h4><p>Run the full workflow. If architecture, testing strategy and patterns already exist, the Architect step shrinks to a checklist. <a class="src" data-lesson="27">L27</a> The walking skeleton and pipeline are already there, so start at the outer-loop test. <a class="src" data-lesson="26">L26</a></p></div>
+      <div class="card"><h4>Platform · stacked guesses</h4><p>With shared infrastructure (deployment, architecture, known services, tested code) you can <strong>skip guesses at some guess points</strong> and score faster over time. <a class="src" data-lesson="85">L85</a> An extendable architecture lets you skip Architect for infrastructure. <a class="src" data-lesson="86">L86</a></p></div>
+      <div class="card"><h4>Familiar standard architecture</h4><p>Plan, clarify inputs/outputs, process-model, then drop straight into level 3 and skip setting up level-5 infrastructure first. <a class="src" data-lesson="89">L89</a> How many loops to test at “depends on the score of the game.” <a class="src" data-lesson="86">L86</a></p></div>
+    </div>
+
+    <h4>Recommended viewing for an MVP (as of recording) <a class="src" data-lesson="40">L40</a></h4>
+    <table class="tbl">
+      <thead><tr><th>Course content</th><th>Why</th><th>In this guide</th></tr></thead>
+      <tbody>
+        <tr><td>Metaphysics + 12 essentials</td><td>Mental models (landmines and anti-landmines)</td><td><a href="#essentials-metaphysical">12 Essentials I</a> · <a href="#essentials-physical">II</a></td></tr>
+        <tr><td>Ideal developer workflow</td><td>The fixed sequence of steps</td><td><a href="#workflow--ideal-workflow">above</a></td></tr>
+        <tr><td>Theoretical guess points</td><td>See them as inputs and outputs; build a checklist</td><td><a href="#essentials-metaphysical--guess-points">Guess points</a></td></tr>
+        <tr><td>Abstraction video</td><td>The abstraction prism as a roadmap to know you have everything before code. “This is also just BDD.”</td><td><a href="#essentials-metaphysical--prism">Abstraction prism</a></td></tr>
+        <tr><td>Best Practice First: acceptance testing a walking skeleton from UI to DB</td><td>Top recommendation</td><td><a href="#testing">Testing</a> · <a href="#essentials-physical--walking-skeleton">Walking skeleton</a></td></tr>
+        <tr><td>Frontend Architecture 2 Q&amp;A, Value First testing strategy</td><td>Builders, application interface; test strategy</td><td><a href="#testing">Testing</a></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>Inventing a different process for MVPs instead of dialling effort per step. <a class="src" data-lesson="40">L40</a></li>
+        <li>Heavy testing and polish on an unvalidated MVP (poor allocation of effort). <a class="src" data-lesson="40">L40</a> <a class="src" data-lesson="85">L85</a></li>
+        <li>Skipping clarity on the guesses before building. <a class="src" data-lesson="40">L40</a></li>
+      </ul>
+    </div>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span>
+      <p>AI makes the physical side cheap, so an MVP's bottleneck moves to the quality of the theoretical guesses and to the acceptance test that defines “done.” A deployed walking skeleton gives an agent a working, tested frame to extend one slice at a time, instead of generating a whole system you then have to deploy.</p>
+    </aside>
+  </article>
+</section>

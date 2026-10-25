@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Software Essentialist — Study Guide</title>
+<script>
+  (function () {
+    var saved = localStorage.getItem("se-theme");
+    var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.setAttribute("data-theme", saved || (prefersDark ? "dark" : "light"));
+  })();
+</script>
+<style>
+:root {
+  --bg: #fbfaf7; --bg-2: #f2efe8; --fg: #1d1f23; --muted: #5d6470; --border: #ddd8cc;
+  --accent: #b4532a; --accent-2: #2f6f8f; --accent-3: #5a7d3a;
+  --code-bg: #f4f1ea; --code-fg: #24292f;
+  --svg-fill: #ffffff; --svg-stroke: #6b6f78;
+  --course: #2f6f8f; --recon: #7a5bb5; --copilot: #b4532a; --ai: #1f8a70;
+  --rule: #2f6f8f; --anti: #b83a3a; --def: #7a5bb5; --tip: #5a7d3a;
+  --sidebar-w: 300px;
+}
+[data-theme="dark"] {
+  --bg: #15171b; --bg-2: #1c1f25; --fg: #e4e6ea; --muted: #9aa2ae; --border: #2e333c;
+  --accent: #e8875a; --accent-2: #6bb5d8; --accent-3: #9cc46e;
+  --code-bg: #1e2229; --code-fg: #e4e6ea;
+  --svg-fill: #1f232a; --svg-stroke: #8d95a3;
+  --course: #6bb5d8; --recon: #b39ae6; --copilot: #e8875a; --ai: #4fc9a6;
+  --rule: #6bb5d8; --anti: #ef7a7a; --def: #b39ae6; --tip: #9cc46e;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body { margin: 0; font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; background: var(--bg); color: var(--fg); }
+a { color: var(--accent-2); }
+.layout { display: flex; min-height: 100vh; }
+nav#sidebar { position: sticky; top: 0; height: 100vh; width: var(--sidebar-w); flex: 0 0 var(--sidebar-w); overflow-y: auto; border-right: 1px solid var(--border); background: var(--bg-2); padding: 18px 14px 40px; }
+nav#sidebar .brand { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+nav#sidebar .brand small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+.controls { display: flex; gap: 8px; margin: 12px 0; }
+#search { flex: 1; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--fg); font-size: 14px; }
+#theme-toggle { border: 1px solid var(--border); background: var(--bg); color: var(--fg); border-radius: 6px; padding: 0 10px; cursor: pointer; }
+#search-status { font-size: 12px; color: var(--muted); min-height: 16px; }
+.toc { list-style: none; padding: 0; margin: 8px 0 0; font-size: 14px; }
+.toc li { margin: 1px 0; }
+.toc a { display: block; padding: 3px 8px; border-radius: 5px; text-decoration: none; color: var(--fg); }
+.toc a:hover { background: var(--bg); }
+.toc a.active { background: var(--accent); color: #fff; }
+.toc ul { list-style: none; padding-left: 12px; margin: 2px 0 6px; display: none; font-size: 13px; }
+.toc li.open > ul { display: block; }
+.toc ul a { color: var(--muted); }
+.toc li.hidden { display: none; }
+.legend { margin-top: 18px; font-size: 12px; color: var(--muted); display: grid; gap: 6px; }
+main { flex: 1; min-width: 0; max-width: 1000px; padding: 32px 48px 120px; }
+header.hero h1 { font-size: 32px; margin: 0 0 6px; }
+header.hero p { color: var(--muted); margin: 0 0 18px; }
+.doc-section { border-top: 2px solid var(--border); padding-top: 22px; margin-top: 40px; }
+.doc-section > h2 { font-size: 26px; margin: 0 0 8px; color: var(--accent); }
+.lede { font-size: 17px; color: var(--muted); }
+.topic { margin: 26px 0; }
+.topic > h3 { font-size: 20px; margin: 0 0 10px; }
+h4 { margin: 12px 0 6px; font-size: 16px; }
+.src { display: inline-block; font-size: 11px; font-weight: 600; padding: 0 6px; margin-left: 4px; border-radius: 10px; border: 1px solid var(--border); color: var(--muted); text-decoration: none; vertical-align: middle; line-height: 18px; }
+.badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 8px; border-radius: 10px; color: #fff; letter-spacing: .2px; vertical-align: middle; line-height: 18px; }
+.badge.course { background: var(--course); }
+.badge.recon { background: var(--recon); }
+.badge.copilot { background: var(--copilot); }
+.badge.ai { background: var(--ai); }
+[data-theme="dark"] .badge { color: #111; }
+figure { margin: 16px 0; }
+figure.code { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+figure.code figcaption { padding: 6px 12px; font-size: 13px; background: var(--bg-2); border-bottom: 1px solid var(--border); color: var(--muted); }
+pre { margin: 0; overflow-x: auto; }
+figure.code pre { padding: 12px 14px; background: var(--code-bg); color: var(--code-fg); font: 13px/1.55 "SF Mono", Menlo, Consolas, monospace; }
+code { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: .9em; }
+:not(pre) > code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+.tok-k { color: #a626a4; } .tok-s { color: #50a14f; } .tok-c { color: #8a8f98; font-style: italic; } .tok-n { color: #c18401; } .tok-t { color: #0184bc; }
+[data-theme="dark"] .tok-k { color: #c678dd; } [data-theme="dark"] .tok-s { color: #98c379; } [data-theme="dark"] .tok-c { color: #7f848e; } [data-theme="dark"] .tok-n { color: #d19a66; } [data-theme="dark"] .tok-t { color: #61afef; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+.compare > div { min-width: 0; }
+.compare-label { font-weight: 700; font-size: 13px; margin-bottom: -8px; }
+.compare .before .compare-label { color: var(--anti); }
+.compare .after .compare-label { color: var(--tip); }
+@media (max-width: 1100px) { .compare { grid-template-columns: 1fr; } }
+.callout { border-left: 4px solid var(--border); background: var(--bg-2); padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 14px 0; }
+.callout > strong:first-child { display: block; margin-bottom: 4px; }
+.callout.rule { border-color: var(--rule); } .callout.anti { border-color: var(--anti); } .callout.def { border-color: var(--def); } .callout.tip { border-color: var(--tip); }
+.callout ul, .callout ol { margin: 4px 0; padding-left: 20px; }
+ol.steps { counter-reset: step; list-style: none; padding-left: 0; }
+ol.steps > li { counter-increment: step; position: relative; padding: 6px 0 6px 40px; }
+ol.steps > li::before { content: counter(step); position: absolute; left: 0; top: 6px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin: 14px 0; }
+.card { border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; background: var(--bg-2); }
+.card h4 { margin-top: 2px; color: var(--accent-2); }
+.card ul { padding-left: 18px; margin: 6px 0; }
+blockquote.quote { margin: 14px 0; padding: 8px 16px; border-left: 3px solid var(--accent); font-style: italic; color: var(--fg); background: var(--bg-2); border-radius: 0 8px 8px 0; }
+blockquote.quote cite { display: block; font-style: normal; font-size: 12px; margin-top: 4px; }
+table.tbl { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 14px; }
+table.tbl th, table.tbl td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; }
+table.tbl th { background: var(--bg-2); }
+aside.ai-lens { border: 1px dashed var(--ai); border-radius: 8px; padding: 10px 14px; margin: 16px 0; background: color-mix(in srgb, var(--ai) 7%, transparent); }
+aside.ai-lens p, aside.ai-lens ul { margin: 6px 0 0; }
+figure.diagram { border: 1px solid var(--border); border-radius: 10px; padding: 14px; background: var(--bg-2); text-align: center; overflow-x: auto; }
+figure.diagram svg { max-width: 100%; height: auto; }
+figure.diagram figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+pre.mermaid { text-align: left; font-size: 12px; color: var(--muted); white-space: pre-wrap; }
+pre.mermaid[data-processed="true"] { text-align: center; }
+.mermaid-offline::before { content: "Mermaid diagram (offline — showing source):"; display: block; font-weight: 700; margin-bottom: 6px; }
+.search-hidden { display: none !important; }
+mark.hit { background: #ffe58f; color: #111; padding: 0 1px; }
+#to-top { position: fixed; right: 20px; bottom: 20px; border: 1px solid var(--border); background: var(--bg-2); color: var(--fg); border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 18px; }
+#menu-btn { display: none; }
+@media (max-width: 900px) {
+  nav#sidebar { position: fixed; z-index: 10; transform: translateX(-100%); transition: transform .2s; }
+  nav#sidebar.open { transform: none; }
+  main { padding: 60px 18px 100px; }
+  #menu-btn { display: block; position: fixed; top: 12px; left: 12px; z-index: 11; border: 1px solid var(--border); background: var(--bg-2); color: var(--fg); border-radius: 6px; padding: 6px 10px; }
+}
+@media print { nav#sidebar, #to-top, #menu-btn { display: none; } main { max-width: none; } }
+</style>
+</head>
+<body>
+<button id="menu-btn" aria-label="Toggle navigation">☰</button>
+<div class="layout">
+  <nav id="sidebar" aria-label="Table of contents">
+    <div class="brand">The Software Essentialist<small>Study guide · Khalil Stemmler's course</small></div>
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search guide…" aria-label="Search">
+      <button id="theme-toggle" title="Toggle dark / light">◐</button>
+    </div>
+    <div id="search-status"></div>
+    <!--TOC-->
+    <div class="legend">
+      <div><span class="badge course">Course</span> straight from lessons</div>
+      <div><span class="badge recon">Reconstructed</span> code rebuilt from narration</div>
+      <div><span class="badge copilot">Added by Copilot</span> illustrative, not in course</div>
+      <div><span class="badge ai">AI-era lens · Copilot</span> my commentary</div>
+      <div><a class="src" data-lesson="0">L#</a> source lesson number</div>
+    </div>
+  </nav>
+  <main id="content">
+    <header class="hero">
+      <h1>The Software Essentialist — Study Guide</h1>
+      <p>Mental models, frameworks and practices from all 95 lessons, organised by topic. Fluff removed. Every point cites its source lesson. Generated <!--DATE-->.</p>
+    </header>
+<!--SECTIONS-->
+  </main>
+</div>
+<button id="to-top" title="Back to top" aria-label="Back to top">↑</button>
+<script>
+(function () {
+  var root = document.documentElement;
+  var sidebar = document.getElementById("sidebar");
+
+  document.getElementById("theme-toggle").addEventListener("click", function () {
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem("se-theme", next);
+    renderMermaid();
+  });
+  document.getElementById("menu-btn").addEventListener("click", function () { sidebar.classList.toggle("open"); });
+  document.getElementById("to-top").addEventListener("click", function () { window.scrollTo({ top: 0 }); });
+
+  // Minimal TS highlighter; runs once on escaped text so it must not break entities.
+  var KW = new Set("abstract as async await break case catch class const constructor continue default delete do else enum export extends false finally for from function get if implements import in instanceof interface let new null private protected public readonly return set static super switch this throw true try type typeof undefined var void while yield describe it test expect beforeEach afterEach".split(" "));
+  document.querySelectorAll("pre code.language-ts, pre code.language-js").forEach(function (block) {
+    var src = block.textContent;
+    var out = "";
+    var re = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|("(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*'|`(?:[^`\\]|\\.)*`)|(\b\d+(?:\.\d+)?\b)|([A-Za-z_$][\w$]*)|([\s\S])/g;
+    var m;
+    function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+    while ((m = re.exec(src))) {
+      if (m[1]) out += '<span class="tok-c">' + esc(m[1]) + "</span>";
+      else if (m[2]) out += '<span class="tok-s">' + esc(m[2]) + "</span>";
+      else if (m[3]) out += '<span class="tok-n">' + m[3] + "</span>";
+      else if (m[4]) {
+        if (KW.has(m[4])) out += '<span class="tok-k">' + m[4] + "</span>";
+        else if (/^[A-Z]/.test(m[4])) out += '<span class="tok-t">' + m[4] + "</span>";
+        else out += m[4];
+      } else out += esc(m[5]);
+    }
+    block.innerHTML = out;
+  });
+
+  var mermaidBlocks = Array.prototype.slice.call(document.querySelectorAll("pre.mermaid"));
+  mermaidBlocks.forEach(function (el) { el.setAttribute("data-src", el.textContent); el.classList.add("mermaid-offline"); });
+  function renderMermaid() {
+    if (!window.mermaid || !mermaidBlocks.length) return;
+    mermaidBlocks.forEach(function (el) {
+      el.removeAttribute("data-processed");
+      el.classList.remove("mermaid-offline");
+      el.textContent = el.getAttribute("data-src");
+    });
+    window.mermaid.initialize({ startOnLoad: false, securityLevel: "strict", theme: root.getAttribute("data-theme") === "dark" ? "dark" : "default" });
+    window.mermaid.run({ nodes: mermaidBlocks, suppressErrors: true });
+  }
+  if (mermaidBlocks.length) {
+    var s = document.createElement("script");
+    s.src = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js";
+    s.crossOrigin = "anonymous";
+    s.referrerPolicy = "no-referrer";
+    s.onload = renderMermaid;
+    document.head.appendChild(s);
+  }
+
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".toc a"));
+  var targets = tocLinks.map(function (a) { return document.getElementById(a.getAttribute("href").slice(1)); });
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var idx = targets.indexOf(entry.target);
+      if (idx < 0) return;
+      tocLinks.forEach(function (a) { a.classList.remove("active"); });
+      var link = tocLinks[idx];
+      link.classList.add("active");
+      document.querySelectorAll(".toc > li").forEach(function (li) { li.classList.toggle("open", li.contains(link)); });
+    });
+  }, { rootMargin: "0px 0px -75% 0px" });
+  targets.forEach(function (t) { if (t) observer.observe(t); });
+
+  var search = document.getElementById("search");
+  var status = document.getElementById("search-status");
+  var topics = Array.prototype.slice.call(document.querySelectorAll("article.topic"));
+  var sections = Array.prototype.slice.call(document.querySelectorAll("section.doc-section"));
+  var topicText = topics.map(function (t) { return t.textContent.toLowerCase(); });
+  var timer;
+  search.addEventListener("input", function () {
+    clearTimeout(timer);
+    timer = setTimeout(applySearch, 150);
+  });
+  function applySearch() {
+    var terms = search.value.toLowerCase().split(/\s+/).filter(Boolean);
+    var shown = 0;
+    topics.forEach(function (t, i) {
+      var hit = terms.every(function (term) { return topicText[i].indexOf(term) >= 0; });
+      t.classList.toggle("search-hidden", !hit);
+      if (hit) shown++;
+    });
+    sections.forEach(function (sec) {
+      var any = !terms.length || sec.querySelector("article.topic:not(.search-hidden)");
+      sec.classList.toggle("search-hidden", !any);
+      var tocItem = document.querySelector('.toc a[href="#' + sec.id + '"]');
+      if (tocItem) tocItem.parentElement.classList.toggle("hidden", !any);
+    });
+    topics.forEach(function (t) {
+      var tocItem = document.querySelector('.toc a[href="#' + t.id + '"]');
+      if (tocItem) tocItem.parentElement.classList.toggle("hidden", t.classList.contains("search-hidden"));
+    });
+    status.textContent = terms.length ? shown + " matching topic" + (shown === 1 ? "" : "s") : "";
+  }
+})();
+</script>
+</body>
+</html>

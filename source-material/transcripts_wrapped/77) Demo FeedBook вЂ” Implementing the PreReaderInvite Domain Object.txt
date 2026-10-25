@@ -1,0 +1,348 @@
+What's going on crafters? Khalil here. And in this video, what we're going to do is implement some of state machines. So we're going to go from state machine to
+domain model. We're going to build out some of the chunks of your domain model rather. One of those chunks that I'm going to demonstrate is the pre-reader
+invite. So if you recall from the previous videos, the pre-reader invite is a piece of state that represents an invite to become a pre-reader. And in order to
+create the pre-reader, there are some rules to create them, meaning there's some data that is required to be passed in. There's also a transition where the
+invite can be accepted. And there's also some other rules as well. I've listed out just some notes in here, but ultimately there's going to be your transitions
+here. And I'm using describe to call these, and there's going to be successes and failures for each of those transitions. Because remember at this guess point,
+the domain modeling guess point, what we're really dealing with here, the concerns are data, rules, relationships, and processes. So I'm not going to go into
+too much depth teaching. There's a ton of stuff I need to teach. And hopefully by the time you're watching this, there's going to be some videos or some written
+lessons for you to read or watch in order to learn some of those things that are going to accompany this demo. But what I'm going to do here is pretty much just
+fly at it. I'm not going to do too much teaching in this. I'm just going to demonstrate how I'm going to develop this domain model out. I'll pause sometimes and
+I'll explain a little bit of what I'm doing and why. But just so that you're aware, just so that you can understand what it is I'm about to do, I'll give you
+that right now. And then I'm going to dive into it and do it. So when you watch this, as you see me doing this, please pause the video and ask questions in
+places where you get confused, where you have questions. And do not be afraid to use the discord if you get stuck as well. So what am I going to do here? How am
+I going to develop this? Again, not going into too much detail here. With the faster framework, the first part of this is finding all the responsibilities. I've
+done much of that work. The responsibilities were the data behavior, processes, and rules. So I've found much of that. I could lean on a lot of what I've done
+in these state machines as well. And with respect to the next step, which is the architect step, once I have all those responsibilities, I've listed many of
+them out already. Those responsibilities for doings and knowings, these eventually need to get mapped onto a object, an abstraction. And at this point, there
+are only three stereotypical abstractions that you could possibly use. There's several different domain-driven design tactical patterns. In order to realize
+these responsibilities, I'm going to have to assign them to roles. So I will be assigning them to the correct domain-driven design tactical patterns rather than
+the object stereotypes, because those are just more abstract. The tactical patterns are more specific. So those patterns are domain events, entities, value
+objects, and domain services. However, I'm not going to be using domain services for this particular assignment for this demo. Then there's the automate step,
+and we've pretty much already got that set up here. We have Jess. This is good enough. There's other ways to set up this automate step we'll get into a little
+bit later on with using when then, and perhaps even using feature file, but it's not important right now. And I've done things a little bit differently here
+where I've specified already right up front the transitions, and I've specified the responsibilities that I need to account for in those transitions, the
+success transitions, and the failure ones. So this is going to be the initial state, and this is going to be an intermediate transition. Once the invite has
+already been created, I'm going to have to move to invite. One other last piece here. I'm not going to go too overboard with the committing my code here. I
+really just want to demonstrate and get through this quickly just so that you can see how this works. And eventually I will re-record this and put it back up,
+cut it into smaller pieces, and we'll do this perfectly. For now, just one and use this to do your assignments. And lastly, what makes this so awesome is it is
+a technique that will allow us to pretty much design out the entire core of how our business works. At the end of the day, these are just really simple state
+machines at the class level, but these are the decision-making objects that happen in most information systems at the data and behavior level. So that's what
+we're doing here. We're encapsulating it. All right, that's enough talking. Time to get into it. So the first thing I'm going to do, I'm going to get my tests
+running here. Okay. I got to uncomment this and I'm going to only do one of these right now. So I need to pass some data in here. What's some data that I need
+to pass that to create a pre-reader invite. If I go back to my notes here to create a pre-reader invite, I need invite ID, author ID, pre-reader email, and
+status. But status is going to be part of the initial state. So really all I actually need to pass in are these three things in our two. A pre-reader for now,
+this concept of the ID, I'm not going to just going to call it one, two, three for now. This thing here, I'm also just going to call this three, six for the
+email. I'm just going to pass it. And that looks good enough in order to specify this. So I know I work backwards here now. Now, what is it I'm creating,
+creating a pre-reader invite. So here we go. I'm just going to specify this a little bit better. And then I'm going to go here and let's go ahead and arrange
+this backwards. So I'm going to want to make sure that it has all the properties in here that it gets created. What's more important here is that it gets
+created in general. And I'm going to use a pattern that I like to use called the result pattern to do this. So I'm just going to walk through and then talk.
+First off Anakin's хотя judgments by this time it's time for us, because that we can dive into this between a few seconds and seconds. Then go here on
+opportunity and jeal even Simon said that they still are the script version. To spin me the man out of previous two minutes, lane pick up. The one thing I see
+on both sides is that ejected in general. Last thing job of heading the first half has been invented in United States Engineers and for a long enough time, but
+they're still going to have the fact it's Cassidy. Pioneer of Bench 001, Bench, роHolaеры is Merry Michigan! They을 for all the first hand at the center of Japan
+that I wasn't doing before and東西 exposed. Okay. And that's how I'm going to get backwards, create this thing here. Now let me add a result and I'm going to make
+this. So this is failing because pre-reader invite doesn't exist. Let's go ahead and create that. Okay. So I've created it and I've given it a create method,
+but it's still asking for some things here. So let's go ahead. I'm going to give this a strict type. Copy this. Okay. We're getting further and now just have
+this bit here. Okay. That's failing there. So let's go ahead and hit that. Get ID. Okay. So what I've just done here is because we're dealing with the type of
+problem that has a success and a failure. There's a technique here called using unions. What I'm doing is I'm just setting up the union right now. I've already
+got the success case here. I could add the failure case as well. So I'm just moving around right here. I'm just moving around in me doing this here. And this is
+all going to converge in a second. I just want to get this to pass really quickly and then we'll be done with that. And then I'm going to clean up all of the
+mess I've made here. So I'm going to pause right here. Just quickly explain this abstraction. This is a well-known abstraction I've just created here. This is a
+classful version of it. This can also be done functionally. It could also be done a lot simpler. You could just have a type called, what is it, pre-reader. Some
+really simple type, like I want to call it result years as well. You have success or failure. You could have incredibly simple ways of modeling this. This is
+called union, like defining monads or unions, really. It's when you're expecting more than one return type is what's going on. So here, what I'm defining is an
+abstraction that is going to return a result for this particular type here of pre-reader invite. That's what it's going to return. I need to pass this in here.
+And that's failing because I have this here and rid of that. And yeah, I don't need new here anymore. And that should fix that. Now, if I save this, yeah, that
+looks good. For the most part, until where I need it to start presenting different stuff. And then, of course, the reason why I'm getting these other errors
+here is because the pre-reader state is these things. That's because this doesn't actually work that way. It's two equal. Whoops. Passing and stuff where I
+shouldn't even be passing and stuff. Okay, great. So now this is failing for a reason that is a lot more sensible here. The reason why this is failing is like,
+just let's look at the objects here. The second line, get ID. Right? It's asking for us to get the ID. The result that's coming back. And that result is, what
+have I done here? I'm just returning nothing. So for me to fix this, let's just put these here for now. And of course, that means, again, I actually have to
+pass these things in. So for the time being, I was passing everything in. Just flying right on through. And now we're good. So let me just pause here and just
+recap everything I just did. So I wanted to test that I could successfully create a pre-reader. And I had this API already designed out upfront ahead of time.
+Sometimes you could do that. And sometimes you will take a more emergent approach. I decided to take a little bit more of an upfront approach because I'm well
+aware of the abstractions I need to use to create here. And I'm going to make sure I have videos or at least some written lessons on what those abstractions
+are. But one of them is the concept of the result. I mentioned that a second ago. The result. So what I'm doing here is I am saying when I create this
+pre-reader, I'm saying that I'm creating it. And I'm saying, yeah, this is good. Okay. Looks good. And because I know that the result is going to be okay, that
+I'm going to pass in the value to the constructor of this object. It's actually creating a result object. And I'm passing in the value. Now this could be any
+value. In fact, this is going to be a utility. I'm going to use a fair amount, which means that I should actually grab this. And this is going to be a, this is
+refactoring here. I'm just not doing much of that right now. I'm going to create a result. Yes. Put that there. And I'm going to export this. And I'm also going
+to make a note to result.spec.ts. Also going to make a note to test this as well. Describe. Result. And this is going to be some tests too. So that's failing on
+me, which is good. It's going to remind me to come back and make sure I test this utility. Never just want to be creating stuff and not testing it. So I just
+moved that over there. And now this should be failing because I'm not recording it. So let's go ahead. Looks good. Great. So I could just write one test. And
+what's something I might want to test here just to express what this thing does. This comes down to the high level responsibilities. It can mark a result as a
+failure. It can mark a result as a success. It can get the value of the result. So these are pretty much the main things that it does. And I'm even struggling
+to give this a proper name right now. So always remember that naming is a process as well. So I'm just going to do this result dot and how is it that I create
+one of these things? I'll say result dot result dot. And I need to pass in value. I'm just going to pass in any for now. No matter. And I'm going to just pass
+that. And all I really want to see is result dot this dot is success. Hoping that's going to be true. Cool. So that's true. And I'm just going to create another
+one. So I'm already seeing an error here, right? So I said result dot fail. And this needs to be a failure to be falsies. It wasn't doing that. So let's see why
+that is. Oh, that's true. That is truthy. Like it is actually a failure. My bad. Yeah. So like I said, it's a failure. And successfully, it's like it is
+successfully a failure. It's the thing that I'm saying here. So yeah. So those are different aspects of this. When I'm testing utility, I can probably go even
+deeper with this. I'm going to leave that for now. This looks relatively okay to me. So moving forward, what else is interesting about this? We are using the
+static factory method here. As I've said before, classes play two roles. They can act as service providers like this. And they can act as a blueprint for what
+the object. And that's what all these other methods here do. And that's what this constructor is for. And the properties, private ones here. So ultimately, I'm
+creating a pre-reader. And it's just always going to be returning one successfully here. So some of what I want to do soon is validate the details here. Because
+also, you might be wondering, why do I have pre-reader state and pre-reader input? The difference is the input is just the input data. This is going to be
+strings. The pre-reader state, this actually has to be specific types. So I'm going to go ahead and create those types. And let me just look at my test here.
+First of all. Yeah. I'm going to go ahead and refactor this by creating those types. Now I've got issues. So this is a good time for me to create some new
+folders. I'm going to create a new one here called modules. And this domain is called feedbook. And I'm going to create a domain folder. And this is where I'm
+going to put the new objects I'm creating. I'm going to have to go ahead and actually make those things real now. That'll import them. And now I've got some new
+things here that are telling me step isn't quite right. Fair enough. And one thing I need to do here is actually need to make this private. because I don't want
+you to be able to create pre-reader by just saying no. So what I'm going to do here for each of these where I have it needing at least one test. I'm going to go
+ahead and give it that. I'm going to go ahead and wave it in and take a minute. And that's where I'm going to have a lot of energy. And that's how we're doing.
+So when I'm feeling the first thing here, we're going to take a bit of a 게 emerge. That should be good enough for that for now. It's going to go in all of these
+as validation logic. It's going to go there. And I need validation logic in order to ensure that while this thing is getting created, it's getting created
+properly. That's going to go there. I have one more to do. Okay. So now we have all these tests, these basic tests for our pre-reader. And this would be a good
+place to commit. Of course, I'm now on green. So if I just recap everything I've just done here, what I've done is created my pre-reader invite. And now my
+pre-reader invite actually references value objects. So data can be either a value or it could be an entity. The way to tell is if you can compare it based
+value or you compare it based on identity. So pre-reader email, I'm comparing that by value. This is also a little bit of a tricky one. These two, because they
+are IDs. But once you actually look at the IDs themselves, they're going to be values. So it's comparing based on value. However, the concept of a pre-reader
+invite, the way to compare that is going to be based on the identifier based on what it actually is. Another thing that mentioned here is I've used the props
+pattern here. I think this is also, you could call it somewhat like the state pattern as well. But what I've done is I've taken all of the state and I've put it
+onto a single object. And I've just done that. And this is going to make this a lot easier to maintain over time rather than having a property here. Creator
+invite ID property. Having it all as one, because really truly that's what we want. Right. This is going to make it very easy for us to do immutability. And I
+just noticed that this should be called pre-reader invite state. So what I'll do to just consolidate this and clean it up is I'm actually going to move this now
+to where it belongs. So pre-reader invite. Yes. Pre-reader. If I expect yes. We'll go and re-import these things. And we don't actually need these anymore.
+Let's get rid of those. Great. So now this is looking a bit more like we're creating a domain model. Because we have all of these concepts now for our domain
+model. And I have one test where I'm testing the create part of actually making this here. Right. Now this technique is called end flooping. And we've started
+up top here at the entity. We've created the entity. And there is more work we could do in here. There's more work to do. Particularly anytime we create a new
+abstraction. Like we've created these various value objects here. We should go ahead and write some proper tests for these. So each of these will have their own
+tests as well. And they will be pretty much the same. So just like we've done before. If we want new behavior. New functionality. We write more tests. So I'm
+just going to provide two more examples here. So pre-reader and by ID. Sure. That's fine. I'm actually going to give that. That. We'll give it another valid
+one. That is valid. And these are also valid as well. So I can go forward here with testing out a failure. Right. There's other aspects of this to test as well.
+If I go back to the responsibilities list here. The doings and knowings. Another knowing I could do. Is knowing that this thing should have an initial state.
+Something we're going to call an invite status. To equal. And we'll say that this should equal. Invited. Because this is the input data. Right. But it's a
+little bit different. So that doesn't exist. So we're going to have to go and create that here. And here's where I have to actually. Do the initial data. So
+invite. Status. Invited. That's interesting. Right there. So that's where we will define that initial stuff. And get invited status. Boom. Get invite status.
+This needs to of course be on the return object. Initially. Initially it's going to be invited. Right. I can call this initially successfully created. And.
+Successfully created a. Pre-reader. Invite. With. Okay. Cool. So let's go ahead and do the failure. And see what we can start. Making happen here. This is going
+to drive. Functionality for sure. So. I can. Pretty much. Copy. Majority of what's in here. I need to pull this out. And let's just focus on the specification
+part. I'm going to grab some of this data here. And let's say failed to create. A. Pre. Invite. For. Reason. For. And then what is the reason going to be. So
+here's where I can actually describe. What the failure is going to be. In each of these here. So. Is it going to be something's missing? Is it going to be.
+Where are all the different ways this could fail? So this could fail for. Missing. Property. Right. Get also fail for. Invalid. Pretty. And I think that's
+pretty much it. Just something's missing. And something's invalid. And when. A property is missing. I want to know which one it is. And when a property is
+invalid. I want to know which one it is. In the air. Once. So if I could focus on how. I would. Model this out. It's going to be. The. Input. And I'm going to.
+Expect an error. And I could also call it the property. That I want it to be aware of. So for this one. I'm actually just not going to pass that in. Which is
+the. Pre-reader invite ID. Which is important. I want it to be aware of that. And I'll just put this here. As error. And I'll do something similar. For this one
+here. This time. I'm going to leave out. The author ID. And then this one. What I'm going to do. Is inputs. And what I'm going to do. Is. So far. These are all
+just testing. Missing property. So I'm going to get rid of that. And I could just call this. Fails to create. When. Property. Missing. And I think that's
+actually a better way to. Describe this. Instead of missing property. I like missing value. Because these are values. Entities and values. Missing value. And
+I'm going to expect. The result here. Is failure. We expect that to be truthy. Now this. Is doing some type checking here. For us. Which is good. However. I'm
+not going to give it that. Particularly. Because sometimes we won't get that. But this is great. That we do have that type checking. But right now. I'm going
+to. This way. So I'm going to expect that to. See. And then this is how we actually. Have to build stuff out. Because this doesn't actually return. A failure.
+When we want it to. Class two. Take this a little further. Failure. I want it to. Return a failure. And I also want to be able to. Tell. That the type. The
+reason why this is failing. Right. So maybe. I want to be able to say. Result.get reason. Perhaps. And then. Maybe on that. Reason. There is something called.
+Or maybe just. Get. Failure. Type. Right. And then. Maybe that failure type. Could be. Error. Oh whoops. This is going to be. Data. Rather. Put. So that's
+actually got to be data. My bad. This whole thing is one object. So. Data. Dot. Error. Dot. Type. And maybe I want that. Be able to get the failure type. So
+missing value. So I'm expecting that to work. Then maybe. Let's also take it a little bit further. I want to get the. I want to know the value. Of what is
+failing. As well. So. Nothing. So far that is a good enough API for me. Now. You don't have to do the exact same API. This is just. Me doing this off of the top
+of my mind here. I might not even do it like this. Next time. I might do it a little bit differently. But this is what I'm thinking. And. Yeah. It might work.
+Right. So. Get failure. It's like. Right. And then the other one was. Get. Failure. Value. So. How could I. Encode that. Into this. Failure type. And failure
+value. I'm working backwards here. So. I'm starting at the end. So we now have those. And. I'm actually going to pause on that. Because it looks like we're
+failing. For. P. Different reason here. So let's go back. To this. That's passing for me. Let's get this thing to fail. For the reason I want it to. And we're
+going to probably have to come back to this. A little bit later on. So. This is probably going to take us into. Needing to do some validation. So. Let's lead
+with one example. I'm going to come back. And take a look at. Let's see. This one here. So why should this fail? This should fail. Because. Pre-reader. Invite
+ID is not there. So that's not good. So I need to check here. I need to. Ensure that all the values. That. Need to be here. Are here. I need to also. Ensure
+that. Each value. That. Is here. Is valid. And then. And only then. If everything is good. Then I will actually. Create. The pre. Pre. Reader. Invite. And
+return it. Only if all of those things are good. Then I will actually. Return it. Let's go ahead and. Do this part. About ensuring that all the values. Need to
+be here. Are here. The simplest way I could do this. Is to just. Do a check. Like. Const. Is. This present. Is that present. Is that present. I could do that.
+However. I'm going to. Do a bit of programming. By which we're thinking again. And I'm going to. Ideate. The. A type of API. That I want. I'm going to use
+abstraction. To talk about. What it is that I want. And. I'm going to do it. Almost like. I'm. Writing English. This pattern here. Is called the. Guard pattern.
+You might have seen it before. Maybe not. But. Here's. Pretty much. What I want. To accomplish. I'm. Going to just. Program by which we're thinking. Say what it
+is. I want to. Guard. Against. Null. Or. Undefined. And. What is it that I want. To guard against. Null. Undefined. So maybe. The API here. Is there's a. List.
+Of. Values. Perhaps. So I could say. I want to make sure that. Maybe I could just say. I want to make sure that. This thing. Has. This list. Of. Properties. And
+I'm just going to call out. All of these ones here. Guard. Against. Null. Or. Undefined. I could say. Data. Contains. And then. Contains. Properties. That's one
+thing I could say as well. Guard. Ensures that. This input data contains. And I just put the property names here. Then all I have to do is. Actually make this
+exist. Make it real. And I could do that. Again. This is the principle of abstraction. It's saying. What. First. This is abstraction design. Saying what. First.
+Coming up with the how. A little bit later on. This is an API. I could do. However. I'm going to just. Use the API. I thought about. First of all. Just guard.
+Against. Null. Or. Undefined. Values. And then. I'm going to make sure. That each of these values. Show up here. Pre-reader. Who. That ID. Author ID.
+Pre-reader. So let's do that. And. Guess what kind of. Feedback loop level. Construct this is going to be. Once again. This is going to be. Level one. So we're.
+Doing. Level two. Stuff. Like this. Construct here. The stateful object. Is a level two. Construct. But what we've got going on here. Is a level one. Construct.
+And now let me think about. What I would like to see. As a return object. I could say. As a. Return. Value. I could say. Contains all. Values. Treat that.
+Guard. About. Spec. TS. And. Guard. About. TS. Sport. Class. Guard. And what was the API again? It was. Against. Nuller. Undefined. Values. That was public
+static. And. This. Was going to be. Some data. This data could be any. And then it's going to be values. And it's going to be a string array. And what is it
+going to return? And that's a good question. Because we need. To know. Right. So far with this result thing. What is it that we have? We might have to change
+things around. This can either return a. Pre-reader invite. Or it's going to return. A sort of error. Right. This actually might be. What we need to do here.
+Just to make this simpler. Already. Like. This is kind of the emergent design process. This is coming out. So. What do I have right now? I have Guard. Let's go
+back to this. So maybe this can't return. This doesn't actually return. Contains all values. Maybe this needs to tell me. What the offending value. That wasn't
+contained. Is. So in a way. The thing that comes back from this. Actually has to be a result. In and of itself. It's going to be a result. In and of itself.
+Where it's going to be. Either. One or. One thing. Or another thing. So. It's going to be. Something successful. Or it's going to be. A failure. Of some sort.
+And in the failure. What is it that I need? I need. To actually know. What the. Result was. So. Let's say. The failure here. So to just make this. Really easy
+to think about. First of all. I'm just going to use a union. So I'm going to call this. A guard result. Release. Simply right now. And. It could be either. One
+of two things. A success. Result. Or it could be. A failure. Result. And then the. Success result. Is going to have what. Doesn't really need to have. Anything
+on it. Just needs to say. We're good. The failure result. Doesn't. Needs to let us know. So. This is going to be. If I just look back. To the result. Success or
+failure. The value. So really what's going on here. Is the value. Is going to be. On this API. The value. Whatever it is. That you get back. Is. It's going to
+be. Either. A failure value. Or a success value. So. That's the whole. Idea of this thing. Result here. Is. This could be. Successful value. Or it could be a
+failure. So. We don't really need this here. Whatever it is. It comes back. Is going to be success or failure. Probably also. Don't need. This API either.
+Otherwise. All. Unless we consolidate. The idea. Of what a failure is early. But. Probably not necessary. And this just. Leads me to simplify. My design a
+little bit. As well. If I come back here. Let me just say. Value. And. Value. Get. Get. So I'm going to expect that. What comes back is an error. And then just
+say. Get. Type. So I'm expecting that this thing here. Is going to be an error. And then. Value. Or maybe. If it's going to be an error. I would actually prefer
+the error. To contain like a message. So get. Message. And. Then I will actually. Change this to property. And then. I'm going to change the way. That I'll
+specify this in general. And the way that I'm going to specify this. Is I want this message. Just to contain. Pre-reader. Or whatever it is. That's going to be
+the. Failing. The property that's missing. And I like that. I think that's. Is a lot better. So for example. Like an error message. That I would want to see is.
+This missing value. Is the type. And then the message is. It doesn't contain. This property. So let's see. It's going to be either. Pre-reader invites. Or. It's
+going to be an error. And what are we going to call that? Let's call it domain error. And I'm just going to put it right here. For now. What were some of the
+things. That I had on it. I get type. That's it. Yeah. I just remembered. Like. I actually don't. Yeah. I just remember. This could have just been. So much
+simpler. If I just did this here. The. This is just way simpler. Thing to do. To start with this in general. Yeah. It just gets way too complex. Using the
+result. Up. So I'm actually going to get rid of that. So I've made some substantial changes so far. I'll go over what some of those are right now. But. I'm
+going to back up. And. Write a test for this here. This guard. Because it's pretty useful utility. And I want to make sure we're doing this right. So. Let's do
+this. So. I'm saying that this thing here. Is going to return a guard result. And that's going to look like this. I'm going to turn the success. Or a failure.
+And it's going to. Optionally return. Data. And it's going to have the keys. That. Are missing. So. Let's put that here. Keys missing. So. Just taking a look at
+that already. It looks pretty good. Looks like it's working. But I got to just structure this test a little differently. To be. Guard result. Dot. Success.
+Knows that the ID key is not in. So that's going to be. To be. False. I don't want it to be true. It's going to be false. So. The guard. One is passing. And. I
+also expect. That. Guard. Result. Dot. Data. Keys missing. I'm also expecting. That. He's going to contain. ID. Looks good. So. What is this telling me?
+Essentially this is. If I was to. Bring the responsibility up higher. Binding. Keys. So. Guarding against. Nuller undefined values. Yeah. This looks good to me.
+This test here against the. Guard. Right. So that tells me. I could use this. Tool now. This utility. Coming back to. Here. Right. This is going to return. To
+guard result. And. That's going to. Tell me. If guard result. Dot. Success. Right. If it's not successful. Then. What am I going to need to do? I actually want
+to know. The. First. I actually want to know. The first. Key. That is missing. Here. I don't need to know. All of them. I actually want to know. The first key.
+That's missing. So I just switched that around. To. First key. Missing. Instead. I just want to get the first key. Missing here. As a guard. Result. And. Now. I
+could. Use that the way I want. So. I'm saying. Ensure that all. Values. That need to be here. Are here. Guard result. Successful. If I. Get all those values.
+And that's. If any of those values. Are missing. I. That's a failure. What am I going to need to do? You're going to need to. I'm going to need to create an
+error. And. I'm going to want to create a specific error. You'll see here. What I've done is. I've gotten rid of. The result. It is a pretty cool pattern. But.
+I just find it is way too confusing. Especially if you're just starting out. And like for me too. Is. It's a whole object. When it's. Easier for you to just
+return. Unions. Unions. What I mean by that. It's. Here what's going on. As I'm saying. Pre-reader invite. Or. Domain error. We're going to be. Returning one of
+these. Two things. Depending on. What happens here. One of those two. So. Domain error. Right. It's. This is actually an abstract thing. And when you're
+dealing. With an abstract class. You can't actually create these. They can't be. Instantiated. So instead. What you have to do. Is. You actually have to create.
+A real. Object. To play this. So that means. That. If we're going to be. Returning a domain error. Here. Has to be more specific. So. One of those domain
+errors. In this case. What's going on here. Is. There's a type. Missing. And. We call that. Missing. Value. So. I might actually just do. Missing. Value. Okay.
+Right. And what's going to be the missing value. I want to be able to get that. Guard result. Dot. Data. Dot. First missing key. So. Missing value error doesn't
+exist. I'm going to just go back here. I'm going to create it. And I'm going to make it extend. The. Domain. Now this needs a. Spring. So this is going to be
+the missing value. And the thing about when you're extending an abstract class. Is. The first call you make is to super. When we call super. What it's saying
+is. This is actually what's calling the constructor here. So. It's asking for a state. So. The same sense. We're going to be creating a domain error state.
+We're going to need to pass in these two things here. And those two things here. The error type. This is. Missing value. Right. And then the actual message. We
+could write the message right here. We don't even need to do this. What's the message going to be? Message might be. That. Couldn't find a value. Like. Now if
+we go back here. We know that if we are getting a. Now this is a TypeScript thing. That we know that. We are getting a. Success. Or we know that if this is a
+failure. What should be happening is. We should be getting access to. The data here. Now TypeScript doesn't really know that. Because. Of the way that we've
+modeled this. We are using. This optional property here. It's not really optional. It's just that we have. Two different types of results. We have the.
+Successful. Guard result. Which is just going to return. Success. Brilliant. And we have the failure. Which is going to return. Success. Equals. False. Right.
+And this is going to be true. And. The. We are going to. This aspect. This is not even going to be optional. Right. So that's actually what's. Going to happen
+in the return object here. And ultimately. Guard result. Is going to be one of these two things. So we could represent it like this. Using. Yes. And say it's
+going to be one of those two things. And now we've just made this type. A little bit more strict. And look at that. We just got rid of that error. Because now
+TypeScript can be more. Specific about. What it is that's actually happening here. So this is why we want to strictly type things. We want to really be. As
+clear as possible. About. The return objects in this union pattern. Is really key for doing that. Really helps us. So we have. This or that. Is going to be. A
+guard result. This is how you say or. So let's go back here. And what's going on here. Yeah. For this. I'm just going to silence the type error. With this here.
+Sometimes that will happen. I'm going to silence that. Because we have our unit tests. Which are really checking for the true correctness here. It's not the
+best. But. It is. All right. So. Where are we at? We're still. Working on this entity here. Right. We're still doing the create. And so far. We've been able to.
+Ensure that when the. Value is missing. We return a value missing error. Here. I would actually. Probably take this out. That here. And we probably. Don't
+really need to be. Returning a domain error. In general. We just need that. So we do need a. This is a generic type. To that sense. So that will help. Now.
+We're going to do the exact same thing here. Now ensure that each value here. Is valid. But now. How are we going to. Do the validation logic. Are we going to
+do it. Within the entity itself. Because this is a. Pre-reader invite. This. This here is an entity. Right. Are we going to do it within this. No. We're not
+going to do it within it. Instead. What we're going to do is. Utilize value objects. Instead of passing in. Input data. What we want to be doing here. Is we
+actually want to be. Constructing. The. Each of these value objects. Right here. The pre-reader invite. The author ID. Email. We want to actually. Create these
+things. And then pass them in. So it's going to look. Something like this. Not quite. We're going to take it. A little bit further. Because I'll do this as
+well. And then we will need to pass in. The value that's being asked. So. Go to the input data. Okay. So now this is going to give us. Some objects back. Right.
+Ideally. Going to be. Full. Like. What we want. Because we still need to. Actually. Test each of those value. Objects themselves. Pre-reader. Invite. Or ID. Now
+we need to ensure. That each of these are valid. So let's say that. This first one here. Is invalid. What are we going to do? Are we just going to. Throw an
+error. Completely. No. We're not going to do. We're going to do. The exact same thing. We've been doing before. Which is. To. Return. Types. So. Pre-reader.
+Invite ID. For this. What are we going to do? Same thing here. We're going to try to create it. But we're going to validate it first. And if the validation is
+good. So. If good. Create. If not good. Return. A. Error. And what's that error going to be? Going to be. Valid property. And we could. Even go ahead. Or we
+could call this. Validation error. Instead. And that is a. Type of domain error. Isn't it? And this had to be. A particular type. I'm going to go ahead. And
+rename this to. Validation. Error. Because I like that. And this will break some things. Yeah. Because we haven't even. Tested the validation errors yet. So.
+I'm back here. Validation error. Let's go ahead and do this one. So. Before I do anything. I'm going to. Teach us to validation error now. That's. True. And.
+Let's just. Validate. These here. So. How am I going to validate. The. ID. What's a valid ID. What's not a valid ID. There's something called. UUIDs. So. We
+want to validate that. That this is a valid. UUID. So. I want to do this without. Regex. So. I just went online. And I found some code. I could actually
+validate this. Quite easily here. I could just say public. Actually. I'm going to make this private. Static. Validate. UU. Validate UUID. Now. This. Code here.
+This doesn't seem very cohesive to this. So. This is probably going to end up. Getting moved. Because we also have. Author ID. Which is also a type of. UUID.
+UUID. So that's probably. Also going to have to get moved. Somewhere. So. I'm going to call this. Validate. Identifier. Just going to do it for now. So. I found
+some code online. It's not. Ideal. This is the type of thing. That I would actually recommend. Using a package for. There are packages. Regex can be pretty
+expensive. So. Here's an example. Of a UUID. We might want this. In order to test. Later on. So I'm just going to. Paste that there for now. And. Pretty much.
+We just want to return. If this is valid. And how are we going to do this? If. It is a valid UUID. We're going to return. The pre. Reader. Invite ID. Otherwise.
+We're going to return. A validation error. So. Let's do. Now. If. This. Thought. Validate. Identifier. Value. Is not good. So. Do's return. A validation error.
+What do we need to pass in? We need to pass in the. Invalid value. Actually. This is going to be the. Property. Invalid property. Resents. So. What is going to
+be the property here? Property is going to be. Pre. Reader. Invite ID. Otherwise. What we want to return. Is just the. Pre. Reader. Write ID. And. We'll. Give
+value. Of course. It needs a constructor for that. That constructor private. So there's no other way. To get into this. This is. Really. State. And there's only
+one piece. To this state here. But we'll still just encapsulate it anyways. Now that's going to be a string. We might want to get the value of this. In order to
+get the value. Just say get ID. Or get value. That's how I get value. So this could very well be. Incorrect. It could be a validation error. And we're going to
+have that be true. For any of these. That they could be validation errors. Now as I just created this one here. What's wise for me to do. Is to. Be doing the
+red green refactor. And. To actually be exhausting this. So. After I just created this. Would be a good time for me. To jump into this one here. And start going
+through. And doing the same types of tests. For some time. I'm skipping doing. Some of that right now. Otherwise I would be here. For quite some time. Just so
+you see. How involved this process is. Now if this feels like. A lot of typing. It is a lot of typing. But this is. What is required. In order to. Encapsulate.
+And protect. The. Ways. State can change in your app. So this right here. Should no longer be. A valid. UUID. That should be. Returning an error. For me. If I
+say. This should be. An instance of a validation error. Yes. It should be. That there. Now if I said. I wanted this to be. An instance of. Pre-reader. Invite
+ID. We see. I'm getting a failure there. Right. Because. It is a validation error. So that looks good. So. It knows. When. A UUID. ID. Is. I'm going to say. It
+knows when. ID. Is. Valid. That's a much better test. And we would want to. Continually. Add more examples here. Because this is the. Responsibility
+specification. So we would want to add. More and more tests. So what I'm going to do here. Is just. Really quickly. Make sure that. Each of these returns.
+Either or. What it. Either the. This. Or. The. The validation error. Because that's the task. Of the value objects. These are value objects. And then. Once I do
+that. We'll move on from here. Okay. So now. Each of these here. Returns. Either. A validation error. Or. The. Value object itself. So that's good. And. Yep.
+That's looking good to me. Now. What we need to do. Is we need to. Ensure that each of these. Here is valid. If any of these. Are not valid. Then I'm going to.
+Have to return. Whichever one. Of those. The first one. Of those. Was invalid. Sounds like another job. For this utility here. So. I'm going to just. Again.
+Program by wishful thinking. To try to. Think this out. Or. Ideate this out. Using abstraction. To describe what it is. I want. So I'm going to call that.
+Validation errors. Guard result. And the method is. I'm guarding against. Validation errors. This kind of. Drives me to change the name. Of this a little bit.
+This is like a guard. This is. Undefined. Or null. Guard. Result. Is what that is. I like that name better. And now we have this new thing. So. Guard against.
+That. So public. Static. Again. The best thing to do here. Is to test drive this. TDA. Specify exactly what the API should be. And then make it be that. It's
+the best thing to do. So I've identified the API. I want here to a degree. Now the best thing to do. Is to actually. Go here. And. Drive that. It. Returns a
+first validation error. From a potential list. Of. Validation errors. Almost a potential validation errors. So. Pretty much just copying it. There. And. What
+I'm going to do here. Is. I'm going to. Do a new. Validation error. This one is going to be. Let's call this. User. Let's call this one. X. And. Let's give this
+something. That's not validation error. So let's call this a. Let's actually make a. Don't have. This doesn't have anything in it yet. This is going to be an
+array of items. And those items can either be. Validation errors. Or. Anything else. Maybe either validation error. Or anything else really. In this. Is. So the
+task of this. Is to ensure that. It's going to return the first one. So. We go back to. Test file. This is looking better. So this looks fine to me. Right.
+This. First one is just an object. Maybe this is just going to be. That. Right. That's just going to be. That. And I'm expecting it to return a validation
+error. User. And that's going to be the first one. Expect. Like this API a little bit better. Result has errors. Sounds a bit nicer. Errors. If it has errors.
+Then. Well. What are those errors going to be? Is that going to be truthy? To be. Truthy. And then. I'm just going to do the exact same API here. Where we have
+guard result. Success. Yes. And I want it to. Be. All C. And. Then I'm going to do something. Somewhat similar. Where I say. I actually want. The entire
+validation error. This sounds much better. Get first error. I like this. And this is. Telling. This is telling it. Instead of asking. Tell don't ask. This is
+much nicer. Of an API. And I should probably. Change all of those. To use the same API as well. That's a good design principle. Go with this. Get first error.
+And. I want that to. Be. Instance of. Validation error. For sure. And then. I also want. That's a validation error. I also want to be able to. Determine. That
+that. Property here is max. It's going to be something. To do here. In order to do that. It's going to be like. Get. Message. Or something like. So. I've got
+some compilation errors here. That are bugging me. I just want to make this compile. First of all. So. Validation errors. Guard results. And. What I'm
+expecting. The API to be like here is. If. Is not successful. Honestly. A better API here. Is. Has errors. Same thing with that one. Better thing to do is. To
+consolidate that into. Has errors. Right. If has errors. Is. What I need. To do here. Is return. A new error. Error. I'm going to return. Is going to be called.
+A validation error. And. I need to. Get. The first error. And I'll actually be able. To just do that. This. And. It's going to be a validation error. In
+general. So I could actually just return. The first validation error. So this will be a validation error. In general. So. I should just be able to. So now. I
+want to make all that. Stuff compiled. I want to make that compile. And. What's this doing here. Get. Missing value error. Yeah. So. I also want that. To do the
+same thing. Just pretty much. Return. The first. Missing error. So return. Right. It's the same kind of thing. So I need to make. All of this compile. So what
+I've done here. Is I've actually. Carved this out. A little bit more. Redefining this API here. Getting rid of this stuff. And. Instead. What I have here. Is
+something called. The guard result. So this kind of. Just emerged here. The guard result. And I could. Actually grab this. And move this over. To a new class.
+Home. Import. Clean this out. It. So. I have a guard result. So now this is going to return. The. Type of result. And it's going to be able to. Explain. If it
+has errors or not. Because that's the API. That we like. That's the one. That we. Are using here. Saying. Does it have errors? If it does errors. Get the first
+error. This is like. The most realistic usage. Of this possible. In this code. In the entity. That's what we're. Saying here. And if it has errors. Then. Yeah.
+Let's make sure. We get the first. So. I like that. API feels a lot better. These tests need to get. Cleaned up a little bit. So. For example. I wouldn't even
+say this. I'd say. Validation errors. Guard result. Has errors. And. I expect this. To be. Truthy now. Same thing about this one. I expect that to also. Has
+errors. To be. Truthy. Right. And. The first error. Get rid of that now. The first error. Get first error. It's going to be a missing value error. And. I'm
+going to. Expect that. Error type. On it. Is going to be ID. See how this is just. Like. Getting slightly better. Takes just. Sitting in. Like a little bit.
+Awkwardness. For it to. Get cleaner. So. Let me just clean this all up. Now. This one. I still need to actually. Implement here. Right. And. I need to do the
+logic here as well. So. Let's just. Get that going quickly here. So. If. A value is missing. The. Value I'm going to push into this missing values. Array. Is
+going to be. Or it was missing there. And I'm just going to have the end. Try missing values. The error type. Of course. It's not quite right. Error type. Error
+type isn't going to be ID. It's going to be. Be missing value. Same thing here. The error type. It'll be a validation. Error type. Error type. Error type. Error
+type. So. We still need to do the implementation. For this one here. Okay. So. This is looking good to me. If any of these items coming in are validation
+errors. Then. We should. Be. Returning those. To the list of validation errors. And. Looks all good. We're not getting any more. Failing tests in our. Guard.
+Guards good. Now. The only thing. That has failing tests. Is the place that should be having failing tests. And that is the entity. This is way back where we
+started. So we just. End looped. All the way in. Pretty much here. And. This does take a little bit of cognitive. Space. And. Like. It's 1130 now. Me building
+this out. It does take some time. Also. I'm a little rusty. Doing this. I've been mostly spending my time teaching. So. It's all kind of coming back to me right
+now. And. I'll leave it there. With that one. And. I would say. The only other part that we need to do. After this. Right now. That we should cover. Is.
+Accepting an invite. Dealing with. Domain events. Stuff like that. But. I think this is. Quite a chunk. Of a video. Already. So. Let's figure out what we need.
+To make these tests pass. Just look at these. What do you think it is? Validation error. Pre-reader invite error. Pre-reader invite error. Pre-reader invite
+error. So. What could the error possibly be? Maybe we're. Not using a good. UUID. In order to create. The pre-reader ID. So. Good thing I saved this. We're
+going to use this right now. Just as a. Test. Come back up. Let's get rid of. Missing imports. And what am I going to do? Toss that on. All of these. Now. I'm
+going to expect that. As I toss. This onto all of these. Don't mind that they're all the same right now. But I'm going to expect that. As I do this. These are
+the pre-reader invite IDs. I'm not doing it on the author. But I have put the logic. To check that. So I'm going to expect. That's. The. I'm going to be getting
+some errors. With respect to author now. Because I'm asking to get the first error. Aha. So. I see what's going on here. Just a slight little. Thing here.
+What's going on is. We are. Testing. We're getting the ID. ID. But. When I say get ID. What am I actually asking for? Am I getting the. I'm getting the. Actual
+ID. If I want the string. Just the full string. I need to. Say. Get ID. Dot. Get value. Dot. And that should be. That should get me the actual. Great. And look
+at that. Now we're just getting. Problems with the. Getting the author ID. Same thing. See. Actually author ID. Is probably because I actually. Didn't build
+this out yet. I didn't even do this logic here. So what I'll do right now. Is I'll just copy the. Much of this logic here. And yep. I'm copying it. And when you
+see things. Three times. It's a good chance. To. Refactor. This stuff right here. By the way. Should go. Somewhere else. And it's pretty. Obviously. Obvious
+where it should go. But for sake of time. We're not going to. Deep on. Let's just change. Everything in here. It needs to get changed. We do need to do valid.
+Ah. We didn't even do the validation logic here. Let's just. There now. It's the same thing. So line 27. We're getting. Validation errors. What. Why could we
+possibly. Be getting validation errors. Probably because of this. View ID. Isn't correct. And yet again. Author ID. We need to go back. And here. Make sure
+we're actually. Pulling the author IDs. Value. Out. And then. Same sort of thing. I need to pull the value out. We also need to make sure. That exists. So I
+didn't build that out. As well. Like as much as I'm trying to. To go through this. Pretty quickly. I need to build it. In order. For it to. Us. There's no
+validation logic there. But there should be. And look at that. After all this. Look what we did. We just got the. Create. Mostly created out. Actually. We got
+the create. Done. Pretty much. Create is done. Now. All we need to do. Is harden it. Give it more examples. And. Actually test. The value objects. In more
+detail. So. That's how we could. Really test value objects. In tests. Our entities. A lot. Is by just going. Into tons of detail. Adding tons more examples.
+Making sure. We write tests. For each of these. I barely wrote any for that. Only wrote one for that. This is the entity. Where I was writing. The majority of
+the. Tests. But I. Barely wrote any for that. We really need to. Make sure we are doing that. In practice. This. But. This pretty much. Does it. For. Building
+up the entity. And getting the value objects. Created. Getting that first. Initial state. Built out. To create. Protecting that. Making sure that those. Values.
+Are present. And making sure that. Each of those values. In their. Own validation logic. Runs on each of those. In order to create. A valid entity. That was a
+lot of work. But this just really goes to show. What goes into. Developing out domain models. In the real world. It is just a lot of typing. For the most part.
+The other part of this is. If I was to continue going further. I actually would. Want to do the next test. Which is to accept the invite. Because. When I. Run
+this code. When I do. Accept invite. And the way that this would work. By the way. Is. If I actually have a valid pre-reader. All I would do. Is I would say.
+Pre-reader dot. Accept. Accept an invite. Or accept. Invite. And. That's pretty much it. However. I would want to. Be able to properly test. That the invite was
+accepted. And I would also want to test that. If. I call up this again. And I call that. Two or three times. How can I make sure. That doesn't happen. Several
+times. Because you can't. Go from accepted. To accepted. And. So I'd want to. Return an error. And would also want to. Ensure that. After calling this. That.
+That only. One. Event. There's only one occurrence. Of. Accept invite. Event. Or an. Invite accepted. Event. There's only one occurrence. Of that. So that's
+something else. That I want to test. Moving forward. Now I'll leave it here for now. Because this is already pretty lengthy. I'm going to have to chop this up.
+Maybe redo lots of this into smaller videos. What not. But this should get you started. At least. To get. Building out your domain models. Doing the
+assignments. If you have questions. Definitely let me know. Leave comments. All of that. Ask for help. Here for you. So. With that being said. This was a long
+one. One. But this is a foundational one. So. Take this. Do your homework. Do the assignments. As always. It's mastery. To be continued.

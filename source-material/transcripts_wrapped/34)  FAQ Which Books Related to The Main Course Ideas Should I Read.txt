@@ -1,0 +1,26 @@
+I'll just call out some of the best ones and I'll make sure that there's a recommended reading list as well. But first one that comes to mind is BDD in action.
+Yeah, this is where I learned about the abstraction prism. It comes from BDD and yeah, BDD is fundamentally what we're doing here. It's driving the code through
+this kind of philosophical level of reasoning, starting from the role and the goal in the vision that is had there. And that goes all the way down until we're
+dealing with low level code. That's an incredibly powerful perspective. And that's fundamentally what we're doing with abstraction. Object design. Yeah. Just
+such a foundational book. It's the last one I needed to read where I thought, okay, yeah, I get it. I don't really see if there's much more to this thing of
+design other than object design. This was the last one for me where it made a ton of sense. Continuous delivery is just also another incredible book. There's so
+much in there, so much great advice on just delivering software. I'll say another one that really changed my life was growing object oriented software guided by
+tests. That's Steve Freeman, I believe. That one taught me about builders, which was really cool. And that's where we get the ideal developer workflow from,
+which is to, and actually I learned about the walking skeleton from this book as well. But yeah, this is a really good one here in terms of just the rigor and
+driving code with tests. The DevOps handbook is really good too. The second metaphysical essential is the feedback loop, I call that. Feedback loop is not just
+a mental model. It's also continuous delivery. It's also the DevOps movement. It's also the agile movement. It all comes together to further validate this idea
+that everything we're doing is a guess. And that's why we need all of these feedback loops to insert a number of them. And the DevOps movement is just a massive
+feedback loop fundamentally. Domain driven designs is the one that started to solve a lot of problems for me when I was struggling with how do I actually do
+very complex things in my code base and have it not turn into a big spaghetti mess. The domain driven design books, the red book, the blue book, they put me
+down a really great path of getting to pattern first, understanding the patterns I need to use, but they didn't help me go a little bit further than that. And I
+think that's where if you're going to go down that path, it would be good that you also read the object design book after these books. Extreme programming
+explained is also a good one. There's a dependency injection version book, but then Scott Blossian's domain modeling made functional book. This is like one of
+the best books, I think of all time, the software books that is, was a huge influence on me in terms of just coming back to the foundations, the basics, and
+just using basic language to understand where it is we're doing. One thing that's really cool, and I referred to this earlier on in the metaphysics content, is
+that we're just solving problems in their steps and events. We go through in order to get from state A to state B. That's all we're really doing. Functional
+programming is something that could be quite elusive to a lot of people, but if we think backwards and we just consider that state B is where we want to be,
+functional programming is just starting there and then just applying these steps and events as these compositional functions building up to create this slice
+that we then just put data into and it will spit out a result that will hopefully take us to an end result, which is really cool. Yeah, that's a really great
+book. And I think after you're done with this course, if you want to go get into functional programming, that's a great place for you to go is to check that one
+out. And I think that's going to do it for the recommended books for the course. Oh, actually, there's one last one. It's the Systems Thinking book as well,
+because yeah, this is all about systems thinking too. So those are some of the books. I'll make sure that we have those in the description for the day.

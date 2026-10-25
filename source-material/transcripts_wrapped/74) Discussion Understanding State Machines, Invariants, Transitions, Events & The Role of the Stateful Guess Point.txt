@@ -1,0 +1,55 @@
+You need to be able to design out and piece together state machines. So that's one of the very first things that I need you to be able to do. Design out a state
+machine and teach you the concept of invariance. I believe it was Alexandra. Are you aware of invariance and what that is? Great. This is perfect kind of
+assignment for you then. Invariance, what is this? This is where we start to get into the concept of business logic and rules. Because so far, all we've really
+been doing with faster at the stateless level is just transforming data. The model that we've been using at this point in time, we've been using input output
+systems, right? But. Output. Great. I'm actually getting excited about this because to me, the idea of invariance is, it's almost trivial, but I'm glad to know
+that this is something that you aren't even really aware of yet. So anyways, like with the stateless ones, all we do is data goes in and data comes out, right?
+Like with, we've seen with palindrome, mom, and what's going to come out on the other side of this. And this is a little bit about timed d35 and, system琥感. By
+end observation, it doesn't漏 net as for that. Now, there's no paper, it is just something that you could do, what you think, when you see, condition entry on
+particular rules. And so I maniacally and the process Moi pattern wise. But I elaborations is going to take that draft toolkit to work on greater Woah goodатели
+are very hard for this genuinely and the analysis actually about course with Sen. με Taft. Hopefully. Okay, great. So this is feedback level one. Feedback loop
+level one status. Now, here's what's going to happen next. These problems, yeah, all they really do is transform data. They just look at data. But it's not all
+that helpful because in the real world, we're always dealing with statefulness. Problems are stateful. Let's see. What kind of problem can I give you? Go and
+wash these clothes. So at the start, the clothes are not washed. Where do you want to be? Clothes washed. Let's say what you're going to do as a human is you're
+going to go and you're going to get the clothes. So gather clothes and then clothes. What's the next thing you might do after you gathered the clothes? Anything
+in between here that you might do. Separate colors. Oh, great. Separated colors. Put in detergent. Boom. We're assuming that there's a machine being used. Let's
+assume that you're not using machine. You're doing it by hand. So separated colors. Separating by colors isn't really necessary for you to do it by hand, right?
+See how privileged I am? I don't wash my clothes by hand. I can't even like really conceive this example. Anyways, let's say I know something else that needs to
+happen. This is why we start from the end, which makes it a lot easier. I can say here clothes clean is actually the last thing. Clothes dry. Clothes washed.
+You see what happens when you start from the end? I'm telling you. It's the technique. And then let's say assemble washing materials. Boom. That's how you
+freaking do stuff. We start from the end. And see how fast my brain is working now. So what have we done just now? Yeah. This washboard is from 1912 right now.
+Sir William Churchill's washing machine. Or just freaking washboard. So we have is the first state and then the end state. How is this different? It's different
+because what has just happened is we have states in the middle that we can be in. We're no longer just dealing with data going in and data going out. What's
+happening here is each and every single one of these states is data. To be at one of these states is a form of data. So we might go into this. Perhaps the
+clothes to be washed. That's probably what needs to go in. Input. And what's going to be the out? I'll do that. And what's the output of this? It's going to be
+the washed clothes. And I struggle with you. Clean. I like the word clean. Let's see what we're doing here. Now I need to introduce these transitions are
+feeling functional. They should because it is functional. It's, and it really doesn't matter. Like how, if you write object oriented code or functional code,
+this really is the functional part of the program. Because you need to just recognize the paradigm doesn't matter. And I think this is where I'll talk about
+programming paradigms as well. See, these are like lessons, things I need to discuss. Programming paradigms. Paradigm doesn't matter. Right? Topics. Either
+topic is variance. We're talking about variance. We're talking about transitions, events, initial state, right? This is all about state really too. So every
+single time we move from one state to the next, what's happening here is we are doing a transition. And every single time we do a transition, we get something
+called an event created. Oh, we're going to get a washing machine trust. That's the next, next phase here. I'm thinking about how I'm going to explain this to
+you guys. Of course, the human being needs to do all of these things, right? Which sucks. And this is why we have the concept of washing machines. Because the
+washing machine can move through all of these different states. Because there's rules at each of these states. Am I allowed to go from gathered clothes to
+clothes clean? I'll tell you what will happen if it was my mom watched me that she beat me. So don't do that. I can't go from here to there. That's invalid.
+This is what we call an invalid transition. You can't do that. And how do you enforce this rule? If you have a system that's modeling this, how do you enforce
+this rule? This is the concept of invariance. Invariance equals a rule, which really equals business logic. That's what this is. So as we model out our system,
+because this is a system nonetheless. And every single time we do this, we have an event gathered clothes is the name of that event. This is the name of that
+event. This is the name of that event. This is the name of that event. These are also, sorry, these are states as well. So the states and events are pretty much
+two sides of the same. These are states that we're in. An event is a piece of data that represents, hey, this state was just, we just moved to this state. So
+confusing, but we'll have to spend a little bit of time on that. What is the purpose of encapsulation? To protect the way the model changes. So if you have
+someone calling, let's imagine this was now some code. We have this here. What should I be able to say on this? If it's new, should I be able to say dry
+clothes? What? It doesn't even, it's not even started. It doesn't have any clothes in it. This is not valid at all. This makes no sense. So your job at this
+point in time is to harden this concept, whatever this is. If this has a thing called dry clothes, if someone tries to call this at the wrong time, the system
+and valid state, it should not let that happen. That's what we're trying to do here. So you need some logic to protect this. What am I going to get you to do
+next? What's the whole point of this next guest point? It really is this here. We're getting clear on this whole idea of state, how it's related to events, how
+it's related to transitions, because this is where we actually begin to solve problems in the world. Because, Hey, look, that's a problem, isn't it? I have
+clothes that are not wash and need to be clean. This is how we get to solving problems is by introducing the concept of state. But we want to be careful when we
+introduce state, because as soon as we do that, we need to make sure that state is changing correctly. It's changing at the right time. It's not changing at the
+wrong time because, well, anyone ever have to, huh? I don't know. This is funny. Anyone ever have to blow into their Nintendo or something like that, or restart
+your router? What's going on there? Or if you're using Uber Eats or something and it was about to purchase, but then your phone, I don't know, you got a call.
+It's like, maybe it didn't expect for that to happen. And then what does it do? I don't know. You end up accidentally purchasing McDonald's or something. You
+know what I mean? It's just, you don't want to be able to put the system in an invalid state or do things that it shouldn't be able to do. And that is the role
+of this guest point. That's what we're getting at here. Alexander, is that kind of clear? Amazing. Amazing. I'm glad to hear it. So that's what we're trying to
+do here. So it's on me to piece together the correct assignments for you, but I have some really interesting ones. Daniel, if I say the word elevator. Yeah,
+that's one of my favorite words around this time to say. There's an elevator assignment I want you all to try out. Tim, I'm glad it was help.

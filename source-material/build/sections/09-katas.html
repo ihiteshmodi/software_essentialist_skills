@@ -1,0 +1,1070 @@
+<section id="katas" class="doc-section" data-title="Kata Walkthroughs">
+  <h2>Kata Walkthroughs (Before → After)</h2>
+  <p class="lede">Each kata below is written up the same way: the problem, the test sequence the course used, what the reviews caught, and the code before and after that feedback. Code narrated in a lesson is marked <span class="badge recon">Reconstructed</span>. Illustrations of the feedback are marked <span class="badge copilot">Added by Copilot</span>. The last topic collects the recurring feedback into one review checklist.</p>
+
+  <table class="tbl">
+    <thead><tr><th>Kata</th><th>Guess point / section</th><th>Main skill trained</th><th>Lessons</th></tr></thead>
+    <tbody>
+      <tr><td><a href="#katas--first-milestone">First milestone API</a></td><td>Code First (no tests)</td><td>Just make it work; specify the “what” to AI</td><td><a class="src" data-lesson="42">L42</a></td></tr>
+      <tr><td><a href="#katas--fizzbuzz">FizzBuzz</a></td><td>Emergent design</td><td>Red-green-refactor mechanics, fake it, rule of three</td><td><a class="src" data-lesson="45">L45</a> <a class="src" data-lesson="46">L46</a> <a class="src" data-lesson="47">L47</a></td></tr>
+      <tr><td><a href="#katas--palindrome">Palindrome</a></td><td>Emergent design</td><td>Red for the right reason; refactor XOR transformation</td><td><a class="src" data-lesson="49">L49</a> <a class="src" data-lesson="50">L50</a></td></tr>
+      <tr><td><a href="#katas--password-validator">Password Validator</a></td><td>Stateless (FA²STR)</td><td>Upfront + emergent design, responsibilities, <code>it.each</code></td><td><a class="src" data-lesson="54">L54</a> <a class="src" data-lesson="55">L55</a> <a class="src" data-lesson="56">L56</a> <a class="src" data-lesson="57">L57</a></td></tr>
+      <tr><td><a href="#katas--stats-calculator">Stats Calculator</a></td><td>Stateless (FA²STR)</td><td>Clarify before you verify; named example sets</td><td><a class="src" data-lesson="58">L58</a> <a class="src" data-lesson="59">L59</a></td></tr>
+      <tr><td><a href="#katas--military-time">Military Time Validator</a></td><td>Stateless (FA²STR)</td><td>Transformation Priority Premise; decomposition</td><td><a class="src" data-lesson="60">L60</a> <a class="src" data-lesson="61">L61</a></td></tr>
+      <tr><td><a href="#katas--boolean-calculator">Boolean Calculator</a></td><td>Stateless (FA²STR)</td><td>One guess at a time; design it twice</td><td><a class="src" data-lesson="62">L62</a> <a class="src" data-lesson="63">L63</a></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="katas--intro" data-title="How to Do Kata Assignments">
+    <h3>How to Do Kata Assignments <a class="src" data-lesson="43">L43</a> <a class="src" data-lesson="44">L44</a> <a class="src" data-lesson="52">L52</a></h3>
+
+    <ol class="steps">
+      <li><strong>One branch per attempt</strong> — use the pattern <code>&lt;project&gt;-&lt;date&gt;-&lt;iteration&gt;</code>. You can redo the kata several times, even on the same day, and each attempt has a single URL to share for feedback. <a class="src" data-lesson="43">L43</a></li>
+      <li><strong>Use the grading checklist as your spec</strong> — Khalil copies it straight into the test file to start. <a class="src" data-lesson="45">L45</a> <a class="src" data-lesson="42">L42</a></li>
+      <li><strong>Map the problem to input → output</strong> before coding. A stateless guess point is “data in, data out.” <a class="src" data-lesson="46">L46</a></li>
+      <li><strong>Loop red → green → refactor</strong>, one example per loop, committing at the points shown in the diagram. <a class="src" data-lesson="44">L44</a> <a class="src" data-lesson="49">L49</a></li>
+      <li><strong>Open a pull request</strong> so reviewers can comment inline. Reviews read the end result first, then walk back through the commits. <a class="src" data-lesson="46">L46</a> <a class="src" data-lesson="47">L47</a></li>
+    </ol>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L43 / L44</span> Branch per attempt, phase-labelled commits</figcaption>
+      <pre><code class="language-bash">git checkout -b fizzbuzz-march-17-1
+
+git add .
+git commit -m "new: fizzbuzz returns a string"
+# later, after refactoring duplication:
+git commit -m "refactor: ..."   # or "design: ..." / "improvements: ..."</code></pre>
+    </figure>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 760 285" role="img" aria-label="Red, green, refactor cycle with commit points: red commits only in the emergent-design section, green always, refactor when a refactoring happened">
+        <defs>
+          <marker id="ka-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+        </defs>
+        <text x="380" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">One example per loop</text>
+        <circle cx="130" cy="50" r="9" fill="none" stroke="var(--accent-2)" stroke-width="2" stroke-dasharray="3 2"/>
+        <text x="146" y="54" font-size="11" fill="var(--fg)">commit (emergent only)</text>
+        <line x1="130" y1="59" x2="130" y2="80" stroke="var(--svg-stroke)"/>
+        <circle cx="380" cy="50" r="9" fill="var(--accent)" stroke="var(--accent)"/>
+        <text x="396" y="54" font-size="11" fill="var(--fg)">commit (always)</text>
+        <line x1="380" y1="59" x2="380" y2="80" stroke="var(--svg-stroke)"/>
+        <circle cx="630" cy="50" r="9" fill="var(--accent)" stroke="var(--accent)"/>
+        <text x="646" y="54" font-size="11" fill="var(--fg)">commit (if refactored)</text>
+        <line x1="630" y1="59" x2="630" y2="80" stroke="var(--svg-stroke)"/>
+        <rect x="40" y="80" width="180" height="92" rx="10" fill="var(--svg-fill)" stroke="#d9534f" stroke-width="2.5"/>
+        <rect x="290" y="80" width="180" height="92" rx="10" fill="var(--svg-fill)" stroke="#3c9d5d" stroke-width="2.5"/>
+        <rect x="540" y="80" width="180" height="92" rx="10" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2.5"/>
+        <text x="130" y="104" text-anchor="middle" font-size="15" font-weight="700" fill="var(--fg)">RED</text>
+        <text x="130" y="126" text-anchor="middle" font-size="11" fill="var(--fg)">write ONE failing test</text>
+        <text x="130" y="143" text-anchor="middle" font-size="11" fill="var(--fg)">fails for a logical reason</text>
+        <text x="130" y="160" text-anchor="middle" font-size="10" fill="var(--fg)">(export the stub first)</text>
+        <text x="380" y="104" text-anchor="middle" font-size="15" font-weight="700" fill="var(--fg)">GREEN</text>
+        <text x="380" y="126" text-anchor="middle" font-size="11" fill="var(--fg)">simplest transformation</text>
+        <text x="380" y="143" text-anchor="middle" font-size="11" fill="var(--fg)">fake it · obvious implementation</text>
+        <text x="380" y="160" text-anchor="middle" font-size="10" fill="var(--fg)">(flip the switch: see it fail)</text>
+        <text x="630" y="104" text-anchor="middle" font-size="15" font-weight="700" fill="var(--fg)">REFACTOR</text>
+        <text x="630" y="126" text-anchor="middle" font-size="11" fill="var(--fg)">only on duplication ×3</text>
+        <text x="630" y="143" text-anchor="middle" font-size="11" fill="var(--fg)">tests + production code</text>
+        <text x="630" y="160" text-anchor="middle" font-size="10" fill="var(--fg)">(no new examples, stays green)</text>
+        <line x1="222" y1="126" x2="286" y2="126" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ka-arrow)"/>
+        <line x1="472" y1="126" x2="536" y2="126" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ka-arrow)"/>
+        <path d="M630,174 L630,212 L130,212 L130,178" fill="none" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ka-arrow)"/>
+        <text x="380" y="232" text-anchor="middle" font-size="11" fill="var(--fg)">next example · if nothing appears three times, go straight from green to the next red</text>
+        <text x="380" y="262" text-anchor="middle" font-size="11" fill="var(--fg)">dashed ○ = commit only in the emergent-design section (FizzBuzz, Palindrome) · filled ● = commit in every section</text>
+        <text x="380" y="279" text-anchor="middle" font-size="11" fill="var(--fg)">each step is EITHER a transformation (red → green) OR a refactor (green → green), never both</text>
+      </svg>
+      <figcaption><span class="badge copilot">Added by Copilot</span> Diagram of the course’s loop: commit cadence <a class="src" data-lesson="44">L44</a> <a class="src" data-lesson="55">L55</a>, red for the right reason <a class="src" data-lesson="45">L45</a>, flip the switch <a class="src" data-lesson="44">L44</a>, refactor XOR transformation <a class="src" data-lesson="49">L49</a>.</figcaption>
+    </figure>
+
+    <table class="tbl">
+      <thead><tr><th>Section</th><th>Commit when</th><th>Message</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Emergent design (FizzBuzz, Palindrome)</td><td>On <strong>every</strong> phase shift: red, green, refactor. This lets reviewers check your mechanics.</td><td><code>red: returns Fizz for 3</code> / <code>green: …</code> / <code>refactor: …</code></td><td><a class="src" data-lesson="44">L44</a> <a class="src" data-lesson="45">L45</a> <a class="src" data-lesson="46">L46</a></td></tr>
+        <tr><td>Stateless guess point onward (Password Validator …)</td><td><strong>Green only</strong> (new functionality) and after a refactor. Never on red. Committing on red is “pausing Mario mid-jump over the flames.”</td><td>Say which kind: <code>new: …</code> vs <code>refactor: …</code></td><td><a class="src" data-lesson="44">L44</a> <a class="src" data-lesson="55">L55</a> <a class="src" data-lesson="56">L56</a></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout rule"><strong>Rules of the stateless guess point (as enforced in the reviews)</strong>
+      <ul>
+        <li><strong>Data in, data out.</strong> The SUT is a function or a static method on a stateless class. Don’t instantiate it. <a class="src" data-lesson="52">L52</a> <a class="src" data-lesson="54">L54</a> <a class="src" data-lesson="56">L56</a></li>
+        <li><strong>Red for the right reason.</strong> A missing function or import is a compile failure. Export a stub and import it first, so the test fails on logic. <a class="src" data-lesson="45">L45</a> <a class="src" data-lesson="49">L49</a></li>
+        <li><strong>Simplest transformation to green.</strong> Fake it until you see duplication three times. Obvious implementation is allowed when you’re confident. <a class="src" data-lesson="45">L45</a> <a class="src" data-lesson="47">L47</a> <a class="src" data-lesson="60">L60</a></li>
+        <li><strong>Rule of three.</strong> Ignore duplication in red and green. Refactor it only on the third occurrence, and never add examples during a refactor. <a class="src" data-lesson="45">L45</a> <a class="src" data-lesson="52">L52</a></li>
+        <li><strong>One example at a time.</strong> Several examples at once force more complex transformations and give unclear failures. <a class="src" data-lesson="49">L49</a> <a class="src" data-lesson="55">L55</a> <a class="src" data-lesson="62">L62</a></li>
+        <li><strong>Refactor XOR transformation.</strong> A step does one or the other. <a class="src" data-lesson="49">L49</a></li>
+        <li><strong>Refactor the tests too</strong>, not just production code. <a class="src" data-lesson="45">L45</a></li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“You only want to commit on red when you're in red for the right reason.”<cite><a class="src" data-lesson="49">L49</a></cite></blockquote>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Agents default to the obvious implementation and batch several tests together. Ask for <em>one</em> failing test, then “the smallest fake-it change that makes only this test pass,” and commit before the next prompt. Your commit history then shows the red → green → refactor path, and each AI diff stays small enough to review.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="katas--first-milestone" data-title="First Milestone: Just Make It Work">
+    <h3>First Milestone: “Just Make It Work” Backend API <a class="src" data-lesson="42">L42</a> <a class="src" data-lesson="86">L86</a></h3>
+
+    <p><strong>Problem:</strong> build three user use cases for <strong>DDD Forum</strong> as a RESTful API. The grading checklist asks for (1) three routes: <code>POST /users/new</code>, edit user, get user by email, (2) a relational or NoSQL DB, (3) an optional ORM (TypeORM / Prisma), (4) manual verification with Postman or curl. Khalil used Express + TypeScript + Postgres + Prisma, and ChatGPT wrote most of the code from the pasted checklist. <a class="src" data-lesson="42">L42</a></p>
+
+    <ol class="steps">
+      <li><strong>Prompt</strong> — “generate the code needed to build an MVC RESTful API with Express.js, Prisma, TypeScript, and Postgres, with the following API endpoints…”, with the grading checklist pasted in. <a class="src" data-lesson="42">L42</a></li>
+      <li><strong>Paste & fix</strong> — install <code>@types/express</code>, move the misplaced <code>prisma/</code> folder, delete the generated <code>app.ts</code>, delete the redundant <code>models/user.ts</code> (the Prisma client already provides the types), fix a string→number id error. <a class="src" data-lesson="42">L42</a></li>
+      <li><strong>Fight the environment</strong> — Postgres via Homebrew, a “failed to create user” error surfaced with try/catch, a <code>DATABASE_URL</code> mismatch fixed with <code>createdb</code>, then <code>npx prisma db push</code>. <a class="src" data-lesson="42">L42</a></li>
+      <li><strong>Verify by hand</strong> — curl create → edit (John → Jonathan) → get by email. <a class="src" data-lesson="42">L42</a></li>
+    </ol>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L42</span> Prisma model after the field edits (id type/default inferred)</figcaption>
+      <pre><code class="language-prisma">model User {
+  id        Int    @id @default(autoincrement())
+  email     String @unique
+  firstName String
+  lastName  String
+  username  String
+}</code></pre>
+    </figure>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L42</span> What was built: the route handler <em>is</em> the service layer</figcaption>
+      <pre><code class="language-ts">import express from 'express';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+const app = express();
+app.use(express.json());
+
+app.post('/users/new', async (req, res) =&gt; {
+  try {
+    const { email, firstName, lastName, username } = req.body;
+    const user = await prisma.user.create({ data: { email, firstName, lastName, username } });
+    res.json(user);
+  } catch (err) {
+    // try/catch added during demo to surface the DB access error
+    console.log(err);
+    res.status(500).json({ error: 'Failed to create user' });
+  }
+});
+
+// edit user and get user by email endpoints followed the same pattern (paths not stated)
+
+app.listen(3000, () =&gt; console.log('Server is running on port 3000'));</code></pre>
+    </figure>
+
+    <div class="callout anti"><strong>Why it’s messy (on purpose)</strong>
+      <ul>
+        <li><strong>Fat functions wired straight to Express.</strong> Basic functions act as “pretty much the entire service layer,” connected directly to controllers. HTTP, validation and Prisma calls all live in one handler. <a class="src" data-lesson="42">L42</a></li>
+        <li><strong>Blind copy-paste</strong> (“pretty brainless on my part”) led to wrong folders, a duplicated model and type errors. <a class="src" data-lesson="42">L42</a></li>
+        <li><strong>DB installed on the machine</strong>, not in a container. Docker and idempotency are deferred to Best Practice First. <a class="src" data-lesson="42">L42</a></li>
+        <li><strong>No automated tests.</strong> Verification is manual curl, and a lot of time goes into debugging. <a class="src" data-lesson="42">L42</a></li>
+      </ul>
+    </div>
+
+    <p><strong>Where this code goes later:</strong> splitting the fat handler into a use case behind a repository contract is covered in <a href="#essentials-physical--horizontal-decoupling">Horizontal Decoupling</a>. The katas below practise the other half first: the smallest, stateless unit, test-driven.</p>
+
+    <div class="callout tip"><strong>Context from the “First Milestone Review” Q&amp;A</strong>
+      <p>Despite its title, the session reviewed no milestone code. It pointed students to FA²STR at the stateless guess point and explained that FA²STR is an input → output tool usable at any level of abstraction. Wherever a problem starts (stateless, stateful, application, E2E), you “drill in with several loops,” which Lucas summed up as <em>n</em> loops rather than a fixed nth layer. <a class="src" data-lesson="86">L86</a></p>
+    </div>
+
+    <blockquote class="quote">“Writing code is not the hard part. It is all of the other aspects of writing code, the design, testing, architecture, and strategy parts.”<cite><a class="src" data-lesson="42">L42</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="katas--fizzbuzz" data-title="FizzBuzz">
+    <h3>FizzBuzz <a class="src" data-lesson="45">L45</a> <a class="src" data-lesson="46">L46</a> <a class="src" data-lesson="47">L47</a></h3>
+
+    <p><strong>Problem:</strong> a function that <em>takes</em> a number from 1 to 100 and returns a <strong>string</strong>: <code>"Fizz"</code> for multiples of 3, <code>"Buzz"</code> for multiples of 5, <code>"FizzBuzz"</code> for both, otherwise the number as a string. <a class="src" data-lesson="44">L44</a> <a class="src" data-lesson="45">L45</a> <a class="src" data-lesson="46">L46</a> <strong>Trains:</strong> red-green-refactor, fake it vs obvious implementation, rule of three, commit per phase. <a class="src" data-lesson="45">L45</a></p>
+
+    <h4>Demo test sequence (commit on every phase) <a class="src" data-lesson="45">L45</a></h4>
+    <table class="tbl">
+      <thead><tr><th>#</th><th>Phase</th><th>Test / change</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>red</td><td>“returns Fizz for 3”. Create <code>export function fizzBuzz</code> and import it first.</td><td>Fail on logic, not on a compile error</td></tr>
+        <tr><td>2</td><td>green</td><td><code>return "Fizz"</code></td><td>Fake it, the simplest transformation</td></tr>
+        <tr><td>3–4</td><td>red → green</td><td>“returns Buzz for 5” → <code>if (num === 3) return "Fizz"; return "Buzz";</code></td><td>Refactor check: nothing ×3 yet</td></tr>
+        <tr><td>5–6</td><td>red → green</td><td>“returns FizzBuzz for 15” → <code>if (num === 15) return "FizzBuzz";</code></td><td>Test duplication noticed and ignored (wrong phase)</td></tr>
+        <tr><td>7–8</td><td>red → green</td><td>“returns Fizz for 9” → <code>if (num === 9) return "Fizz";</code></td><td>Still faking</td></tr>
+        <tr><td>9</td><td>refactor</td><td><code>num === …</code> seen three times → <code>isMultipleOfThree = num % 3 === 0</code>. 15 then returned “Fizz”, so the 15 check moved above it.</td><td>Rule of three. Accept the simplest fix.</td></tr>
+        <tr><td>10</td><td>refactor (tests)</td><td>Added “returns Fizz for 6” while green, then merged 3/6/9 into <code>it.each</code> “returns Fizz for multiples of three”. Did <em>not</em> add 12.</td><td>Name the higher-level behavior. No new examples in a refactor.</td></tr>
+        <tr><td>11</td><td>—</td><td>Stopped. Buzz multiples, “both”, and the rest of the checklist were left to students.</td><td></td></tr>
+      </tbody>
+    </table>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L45</span> Where the demo stopped: production + tests</figcaption>
+      <pre><code class="language-ts">export function fizzBuzz(num: number): string {
+  const isMultipleOfThree = num % 3 === 0;
+  if (num === 15) return "FizzBuzz"; // moved above to fix 15 -&gt; "Fizz"
+  if (isMultipleOfThree) return "Fizz";
+  return "Buzz";
+}
+
+describe("fizzbuzz", () =&gt; {
+  it.each([3, 6, 9])("returns 'Fizz' for multiples of three", (num) =&gt; {
+    expect(fizzBuzz(num)).toBe("Fizz");
+  });
+
+  it("returns 'Buzz' for 5", () =&gt; {
+    expect(fizzBuzz(5)).toBe("Buzz");
+  });
+
+  it("returns 'FizzBuzz' for 15", () =&gt; {
+    expect(fizzBuzz(15)).toBe("FizzBuzz");
+  });
+});</code></pre>
+    </figure>
+
+    <h4>Review feedback → fixes</h4>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — wrong system shape: nothing goes in, a sequence comes out (a generator) <a class="src" data-lesson="46">L46</a></div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L46</span> Student misread “takes numbers from 1 to 100”</figcaption>
+          <pre><code class="language-ts">function iterateFizzBuzz(): string[] { /* loops 1..100 */ return []; }</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — stateless system: one number in, one string out</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L46</span> The shape the problem asks for</figcaption>
+          <pre><code class="language-ts">function fizzBuzz(num: number): string { /* ... */ return ""; }</code></pre>
+        </figure>
+      </div>
+    </div>
+    <p>The same submission had everything in <strong>one commit</strong> (“FizzBuzz returns the string”, “generate sequence”, “FizzBuzz logic”) and was not a PR. The fix: commit on each phase shift and open a PR. <a class="src" data-lesson="46">L46</a></p>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — <code>else if</code> chain: every branch adds a code path <a class="src" data-lesson="47">L47</a></div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Illustrates the reviewed <code>if / else if / else</code> style</figcaption>
+          <pre><code class="language-ts">export function fizzBuzz(num: number): string {
+  const isDivisibleByThree = num % 3 === 0;
+  const isDivisibleByFive = num % 5 === 0;
+  if (isDivisibleByThree &amp;&amp; isDivisibleByFive) {
+    return "FizzBuzz";
+  } else if (isDivisibleByThree) {
+    return "Fizz";
+  } else if (isDivisibleByFive) {
+    return "Buzz";
+  } else {
+    return String(num);
+  }
+}</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — early-return one-line <code>if</code>s: same behavior, flat paths</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L47</span> Guard-clause style Khalil suggested</figcaption>
+          <pre><code class="language-ts">export function fizzBuzz(num: number): string {
+  if (num &gt; 100) throw new Error("Number out of range"); // message (inferred)
+  const isDivisibleByThree = num % 3 === 0;
+  const isDivisibleByFive = num % 5 === 0;
+  if (isDivisibleByThree &amp;&amp; isDivisibleByFive) return "FizzBuzz";
+  if (isDivisibleByThree) return "Fizz";
+  if (isDivisibleByFive) return "Buzz";
+  return String(num);
+}</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — abstract names and several expects per <code>it</code>: when one fails, the reason isn’t clear <a class="src" data-lesson="47">L47</a></div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Test names quoted from the reviewed PR</figcaption>
+          <pre><code class="language-ts">it("should return FizzBuzz when input is divisible by both three and five", () =&gt; {
+  expect(fizzBuzz(15)).toBe("FizzBuzz");
+  expect(fizzBuzz(45)).toBe("FizzBuzz");
+});
+
+it("handle when the input is not divisible by three and five", () =&gt; {
+  expect(fizzBuzz(43)).toBe("43");
+});
+
+it("should throw number out of range when input is greater than 100", () =&gt; {
+  expect(() =&gt; fizzBuzz(102)).toThrow();
+});</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — abstract behavior in <code>describe</code>, a concrete example in each <code>it</code>: one it, one expect</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L47</span> Khalil’s suggested structure</figcaption>
+          <pre><code class="language-ts">describe("fizzBuzz", () =&gt; {
+  describe("returns 'FizzBuzz' when divisible by both three and five", () =&gt; {
+    it("returns 'FizzBuzz' for 15", () =&gt; {
+      expect(fizzBuzz(15)).toBe("FizzBuzz");
+    });
+    it("returns 'FizzBuzz' for 45", () =&gt; {
+      expect(fizzBuzz(45)).toBe("FizzBuzz");
+    });
+  });
+
+  it("returns '43' for 43", () =&gt; {
+    expect(fizzBuzz(43)).toBe("43");
+  });
+
+  describe("throws number out of range when greater than 100", () =&gt; {
+    it("throws number out of range for 102", () =&gt; {
+      expect(() =&gt; fizzBuzz(102)).toThrow();
+    });
+  });
+});</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <ul>
+      <li><strong>Commit messages say what happens:</strong> “handle when the input is not divisible by three and five” → “when given 43, returns '43'”. <a class="src" data-lesson="47">L47</a></li>
+      <li><strong>Throw assertions</strong> must wrap the call: <code>expect(() =&gt; fizzBuzz(102)).toThrow()</code>. <a class="src" data-lesson="47">L47</a></li>
+      <li><strong>Extending the assignment</strong> (e.g. non-number inputs) is fine if tests express it, after the required behavior is done. <a class="src" data-lesson="47">L47</a></li>
+      <li><strong>Obvious implementation</strong> from the first test is fine on a problem this simple. Harder katas will need fake it. <a class="src" data-lesson="47">L47</a></li>
+    </ul>
+
+    <blockquote class="quote">“One it, one expect. No more. One it, one expect. And that's the rule.”<cite><a class="src" data-lesson="47">L47</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="katas--palindrome" data-title="Palindrome">
+    <h3>Palindrome <a class="src" data-lesson="49">L49</a> <a class="src" data-lesson="50">L50</a></h3>
+
+    <p><strong>Problem:</strong> detect palindrome words (<code>mom</code> and <code>wow</code> are palindromes, <code>bill</code> is not) and phrases (“Was it a rat I saw?”, “Never odd or even”), plus the grading-checklist examples. <a class="src" data-lesson="49">L49</a> <strong>Trains:</strong> the micro-mechanics of red-green-refactor, which matter much more at higher guess points (outgoing adapters, E2E). <a class="src" data-lesson="49">L49</a></p>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — red for the wrong reason, two tests at once, a transformation mixed with a refactor <a class="src" data-lesson="49">L49</a></div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L49</span> The reviewed commit walk-through</figcaption>
+          <pre><code class="language-text">1  test "knows that mom is a palindrome"      ← palindrome() doesn't exist: compile error
+2  created palindrome function that returns true   ← stub belonged in commit 1
+3  test "does not know dog is not a palindrome"   ← double negative
+4  split-string implementation
+5  two new tests added in one step
+6  lowercase everything
+7  handle empty spaces + refactor in one commit     ← two kinds of change
+8  consolidate split/join into one chain           ← no rule-of-three trigger (accepted)</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — each commit is one phase, one example, one kind of change</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Same kata, re-sequenced per the feedback</figcaption>
+          <pre><code class="language-text">red:      knows that mom is a palindrome     (stub exported → fails on logic)
+green:    knows that mom is a palindrome     (fake it)
+red:      knows dog is not a palindrome
+green:    knows dog is not a palindrome      (compare with reversed string)
+red:      knows Mom is a palindrome          (one new example)
+green:    knows Mom is a palindrome          (lowercase)
+red:      knows "Never odd or even" is a palindrome
+green:    knows "Never odd or even" is a palindrome  (strip spaces)
+refactor: chain split/join                   (structure only, only on duplication ×3)</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — double negative: hard to parse</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L49</span></figcaption>
+          <pre><code class="language-ts">it("does not know dog is not a palindrome", () =&gt; {
+  expect(palindrome("dog")).toBe(false);
+});</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — positive, concrete “knows that …” names</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L49</span></figcaption>
+          <pre><code class="language-ts">it("knows that mom is a palindrome", () =&gt; {
+  expect(palindrome("mom")).toBe(true);
+});
+it("knows dog is not a palindrome", () =&gt; {
+  expect(palindrome("dog")).toBe(false);
+});</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <p><strong>Review #2</strong> <a class="src" data-lesson="50">L50</a>: the final tests read well (<code>describe</code> + <code>it.each</code> for palindromes, including books, movies and places; non-palindromes; non-strings that throw). The mechanics were off. The student started with a fake implementation before any red. The second commit was too big (“normalize to lowercase, reverse it, compare it” plus all the examples). Commit messages had no phase labels, and there was an unnecessary comment. Verdict: redo the kata with strict red/green/refactor commits. The student also asked whether the solution was a pure function:</p>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — “functional, but not a pure function” by Khalil’s definition: <code>const</code> introduces state</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L50</span> Student-style solution</figcaption>
+          <pre><code class="language-ts">export function isPalindrome(value: unknown): boolean {
+  if (typeof value !== "string") throw new Error("..."); // message not fully audible
+  const normalizedValue = value.toLowerCase(); // further normalization (inferred)
+  return normalizedValue === normalizedValue.split("").reverse().join("");
+}</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — pure by his framing: no declarations, just a pipeline of functions</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L50</span> Illustration (inferred)</figcaption>
+          <pre><code class="language-ts">const reverse = (s: string) =&gt; s.split("").reverse().join("");
+const isPalindrome = (s: string): boolean =&gt;
+  s.toLowerCase() === reverse(s.toLowerCase());</code></pre>
+        </figure>
+      </div>
+    </div>
+    <p><span class="badge copilot">Added by Copilot</span> This is Khalil’s stricter definition. Many FP references treat local immutable bindings as compatible with purity. The review’s practical point stands either way: no side effects means an input/output system.</p>
+
+    <div class="callout rule"><strong>Commit-size trade-off</strong>
+      <p>“How much complexity can you tolerate?” One example per commit is slower but simpler. Many at once is faster but more complex. Default to one, because FA²STR at the next guess points will require it. Put the “throws when not a string” feature in its own commit. <a class="src" data-lesson="50">L50</a></p>
+    </div>
+    <div class="callout anti"><strong>Comments</strong>
+      <p>“That comment is unnecessary. So get rid of that.” Code says <em>what</em>. Comments are a last resort, used only for <em>why</em>. <a class="src" data-lesson="50">L50</a> <a class="src" data-lesson="48">L48</a></p>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="katas--password-validator" data-title="Password Validator">
+    <h3>Password Validator <a class="src" data-lesson="54">L54</a> <a class="src" data-lesson="55">L55</a> <a class="src" data-lesson="56">L56</a> <a class="src" data-lesson="57">L57</a></h3>
+
+    <p><strong>Problem:</strong> a function or stateless class that validates passwords. They must be <strong>5–15 characters</strong>, contain <strong>at least one digit</strong>, and contain <strong>at least one uppercase letter</strong>. It returns an object with a boolean <code>result</code> and an <code>errors</code> key listing <em>every</em> error that occurred. <a class="src" data-lesson="54">L54</a> <strong>Trains:</strong> FA²STR (upfront + emergent), AAA backwards, program by wishful thinking. <a class="src" data-lesson="56">L56</a></p>
+
+    <h4>Upfront design: Find → Architect → Automate <a class="src" data-lesson="54">L54</a> <a class="src" data-lesson="52">L52</a></h4>
+    <div class="cards">
+      <div class="card"><h4>Find</h4><p>Read the problem. Write <strong>success and failure examples for each criterion</strong> in a “find” file. Classify the requirements: one <em>doing</em> (validate password) and many <em>knowings</em> (5–15 is valid, no digit is invalid, …). The knowings become most of the tests. Sketch the output for an input that breaks every rule (<code>"s"</code>). <a class="src" data-lesson="54">L54</a> <a class="src" data-lesson="52">L52</a></p></div>
+      <div class="card"><h4>Architect</h4><p>Get clear on the <strong>system under test</strong>: string in, object out, through a stateless class with a static method or a plain function. At the stateless level this step is “extremely simple.” <a class="src" data-lesson="54">L54</a></p></div>
+      <div class="card"><h4>Automate</h4><p>Set up the test infrastructure. Here that’s just Jest. All of this can happen “in a millisecond” in your head. Writing it down makes the metacognition visible. <a class="src" data-lesson="54">L54</a></p></div>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L52 / L54</span> Find-file artifacts: responsibilities + wishful-thinking output for <code>"s"</code></figcaption>
+      <pre><code class="language-ts">// Doing:
+//   - validate password
+// Knowing:
+//   - knows passwords between 5 and 15 characters long are valid
+//   - knows passwords outside 5–15 characters are not valid
+//   - knows passwords without at least one digit are not valid
+//   - ... (remaining criteria from the problem statement)
+// Architect: subject under test = a function or static method (stateless guess point)
+
+// input: "s"  → too short, no digit, no uppercase
+const expected = {
+  result: false,
+  errors: ["InvalidLength", "NoDigitIncluded", "MissingUppercase"], // exact identifiers (inferred)
+};</code></pre>
+    </figure>
+
+    <h4>Emergent design: Specify → Test → Refine (commit on green only) <a class="src" data-lesson="55">L55</a></h4>
+    <ol class="steps">
+      <li><strong>Valid password</strong> — written backwards (assert → act → arrange). <code>result.result</code> read badly, so the variable became <code>output</code>. Fake it: <code>return { result: true, errors: [] }</code>. Commit.</li>
+      <li><strong>Invalid length</strong> — expect exactly one error. <code>errors</code> became its own array, with an “is between 5 and 15” check that pushes <code>InvalidLength</code>. Commit.</li>
+      <li><strong>Another length example</strong> — passes immediately. Commit.</li>
+      <li><strong>Refine</strong> — length examples go into an <code>it.each</code> table (input, expected result, expected errors) nested under a <code>describe</code> naming the behavior. Commit.</li>
+      <li><strong>Digit feature</strong> — the success example passes immediately. The failure example drives <code>hasDigits</code>. A copy-pasted test still expected a truthy result and was fixed. The next example passes. The feature is refined into <code>it.each</code> the same way.</li>
+      <li><strong>Detect multiple errors</strong> — a feature only <em>implied</em> by the statement (“read between the lines”). The expected errors were deliberately listed in a different order from the push order. <code>toStrictEqual</code> failed, and the fix was per-error <code>toContain</code>.</li>
+      <li><strong>Stopped</strong> before the uppercase feature (“pretty much just typing”).</li>
+    </ol>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L55</span> Production code at the end of the demo</figcaption>
+      <pre><code class="language-ts">type PasswordError = "InvalidLength" | "NoDigitIncluded" | "MissingUppercase"; // names (inferred)
+
+export class PasswordValidator {
+  static validate(password: string) {
+    const errors: PasswordError[] = [];
+    const isBetween = password.length &gt;= 5 &amp;&amp; password.length &lt;= 15;
+    if (!isBetween) errors.push("InvalidLength");
+
+    const hasDigits =
+      password.split("").find((char) =&gt; !isNaN(Number(char))) !== undefined; // exact check (inferred)
+    if (!hasDigits) errors.push("NoDigitIncluded");
+
+    return { result: errors.length === 0, errors };
+  }
+}</code></pre>
+    </figure>
+
+    <div class="callout def"><strong>Levels of abstraction in a test file</strong>
+      <p>Specification (feature/responsibility name) → concrete examples → test code → production code. “You always have a higher level of policy that's describing what is happening.” <a class="src" data-lesson="55">L55</a></p>
+    </div>
+
+    <h4>Review feedback → fixes</h4>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — instantiating a stateless class; the test name describes <em>how</em> (keys, flags, null) <a class="src" data-lesson="56">L56</a></div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Test name quoted from the reviewed PR, example value illustrative</figcaption>
+          <pre><code class="language-ts">it("sets result to true and error to null when password is Abcde1", () =&gt; {
+  const validator = new PasswordValidator();
+  const output = validator.validate("Abcde1");
+  expect(output.result).toBe(true);
+  expect(output.error).toBeNull();
+});</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — static call; the name states a responsibility (“can … / knows that …”), the how stays in the body</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Uses the rename Khalil proposed: “can detect valid passwords”</figcaption>
+          <pre><code class="language-ts">describe("can detect valid passwords", () =&gt; {
+  it.each(["Abcde1", "Passw0rd"])("knows that '%s' is valid", (password) =&gt; {
+    const output = PasswordValidator.validate(password);
+    expect(output.result).toBe(true);
+    expect(output.error).toBeNull();
+  });
+});</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — hard-coded reason copied across tests: the “too long” tests still said “too short” <a class="src" data-lesson="56">L56</a></div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Illustrates the copy-paste bug from the review</figcaption>
+          <pre><code class="language-ts">it.each(["abc", "ab1"])(
+  "sets result to false and error to too short when password is less than five characters",
+  (password) =&gt; {
+    expect(PasswordValidator.validate(password).error).toContain("too short");
+  }
+);
+it.each(["abcdefghijklmnop1A"])(
+  "sets result to false and error to too short when password is ...",
+  (password) =&gt; {
+    expect(PasswordValidator.validate(password).error).toContain("too short");
+  }
+);</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — encapsulate what varies: password + reason in one row, substituted into the name and the assertion</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L56</span> Khalil’s PR-comment suggestion (example values and exact API inferred)</figcaption>
+          <pre><code class="language-ts">it.each([
+  { password: "abc", reason: "too short" },
+  { password: "abcdefghijklmnop1A", reason: "too long" },
+])("knows that '$password' is invalid because it is $reason", ({ password, reason }) =&gt; {
+  const output = PasswordValidator.validate(password);
+  expect(output.result).toBe(false);
+  expect(output.error).toContain(reason);
+});</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — order-dependent assertion couples the test to push order in production <a class="src" data-lesson="55">L55</a></div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> The failing assertion from the demo</figcaption>
+          <pre><code class="language-ts">const output = PasswordValidator.validate(input);
+expect(output.errors).toStrictEqual(["NoDigitIncluded", "InvalidLength"]);
+// fails: production pushed InvalidLength first</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — assert containment: “I don't really care about the order”</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L55</span> Multiple-errors feature (wording inferred)</figcaption>
+          <pre><code class="language-ts">describe("can detect multiple errors", () =&gt; {
+  it.each([
+    ["&lt;short no digit&gt;", false, ["NoDigitIncluded", "InvalidLength"]],
+    ["&lt;long no digit&gt;", false, ["NoDigitIncluded", "InvalidLength"]],
+  ])("knows that '%s' has multiple errors", (input, result, expectedErrors) =&gt; {
+    const output = PasswordValidator.validate(input);
+    expect(output.result).toBe(result);
+    output.errors.forEach((error) =&gt; expect(expectedErrors).toContain(error));
+  });
+});</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <p><strong>Review #2 (Tim)</strong> <a class="src" data-lesson="57">L57</a> was mostly praise. It used a plain function (the closest to essential complexity), a fake-it first commit, tiny transformations and <code>toContain</code> (“a very good API”). It also strictly typed the response, which turns the return shape into a <strong>role</strong>:</p>
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L57</span> Typed response = a role the function must satisfy (names inferred)</figcaption>
+      <pre><code class="language-ts">type PasswordError = "InvalidLength" | "MissingDigit" | "MissingUppercase";
+
+interface PasswordValidationResult {
+  result: boolean;
+  errors: PasswordError[];
+}
+
+export function validatePassword(password: string): PasswordValidationResult {
+  // ...
+}</code></pre>
+    </figure>
+    <div class="cards">
+      <div class="card"><h4>Breadth triangulation</h4><p>One concrete example per responsibility, then move to the next feature. Tim did this. Adding the uppercase test forced him to update older inputs so they kept passing. <a class="src" data-lesson="57">L57</a></p></div>
+      <div class="card"><h4>Depth triangulation</h4><p>One feature, with more and more examples to strengthen its abstraction. Both styles are valid. <a class="src" data-lesson="57">L57</a></p></div>
+      <div class="card"><h4>Next step for Tim</h4><p>Near-duplicate standalone tests → <code>it.each</code> rows of input + expected errors, then many more combinations. Name multi-error tests precisely: “missing digit and missing uppercase letter.” <a class="src" data-lesson="57">L57</a></p></div>
+    </div>
+
+    <blockquote class="quote">“You want to decouple the how from the what. That's huge. Because the how could change. But you still want the what to stay exactly the same.”<cite><a class="src" data-lesson="56">L56</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="katas--stats-calculator" data-title="Stats Calculator">
+    <h3>Stats Calculator <a class="src" data-lesson="58">L58</a> <a class="src" data-lesson="59">L59</a></h3>
+
+    <p><strong>Problem:</strong> process a sequence of integers and report statistics on them (e.g. minimum and maximum). The <em>what</em> is fixed. The <em>how</em> (return an object, a string or an array) has many valid answers, and “that is a key distinction.” <a class="src" data-lesson="58">L58</a></p>
+
+    <div class="callout def"><strong>Clarify before you verify (new Find-step principle)</strong>
+      <ol>
+        <li>List the <strong>responsibilities</strong> from the description.</li>
+        <li>List concrete <strong>examples</strong>.</li>
+        <li>Decide the <strong>output data structure</strong> (object / string / array) and strictly type it.</li>
+        <li>Decide <strong>how you’ll verify</strong> each responsibility.</li>
+      </ol>
+      <p>The reviewed student did this in the first commit: <code>calculateStats(numbers)</code> returns a typed stats shape. The commits then showed <strong>baby steps</strong>. <a class="src" data-lesson="58">L58</a></p>
+    </div>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — <code>firstInput / secondInput / thirdInput</code> hide which edge case each covers; the tests repeat <a class="src" data-lesson="58">L58</a></div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Names from the reviewed file, values illustrative</figcaption>
+          <pre><code class="language-ts">const firstInput = [2, 4, 21, -8, 53, 40];
+const secondInput = [0, 3, 0, 7];
+const thirdInput = [-5, -1, -9];
+
+describe("should return maximum value among passed integers", () =&gt; {
+  it("first input", () =&gt; {
+    expect(calculateStats(firstInput).max).toBe(53);
+  });
+  it("second input", () =&gt; {
+    expect(calculateStats(secondInput).max).toBe(7);
+  });
+  it("third input", () =&gt; {
+    expect(calculateStats(thirdInput).max).toBe(-1);
+  });
+});</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — named example sets + <code>it.each</code>: the intent is readable, and each example lives in one place</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Names from Khalil’s rewrite (assignment input, input containing zeros, input with negative numbers)</figcaption>
+          <pre><code class="language-ts">const assignmentInput = [2, 4, 21, -8, 53, 40];
+const inputContainingZeros = [0, 3, 0, 7];
+const inputWithNegativeNumbers = [-5, -1, -9];
+
+describe("stats calculator", () =&gt; {
+  it.each([
+    ["assignment input", assignmentInput, 53],
+    ["input containing zeros", inputContainingZeros, 7],
+    ["input with negative numbers", inputWithNegativeNumbers, -1],
+  ])("knows the maximum value for %s", (_name, input, expectedMax) =&gt; {
+    expect(calculateStats(input).max).toBe(expectedMax);
+  });
+});</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — inputs and expectations in separate structures; the spec names the return shape (how) <a class="src" data-lesson="59">L59</a></div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Shape of the reviewed file</figcaption>
+          <pre><code class="language-ts">it.each([
+  [[2, 4, 21, -8, 53, 40], { min: -8, max: 53 }],
+  [[0, 3, 0, 7], { min: 0, max: 7 }],
+  [[-5, -1, -9], { min: -9, max: -1 }],
+])("returns a result object with min and max properties", (input, expected) =&gt; {
+  expect(calculateStats(input)).toEqual(expected);
+});</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — one object per example + responsibility specifications (a doing or a knowing)</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Follows the data shape and spec wording from L59</figcaption>
+          <pre><code class="language-ts">const examples = [
+  { input: [2, 4, 21, -8, 53, 40], expected: { min: -8, max: 53 } },
+  { input: [0, 3, 0, 7], expected: { min: 0, max: 7 } },
+  { input: [-5, -1, -9], expected: { min: -9, max: -1 } },
+];
+
+describe("stats calculator returns a set of statistics for a list of integers", () =&gt; {
+  it.each(examples)("can calculate the minimum value", ({ input, expected }) =&gt; {
+    expect(calculateStats(input).min).toBe(expected.min);
+  });
+  it.each(examples)("can calculate the maximum value", ({ input, expected }) =&gt; {
+    expect(calculateStats(input).max).toBe(expected.max);
+  });
+});</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <div class="callout def"><strong>Responsibility specification vs examples</strong>
+      <p>A test spec has two parts. <strong>Responsibility specifications</strong> name a doing or a knowing (“it can calculate the minimum value”) and stay abstract. <strong>Examples</strong> are as concrete as possible. Drive with concrete examples, and end up with abstract responsibility specs. <a class="src" data-lesson="59">L59</a></p>
+    </div>
+    <div class="callout tip"><strong>Refinement budget</strong>
+      <p>“You could spend so much time refactoring these examples.” Refine until the tests are readable, then stop, but never trade away readability. Parameterizing is now a grading-checklist refinement. <a class="src" data-lesson="59">L59</a> <a class="src" data-lesson="58">L58</a></p>
+    </div>
+    <blockquote class="quote">“Names are not something to be wasted. Names actually do a lot.”<cite><a class="src" data-lesson="58">L58</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="katas--military-time" data-title="Military Time Validator">
+    <h3>Military Time Validator <a class="src" data-lesson="60">L60</a> <a class="src" data-lesson="61">L61</a></h3>
+
+    <p><strong>Problem:</strong> given a string that may be a valid or invalid military time range (e.g. <code>"01:12 - 14:32"</code>, format inferred), write a function or stateless class that detects which. <strong>Trains:</strong> picking the simplest transformation with the <strong>Transformation Priority Premise</strong>, here and in the Boolean Calculator. <a class="src" data-lesson="60">L60</a></p>
+
+    <h4>Transformation Priority Premise (simplest first) <a class="src" data-lesson="60">L60</a></h4>
+    <ol class="steps">
+      <li><strong>nil</strong> — return nothing. Fake it can start here so the first test fails for the right reason.</li>
+      <li><strong>constant</strong> — return a hard-coded value.</li>
+      <li><strong>combine constants</strong> — e.g. add two constants.</li>
+      <li><strong>scalars / arguments</strong> — use the input.</li>
+      <li><strong>single statement</strong> — one functional expression calling functions or “service providers” such as <code>min</code>/<code>max</code>.</li>
+      <li><strong>conditional + return</strong> — multiple statements.</li>
+      <li><strong>more conditionals, more statements</strong> — variables and mutation sit here, at the costly end.</li>
+    </ol>
+    <div class="callout rule"><strong>Using TPP</strong>
+      <ul>
+        <li>Use it at FA²STR’s <strong>Test</strong> step (keep the obvious implementation at the simplest option every time) <strong>and</strong> at the <strong>Refine</strong> step. <a class="src" data-lesson="60">L60</a></li>
+        <li>“If you feel like you need to add a variable or you think you need to do some mutations, question your transformation.” <a class="src" data-lesson="60">L60</a></li>
+        <li>For reference, a condition-map abstraction on test one sits around “level seven or eight.” <a class="src" data-lesson="63">L63</a></li>
+      </ul>
+    </div>
+
+    <h4>Review #1 (Loki): functional decomposition, commit by commit <a class="src" data-lesson="60">L60</a></h4>
+    <p>“Some of the most readable commits in a story of commits” Khalil had seen. The problem was decomposed down to the tiniest responsibility and composed upward:</p>
+    <figure class="diagram">
+      <pre class="mermaid">flowchart BT
+  IR["isInRange value, min, max"] --&gt; HR["isHourInRange"]
+  IR --&gt; MR["isMinuteInRange"]
+  TF["hasValidTimeFormat"] --&gt; VT["isValidTime"]
+  HR --&gt; VT
+  MR --&gt; VT
+  TF --&gt; RF["hasValidTimeRangeFormat"]
+  VT --&gt; MT["isMilitaryTime - the only export"]
+  RF --&gt; MT</pre>
+      <figcaption><span class="badge copilot">Added by Copilot</span> Build order of Loki’s helpers: <code>isInRange</code> (5 in 0–10 → true, 5 in 6–10 → false) → hour (25 → false) → minute (61 → false) → <code>isValidTime</code> → <code>isMilitaryTime</code> → format regex → range format → extract <code>TIME_PATTERN</code> → remove unneeded exports. <a class="src" data-lesson="60">L60</a></figcaption>
+    </figure>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — one function doing everything: a mutable flag and nested branches (high on the TPP list)</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> What skipping the decomposition tends to look like</figcaption>
+          <pre><code class="language-ts">export function isMilitaryTime(range: string): boolean {
+  let valid = true;
+  const parts = range.split(" - ");
+  if (parts.length !== 2) {
+    valid = false;
+  } else {
+    for (const part of parts) {
+      const [h, m] = part.split(":");
+      if (h.length !== 2 || m.length !== 2) valid = false;
+      else if (Number(h) &gt; 23 || Number(m) &gt; 59) valid = false;
+    }
+  }
+  return valid;
+}</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — tiny responsibilities composed upward; helpers encapsulated by <em>not exporting</em> them</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L60</span> Exact regex, hour bound and separator inferred</figcaption>
+          <pre><code class="language-ts">const TIME_PATTERN = /^\d{2}:\d{2}$/;
+
+const isInRange = (value: number, min: number, max: number): boolean =&gt;
+  value &gt;= min &amp;&amp; value &lt;= max;
+
+const isHourInRange = (hour: number) =&gt; isInRange(hour, 0, 23);
+const isMinuteInRange = (minute: number) =&gt; isInRange(minute, 0, 59);
+
+const hasValidTimeFormat = (time: string) =&gt; TIME_PATTERN.test(time);
+
+const isValidTime = (time: string): boolean =&gt; {
+  if (!hasValidTimeFormat(time)) return false;
+  const [hour, minute] = time.split(':').map(Number);
+  return isHourInRange(hour) &amp;&amp; isMinuteInRange(minute);
+};
+
+const hasValidTimeRangeFormat = (range: string): boolean =&gt; {
+  const parts = range.split(' - ');
+  return parts.length === 2 &amp;&amp; parts.every(hasValidTimeFormat);
+};
+
+export const isMilitaryTime = (range: string): boolean =&gt; {
+  if (!hasValidTimeRangeFormat(range)) return false;
+  const [start, end] = range.split(' - ');
+  return isValidTime(start) &amp;&amp; isValidTime(end);
+};</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — “revise index file for clarification” added comments that restate the names <a class="src" data-lesson="60">L60</a></div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Illustrative “what” comments</figcaption>
+          <pre><code class="language-ts">// checks if the hour is between 0 and 23
+const isHourInRange = (hour: number) =&gt; isInRange(hour, 0, 23);
+// checks if the minute is between 0 and 59
+const isMinuteInRange = (minute: number) =&gt; isInRange(minute, 0, 59);</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — delete them: the names already say what. “Do we really need comments? I wouldn't say we do.”</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Comments only for “why” <a class="src" data-lesson="48">L48</a></figcaption>
+          <pre><code class="language-ts">const isHourInRange = (hour: number) =&gt; isInRange(hour, 0, 23);
+const isMinuteInRange = (minute: number) =&gt; isInRange(minute, 0, 59);</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <h4>Review #2 (Kareel): class-based, “an exemplary demonstration” <a class="src" data-lesson="61">L61</a></h4>
+    <p>Commit story: fake a basic valid example → a falsy example (hour <code>25</code>) forces parsing → refactor “group test by validity” → hour bounds with <code>isHourValid</code> → minute checks → refactor merging the helpers into one <code>isTimeValid</code> + <code>parseTimeRange</code> → a finite-number check → start must be before end (several examples had to change). <a class="src" data-lesson="61">L61</a></p>
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L61</span> The first level of production code reads like the algorithm: parse, start valid, end valid, start &lt; end</figcaption>
+      <pre><code class="language-ts">interface Time { hours: number; minutes: number }
+interface TimeRange { start: Time; end: Time }
+
+export class MilitaryTimeValidator {
+  isValidRange(input: string): boolean {
+    const range = parseTimeRange(input);
+    return isTimeValid(range.start)
+      &amp;&amp; isTimeValid(range.end)
+      &amp;&amp; isStartTimeLessThanEndTime(range);
+  }
+}</code></pre>
+    </figure>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — a copied test per example: each new case duplicates structure (closed to extension) <a class="src" data-lesson="60">L60</a></div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Illustrative duplicated examples</figcaption>
+          <pre><code class="language-ts">it("should return true if time range is valid", () =&gt; {
+  expect(isMilitaryTime("01:12 - 14:32")).toBe(true);
+});
+it("should return true if time range is valid (2)", () =&gt; {
+  expect(isMilitaryTime("22:00 - 23:59")).toBe(true);
+});
+it("should return false if time range is not in format", () =&gt; {
+  expect(isMilitaryTime("01:12 14:32")).toBe(false);
+});</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — responsibility spec → parameterized examples: “super open closed”, so a new case is just a new row</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L61</span> Kareel’s grouping</figcaption>
+          <pre><code class="language-ts">describe('military time validator', () =&gt; {
+  describe('valid time', () =&gt; {
+    it.each([/* ...valid ranges... */])('%s is a valid military time range', (input) =&gt; {
+      expect(new MilitaryTimeValidator().isValidRange(input)).toBe(true);
+    });
+  });
+  describe('invalid time because of syntax', () =&gt; { /* it.each([...]) */ });
+  describe('invalid time because of hours', () =&gt; { /* it.each([...]) */ });
+});</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <div class="callout def"><strong>Levels of abstraction, highest → lowest</strong>
+      <ol>
+        <li>You explaining the problem out loud to someone.</li>
+        <li>The specifications.</li>
+        <li>The test code.</li>
+        <li>The first level of production code: the function or static method that kicks off the SUT, reading as the algorithm’s steps.</li>
+        <li>Encapsulated lower-level helpers, seen only when you “descend a layer deeper.”</li>
+      </ol>
+      <p>“That sort of gradient like movement from theoretical to physical.” <a class="src" data-lesson="61">L61</a></p>
+    </div>
+    <p><strong>Functional vs OOP encapsulation:</strong> functional code co-locates state and behavior in one file and hides helpers by not exporting them. OOP encapsulates them together in a class. <a class="src" data-lesson="60">L60</a> Kareel’s class had to be instantiated. A static method would also work, which is “not a huge deal.” <a class="src" data-lesson="61">L61</a></p>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>TPP gives you a shared vocabulary for keeping AI diffs small. Try “make this test pass using the highest-priority transformation on the TPP list: constant before conditional, no new variables.” If the diff introduces a <code>let</code>, a loop or a lookup map for one new example, reject it and ask again one rung lower.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="katas--boolean-calculator" data-title="Boolean Calculator">
+    <h3>Boolean Calculator (Design It Twice) <a class="src" data-lesson="62">L62</a> <a class="src" data-lesson="63">L63</a></h3>
+
+    <p><strong>Problem:</strong> evaluate a boolean expression given as a string, such as <code>"TRUE"</code>, <code>"FALSE"</code>, <code>NOT</code>, <code>"TRUE AND FALSE"</code>, and later parentheses. It has “one other aspect” that makes it harder than Military Time. Khalil flagged it as a kata that may need upfront design. <a class="src" data-lesson="62">L62</a> <a class="src" data-lesson="63">L63</a> <a class="src" data-lesson="60">L60</a> <a class="src" data-lesson="54">L54</a></p>
+
+    <div class="cards">
+      <div class="card"><h4>Johan: emergent, swim lanes <a class="src" data-lesson="62">L62</a></h4><p>“One of the best ones I've seen so far.” Tests are grouped into <code>describe</code> <strong>swim lanes</strong> (incorrect input, TRUE/FALSE, NOT, AND), which is categorical thinking, so it’s obvious where the next test goes and you can triangulate within a lane. Transformations are simple. Trouble starts at AND: two tests in one loop, deeply nested describes, and vague words (“parts”, “one/two/three”).</p></div>
+      <div class="card"><h4>Shannon: upfront, one big guess <a class="src" data-lesson="63">L63</a></h4><p>All tests pass, but the first commit already had <code>describe.each</code> table infrastructure plus a “condition map”, a stack, tokens and operands. That’s an <strong>upfront design decision</strong> (FA²STR’s Architect), “five, six, seven different guesses all at the same time.” The design lives in the author’s head, not in commits a reviewer can follow.</p></div>
+    </div>
+
+    <h4>Johan’s sequence <a class="src" data-lesson="62">L62</a></h4>
+    <ol class="steps">
+      <li><strong>Invalid input → throw</strong> — obvious implementation, “a great first defensive coding commit.” Rename the context to “when input is not correct.”</li>
+      <li><strong><code>TRUE</code> → <code>return true</code></strong> — the simplest thing, even with foresight. “Lead with the guess.”</li>
+      <li><strong><code>FALSE</code></strong> — evaluate the condition inline instead of adding an <code>if</code>.</li>
+      <li><strong><code>NOT</code></strong> — “input includes NOT”. Similar code appeared twice, so no refactor yet (rule of three).</li>
+      <li><strong><code>AND</code></strong> — two tests at once (flagged). Split on AND and require every token to be true. A refactor introduced <code>transformValuesToExpression</code>, and words like <em>values</em> and <em>expressions</em> began to appear.</li>
+      <li><strong><code>TRUE AND NOT TRUE</code></strong> — <code>checkNegation</code> works, but the test name was hard to read.</li>
+    </ol>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — conditions encoded as nested describes: high “psychic entropy” for the reader <a class="src" data-lesson="62">L62</a></div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Context names quoted from the reviewed tests</figcaption>
+          <pre><code class="language-ts">describe("when AND is provided", () =&gt; {
+  describe("when no negation provided", () =&gt; {
+    describe("when all parts true", () =&gt; {
+      it("should return true", () =&gt; {
+        expect(calculator.evaluate("TRUE AND TRUE")).toBe(true);
+      });
+    });
+    describe("when all parts not true", () =&gt; {
+      it("should return false", () =&gt; {
+        expect(calculator.evaluate("TRUE AND FALSE")).toBe(false);
+      });
+    });
+  });
+});</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — lead with the concrete example. “It's always going to be easier to just use an example.”</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L62</span> Names from Khalil’s suggestion, bodies filled in</figcaption>
+          <pre><code class="language-ts">describe('boolean calculator', () =&gt; {
+  describe('when input is not correct', () =&gt; {
+    it('should throw an error', () =&gt; {
+      expect(() =&gt; calculator.evaluate('garbage')).toThrow();
+    });
+  });
+
+  it('returns true for TRUE AND TRUE', () =&gt; {
+    expect(calculator.evaluate('TRUE AND TRUE')).toBe(true);
+  });
+  it('returns false for TRUE AND NOT TRUE', () =&gt; {
+    expect(calculator.evaluate('TRUE AND NOT TRUE')).toBe(false);
+  });
+});</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — an <code>if</code> adds a statement and a branch (lower on the TPP list)</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span></figcaption>
+          <pre><code class="language-ts">evaluate(input: string): boolean {
+  if (input === 'TRUE') return true;
+  return false;
+}</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — evaluate the condition inline: one expression, the simpler transformation</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L62</span></figcaption>
+          <pre><code class="language-ts">evaluate(input: string): boolean {
+  return input === 'TRUE';
+}</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — test one arrives with table infrastructure and a condition map: TPP “level seven or eight” <a class="src" data-lesson="63">L63</a></div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Illustrates the shape described in the review</figcaption>
+          <pre><code class="language-ts">const CONDITIONS: Record&lt;string, (a: boolean, b: boolean) =&gt; boolean&gt; = {
+  AND: (a, b) =&gt; a &amp;&amp; b,
+  // ...
+};
+
+describe.each([
+  ["TRUE", true],
+  ["TRUE AND TRUE", true],
+  ["TRUE AND FALSE", false],
+])("evaluate(%s)", (expression, expected) =&gt; {
+  it(`returns ${expected}`, () =&gt; expect(evaluate(expression)).toBe(expected));
+});
+
+export function evaluate(expression: string): boolean {
+  const tokens = expression.split(" ");
+  const stack: boolean[] = [];
+  // ... operands pushed onto the stack, operators looked up in CONDITIONS
+}</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — “take one example, write it as English, make that your it statement”; production starts at <code>return true</code></div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L63</span> Suggested simpler start (add <code>type Expression = string</code> later, in a refactor step)</figcaption>
+          <pre><code class="language-ts">describe('boolean calculator', () =&gt; {
+  it('returns true when I pass in TRUE', () =&gt; {
+    expect(evaluate('TRUE')).toBe(true);
+  });
+  it('returns true when I do TRUE AND TRUE', () =&gt; {
+    expect(evaluate('TRUE AND TRUE')).toBe(true);
+  });
+  it('returns false when I do TRUE AND FALSE', () =&gt; {
+    expect(evaluate('TRUE AND FALSE')).toBe(false);
+  });
+});</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 720 210" role="img" aria-label="Left: one big guess wanders from start to solution. Right: short hops, one guess each, reach the same solution.">
+        <defs>
+          <marker id="ka-arrow-hop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker>
+        </defs>
+        <text x="175" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Many guesses at once</text>
+        <text x="535" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">One guess at a time</text>
+        <line x1="360" y1="30" x2="360" y2="190" stroke="var(--svg-stroke)" stroke-dasharray="4 4"/>
+        <circle cx="40" cy="160" r="7" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <circle cx="310" cy="50" r="9" fill="var(--accent-2)" stroke="var(--accent-2)"/>
+        <path d="M40,160 C 110,20 150,200 190,100 S 80,60 150,50 S 330,170 300,58" fill="none" stroke="var(--accent-2)" stroke-width="2" stroke-dasharray="5 3"/>
+        <text x="40" y="185" text-anchor="middle" font-size="11" fill="var(--fg)">start</text>
+        <text x="310" y="80" text-anchor="middle" font-size="11" fill="var(--fg)">solution</text>
+        <text x="175" y="202" text-anchor="middle" font-size="11" fill="var(--fg)">design happens in your head: backspace, rerun, wander</text>
+        <circle cx="400" cy="160" r="7" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <circle cx="670" cy="50" r="9" fill="var(--accent-2)" stroke="var(--accent-2)"/>
+        <circle cx="468" cy="132" r="5" fill="var(--accent)"/>
+        <circle cx="536" cy="105" r="5" fill="var(--accent)"/>
+        <circle cx="604" cy="78" r="5" fill="var(--accent)"/>
+        <line x1="406" y1="157" x2="462" y2="135" stroke="var(--accent)" stroke-width="2" marker-end="url(#ka-arrow-hop)"/>
+        <line x1="474" y1="129" x2="530" y2="108" stroke="var(--accent)" stroke-width="2" marker-end="url(#ka-arrow-hop)"/>
+        <line x1="542" y1="102" x2="598" y2="81" stroke="var(--accent)" stroke-width="2" marker-end="url(#ka-arrow-hop)"/>
+        <line x1="610" y1="75" x2="660" y2="55" stroke="var(--accent)" stroke-width="2" marker-end="url(#ka-arrow-hop)"/>
+        <text x="400" y="185" text-anchor="middle" font-size="11" fill="var(--fg)">start</text>
+        <text x="670" y="80" text-anchor="middle" font-size="11" fill="var(--fg)">solution</text>
+        <text x="468" y="150" text-anchor="middle" font-size="10" fill="var(--fg)">TRUE</text>
+        <text x="536" y="123" text-anchor="middle" font-size="10" fill="var(--fg)">AND</text>
+        <text x="604" y="96" text-anchor="middle" font-size="10" fill="var(--fg)">NOT</text>
+        <text x="535" y="202" text-anchor="middle" font-size="11" fill="var(--fg)">each commit is a readable step; the feedback loop shows the next one</text>
+      </svg>
+      <figcaption><span class="badge copilot">Added by Copilot</span> Redrawn from Khalil’s verbal path sketch (“all around” vs “here to here and then here to here”). Hop labels are illustrative. <a class="src" data-lesson="63">L63</a></figcaption>
+    </figure>
+
+    <div class="callout rule"><strong>Design it twice</strong>
+      <p>Once you have a working upfront solution, redo it and arrive at the same place <em>emergently</em>, one guess at a time (from <em>A Philosophy of Software Design</em>). “Allow the tool to be doing the heavy lifting, which is to make the small guesses and lead with that.” For stateless problems, start with plain <code>it</code> tests and refactor toward <code>describe.each</code>/<code>it.each</code> later. <a class="src" data-lesson="63">L63</a></p>
+    </div>
+    <div class="callout tip"><strong>Name the concepts (ubiquitous language)</strong>
+      <p>“What is a part really?” A part, a token, a value, an expression? Name the concepts instead of numbering them, and refactor test names for meaning too. Pushing complexity into deeper layers is fine: “That complexity needs to go somewhere and it's essential.” <a class="src" data-lesson="62">L62</a></p>
+    </div>
+    <p>Both reviews end positively. Shannon’s code “looks really elegant”, and nested statements get refined in the later stateful sections, not here. It’s a spectrum: if you’re confident and short on time, the whole thing can be an obvious implementation. <a class="src" data-lesson="63">L63</a></p>
+    <blockquote class="quote">“All of what is happening here is happening within your brain. It's not happening within the code to be read as a story.”<cite><a class="src" data-lesson="63">L63</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="katas--review-checklist" data-title="Cross-Kata Review Checklist">
+    <h3>Cross-Kata Review Checklist</h3>
+    <p>The feedback that came up again and again across the reviews, in one place. Run it over your own PR, or anyone else’s, before asking for review.</p>
+
+    <table class="tbl">
+      <thead><tr><th>#</th><th>Check</th><th>Smell (before)</th><th>Fix (after)</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Shape matches the problem</td><td>No input, generated output</td><td><code>fn(input) =&gt; output</code>, stateless</td><td><a class="src" data-lesson="46">L46</a></td></tr>
+        <tr><td>2</td><td>Red for the right reason</td><td>Test fails because the function doesn’t exist</td><td>Export a stub in the red step</td><td><a class="src" data-lesson="45">L45</a> <a class="src" data-lesson="49">L49</a></td></tr>
+        <tr><td>3</td><td>Simplest transformation</td><td>Map / loop / variables for test one</td><td>Constant first, climb TPP one rung at a time</td><td><a class="src" data-lesson="60">L60</a> <a class="src" data-lesson="62">L62</a> <a class="src" data-lesson="63">L63</a></td></tr>
+        <tr><td>4</td><td>Rule of three</td><td>Refactor after one or two repeats; examples added mid-refactor</td><td>Refactor on the third, structure only</td><td><a class="src" data-lesson="45">L45</a> <a class="src" data-lesson="62">L62</a></td></tr>
+        <tr><td>5</td><td>One example per loop</td><td>Two tests in one red-green-refactor</td><td>Comment out pre-written tests, enable one at a time</td><td><a class="src" data-lesson="49">L49</a> <a class="src" data-lesson="55">L55</a> <a class="src" data-lesson="62">L62</a></td></tr>
+        <tr><td>6</td><td>Refactor XOR transformation</td><td>New behavior + cleanup in one commit</td><td>Split into two commits</td><td><a class="src" data-lesson="49">L49</a></td></tr>
+        <tr><td>7</td><td>Commit cadence &amp; labels</td><td>One big commit; no phase in the message</td><td>Per phase (emergent) or on green / refactor, labelled</td><td><a class="src" data-lesson="44">L44</a> <a class="src" data-lesson="46">L46</a> <a class="src" data-lesson="50">L50</a></td></tr>
+        <tr><td>8</td><td>One it, one expect</td><td>15 and 45 asserted in one <code>it</code></td><td>Separate <code>it</code>s or <code>it.each</code></td><td><a class="src" data-lesson="47">L47</a></td></tr>
+        <tr><td>9</td><td>Concrete example names</td><td>“…divisible by both three and five”</td><td>“returns 'FizzBuzz' for 15”; abstract behavior in <code>describe</code></td><td><a class="src" data-lesson="47">L47</a> <a class="src" data-lesson="62">L62</a></td></tr>
+        <tr><td>10</td><td>Responsibility names, not how</td><td>“sets result to true and error to null…”, “returns a result object…”</td><td>“can detect valid passwords”, “can calculate the minimum value”</td><td><a class="src" data-lesson="56">L56</a> <a class="src" data-lesson="59">L59</a></td></tr>
+        <tr><td>11</td><td>Positive names</td><td>“does not know dog is not a palindrome”</td><td>“knows dog is not a palindrome”</td><td><a class="src" data-lesson="49">L49</a></td></tr>
+        <tr><td>12</td><td>No <code>else</code></td><td><code>if / else if / else</code> chains</td><td>Early-return <code>if</code>s</td><td><a class="src" data-lesson="47">L47</a></td></tr>
+        <tr><td>13</td><td>Stateless means no instance</td><td><code>new PasswordValidator()</code></td><td>Static method or plain function</td><td><a class="src" data-lesson="56">L56</a> <a class="src" data-lesson="57">L57</a></td></tr>
+        <tr><td>14</td><td>Encapsulate what varies</td><td>Copied tests, hard-coded reasons (“too short” in “too long” tests)</td><td><code>it.each</code> rows holding input + expected</td><td><a class="src" data-lesson="56">L56</a> <a class="src" data-lesson="57">L57</a> <a class="src" data-lesson="58">L58</a></td></tr>
+        <tr><td>15</td><td>Named example sets</td><td><code>firstInput</code>, <code>secondInput</code></td><td><code>inputContainingZeros</code>, <code>inputWithNegativeNumbers</code></td><td><a class="src" data-lesson="58">L58</a></td></tr>
+        <tr><td>16</td><td>Order-independent assertions</td><td><code>toStrictEqual</code> on an unordered errors array</td><td><code>toContain</code> per error</td><td><a class="src" data-lesson="55">L55</a> <a class="src" data-lesson="57">L57</a></td></tr>
+        <tr><td>17</td><td>Type what you invent</td><td>Loose return objects</td><td><code>ValidationResult</code> interface = a role</td><td><a class="src" data-lesson="56">L56</a> <a class="src" data-lesson="57">L57</a></td></tr>
+        <tr><td>18</td><td>No “what” comments</td><td>Comments restating the code</td><td>Expressive names; comment only “why”</td><td><a class="src" data-lesson="48">L48</a> <a class="src" data-lesson="50">L50</a> <a class="src" data-lesson="60">L60</a></td></tr>
+        <tr><td>19</td><td>Readable test structure</td><td>Nested conditional describes; vague “parts”</td><td>Swim lanes by category + concrete examples; named concepts</td><td><a class="src" data-lesson="62">L62</a></td></tr>
+        <tr><td>20</td><td>Decompose, then compose</td><td>One function with flags and nested branches</td><td>Tiny responsibilities; top level reads like the algorithm</td><td><a class="src" data-lesson="60">L60</a> <a class="src" data-lesson="61">L61</a></td></tr>
+        <tr><td>21</td><td>Commits tell the story</td><td>Design done off-screen in one jump</td><td>One guess at a time; design it twice</td><td><a class="src" data-lesson="63">L63</a></td></tr>
+      </tbody>
+    </table>
+
+    <p>Deeper treatment of the testing techniques is in <a href="#testing">Testing: Principles &amp; Techniques</a>, and of FA²STR in <a href="#workflow">FA²STR &amp; the Ideal Developer Workflow</a>.</p>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span>
+      <p>This table works as a review rubric for AI-generated tests and code. Agents often trip rows 3, 5, 6, 8, 10 and 18: one-shot implementations, batched tests, mixed refactors, multi-assert tests with “returns an object with…” names, and “what” comments. Paste the table into your review prompt or PR template, and send back any diff that fails a row with that row as the instruction.</p>
+    </aside>
+  </article>
+</section>

@@ -1,0 +1,61 @@
+All right, what's going on crafters? What I'm going to do now is dive into one of the palindrome submissions and we're going to review this. So I've got the
+grading checklist up here. I've got the problem description for palindrome. So it's a checker. You should be able to detect that a string is front and back the
+same thing in reverse. Words like mom and wow are palindromes. It also means bill. It's not a palindrome, right? It should also be able to detect palindromes
+and phrases like, was it a rat I saw? Never odd or even two. Okay, great. And then the grading checklist goes into a little bit more detail here. There's some
+more examples I've added and some other considerations. So good. I do as I've gone in here and if I search palin, pulls up all these different palindromes. I
+also have this level one stateless selected. So let's see. What I'm actually going to do is go through this first one here and I'll do another one. So we've got
+a PR open. Very nice. And what I'm going to do right now is actually take a look at the end result. Find that I like to do that now. So palindrome checker knows
+that mom's palindrome knows that dog is not a palindrome race car. Race car. Testing. Stuff like that. So these are good tests. I could just tell right away.
+This is good. The solution looks pretty good here. There's stuff here that's not considered, but I'm sure that even if you added those examples based on if
+these things are true, if you add those examples, I'm sure that they're going to work. It would just be now a case of adding more examples. So if you've already
+done your palindrome and you don't have some of the examples listed here, all you actually need to do is just add those next. This looks great. So now that I
+can see that it looks pretty good from a high level, I'm going to go through this and begin to critique some of how you've maneuvered through it. So describe
+palindrome checker. It's red. You've created the test for palindrome knowing that mom is a palindrome. Very good. You've used the concrete example in the test.
+I like to see that. Created palindrome function that returns true. Looks good. Yep. So expect to be true. You're now switching that. You've gotten rid of that
+test that you had beforehand. Okay. So now, so let's go through this. So this first test, it knows that mom is a palindrome and this should be red. And why
+should this be red? Because you've mentioned something here called palindrome doesn't exist. So at this point in time, your test code, if you're mentioning
+something called palindrome that doesn't exist, you actually want to only commit when... On red, you only want to commit when the... So as a rule of thumb, you
+only want to commit on red when you're in red for the right reason. And the right reason here would be that it's logically not correct. Not necessarily that it
+doesn't compile. So I could see here that palindrome doesn't yet exist. So you're in red, but you're not a red for the right reason. If you were to run the
+code, it would probably say you have a compilation error. So we'd want to fix that first by probably what you're doing in the next test. Let's see how you've
+named that. And here you've created palindrome. So you actually want to have done this before in the last test, which is to have just created palindrome. You
+don't actually need to return true, but you want to have had that exist. So this export function, palindrome, you want that to have been in the last one. And
+then you would mark that as red in red for the right reason. Because now what we're looking at is a new test. And here, what you want to be doing is actually
+making what was red now green. And you want to make it green for the right reason. So it's just all about those tiny little micro commits and decisions. And
+that's really the focus of this section in the course right now in the merchant design process is to get this down of being in, of committing and of moving from
+one phase to the next one and committing at the correct time. You won't always be doing this later on. You'll just be committing mostly on green. However, it's
+really good to build this skill now because sometimes you actually do need to make these tiny little small micro movements from one to the next. And this helps
+a lot. So that said, let's go to the next one. So now we're in red does not know dog is not a palindrome. I would try to rephrase this. We get rid of one of
+those negatives that it's easier to express. So knows dog is not a palindrome. That's said better. So maybe we could just have had that. We copy that. That's
+clear. And that should fail. So that's red here. Nice. And we're going to move along. And what should we be looking at now? Split string. Great. So this is
+little simple stuff you're doing. That's fine. This is the stateless guest point as well. So you could do all of this statelessly, but actually like the
+expressiveness of this. So yeah, I actually like that a lot. So let's move forward. And what you've done here is you've added two tests. Generally speaking,
+sometimes you can add more than one test if you know what it is you're doing. And because that's breaking a rule, that's breaking one of the rules here, which
+is to just do one test at a time. However, you're just adding several examples examples. And you want to save time and you're okay with jumping outside of that
+rule. Be aware that jumping outside of the rule could introduce problems for you later on down the road. Namely, that you can introduce two examples at the same
+time. Start doing work for two different reasons to make that work pass. It actually makes your transformations a lot harder when you have more examples.
+However, this is a relatively simple one, but just be aware of that as you continue to move forward, especially as we get to the upper layer of guest points,
+you're not going to want to do that. Consider if we were building something like a discord integration and we wrote three tests at the same time for different
+examples, different things. It's probably going to be a lot harder because that's a guest point that's way higher up. That would probably be the outgoing
+adapter. Guess point could also be maybe the end to end one, the system level guess point. And yeah, having multiple examples doing that type of work could
+sometimes be really overwhelming. However, we're just dealing with strings right now. This isn't very overwhelming at all. So not bad. Okay. So what you've done
+here is you've just made the smallest transformation here possible to make this work. You've just lower cased everything. That's completely cool. And yeah, that
+looks good to me. You've made it work pretty simple. So now it looks like what we're going to get into is the idea of handling empty spaces. So is this a
+refactor or is this a new functionality? Okay. This is important actually. So you should be on green at the start of this. Now, when you add new examples, what
+you're doing is you should save the code, add one example, usually just one at most, actually one example, you save the code and then you see where you are. You
+see if you're in red now, because if you want to refactor, you should just refactor. So I shouldn't be seeing this at the same time. Cause right now this
+transformation I'm looking at, this is both adding new code to make this ideally to make this red or to go from green to green. And you're doing a refactor at
+the same time. So my feedback here is to do either a refactor or do a new transformation moving forward. Don't do both. Do one at a time. Again, this is a very
+simple guess point. So you might not be in a lot of pain here at this point in time. However, consider how this is going to go as we move forward, things are
+going to only become more and more complex. So this skill, this mechanical process, red, green, refactor is huge. All right. And this is looking pretty good.
+Yeah. You've added another refactor here. So I do want to see us moving from red, green refactor. Although of course, like sometimes when you're coding, you
+might have like a thought come up or just something you see that I need to fix that. Or I need to change that. Sometimes that does happen like this here,
+probably maybe is what will happen. But this is looking more like the type of thing I want to see. This is a refactor. And I believe that's going to pretty much
+clean up your tests here. So not bad, but let's take a look at what you've done here in this refactoring. You have split, split. And what are we doing here?
+We're just bringing this up here and we are just pulling some of this out and also putting it there. It looks like what you've done is just cleaned up a little
+bit of your usage of split and join. You've just brought that up there. You've brought these things all together into one. Cool. It's totally fine. It's
+definitely looking more clean over here. And then as for the rule of three, not really seeing any, anything that is duplicated three times necessarily. So you
+don't actually meet the requirements to do a refactoring here. I wouldn't say, although this does look a lot cleaner than that. So I'm not mad at that at all.
+So that's going to do it for this review of Palindrome. Nicely done. The feedback I have here, the main feedback is to just attempt to mostly use one example at
+a time, although it's okay for this type of assignment. However, later assignment, definitely make sure that you're doing one example at a time because it's
+going to get more and more complex as we keep going. So I'll leave the video right there. And as always, I'll see you in the next one to mastery.

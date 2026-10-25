@@ -1,0 +1,254 @@
+<section id="cheatsheet" class="doc-section" data-title="Cheat Sheet">
+  <h2>Cheat Sheet: The 10% Worth 1000x</h2>
+  <p class="lede">The course's highest-leverage mental models and frameworks, one screen per topic. Kent Beck's framing: 90% of skills dropped to zero, and the leverage of the remaining 10% went up 1000x. Everything below is that 10%. Each item cites its lessons, and <strong>→</strong> jumps to the deep-dive topic. <a class="src" data-lesson="3">L3</a> <a class="src" data-lesson="13">L13</a> <a class="src" data-lesson="91">L91</a></p>
+
+  <article class="topic" id="cheatsheet--core-loop" data-title="The Core Loop">
+    <h3>The Core Loop in One Picture <a class="src" data-lesson="82">L82</a> <a class="src" data-lesson="93">L93</a> <a class="src" data-lesson="15">L15</a></h3>
+    <figure class="diagram">
+      <svg viewBox="0 0 960 250" role="img" aria-label="Role, goal, features, concrete examples, acceptance test, code, left to right. The first four are theoretical, the last two physical. A dashed feedback arrow returns from code to role: everything is a guess.">
+        <defs>
+          <marker id="cs-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+          <marker id="cs-arrow-loop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent-2)"/></marker>
+        </defs>
+        <text x="318" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">THEORETICAL · the what (who, why, what) · top-down</text>
+        <path d="M20,44 L20,32 L616,32 L616,44" fill="none" stroke="var(--accent)" stroke-width="2"/>
+        <text x="792" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent-2)">PHYSICAL · the how</text>
+        <path d="M644,44 L644,32 L940,32 L940,44" fill="none" stroke="var(--accent-2)" stroke-width="2"/>
+
+        <rect x="20" y="56" width="140" height="70" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="90" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">Role</text>
+        <text x="90" y="106" text-anchor="middle" font-size="11" fill="var(--fg)">who</text>
+        <rect x="176" y="56" width="140" height="70" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="246" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">Goal</text>
+        <text x="246" y="106" text-anchor="middle" font-size="11" fill="var(--fg)">why · pain → benefit</text>
+        <rect x="332" y="56" width="140" height="70" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="402" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">Features</text>
+        <text x="402" y="106" text-anchor="middle" font-size="11" fill="var(--fg)">what · stories</text>
+        <rect x="488" y="56" width="140" height="70" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="558" y="86" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Concrete examples</text>
+        <text x="558" y="106" text-anchor="middle" font-size="11" fill="var(--fg)">Given / When / Then</text>
+        <rect x="644" y="56" width="140" height="70" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="714" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">Tests</text>
+        <text x="714" y="106" text-anchor="middle" font-size="11" fill="var(--fg)">flag post in the future</text>
+        <rect x="800" y="56" width="140" height="70" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="870" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fg)">Code</text>
+        <text x="870" y="106" text-anchor="middle" font-size="11" fill="var(--fg)">minimum to pass</text>
+
+        <line x1="160" y1="91" x2="174" y2="91" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#cs-arrow)"/>
+        <line x1="316" y1="91" x2="330" y2="91" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#cs-arrow)"/>
+        <line x1="472" y1="91" x2="486" y2="91" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#cs-arrow)"/>
+        <line x1="628" y1="91" x2="642" y2="91" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#cs-arrow)"/>
+        <line x1="784" y1="91" x2="798" y2="91" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#cs-arrow)"/>
+
+        <path d="M870,126 L870,176 L90,176 L90,130" fill="none" stroke="var(--accent-2)" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#cs-arrow-loop)"/>
+        <text x="480" y="198" text-anchor="middle" font-size="13" font-weight="700" fill="var(--accent-2)">Feedback loop: every box is a guess → feed forward, get feedback, refine</text>
+        <text x="480" y="220" text-anchor="middle" font-size="11" fill="var(--fg)">Tests re-validate physical guesses · users and KPIs validate theoretical ones (execution guess point)</text>
+        <text x="480" y="238" text-anchor="middle" font-size="11" fill="var(--fg)">Crossover from what to how = the acceptance test</text>
+      </svg>
+      <figcaption><span class="badge course">Course</span> The role → goal → features → concrete examples → acceptance tests chain <a class="src" data-lesson="82">L82</a>, worked top-down through the abstraction prism <a class="src" data-lesson="14">L14</a> <a class="src" data-lesson="93">L93</a>, under the feedback loop <a class="src" data-lesson="15">L15</a>. The acceptance test is the crossover <a class="src" data-lesson="81">L81</a>. The layout is drawn by Copilot.</figcaption>
+    </figure>
+    <div class="cards">
+      <div class="card"><h4>2 mental models</h4><p><strong>Abstraction</strong>: the what, separated from the how. <strong>Feedback loop</strong>: everything is a guess. Systems thinking ties them together, and “that is the entire course really.” <a class="src" data-lesson="90">L90</a> <a class="src" data-lesson="91">L91</a> <a href="#essentials-metaphysical--overview">→</a></p></div>
+      <div class="card"><h4>Systems thinking</h4><p>Every thing is input → process → output, moving state A to state B: a function, an app, a business, you. <a class="src" data-lesson="9">L9</a> <a href="#metaphysics--systems-thinking">→</a></p></div>
+      <div class="card"><h4>Value creation system</h4><p>Move people from pain to benefit by giving back or enriching time. Go theoretical → physical, left to right. Score, then score faster, without shipping negative value (bugs). <a class="src" data-lesson="10">L10</a> <a class="src" data-lesson="85">L85</a> <a href="#metaphysics--value-creation-system">→</a></p></div>
+      <div class="card"><h4>3 roles, 4 pillars</h4><p>User, customer and developer must all win at once, and that is what scalability means. The four pillars (architecture, design, testing, strategy) are what make it possible. <a class="src" data-lesson="11">L11</a> <a class="src" data-lesson="12">L12</a> <a href="#metaphysics--three-roles">→</a></p></div>
+    </div>
+    <blockquote class="quote">“Never start a project without these four words clearly understood”: who, why, what, how.<cite><a class="src" data-lesson="82">L82</a></cite></blockquote>
+  </article>
+
+  <article class="topic" id="cheatsheet--twelve-essentials" data-title="The 12 Essentials">
+    <h3>The 12 Essentials, One Line Each <a class="src" data-lesson="13">L13</a> <a class="src" data-lesson="93">L93</a></h3>
+    <p>They are stats you level up, and you need all 12. Any question you have maps to one metaphysical essential plus one theoretical or physical essential. <a class="src" data-lesson="82">L82</a> <a class="src" data-lesson="85">L85</a> <a href="#essentials-metaphysical--overview">→</a></p>
+    <table class="tbl">
+      <thead><tr><th>Group</th><th>Essential</th><th>One-liner</th><th>Ask yourself</th></tr></thead>
+      <tbody>
+        <tr><td>Metaphysical</td><td>Abstraction <a class="src" data-lesson="14">L14</a> <a href="#essentials-metaphysical--abstraction">→</a></td><td>Separate the what (theoretical) from the how (physical). Always work top-down.</td><td>Do I know what I'm doing, why, who it's for, and at what level? <a class="src" data-lesson="82">L82</a></td></tr>
+        <tr><td>Metaphysical</td><td>Feedback loop <a class="src" data-lesson="15">L15</a> <a href="#essentials-metaphysical--feedback-loop">→</a></td><td>Everything is a guess. Feed forward, get feedback, refine, and keep the loops tight.</td><td>What guess am I making, and how will I know it's right?</td></tr>
+        <tr><td>Theoretical</td><td>Value identification <a class="src" data-lesson="21">L21</a> <a href="#essentials-theoretical--value-identification">→</a></td><td>Get clear on who you help, why, and what they'll be able to do (vision, roles, goals, capabilities).</td><td>Can I connect this to a role's goal? <a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td>Theoretical</td><td>Domain discovery <a class="src" data-lesson="22">L22</a> <a href="#essentials-theoretical--domain-discovery">→</a></td><td>Build a shared language, then turn it into features, stories, acceptance criteria, concrete examples and boundaries.</td><td>What will we build, what will someone experience, and does everyone use the same words for it?</td></tr>
+        <tr><td>Theoretical</td><td>Strategic design <a class="src" data-lesson="23">L23</a> <a href="#essentials-theoretical--strategic-design">→</a></td><td>Stereotype, develop, integrate and prioritize components. Core = build, generic = buy.</td><td>How do we realize this in the real world: build, buy or use a service?</td></tr>
+        <tr><td>Physical</td><td>Vertical slicing <a class="src" data-lesson="16">L16</a> <a href="#essentials-physical--vertical-slicing">→</a></td><td>Features are first-class in folders and tests: modules → features → operations.</td><td>Can I see the features from the folder structure alone?</td></tr>
+        <tr><td>Physical</td><td>Horizontal decoupling <a class="src" data-lesson="17">L17</a> <a href="#essentials-physical--horizontal-decoupling">→</a></td><td>Know the layers and put every line in the right one. Decouple them with contracts (dependency inversion).</td><td>Where does this line of code belong? Am I decoupling concerns horizontally? <a class="src" data-lesson="12">L12</a></td></tr>
+        <tr><td>Physical</td><td>Temporal decoupling <a class="src" data-lesson="18">L18</a> <a href="#essentials-physical--temporal-decoupling">→</a></td><td>Reality is event-based. End each slice at its own state change and let handlers start the next slice.</td><td>What happens after, before, or only when?</td></tr>
+        <tr><td>Physical</td><td>Composition <a class="src" data-lesson="19">L19</a> <a href="#essentials-physical--composition">→</a></td><td>Wire collaborating abstractions deliberately, in one composition root.</td><td>How are the parts wired, and how does that change per environment?</td></tr>
+        <tr><td>Physical</td><td>Subject/system verification <a class="src" data-lesson="20">L20</a> <a href="#essentials-physical--subject-system-verification">→</a></td><td>Put a boundary around the subject to validate one specific guess, using result, state or communication verification.</td><td>Do I have clarity over the subject under test? <a class="src" data-lesson="12">L12</a></td></tr>
+        <tr><td>Physical</td><td>Walking skeleton <a class="src" data-lesson="24">L24</a> <a href="#essentials-physical--walking-skeleton">→</a></td><td>Deploy the thinnest slice through all components first, with an E2E test.</td><td>Can this even deploy and run?</td></tr>
+        <tr><td>Physical</td><td>Deployment &amp; delivery <a class="src" data-lesson="25">L25</a> <a href="#essentials-physical--deployment-delivery">→</a></td><td>A single pipeline to production (commit → acceptance → deploy) makes negative value very hard to ship.</td><td>Can negative value reach users?</td></tr>
+      </tbody>
+    </table>
+    <p>Filing jargon: hexagonal, onion and ports &amp; adapters go under horizontal decoupling. CQS goes under vertical slicing. Contract tests go under subject/system verification. <a class="src" data-lesson="91">L91</a> <a href="#essentials-metaphysical--jargon-map">→</a></p>
+  </article>
+
+  <article class="topic" id="cheatsheet--fa2str" data-title="FA²STR">
+    <h3>FA²STR: Six Steps, Input → Output <a class="src" data-lesson="27">L27</a> <a class="src" data-lesson="52">L52</a></h3>
+    <ol class="steps">
+      <li><strong>Find</strong>: problem statement → responsibilities (doing / knowing), concrete examples, and the starting guess point. At higher levels the output is role, why and capabilities, then features, stories, acceptance criteria and examples. <a class="src" data-lesson="52">L52</a> <a class="src" data-lesson="27">L27</a></li>
+      <li><strong>Architect</strong>: responsibilities + examples → the subject under test. At higher levels: patterns, components, the testing strategy and a broad-stroke architecture. <a class="src" data-lesson="52">L52</a></li>
+      <li><strong>Automate</strong>: SUT + examples → a test harness and scripts that also run in the pipeline. Success criteria are defined before any code. <a class="src" data-lesson="52">L52</a></li>
+      <li><strong>Specify</strong>: one example → a failing spec (red). At feature level this is the outer-loop acceptance test. <a class="src" data-lesson="52">L52</a></li>
+      <li><strong>Test</strong>: failing spec → passing code, written with AAA and made green by fake it or the obvious implementation. Commit. <a class="src" data-lesson="52">L52</a></li>
+      <li><strong>Refine</strong>: passing code → refactored code once duplication appears three times. Commit, then loop back to Specify. <a class="src" data-lesson="52">L52</a></li>
+    </ol>
+    <div class="callout rule"><strong>Remember</strong>
+      <ul>
+        <li>Upfront design = Find + Architect + Automate. Emergent design = Specify + Test + Refine. <a class="src" data-lesson="52">L52</a> <a class="src" data-lesson="87">L87</a></li>
+        <li>It works at any level. Start anywhere and drill in with <em>n</em> loops. <a class="src" data-lesson="86">L86</a> <a href="#workflow--n-loops">→</a></li>
+        <li>Everything is a doing or a knowing. Most tests are one doing with many knowings. <a class="src" data-lesson="52">L52</a></li>
+        <li>More than about four collaborating pieces? Go to paper and run RDD. <a class="src" data-lesson="52">L52</a></li>
+      </ul>
+    </div>
+    <p>Full method <a href="#workflow--fa2str">→</a> · worked example <a href="#workflow--worked-example">→</a></p>
+  </article>
+
+  <article class="topic" id="cheatsheet--ideal-workflow" data-title="Ideal Developer Workflow">
+    <h3>Ideal Developer Workflow: Outer &amp; Inner Loop <a class="src" data-lesson="26">L26</a> <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="40">L40</a></h3>
+    <ol class="steps">
+      <li><strong>Clarify the theoretical guesses</strong> (Find): vision → role → goal → capabilities → concrete examples. Non-negotiable. <a class="src" data-lesson="26">L26</a></li>
+      <li><strong>Broad-stroke architecture</strong> (Architect): patterns, components, testing strategy, and how tests plug into the pipeline. <a class="src" data-lesson="26">L26</a> <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>Walking skeleton</strong> (Automate): a testable architecture, a tiny deployed slice and a pipeline. <a class="src" data-lesson="26">L26</a> <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>Feature work, n loops</strong> (Specify/Test/Refine): outer-loop and inner-loop tests, then fill the remaining ~20% and ship. <a class="src" data-lesson="26">L26</a></li>
+    </ol>
+    <div class="cards">
+      <div class="card"><h4>Outer loop · customer</h4><p>A failing E2E acceptance test at level 5, written in the user's language. One per feature, shared by every platform. Result verification only. <a class="src" data-lesson="87">L87</a></p></div>
+      <div class="card"><h4>Inner loop · developer</h4><p>A failing use-case test at level 3 for each scenario (one success, many failures). About 80% of the time goes here. Recurse into levels 2 and 1 as new concepts appear. <a class="src" data-lesson="87">L87</a></p></div>
+      <div class="card"><h4>Close it out</h4><p>Adapter tests (levels 4 and 6), then hook up the view, then deploy. Infrastructure tests come last. <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="87">L87</a></p></div>
+    </div>
+    <div class="callout tip"><strong>Numbers to remember</strong> E2E: the happy path plus one or two sad paths. Then about 12–20 parameterized high-value tests. Roughly 1 E2E test to ~10 high-value unit tests, and those unit tests give ~80% of the confidence. <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="28">L28</a></div>
+    <p>The workflow is the same for an MVP and a mature product. Only the time, the effort and the quality of your guesses change. <a class="src" data-lesson="40">L40</a> <a href="#workflow--ideal-workflow">→</a> · MVP <a href="#workflow--mvp">→</a></p>
+  </article>
+
+  <article class="topic" id="cheatsheet--guess-points" data-title="Guess Points & Test Levels">
+    <h3>Guess Points &amp; Test Levels <a class="src" data-lesson="15">L15</a> <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="87">L87</a></h3>
+    <table class="tbl">
+      <thead><tr><th>Guess point</th><th>What to verify / clarify</th><th>Verification</th><th>Typical artifact / test</th></tr></thead>
+      <tbody>
+        <tr><td>Problem</td><td>Who, why, what they'll be able to do. Is it worth it?</td><td>Users, qualitative + quantitative data</td><td>Impact map, concrete what/why examples <a class="src" data-lesson="21">L21</a></td></tr>
+        <tr><td>Solution</td><td>Features, experience, domain language, boundaries</td><td>Domain experts</td><td>Event storm / process model, stories, Given/When/Then <a class="src" data-lesson="22">L22</a></td></tr>
+        <tr><td>Architecture</td><td>Components, tools, test strategy, event-based from day one?</td><td>Walking skeleton</td><td>Broad-stroke diagram <a class="src" data-lesson="23">L23</a> <a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td>1 · Stateless</td><td>Data transformation</td><td>Result</td><td>Unit test on a pure function, examples → <code>it.each</code> <a class="src" data-lesson="52">L52</a></td></tr>
+        <tr><td>2 · Stateful</td><td>One state machine: invariants, valid and invalid transitions</td><td>State</td><td>Entity / value object tests + builders <a class="src" data-lesson="86">L86</a></td></tr>
+        <tr><td>3 · Application</td><td>Use cases: coordination, indirect inputs/outputs, time, transactions</td><td>Mixture, plus communication (only here)</td><td>Use-case test with in-memory repos + hand-written spies. The developer boundary. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="89">L89</a></td></tr>
+        <tr><td>4 · Outgoing adapter</td><td>Real infrastructure honours the contract, so fakes stay in parity</td><td>Contract</td><td>One <code>.ispec.ts</code> looped over every implementation <a class="src" data-lesson="81">L81</a></td></tr>
+        <tr><td>5 · System</td><td>The whole system as a black box</td><td>Result only</td><td>E2E acceptance test via a protocol driver. The customer boundary. <a class="src" data-lesson="89">L89</a></td></tr>
+        <tr><td>6 · Incoming adapter</td><td>Routes and request shapes unchanged. Endpoints call the right use case with the right params.</td><td>—</td><td>API / driver test against a fake app interface <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="88">L88</a></td></tr>
+        <tr><td>Execution</td><td>Are we getting the KPIs we want?</td><td>Metrics</td><td>Usage, sales <a class="src" data-lesson="81">L81</a></td></tr>
+      </tbody>
+    </table>
+    <p>“Level 3 is the developer boundary and level 5 is the customer boundary.” <a class="src" data-lesson="89">L89</a> The mapping is “not strict”. <a class="src" data-lesson="87">L87</a> <a href="#workflow--guess-points">→</a> · verification per level <a href="#testing--verification">→</a></p>
+  </article>
+
+  <article class="topic" id="cheatsheet--testing-rules" data-title="Testing Rules of Thumb">
+    <h3>Testing Rules of Thumb <a class="src" data-lesson="31">L31</a></h3>
+    <div class="callout rule"><strong>Rules</strong>
+      <ul>
+        <li><strong>AAA backwards</strong>: assert → act → arrange. Start with the most complex example and program by wishful thinking. “Vagueness does not compile.” <a class="src" data-lesson="51">L51</a> <a href="#testing--aaa-backwards">→</a></li>
+        <li><strong>Commit on green</strong>, never on red, and say whether the commit is new functionality or a refactor. Flip the switch to prove the test can fail. <a class="src" data-lesson="44">L44</a> <a href="#testing--commits">→</a></li>
+        <li><strong>Red for the right reason</strong>: export a stub first, so the test fails on logic and not on a missing import. <a class="src" data-lesson="45">L45</a> <a class="src" data-lesson="49">L49</a></li>
+        <li><strong>Fake it</strong> until duplication forces a change. Use the obvious implementation only when you're confident. <a class="src" data-lesson="45">L45</a> <a class="src" data-lesson="47">L47</a></li>
+        <li><strong>Rule of three</strong>: refactor on the third repeat. Never add examples during a refactor, and keep each step a refactor XOR a transformation. <a class="src" data-lesson="44">L44</a> <a class="src" data-lesson="49">L49</a></li>
+        <li><strong>TPP</strong>: nil → constant → scalars → single statement → conditionals → mutation. If you need a variable or a mutation, question your transformation. <a class="src" data-lesson="60">L60</a> <a href="#katas--military-time">→</a></li>
+        <li><strong>One example per loop, one it / one expect.</strong> <a class="src" data-lesson="47">L47</a> <a class="src" data-lesson="55">L55</a></li>
+        <li><strong>Name tests as responsibilities</strong> (a doing or a knowing, e.g. “knows that …”). Keep examples concrete, in <code>it.each</code> rows that hold the input and expected output together. <a class="src" data-lesson="56">L56</a> <a class="src" data-lesson="59">L59</a> <a href="#testing--naming">→</a></li>
+        <li><strong>3 verification types</strong>: result, state, communication. Pick by guess point. State or communication checks at E2E are bad practice. <a class="src" data-lesson="20">L20</a> <a class="src" data-lesson="53">L53</a> <a class="src" data-lesson="87">L87</a></li>
+        <li><strong>Hand-written fakes and spies</strong> implement the contract. Keep library mocks for trivial stubs such as a logger. <a class="src" data-lesson="73">L73</a> <a class="src" data-lesson="81">L81</a> <a href="#testing--test-doubles">→</a></li>
+        <li><strong>Contract tests for every fake</strong>: run one spec against every implementation. “You're testing the contract, not the implementation.” <a class="src" data-lesson="81">L81</a> <a href="#testing--contract-tests">→</a></li>
+        <li><strong>Builders for fixtures</strong>: a fixture is the initial state. Give well-known states names. <a class="src" data-lesson="78">L78</a> <a href="#testing--builders">→</a></li>
+        <li><strong>Comments say why, never what.</strong> <a class="src" data-lesson="48">L48</a></li>
+        <li><strong>Choose the strategy by ROI.</strong> There's no perfect strategy, and E2E-only or unit-only always fails. <a class="src" data-lesson="64">L64</a> <a class="src" data-lesson="87">L87</a> <a href="#testing--strategies">→</a></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="topic" id="cheatsheet--design-rules" data-title="Design & Architecture Rules">
+    <h3>Design &amp; Architecture Rules of Thumb <a class="src" data-lesson="32">L32</a> <a class="src" data-lesson="88">L88</a></h3>
+    <div class="callout rule"><strong>Rules</strong>
+      <ul>
+        <li><strong>Stereotypical architecture</strong>: CQS read/write paths, event-based, layers of concerns, the dependency rule. It's the same on frontend, backend and desktop. <a class="src" data-lesson="32">L32</a> <a class="src" data-lesson="87">L87</a> <a href="#architecture--architect-role">→</a></li>
+        <li><strong>Dependency rule</strong>: domain → application → adapter → infrastructure. Inner layers never know infrastructure directly, and use cases depend on contracts. <a class="src" data-lesson="32">L32</a> <a class="src" data-lesson="84">L84</a></li>
+        <li><strong>Classify code by what it touches, not where it comes from.</strong> <code>new Date()</code> is infrastructure, so inject a Clock. <a class="src" data-lesson="84">L84</a> <a class="src" data-lesson="88">L88</a></li>
+        <li><strong>Feature-first folders</strong>: <code>modules/&lt;capability&gt;/&lt;feature&gt;</code> for the customer, <code>shared/</code> for the developer, and <code>tests/</code> mirroring the features. <a class="src" data-lesson="92">L92</a> <a class="src" data-lesson="29">L29</a> <a href="#architecture--structuring">→</a></li>
+        <li><strong>Composition root</strong>: one place wires dependencies and holds the environment checks. Move to a DI container only when that gets messy. <a class="src" data-lesson="19">L19</a> <a class="src" data-lesson="93">L93</a> <a href="#essentials-physical--composition">→</a></li>
+        <li><strong>Temporal decoupling via events</strong>: end the slice at its own state change (“order placed”), let a coordinator dispatch, and model success first, then failure. <a class="src" data-lesson="18">L18</a> <a class="src" data-lesson="82">L82</a> <a href="#essentials-physical--temporal-decoupling">→</a></li>
+        <li><strong>George Clooney test</strong>: “Who else is going to play this role?” Abstract only when there is more than one actor. Start with an interface, and move to an abstract class only after the rule of three. <a class="src" data-lesson="79">L79</a> <a class="src" data-lesson="84">L84</a> <a href="#abstraction-rdd--roles-actors">→</a></li>
+        <li><strong>Object stereotypes</strong>: information holder, structurer, service provider, coordinator, controller, interfacer. Lean into each object's dominant role. Controllers get called; they don't subscribe. <a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="95">L95</a> <a href="#abstraction-rdd--stereotypes">→</a></li>
+        <li><strong>Invariants live in domain objects</strong>: private constructor + static <code>create</code>, validation in value objects, expected failures returned rather than thrown. The domain stays pure. <a class="src" data-lesson="77">L77</a> <a class="src" data-lesson="74">L74</a> <a href="#ddd-feedbook--prereaderinvite">→</a></li>
+        <li><strong>Small aggregates</strong>: the minimum data a command needs, which is its transaction boundary. Reference other aggregates by ID. <a class="src" data-lesson="88">L88</a> <a class="src" data-lesson="89">L89</a> <a href="#ddd-feedbook--aggregates">→</a></li>
+        <li><strong>Own the control center</strong>: if you need React to test a feature, React is doing the coordinating. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="94">L94</a> <a href="#frontend--control-center">→</a></li>
+        <li><strong>Default shape</strong>: a modular monolith with an event bus. Fewer components means fewer guesses. <a class="src" data-lesson="71">L71</a> <a class="src" data-lesson="84">L84</a> <a href="#architecture--monolith-vs-microservices">→</a></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="topic" id="cheatsheet--theoretical-checklist" data-title="Theoretical Design Checklist">
+    <h3>Theoretical Design Checklist (Before Any Code) <a class="src" data-lesson="65">L65</a> <a class="src" data-lesson="88">L88</a></h3>
+    <ol class="steps">
+      <li><strong>Who / why / what before how</strong>: actor → role → goal → capabilities. Exit when you can say who you help, what they achieve, and why it's worthwhile. <a class="src" data-lesson="21">L21</a> <a class="src" data-lesson="66">L66</a> <a href="#essentials-theoretical--role-goal-chain">→</a></li>
+      <li><strong>Concrete examples</strong>: start state, end state, what the person does, what they see. <a class="src" data-lesson="68">L68</a> <a href="#ddd-feedbook--problem">→</a></li>
+      <li><strong>Subdomains</strong>: brain-dump the problem categories and stop when you run out. <a class="src" data-lesson="66">L66</a> <a href="#ddd-feedbook--subdomains">→</a></li>
+      <li><strong>Bounded contexts</strong>: group by shared language (“be Aristotle”), classify core / supporting / generic, decide build vs buy, draw the context map. <a class="src" data-lesson="67">L67</a> <a class="src" data-lesson="68">L68</a> <a href="#ddd-feedbook--consolidating">→</a></li>
+      <li><strong>Event storm one scenario</strong>: past-tense events → imperative commands → actors → aggregates → boundaries. Be wary of same-context event chains. <a class="src" data-lesson="69">L69</a> <a href="#ddd-feedbook--event-storming">→</a></li>
+      <li><strong>Add views and tally the I/O data</strong> for each command–event pair. <a class="src" data-lesson="70">L70</a> <a href="#ddd-feedbook--refining">→</a></li>
+      <li><strong>State machines</strong>: states, transitions, events and invariants. One state change per step, per context. <a class="src" data-lesson="74">L74</a> <a class="src" data-lesson="70">L70</a> <a href="#ddd-feedbook--state-machines">→</a></li>
+      <li><strong>Architecture</strong>: modules, deployable units, event bus, and tools chosen by responsibility and NFR. <a class="src" data-lesson="71">L71</a> <a class="src" data-lesson="92">L92</a> <a href="#ddd-feedbook--architecture">→</a></li>
+      <li><strong>Go physical</strong>: pipeline → E2E in a production-like environment → level-3 tests. <a class="src" data-lesson="72">L72</a> <a href="#workflow--to-physical">→</a></li>
+    </ol>
+    <div class="callout tip"><strong>Khalil's standard reply</strong> “Do you have clarity on the theoretical guesses first?” <a class="src" data-lesson="21">L21</a> “You never want to be making physical guesses unless you have your theoretical guesses sorted.” <a class="src" data-lesson="88">L88</a></div>
+  </article>
+
+  <article class="topic" id="cheatsheet--anti-patterns" data-title="Anti-Patterns to Catch">
+    <h3>Anti-Patterns to Catch in Review</h3>
+    <div class="callout anti"><strong>Flag these</strong>
+      <ul>
+        <li><strong>Package by infrastructure</strong> (<code>routes/</code>, <code>controllers/</code>), which hides the features. <a class="src" data-lesson="16">L16</a> <a class="src" data-lesson="88">L88</a></li>
+        <li><strong>Fat controllers / anemic domain</strong>: HTTP, rules and SQL in one handler, or <code>this.repo.save</code> in a controller. <a class="src" data-lesson="84">L84</a> <a class="src" data-lesson="93">L93</a></li>
+        <li><strong>Environment checks everywhere</strong> and imports pulled in “willy nilly”. <a class="src" data-lesson="19">L19</a></li>
+        <li><strong>Mocks that lie</strong>: fakes with no contract tests (“we're only testing our mocks”), or inline library-mock soup. <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="73">L73</a></li>
+        <li><strong>Implementation-detail test names</strong> such as “sets result to true and error to null…”. <a class="src" data-lesson="56">L56</a></li>
+        <li><strong>else-if chains</strong> instead of early-return ifs. <a class="src" data-lesson="47">L47</a></li>
+        <li><strong>Big-bang commits</strong>, commits on red, or design done off-screen in one jump. <a class="src" data-lesson="46">L46</a> <a class="src" data-lesson="63">L63</a></li>
+        <li><strong>Code-first / DB-first / API-first design</strong>: thinking in endpoints, not features. <a class="src" data-lesson="8">L8</a> <a class="src" data-lesson="82">L82</a></li>
+        <li><strong>Awaited side effects appended to a command</strong>: one failure strands the rest (the <code>makePurchase</code> script). <a class="src" data-lesson="18">L18</a> <a class="src" data-lesson="88">L88</a></li>
+        <li><strong>Components for weeks, deploy last</strong>, which ends in “all these weird CORS errors”. <a class="src" data-lesson="24">L24</a> <a class="src" data-lesson="81">L81</a></li>
+        <li><strong>Premature interfaces</strong>: “You George Clooney'd it.” <a class="src" data-lesson="79">L79</a></li>
+        <li><strong>Everything is a “service”</strong>, and React is the control center. <a class="src" data-lesson="94">L94</a> <a class="src" data-lesson="87">L87</a></li>
+        <li><strong>E2E-only or unit-only strategies</strong>, and state/communication checks at E2E. <a class="src" data-lesson="87">L87</a></li>
+        <li><strong>Husky as the only quality gate</strong>, or manual walkthroughs as features grow. <a class="src" data-lesson="25">L25</a></li>
+        <li><strong>Modelling the domain before the theoretical guesses</strong>, or learning DDD on a project with no real value. <a class="src" data-lesson="65">L65</a> <a class="src" data-lesson="93">L93</a></li>
+        <li><strong>Rewriting legacy code from scratch</strong> instead of pinning it with characterization tests first. <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="92">L92</a></li>
+        <li><strong>Comments that restate the code.</strong> <a class="src" data-lesson="48">L48</a></li>
+      </ul>
+    </div>
+    <p>21-item kata review checklist <a href="#katas--review-checklist">→</a> · frontend anti-patterns <a href="#frontend--anti-patterns">→</a></p>
+  </article>
+
+  <article class="topic" id="cheatsheet--mindsets" data-title="Mindset One-Liners">
+    <h3>Mindset One-Liners <a class="src" data-lesson="3">L3</a> <a class="src" data-lesson="4">L4</a></h3>
+    <div class="cards">
+      <div class="card"><h4>Clarity beats anxiety</h4><p>Anxiety at work means you lack clarity. Fix your mental models; don't push harder. <a class="src" data-lesson="89">L89</a> <a class="src" data-lesson="4">L4</a> <a href="#mindsets--obstacles-flow">→</a></p></div>
+      <div class="card"><h4>Purpose beats boredom</h4><p>Tie the work to something that matters. Use the trail of whys until you reach an emotional charge. <a class="src" data-lesson="4">L4</a> <a class="src" data-lesson="6">L6</a> <a href="#mindsets--motivation">→</a></p></div>
+      <div class="card"><h4>Essentialism loop</h4><p>Observe &amp; evaluate → eliminate → execute in a straight line. Learn “topics for problems”. <a class="src" data-lesson="5">L5</a> <a class="src" data-lesson="85">L85</a> <a class="src" data-lesson="91">L91</a> <a href="#mindsets--clarity-strategies">→</a></p></div>
+      <div class="card"><h4>Think backwards</h4><p>Name the end state first, then let it “carve the pieces moving back”. This is the idea behind TDD. <a class="src" data-lesson="75">L75</a> <a class="src" data-lesson="3">L3</a> <a href="#mindsets--thinking-backwards">→</a></p></div>
+      <div class="card"><h4>Right action</h4><p>At quantum moments (“how do I start this project?”) you act on what you value. Value code and you get code; value value and you get value. <a class="src" data-lesson="85">L85</a> <a href="#mindsets--right-action">→</a></p></div>
+      <div class="card"><h4>Refinement</h4><p>Is it working and doing what we need? Then move on. Kill your designs and design it twice. <a class="src" data-lesson="3">L3</a> <a class="src" data-lesson="63">L63</a> <a href="#mindsets--four-mindsets">→</a></p></div>
+      <div class="card"><h4>No more “it depends”</h4><p>Run the scenario: theoretical → physical → which guesses → time budget. That's what it depends on. <a class="src" data-lesson="91">L91</a></p></div>
+      <div class="card"><h4>Zoom out when stuck</h4><p>Stuck in a change-fail loop? Stop, draw it, clarify the responsibilities, then descend one level. <a class="src" data-lesson="82">L82</a> <a href="#essentials-metaphysical--zoom-out">→</a></p></div>
+    </div>
+  </article>
+
+  <article class="topic" id="cheatsheet--ai-agents" data-title="Using This with AI Agents">
+    <h3>Using This with AI Coding Agents <span class="badge copilot">Added by Copilot</span></h3>
+    <p>The course's own take: AI “crunches down” some state-change and decision logic, and the skill left to you is knowing the inputs, outputs and goalpost <a class="src" data-lesson="89">L89</a>. The first milestone had ChatGPT write the code from a pasted grading checklist <a class="src" data-lesson="42">L42</a>. The checklist below maps the course frameworks onto how you spec and review agent output.</p>
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span>
+      <ul>
+        <li><strong>Spec = Find output.</strong> Give the role, goal, feature, acceptance criteria and a concrete-examples table. A vague prompt is vagueness that won't compile. <a href="#cheatsheet--fa2str">→</a></li>
+        <li><strong>Add Architect + Automate.</strong> Name the guess point, the subject under test, the contracts it may depend on, the target folder (<code>modules/&lt;capability&gt;/&lt;feature&gt;</code>) and the exact test command.</li>
+        <li><strong>Demand tests first, AAA-backwards.</strong> One example per loop, named as responsibilities. Check that the test fails for the right reason before accepting any code.</li>
+        <li><strong>Ask for red-green-refactor commits</strong> labelled as new functionality or refactor, so you review a story of commits and not a big-bang diff.</li>
+        <li><strong>Review with the kata checklist</strong> and the anti-pattern list. Else-if chains, what-comments, fake names and premature interfaces are common in generated code. <a href="#katas--review-checklist">→</a></li>
+        <li><strong>Guard layer boundaries.</strong> No <code>new Date()</code> or <code>Math.random()</code> in the domain, no repo calls in controllers, no environment checks outside the composition root. Consider enforcing this with architecture tests (the course mentions TS-Arch <a class="src" data-lesson="68">L68</a>).</li>
+        <li><strong>Every generated fake needs a contract test.</strong> Reject mocks of your own roles that have no parity with the real implementation.</li>
+        <li><strong>Keep the theoretical guesses human.</strong> An agent can draft an event storm, but only users and domain experts validate value, and KPIs close the loop.</li>
+      </ul>
+    </aside>
+  </article>
+</section>

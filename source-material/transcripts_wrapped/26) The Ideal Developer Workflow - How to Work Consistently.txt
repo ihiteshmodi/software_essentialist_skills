@@ -1,0 +1,46 @@
+What's going on crafters, Kalil here, and it is time to talk about the ideal developer workflow real quick. How to kick off feature work consistently and
+effectively. So let's talk about an ideal. So we know that there are a number of ways to kick off a project. You can do things like starting from the code, from
+the database, from all over the place. I actually just realized that rhymed, not bad. And we've just spent the past few videos covering the 12 essentials from a
+high level. So we know a number of things about them. We don't actually need to go through all of that again. So putting that all together, we can conceptualize
+an ideal developer workflow that works on any side of the stack. And it's going to take us through this value creation system through the guest points. And it
+should be clear now that the 12 essentials are actually what help us make it through the guest points all the way to working software in the hands of users. So
+what is the ideal developer workflow? It is a way to put all of this together to use the 12 essentials, move through from the theoretical to the physical. And
+this is just based on everything that we've currently learned from the experts and pieced into these 12 essential principles. And just for some additional
+clarity here, you will not be able to do all of these steps all the time. However, some of them are non-negotiable. So here are the steps. And it's actually
+this first step here where we want to clarify the theoretical guesses. This is non-negotiable. I was saying earlier on in one of the other videos that when I
+get questions in the discord or questions from developers on how to solve a particular problem or particular challenge, I always tell them, first, we need to
+clarify the theoretical guesses. So if we come back to this idea of abstraction, what is it we need before we can begin to even start thinking through how to
+implement anything? We need to clarify everything that's in that abstraction prism in the theoretical space. So everything from vision, role goal, capabilities,
+all the way down until we have some concrete examples. Once we have some concrete examples, then we can move to the next step and we can think about the broad
+stroke architecture. And again, this broad stroke architecture is relatively high level, although we do want to have some things clarified, like the patterns,
+the architectural components we're going to use. And also importantly, we want to clarify the testing strategy. We want to know how are we going to be able to
+verify that the features work? And how will we be embedding these tests within a deployment pipeline? The next step is then to go ahead and build test and
+deploy a walking skeleton. So we know what the walking skeleton is, we take a slice of functionality, and we run that through all the way to the end, deploy
+until we have some software that we can now take a look at and see that it is working. Even if the little slice that we built is pretty tiny and doesn't really
+do a whole lot, we still want to get this built out all the way. And once that's done, all that's really left for us to do is feature work. So the first few
+steps really do apply when we're thinking through how to approach a new project. But it's also something that we want to clarify, even when we're doing feature
+work as well. So if you're starting on a new feature on an existing project, we also still want to clarify the theoretical guesses. We also still want to have a
+picture of the broad stroke architecture, we want to know how we're testing and verifying that our features were correctly. And we want to have something built
+out that will allow us to run our high value tests, whether we run those as end to end tests, or we run them as high value unit or integration tests. We're
+going to cover what all of those are in particular in the pattern first section. But this is some of what I would be thinking about at this point. Now in the
+feature work step here, what we're going to be doing is practicing a technique called nth looping. What we usually want to do is have a combination of outer
+loop tests and inner loop tests. So the outer tests are going to be more concerned with verifying that the feature works. And these are going to be the ones
+that verify things for the customer. And in the inner loop tests, these are going to be more ones that are focused on stuff that we as developers need to know
+about. So that could just be an inner loop test to make sure that let's say we were dealing with an object that did validation on the concept of a user or the
+concept of a job posting. We probably want to have tests for that as well, because it is still logic. Now it's not necessarily a feature, but it's still
+something that's inside of our code base that could present a problem if it isn't properly tested. And to just give you a general sense of what this will
+somewhat look like. Here's an example of us high value tests, let's say the application level. So that would be the outer loop. And then we're going to do some
+inner loop tests as well for some other things. So basically, anytime we mentioned a new abstraction, we're going to want to write some new tests. We're going
+to talk all about testing in the best practice first phase. But just from a high level, this is somewhat what it will look like. And finally, with some outer
+loop tests passing in our inner loop tests passing, then we can start to think about some other tests that we might want to run as well. And this is just going
+to be filling in the gaps. And this is going to be around like 20% of the work left for us to do before we're ready to ship and go on to the next feature. So
+that is fundamentally how the ideal developer workflow works. And do not fret if this is not something you quite fully understand yet, we are going to be
+practicing this in the value first phase of craftship. Maybe that will make sense if you're aware of what the phases of craftship are. We go from code first to
+best practice first to pattern responsibility, then value first. And it would only make sense that this would be something we need to practice and value first,
+because at that point, we have a good level of mastery in the skills and the 12 essentials. And now we're thinking predominantly about how we can work in the
+ways that are most effective. Now, why is this skill useful? One of the most reasons why this is useful is consistency. We have something we could always come
+back to and understand how we should ideally be working and it is an ideal and ideals are never perfect. But having this as something that we could use to
+determine and know how far off we are is incredibly powerful. Not to mention that this is a process that comes together and helps us integrate all of the 12
+essentials. So as I said, we're going to talk about this more in the value first phase of craftship. I wanted you to have a high level of what this is, why it
+matters and why we're going to use it so that you can get a sense of where we're going. So with that said, I'll leave the video right here. We can head over to
+the next one. And as always, to mystery.

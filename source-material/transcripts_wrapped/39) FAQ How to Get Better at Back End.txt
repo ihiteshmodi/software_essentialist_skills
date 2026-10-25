@@ -1,0 +1,19 @@
+This is a lot simpler than it needs to, this doesn't actually have to be hard. The way to get better at backend is to have a problem in your life or have some
+area where you want to get back time. All you need to do is identify that and then put some backend code there and make a commitment to actually seeing that
+through and seeing it actually now give you back time. You do that and I'm telling you, that's going to force you to have to learn a lot of different things,
+especially if you take that and you turn it into something that's going to be public for other people as well. That's going to propel you. So in the course,
+there's going to be a section where I ask you to submit a final project. This is a great scenario. This is a great opportunity for you to think about a problem
+like this in your life and write some code to try to solve it. That's a really good one. You can also do this with the community member as well. So there will
+be some information on that a little bit later on in the course for you to know how to sync up and even find a community member if you want to do that or if you
+just want to do it by yourself. But that's going to give you, I would say, a massive level of confidence if you can do that. With respect to the phases of
+craftship, what are we going to do? Of course, in code first, all we're going to do is just build something out on the backend. But, you know, because
+everything is on the internet, you could look up how to build something with chatGPT. It's great and all, but we need to take it a little bit further. So
+throughout the phases of craftship, in best practice first, we're going to refine this a lot. We're going to make sure that we can test the backend with an
+acceptance test. We're going to make sure that we're using a production-like environment by using Docker. And in best practice first, we're going to use a lot
+of patterns. And then, of course, in responsibility first, we're going to learn how to actually think in terms of responsibilities, roles, and collaborations,
+and then take those things, take those conceptual understandings, do some design, and then actually put them into play, put them into practice in the code-based
+guided by objects. So I would say those are some of the most impactful ways that you're going to be able to get better at backend. But something you could just
+start to think about mull on right now is, what problems do I have in my life? What areas do I seem to spend a lot of time that I don't want to spend in my time
+in? Think about those things and start thinking about putting code together for those. You're going to need to do a fair amount of theoretical work up front. So
+again, come back to the abstraction prism to know what it is you should be doing at what time. But that's going to give you a massive level of confidence if you
+can do that for yourself.

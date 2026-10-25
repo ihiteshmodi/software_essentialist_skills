@@ -1,0 +1,28 @@
+Okay. So this question here is called how to get better at design. So what is design really? Design is about discoverability and understanding. Discoverability
+is how easy is it for you to find things you're trying to find. And if we think back to the key developer use cases, what you're trying to find are the features
+in the code base. And if you could find the features in the code base, then you could do the things you need to do after you understand them and things you need
+to do, add change test features. That's what you're doing. In order to become better at design, to get better at design, one, it is understanding just the
+foundation of what design is. It is about your ability to find the stuff and do the things you want to do and making it easier for others to find the things
+that do the things that they need to do. So there's a number of elements that are involved in that. One of them is going to be just the way you structure your
+project. So I might've said this before, but yeah, structure your project based on the abstraction prism, because it's just the way that requirements come to be
+and come to exist and come to get tested and come to get implemented. So structure your projects that way, because it's going to be the most intuitive way for
+people to find what it is they're trying to find. And then besides that, you need to make sure that when you're working with developers in general, you are
+using patterns that are conceptually understood by everyone. So I'll say that again. You want to make sure you're using patterns that are conceptually
+understood by everyone. So the whole idea of patterns, why do we use patterns at all in the first place? The whole point is because patterns themselves are
+mental models. They're abstractions and shortcuts to understanding how to solve problems. We can piece them together and make them do things. And we just
+inherently know what patterns are for certain patterns. For example, when you use Redux and you have a store, we all know that's a sort of event listener
+handler coordinator type thing. We all know what that's for. We all know what React components are for to present the view. Although sometimes we might get a
+little bit of the responsibilities mixed up. We all generally understand what this thing is for. There's a stereotypical responsibility for a lot of these
+patterns. So at the start of any project, you want to make sure that you have clarity on what the patterns you're going to be using are. And your team also has
+clarity on what those patterns you're going to use are as well. So getting better at design is really a practice of metacognition and developing awareness. So
+it's developing awareness as to why you understand certain things. And if you can develop internal awareness, you also develop external awareness at the same
+time. So metacognition, understanding why you understand things and using empathetic thinking to consider, will someone else understand what this is, how to use
+it, why I'm using it? And will they be able to carry out their tasks as I write my code? So if you're writing code and it's really loosey goosey, and there's
+also the topic of cohesion that we've also discussed as well. If you're noticing that it's very hard for someone to cohesively understand the purpose of what it
+is you're doing, and we can't really tether that to the patterns, then yeah, people are going to have trouble picking apart your code. So you want to become
+aware of that. So yeah, getting better at design is at practice. There's a book I highly recommend called The Design of Everyday Things. It's just a
+foundational book. It'll go through the seven stages of action for you. I believe I actually studied this book in university. It was a really good one for human
+computer interaction. Yeah, it's a foundational piece. I think every developer needs to read because we all need to design not only user interfaces, but we need
+to design interfaces for backend, frontend developers, where your code is the interface for someone else to do their work. That's how I would say to get better
+at design. In summary, abstraction prism, development of cognition, awareness, establish the patterns, study the stages of action. There's a lot of different
+stuff there, but it's the most human thing, really.

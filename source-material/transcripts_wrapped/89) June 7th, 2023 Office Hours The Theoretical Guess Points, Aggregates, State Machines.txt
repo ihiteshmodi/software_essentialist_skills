@@ -1,0 +1,416 @@
+In action now. All right, everyone. Welcome. Welcome back. It is Wednesday, June 7th. So question is, how did it go so far? What the assignments were taking in
+the content. Have y'all watched it? Start there. While you're reflecting on that, let me get up the screen. Who has watched the content or who was in the last
+Q&A? I know some of you were. Some of you were not. And what I'm referring to is the theoretical content. So that would be the problem space, the solution
+space, and the architecture space. The architecture space, out of all of those, I think is the one that needs to get fleshed out the most. But the main idea of
+that one that we're probably going to cover for the time being is just how you can take what you've learned there. And then turn that into the modules that
+we're going to use for your project. So it's really good to know that no matter what, you can always follow some of what we've just done. And find the exact
+screens, find the exact views, find the exact commands, the features, the actual API calls that need to exist in order to implement a feature. It's always good
+now that we can start from the problem space and get all the way up to the architecture point, knowing exactly what folders we're going to need on our computer.
+And we also know which ones are core, which ones are not core, which ones are not. Part of the main thing we're trying to build. So there's a lot of learnings
+in there. I pretty much crunched everything in that, everything, a massive portion of the red book and the blue book, like domain-driven design, in those few
+videos there. So if you've struggled with reading those books, and a lot of folks have, those vids, yeah, those vids really do pull out and extract, I think,
+what matters the most. So I'm going to get a new big jam file going on here. Yeah. I'm strapped. So watch subdomain, battle context, and attempt to the
+assignments. Okay. They are much harder. We're getting close to the essence of what makes programming so hard here. What makes programming really hard is not
+the programming part. That's the easy part. Huh. The hard part of programming is ascertaining. It's determining the what part. It's stepping back and getting
+clear on what first, and then doing the how. And this is where you have to become a little bit philosophical. And you have to pay close attention to language. I
+want to really emphasize the idea of language, because that's what makes this hard, is language. Rohan says, I agree. Breaking down the problem. Initially, it's
+very overwhelming. Even the Boolean calculator was easy for me, as he did the hard part of giving concrete examples. Yeah, exactly. Even putting together these
+assignments. I want to give you guys a clear picture of what I mean by this. This is all about what before how. It's all about abstraction. I feel like things
+are moving a little bit better for me in terms of shipping this course content. I feel like I have more clarity. I have less, a lot less stress. And the reason
+why you have, like, I have a lot less stress is because I just have that clarity. If you're experiencing a lot of anxiety, and we talked about this in some of
+the mastery videos. If you're experiencing a lot of anxiety when you're doing your work, it's because you don't have enough clarity. And these last few weeks,
+I've just been coming back to what I've been doing for pretty much my entire career over the last four or five years. Which is just writing more and just
+stepping back and meditating more and getting clear on what it is I'm doing, what it is I'm doing, what it is I'm doing. Separating that part away first and
+then stepping into the house. So I might have mentioned I was, I went to the art gallery in Toronto and I spent some time meditating there on, okay, how can I
+ship this course content a little bit faster? Because there's 9,000 different ways I could do this. But stepping back and actually asking, okay, what is it that
+needs to realistically happen here? Developers just need to have the experience where they've tried something hard and then they've achieved a level of
+self-confidence because they've gone and done it themselves. That's all that actually needs to be accomplished. Stepping back and getting clear on that excludes
+and eliminates all the 8,099 other things that need to be done. So again, I'm talking about this idea of abstraction because this is the whole idea of the
+course. This is the reason why we have theoretical versus physical. It's why we have the upfront first before we do the emergent. And just to give you an
+example, here's a document I wrote recently, right? This is how I ship content. So look at this. This is actually describing out in detail the process that I
+need to do before I actually do anything. Because if I have this, I could just drop into what it is I need to do. So you want to have that amazing level of
+understanding when you drop into programming. So that just feels like typing. Look at all the stuff I need to do to actually get a demo in front of you all.
+There was times when this was like, and this is why I think things used to take a large amount of time is because I didn't have this all very clear. It was all
+very new and I was all still creating this. But getting this out and getting this very clear and seeing it in front of me, it's not very hard to not know
+exactly what it is I need to do and exactly where I am at any point in time. So that is no different whether you are programming, whether you're trying to maybe
+get a particular job. If you don't have clarity on how you can get there and how you can get there effectively, then we got to fix that first. So Lucas, I liked
+the event storming process in the way we find the commands and aggregates. I used to struggle to model aggregates before, but things seem clearer now. Is it
+always a good approach to find the aggregate related to each event? Yeah, this is a great question. I think this is the best way to find the required input. I'm
+not using the word aggregate. I'm just saying required input because the word aggregate, man, there's so many different ways you can model out what it is you
+need. But I think you should always look for the inputs and outputs of your system. That's really what we're doing here is we're saying a few things. We're
+saying one information systems are just state machines. They're just a bunch of state machines. You have, I could feel my computer getting crazy. You have one
+state machine here. And then once an event comes off of that, maybe a new state machine is created. And then once an event comes off of that, a new state
+machine is created. And then event comes off of that. And this state machine does something as a result of that state machine. So you really want to follow the
+inputs and the outputs, the flow of data. And that's going to show you exactly what is required for the modeling that's going to come underneath that when we
+envelope, when we go a little deeper. So when we go from here, when we finish doing all the work here in the theoretical space, when we have a process model,
+usually the wisest thing to do is to, let's say you've already built out your entire infrastructure. You already have the architecture. The wisest thing to do
+is to drop into the ideal developer workflow, but you could also forego doing the system level tests, the level five, and you could actually just drop into
+level three. Because we, if we're going to be building out our domain model implementation, the stuff we're doing now level two, it's actually wiser for us to
+just go straight to level three. Because this gives us, we could actually just create the feature right then and there and just use the inputs that are required
+to create the necessary entities and value objects underneath. Yeah. And in summary, information systems are state machines, the whole thing. And it's just
+inputs and outputs between states. And you want one state change to happen at a time. And in order to have one state change happen at a time, sometimes this
+will mean you have to break apart what you think your aggregate actually is. And you want those state changes to be as small as possible. So in an event
+storming timeline, can an event generate two branch events or is it better to always process it as a linear process? No, you're going to have times where you'll
+go, you'll have two things happen. The way to think about this is you're building a event driven architecture. And when you cross over to another boundary, you
+cross over to another domain. I close some of these tabs out. I might have my computer. Because my computer is struggling a bit. Let's see. So close the field.
+Let's close that. I got VS code out. And then back then that's what. Yeah. That's me. So yeah, you're going to sometimes have to do that where you're, you'll
+have two different paths. You'll go down. No fill. Great example of this. One of my favorite ones. I think I might've even done this before is the example of
+creating an order. Order. Placed. Let's make this close. It's supposed to be like yellow. Order placed. Is actually order places going to happen here. No,
+actually what happened here. And then here, of course, you're going to email sent. Now, when stuff is not in our, cause this would be a generic context, this
+would be like email. And this would be, I'm giving, by the way, in case you don't know, I'm giving the e-commerce example of them, orders, billing, right? Order
+placed. And then you can split off into these two zones. And then again, let's say once the customer is charged, what might happen after that? Yet another email
+sent. I'm sure you've gotten this before. I'm sure you like when you bought something online, what's happened is you've gotten a email that said, okay, your
+order's been placed. And then two seconds later you get another email that says, okay, you've been charged. What's going on here is this concept. Placing an
+order. Getting that because this is email. Order placed. Boom. That makes sense, right? That's what we actually model this. And oh, and if I haven't shown you
+this already, I think I have. But modeling, one of the best ways I like to visualize this is this tool. Adam, another fellow cannot. Has put together this. This
+system. That's like a, it really goes with this input output stuff. I'm telling you all. This is a great way to see that sometimes what you're going to do is
+actually just going to flow up and down in between. Things will happen at the same time. This is a great way to visualize the process. So this is event storming
+like on steroids. So another way to draw it all out. You see here, we have the contexts. Because the problem that we have when we try to model this out is it's
+not very easy to show that we're bouncing between contexts. So the way that they've done it here is they have the context down as like a grid at the bottom. And
+then you could just see which events get emitted from which contexts. And we could see what happens as it was. So that's what he looks like. He doesn't exactly
+put the commands in the context it belongs to, though. That's one thing that's a bit strange. So maybe there's no real winning here with that. But hopefully
+that answers the question. Yes, you will split off into different paths because it is event driven. And you may have like external systems like that need to do
+something later on. What you don't want to do is split off into two paths in the same namespace. You want to try to avoid that. Because as I said, we're trying
+to manage state changing out one like in like steps. Like this step, then that step. If I was to really think about what it is I'm looking at here, I would say
+these might be that's its own context. That's like its own context. That is two. Question? Oh, Laurent, you've joined in. Yeah, thank you. Beautiful. Does this
+stuff make sense? Anyone have questions on this so far? Awesome. Okay. So it seems like most of y'all have begun to go through the assignments. It seems like
+y'all have seen the videos. Is there anything I could help with in terms of actually doing the assignments? Or maybe it's just enough for you to watch the
+videos and get the idea. Because I'm just noticing, I think there's only been a couple submissions so far. For the feedback loop. Yes. Yes, what's up? Yeah, I'm
+good. I just have a question. You should have to join? Yeah, of course. Is this how I know? And if you get the... It is an awful. You only have the events
+coming out. So where are the... Inputs. Where are the inputs? Oh, like with this drawing I've done here? Yes. Oh yeah, it's probably not the best drawing. Could
+be a little bit better. But these would all have some sort of inputs. In Solidbook, there's actually a really good... I wonder if I could get on there right
+here. They'll still have me logged in. Let's see. Where is this? This is all going to get torn up. Anyways. There's a really good image. Anything I want to show
+you? Ah, this one. Call. So... This is what is going on. There's going to be some sort of triggering event. And then... This input data... Is effectively the
+DTO... In order to invoke the command. And then output events are going to happen. But... Yeah, like with these state machines... Let's say this one here is
+like... Feedback cycle. We're always going to need some input data. So for this would be... Probably just the reader ID. And maybe some other details like...
+Start. Date. And maybe also optionally. By the way, if you're... Yeah, just mute your mic when you're done, man. And then, yeah, that's pretty much it. Like
+we're going to have some input... Stuff like that. And then that will finally create this thing. Feedback cycle created. And then who subscribes to that? Maybe
+another context needs to know about... That a feedback cycle was created. Maybe to send an email. Maybe to notify all of me. Re-reader. Maybe to do all that.
+Email. Email. Right? And then email might go ahead and send all that stuff out. There's probably not going to be an event after that. But... They get the idea.
+The information systems are state machines. It's just inputs and outputs between states. You only want one state change to happen at a time. And... When I say
+you only want one state change to happen at a time... I should probably constrain my language here and say... Within your context. Within the current context
+you're working in... You only want one state change to happen. So... Because what we've got going on down here is... One's going to happen here. And then two
+are going to happen there. But they're not going to happen within the same context. If you watch the video where we refactored this away... In the platform.
+That's a great example of us identifying... Looks like we're trying to do too much in... I think it was the feedback cycle. Looks like we're missing a concept.
+We ended up like... Breaking apart... Like one of these into two... Parts. Instead of just one. So... That's just to catch you up on what we... Just covered
+here a little bit. So any other questions? Any other things? Like I'm just going to answer... Questions for y'all. Pretty much here to unblock you... On
+anything you might be struggling with. To do the assignments. Any questions you have about the assignments. So I'll just put this up... Real quick. What we're
+doing here. Questions. For... Red of Cool. And... The first part of the physical. I actually want to comment on... This first part of the stateful. And I'm just
+going to... If nothing else... I'll just rant. Because you guys know I can do that. So the rest of that is coming up. I'm trying to get this out... This week.
+With my new writing system. So I'll say... Questions. Let's take some more of those... If we have them. See Daniel's here. Wonderful. Leo Max. Nice to see you.
+Yep. That aggregate thing that we... We worked out there. I love that problem. So I've been known to... Create some pretty large... Nasty aggregates in my time.
+So I've definitely... Been bit... By that bug... Of making aggregates way too big. Learning object-oriented design really is... For those of you who don't
+know... There's a great thread where we... Walked through... Some design issues... With... Something that Leo Max is working on. About like... Reordering... A
+playlist. It's a really great... That's a good question. What is an aggregate? I'll answer that. But it's a really great... Kind of thought experiment... To
+take a look at. If someone could post a link to that thread... It's really good. I'm going to probably utilize... Some of the key learnings in there. Because
+it's just such a great example. But... Can you put that note into your questions? What is an aggregate? But yeah... I really like that problem. It's perfect.
+Thank you. Yeah. For those who haven't seen it yet... What we're doing in the domain layer... Is we are modeling... We're modeling data... It's behaviors... The
+rules... Processes... But we're really just modeling... This tiny little thing here. Right? We're modeling... Our state machine... And our state machine... Can
+transition to other states. So that's what we're doing... At feedback loop level two... Where it's taking one state machine... And we're just modeling... The
+way it changes. Sometimes we need to do work... That... Kind of involves two state machines... And that is... When we get into the concept... Of domain
+services. So there is... A challenge in there... Regarding... Synchronizing... A tasks list... And a calendar together. So in that example... It would be like
+you have... Two of these... And you need to... Figure out how to sync... What's in this... To what's that... But... To do that... You're gonna have to... Have
+to introduce a new concept... That kind of... Goes in between these two... And that would be... The domain service... But we'll get into that... A little
+later... But yeah... This is a problem of... The playlist is really great... Because... We're modeling relationships... And that's why we use... Identifiers...
+So that we can... Model things out... In a really simple way... Because if I had... Feedback cycle relates to... An author... Right? It does... You know... It's
+starting to look a little messy... Feedback cycle relates to an author... Right? But... If I had to... Grab... The entire author... Every single time... I
+needed to... Do something with the feedback cycle... That's not great... And also... At the same time... If I... Was trying to grab the author... And an author
+can have... Many different feedback cycles... Could... They could run... Tons of these... If I... Needed to get the author... And I needed to get the author...
+For some reason to do... A command... And there's... 30 of these... And for me to actually... Get access to the... Author... If I need to load up... All 30 of
+these... In my request... That's not going to be good... At all... And my... Code is probably going to... Probably going to crash... So we... Resolve this
+issue... In general... By... Using... Identifiers... So we could say... Feedback... Cycle... ID... So that will solve... The issue of us needing to... Even
+bring... One of these... So this... Author relates to that... So now we don't actually... Need to mention this thing... At all... We could just focus on the...
+Idea of author... This is how we... Model out relationships... And then... If we need to deal with lists... Which is one of the... More challenging problems...
+If we do need to deal with lists... We want to try to... Think around a way... To not have to... Actually load up an entire list... Because... It's a great idea
+to think about... The worst case scenario... In the example that we were looking at... In LeoMax's... Scenario... He's dealing with a... Playlist... That has a
+ton of... It could have a ton... Of tracks in it... Like lots of playlist items... And if we want to reorder... The playlist... Drag one item... From... One
+position to another one... It would not be good... If we needed to... Update everything... From one position... All the way downwards... Let's say you drag...
+Like something from... Position 3 to 50... And then you have to... Update... Like a ton of those... All at one time... Not good... So... Go and take a look...
+At the solution there... What we came up with... Was... All you actually need to do... Is... Say a playlist item... Refers to another playlist item... Refers to
+another playlist item... And all it... Needs to do... Is it has... Next... It has... Previous... So it has... Previous... Pull... It's an ID... It has next...
+And all you actually need to do... Is... A reorder... Is just gonna adjust... What is previous... And what is next... And that's how you can... Constrain the
+work... That needs to get done... In a single... Request... And then... As for updating... The IDs... The track list... And the... Updating... The current...
+Number... Like the... Sequence number... Well... All of that can be done... Later on... That's the idea... Of eventual consistency... So... Yeah... I'm not
+gonna go too deep... Into that now... Because that is such a fun topic... And we could go down to rabbit hole... So... I'm gonna take a moment here... And...
+Get to some of these questions... Let's start with... What is an aggregate... And I'm gonna grab this one... What is an aggregate... And by the way... What time
+is it? It is 12... Something... Yeah... Yeah... I need to take a big sip... Of this coffee here... Because I haven't had that yet... I feel my brain still
+waking up... Alright... I'm curious... Like... Anyone else... What do you guys think an aggregate is? Someone else dropping their thoughts... There's a lot of
+different ways... We can refer to what... We think this is... You can give me an example... Great... Aggregates to me... Are like... Objects that enforce
+invariance... That's fair enough... And that... And then that introduces... Well... What's an invariant? Yeah... So... We know that we... Let's say if you're
+doing... Let's see... What's a great example here... Look at this... Yeah... What's an aggregate? Well... An aggregate to me is just... It's a boundary... It's
+a transaction boundary... The example I gave in the... In the videos... We can always name your data out... In order to do start feedback cycle... What is it
+that we're going to be creating? We're going to be creating a feedback cycle... Is the concept that's getting created... And then an event's going to happen...
+Okay... Cool... So the aggregate is just the... Is it the data... Is it the idea of the feedback cycle? To me... An aggregate is the... It's like a boundary
+around... The... It's the data you need... In order to perform... The transaction... So... We're now doing work at... Feedback loop level 2... And we're talking
+about... An entity... An entity is... Different than an aggregate... An aggregate is inherently... An application... Level... Thing... It's inherently... A...
+Type of thing... That has to do with... Making sure that your app... Is going to stay in a consistent state... So... When you're... Designing out... How to...
+Perform... A... State change... In your app... You want to make sure that... If you walk through... Your code... That actually does the state change... Line by
+line... If you change the app... Or... If you perform a state change... And then... You go to the next line of code... And you still need to perform... One
+more... If the... Code base... If your system dies... At that point... And you start back up... If your system is now... Messed up... Because... You only did
+half of the transaction... That's bad... So... An aggregate is something... That is going to prevent... That issue... It's going to... Allow you to... Either
+make the state change... Or... Not make the state change... It's the... Essential amount... Of... Data... Required... That's going to change... All together...
+In one... Transaction... Daniel says... Add it to me... Or like... Objects that are forced... Yeah... Because an invariant is... It's a rule about... What
+your... It's a rule about... What your... Objects... Your domain concepts... Are allowed to be... The state that they're allowed... To be in... For example... I
+cannot... Have a washing machine... Be in... Off... That also has... Like... Settings... Currently selected... That's just... Invalid... It's impossible... Is
+it the same... As a DTO... Aggregate is in... Guess point... Level 3... Yes... I will say that... Yeah... It is... Other things that are in... Level 3... Are
+things that have to do... With time... Anything that has to do... Is... And that's... Reminded me of something... I want to show you all soon... Is... Actually
+built out... An entire... Time domain... I want to demonstrate... Yeah... DTOs just carry data... Yeah... Entities... Like... Value objects... And... Entities
+are level 2... Aggregates... Come to be... Because of the application... Because... Here's the thing... That could happen... If we never had an application...
+If we didn't have to... Build an app... You could go and... Model out... An entire world... Of entities... And value objects... It's like... When people first
+learn... About object-oriented programming... They go crazy... Just... Okay... I'm going to just... Model out... Dogs connected to... Like... The owner... The
+owner is connected... To the house... The house is connected... The city is connected... That's connected to that... That's connected to that... If you didn't
+have an application... You could model everything out... Forever... You could go to... Eternity... Things that might exist... But... Because you have an
+application... You... Every entity that you create... Has a purpose... Every value object you create... Has a purpose... It's all supposed to be purposeful...
+In the way that you... Enforce... Purposefulness... Is to do work... Starting from level 3... Or work... Starting from level 5... Because those are the two key
+boundaries... Level 3 is the... Developer boundary... And level 5 is the... Customer boundary... This is why... Enf looping is so key too... Because... When
+we... Get to doing this... After the stateful guest point... By the way... We're doing this in reverse... Because there's just a lot of stuff to learn... And
+we'll do it all... From top to bottom... In the projects section... But... When you get to level 3... You're just gonna start by... Taking one of the
+features... So in this case... It might be like... Place order... And you're gonna create a use case... And then what we're gonna do... Is we're gonna... Go
+through all the success... And failure scenarios... And... What's gonna get created... Underneath here... Is probably gonna be... Something called... Wordr...
+But this concept here... Is gonna be an aggregate... Thing right here... Is gonna be called... The aggregate... And... Honestly man... I don't even... Like
+to... Give things... Concrete... Base classes... Until I... Absolutely need them... So I'll just call it... Order for now... And then... I'll just... Structure
+it out... And then go to the next feature... Eventually... These things will emerge... Let's see... There's another good question... Here I think... In terms
+of... Stereotypical roles... An aggregate is... Composed of... Information holders... And structures... Right? Man... There's so many different ways... To
+design aggregates out... As I said... You could do it like this... You could say... Data... For... Place... Order... Right? So... What is this gonna contain?
+It's gonna contain... All of the data necessary... In order for you to do... Place order... And then what might this refer to? This might refer to the actual
+concept... Of the order... But then you're still gonna have... The input data... Or... Yes... Like... It's tricky... I think the best way for us to do this...
+Is to literally just do it... This is why I like to skip the whole conversation... Of aggregate in general... This is honestly why I like to just... Let's just
+forget about aggregates for the moment... Inputs and outputs... Let's focus on that... Because there's so many different ways... We can model it... What's going
+in... What needs to go out... What needs to change all at one time... Let's figure that out... We'll come up with the concepts... The abstractions... That
+actually need to... Be assembled... When we get... I think this part is a lot more... Important... So yeah... I like to just keep it... Normally like that...
+And then allow... What needs to get added onto this... To emerge... If I start to see... Yeah... Actually this was another really good one too... Because... We
+propose another way to do this... Where... Let's say you have... Three of these features... I'm gonna pull this over again... I really like this... Way of
+thinking about it too... I don't remember where I learned this... Maybe... Like... Bogart or someone like that... Right... Say you have... Place order... And
+maybe you call this like... Data... For... Place... And maybe this one is called... I don't know... Update... Or... And then let's say... This one is... Let's
+just say... Cancel... So... Each of these are referring to... An order... To some degree... Right... Yeah... Each of these are referring to... Order... To some
+degree here... But... What's actually required... In each of these... Is a little bit different... So... The concept of an order... Could eventually become...
+Abstract... And... Maybe... Instead of calling this... Data for a place order... We could call this... Let's see... It's like... A small slice... Of what we
+actually need... It's an aspect... Of the order... It's not even really the data... Like... Like... It's the data from... The order... Really truly... It's
+like... The data from the order... For us to do... Place order... You know what I mean? That's actually what is... What I'm trying to communicate here... And
+then what could happen is... These objects... Will be... Very slim... And then... The concept of an order... Might actually just be... Like an abstract thing...
+Yeah... Sometimes it can feel... Like a DTO in general... Like... It can feel like that... I think for this one... Like... I don't want to give any... Solid...
+Statements on this... Because it's just... There's so many different ways... We could model this out... There's the object-oriented way... Where we just say...
+Nah... Order... We're just gonna go with that... And then there's a way... Where we could go... Vary inputs and outputs... Which is popular... In the functional
+approach... Where you just... Look at everything... As inputs and outputs... And you just... You're not modeling any classes... You're just saying... This
+input... To create this transaction... And then the use case... Returns this output... So... To me... An aggregate is... A little bit more... Of a philosophical
+thing... It's just... I might even say... It's like a logical boundary... Around what needs to be... What needs to happen... It might not be a real...
+Construct... It can be... But it might not be... A real construct... It's really gonna depend on... How we wanna do this here... So I think I gotta leave it
+there... For now... We'll return to this... We're gonna actually look at it... And try a few things out... So this is... A good... This is good... For us to
+talk about... So I'm gonna actually... Spend some more time on this... And... Make this clear for everyone... Just gonna take a note on that... And yeah...
+No... Cause DTO is... Data in a certain shape... We shouldn't have... Behavior... Yeah... Like... The language here man... It's just... It gets really
+complex... Really fast... So... I think we need... Better mental models for this... Alright... I wanted to show y'all something... That's gonna be pretty
+useful... For... The... Application... Level... I know that sometimes... When some of you are doing... The... The stateful assignments... Like... Pomodoro... Or
+the traffic light... The concept of time... Comes up... And how to work with time... And... Time... Really truly... The fact that... One... Command... Happens
+after... A particular event... That's... A concern that is handled... By the application... It's not a concern that... Should concern... The state machines just
+need to... They just hold on to... The data behavior... They just protect the data... And make sure that... It's gonna change... Appropriately... When it is
+called to change... But it's... Knowing when to call... Your level two concepts to change... Is not... A level two concern... That's... Application concern...
+Application concern... Is there anything that has to do... With the outside world... With reality... With... Dealing with external services... With...
+Connecting to... And... Receiving requests from the outside world... All this stuff is... Application level stuff... So... We need a way to decouple from
+time... When... We are... Building out... Our... Domain models... Which... Could be tricky... As I said... If you're doing... Something where it seems like...
+Time is like... A part of the domain... Concept... Like... Pomodoro... Or like... TrafficLite... So I wanna show you... Is just an example... Of... How you can
+decouple from time... And how... I literally just did the exact same thing... What are all the... Different subdomains... What are all the different... Bounded
+contexts here... Okay... Those bounded contexts are now... Well known... So what we're gonna do now... Is we're gonna create... Those bounded contexts... As
+folders... On the... In the project... And I ended up creating... A time... Folder... See... Something going on... I'm not sure if I uploaded this... Oh yes...
+It is... I'm just gonna share... Something a little different here... Real quick... So quick little detour... Stop streaming... Start streaming... Time... And
+let's take a look... Okay... So let's see... Did I even connect this... I didn't even connect... To TrafficLite yet... So what I've done here is... Right... So
+check out this... Test here... Now this... I've named this a little bit... Differently... I've called it... ISpec... Because this is... An integration test...
+This... Particularly... This is a... Level 4 test... We call this a... Contract test... So I have the concept... Of a clock... So what is a clock... It does
+something called... GetCurredTime... So I can get the time... And it can tick... Forward... By... Number of seconds... That's what... It can do... So... When
+this is running... In production... What's probably gonna happen is... There's... Gonna... Be a set timeout... Or... Some set interval... And it's gonna tick
+forward... By one second... Every set... That's what it will do in production... That's what a clock does... Right? So... Seems about right... However... Do I
+wanna have to wait... One second... In my codebase... Or do I wanna have to wait... Seconds in my codebase... For real... When I'm actually writing my tests...
+Hell no... Cause then it's gonna be super slow... And... That's not what I want... When I'm doing... My high value unit tests... Which are the... Level 3
+tests... That's not what I want... When I'm testing out the features... I'm testing out... Things that might... Rely on time... I want to be able to test...
+That... Things are temporally correct... But I don't actually want to have to wait... The amount of time... That it will take... So... The way that you achieve
+this... Is by using... Just describing... Creating the role... Of a clock... So this is abstract... Which means it can't actually be created for real... That
+means... It's like a job application... Where... Someone has to fulfill the role... So there's two... Classes that fulfill this role... There's a system
+clock... Which is gonna do the real thing... As I just said... What it does here... Is... It waits... One second... It's a little bit larger for y'all... Does
+the real thing... It waits one second... And it could get the current time as well... And you see what I'm saying... New date here... That's gonna get... The
+new date for real... It will... It will... Because anytime you say new date on your machine... It's going to... Go straight to your... System clock... In your
+computer... And then... Extract at the current time... Based on your time zone... Based on... Your machine... I took that... So this is... Infrastructural...
+This is now... Infra code... However... I can also implement a fake clock... So this thing here... Does not... Actually touch... Infra... At all... So it's not
+a real clock... And I could actually manipulate the time... Now what's the purpose of me doing this? If I do this... Then... I could have code that relies on a
+clock... And I could actually... Manipulate time... In my tests... So... For example... Here's the test... I... It can tick forward for 4 seconds... So... It's
+going to get the clock... It's going to get the current time... It's going to tick forward 4 seconds... And then... It is going to... Get the current time...
+Again... And it's going to... Get time between... By the way... When I was coding this out... You already know... None of this stuff existed... This is all just
+me using language... To describe what it is I want... Again... Abstraction... What... Before... How... And then... I made it... So this type of test... I
+said... Is called the contract test... Because we are testing the contract of a clock... And we're testing it with 2... Clocks... Why are... Why am I doing...
+Like a 4 let of clocks? Why am I looping over them? The reason why you want to loop over... All the different implementations you have... Is so that you can
+ensure that... If... One changes... If you're using one in production... And you're using one in your tests... You want to make sure that they stay in sync...
+This is how we solve the problem of... Mocking... Where people say... Don't mock... It's okay to mock... But... Just make sure you mock correctly... You want to
+create parody between what's real and fake... So that's what we're doing here... So now... I have pretty much... The main things I need... In order for me to
+now go and do traffic light... Correctly... In order for me to now go and manipulate time... In my... In my tests... For traffic light... So if I was to run
+this... It would actually take 4 seconds for real... Because it's using both the real system clock... And the fake clock... But if I wanted to go over to
+traffic light... And create a new... Use case... You want to test a real scenario... Maybe the scenario I want to test is... Let's say the traffic light runs
+for... One hour... And then... Over the course of one hour... The traffic light must have done... These amount of things... So... Am I going to write a test
+that... Has to wait one hour? Of course not... Now that I have a fake clock... I can control the time... In my code... And I could... Make it move... For... One
+hour... Entirely... And then go and take a look... At the traffic lights... Events... And see how it has changed over time... So... This is extremely powerful
+technique... Of course... Everything we're doing here... Like... The whole purpose of us writing... Information systems... Is to get back time... Or to enrich
+time... So this is going to be... Just a foundational... Tool for you... The ability to do this... In order to test your... Systems... To decouple from...
+System infrastructure... And then actually... Test the aspect of... Time... Without having to talk to... The actual clock in your computer... Are there
+questions about this? I'm sure there's probably... Like... 9,000 questions... But... I just jumped ahead... To... At least two modules... But... I really wanted
+to show you... All this... Because I think it's awesome... And also... It will alleviate... Perhaps any... Maybe overwhelm... You might be feeling... Trying to
+do some of your... State... Full... Assignments... That have to do with time... Just know that... The stuff that has to do with... Time a little bit later...
+Just focus on the... State changes... For now... We'll get into this... Whole aspect of dealing with... Time a little bit later... Should we jump the... Module
+order? No... Do... Everything in sequence... And I'm going to... Level 2... Because I want you to... Learn these things... Inside out... So... Yeah... Do the
+theoretical... Stuff first... Then go to... Level 2... Then go to... Level 3... I haven't put this... The rest of... Level 2... So go to... What's in there...
+And do things in sequence... Yeah... That's... Pretending... Do you have this... Repo in GitHub? I do... It is in my... Teaching repo... Yeah... I could
+probably make... Parts of that... Public... I'm still milling on this here... But yeah... If it's helpful... I could just... Definitely... Put it up... I'm
+going to just have this... In the solution... For traffic light... In general... The reason why... I've separated out... I've taken tons of commits... In the...
+The course... Repo... But... I could definitely... Put this out... Alright... Great... So you see how... I've organized this here... Into a... A different
+context... And then we have the traffic light context... Those two things are... So just know that... Any time you're going to be dealing with... Time is going
+to live in its own thing... Awesome... Awesome... Okay... That's enough of that... Let's come back to... What was it... Bang... Bang... The brain is still
+waking up... I... Definitely... Didn't... I'm... Today... Alright... So... Yeah... Like... You guys have... The floor... Whatever you guys want to chat about...
+Or... What you want to talk about... It's... Office Sadwires... The next assignments... We could also just leave it there... But... Anyone get a chance to...
+Start doing the... Let's see... So what were some of the other ones... We had... Let's see... What were some of the other ones... We can do it... My brain...
+Yeah... Okay... Cool... I think maybe later on... Once I get to... Rewriting all this stuff... I might figure out a way... To... Go from... Theoretical... To...
+Level 3... But it's just... There's so much stuff... That I don't really want us... To go to that right away... If I try to get you all... To do level 3 work...
+Because... Ideally it's great... I do that most of the time... Whenever I need to... Actually build features out... I'll just... Plan it out... Get clarity
+on... The inputs and outputs... I'll do a process model... And then I'll... Often times... Sometimes... If it's just... Something I'm going to use... A
+standard... Architecture... That I'm familiar with... I'll just jump straight... To level 3... So I don't have to... Set up... Infra... But you really... Most
+of the time... I'll just jump straight... To level 3... Start building out... Some of the... Edge cases... Right away... The problem with that is... This is
+why... Testing is so hard... Because... In... When we use... Faster... The find step... What is it you need to find? You're trying to find... All the
+responsibilities... That have to do with... That current... Feedback loop level... That you're at... You're going to be... Doing faster... From level 3... You
+need to find... All the responsibilities... That have to do with... Time... Have to do with... Dealing with... Repositories... Dealing with... Inputs... Dealing
+with... Saving transactions... Dealing with... Grabbing the events... Possibly... Out of... The... Aggregates... That are... That you're going to get to
+interact... There's just so many... Different... Responsibilities... To get handled... At an application level... Not even... I haven't even... Mentioned things
+like... Crosscutting... Concerns... Like... Off... A lot of things... To get handled... At the application level... Where it could just get... So
+overwhelming... Which is why... So few people do... The... High value... Use case tests... That I'm going to teach you... How to do at... Level 3... Which is
+why... We need to learn it... From the inside out... Which is why... We're going to level 2... Straight after this... But perhaps... Be able to figure out... A
+way to jump... Towards that... Faster... Because... Emotionally... It just hooks a lot better... To see... All the work you're doing here... And we go and
+just... Just take it straight... To building out that feature... It's just a lot more... Motivating... To jump... Straight to a feature... That you're going to
+build... It's just that... There's so many... Architectural components... Involved... With making that work... The simplest possible way... We could probably
+make it work... Is to just say... Yeah... Let's not even bother... With the entities... Like... For now... And then we just build out... Like... Success and
+failure cases... And then realize... We need entities... And then get to entities... But... Those are all things... I'm considering... I'm just going to keep...
+The path that we're going... Right now... Visualization of these levels... Somewhere... Yeah... There is... Let me see... We're going to pull that up...
+Create... Some more stuff... On this... One sec... Let's see if I can... Couple images... And... Let's see... Copy... Image... Like... Yeah... Like this one
+here... But... This is not the full... This is also not the... My favorite... Depiction of this... I'm going to put this... In... Course Chat... No... Like...
+There's also a module... In the course... It has been asked... Of me... To... Draw... All of this... See you later... Leo Max... It's been asked... Of me to
+just... Draw all of this out... Show you what all of these... Feedback loop levels are... I think Rohan actually... Asked me that... Yeah... It's going to go
+like... Towards the start of the course... Like... This whole visualization... Of each of these levels... I believe it's in... The... Where is it? I think it's
+in the... I think... It does feel like... The ground is moving... Underfoot sometimes... Not sure what that means... But... Probably... Things are just going
+like... Moving all over the place... Yeah... Yeah... I'm pretty... I'm pretty ruthless... With my edits... It's... One of the joys... Of being an early
+adopter... I think that's right... Okay... I don't have a great... Visualization of this... So... You know what... I'm actually going to prioritize that...
+Yeah... I'm going to prioritize that... That has been asked... Actually... A couple times... So... I'll make sure that's in there... Today... I'm going to get
+to that... So... Let's put that on the... Yeah... But on a positive note here... It's just... Yeah... Is this thing... Like... Just backing up and... Reflecting
+on... This course... Solid book... This problem in general... Of... Trying to find the correct... Philosophical understanding of... What it is we're doing
+here... How to break this down... How to explain this to others... How to get out of these conversations... Of... Oh... Oh... Oh... Oh... Oh... Oh... It's
+like... Of... All of those conversations... Reflecting back on all this stuff... I just think the main ideas here... Are... Abstraction... What before how...
+The second one is... Okay... Now that we know... What before how... So how do we know what... The answer to what... Is systems thinking... It's okay... What's
+that... Inputs outputs... Environments... Processes in the middle... Can we learn... The entirety of... The work we need to do... Into systems... Yes we can...
+Because a business... Is a system... Starts with value... Creation... Sales... We have marketing... Sales... And then it comes to us... That's where we pick up
+the ball... We start doing work... Comes into that... We have to go through... The theoretical guesses... Make sure we understand... And then the next... Phase
+is after that... It's the physical... Inputs... Incoming guesses... The system one... The outgoing adapter... The application... Stateful... Domain modeling...
+Then unit... We have to make sure... Of course... We can actually deploy it... So... I think... That's all that matters... Which is why I'm really... Even with
+these new tools... That are coming out... I saw there was a no code... Course... And... I think... That's all that matters... Which is why I'm really... Even
+with these new tools... That are coming out... I saw there was a no code... Course... On how to build... AI apps... I just thought... Awesome... Like... I know
+some devs are like... Oh no... I see that... These AI apps... And stuff like that... I think this is... Freaking awesome... Because... The stuff we're learning
+here... We don't really have to be worried... Because... We... Have... Clarity on what matters... If you don't have clarity... On what matters... Everything's
+gonna seem like a threat... Like... The... I think later on... Like... Once I finish this... The V1 of this... I would like us to actually do a deeper dive...
+On some of the... The emerging AI patterns... Because... All that's really... Like... It does... Is it just... Crunches down... And minimizes... Some of the...
+The state changes that we need to do... That... I think... Is probably the best way to understand... Like... What... AI helps us do... Is it minimizes down...
+Some of these state changes... Decision making logic... That we need to do... Sometimes... A drastic amount... If we could... Learn that... If we could... Learn
+how to... Plug that into our code bases... Then... We're just... We're sitting pretty... And we're moving a lot faster... That's it... It's just about
+knowing... The inputs and outputs... What we're plugging in... But also knowing what the goalpost is... Has anyone played with some of the new AI stuff? Anyone
+figure out how to... Utilize it for anything... Worthwhile? Maybe even connect it to a... Your backend... For some features... Because if we come back to...
+The... Process model... Go to Feedbook again... Just visualize... What I think that tool will help you do... Or like these tools... These new AI tools... Say
+you have a big batch of work... Like this to do... I think all it will really do... Is it'll just go... Okay, cool... I'll do that for you... Nice... It'll do
+that for you... And that's like the value... But it's still gonna need to... Connect to all the other stuff... I'll just go... I'll do that... In GTP... Create
+my XD machines... I describe them in natural language... In testing machines... I'm like... Yeah, it's so good... When I need... Good code examples these
+days... I just go on to that... I'm like... Yeah, give me a code example... Where someone is doing this... That... And it shows me... This... And it just
+goes... Here's the React code... Thank you... Can you make it worse? And then... Just like... What do you need... Yeah... Make it... Like worse... Okay... So
+then I'll have a bad exam... Also use it for some... Classification... Classification tasks for... Metrics... I've always wanted to build out... Like a
+Jarvis... I'll have my own... Like Ironman... What are you... Can you... Or a VA... As you are the VA... Or something... It'd be really cool... I feel like
+we're... Getting to that level... Of possibility... Okay... So I'll maybe hang around here... For 10 more minutes... If no one has any more... Solid
+questions... I'll just hang out with y'all... But happy to answer anything else... That might be... Useful... At your service here... Immediately after this...
+I'm gonna go down to... The Starbucks... I might be destroying my brain with this... But... Getting... Those Americanas... Things are hitting different... And
+that's when my best writing comes out... Feeling... See you later Frank... Alright... Let me ask some specific questions... I'm gonna ask some of you... I'm
+gonna pick on some... Just imagine... I don't think we've... I don't think I've seen you in here... Before... Maybe we're on a good time zone now... Oh...
+What's going on bro? Manny's back... Nice to see you... Yo... Legend... I'm curious... So far... Out of... What we've... Covered... In the course... I'm
+curious... Like... Which section... What is something... You would like to see... Just more... Fleshed out... In general... I know there's... Still much... To
+be desired... Particularly... This stuff... Towards the... Start... I'm gonna pull open... The... I'm gonna pull open... The new outline... Again... Now that I
+have... My excellent... New writing... To call this system... What before how... Look... I even have my own... Walking skeleton... To get everything... All
+keyed out... Correctly... Assignments... Demos... It's just like... A lot of work... But yeah... Like... Out of everything so far... I'm curious... What would
+you like to see... More fleshed out? And... What are you most interested in? So far... Yeah man... Lots has happened actually... Over the last little walk...
+Walking skeleton... Beautiful... I was actually considering... When we go from... The... The... Theoretical guess points... I was actually thinking about...
+Just jumping straight... To doing the walking skeleton... To building that all out... I was considering that... Like just doing everything... Top to bottom...
+Like... Imagining that... We're going from nothing... To... Literally walking through... The ideal developer workflow... In sequence... Considering that...
+But... Ultimately... Considered against that... And... I just said... We're gonna do that... For real... In the backend project... Yeah... That would be part
+of... The backend project... And that would be part of... The frontend project... I also have the... There was a couple other... Project ideas... I wanted to do
+too... But for this... Like just getting this... Like I wanted us to do... A Chrome extension as well... Just so that you could see... Like what we're doing
+here... Is really not for... Backend... In frontend... Just those two... You could literally do... This stuff anywhere... It's just... Takes the same level
+of... Looking for... Those systems... Like... What is the... Incoming... Adapter... For a... Chrome extension... What is that gonna look like? What is... The
+system level test... For a Chrome extension... It's just looking for... Those same systems... Regardless of where... You're doing your work... And then you
+could just do the same things... Use faster... So yeah... Walkman skeletons... A good one... Laurent... What about you? I'm curious... Questions are... Just
+gonna put this here... OP mostly... Sweet... Well that's... We're getting straight into that now... Deployments... Iterative... Incremental wave...
+Deployments... Slicing of features... Cool... Sounds like level 3... Slicing... Level 5 and level 3... And then level 7... Of the odd words... Feature flags...
+Yeah... That's an interesting one... Do you currently do... Feature flags? By the way I'm gonna actually... Yo... You have your... Move in on... Let me just...
+What's happening? Yeah... Cool... You got any sound in there? Yes... Yes... I didn't wanna say anything... No... You're good... Yeah... I think... Like... To
+think that... I was... Left in behind... Somehow... Like the... Iterative... Way of... Slicing features... Because it's... Mostly... One of the important
+thing... Mainly... Not too many people... Put too much effort into it... But... It's actually... The best... Of... Getting feedback... From the real systems...
+For example... We started implementing... And... Working with microservices... On that client... And... The first thing is... Obviously... We have... We...
+We... Because we have a legacy system... We only send messages... Then... The picture flag... We're sending the messages... Then... After that... We create a
+consumer... On the other service... Then... Started... Like... Just outputting things... And... Everything... And... Moving... The code... That wasn't... One
+system... To another one... And... Like... I was commenting... And... In the same... Slicing the features... Right... So... It's like... You're just... Straight
+from... Like... The walking skeleton... Let's just... Get little pieces of that... Making sure... We're... Actually... All over here... Let's just make sure...
+That we can... Consistently... Get to that... End goal... All the work... That we're doing... Is actually taking this... To where we want to be... It's really
+good... Yeah... And also... Trying to deploy... Like... For example... We deploy... At least... We have to deploy... So... Features... Not done... We have to
+find a way... To deploy it... And also... Make it into the... The main brand... Most strategies... Need to... Defend... So... That's why I was saying... It
+makes sense... A little... Of... Enlightenment... Do you have... Like... There's... What do they call it? Pulling the... And on... Pulling the... On... Like...
+When builds are failing... And then like... How do you come back... And like... Fix builds... What's that process? We have several... It depends... But we
+have... First of all... We have... Playbooks... Based on... We have... Playbooks... We can see... What should we take... But... The way we... Incrementally...
+Do things... For example... If I'm... Creating something... In other ways... First... I run the migration... Then afterwards... I... Why do I do this? I do it
+in an... Let's say... I create... Some optional information... Or default values... And then I... Or maybe I... The column to be... No... And then I... Run
+another migration... That's... Requiable... And so on... And... That way... Every time... That I want to... Rollback... The rollback... Is just a git...
+Revert... It's not like... Funny... Yeah... If we need to... Yeah... You know... What's interesting... About that... Is... You're just... Describing... With...
+The application... With... Our state machines... And our state changes... Being one step... At a time... We saw this... In the last... One of the
+demonstrations... We did... Where... We... Drew out... State changes... That need to happen... Like... Feedbook... And... It created... There was... Two state
+changes... Happening together... And then we thought... If it fails here... And the system goes down... The system's now inconsistent... So that's not good...
+In the last... States... So that's interesting... You're describing... Like... The same thing... For your own... Process... For bringing it... Back up... And it
+involves... All these other... Steps... It's always like... Just... Decoupling... And making sure... That each step... Is... Concept... I'd... And... So try
+to... Slice it... Because... We work with... Many other... People... In... It's really important... To... Know... How to slide features... Because... Often
+times... We find a feature... And the feature is like... From... From... Point A... To point B... Like... Fully... Fully... Let's say... Like... The feature...
+Is complete... And... It's like... Like... Like... Like... Like... Like... Like... Like... Like... Like... Like... Like... Giving... The feedback... On...
+Like... On... The way that I think about this is we have... A couple of... Metaphysical... Essentials... And one of them is the feedback loop... Is just making
+that... Tighter... As much as possible... I've been trying to take my own advice with that as well... Which is to just do... More of these... Teach in these...
+Spend less time... Like... Writing into my computer screen... Getting the teaching done here first... Find what's actually useful... Then... Restructure back
+into the content... But... With respect to... A feature... And getting... Now... This is like... A... A philosophical... Cost... What is a feature really?
+And... Cause... Yeah... There's the idea of the use case... And the use case can be any... From any state... From this state... To all these different state
+changes... And we're gonna end that there... And we're gonna call this... So... We saw... Pretty objectively... When we did our process modeling... That...
+There's a command event pair... What do you call that? Is that what you mean... When you're referring to a slice? We're referring to a slice... Is to... Create
+this... Smallest... Eternity... Result... From... Assumption... That can solve part of the problem... Or at least... Half of the problem... Or... A part of the
+problem... That can be like... Eternity... Incrementally... Developed... And... Brought to production... And also... Seen by someone... And used by someone...
+So... It adds value to... To the stakeholders... That's using it... But just... At the... At the... Use case system... As we... Like... Inside code... You see
+it... And use case... And the state of machine... The other side of... We have... A problem... That we want to solve... But the problem is too big... How do we
+slice it... And make it like... We can like... Really... Provide... Feedback... And have it fast... In production... As fast as possible... How can we... Get
+that done... I understand... So... It's not necessarily... A technical slice... We're talking about here... We're more talking about... A slice of value... If
+any... Yes... As a matter of fact... The technical part... Is what we call... Chars... We have two different types... Let's say... User stories... You have user
+stories... And then you have... Chars... Chars are... Enablers... Or things that we need to... Tuggle to... Or... Or... Let's say... Enabler... Our work... In
+the future... Or things we want to do... For example... Example that I picked... Here... Which was... Going to microservices... On one of our... Systems...
+So... I started using... The event mask... We started sending things... We created... That's a chore... It's basically... A technical chore... Got it... Yep...
+Y'all use like... Feed... Impact mapping... And tools like that... Probably... Because... That again... Is for us... To separate... What is... What...
+Everything you're describing... As a chore... Is what I would call... The how... Everything... Before that... Is the what... So... It seems like... What you're
+referring to... As a slice... Would be... One of these... Like... Maybe... Pieces of these things here... Let's say that... I don't know if you... Have the
+metaphor... Eating the elephant in pieces... Yeah... Yeah... That metaphor... Comes out... Actually... For making the slices... Like... For example... We...
+Take... Into production... Like... The backend... And the frontend... For a part... And then... But we slice it... Like... This is something... That... Like I
+said... The client... We use also... Instead of using... EventStorm... In this case... We use... UserStorm mapping... As you mentioned... Because it's like...
+The tool to... In these cases... Yeah... I think that's actually... Probably... The proper tool... For slicing out... Units of value... Is like... UserStory
+mapping... Definitely... EventStorm... Is good for like... Developers... But I think like... From more of a... Product... When is this thing... Going to get...
+Shipped out... What are we shipping out... Yeah... That makes a lot more sense... UserStory mapping... We didn't cover that... We probably should cover that...
+Later on... Probably another iteration... Showing that at the... Very least... Exposing people to what that is... I'm... Sure that a lot of developers... In
+this BDRD... Are aware of it... But there's... Guaranteed to be developers... That... Kind of... Are more code first... To show up... And do the work... But
+I'm... Curious about... What actually goes on... UserStory mapping... Okay... And that's the one... By the book... Sweet... Alright... I love it... Let's see...
+So I think we could... Pretty much... End it here for now... Damn... There's so much... Fun stuff going on here... There's so much... It's nice to see you... By
+the way... Nice to see you back... Yeah... So today... What are we doing... So today... What I'm... Working on... Is getting the rest... Of the... Stateful...
+Guestpoint stuff... Coming out... I just... Jump straight into... Another one of these... Office hours... So for anyone else... Who's in here... You can... Get
+pretty much... All the way through... The theoretical stuff... If you have questions... You can ask... In... The course chat... But... Yeah... Pretty much...
+That... Wraps it up... I think... So with that being said... Y'all... It's time... Yeah... I love the energy man... It's like... Things are coming together...
+I'm really liking... How this is looking right now... Is it finally coming together... It's... It was a bit of a rocky start... Getting all of the... The team
+together here... Hiring... Figuring out the system... But... I'm liking this system of... Get some assignments... Some demos... Teach... Assignments... Demos...
+Teach... I like that... Harsh... I think that's good... I'm really happy that... Dude... You're getting there... In a way... He... It was rough... It was
+rough... But... You have to be positive... Like... Stoics... Don't think... Don't control... That's the thing... How could... It's... All this stuff emerged...
+Like... It's just... All of these teaching... And... Teachings in the course... It's about producing value... And like... In doing this too... In producing
+value... I've had to experience... Seeing... Oh my god... There it is again... The same ideas... I'm coming face to face with... In this own practice... Of
+putting this stuff out... It was very interesting... Grill says... You've started to produce... Lots of content... Have been able to digest all... My
+comments... Boom... Perfect... Alright... Let me get out of here... Everyone go do your stuff... Go enjoy your day... Night... Evening... Fortnight... Great...
+See you... Later...

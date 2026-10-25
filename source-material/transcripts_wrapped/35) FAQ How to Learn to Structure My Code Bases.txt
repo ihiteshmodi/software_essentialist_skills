@@ -1,0 +1,9 @@
+Indirectly already answered this question, but I'll just summarize it again here. So what we want to be doing is thinking in terms of project structure through
+the lens of the abstraction prism. And we also want to remember that what we need to do as developers is to carry out the key developer use cases, which is to
+work against features and test, extend, remove features in the code base. And that means that we're going to need to be able to discover them in the code base.
+And we are going to need to be able to do all those other things against them in the code base as well. That's the main skill. The good news is that in the best
+practice first phase, we're going to be talking a bit more about this. We're going to structure out our project as a monolith, and we're going to learn how to
+have a mono repo as well. So that's going to be the front end and the back end in the same project. And we're going to learn how to share stuff between the
+front end and the back end. And we'll do that in the best practice first phase of craftship. And that's going to be the most important one with respect to
+structuring out your project. That's where we're going to do all of that stuff. So go through that and yeah, study the abstraction prism, because I think that
+is the key thing here. Thank you. Thanks,budry. Thanks, both of them. Thanks, guys. Fucking thank you. Thanks. Take care. Bakit.

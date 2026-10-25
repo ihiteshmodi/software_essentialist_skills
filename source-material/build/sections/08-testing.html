@@ -1,0 +1,799 @@
+<section id="testing" class="doc-section" data-title="Testing: Principles &amp; Techniques">
+  <h2>Testing: Principles &amp; Techniques</h2>
+  <p class="lede">Testing is one of the four intertwined pillars, and the core skill is to “isolate exactly what it is you would like to test and forget everything else.” This section collects the concrete techniques: commit discipline, AAA backwards, naming tests as responsibilities, picking the verification type per guess point, 4-layer acceptance tests, hand-written fakes kept honest by contract tests, builders for fixtures, and choosing a strategy by ROI. <a class="src" data-lesson="31">L31</a> <a class="src" data-lesson="12">L12</a></p>
+
+  <table class="tbl">
+    <thead><tr><th>Technique</th><th>Use it when</th><th>Smell it fixes</th></tr></thead>
+    <tbody>
+      <tr><td><a href="#testing--commits">Commit on green</a></td><td>Every TDD cycle</td><td>History full of broken “save points”</td></tr>
+      <tr><td><a href="#testing--aaa-backwards">AAA backwards + wishful thinking</a></td><td>Starting any test, especially when overwhelmed</td><td>10–15 minutes of arrange, then the assert doesn’t work</td></tr>
+      <tr><td><a href="#testing--naming">Responsibility specs + <code>it.each</code></a></td><td>Naming <code>describe</code>/<code>it</code>, 3+ similar examples</td><td>“sets result to true and error to null when…”</td></tr>
+      <tr><td><a href="#testing--verification">Verification per guess point</a></td><td>Deciding what to assert</td><td>Proving emails were sent from an E2E test</td></tr>
+      <tr><td><a href="#testing--acceptance">4-layer acceptance tests</a></td><td>Every feature, E2E</td><td>Flaky E2E tests</td></tr>
+      <tr><td><a href="#testing--test-doubles">Hand-written spies</a></td><td>Verifying side effects (indirect outputs)</td><td>Inline library-mock soup</td></tr>
+      <tr><td><a href="#testing--contract-tests">Contract tests</a></td><td>Every fake you write</td><td>“We’re only testing our mocks”</td></tr>
+      <tr><td><a href="#testing--builders">Builders for fixtures</a></td><td>Long state-setup in arrange</td><td>Tests that are 30 lines of <code>game.move(...)</code></td></tr>
+      <tr><td><a href="#testing--strategies">Value-first strategy</a></td><td>Deciding which tests to write at all</td><td>One testing dogma for every project</td></tr>
+    </tbody>
+  </table>
+  <p>Why the boundary matters and the definitions of result, state and communication verification are in <a href="#essentials-physical--subject-system-verification">Subject/System Verification</a>. Kata-level examples are in <a href="#katas">Kata Walkthroughs</a>.</p>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="testing--roadmap" data-title="Testing Roadmap by Phase">
+    <h3>Testing Roadmap by Phase of Craftship <a class="src" data-lesson="31">L31</a></h3>
+    <p>Khalil’s own testing started badly. He tested things that didn’t need testing (Sequelize models) and wrote flaky E2E tests. “Testing sucked for me.” His fix was a roadmap that follows the phases of craftship. You need “to build up a little bit in all of them [the pillars] in order to do even one of them.” <a class="src" data-lesson="31">L31</a></p>
+
+    <table class="tbl">
+      <thead><tr><th>Phase</th><th>Testing skill to build</th></tr></thead>
+      <tbody>
+        <tr><td>Code-first</td><td>Build basic backend operations. The backend is “raw”: no front-end tools or thought-leadership noise, so you think purely about structure and tests.</td></tr>
+        <tr><td>Best-practice-first (1)</td><td>TDD mechanics: red-green-refactor, start from examples, parameterize. Simple input-output tests (stateless).</td></tr>
+        <tr><td>Best-practice-first (2)</td><td>Non-flaky E2E tests with <a href="#testing--acceptance">four layers of abstraction</a>. Test “the entire system as a function”. Run tests in different environments (composition).</td></tr>
+        <tr><td>Pattern-first</td><td>Decouple core from infrastructure (hexagonal / clean / onion, “all different ways to say the same thing”). High-value unit and integration tests, stubs, mocks, edge cases, state and communication verification, then contract tests.</td></tr>
+        <tr><td>Value-first</td><td>Pick <a href="#testing--strategies">testing strategies</a>: the ideal developer workflow and its variations.</td></tr>
+      </tbody>
+    </table>
+    <p>Sources: <a class="src" data-lesson="31">L31</a>, with the pattern-first order (result → communication → contract tests) from <a class="src" data-lesson="91">L91</a>.</p>
+
+    <div class="callout def"><strong>The test type is the boundary you draw</strong>
+      <p>“All tests fundamentally are input-output tests.” The name follows from which systems you include in the boundary: <a class="src" data-lesson="31">L31</a></p>
+      <ul>
+        <li><strong>Integration test</strong>: application → outgoing infrastructure, all the way to the database and the services it uses.</li>
+        <li><strong>Unit test</strong>: application + domain logic, up to but <em>not</em> including the database. Pure core code.</li>
+        <li><strong>E2E test</strong>: the entire system treated as a function.</li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“You just want the highest level of confidence to have to do the least amount of work based on where you currently are.”<cite><a class="src" data-lesson="31">L31</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="testing--commits" data-title="Red-Green-Refactor Commits">
+    <h3>Red-Green-Refactor Commit Discipline <a class="src" data-lesson="44">L44</a></h3>
+    <p>Commits exist to make your work <strong>easy to read</strong> for whoever gives you feedback. <a class="src" data-lesson="44">L44</a></p>
+
+    <div class="callout rule"><strong>Rules</strong>
+      <ul>
+        <li><strong>Only commit on green.</strong> Committing on red is like pausing Mario mid-jump over the flames: “not a very safe place to be for you to unpause the game.” Green is standing on a platform. <a class="src" data-lesson="44">L44</a></li>
+        <li><strong>Two reasons to commit on green</strong>, and the message must say which: <em>new functionality</em>, or a <em>refactoring</em> (“all that we’re doing here is changing the structure of the code”). The wording (<code>refactor</code>/<code>design</code>/<code>improvements</code>) doesn’t matter; the intent must be clear. <a class="src" data-lesson="44">L44</a></li>
+        <li><strong>Exception: the Emergent Design section</strong> (the first assignments). Commit on <em>every</em> phase (red, green, refactor) so reviewers can check your TDD mechanics. From the stateless section onward, go back to committing on green only. <a class="src" data-lesson="44">L44</a> <a class="src" data-lesson="56">L56</a></li>
+        <li><strong>Rule of three</strong>: after seeing duplication three times, “you’re probably going to want to refactor. In fact, you should.” <a class="src" data-lesson="44">L44</a></li>
+        <li><strong>Flip the switch</strong>: after going green, deliberately break the code, watch it go red, then restore it. That proves the test can fail. <a class="src" data-lesson="44">L44</a></li>
+        <li>Make commit messages express behavior, not internals: not “return result as true and error as null on valid password”. <a class="src" data-lesson="56">L56</a></li>
+      </ul>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L44</span> Easiest first test (“outputs them as a string”), made green with <strong>fake it</strong></figcaption>
+      <pre><code class="language-ts">describe('fizzbuzz', () =&gt; {
+  it('returns a string', () =&gt; {
+    expect(typeof fizzbuzz(5)).toBe('string');
+  });
+});
+
+// fake it: the simplest thing that passes
+export function fizzbuzz(n: number): string {
+  return '';
+}</code></pre>
+    </figure>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — red save points, messages that hide intent</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> A history a reviewer can’t trust</figcaption>
+          <pre><code class="language-bash">git log --oneline
+a91f2c3 wip
+7c0d1e8 fix tests          # were they red before this?
+5b33a90 stuff + cleanup    # behavior change or structure change?
+1e0f7aa trying modulo      # committed on red</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — every commit is a green platform with a declared intent</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L44</span> Exact message format is flexible</figcaption>
+          <pre><code class="language-bash">git add .
+git commit -m "new: fizzbuzz returns a string"
+# later, after refactoring duplication:
+git commit -m "refactor: ..."   # or "design: ..." / "improvements: ..."</code></pre>
+        </figure>
+      </div>
+    </div>
+    <p>More commit reviews (“a story of commits”) are in <a href="#katas">Kata Walkthroughs</a>. <a class="src" data-lesson="60">L60</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="testing--comments" data-title="Comments Explain Why">
+    <h3>Comments Only Explain “Why” <a class="src" data-lesson="48">L48</a></h3>
+    <blockquote class="quote">“Your code should always express what happens. Comments should express why you’ve chosen to do what you’re doing.”<cite><a class="src" data-lesson="48">L48</a></cite></blockquote>
+    <ul>
+      <li>If code can’t say what it does, that’s a code problem. “Always make that readability change first. And at a last resort, use comments.” <a class="src" data-lesson="48">L48</a></li>
+      <li>The last resort is almost always the <em>why</em>, because code has no way to express rationale. <a class="src" data-lesson="48">L48</a></li>
+      <li>This comes up again and again in kata reviews: “delete the comments”. <a class="src" data-lesson="60">L60</a></li>
+    </ul>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — comments narrate the “what”</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Palindrome with “what” comments</figcaption>
+          <pre><code class="language-ts">export function isPalindrome(text: string): boolean {
+  // lowercase the string
+  const lower = text.toLowerCase();
+  // remove the spaces
+  const noSpaces = lower.replace(/ /g, '');
+  // reverse it and compare
+  return noSpaces === noSpaces.split('').reverse().join('');
+}</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — names carry the “what”, one comment carries the “why”</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Expressive code first; the comment records a decision</figcaption>
+          <pre><code class="language-ts">export function isPalindrome(text: string): boolean {
+  const normalized = ignoreCaseAndSpaces(text);
+  return normalized === reverse(normalized);
+}
+
+// Spaces are ignored because the spec treats "Was It A Rat I Saw" as a palindrome.
+const ignoreCaseAndSpaces = (text: string) =&gt; text.toLowerCase().replace(/ /g, '');
+const reverse = (text: string) =&gt; [...text].reverse().join('');</code></pre>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="testing--aaa-backwards" data-title="AAA Backwards &amp; Wishful Thinking">
+    <h3>Arrange-Act-Assert Backwards &amp; Programming by Wishful Thinking <a class="src" data-lesson="51">L51</a></h3>
+    <p>Overwhelm comes from not knowing how you’ll make it work. If you start where you are and head toward a vague end, there are endless paths. If you start at the end, there are few. “<strong>Vagueness does not compile.</strong>” <a class="src" data-lesson="51">L51</a></p>
+
+    <ol class="steps">
+      <li><strong>Assert</strong> — write the expected output first, using the <em>most complex example</em>, so the hard design is settled early. <a class="src" data-lesson="51">L51</a></li>
+      <li><strong>Act</strong> — write the call that would produce it, as if it already existed. <a class="src" data-lesson="51">L51</a></li>
+      <li><strong>Arrange</strong> — set up the inputs last. <a class="src" data-lesson="51">L51</a></li>
+    </ol>
+
+    <div class="callout def"><strong>Programming by wishful thinking</strong>
+      <p>Imagine the code already exists and write it piece by piece, as if real, even though it won’t compile yet. Judge whether you’d enjoy using the API, then implement it. It is abstraction applied: specify <em>what</em>, not <em>how</em>. It’s the same idea as “tell, don’t ask” and declarative code. <a class="src" data-lesson="51">L51</a> <a class="src" data-lesson="81">L81</a> “What if it was real? Think about that.” <a class="src" data-lesson="51">L51</a></p>
+    </div>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — forwards: arrange first, discover the API is awkward only at the assert</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Setup-first test that drifts into internals</figcaption>
+          <pre><code class="language-ts">it('validates the password', () =&gt; {
+  const validator = new PasswordValidator();
+  validator.setMinLength(5);
+  validator.setMaxLength(15);
+  validator.load('abc');
+  validator.run();
+  // ...now what? a flag? a message? which one wins if there are two?
+  expect(validator.isValid).toBe(false);
+  expect(validator.lastError).toBe('too short');
+});</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — backwards: the assert designs the API (a result plus <em>all</em> errors)</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L51</span> Keys beyond <code>result</code>/<code>errors</code> and the values weren’t given</figcaption>
+          <pre><code class="language-ts">it("returns all errors for an invalid password", () =&gt; {
+  // Arrange (written last)
+  const password = "...";
+
+  // Act (written second): wishful thinking, validate() doesn't exist yet
+  const output = validate(password);
+
+  // Assert (written first)
+  expect(output.result).toBe(false);
+  expect(output.errors).toEqual([/* error message or type for each error */]);
+});</code></pre>
+        </figure>
+      </div>
+    </div>
+    <p>Khalil first wrote a single <code>error</code> key. After rereading the spec (“for all errors in occurrence”) he changed it to an array, before any implementation existed. <a class="src" data-lesson="51">L51</a> In the emergent-design demo he also renamed <code>result.result</code> to <code>output.result</code> because it read badly. <a class="src" data-lesson="55">L55</a></p>
+
+    <div class="cards">
+      <div class="card"><h4>Everything is an API</h4><p>Code, project layout, test scripts. “Every single time that you’re writing code… is you designing an API for someone else to use.” People will get around abstractions they don’t enjoy using. <a class="src" data-lesson="51">L51</a></p></div>
+      <div class="card"><h4>Clarify before you verify</h4><p>Get clear on the input/output shapes (object vs string vs array) and how each responsibility will be asserted, before you code. <a class="src" data-lesson="58">L58</a></p></div>
+      <div class="card"><h4>Don’t copy utility classes</h4><p>Students copied Khalil’s <code>Result</code> class and then complained about its API. “Don’t copy mine, just do your own”: grow a minimal one through emergent design. <a class="src" data-lesson="51">L51</a></p></div>
+      <div class="card"><h4>It scales up</h4><p>The same move finds state APIs (<code>game.getCurrentPlayer()</code>, <code>game.getGameState()</code>) and builder APIs. At higher guess points it forces you to understand collaborations: “so much of design is just structuring out relationships properly.” <a class="src" data-lesson="84">L84</a> <a class="src" data-lesson="78">L78</a> <a class="src" data-lesson="51">L51</a></p></div>
+    </div>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Write the assert yourself, because it is the spec. Then let the assistant fill in the act/arrange plumbing and the implementation. An agent will happily invent an awkward API that satisfies a vague test. A hand-written assertion pins the contract and leaves you to judge whether the API is pleasant.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="testing--naming" data-title="Naming Tests as Specs">
+    <h3>Naming Tests as Responsibility Specifications <a class="src" data-lesson="56">L56</a> <a class="src" data-lesson="59">L59</a></h3>
+    <p>A test file has two parts. <strong>Responsibility specifications</strong> (the <code>describe</code>/<code>it</code> titles) name a <em>doing</em> or a <em>knowing</em> and stay abstract. <strong>Examples</strong> are as concrete as possible. Drive the code with concrete examples and end up with abstract responsibility specs. <a class="src" data-lesson="59">L59</a> Responsibilities come from Responsibility-Driven Design: everything a system does is either knowing or doing. <a class="src" data-lesson="56">L56</a></p>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — names describe the how (keys, flags, null)</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L56</span> Student test names quoted in the review</figcaption>
+          <pre><code class="language-ts">it('sets result to true and error to null when password is valid', ...);
+it('sets result to false and error to too short when password is less than five characters', ...);
+it('sets result to false and error to needs an uppercase character when password does not contain an uppercase character', ...);</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — names state the what; the how lives in the body</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L56</span> “knows that… / can… / does…” (third name is L59’s example)</figcaption>
+          <pre><code class="language-ts">it('can detect valid passwords', ...);
+it('knows that a password shorter than five characters is invalid', ...);
+it('can calculate the minimum value', ...);   // stats calculator</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> After the rule of three: responsibility spec wraps an <code>it.each</code> table; what varies (the reason) lives in the data</figcaption>
+      <pre><code class="language-ts">describe('password validator', () =&gt; {
+  describe('knows that a password must be between 5 and 15 characters', () =&gt; {
+    it.each([
+      { password: 'abc',               reason: 'TooShort' },
+      { password: 'abcd',              reason: 'TooShort' },
+      { password: 'thisIsWayTooLong1', reason: 'TooLong' },
+    ])('rejects "$password" because it is $reason', ({ password, reason }) =&gt; {
+      const output = PasswordValidator.validate(password);
+
+      expect(output.result).toBe(false);
+      expect(output.errors).toContain(reason);
+    });
+  });
+});</code></pre>
+    </figure>
+
+    <div class="callout rule"><strong>Heuristics from the kata reviews</strong>
+      <ul>
+        <li>Lead each new responsibility with <strong>one concrete example</strong>, and refactor to <code>it.each</code> once you see duplication three times. <a class="src" data-lesson="56">L56</a> <a class="src" data-lesson="57">L57</a> Refactoring applies to tests too: three “Fizz” tests become one “returns Fizz for multiples of three”. <a class="src" data-lesson="45">L45</a></li>
+        <li><strong>Encapsulate what varies.</strong> Hard-coded reasons in names and assertions produced “too long” tests that still said “too short”. Put the reason in the example data. <a class="src" data-lesson="56">L56</a></li>
+        <li>Keep each example’s input and expected output together in <strong>one object</strong>. <a class="src" data-lesson="59">L59</a></li>
+        <li>Parameterized tables keep a suite <strong>open-closed</strong>: a new example is just a new row. <a class="src" data-lesson="61">L61</a> They’re cheap: parameterize to add “20 more units of data”, and they run fast because they’re pure. <a class="src" data-lesson="81">L81</a></li>
+        <li>Don’t over-refine examples, but “never sacrifice readability”. <a class="src" data-lesson="59">L59</a></li>
+      </ul>
+    </div>
+    <p>Full reviews: <a href="#katas">Kata Walkthroughs</a>.</p>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Responsibility specs are the part of a test a reviewer reads first, and they make good prompts. A list of “knows that… / can…” titles tells an agent what to build without prescribing how. Watch for generated names that leak internals (“returns object with errors array”), because they lock the test to one implementation.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="testing--verification" data-title="Verification per Guess Point">
+    <h3>Which Verification at Which Guess Point <a class="src" data-lesson="53">L53</a> <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="84">L84</a></h3>
+    <p>Verifying the assert is one of the hardest parts of testing. It’s easy at the stateless level and gets harder as the relationships grow. “Each guess point requires different forms of subject verification.” <a class="src" data-lesson="53">L53</a> Definitions and examples of the three types are in <a href="#essentials-physical--subject-system-verification">Subject/System Verification</a>.</p>
+
+    <table class="tbl">
+      <thead><tr><th>Guess point</th><th>Subject under test</th><th>Predominant verification</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Stateless</td><td>Function / static method</td><td>Result only</td><td><code>isPalindrome("mom")</code> → <code>true</code></td></tr>
+        <tr><td>2 · Stateful</td><td>Entity, value object, state machine</td><td>State: state “hangs out”, so you inquire into it</td><td>chess <code>game.getGameState()</code></td></tr>
+        <tr><td>3 · Application</td><td>Use case with injected collaborators</td><td>Mixture, adding <strong>communication</strong>: the only guess point where you do it</td><td><code>CreateUser</code> + email spy</td></tr>
+        <tr><td>4 · Outgoing adapter</td><td>Repo / clock / service implementations</td><td>Contract tests</td><td><a href="#testing--contract-tests">Clock contract</a></td></tr>
+        <tr><td>5 · System (E2E)</td><td>Whole system as a black box</td><td>Result only</td><td>201 response, page shown</td></tr>
+      </tbody>
+    </table>
+    <p>Mapping: <a class="src" data-lesson="87">L87</a> (“not a strict mapping”), <a class="src" data-lesson="53">L53</a>, <a class="src" data-lesson="84">L84</a>, <a class="src" data-lesson="89">L89</a>. The six test levels (incoming adapter as level 6) come from <a class="src" data-lesson="81">L81</a>.</p>
+
+    <div class="cards">
+      <div class="card"><h4>Direct inputs/outputs</h4><p>Passed in or returned, like the palindrome string. <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="87">L87</a></p></div>
+      <div class="card"><h4>Indirect inputs</h4><p>The state of injected dependencies. Seed the user repo with an existing user and the same use case must fail (“user already exists”). <a class="src" data-lesson="87">L87</a></p></div>
+      <div class="card"><h4>Indirect outputs</h4><p>Commands sent to dependencies: <code>save</code> called, <code>cache.hasItem</code> called, email sent. A repo can be both an indirect input and an indirect output. <a class="src" data-lesson="87">L87</a></p></div>
+    </div>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — state/communication checks forced into an E2E test</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> The kind of rig Khalil calls “a mess”</figcaption>
+          <pre><code class="language-ts">it('sends a welcome email when a user registers', async () =&gt; {
+  await driver.register({ email: 'sam@example.com', username: 'sam' });
+
+  // spin up an SMTP test server / poll a sandbox inbox from the E2E test
+  const inbox = await smtpTestServer.waitForInbox('sam@example.com', { timeout: 30_000 });
+  expect(inbox[0].subject).toContain('Welcome');
+});</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — E2E checks the result; the application-level test checks communication with spies</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L87</span> <code>CreateUser</code> with an email spy, a cache spy and an in-memory repo</figcaption>
+          <pre><code class="language-ts">const emailSpy = new EmailServiceSpy();
+const cacheSpy = new CacheSpy();
+const userRepo = new InMemoryUserRepo();
+const createUser = new CreateUser(userRepo, cacheSpy, emailSpy); // dependency injection
+
+const result = await createUser.execute(validDetails);
+
+expect(result.isSuccess()).toBe(true);                 // then read the success object
+expect(cacheSpy.getCalls('hasItem')).toHaveLength(1); // cache miss: user never existed
+expect(userRepo.getCalls('save')).toHaveLength(1);    // indirect output
+expect(emailSpy.getCalls()).toHaveLength(1);
+// also check emailSpy was called with the correct arguments</code></pre>
+        </figure>
+      </div>
+    </div>
+    <p>Being pedantic, Khalil noted that <code>result.isSuccess()</code> plus reaching into the success object is closer to state verification on the result. The spy call assertions are the communication verification. <a class="src" data-lesson="87">L87</a></p>
+
+    <div class="callout anti"><strong>Anti-patterns</strong>
+      <ul>
+        <li>State or communication verification at E2E is “bad practice”. It conflates concerns and makes tests messy. At E2E the email may just be a no-op. <a class="src" data-lesson="87">L87</a></li>
+        <li>An email-provider sandbox doesn’t validate delivery. At most it saves money per run. <a class="src" data-lesson="87">L87</a></li>
+        <li>Real network calls to external services in tests slow them down. <a class="src" data-lesson="53">L53</a></li>
+      </ul>
+    </div>
+    <blockquote class="quote">“It’s the hardest one but it’s the one that’s going to lead to the tests that are the most valuable.” (communication verification)<cite><a class="src" data-lesson="84">L84</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="testing--acceptance" data-title="4-Layer Acceptance Tests">
+    <h3>Acceptance Tests: the 4-Layer Architecture <a class="src" data-lesson="82">L82</a> <a class="src" data-lesson="81">L81</a></h3>
+    <p>An acceptance test is a concrete example (Given/When/Then) put straight into the code base. It’s a <strong>shared executable specification</strong> that can drive either the frontend or the backend. <a class="src" data-lesson="82">L82</a> It’s where work crosses over from <em>what</em> to <em>how</em>. <a class="src" data-lesson="81">L81</a> E2E tests “are incredible when they are designed with the appropriate levels of abstraction”. <a class="src" data-lesson="31">L31</a></p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 940 260" role="img" aria-label="Four layers of an acceptance test: concrete example, test runner, test code or DSL, protocol driver, then the system under test">
+        <defs>
+          <marker id="ts-arrow-accept" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+        </defs>
+        <text x="90" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">layer 1</text>
+        <text x="280" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">layer 2</text>
+        <text x="470" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">layer 3</text>
+        <text x="660" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">layer 4</text>
+        <text x="850" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent-2)">subject</text>
+        <rect x="10" y="44" width="160" height="110" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2"/>
+        <rect x="200" y="44" width="160" height="110" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="390" y="44" width="160" height="110" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="580" y="44" width="160" height="110" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="770" y="44" width="160" height="110" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2.5"/>
+        <text x="90" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Acceptance criteria</text>
+        <text x="90" y="92" text-anchor="middle" font-size="11" fill="var(--fg)">concrete example</text>
+        <text x="90" y="110" text-anchor="middle" font-size="11" fill="var(--fg)">Given / When / Then</text>
+        <text x="90" y="128" text-anchor="middle" font-size="11" fill="var(--fg)">user’s language</text>
+        <text x="280" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Test runner</text>
+        <text x="280" y="92" text-anchor="middle" font-size="11" fill="var(--fg)">binds scenarios</text>
+        <text x="280" y="110" text-anchor="middle" font-size="11" fill="var(--fg)">to test code</text>
+        <text x="280" y="128" text-anchor="middle" font-size="11" fill="var(--fg)">(e.g. Jest + Gherkin)</text>
+        <text x="470" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Test code / DSL</text>
+        <text x="470" y="92" text-anchor="middle" font-size="11" fill="var(--fg)">executable spec</text>
+        <text x="470" y="110" text-anchor="middle" font-size="11" fill="var(--fg)">register(), purchase()</text>
+        <text x="470" y="128" text-anchor="middle" font-size="11" fill="var(--fg)">no HTTP, no selectors</text>
+        <text x="660" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Protocol driver</text>
+        <text x="660" y="92" text-anchor="middle" font-size="11" fill="var(--fg)">“acts as the user”</text>
+        <text x="660" y="110" text-anchor="middle" font-size="11" fill="var(--fg)">API client (backend)</text>
+        <text x="660" y="128" text-anchor="middle" font-size="11" fill="var(--fg)">page object · Puppeteer</text>
+        <text x="850" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">System under test</text>
+        <text x="850" y="92" text-anchor="middle" font-size="11" fill="var(--fg)">frontend ↔ backend</text>
+        <text x="850" y="110" text-anchor="middle" font-size="11" fill="var(--fg)">↔ database</text>
+        <text x="850" y="128" text-anchor="middle" font-size="11" fill="var(--fg)">as in production</text>
+        <line x1="172" y1="99" x2="196" y2="99" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ts-arrow-accept)"/>
+        <line x1="362" y1="99" x2="386" y2="99" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ts-arrow-accept)"/>
+        <line x1="552" y1="99" x2="576" y2="99" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ts-arrow-accept)"/>
+        <line x1="742" y1="99" x2="766" y2="99" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ts-arrow-accept)"/>
+        <path d="M10,170 L10,180 L550,180 L550,170" fill="none" stroke="var(--accent)" stroke-width="2"/>
+        <text x="280" y="200" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">what: one spec per feature, shared by every platform</text>
+        <text x="280" y="218" text-anchor="middle" font-size="11" fill="var(--fg)">(frontend, backend, mobile, desktop)</text>
+        <path d="M580,170 L580,180 L930,180 L930,170" fill="none" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="755" y="200" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">how: swap the driver per channel</text>
+        <text x="755" y="218" text-anchor="middle" font-size="11" fill="var(--fg)">UI changes stay out of the spec</text>
+        <text x="470" y="250" text-anchor="middle" font-size="11" fill="var(--fg)">flaky E2E tests are usually a symptom of missing these layers</text>
+      </svg>
+      <figcaption><span class="badge course">Course</span> Layers from <a class="src" data-lesson="82">L82</a> and <a class="src" data-lesson="81">L81</a>. One acceptance test per feature, validated differently per platform (Dave Farley): <a class="src" data-lesson="87">L87</a>. Flakiness as a symptom: <a class="src" data-lesson="91">L91</a>. The “what/how” split labels are a Copilot framing of the what→how crossover in <a class="src" data-lesson="81">L81</a>.</figcaption>
+    </figure>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L82</span> Layer 1: the concrete example, shrunk to “places an order” because billing and email should be temporally decoupled</figcaption>
+      <pre><code class="language-gherkin">Feature: Buy tickets
+  Scenario: James buys three tickets for his company
+    Given James has three tickets in cart
+    When James purchases tickets
+    Then an order should have been placed
+    And an email is sent</code></pre>
+    </figure>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> Layers 3–4: the DSL speaks the domain; only the protocol driver knows HTTP (or the page)</figcaption>
+      <pre><code class="language-ts">// Layer 3: test code / DSL, the step bodies read like the scenario
+defineFeature(feature, (test) =&gt; {
+  test('James buys three tickets for his company', ({ given, when, then }) =&gt; {
+    let james: Customer;
+    given('James has three tickets in cart', async () =&gt; {
+      james = await shop.aCustomer('James').withTicketsInCart(3);
+    });
+    when('James purchases tickets', async () =&gt; {
+      await shop.purchase(james);
+    });
+    then('an order should have been placed', async () =&gt; {
+      expect(await shop.ordersFor(james)).toHaveLength(1);
+    });
+  });
+});
+
+// Layer 4: protocol driver, one per channel; swap for a page object on the frontend
+class ShopApiDriver implements ShopDriver {
+  constructor(private baseUrl: string) {}
+  async purchase(customer: Customer) {
+    const res = await fetch(`${this.baseUrl}/orders`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ customerId: customer.id }),
+    });
+    if (res.status !== 201) throw new Error(`purchase failed: ${res.status}`);
+  }
+  // ...
+}</code></pre>
+    </figure>
+
+    <div class="callout rule"><strong>Rules</strong>
+      <ul>
+        <li><strong>“Then” tense:</strong> past tense usually fits (“order <em>placed</em>”, “email <em>sent</em>”). Present tense (“I should now be logged in”) is fine for UI experience. The hard rule is to describe the system the way the user interacts with it. <a class="src" data-lesson="82">L82</a></li>
+        <li><strong>How many:</strong> the happy path plus one or two sad paths (error messages show up on screen). Then about 12–20 high-value tests with concrete examples and parameterization. <a class="src" data-lesson="81">L81</a> Roughly 10–12 application-level scenarios per acceptance test. <a class="src" data-lesson="82">L82</a></li>
+        <li><strong>Idempotent:</strong> tests can run “over and over” and still work. <a class="src" data-lesson="82">L82</a></li>
+        <li><strong>Existing code:</strong> start with a <em>characterization test</em> that pins current I/O end to end (tailor’s pins), then “move in a layer”. Don’t rewrite from scratch. <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="84">L84</a></li>
+        <li><strong>Reusable page objects pay off:</strong> a friend’s team using four-tier E2E went “from requirement to implement it with just mixing together a couple of page objects”. <a class="src" data-lesson="92">L92</a></li>
+      </ul>
+    </div>
+    <p>Three test categories (acceptance, unit, infrastructure): <a href="#essentials-physical--subject-system-verification">Subject/System Verification</a>. Where acceptance tests run in the pipeline: <a href="#essentials-physical--deployment-delivery">Deployment &amp; Delivery</a>. Where they sit in the double loop: <a href="#workflow">Ideal Developer Workflow</a>.</p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="testing--test-doubles" data-title="Test Doubles &amp; Hand-Written Spies">
+    <h3>Test Doubles &amp; Hand-Written Spies <a class="src" data-lesson="73">L73</a></h3>
+    <div class="callout def"><strong>Test double</strong>
+      <p>“A test double is just anything that stands in for the real one.” Skip the spy/stub/mock taxonomy and call them <strong>fakes</strong> or <strong>test doubles</strong>. <a class="src" data-lesson="73">L73</a> <a class="src" data-lesson="84">L84</a> “In-memory repo” also sidesteps the naming debate. <a class="src" data-lesson="87">L87</a></p>
+    </div>
+    <p>A student used a mocking library to spy on a collaborator and felt something was off. Khalil updated the assignment to require a <strong>hand-written spy</strong>: “I think you need to learn that. And we all need to learn that.” The fake plays <strong>two roles</strong>: it implements the email service contract, and it records calls for assertions. <a class="src" data-lesson="73">L73</a></p>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — library-mock soup, inline and duplicated per test file</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Nothing forces this mock to keep up with <code>EmailService</code></figcaption>
+          <pre><code class="language-ts">jest.mock('../services/emailService');
+
+const sendEmail = jest.fn().mockResolvedValue(undefined);
+(EmailService as jest.Mock).mockImplementation(() =&gt; ({ sendEmail }));
+
+it('sends a welcome email', async () =&gt; {
+  const createUser = new CreateUser(new InMemoryUserRepo(), new EmailService());
+  await createUser.execute(validDetails);
+  expect(sendEmail).toHaveBeenCalledTimes(1);
+});
+// copy-pasted into the next five spec files...</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — a hand-written fake that implements the contract and records calls</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L73</span> <code>EmailService</code> method names inferred; the narration passed <code>'save'</code> as its example</figcaption>
+          <pre><code class="language-ts">interface EmailService {
+  sendEmail(to: string, body: string): Promise&lt;void&gt;;
+}
+
+class FakeEmailService implements EmailService {
+  private calls: Record&lt;string, unknown[][]&gt; = {};
+
+  async sendEmail(to: string, body: string): Promise&lt;void&gt; {
+    this.record('sendEmail', [to, body]);
+  }
+
+  getTimesCalled(method: string): number {
+    return (this.calls[method] ?? []).length;
+  }
+
+  getCallsTo(method: string): unknown[][] {
+    return this.calls[method] ?? [];
+  }
+
+  private record(method: string, args: unknown[]) {
+    (this.calls[method] ??= []).push(args);
+  }
+}
+
+expect(fakeEmailService.getTimesCalled('sendEmail')).toBe(1);</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <div class="callout rule"><strong>Rules</strong>
+      <ul>
+        <li>Give the real collaborator an <strong>interface</strong> so the fake can implement it. <a class="src" data-lesson="73">L73</a></li>
+        <li>Put hand-written spies in <strong>their own files</strong>, not inline in tests (inline leads to duplication). Hand-written fakes are preferred because growing the contract forces you to implement it. Library mocks are fine only if they “yell at you” when the contract grows. <a class="src" data-lesson="87">L87</a></li>
+        <li>Library mocks are for <strong>trivial stubs</strong> whose behavior doesn’t matter (“this thing needs a logger… here, just take this”). Stateful dependencies are indirect inputs, so use fakes covered by contract tests. <a class="src" data-lesson="81">L81</a></li>
+        <li>Wait for the <strong>rule of three</strong> before extracting a generic spy contract. <a class="src" data-lesson="73">L73</a></li>
+        <li>Use controllable fakes to set up “the state of the world” for each edge case: user exists, banned, email taken, username taken. <a class="src" data-lesson="87">L87</a></li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="testing--contract-tests" data-title="Contract Tests &amp; FakeClock">
+    <h3>Contract Tests Keep Fakes Honest (and the <code>Clock</code> role) <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="89">L89</a></h3>
+    <p>A common complaint about high-value tests is “we’re not testing anything, just what we put into the tests.” That feeling comes from missing <strong>contracts</strong>: the fake and the production implementation have no <strong>test parity</strong>. <a class="src" data-lesson="81">L81</a> Without contracts, mocks create “two divergent code paths”. <a class="src" data-lesson="91">L91</a> The fix is not “stop mocking”. It’s one contract test run against every implementation of the role. <a class="src" data-lesson="87">L87</a></p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 760 350" role="img" aria-label="A use case depends on a role interface. A fake actor and a real actor both play the role, and one contract test runs against both.">
+        <defs>
+          <marker id="ts-arrow-role" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+        </defs>
+        <rect x="260" y="10" width="240" height="48" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="380" y="31" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Use case (core code)</text>
+        <text x="380" y="49" text-anchor="middle" font-size="11" fill="var(--fg)">CreateUser · TrafficLight app</text>
+        <line x1="380" y1="60" x2="380" y2="96" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ts-arrow-role)"/>
+        <text x="392" y="83" font-size="11" fill="var(--fg)">depends on the role only</text>
+        <rect x="220" y="100" width="320" height="58" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2.5"/>
+        <text x="380" y="124" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">«role» UserRepo · Clock</text>
+        <text x="380" y="144" text-anchor="middle" font-size="11" fill="var(--fg)">the contract (adapter layer / port)</text>
+        <rect x="20" y="196" width="720" height="104" rx="10" fill="none" stroke="var(--accent-2)" stroke-width="2" stroke-dasharray="6 4"/>
+        <rect x="50" y="216" width="280" height="62" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="190" y="240" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Fake actor: core, fast</text>
+        <text x="190" y="260" text-anchor="middle" font-size="11" fill="var(--fg)">InMemoryUserRepo · FakeClock</text>
+        <rect x="430" y="216" width="280" height="62" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="570" y="240" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Real actor: infrastructure</text>
+        <text x="570" y="260" text-anchor="middle" font-size="11" fill="var(--fg)">ProductionUserRepo · SystemClock</text>
+        <line x1="190" y1="214" x2="300" y2="162" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ts-arrow-role)"/>
+        <line x1="570" y1="214" x2="460" y2="162" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ts-arrow-role)"/>
+        <text x="205" y="182" font-size="11" fill="var(--fg)">plays the role</text>
+        <text x="480" y="182" font-size="11" fill="var(--fg)">plays the role</text>
+        <text x="380" y="322" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">Contract test (.ispec.ts): the same spec looped over every actor → test parity</text>
+        <text x="380" y="340" text-anchor="middle" font-size="11" fill="var(--fg)">unit tests inject the fake · production composes the real one · if one breaks, they all break</text>
+      </svg>
+      <figcaption><span class="badge course">Course</span> Roles and actors: <a class="src" data-lesson="84">L84</a>. Contract tests over all implementations: <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="89">L89</a>. Layout and colors: <span class="badge copilot">Added by Copilot</span>.</figcaption>
+    </figure>
+
+    <h4>Worked example: decoupling from time <a class="src" data-lesson="89">L89</a></h4>
+    <p><code>new Date()</code> and <code>Math.random()</code> are infrastructure because they touch the system clock and the random generator. “It’s not about where it comes from, it’s about what it touches.” <a class="src" data-lesson="84">L84</a> Time is an <strong>application concern</strong> (level 3), not a domain (level 2) concern. State machines protect their data and change when told to. <em>Knowing when</em> to tell them belongs to the application, and time can live in its own context folder. <a class="src" data-lesson="89">L89</a></p>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — hidden dependency on the system clock</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L84</span> Untestable without really waiting</figcaption>
+          <pre><code class="language-ts">class User {
+  createdAt: Date;
+  constructor() {
+    this.createdAt = new Date(); // talks to the system clock -&gt; infra, hard to test
+  }
+}</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — a <code>Clock</code> role with a real and a fake actor</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L89</span> Traffic-light solution in Khalil’s teaching repo</figcaption>
+          <pre><code class="language-ts">export abstract class Clock {
+  abstract getCurrentTime(): Date;
+  abstract tickForward(seconds: number): Promise&lt;void&gt;;
+}
+
+export class SystemClock extends Clock {
+  getCurrentTime() { return new Date(); }
+  async tickForward(seconds: number) {
+    await new Promise((r) =&gt; setTimeout(r, seconds * 1000));
+  }
+}
+
+export class FakeClock extends Clock {
+  private now = new Date();
+  getCurrentTime() { return new Date(this.now); }
+  async tickForward(seconds: number) {
+    this.now = new Date(this.now.getTime() + seconds * 1000);
+  }
+}</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L89</span> Level-4 contract test (an “ISpec”): same assertions for both clocks. It takes 4 real seconds because <code>SystemClock</code> is included.</figcaption>
+      <pre><code class="language-ts">describe('clock contract', () =&gt; {
+  for (const clock of [new SystemClock(), new FakeClock()]) {
+    it('can tick forward 4 seconds', async () =&gt; {
+      const start = clock.getCurrentTime();
+      await clock.tickForward(4);
+      const end = clock.getCurrentTime();
+      expect((end.getTime() - start.getTime()) / 1000).toBeGreaterThanOrEqual(4);
+    });
+  }
+});</code></pre>
+    </figure>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> Payoff at level 3: an hour of traffic-light time passes instantly (Khalil’s stated plan: fast-forward an hour, then inspect the events)</figcaption>
+      <pre><code class="language-ts">it('has changed lights after an hour', async () =&gt; {
+  const clock = new FakeClock();
+  const app = new TrafficLightApp(clock); // the application decides *when*
+  app.start();
+
+  await clock.tickForward(60 * 60);
+  app.onTick();                           // reads clock.getCurrentTime()
+
+  expect(app.getEvents().map((e) =&gt; e.type)).toContain('LightChanged');
+});</code></pre>
+    </figure>
+    <p>The repository version of the same idea (<code>userRepo.ispec.ts</code> looping over <code>InMemoryUserRepo</code> and the production repo) is in <a href="#essentials-physical--subject-system-verification">Subject/System Verification</a>. <a class="src" data-lesson="81">L81</a> It’s expensive because it hits the real backend, but it keeps fake and real in parity. <a class="src" data-lesson="87">L87</a></p>
+
+    <div class="callout tip"><strong>When the fake is hard to write</strong> <a class="src" data-lesson="81">L81</a>
+      <ul>
+        <li>Complex filters/aggregations: find the concrete use cases you actually need, and pull heavy filtering into its own abstraction (e.g. “search”) tested on its own.</li>
+        <li>Don’t build a do-everything fake filter. Extend the in-memory implementation until the contracts are covered.</li>
+        <li>If the DB does the heavy lifting, test the contract and “let the external tool do the external tooling”. “Raise the level of abstraction of what it is you’re looking at to test.”</li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“It’s okay to mock… but just make sure you mock correctly… You want to create parity between what’s real and fake.”<cite><a class="src" data-lesson="89">L89</a></cite></blockquote>
+    <blockquote class="quote">“What you want is your production code and your test code to be the exact same.”<cite><a class="src" data-lesson="91">L91</a></cite></blockquote>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>AI-generated mocks can lie. They return whatever makes the test green, and nothing checks them against production. Ask for a hand-written fake <em>plus</em> a contract spec looped over fake and real, so a hallucinated fake fails the moment it diverges.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="testing--builders" data-title="Fixtures with Builders">
+    <h3>Fixtures = Initial State, Encapsulated with Builders <a class="src" data-lesson="78">L78</a></h3>
+    <div class="callout def"><strong>Fixture</strong>
+      <p>“What is a fixture really? … It means the initial state.” If arrange/act lines only get the system into a state, they are setup, so move them into a <strong>builder</strong>. <a class="src" data-lesson="78">L78</a></p>
+    </div>
+    <p>Khalil’s example is chess: detect a checkmate (Scholar’s mate, Fool’s mate). It sits at the stateful guess point because it depends on a sequence of state changes. The assertions were carved out by wishful thinking: <code>getGameState()</code> is <code>end</code> and the reason type is <code>checkmate</code>. Ideally the test would “describe the state of the universe” at game end. <a class="src" data-lesson="78">L78</a></p>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — the test is mostly moves</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L78</span> Argument types and accessor names partly inferred</figcaption>
+          <pre><code class="language-ts">it('can detect a checkmate', () =&gt; {
+  const game = new Game();
+  game.move(Player.One, piece, position);
+  game.move(Player.Two, piece, position);
+  game.move(Player.One, piece, position);
+  // ...more moves
+
+  expect(game.getGameState()).toBe('end');
+  expect(game.getReason().type).toBe('checkmate');
+});</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After — a named initial state; the test shows only intent</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L78</span> “Not the best design… but it works.” Naming is a process: “game test util” was rejected</figcaption>
+          <pre><code class="language-ts">it('can detect a checkmate', () =&gt; {
+  const game = GameBuilder
+    .fromCommonGameState(GameStates.mostBrutalGameEver)
+    .build();
+
+  expect(game.getGameState()).toBe('end');
+  expect(game.getReason().type).toBe('checkmate');
+});
+
+class GameStates {
+  static mostBrutalGameEver(game: Game): Game {
+    // apply the sequence of moves to the game
+    return game;
+  }
+}</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L87</span> An array-backed in-memory repo that grows into a builder for indirect inputs</figcaption>
+      <pre><code class="language-ts">class InMemoryUserRepo implements UserRepo {
+  private users: User[] = [];
+  async save(user: User) { this.users.push(user); }
+  async getById(id: string) { return this.users.find((u) =&gt; u.id === id) ?? null; }
+}
+// builder idea: new UserRepoBuilder().withRandomUsers(10).build()</code></pre>
+    </figure>
+
+    <div class="callout rule"><strong>Rules</strong>
+      <ul>
+        <li>Name well-known states in team or domain vocabulary (“Scholar’s mate”, “the most brutal game ever”). Moves could even live in a file. <a class="src" data-lesson="78">L78</a></li>
+        <li>Design the builder API by wishful thinking. Treat code as a paintbrush: “we’ll figure out how to make it happen later.” <a class="src" data-lesson="78">L78</a></li>
+        <li>Turn in-memory repos into builders (e.g. seed N random users) so tests stay domain-driven and readable. Store <strong>plain objects</strong>, with a mapper if needed, to keep parity with the real store. <a class="src" data-lesson="87">L87</a></li>
+        <li>Real-database strategies need builders even more, because setup is complex. <a class="src" data-lesson="64">L64</a></li>
+      </ul>
+    </div>
+    <p>Stateful modelling and invariants: <a href="#ddd-feedbook">Theoretical Design &amp; DDD</a>.</p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="testing--strategies" data-title="Value-First Test Strategies">
+    <h3>Value-First Testing Strategies <a class="src" data-lesson="64">L64</a> <a class="src" data-lesson="92">L92</a></h3>
+    <p>Prompted by a post on “TDD-induced design damage”, Khalil objects to prescribing “one testing strategy 1000% in every scenario”. Learn every way to test, then choose by ROI: time, cost and the quality you need. “There is no perfect testing strategy. It’s going to be entirely context dependent.” <a class="src" data-lesson="64">L64</a></p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 900 300" role="img" aria-label="Backend chain Express, controllers, application use cases, real or fake database, with the scope of each test strategy drawn as bars underneath">
+        <defs>
+          <marker id="ts-arrow-scope" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+        </defs>
+        <rect x="10" y="20" width="160" height="50" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="90" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Express</text>
+        <text x="90" y="60" text-anchor="middle" font-size="11" fill="var(--fg)">the server (a system)</text>
+        <rect x="200" y="20" width="160" height="50" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="280" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Controllers</text>
+        <text x="280" y="60" text-anchor="middle" font-size="11" fill="var(--fg)">incoming adapter</text>
+        <rect x="390" y="20" width="200" height="50" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="490" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">App: use cases</text>
+        <text x="490" y="60" text-anchor="middle" font-size="11" fill="var(--fg)">application interface</text>
+        <rect x="640" y="10" width="160" height="28" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="720" y="29" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">Real DB</text>
+        <rect x="640" y="52" width="160" height="28" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <text x="720" y="71" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">Fake DB</text>
+        <line x1="172" y1="45" x2="196" y2="45" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ts-arrow-scope)"/>
+        <line x1="362" y1="45" x2="386" y2="45" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ts-arrow-scope)"/>
+        <line x1="592" y1="38" x2="636" y2="25" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ts-arrow-scope)"/>
+        <line x1="592" y1="52" x2="636" y2="65" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ts-arrow-scope)"/>
+        <rect x="10" y="100" width="790" height="24" rx="4" fill="none" stroke="var(--svg-stroke)" stroke-width="2"/>
+        <text x="20" y="117" font-size="11" fill="var(--fg)">System / E2E (ideal developer workflow): whole thing, result verification only</text>
+        <rect x="10" y="134" width="350" height="24" rx="4" fill="none" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="20" y="151" font-size="11" fill="var(--fg)">Incoming test: app replaced by a test double</text>
+        <rect x="200" y="168" width="600" height="24" rx="4" fill="none" stroke="var(--svg-stroke)" stroke-width="2"/>
+        <text x="210" y="185" font-size="11" fill="var(--fg)">B · High-value integration test: controller → real DB (no Express needed)</text>
+        <rect x="390" y="202" width="410" height="24" rx="4" fill="none" stroke="var(--svg-stroke)" stroke-width="2"/>
+        <text x="400" y="219" font-size="11" fill="var(--fg)">A · Application-level test including the real DB</text>
+        <rect x="390" y="236" width="410" height="24" rx="4" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+        <text x="400" y="253" font-size="11" font-weight="700" fill="var(--fg)">C · High-value unit test: use cases + fake DB</text>
+        <text x="450" y="288" text-anchor="middle" font-size="11" fill="var(--fg)">bars = what each test puts inside its boundary · C + E2E is Khalil’s default · A needs incoming tests to cover the controller gap</text>
+      </svg>
+      <figcaption><span class="badge course">Course</span> Redrawn from Khalil’s iPad sketch in <a class="src" data-lesson="64">L64</a>; incoming tests from <a class="src" data-lesson="64">L64</a> and <a class="src" data-lesson="92">L92</a>.</figcaption>
+    </figure>
+
+    <table class="tbl">
+      <thead><tr><th>Option</th><th>Benefits</th><th>Drawbacks</th><th>Choose when</th></tr></thead>
+      <tbody>
+        <tr><td><strong>A</strong> · App-level + real DB</td><td>Tests the DB for real, no mocks</td><td>Complex setup (builders). Slow at hundreds of edge cases. Alone, it leaves the request → use case translation unverified</td><td>Squeezing “just a bit more” confidence tactically. Add incoming tests.</td></tr>
+        <tr><td><strong>B</strong> · Controller → real DB</td><td>As A, plus covers validation and extraction of requests</td><td>As A; “can get very expensive”</td><td>“A really nice middle ground”, e.g. if you don’t want E2E. Khalil likes it a lot.</td></tr>
+        <tr><td><strong>C</strong> · Use cases + fake DB, with IDW E2E</td><td>Hundreds of fast concrete examples; result verification</td><td>Infrastructure interactions need communication verification (spies), which is more complex</td><td>Khalil’s default: “combine those two together, we’re in really good shape.”</td></tr>
+      </tbody>
+    </table>
+    <p>All rows: <a class="src" data-lesson="64">L64</a>. “This tiny little connection [controller → use case] has messed me up plenty of times.” Before adopting the ideal developer workflow, Khalil wrote only high-value unit tests, and then “nothing’s really working properly”. <a class="src" data-lesson="64">L64</a></p>
+
+    <h4>Two valid strategies <a class="src" data-lesson="92">L92</a></h4>
+    <div class="cards">
+      <div class="card"><h4>Strategy 1</h4><p><strong>E2E</strong> (whole thing, touches the DB) + carve inward with <strong>high-value unit tests</strong> (no DB). For most task-based UI apps, E2E is the best way to begin and gives the greatest certainty. <a class="src" data-lesson="92">L92</a></p></div>
+      <div class="card"><h4>Strategy 2</h4><p><strong>Incoming (contract) tests</strong> + <strong>high-value integration tests</strong>. Works for any app with an interface. More relevant with many clients (REST + GraphQL). <a class="src" data-lesson="92">L92</a> <a class="src" data-lesson="64">L64</a></p></div>
+      <div class="card"><h4>Choosing</h4><p>“It’s just your level of confidence in your code base.” Logic-heavy apps: many application/domain examples. Simple apps: check that major components (Stripe, etc.) work together. Mixing is fine: “You don’t have to have a perfect parity.” <a class="src" data-lesson="92">L92</a></p></div>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L92</span> Incoming test: the app behind the application interface is faked, so no use cases run (tooling inferred in notes)</figcaption>
+      <pre><code class="language-ts">test('POST /users/register invokes app.users.register with extracted input', async () =&gt; {
+  const fakeApp = {
+    users: { register: jest.fn().mockResolvedValue({ id: '1' }) },
+    jobs: {},
+  } as unknown as ApplicationAPI;
+
+  const server = buildServer(fakeApp); // express + routes, no infra
+  await request(server).post('/users/register')
+    .send({ email: 'a@b.com', username: 'a', password: 'pw' });
+
+  expect(fakeApp.users.register).toHaveBeenCalledWith({
+    email: 'a@b.com', username: 'a', password: 'pw',
+  });
+});</code></pre>
+    </figure>
+    <p>This verifies everything before the app call: routing, extraction, validation. It minimizes the uncertainty of Express, “a whole… framework”. A high-value integration test uses the same entry point with the real app, all the way to the DB. <a class="src" data-lesson="92">L92</a> For the application interface itself, see <a href="#essentials-physical--composition">Composition</a>.</p>
+
+    <blockquote class="quote">“E2E tests, they suck, right?… But there’s very little that’s going to be as good as E2E tests.”<cite><a class="src" data-lesson="92">L92</a></cite></blockquote>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="testing--no-time" data-title="“No Time to Test”">
+    <h3>“We Don’t Have Time to Test” <a class="src" data-lesson="91">L91</a></h3>
+    <p>A student’s managers said there was no time for tests. Khalil’s answer was about strategy and roles, not craftsmanship. <a class="src" data-lesson="91">L91</a></p>
+
+    <div class="cards">
+      <div class="card"><h4>It’s a strategy decision</h4><p>“I don’t have time” is a limiting belief. It’s really a value choice: fast / good / cheap, pick two. Shipping without tests trades quality for time. <a class="src" data-lesson="91">L91</a></p></div>
+      <div class="card"><h4>Capability ≠ choice</h4><p>“There’s a difference between not being able to do something and not doing something.” All-manual testing scores 1 on subject/system verification, and that is acceptable sometimes. <a class="src" data-lesson="91">L91</a></p></div>
+      <div class="card"><h4>Know your role</h4><p>“Customers [are] supposed to make business decisions and developers make development decisions.” Your professional responsibility is to tell stakeholders the consequences, ideally ahead of time. <a class="src" data-lesson="91">L91</a> Automated testing is an <strong>investment</strong>, and paying a firm for manual testing is valid if the customer knows the alternatives. <a class="src" data-lesson="92">L92</a></p></div>
+      <div class="card"><h4>Practice off the clock</h4><p>Tire-change analogy: the customer cares about the outcome and wouldn’t want experiments. Practice new techniques on your own time and bring proven skills to work. <a class="src" data-lesson="91">L91</a></p></div>
+    </div>
+
+    <ol class="steps">
+      <li><strong>Stop the bleeding</strong> — first ask: “do the features that need to work right now work?” Wrap the whole thing in E2E tests (tailor’s pins) before any pattern-first surgery. <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>Short on time</strong> — E2E tests on the main things, then high-value unit tests if there’s time. <a class="src" data-lesson="91">L91</a> With zero customers, “maybe I’ll just chuck some end-to-end tests”. <a class="src" data-lesson="64">L64</a></li>
+      <li><strong>Weird third-party API</strong> (e.g. Stripe) — add more outgoing tests there. That’s what “it depends” depends on. <a class="src" data-lesson="91">L91</a></li>
+      <li><strong>Switch to test-first</strong> — when the potential negative value outweighs the cost of building a little slower. <a class="src" data-lesson="84">L84</a></li>
+      <li><strong>Roll it in</strong> — apply the approach on the next feature, or on an existing feature in a new branch, and make it part of your infrastructure. <a class="src" data-lesson="91">L91</a></li>
+    </ol>
+
+    <div class="callout anti"><strong>Don’t</strong>
+      <ul>
+        <li>Test only for craftsmanship’s sake. Do what keeps customers and users in benefit. <a class="src" data-lesson="91">L91</a></li>
+        <li>Experiment with unfamiliar techniques on paid client work. <a class="src" data-lesson="91">L91</a></li>
+      </ul>
+    </div>
+    <p>Mindset side of this (“know your role”): <a href="#mindsets">Mindsets</a>. Career angle: <a href="#career">Learning Path &amp; Career</a>.</p>
+  </article>
+</section>

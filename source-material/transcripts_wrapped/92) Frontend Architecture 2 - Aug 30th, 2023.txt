@@ -1,0 +1,405 @@
+Yeah, yo front end architecture, right. The idea that I wanted to get into today was I wanted to cover some of the last stuff that we were missing and yeah, I
+was putting together some, I wanted to put together a presentation for you all, but it was taking a little bit too much time, so this is where I ended up with
+that presentation. And yeah, I think this stuff just needs to go into pattern first, regardless, but I want to make sure that we touch on things that are really
+important. It's there and we have that covered. I also, yeah, I'm going to actually just say a couple of things here before we even jump in. Let's do a quick
+getting started, which is number one. Number one thing is where are we at? Where are we at things? Number two is, yeah, like the idea thus far with the front
+end. So we're essentially first. And then let's dive into the. Okay. And then last thing we'll do is we'll discuss. I'm in first. It's weird how we're getting
+through where we need to go in these Q and A's instead of the content. Which is just, yeah, it's funny, but definitely trying to keep up here. So yeah, great.
+Let's start with where we're at and we'll go into that. And I think discuss pattern. Yeah. Discuss pattern first. What do I mean by this? Like what we're doing
+here? Goals and what we'll need to cover. And I'll get comments and any sort of feedback from y'all. Just. That's. Just refine that. Okay. Cool. Where are we at
+so far? And what am I sharing? Just this one screen. Yeah. Let me go ahead and just share my whole bank screen. So you can see where we're actually. Pop those.
+Real quick, fast. And let's change this way to. Change. This. Go lot. Yeah. Excellent. So everyone, yeah, here's where we're at. There's been a, yeah, I've just
+had such a breakthrough here with just shipping this stuff out and getting the content structured in, in a way that could go much faster here. And it's pretty
+much again, just by starting from the end, wish I did this from the start, but what I'm noticing is that by doing these slideshows, I'm able to get what I need
+to convey to you into your brain a lot quicker here. I'm almost done this stuff here. I just need to go through it a couple more times. So yeah. What's coming
+out in this next section here. This is the actual. Meat of what I've been trying to convey to you all for some time. And so the structure of this is we're going
+to talk about what are the metaphysics. Fundamentally, this is just. There's this thing like the closer we have a mental model of reality, it's just the better
+our decisions are, the better our strategies are, the more closely aligned with writing scalable code. Our actions are right. So if we have really solid mental
+models, this is the main thing we want to refine. So that's why we're spending so much energy and time on this. We're going to kick it off and gain clarity on
+that. Talk about the five phases. We'll go over the three roles. Right. The four pillars. And then we're going to get into the 12 essentials. So I've got some
+nice images I can show you all and give you examples for what happens if you don't use this. And then what happens when you do use it. We'll go through those
+and we'll talk about the guess points. And then, yeah, we have the ideal developer workflow. And then pretty much the last, the main thing about this whole
+course is I want you to just have the mental model for how to solve problems effectively. And this is going to just combine everything. So it's going to be the
+guess points, faster and flipping and the 12 essentials are the tools you're going to have to use to keep you on track as you do that. Yeah, I'm working on
+getting this published. This is my priority right now. But jumping over to the, the front end architecture stuff. Right. So the idea today, I was just wanted to
+go over some of what we said we were going to discuss last time and dig in a little bit into what I want to talk about in pattern first. I'll give you a little
+bit of an outline here. I know we talked about this last time. That's something, a lot of this stuff here that we're going to, I'm going to switch back to
+change windows. So let's see, where are we at here? Let's do this. So last time, what did we talk about? There was a question where we asked, what are some of
+the front end architectures to choose from and what should we choose? I'm going to just open the chat or listen, but just what are some different type of
+architectures y'all are using right now, or even familiar with on the front end react native. And when you're doing a react and react native, are you thinking
+about architecture and thinking about, okay. Yeah. Oh, this is good. This is great. Actually. This is really good to get where everyone's mind is at. Like when
+I asked this question, this could go so many different directions. It's very good to go. Yeah. Yeah. To get that. You don't like separating by components and
+pages. Yeah. I think it might actually be a level higher up by the way. It's more by, by feature. Pages are often, pages are often the thing, but I think it
+actually might be by featuring this thing. That's something because yeah, we have something I talk about in the main mental models as well, which is the key
+developer use cases. At the end of the day, there's, yeah, there's three of these roles and they have their own goals. But the thing that we fundamentally
+collaborate on all of us, if I look to the abstraction prism, that's what I'm calling this thing that once we get down to this point, is this where everyone
+collaborates. So features are pretty much the main thing that we are building that we are doing. This is something that is valuable to the user is what needs to
+end up finding its way into our code base. So instead of pages and components, I actually still, I gave that advice, but I still feel like it's a little too,
+it's missing the mark a little bit. I think organizing my feature is probably the, the better way to think about it. And if I actually look at what we've done
+in the E2B test code, add it to DD form V2. I'm pretty sure that's actually what we've done with our tests. Let's say going to our, our end to end tests. And
+yeah, look at that features. It's the concept of the features. It, when we talk about features, the features are more general, the more abstract, but I think
+they're the correct level of describing an abstract concept of something that's valuable for us to use to structure our projects for us to use, to organize the
+scenarios and examples within it. I think this is where stuff should begin becoming code. I think from this level of the feature. I don't, yeah. If I've said
+that before, I'm sure I have said organized by page and this, that I think those things are important. You still want to use pages and. And things like that,
+but I think we need a level a little bit higher up, just an abstraction a little bit higher up. And I think that this for just making sense of that, because we
+have a feature there and then let's see, where's the story in here. And there's the story that. Right. Pretty much. Yeah. Pretty much the test right there. It's
+a scenario and then acceptance criteria. So it goes scenario, then acceptance criteria. So we have that, we have the abstraction prism right here in front of
+us. So I can almost take this image and draw lines between this and how this is going to map up to our folder structure, how it's going to map up to the way
+that we drive our features, the way that we do everything. Because this actually goes into another topic I want to discuss, which was the problem of working
+inside out versus working inside. And what I'm referring to when I say working inside and outside in, maybe someone comment on that. What do I want to say that
+to working inside out versus working inside? Test styles. Black box testing related. Yeah, sure. Yeah. All that stuff is good. But look at this here, right? If
+you were going to do your work, should you start by, you just started on a new project. Should you spend a lot of time building little functions and composing
+all those functions up? Should you begin your work that way? Should you begin your work by building components and maybe trying to get a reusable component
+library first? Right. There's, and I've talked to, I'm not going to name names. I've talked to somebody here who's experienced this, but yeah, it's, that's a
+fundamentally flawed approach. If we go based on this mental model, things work. We should drive code outside in. And there's two boundaries at which we work.
+And it's going to be, if this is the whole system. And there's another one here. This boundary right here, it's called the customer boundary. And this boundary
+right here, it's called the developer. And this boundary right here, the system, E2E. This is why we begin our work here. And this one there, it's called the
+application boundary. That's why we don't begin our work there, but we do a lot of work here nonetheless. We want to always drive our work outside in because if
+we think back to the three roles and the goals, everything comes from here. It's the customer that decides what we're building. Right? So we have to make sure
+we're driving things in a customer driven way. So that's why we end to end test to kick things off. And that's why we always want to work outside in. It's
+because the customer decides. It's up to the customer. And it, another thing I've always heard is, oh, the requirements are always changing. Oh, they can't make
+up their mind. This, I actually get it. I actually understand that struggle. But if we don't, if we don't work this way, then yes, that's how we end up with
+code that doesn't scale because we're doing things that are not in alignment to reality. Right? Yeah. This is in, in relation to another question that was
+asked, which is how to structure a project. So this was something that, that was asked. We went down that rabbit hole there, but how to have a bad store not use
+this abstraction prism to not drive stuff outside in. And to not make features the first class citizen of everything we're doing. All right. So that's the North
+star is number one. Understand that we have these key developer use cases. And I say two is customers decide. This one is drive what we do. Two. And then three.
+This is the hardest part, which is discoverability and understanding, which means that when you open up the code base, you need to be able to see how in a
+second or once one or two seconds need to be able to see. How you can get to doing these use cases. That's structuring this out. Is there questions on that in
+particular about project structure? There's also just some other things I recommend doing always having these separate folders. Sharing things between the front
+end and the back. Is there a question about project structure? Or anyone want to unmute and talk about it? I agree well. Yes. Yes. I have. I want to understand
+the final idea of project structure. Next to the idea of going from outside in and highlight next to modules and sub modules. And so essentially a module works
+with a covers of feature area. Then you define the modules. Or looking at the use cases, which define the features, which define the modules, which defines the
+sub modules. Yeah. Is there something that you can't look into your mind? Yeah. That's awesome. Yeah. That's awesome. I love that you're thinking in that
+direction because that's precisely it. I'll probably need to draw this out here. How it concretely maps to what we're referring to. But yeah. Like the, like we
+have a feature and then that's going to map to, whoops. And this is like a theory. This isn't a theoretical space, but we have a feature and this is going to
+map to, let's say we have our source. Holder and we have our tests folder inside of both of these, we would want to, let's say the feature is on a, yeah, it's
+registration. At some point in here, depending on how we're doing it, do you want to be able to see that feature? Right. And then I'm going to say the same
+thing and then make this separate. So here, BDD book BDD in action, by the way, is a really good one for this too. They've covered this in a lot of great
+detail. Whoops. I'm going to give you the level one entry point. Registration not feature. And then where would it go here? There's something that, you know, I
+actually tend to do on all of my projects, which is I have modules. And I go shared. And the reason for this is because some of this stuff is referring to
+feature development. Some of this stuff is just going to refer to the developer stuff. It's almost like this modules folder is for the customer. And this folder
+is like for the developer. That's the way I think about it. There's, by the way, there's enough. Cost and gun strengths? Yeah, pretty much. Crosscutting
+concerns. Yeah. Could be. Like you could say it's crosscutting concerns. Because some of, like a crosscutting concern is something that wraps a feature. But I
+think we, another way to think about it is like, it's like the accidental complexity. It's just what is required. Like I need something to define the shape of a
+use case. I need a use case base class. This has to be here. Is that a crosscutting concern? Not really, but it's just, it's kind of part of what is required in
+order for me to build this in. So that might even go into a folder here called core. Right. Oops. And then I might, yeah. Let's use case. Entity X, Y, Z. Stuff
+like that. So this is the folder. Yeah. This is how I think about it. It's shared is going to be everything. Modules is, this is where all the work is going to
+be done. This is all the stuff, the shared stuff to support the work that's going to get done. So really valuable. Customer based and just more developer based
+stuff that needs to happen. That's the way I think about it with modules too, though, it can get tricky because there's a lot of different ways we could drive
+all this, but I'm going to just choose one for now. So yeah, going a little bit deeper on this feature, like where would this, let's say it's registration,
+where would registration end up? Is this feature? Okay. Let's actually grab this again. Let's go into modules. And here's an interesting thing. This is like the
+whole concept of cohesion, because really what I could do is I could just say registration. I could do that. And then inside of this registration folder, then
+we have the things related to making this work. So we could put the control. We could put the use case. We could put the input and output. We could do that.
+This is one thing. But this is why I say this is, it's a discoverability and understanding as the principles, because the principles are not precise, right?
+Principles are just, they're going to help you gain more clarity on a lot of different use cases. So we could drop into that. So, let's say if we had reset
+password and suddenly all of these are different as well. And we had, oh, sorry, man, what else might we have? Let's see. I don't know. Let's say this is like a
+jobs app or so. So what would be a feature? I feel like this is actually too specific. This is probably more of a use case. Yeah, I would say that's probably
+more of a use case. Rather than a feature. Let me just see what Wes is saying. And the point of discoverability. Yeah, account management. That's probably more.
+This is where I'm trying to go is that we could group all these things together into one kind of cohesive. Understandable unit of what this is. And that's what
+the feature is going to be. So the reason why this is so hard and the reason why nobody really talks about this and no one teaches it is because it's about
+language. And it's about cohesion and it's about design and it's not precise. It's not a very precise thing. It requires constant scrutiny and philosophizing
+on. So that's what makes it very hard in general. If that makes sense. I guess if you're also going to make stuff further, it's hard to introduce the manager of
+each of the modules can essentially be its own application. All right. Very well-defined interface points, which all their modules can connect with it. Yeah.
+And I like that too, because I really like the approach of if we think about your entire application as an interface, because this is a pattern called the
+application interface pattern. So you can make your API for your whole app, just call it app. And then on this, you'll have users and then users API, jobs API.
+And inside of users, what's in that? Create, edit, get by ID. All those different things are inside of there. And these become their own modules. But what in
+this is the, what is the feature? Is jobs a feature? Or is that just, you know what I'm saying? Is that a feature? Maybe it is. Maybe it's not. Maybe it's,
+maybe that's just a bounded context. The way for us to understand the grouping of who does this work? Who's responsible for all this work? I have the answer.
+What's the answer? It's both a module and the feature. Yeah. Yeah. Yeah. Yeah. Yeah. It's tricky stuff. So yeah, that's how I think about this here. I, sorry. I
+want to see what, what was written here. What was right on the point of discoverability? Could you demo that one, two second process in the DDT form between
+code base? Think of a new unimplemented use case and just navigate the code base. Think of me out loud where the important parts are the, where the important
+parts of the code base are. Yeah. Let's do that. Sorry. Could you unmute and walk me through exactly what it is you're looking for here? Yeah, totally. Earlier
+you said something along the lines of a connect. Things should be structured in a way when, when you go into the code base. Hmm. I shouldn't take very long to
+identify given like a task or a use case to implement. I think navigating that code should be quick and efficient. I think that was just thinking maybe if you
+demo that, that'd be really neat. Awesome. Yeah. I love it. Let's see if I can, how am I going to put this together now with the tools I would love? But let's
+see. Let's maybe pop open DDD form and I could show you. Yeah. Yeah. I'll show you how I'll do this for even like a new feature and maybe even where things are
+not quite good. Okay. Let's do that now. Let's do that now. Reference to. All right. And this over here. Okay. So let's share the screen up. Close. And let's go
+to the one other thing I just want to make sure y'all are aware of too. In solid book, I think I have a chapter here called humans in code organizing things.
+All right. We've, we might have covered a lot of this. So there's a lot of, there's a lot of this I've talked about a fair amount before, but if you want to
+take a look through this as well, could help. However, yeah, let me go over this now. Cause are you familiar with this diagram? By the way, I might've shown
+folks this, maybe not, but does this look familiar? Okay. Yeah. So this is, I think this is a foundational principle of, or two principles, discoverability,
+understanding. This is part of the feedback loop, which is the second metaphysical essential. There's two mental models for the metaphysics that are the most
+important. It's abstraction. And it's this, the feedback loop. If we know what all the things you need to do are, we need to make sure that you have, you could
+do this in a couple of seconds. And there's tools available for us to do this. There's design tools. And I'm going to show you this in a moment with the code,
+but I just want to call out some of the tools that are available. There's a great book called the design of everyday things. I think it's Don Norman. Who wrote
+the book, but he calls out that we have these things available like affordances, signifiers, constraints, mappings, feedback, and conceptual models. Conceptual
+models is design patterns. Design patterns are just for us to make sure that we understand. It's just for us to make sure we understand the building blocks of
+what we're doing and what that building block is for. What's the whole point of that? Yeah. It's just making more sense of things. If what we're talking about
+is you're about to get into your code base. Let's say your scenario is all right, I need, I've never seen this code base before in my life and I need to begin
+to understand what it does. Okay. So let's say you get access to the read me or you get access to the repo. What's the first thing that happens. So you land
+right here. So your goal is what we're walking through this right now. Your goal is I need to understand what this code base does and how to find the features.
+Because let's say I need to implement a feature. That's what I've been asked to do. So I'll go here. Okay. I'm going to read through this and this is not
+helping. Right. This is not helping me implement what I need to do. Right. Which is add a feature. I think what I would expect to see right here is a table of
+contents that says adding features, how to add a feature or how to test features. I need to see immediately how I can get to doing the thing I need to do like
+in a second or two. So that's what I mean about organizing. So this is not done to help me do that at all. There are just common. There are common structural
+patterns with just organizing code bases. I think we're all familiar with this is called knowledge in the world. Like when you look at a code base and that
+there's a source folder and a test folder, that's common enough for us to know. All right. The source code is in source. The tests code of some sort is going to
+live in tests. So at that point, the first jump would be to go into that, but here we have packages and that's not necessarily a common thing. So again, I would
+want to make sure that this is called out here. I'm sure everyone's worked on or started working on projects where the readme wasn't very clear at all. You just
+had to move around and it wasn't very easy for you to figure out what you need to do. This is the process. So I would go through all of the developer use cases
+and I would start at the readme and I would actually walk through this process of making those things better, making them more clear. Let's see, let's say the
+scenario, cause you want to read it, walk through the file folder structure. Let's say my goal right now is I want to add a, I want to add a new feature called,
+let's say this is DDD forum. So I want to add create post. So yeah, I need to figure out how to get in, into that. Let me actually pull up in the cold now and
+search to that folder screen. So we've got that. So let's see how we do that packages. What am I hanging into the front end or the back end? Let's say I'm
+working on the back end. So I opened that up. Okay. Now it's also, how am I working? Am I working with tests first? Hopefully I'm doing a test first approach.
+So I would go into tests. Okay. Now, what am I seeing acceptance in this thing? I don't know. I'm assuming I don't know this. I'm assuming this is a new
+project. I would say, okay, I don't really know what this is. I'm also acceptance. That's interesting. What is that? Okay. Let's open it anyways. Okay.
+Interesting users. So this makes me think the thing I have to do is about posts, creating a post. So should I create a post or maybe I should. Is posts the same
+level of cohesive? Is that at the same level of cohesion of whatever this thing users is? Maybe it might actually make me think actually forum sounds like it
+might be more the correct thing to put here instead. And then it seems like the feature is actually posting. Right. So do you see what I mean about it's
+philosophizing every, every step of the way through and trying to keep things cohesive, but also in just not getting lost. So that's how I would begin to even
+carve into here to think about what it is I need to do. Did that kind of make sense? Yeah. This is a really hard topic. It's yeah. It's it's language
+fundamentally. Okay. There are questions, comments on this. I've been. Yeah. Let's just get all I'm in. Let's take a little get to chatting and everyone's good
+on this one. Okay. In terms of organizing your, the source code. Now, everything we're doing here. Well, I just want to say this every line we write, of course,
+this is going to create new abstractions. So this week when the pretty new instructions, every single time we do that forced to ask ourselves. Is the thing
+we're creating related to the problem itself, or is it, is it essential complexity where it needs to go in modules? Or is it some sort of accidental complexity,
+like just a restful API driver where it needs to go in. And the share, like, it's just a part of what we need. So that's another important thing to, to note as
+well, just the way I'm walking through and thinking about this. So anything that's not. Yeah. Anything that's not related to posting or related to registration
+as a movie goes in there. Hopefully I have a, a users folder in here. I do. That's in the module there. And then features would go in here. A better way to
+probably structure this out. Cause I, this is a level of abstraction where what is the actual thing I'm doing here? Registration. Yeah. This should probably be
+users. Registration is actually probably better than that. And then I could have a registration controller in there. Now, if this users controller, I'd probably
+call it was here at this level of abstraction. And if I had a number of these. Log in. Headed. I would imagine now just looking at the relationship between
+these users. The relationship between these three folders. And this one thing. I'm going to imagine that this user controller has a relationship to all three,
+because the idea of cohesion is everything I'm looking at has to be related. So that's what I'm going to imagine is that this is going to do the work for all
+three of those. But that's not the only way to do it. You could always break this up and you have an edit user controller, login controller, registration
+controller. And that is fine, but it's about, that's why it's not perfect. Never deeper comments on that. Oh, Osman. Does the folder structure map to the
+vertical for horizontal slices? Yes, absolutely. The way I would picture it is. Yeah. Let's maybe call the users, the feature or the module. So users equals
+feature module. And these things here, these are the slices. These are the use cases. So yeah, this could also be called account management. Two. Yeah. Okay. So
+questions on that, or should we move on to the next, uh, top. So there's a folder file structure and having that be guided by features, but then there's a
+network of objects. That is hard to think through. Yeah. Yeah, you're absolutely right. It's just a, man, it actually is complex. There is just, it's all a
+network from theoretical to physical and it becomes physical by the feature, by the module. And then inside of that, how do we think about the network of
+objects? The way we think about the network of objects is the stereotypical architecture. Because those objects will interact in a particular way. And they'll
+always be that way, whether it's front end or back end. So yeah, it's like a big tree. See you later, Eric. Thanks for coming out. Yeah. So yeah. And right.
+Just, this is the stereotypical architecture. Just as a reminder, these are the concerns, like the responsibilities that happen each of these layers, and then
+we've seen how this works in the front end. Oh, whoops. I'm probably not sharing. I'm not sharing. I'm not sharing. I'm just changing windows. This is the
+stereotypical architecture again. This is it by responsibility, by the types of concerns. And whether we're doing front end or back end, it's going to be the
+same thing where we have objects that live there, always going to have some sort of outside infrastructural incoming adapter of some sort. And that here it's
+the component. And that's always going to talk to something that's going to work as a controller. And that's always going to, it looks like I'm missing the,
+yeah, I'm missing the observer actually in this pattern or in this drawing here. So fix that. But yeah, there is a typical structure. Okay, cool. I think that's
+enough for this topic on the folder structure, right? Unless y'all had more. All right. I'm going to just move it along then. Oh, what's this type in? Where can
+we find that diagram? Copy link. I mean this front end architecture one. I'll redraw this one actually. Cause it's, yeah, it's not quite correct. This is more
+correct, but it's just disgusting. So I have to redraw this. So I'll do that for y'all. And let me just make a note. F, maybe part. Yeah. Cause this is not
+quite right. Okay. But yeah, I think this should be a lot of clarity. So what I wanted to do, and this is what we're going to do in pattern first. So, some of
+you, we had this conversation a little bit earlier in the community crafters. I was saying, okay, a lot of what we're doing in like in pattern first is going to
+be just trying to get to the end result of, all right, boom, I know how to use the, I know what the patterns are on the front end. Boom. I know what the
+patterns are on the backend. Boom. Boom. I can use these patterns to build. Pattern first phase of craftship done. If you could do that, you're at, you're
+successfully done the pattern first phase. So that's the goal. But on the front end, you're going to need to know the patterns. So I'm putting together a
+pattern catalog for you. Where did I start? Not. Yeah. I'm putting together a pattern catalog. So I can put together an image of that, how they all go together.
+We did discuss that in the last Q and A that we did on this topic. So, but just having these patterns and knowing, Hey, these are the buckets of where things
+go. Here's the way that they, they collaborate. Here's how they interact. Here's how you should test this pattern. If you care to test it. And then the other
+thing is just state management as well. What are the different types of state that we need to manage global domain objects, view models components. Right. If we
+know all of that, then we're in a really good shape to just, if you need to handle more complexity on the front end, you now have the tools to do that. So I
+would say the main lesson from best practice first is drive your code from the customer boundary and do that with E2E tests. And then at the pattern first
+phase, the main learning is there's patterns. If you need to carve in and actually test things a little more deep move stuff around to get the isolation you
+need. And then patterns are going to help you do that. So that's the main, those are the main two main lessons of those phases. I would say, yeah, that's what
+we're going to prioritize for those phases in particular. Now, let me just write this down. Yeah. Yeah. Now, with that being said, we're also, we're going to
+use front end architecture things in the course in the responsibility first phase. Once we move forward a little bit more, I'm probably going to give you all
+some. So this was my journey. Once I learned how to use the patterns, I then have to learn how to test. And in order to learn how to test, you need to learn,
+you need to learn responsibility. I had to learn responsibility and driven design. So at the responsibility first phase, that's when you can cost, make your own
+custom abstractions, how to glue things together properly. So at that point, what I'm going to ask everyone to do is to, yeah, build, probably build something
+custom, like maybe your own custom router. Or like even like a chess game, something where it's you, it's outside of just the common patterns. And if you could
+think at that level, then you'll just have the confidence to know you could design anything, any time. And then finally, that leaves us at value first. And then
+all we really need to discuss in the phases of craftship are just best testing strategies for us to use. And just how to be more effective and efficient with
+the patterns. So that's the main idea here. And then the last thing I wanted to talk about was, what are the front end architectures to choose from? And which
+ones should we choose? And we started at that and then I went off topic. But the way to start this is we need to work at the architecture guest. So we can't
+really begin to know how to confidently select a front end architecture until we can know how to break down the problem of selecting an architecture. Sounds
+obvious, right? Do I have the guest points images in here? Let me pull out. Let me pull out. This is a good one. This is a really good one. Yeah, surely though.
+The guest points. This is pretty much the same thing. It's the abstraction prism, but now it's with the feedback loop where every single time we just make a hop
+over to the next thing. Before we write any code, we need to have clarity on the problem, the solution, and the architecture that we're going to use. And the
+solution is, it's going to give us some concrete examples that we need to pass through. Our architecture. At this phase here, like at this point, because we
+can't talk about this now because y'all are not really quite going to get it if you're not at the, at least at the responsibility first phase, it won't make
+sense. This is why we need to finish the phases of craftship first and then get to the guest points. But at this point here, how do you choose a good front end
+architecture? Us listing out all of the functional and non-functional requirements. So if we've been asked to do, let's say it's a multiplayer game, right? And
+you've been asked to create a start game or join new game. Whoa. It's a multiplayer game. And there could be people all around the world playing functionally.
+It's easy. It's just an API call. It's join new game. Data goes in the database or something, whether it's an in-memory one or not. It's just a slice. But the
+non-functional part, it's how the system does that. And that's where the real complexity lies. That's where we get into stuff like, what's it? Web sockets and
+all sorts of like, where are we going to put some of these, these responsibilities? Which roles are we going to assign them to? Which types of architectural
+components are we going to need? That's where it gets a lot more complex, but this can be decomposed using the responsibility driven design process. And this is
+really hardcore systems design stuff. We need to have clarity on that. And we do this in the architecture guest point. So this is something you're going to
+learn in the RDD phase, which is how to do this. And this is, if you've ever seen CRC cards, like the old, old school style object-oriented programming folks
+who use those things in use case diagrams. We're going to do a little bit of that. Just, we don't have to use CRC cards, but you do need to be able to decompose
+responsibilities, sign them to roles, and then design their collaborations. And then you go and you find the architectural tools that can implement those roles.
+And that's how you piece together an architecture. So we need to get to that phase, right? And it's going to be based on those two things, because let's just
+think about some of the common non-functional requirements. I know I gave you like a multiplayer game, but let me give you some more common things that you need
+to make sure happen in your app. Your app needs to be fast, right? It's probably not good to be downloading a 200 megabyte build, sending that straight to the
+client, right? SEO, that's another huge one. Is this user generated content going to be growing traffic on our site or is it not? Right. That's largely going to
+be determined by SEO. This is all stuff you want to ask the customer. You want to know. It's not really a slice, but it is related to what surrounds the slice,
+the way the slice is implemented. Yeah. This is also related to speed. Like how fast or how slow am I going to see the thing on the screen? I think there's like
+a Google stat where it's like, I can't remember. It's some crazy number of people that drop off if the site doesn't load in three seconds. So that's a major
+concern. Security. It's like, where are you going to? Yeah. Are you going to do your security on the front end? Or are you going to lock it down a little bit
+more and have the backend do all the security? And just pass the view to the front end. For example, solid book. Okay. This is the type of thing where I should
+probably be doing server side rendering. I shouldn't even send you the page if you're not authenticated at all. Instead of doing some of this stuff on the
+client. Yeah. So anyways, availability, XYZ. Those are just common non-functional requirements and there's different architectural approaches to solving all of
+these. This is actually a great article. I should paste a link to this one. I'm going to grab this and just share this with everyone. Really liked this article
+a lot. Oops. Yeah. So there's different approaches to implementing this stuff. What we did in best, I think in just code first was we just were returning JSON.
+If you needed to return a view, some of you are probably familiar with templating engines. That's the fastest thing to do to start returning HTML. But I think
+this is a great article you could take a look at. Which describes a lot of the benefits and drawbacks to each of those. A massive part of this as well is just
+being aware of different types of approaches that will help meet these functional and non-functional requirements. Mostly the non-functional requirements. But
+ultimately the main driver here, what's going to happen is it's just moving around your responsibilities. It's just moving around concerns. Some of the stuff
+like how much of the security are you going to do on the front end versus how much are you going to do on the back? And how much of the rendering are you going
+to do on the client? And how much of the rendering are you going to do on the server? If you've ever heard of something called pre-rendering, it's really slick.
+I used to use that way back in the end of jobs days. I think it's a lot cleaner now. Some of the tools are a little better for that. Let's see if I can find
+pre-rendering. Yeah. Pre-rendering. So what pre-rendering does is it will just load. It's going to actually render your website when you request it and then
+pass that back to you that first time. But then the rest of the requests you make are going to, it's going to be client side. And that's how to quickly just get
+SEO working. So that's, it's hard to give you like a one, one and done. This is the best architecture. It's always going to be based on, as they always say, it
+depends. The requirements, but knowing what to look for non-functional, that's going to help you move in the correct direction. So yeah. How to decide just get
+very clear on the non-functional requirements. And then let's get some concrete examples and then we can choose the best ones. All right. Any comments,
+questions on this one? Yeah. All right. Let's see for the rest of this Q and A. Oh, we have the best way to do encapsulation. Let me just give this time to
+everyone here. What's the most productive thing we could do with the time we have here? I'm happy to answer any questions, dive into anything really, any
+discussions. What are you actually, let me ask, what is everyone struggling with the most then? Or what is everyone most concerned about getting better at?
+Right now for me it's still in a dually, still in a strangle. Yeah. But I think it's far from what we're discussing here. Yeah. A little bit. Yeah. A little
+bit. Following with the main. Big and ready to strip up this. Good. This is helpful. Downloading the patterns in the front. Okay. This is excellent. So this is
+all stuff all putting pattern first then. And I think as well, modeling the domain, cause the way pattern first is going. Is we have the front end and the back
+end. So we need to talk about both. I think the front end is going to be considerably easier than the back end. So we'll start with that. And I think also it's
+probably just wiser to start with that as well, because I think most of us in the community are coming from front end as well, if I'm correct. So yeah,
+downloading the patterns, just make sure we have all those listed out. It's pattern catalog. So I'll put that in powder first. Great. You just outline. I'm just
+taking some notes here. Yeah. Incrementally. Incrementally improve the code base. What do you, what's the most important thing, right? At the end of the day, do
+the features that need to work right now work? Yes. Is there any bleeding? Just stop the bleeding. Okay. Good. And what's the fastest, easiest way to do that?
+It's the end to end test, man. I think, I think everyone might agree with me on that. It's probably the best way. Just wrap the whole thing. Because if you do
+that, I always use the analogy of the tailor or yeah, the tailor who is going to fix your clothes and trim it up, make it look nicer. What's the first thing
+they do? They always just put pins in your clothes. They make sure things are good first before they go and do anything invasive. Do you have it? Is it good?
+Set up? You like it? Looks good like that? Yes. Okay, cool. Great. And then you continue. Then you go a little bit deeper. So we shouldn't really be doing any
+crazy pattern for stuff yet until we know, yo, we got our features. The stuff that needs to work works great. Now, how do we make it better? That's when we, I
+think, do something wild practice first. So that's why I put it in best practice first, which is stop the bleeding. Which is, I think about it. Was there
+anything stopping you or, or, or, or, or, or, or the, had you confused how to do the end to end testing? I know I didn't put the videos in just yet. The, the
+training. Sorry. The lessons, the lesson that's coming. To do end to end testing on the front end. Is there anything stopping you right now? With doing that.
+Convincing the team it's worth the time. And if your situation is funny because your team is, you have someone else doing all your testing manually. Right. You,
+you have like a paid company. I think you mentioned doing all your testing. Yeah. That's an approach. If they can spend money that way. It's not ideal, but Hey,
+if it ships stuff out to users and it gets to users. And the customer is aware of how the alternate reality, we get to choose. And that's what they landed.
+Yeah. All I could do is give people options. Ultimately it is a customer decision at the end of the day. It's not a developer decision. If, if y'all want to
+expend the time and energy to do something a fundamentally different way. Yeah. Yeah. Teaching the whole team process. Yeah. It is a trade off. Yeah. Like they
+even day Farley, all these folks, every time they talk about this is they say, this is a investment. They always say it's an investment because actually one of
+my friends, I can't remember the, I do not know the name of his company. I probably shouldn't say it though. But one time he showed me his code base. He was a,
+he was working as a, I think he's still there actually, a senior developer. And he showed me his code. And this was the first time I ever really saw a medium
+sized company using this four tier E2E test approach. And it was just beautiful looking at this. And I asked him, okay, you have all these tests built up. You
+have all these page objects. You have all these kind of abstract things that describe the main components in your app. Is this just plug and play now for you to
+build new features? And you just said, yeah, pretty much. So just looking at the code once, once you've invested all that time and energy into building the
+reusable page objects and reusable, the reusable components come off of those get created off of those. It was incredible. You could pretty much just go from
+requirement to implement it with just mixing together a couple of page objects, which was really cool. I see what was that. I'm a strange situation where I feel
+like I'm a junior dev still in the code first phase, but there's no senior devs managing the team. And we've adopted messy code base. First of all, pause there
+is what you're describing is not an uncommon scenario by any means. It's probably the most, it's probably the most common scenario, but you're here though. So
+that that's the only thing that I'm going to say is uncommon. But yeah, there's no senior devs managing the team. We've adopted a messy code base. I'm really
+struggling to do what's best from a value first perspective. You know what? You can't, you can't completely do what's best from a value first perspective
+because you haven't experienced it. You haven't experienced enough yet. Just take me going through and doing this course, shipping this out all for you as an
+example. Look at the amount of L's I took in terms of just trying to ship this out, trying to do it the right way. But the mental models I'm building are a lot
+better than the ones I had before. I think this is something I put in the mindset module is that we do have to remember you're structuring your consciousness
+now. And the only way to really do that is not just by theory alone. It is practice, whether that's practice on the job or it's practice that you do on your own
+project. You can go a lot faster if you have your own project and you're getting into practice there, too, because you need to have those experiences that
+really teach you. Ah, yes. Okay. I believe, I believe this part sucks. I believe this is not what I want to experience. I believe I need to do it like this. And
+you're going to remember, because it is very much a felt thing as well. So I don't think there's any way to get to value first without just putting in reps and
+going through and doing the stuff here. Yeah. If you're, if you're trying to do everything here at work, it might make the process take a little bit longer. But
+if you're going to do a lot of this stuff on your own time, you probably go a lot faster. That's just what I've realized. And when I was doing the mentorship as
+well, I had some students. It's a student, Luigi. He just ran into it. He actually got laid off as a front end developer. And then he just started learning back
+and he just went in. And yeah, he got hired for a job, I think like about a month ago. And, but the thing is, there's very few students I've seen go that hard,
+but he went and he just took a project and just kept iterating on it, doing, doing the same thing over. Just a little bit better each time. And it just kept
+structuring and restructuring, killing his design, doing it over again, killing it, doing it over again. And then eventually he has this kind of felt experience
+for how to approach his work in a way that just feels good and makes sense. So it doesn't, I really wish there was a different way. I wish there was like a
+magic thing, but it's just, yo, it's putting in reps to get the value first. Cause that's the thing that sustains me too, is yeah. I, of course there's a bunch
+of L's and then we take double loops. That's just the way it goes. So hopefully that's helpful or just some perspective there on that. But I've been there for
+sure. So expect the next L just maybe be like, how can I get to the next L faster? So I think what it too. Let's see. I'm going to read through all this here.
+Question about E2E tests. Is the most important tests. Aren't the integration unit tests to test the business logic and implementation of the different use
+cases we're implementing so we can get these E2E tests possible. Like this question a lot. We're practicing clean architecture and DDD implementation in my
+company. And we don't need to be tested as manager things. It's great. I'll put it like this. I'm actually going to go to the whiteboard for this one. Yes,
+actually we did. But I'm going to pull up this image from, let me go to general. I just need to grab this for real. This is, this is a very insightful as well.
+Copy image. Let's drop this here. This is just something from my iPad real quick. Kind of covered this recently. But here's what I'll say. E2E tests, they suck,
+right? Let's be honest. They take a lot of time and energy to begin to get right. But they're really important to, for the customer, right? For the customer.
+They are important. You need at least a few of them to just know, okay, it, it all works. But by no means is it one, like 1000% the only way to do it. I would
+say the main measure here is how confident are you that your app works and that your customer is going to get what they asked for. And that users are not going
+to run into bugs. How confident do you feel? If you could find another way to accomplish that. Great. But there's very little that's going to be as good as E2E
+tests. It's just, they're not. Yeah. They're not the best to write. They do take time. And they are just, yeah, fundamentally hard. I'm like, you know, Osman
+wrote here, do a couple of tests, show the team, add it to a CI. Okay. Yeah. Like if you can see that it's possible and you have the correct infrastructure for
+it, that's great. But we go into that end of the best practice for stuff. However, there are other approaches. So let me give you two other approaches in my
+recommendations or just some of my thoughts. By the way, are you doing front end or back end? I need to ask this. What are we referring to front end or back
+end? Both. Hey, beautiful. Let's think about this front ends. Back end. Cool. For front ends. Let's say strategy. Number one. Okay. This is the one I've been
+talking about, which is E2E. Test. Need to be test some stuff and high value unit tests. So does this, is this clear to you what I mean by that? Are you
+familiar with these two concepts? I think you are. Cause I think you mentioned it. Yes. I'll be ready. So we have that. But let's think about another one here.
+And this E2E test is full. This is the whole thing. Now let's think about another scenario. On the front end where you don't have access to the back end. Let's
+say the features not, but what else could you do here? You definitely still want to do an E2E test. However, it's going to actually, no, I'm actually not going
+to go down this route. Here's legitimately what I'm trying to explain to you is this. Hold on. I think there's something that happens when we do this. We take
+either E2E. Plus high value units. Or you take, check this out. Incoming plus high value. Integration. Oh, what's that? What is that? Do you know what I mean by
+this? The incoming tests. Do you know what I mean by the high value integration tests? And let's just say that this is the one that we're doing on the backing.
+Aha. Okay. We have something to talk about incoming tests. Let me explain this. We have a number of guest points. Let me go to my image library. I'm building.
+Where's the one I want to show you. This is okay. Cool. Oh, I think it's a physical one. My bad. Okay. I literally didn't draw it. All right, cool. Anyways,
+let's go back. I kind of have it here and here it is. So the incoming tests, right? We're going to go back to the back. And then we're going to go back to the
+back. And then we're going to go back to the back. And then we're going to go back to the back. And then we're going to go back to the back. So the incoming
+tests, right? We're aware we have this four tier architect, like this four tier thing in order for us to even begin to write an E2E test project. We need that.
+But there's a boundary here. And this boundary is between it's like the client, the API client using the system. This is just back then I'm talking about. And
+then the system starts here and it's hard for you to see, but system. I don't even know if this is drawing properly. Cause you'd probably not see my cursor.
+Maybe you are. Are you seeing my cursor by the way? Damn. Okay. How about that? Yeah. I think when I need to do this marker, let's try one of these fancy
+markers. So let's do this. Not over. Okay. We have this four tier thing here. This is where we begin to do our E2E tests. Now what's this? What's this thing
+right here? This one right here. This is like your controller. This is the incoming. This is what accepts the requests, the controller. But what we can do. Oh,
+where did I write this? What we can do is you have express, which is just, this is actually just express. If you do like when you use this new tool I have,
+right. Where you have your express, right. And the server is now running and you do have dot listen. This is going to start the whole thing. You have this first
+one here, which is going to be express. But of course we need to pass this controllers, so we would have set up route right. pass the controllers and whatnot. I
+think we needed to give that like a route user. Right. But those controllers are going to be things we write. So we're going to write those. Great. Now, inside
+of that, there's logic that we need to test. When a request comes in, does this even get to the use cases? When this request comes in, does it properly pull out
+the right data from the request and then validate that and then pass it to the use cases. Really what we're trying to test here with this incoming test is does
+our API work? Because if you have graph to, imagine you have a graph to API, have a rest. You have maybe a client. And then you have your API. Okay. But this
+thing here is going to be, this is going to be a contract. So this is everything your app can do. Right. And we want to allow graph QL and we want to allow rest
+to work. Let's say. So what this needs to do is these need to actually implement this API. Implement this. And then for each of these, what happens is this. You
+have your actual app, which does what your, whoops, sorry. This is actually right here. This goes right there. Yeah, that's it. Sorry. My bad. Your app
+implements the API interface and these things here, they just have, they get injected. We have access to an instance of your app, but your app is going to have
+a ton of different use cases on it. But each of these use cases is going to connect to infrastructure. Right. But if you're doing an incoming test, what an
+incoming test does is it places a boundary around what is actually being tested. All we really care about with your incoming test is, sorry, why did I say
+backend? I meant to say like desktop or even like Hobo. All we really care about with this is, does this API interface attempt to call the correct like use case
+when it gets called? Does, do these, does, is this API interface still up to date? Because this thing could change. That's what the incoming tests are all
+about. It's just about testing that. So you'll actually mock out this app, the fake app, and this will be your mock. You're just going to verify that this gets
+called the correct way to call into these things. It doesn't actually execute in use cases. So that's what the incoming test is for. So imagine you have your
+incoming, right? And then you have your, your high value integration. So that's going to place a boundary. Okay. Now let's imagine the controller it's called.
+And we actually go all the way to the database. So you're not doing E2E tests, but you are testing that the requests can come in properly. Incoming tests can
+come in properly and they get called correctly and they call the correct things. Does that make sense? So it's a different strategy that I see we have. We could
+use incoming in these high value integration tests, or we could do the other one where it's like this E2E. And then we carve high value unit. We kind of carve
+inwards where we do this and we don't touch the database. We would be touching the database with the E2E tests here. Ultimately, what we're trying to get is
+making sure we, we cover everything with some sort of test. As a part of a strategy. And I'm referring to this because realize you guys probably thought I was
+pointing to. Does that make sense? The incoming test is called an incoming con. It's called a contract test, by the way, because what it does is it's verifying
+the contract of your API. Hey, does this contract still work? Is this contract correct? So this is how you can keep your API. Just making sure that, hey, this
+didn't break the clients. The client did just break for everybody. The API is still good. Yeah, it's really, it's a really interesting strategic little game
+that needs to get played here with just making sure things will work. High value are usually hard to get if the code is not decoupled. So the E2E test is a
+faster feedback. Yeah, that's great. And no, there is both strategies are great. They work. It's just going to be. This is what I mean. This is value first.
+This is the strategy part of the four pillars. Design testing, architecture strategy. Which one's better? It's really hard to say. It's really hard to say. It's
+just your level of confidence in your code base. Because some projects that are going to be very heavy on their, the application and domain logic. Some apps are
+going to be so freaking complex with the logic that has to happen in here. And you're going to want to be very, very hard to say. And you're going to want to
+spend a ton of time. Maybe even hundreds of examples you want to toss at your application domain layer. Versus sometimes you have projects that are relatively
+simple, relatively basic. And the thing that's most important is just, hey, just do all these major architectural components like work together. Does a Stripe
+connection work? Does this work? Does that work? Does this work? And then you could get the majority of the bang for your buck with these. And then sometimes
+you have a lot of clients. Maybe you have, maybe you actually do have a number of different clients that you need to serve. So this is what I mean by it's hard
+to give you the best. But I'm going to say for the majority of people. For doing. Tasked based UI apps, just basic stuff. E2E tests are the best to begin to
+carve into everything. Make sure it all works. It should give you the greatest level of certainty. Just write one or two. You're going to have to write a ton of
+them. It's just get that confidence to make sure that you can begin to make changes. And then you could even do away with those E2E tests and then move to doing
+this strategy I'm describing to you. It's just, that's going to test your whole system input output. If you know that the input output's okay. Then you can move
+over to do one of these other types of strategies. But I still think E2E is great because it just verifies the whole dang thing. It's just doing a lot of them
+really sucks. And I'm not, I also don't mean like you, there's no reason why you can't do all of these. You just have a little bit of a mixture. You don't have
+to have a perfect parity of just these two or just these two. It's, it's just ultimately how confident am I going to feel that I'm doing this correctly. Or that
+this is not going to just break and prod for me. Was that helpful? You can, we could always talk about this more as well. If you have more questions on this,
+but I hope it was helpful. I think you probably need to see examples of it though. Is like the big thing, right? Awesome. Might be able to find a quick little,
+and then I'll split right after this. What's it? Yeah. Straight up. Oh my God. Can you type? Yeah. There we go. Yeah. Here's some of my messy notes from
+mentorship stuff. Let's see if I can jump into this. Grab one of these incoming. Oh, here we go. Creating a test boundary between the incoming, blah, blah,
+blah. Where's the good one? Controller test. That's not the type of stuff we're doing. I might have to actually draw this out for y'all or make one of these
+here. We need an application interface. Okay. This might be it. Who we got? Yeah. Application interface. And then we're going to mock. Yeah. I think this is too
+complex for us, for me to just show you. I think I actually need to. Yes. Give me one. We have to walk through for sure. But I'll just say what's happening here
+is if we have the app, application interface, you need to know about this concept first, which is we can take everything that your app does as I was referring
+to earlier when I was saying, I'm not delete that. I'm saying you can take your whole app and say, this was API jobs, jobs API. Right. Take your whole app and
+express it like that. Then what happens is your test code. All you're verifying is that it correctly invokes. Like if you make a particular API call, it's going
+to invoke the use case behind the scenes. So that's all you're testing. So really you're, you're, what is it you're actually verifying here? You get more
+verifying the on this. And I think that should be good. Fine. Just to draw it like a rough cloud. What are you really verifying? You have the express. So this
+is like the thing that's actually going to do the work. So this is when you say, whatever this concept is right here, then you have your controller. You might
+have a user controller and inside of this and say, it's like a register. You might do something like it's going to get the request response. And it might be
+this dot dot. Yeah. This dot app dot users dot register. But there's going to be logic right here. Right? So what are you verifying? You're verifying whatever
+comes before this. And this is going to be a lot of like validation, making sure it pulls the stuff out correctly. Making sure X, Y, Z. This is what you're
+verifying. You're just verifying. You can get to here. You're making sure you can get to here. And I said, this dot app, what is this? The app. This is going to
+be. Stop. And this is what I meant earlier. When I said, it's going to be your application interface. Oh my God. That was great. Right? So that's all that this
+controller is going to get. And we just want to know, hey, request comes in. Is it going to get to that? Is it going to get to that? And then is it going to
+call into this thing here? Correct. Is it going to talk to this thing here in the way that we expect? Yes or no. And that's what this incoming test. Does. Just
+make sure that's good. Because this often gets mixed. There is a fair amount of stuff that is happening by the time it comes into the framework. Because this is
+a whole ass framework. Remember, this is like a big framework with a lot of stuff in it. And maybe you don't even have your, oh, it's a course. CRS is probably
+not even said. Who knows? There's just so much that could happen. It's just uncertainty. We want to minimize that. We're not going to actually move forward with
+this and call into the use cases. Yeah. I'm going to. Okay. Majed. This. And I'm going to give you the link to this as well. Let's just snip that. All right. So
+we should be able to leave it there for now. So. Oops. Okay, folks. That'll do it. I think. Was that helpful, by the way? This little bit here. Right. I still
+need to teach you stubbing and mocking and this and that properly. I think some of you guys. I think, Osman, you've got it. Because you know how to do the
+contract testing on the outside. Outgoing. You should probably. I think you now know how to do the incoming too. If you got that. All right. All right. All
+right. Great. You know what I'm up to. I think it's just pattern first. And it's just getting just this freaking intro stuff, man. So let's get this intro stuff
+in the patterns. So we're focusing on front end deep. I think that's where I'm going to. Just put my, all of my awareness is getting everything from the intro
+modules. To the front end patterns. To the front end patterns. And that's going to include the lessons for the best practice first step. All right. This has
+been awesome. I actually really appreciate the just jumping on and like sharing. Like what you've been struggling with or what you could get better at. That's
+really helpful to me. So thank you very much. That gives me a little bit. Clarity into what I should focus on. All right, folks. We'll leave it there. We'll
+chat soon.

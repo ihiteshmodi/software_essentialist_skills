@@ -1,0 +1,56 @@
+What's up crafters, Khalil here. In this video, we're going to talk about composition, the next physical essential. There's a lot of different ways I can
+explain this topic of composition. You've probably heard about it before. You might've heard someone say prefer composition instead of inheritance as a design
+principle, but really composition is an essential practice, but really composition is more than just a passing design principle. It is one of our essentials.
+And in order to explain composition, I'm going to talk about two truths of software and how composition helps us with it. So the first truth about software is
+that it is made up of a lot of different parts. And unfortunately, when we first start out as code first developers, we don't really take too much concern in
+terms of how we wire up these parts. It's not uncommon to go on the docs, go on a stack overflow, nowadays go on chat, GPT, grab some code, paste the code, and
+just plug things together until they work. We are more thinking of designing things in terms of the folders and the folder structures we're using. Where do we
+put these components? Where do we put these abstractions? How should we break up our code? Now that's all well and good. And this will get us a fair amount, at
+least to the next phase of craftship, the best practice first phase. However, the way in which we link together our dependencies is incredibly important. So
+far, we've talked about vertical slicing and we've identified the fact there is a directionality to the way that we hook up an operation. We go from the
+infrastructure layer into the application, into domain, that hits the database, and then it comes and flings all the way back up. Directionality going on here.
+This means is outer layer concerns rely on the inner layer ones. That means in order to even create, let's say a create user operation that is going to be
+something that lives in our code base that we could just call and it will do the work and write into the database. In order to create this operation, this
+command, by the word for it, we need to link together a number of lower level parts. And the practice of doing this consciously instead of unconsciously just
+linking stuff together is this practice of composition. It's passing in the dependencies that are required. And for that dependency, passing the dependencies
+that's required for that dependency, and so on and so forth. If we do not consciously, we can either create what's known as circular or cyclical dependencies.
+And we could also create the situation where it is just very hard for you to understand and maintain your code and probably most critically testing your code.
+If there is no consistent structure or directionality between how your abstractions should talk to each other, it's not easy to perform the previous essential
+horizontal decoupling. So this is something that a lot of front-end developers struggle with because front-end developers are just linking things together, but
+they're not really aware of number one, the abstractions that are at play or the patterns that are at play and where those patterns belong. This is horizontal
+decoupling again. And because of that, the only way a lot of front-end developers are able to test their code is to test the entirety of their code as an
+end-to-end test. Now we don't want that situation where that's the only type of test we can write. It's a good type of test to write, but we want the situation
+where if we want to on the front-end, for example, test the entirety of a feature without actually needing to start up React, without actually needing to have
+Redux installed or set up, that is something we could do. And sometimes we will want to do that, especially on very complex front-ends where there is a lot of
+perhaps front-end logic. Now, the other truth of software is that it often needs to run in different environments. For example, when you're developing out the
+app locally, that might be a dev environment. When you're running your tests, that could be a test environment. When you are running your code in a CI, perhaps
+we call that the CI environment. And when you're running it in production, that would be of course the production environment. We could also talk about staging
+as well. Now, when you run your code in development, of course, you sometimes need to point to a development database or you need to point to development
+services that are running on your machine. Sometimes you may need to turn off certain things in development. For example, when we're using Redux, we might want
+to use some developer tools and have those turned on in development. However, when we're running in production, we don't want to have those things turned off.
+If we're not conscious about the way that we do this, it's going to make it very complex and very confusing to run in different environments dynamically. This
+concept is of course called polymorphism. It's the ability for your code to take on different shapes and it can take on different shapes. Now, with all that
+said, just to illustrate the type of code, we do not want to see continually, constantly in your code base. If you have seen this, don't worry. You are not
+unique in this sense. Trust me. We've all done it. This is something littered all over the place sometimes, but we don't want that to be the situation. One of
+the first steps is just getting clear on how things are linked together in the first place. For example, if we were to really trace the dependencies, and this
+is one of the beautiful things about composition is it forces you to really have a tight awareness of how you're linking up your code base. If we get really
+clear on this, we could see the way that everything is related up to the web server itself. And this is just a first step. But once we get good at this, we
+could take it a little bit further and encapsulate the work of linking everything up and linking everything together to a particular object. That object is
+called the composition route. We're going to learn about this a little bit later on. But if we do this correctly, we can get rid of all of this work of checking
+the environment from various places in the code base and co-locate that to just one place. And this is what will give us some sort of dynamic behavior in our
+code base. Think about the way that it works in terms of other people being able to add their own plugins to Visual Studio Code. Visual Studio Code is
+incredibly extensible and has a sort of plugin architecture. And that plugin architecture comes from the fact that the behavior is dynamic and composable. So
+composition is just such a powerful technique for us to use. We 1000% will have to use it when we are running our code in different environments. But you may
+also be dealing with a particular problem in general might require you to use composition. Visual Studio Code is a great example, but you could even take video
+games. What happens when new weapons come out and your character needs to be able to interact with that and use it a particular way. Or if you're building a
+digital audio workstation, how do various audio nodes and audio components link together? How can this work? Basically, it's about this plugin architecture and
+having dynamic behavior that works in various future scenarios. This is a technique that we're going to use a lot. In particular, we're going to use it a lot in
+the application guess point because here's where we're going to need to be swapping dependencies in and out for testing purposes. We'll also use this at some of
+the other higher ones like the system and incoming adapter. And of course, when we get into deployment and we get to actually running our code through a
+pipeline, we're going to need to make sure that our code was composable in the first place so that it can run in different environments. So where are we going
+to learn more of this in the best practice first phase of craftship? We're definitely going to get deep into this. We are going to refactor a lot of what we've
+done in the code first phase. And that is going to mean that we will need to use composition. That is primarily the place in the course that we're going to need
+to use it. However, there's also tools that we can use in order to implement this technique of composition, like dependency inversion containers and whatnot.
+We'll hold those discussions when we get to them. But this should conclude our understanding of composition for now. Just know that it's about creating dynamic
+behavior and that we need to link things together almost like a Russian doll. And that's what our software is. It's this complex network of pieces and parts. So
+with that being said, I'll leave the video right here. See you in the next one. And as always, Tood Mastery.

@@ -1,0 +1,28 @@
+Should we find subdomains first or can we go straight to bounded contexts? It can. Yep. That's totally fine. If you're pretty good at this, you know what you're
+doing. Jump straight to it. In fact, most of the time I do jump straight to it because I'm pretty good at this because I've done it several times. It's very
+hard to actually, before actually I even say anything, what is a bounded context? I might've said this a little bit earlier, but I just want to make sure it's
+very clear. The difference between subdomains and bounded contexts, what we're going to do in the next point here is we're going to take these subdomains. We're
+going to look at them and we're going to try to combine the ones that can get combined. So it's where you're going to act like you're Aristotle a little bit.
+And you say, ah, this is actually part of this topic. Ah, this is actually this. Ah, this is actually that. You're going to create the major domains where the
+language that you're going to use within that domain, whatever the ones you combine together is going to be the same language. So in terms of book feedback and
+emoji management, am I going to be using the same language within these two? Yeah. Yeah. So if I'm going to use the same language between like within book
+feedback and emoji management, then I would probably just call them feedback. So Bashman, is this algorithm applicable to a whole project? Seems like it can be
+used at a smaller scale, something like faster. So what we're doing here is the, there's two major overarching principles of what makes software just really
+hard to get right. And it's coupling and cohesion. If you're not familiar with those two topics, coupling and cohesion, definitely open up a tab and become
+aware of them. But this is just coupling and cohesion at the problem level. We're doing coupling and cohesion everywhere. We're doing, I just call this
+together, like the essential I put coupling and cohesion under, which is finally an active cohesion. I just put coupling, cohesion, responsibility driven
+design. We're doing here category theory. I just call all of this abstraction design. It's what belongs together. What doesn't belong together? Yeah. A quick
+little side tangent on that to just less than a minute, not even a minute is if I had something called job scheduler and I had like burger creator, right? And I
+had something called, I don't know, lettuce. Which category do you think lettuce should go to? Is it going to go to job scheduler or is it going to go to burger
+creator? Which one of these do you think it's more cohesive to belong to? I'm sure everyone's got this. You guys got this. Woo. Yeah. You got it. Here we go. So
+cohesion, it's more cohesive over here. Now, when you're designing this out, like you're designing your classes at the class level. If you have a class here
+called user, right? And it's like, all right, this is going good. This is going good. We got get email. That's sick. That's sick. That's sick. That's sick. We
+got change password. That's sick. That's sick. We got that. That's just okay. Cool. And we got get number of spinny hats worn in past week. What the hell is
+that? It makes no sense, right? It's like, obviously something here is breaking cohesion and it's going to be this part. Yes. It's pretty late for me here. So
+that's why I'm flying off this stuff. So that's cohesion, coupling and cohesion. Coupling actually haven't talked about yet. Coupling is just going to be, this
+is cohesion, but coupling is if this thing refers to something it's not related to. So obviously this behavior doesn't belong there, but if we had constructed
+this and this had a dependency on it and the dependency was spinny at counter and that was getting injected. Should this thing really be aware of, it's just
+really about a relatedness and it's about tightness to what it relates to. Maybe this is like how to describe something else. This is a bit more of a nuanced
+topic. So maybe I need to just, I would say the cohesion example is really great, but maybe I need to stop talking about spinning hats in order to, to
+demonstrate coupling a little bit better. It's not the best coupling example. We will probably come back to that later on if we need to. Anyways, back to the
+task at hand, right? Okay, great. I just want to make sure we're going to. Cool. Ballet.

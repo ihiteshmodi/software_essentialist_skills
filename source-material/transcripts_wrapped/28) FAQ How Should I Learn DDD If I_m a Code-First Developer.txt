@@ -1,0 +1,58 @@
+You're saying you're going through the course here at Master Foundations. I went through some of the welcome fast track stuff. Yep. Awesome. A little bit messy,
+but getting tuned up. And for someone who is coming from this mental model of being a code first developer, what is a good entry point to DDD? As in when trying
+to implement a DDD architecture for an API or front end apps, what's the first thing you do? Something tells me I need more context and our repetition behind
+implementing this in order to make it stick. Yeah, you definitely do, which is why we need to go up the phases of craftship. So if you're just joining in here,
+the way that we first attacked this was I was teaching everyone the guess points, which is a tool that's only really available to you when you're at what I call
+the value first or the responsibility first phase of craftship. So what this is, it's a way for you to fully holistically understand how to approach solving
+problems from a theoretical space and from like the physical space. So with respect to domain driven design, there's a ton of different practices you could use.
+Like there's impact mapping, which is going to show us what it is we need to build. That's also from BDD. There's tools like event storming. There's process
+modeling. There's just a number of different tools you could use in order to make sense of how to even begin to learn the domain and then see how you're going
+to begin to structure your architecture. And the way that we consolidate all these different techniques and tools that we could possibly use is the idea of just
+systems thinking. If we can understand that we need to theoretically, first of all, understand what we want to build. We need to know the problem. We need to
+know the solution we're intending to create. We need to know the architecture and then we could drop into how we plan to deploy it. And then we could drop into
+what the system, you know, looks like, and then we could go into the system. And we could go all the way deep to the level of just like functions. That's the
+process of functional decomposition. However, it's very hard for you as someone who's in a code first mindset for you to even begin to think that way. It's just
+not going to really compute. So the way to do this, the way to get into and to make sense of DDD is to go up these phases of craft. Instead, it's to do the work
+at the code first phase and to just solve, to build an API like this first. And then it's go to go over to best practices and you're going to implement a couple
+of different things. Like you're going to compose together your, your concepts. You're going to start with an acceptance test. First of all, so we get these
+tiny little hints in bits and pieces of what DDD is and what DDD is about by doing some of those best practices. But because there's this concept of chunking,
+the human mind can only take in so much at a time. And for you to really actually learn and understand something, you need to have experiences with it. And
+every single time you do your assignments, which is why I also recommend we want to do some of these assignments over and over. Every single time you do an
+assignment, you're taking new approaches. You're taking these new ways of solving this problem and you're gaining more awareness on the various levels of
+abstraction, the responsibilities that you actually need to handle. So with respect to domain driven design, DDD is something that when you get to the pattern
+first base, you're going to, I'm going to introduce you to a lot of the patterns that we use in domain driven design in order to carve out an architecture that
+is going to allow you to do what really matters, which is to build a domain layer. So you don't really want to focus on that until you know how to write tests
+and you know how to begin to do some of the best practices in general first, because what has happened to me in the past was I learned DDD before I even knew
+how to write tests. And pretty much the whole mental model of software is everything we're doing is a guess. So why even bother carving out architectural
+layers? What's the whole point of having a domain layer? What's the point of having an application layer? What's the point of having these patterns that kind of
+slot into there nicely? The whole point is it gives you different opportunities for how you should write your tests. It's giving you different places at which
+you can write tests that are going to have different impacts that are going to cover different things. For example, at the application layer, you're going to
+get the experience of testing the core functionality of your app without needing to actually start up react on the front end and without having to start a
+database and without having to start a web server on the backend. This is incredibly valuable and we're going to get to this soon. We've got best practices. We
+have the E2E on the backend, E2E on the front end. We're going to deploy. Considering not doing the deployment pipeline as deeply just yet here, but then we
+also need to learn how to refactor to a monorepo so that we can begin to share some of these domain-driven design concepts. It's not even a domain-driven design
+concept. These are just basic patterns that work like domain data transfer objects. And you could also share value objects between the front end and the
+backend. So we're taking a little bit of a holistic approach here to moving towards these rather than just chuck yourself into it and just start using patterns
+and then get stuck on the patterns because you don't even really know why you're using the patterns. So it's a very good question. It's not a vague question at
+all. I really understand this question because I've been here. Once you learn these patterns and you're at the pattern first phase, there is a approach that
+we're going to use to just drive software always. And this is called the ideal developer workflow. So the way the ideal developer workflow works is this is
+going to be a lot more rich when we get towards the other phases, like the responsibility first and the value first ones, particularly value first. But the
+ideal developer workflow, roughly speaking, involves, first of all, getting clear on the problem, then deciding and knowing and having a shared understanding of
+what the patterns you're going to use to solve that problem are. So for example, on the front end, very few developers know how to use presenters, view models,
+and to decouple from react or decouple from Svelte or decouple from angular. Very few developers know how to use those things. However, if you want to create a
+testable front end, you need to know some of these patterns. Problem. Architecture and patterns. We need to have a testing strategy laid out. And then from
+there, we can take a feature end to end test it. And then that gives us proof that it will work. And then from there we write all, we work what's called high
+value unit tests. And those high value tests are going to give us, let's say, 80% confidence. And it's going to be 80% of the work you're going to be doing.
+That's going to be like, let's say, for every one end to end test you have, you might have 10 high value unit tests that are going to give you an extremely high
+level of confidence in your code. And they're going to be fast tests to write. They're going to execute fast. But with respect to domain driven design, you're
+going to be, you need to know DDD patterns in order to do this process. In summary, don't try to just jump into DDD just yet. We're going to get to it. We're
+going to get to it in pattern first, but first we need to go through best practice first. And then once you understand the patterns, you know, what value
+objects are, you know, what entities are back end, you know, use cases are on the back end. And on the front end, you know what presenters are, you know, what
+domain models are on the front end and you know what, how to use controllers and some of these other tools on the front end. Once you know all of that, then
+we're in an incredibly good shape to use the patterns, but we still need to go a little bit further. And we'll get to these in the guest points. We still need
+to go a little bit further in order to work on understanding the theoretical part of the pop. We'll get to that a little bit later. So hopefully that was,
+hopefully I could shed some clarity there for you on this, but I've been here personally, myself, and I'm just excited for you to be here and to start going
+through this stuff. Cause it's like, yeah, this is going to shave off years and years of just trying to figure things out. Okay, cool. I'll leave it there for
+now, but awesome question. And I'm excited for you to be here and to have asked that question. Thanks. Thank you. Thanks. All right. Thank you. Many, many
+different ones just in the video meny OF meant two sama and one of them, for me, be careful of the ejemplo of how to use properathy and all sorts and the
+instructions. Then I'm happy to have asked that question. Thank you,golden baş.

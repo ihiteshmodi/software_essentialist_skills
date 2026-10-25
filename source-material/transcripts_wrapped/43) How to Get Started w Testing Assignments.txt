@@ -1,0 +1,12 @@
+So now what I would like to do here in this video is show you how to do an assignment. There are a few different ways we could do this, but what I'm seeing
+works really well is to actually create a new branch for each version of the assignment that you're going to do. The reason why this is a good idea is because
+it's going to allow you to do the assignment several times, and it's also going to create a really easy way for everybody else to be able to give feedback on
+your assignments because you're going to have a specific branch that you could just share the URL to, and we could all just look at and provide feedback for
+you. So I'll show you how to do that here now. I'm currently in an assignment right now, actually, and this is the first one. This is called FizzBuzz. This is
+perhaps the easiest assignment out of all of them, and what I'm going to do here is use a very simple naming pattern for the branching. We can say, get
+checkout-b, the name of the project we're currently doing, the date, and the last part here is going to be the iteration number. And this is just so that if you
+want to do this several times, you can do it over and continue to get feedback on your work. You can do it several times in the same day. So I've already done
+this once today on a different project. That's why it's reminding me here, but I'm going to go ahead and say one again. And now I've switched to a new branch
+called FizzBuzz, March 17, 1. And that's the current branch I'm in. So if I go here and I say clear, notice that it's even refreshed the branch that I'm in.
+That's good. That is very good. And this should be all we need to get set up for doing a new assignment. You just want to go ahead and create a new branch so
+that we can go and start TDDing, feedback looping, and writing the tests. Okay. See you in the next one.

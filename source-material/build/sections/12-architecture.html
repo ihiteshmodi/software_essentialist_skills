@@ -1,0 +1,490 @@
+<section id="architecture" class="doc-section" data-title="Architecture &amp; Code Structure">
+  <h2>Architecture &amp; Code Structure</h2>
+  <p class="lede">An architect makes the smart decisions at the start of a project. Most of those decisions come from knowing one <strong>stereotypical architecture</strong> (read/write paths, events, layers, the dependency rule) and from picking tools by <strong>responsibility</strong> and <strong>non-functional need</strong>. Code is structured <strong>feature-first</strong>: <code>modules/</code> for the customer, <code>shared/</code> for the developer, tests mirroring features. A <strong>modular monolith</strong> wired by an event bus is the default starting point. <a class="src" data-lesson="32">L32</a> <a class="src" data-lesson="92">L92</a> <a class="src" data-lesson="71">L71</a></p>
+  <p>Layer mechanics (dependency inversion, repositories, fakes, the clock contract) live in <a href="#essentials-physical--horizontal-decoupling">Horizontal Decoupling</a>. The composition root lives in <a href="#essentials-physical--composition">Composition</a>. This section covers the architecture-level view and code structure.</p>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="architecture--architect-role" data-title="What an Architect Does">
+    <h3>What an Architect Does &amp; the Stereotypical Architecture <a class="src" data-lesson="32">L32</a> <a class="src" data-lesson="88">L88</a></h3>
+
+    <div class="callout def"><strong>Architect</strong>
+      <p>“What is an architect really? It's about making the decisions at the start of a project that are going to be really smart to make.” The skill comes from <strong>experience plus education</strong>. Education means knowing the foundational styles and patterns, summarised as the stereotypical architecture, plus a working knowledge of platforms and tools. <a class="src" data-lesson="32">L32</a></p>
+    </div>
+
+    <h4>The laws of the stereotypical architecture</h4>
+    <p>The same architecture shows up on frontend, backend and desktop. Hexagonal, onion, ports &amp; adapters and even event-driven are all “one stereotypical architecture.” <a class="src" data-lesson="32">L32</a> <a class="src" data-lesson="88">L88</a></p>
+    <div class="cards">
+      <div class="card"><h4>1 · CQS: read path + write path</h4><p>“There has to be a read path and a write path.” Commands change the system; queries read it. <a class="src" data-lesson="32">L32</a> Khalil files CQS under vertical slicing. <a class="src" data-lesson="91">L91</a></p></div>
+      <div class="card"><h4>2 · Event-based</h4><p>“We could scale features horizontally because we could just temporally decouple features.” See <a href="#essentials-physical--temporal-decoupling">Temporal Decoupling</a>. <a class="src" data-lesson="32">L32</a></p></div>
+      <div class="card"><h4>3 · Layers of concerns</h4><p>Horizontal decoupling. Put responsibilities in the correct abstractions, assign those abstractions to layers, and let abstractions talk only to the appropriate ones. Layers: domain → application → adapter → infrastructure. <a class="src" data-lesson="32">L32</a> <a class="src" data-lesson="88">L88</a></p></div>
+      <div class="card"><h4>4 · Dependency rule</h4><p>“An abstraction inside of the application layer is not necessarily supposed to know about directly an infrastructure concern. That's called the dependency rule.” <a class="src" data-lesson="32">L32</a></p></div>
+    </div>
+    <p><strong>Domain layer concerns (4):</strong> data, rules, relationships between data, processes. The domain model is “anything tasked with representing your data, your rules, your processes and your relationships.” <a class="src" data-lesson="88">L88</a> <a class="src" data-lesson="84">L84</a> Khalil pictures it as “building this little world and just connecting to it using infrastructure.” <a class="src" data-lesson="88">L88</a></p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 920 400" role="img" aria-label="Stereotypical architecture: nested infrastructure, adapter, application and domain layers, a write path through a command use case and the domain, a read path through a query, and an event bus below connecting modules">
+        <defs>
+          <marker id="ac-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+          <marker id="ac-arrow-write" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker>
+          <marker id="ac-arrow-read" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent-2)"/></marker>
+        </defs>
+        <text x="460" y="18" text-anchor="middle" font-size="12" fill="var(--fg)">Dependency rule: dependencies point inward (infrastructure → adapter → application → domain)</text>
+        <rect x="10" y="30" width="900" height="300" rx="14" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="150" y="55" width="620" height="250" rx="12" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="270" y="80" width="380" height="200" rx="10" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <rect x="405" y="110" width="110" height="90" rx="8" fill="var(--svg-fill)" stroke="var(--accent)" stroke-width="2.5"/>
+        <text x="22" y="48" font-size="12" font-weight="700" fill="var(--fg)">Infrastructure</text>
+        <text x="162" y="72" font-size="12" font-weight="700" fill="var(--fg)">Adapter</text>
+        <text x="282" y="97" font-size="12" font-weight="700" fill="var(--fg)">Application</text>
+        <text x="460" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">Domain</text>
+        <text x="460" y="146" text-anchor="middle" font-size="11" fill="var(--fg)">Order</text>
+        <text x="460" y="162" text-anchor="middle" font-size="10" fill="var(--fg)">data · rules</text>
+        <text x="460" y="176" text-anchor="middle" font-size="10" fill="var(--fg)">relationships</text>
+        <text x="460" y="190" text-anchor="middle" font-size="10" fill="var(--fg)">processes</text>
+
+        <text x="20" y="122" font-size="11" font-weight="700" fill="var(--accent)">WRITE · command</text>
+        <rect x="20" y="130" width="120" height="40" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <text x="80" y="147" text-anchor="middle" font-size="11" fill="var(--fg)">Controller / UI</text>
+        <text x="80" y="162" text-anchor="middle" font-size="10" fill="var(--fg)">POST /orders</text>
+        <rect x="280" y="130" width="100" height="40" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <text x="330" y="147" text-anchor="middle" font-size="11" fill="var(--fg)">PlaceOrder</text>
+        <text x="330" y="162" text-anchor="middle" font-size="10" fill="var(--fg)">command use case</text>
+        <line x1="142" y1="150" x2="277" y2="150" stroke="var(--accent)" stroke-width="2" marker-end="url(#ac-arrow-write)"/>
+        <line x1="382" y1="150" x2="403" y2="150" stroke="var(--accent)" stroke-width="2" marker-end="url(#ac-arrow-write)"/>
+        <path d="M330,130 C360,84 610,84 657,140" fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#ac-arrow-write)"/>
+        <text x="585" y="120" text-anchor="middle" font-size="10" fill="var(--fg)">save(order)</text>
+        <rect x="660" y="130" width="100" height="40" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <text x="710" y="147" text-anchor="middle" font-size="11" fill="var(--fg)">OrdersRepo</text>
+        <text x="710" y="162" text-anchor="middle" font-size="10" fill="var(--fg)">port (role)</text>
+        <line x1="762" y1="150" x2="777" y2="150" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ac-arrow)"/>
+        <rect x="780" y="130" width="120" height="40" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="840" y="147" text-anchor="middle" font-size="11" fill="var(--fg)">Postgres</text>
+        <text x="840" y="162" text-anchor="middle" font-size="10" fill="var(--fg)">plays the role</text>
+
+        <text x="20" y="217" font-size="11" font-weight="700" fill="var(--accent-2)">READ · query</text>
+        <rect x="20" y="225" width="120" height="40" rx="6" fill="var(--svg-fill)" stroke="var(--accent-2)"/>
+        <text x="80" y="242" text-anchor="middle" font-size="11" fill="var(--fg)">Controller / UI</text>
+        <text x="80" y="257" text-anchor="middle" font-size="10" fill="var(--fg)">GET /orders/:id</text>
+        <rect x="280" y="225" width="100" height="40" rx="6" fill="var(--svg-fill)" stroke="var(--accent-2)"/>
+        <text x="330" y="242" text-anchor="middle" font-size="11" fill="var(--fg)">GetOrder</text>
+        <text x="330" y="257" text-anchor="middle" font-size="10" fill="var(--fg)">query use case</text>
+        <line x1="142" y1="245" x2="277" y2="245" stroke="var(--accent-2)" stroke-width="2" marker-end="url(#ac-arrow-read)"/>
+        <line x1="382" y1="245" x2="657" y2="245" stroke="var(--accent-2)" stroke-width="2" marker-end="url(#ac-arrow-read)"/>
+        <text x="585" y="238" text-anchor="middle" font-size="10" fill="var(--fg)">read model</text>
+        <rect x="660" y="225" width="100" height="40" rx="6" fill="var(--svg-fill)" stroke="var(--accent-2)"/>
+        <text x="710" y="242" text-anchor="middle" font-size="11" fill="var(--fg)">OrderReads</text>
+        <text x="710" y="257" text-anchor="middle" font-size="10" fill="var(--fg)">port (role)</text>
+        <line x1="762" y1="245" x2="777" y2="245" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ac-arrow)"/>
+        <rect x="780" y="225" width="120" height="40" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="840" y="249" text-anchor="middle" font-size="11" fill="var(--fg)">DB / read model</text>
+
+        <line x1="460" y1="200" x2="460" y2="345" stroke="var(--svg-stroke)" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ac-arrow)"/>
+        <text x="468" y="296" font-size="10" fill="var(--fg)">OrderPlaced (domain event)</text>
+        <rect x="150" y="348" width="620" height="36" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="460" y="371" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">Event bus: modules publish and subscribe (in-process to start)</text>
+        <line x1="772" y1="366" x2="787" y2="366" stroke="var(--svg-stroke)" stroke-width="2" marker-end="url(#ac-arrow)"/>
+        <rect x="790" y="348" width="120" height="36" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="850" y="363" text-anchor="middle" font-size="10" fill="var(--fg)">another module’s</text>
+        <text x="850" y="377" text-anchor="middle" font-size="10" fill="var(--fg)">event handler</text>
+      </svg>
+      <figcaption><span class="badge copilot">Added by Copilot</span> The four laws in one picture: read and write paths (CQS), layers of concerns, the dependency rule <a class="src" data-lesson="32">L32</a>, domain concerns <a class="src" data-lesson="88">L88</a>, and an event bus between modules <a class="src" data-lesson="71">L71</a>. A request enters through an adapter, travels down to the database and back up. That round trip is the vertical slice <a class="src" data-lesson="71">L71</a>. The names, and drawing the read path so it skips the domain, are illustrative.</figcaption>
+    </figure>
+
+    <blockquote class="quote">“Once you're aware of the stereotypical architecture and the layers and the concerns within those layers, you can't unsee it.”<cite><a class="src" data-lesson="88">L88</a></cite></blockquote>
+    <p>Once you know it, you always know when a concern is missing and where to encapsulate it. <a class="src" data-lesson="88">L88</a> Many devs struggle to piece an architecture together because they don't know what the stereotypical concerns do or where they belong. Khalil's example: where does React Query go? <a class="src" data-lesson="93">L93</a></p>
+
+    <h4>Picking tools: it all comes down to responsibilities</h4>
+    <p>A large part of architecture is “choosing the best tool for the non-functional task that you need to accomplish.” You can only choose from tools you know, so keep learning platforms (static sites, SSG, serverless, Docker, Kubernetes, an event bus, MongoDB). For each one, learn both its functional and its non-functional reasons. <a class="src" data-lesson="32">L32</a></p>
+    <table class="tbl">
+      <thead><tr><th>Responsibility / NFR</th><th>Candidate tool or approach</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Very fast data retrieval</td><td>Key-value storage (alternatives: document, relational)</td><td><a class="src" data-lesson="32">L32</a></td></tr>
+        <tr><td>Caching, Pub/Sub, key-value</td><td>Redis. One component can play many roles.</td><td><a class="src" data-lesson="71">L71</a></td></tr>
+        <tr><td>Queuing and scheduling</td><td>Redis + BullMQ</td><td><a class="src" data-lesson="71">L71</a></td></tr>
+        <tr><td>SEO for user-generated content</td><td>Server-side rendering / pre-rendering</td><td><a class="src" data-lesson="92">L92</a></td></tr>
+        <tr><td>Security: never send protected pages to anonymous users</td><td>Server-side rendering</td><td><a class="src" data-lesson="92">L92</a></td></tr>
+        <tr><td>Real-time play for users worldwide</td><td>WebSockets question: “really hardcore systems design stuff”</td><td><a class="src" data-lesson="92">L92</a></td></tr>
+      </tbody>
+    </table>
+
+    <ol class="steps">
+      <li><strong>Theoretical before physical</strong> — problem → solution space (core / supporting / generic subdomains) → architecture (build vs buy, tools per subdomain) → physical guess points. “You never want to be making physical guesses unless you have your theoretical guesses sorted.” <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>List functional requirements and NFRs</strong> — the NFR (how the system does a slice) is “where the real complexity lies.” <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>Run the three-step RDD process</strong> — list responsibilities → assign them to roles → define collaborations. <a class="src" data-lesson="91">L91</a> <a class="src" data-lesson="71">L71</a></li>
+      <li><strong>Find tools that implement those roles</strong>, then validate with concrete examples. There's “no more room for <em>it depends</em>”: systems thinking tells you what it depends on. <a class="src" data-lesson="91">L91</a> <a class="src" data-lesson="92">L92</a></li>
+    </ol>
+    <p>Strategic design selects the platform, components, tools and external services before the <a href="#essentials-physical--walking-skeleton">walking skeleton</a> goes out. <a class="src" data-lesson="32">L32</a> See also <a href="#essentials-theoretical--strategic-design">Strategic Design</a>.</p>
+
+    <div class="callout tip"><strong>How to become a better architect (Khalil's path)</strong> <a class="src" data-lesson="32">L32</a>
+      <ol>
+        <li>Climb the phases of craftship and note the styles, patterns and tools you meet: 3/4-tier, hexagonal, event-based.</li>
+        <li>Learn the stereotypical architecture.</li>
+        <li>Learn object design (responsibility-first) to glue the pieces together.</li>
+        <li>Use guess points and systems thinking to decompose problems and route them into the right systems.</li>
+        <li>Try new tools on your own time (Docker, Kubernetes, an event bus, MongoDB). Learn what each is and why it helps non-functionally, then plug things together.</li>
+      </ol>
+    </div>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Code generation is cheap. Reworking a platform or storage choice is not. The architect's early, hard-to-reverse calls stay human. Responsibility-based selection (“which role does this tool play, for which NFR?”) is also a crisp way to review an AI-suggested stack.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="architecture--one-architecture" data-title="One Architecture, Many Names">
+    <h3>One Architecture, Many Names &amp; How It Evolves <a class="src" data-lesson="37">L37</a> <a class="src" data-lesson="91">L91</a> <a class="src" data-lesson="84">L84</a></h3>
+
+    <p>Layered, onion, clean, hexagonal, ports and adapters, “the Rick Morty,” “9000 different names.” “Layered is actually a little bit different but it's the same thing.” <a class="src" data-lesson="84">L84</a> <a class="src" data-lesson="37">L37</a> Horizontal decoupling alone pulls in hexagonal, onion, ports and adapters, stereotypical, core vs infra, levels of abstraction and separation of concerns. “It destroys the mind.” <a class="src" data-lesson="91">L91</a></p>
+
+    <div class="callout rule"><strong>Jargon → essentials</strong>
+      <p>Learn the 12 essentials first, then file every new term under one of them instead of chasing each term. Example: CQS is about read paths and write paths, so it goes under vertical slicing. The industry has many names for the same concept (“Dan Abramov just said it a little differently”). <a class="src" data-lesson="91">L91</a> See <a href="#essentials-metaphysical--jargon-map">Mapping Jargon onto the Essentials</a>.</p>
+      <p>Hexagonal architecture covers technical isolation from infrastructure. The course adds <strong>what drives development</strong>: BDD, DDD, impact mapping, value, pain and benefit. <a class="src" data-lesson="91">L91</a></p>
+    </div>
+
+    <h4>Evolution through the phases of craftship</h4>
+    <table class="tbl">
+      <thead><tr><th>Phase</th><th>Architecture</th><th>What triggers the change</th></tr></thead>
+      <tbody>
+        <tr><td>Code First</td><td>View → controller → DB (MVC, JSON out)</td><td>Just make it work. <a class="src" data-lesson="82">L82</a></td></tr>
+        <tr><td>Best Practice First</td><td>Slim controllers + service layer = <strong>3/4-tier</strong>. The first cut of a <strong>layered</strong> architecture.</td><td>Decouple from the database so you can integration test it. Fat controllers do “way too many things.” <a class="src" data-lesson="37">L37</a> <a class="src" data-lesson="82">L82</a> <a class="src" data-lesson="91">L91</a></td></tr>
+        <tr><td>Pattern First</td><td>Add an <strong>adapter layer</strong>; core decoupled from infrastructure = <strong>hexagonal / clean</strong></td><td>Writing high-value unit tests needs a pure application + domain core behind contracts. “Most of the work” happens here. <a class="src" data-lesson="37">L37</a> <a class="src" data-lesson="82">L82</a> <a class="src" data-lesson="91">L91</a></td></tr>
+        <tr><td>Responsibility First</td><td><strong>Event-based</strong> architecture on top; object design for custom abstractions</td><td>Chain features in time, and handle needs no pattern covers. <a class="src" data-lesson="37">L37</a> <a class="src" data-lesson="32">L32</a></td></tr>
+      </tbody>
+    </table>
+    <p>“That's when it becomes the hexagonal or the clean architecture is when there's a decoupling from core code to infrastructure code.” <a class="src" data-lesson="37">L37</a> Classify code as core or infrastructure by <em>what it touches</em>, not where it comes from. See <a href="#essentials-physical--horizontal-decoupling">Horizontal Decoupling</a>. <a class="src" data-lesson="84">L84</a></p>
+
+    <div class="callout def"><strong>Why layers exist at all: places to test</strong>
+      <p>“Everything we're doing is a guess.” Layers (domain, application…) are “giving you different places at which you can write tests that are going to have different impacts.” Application-layer tests exercise core functionality without starting React, a database or a web server, which is “incredibly valuable.” <a class="src" data-lesson="28">L28</a></p>
+      <p><strong>Ratio:</strong> roughly <strong>1 E2E test : ~10 high-value unit tests</strong>. The unit tests give ~80% of the confidence and take ~80% of the work. <a class="src" data-lesson="28">L28</a> See also ~10–12 application-level scenarios per acceptance test. <a class="src" data-lesson="82">L82</a></p>
+    </div>
+
+    <div class="callout anti"><strong>Anti-pattern: patterns without the why</strong>
+      <p>Khalil learned DDD before he knew how to write tests, and calls it a mistake. Don't “chuck yourself into it and just start using patterns and then get stuck on the patterns because you don't even really know why you're using the patterns.” <a class="src" data-lesson="28">L28</a></p>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="architecture--structuring" data-title="Structuring a Codebase">
+    <h3>Structuring a Codebase: Features First <a class="src" data-lesson="35">L35</a> <a class="src" data-lesson="29">L29</a> <a class="src" data-lesson="92">L92</a> <a class="src" data-lesson="93">L93</a></h3>
+
+    <p>Judge structure through the <a href="#essentials-metaphysical--prism">abstraction prism</a>, which Khalil calls “the key thing here.” Structure exists to serve the <strong>key developer use cases</strong>: discover features, work on them, test, extend and remove them. <a class="src" data-lesson="35">L35</a> Khalil <strong>revised</strong> his earlier pages/components advice. Organise by <strong>feature</strong>, the level where all three roles collaborate: “I think this is where stuff should begin becoming code… from this level of the feature.” <a class="src" data-lesson="92">L92</a></p>
+
+    <div class="cards">
+      <div class="card"><h4>North star 1 · Key developer use cases</h4><p>Discover, understand, test, add, change, execute and remove features. <a class="src" data-lesson="29">L29</a> <a class="src" data-lesson="35">L35</a></p></div>
+      <div class="card"><h4>North star 2 · Customers decide</h4><p>Drive code outside-in from the customer boundary, starting with E2E tests. Building a component library or tiny functions first is “fundamentally flawed.” <a class="src" data-lesson="92">L92</a></p></div>
+      <div class="card"><h4>North star 3 · Discoverability &amp; understanding</h4><p>Open the codebase and see “in a second or two” how to do the use case. This is the hardest part. <a class="src" data-lesson="92">L92</a></p></div>
+    </div>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before — package by infrastructure: features invisible, cohesion accidental</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Typical code-first backend</figcaption>
+          <pre><code class="language-text">backend/
+  src/
+    controllers/
+      usersController.ts
+      postsController.ts
+    services/
+      userService.ts
+      postService.ts        ← create post? vote? comment? all here
+    repositories/
+    models/
+    utils/
+      helpers.ts            ← base classes, HTTP client, date math…
+  tests/
+    fake/                   ← two folders for one concept
+    testing-utils/
+    users.test.ts
+    posts.test.ts           ← which features are covered?</code></pre>
+        </figure>
+        <p>“I hate packaged by infrastructure.” <a class="src" data-lesson="88">L88</a> Two folders for one concept (<code>fake</code> and <code>testing utils</code>) is a cohesion smell. Merge them. <a class="src" data-lesson="84">L84</a></p>
+      </div>
+      <div class="after"><div class="compare-label">After — modules for the customer, shared for the developer, tests mirror features</div>
+        <figure class="code">
+          <figcaption><span class="badge recon">Reconstructed from L92</span> Whiteboard tree (with L29’s mirrored <code>tests/</code>)</figcaption>
+          <pre><code class="language-text">src/
+  modules/                      ← for the customer (essential complexity)
+    users/                      ← feature/module (maybe "account-management")
+      registration/             ← use case / slice: controller, use case, input/output
+      login/
+      edit/
+      usersController.ts        ← serves all three (cohesion), or split per use case
+    forum/
+      posting/                  ← not a top-level posts/
+  shared/                       ← for the developer (accidental complexity)
+    core/                       ← UseCase base class, Entity, …
+tests/
+  modules/                      ← mirrors src: capability → feature
+    users/
+      registration/             ← acceptance tests for the feature
+    forum/
+      posting/</code></pre>
+        </figure>
+        <p>“Use cases define features, which define modules, which define sub-modules.” Khalil: “that's precisely it.” <a class="src" data-lesson="92">L92</a> <code>src/modules/&lt;capability&gt;/&lt;feature&gt;</code>, mirrored in <code>tests/</code> with acceptance tests per feature. <a class="src" data-lesson="29">L29</a></p>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card"><h4><code>modules/</code>: for the customer</h4><p>Essential complexity: code related to the problem itself. “It's almost like this modules folder is for the customer. And this folder is like for the developer.” <a class="src" data-lesson="92">L92</a></p></div>
+      <div class="card"><h4><code>shared/</code> (<code>shared/core/</code>): for the developer</h4><p>Accidental complexity and cross-cutting concerns, “what is required”: use-case and entity base classes, a RESTful API driver. <a class="src" data-lesson="92">L92</a> In FeedBook: core utilities plus shared domain descriptions. <a class="src" data-lesson="71">L71</a></p></div>
+      <div class="card"><h4>Two kinds of slice</h4><p>(1) The <strong>module</strong>: capability or bounded context, the thick cut. (2) The <strong>operation</strong>: an API call, a thin input→output cut. Features/workflows sit in between. Cohesion decides how thick to cut. <a class="src" data-lesson="93">L93</a></p></div>
+    </div>
+
+    <div class="callout rule"><strong>Rules</strong>
+      <ul>
+        <li>For every new abstraction ask: <strong>essential</strong> (<code>modules/</code>) or <strong>accidental</strong> (<code>shared/</code>)? <a class="src" data-lesson="92">L92</a></li>
+        <li>Keep siblings at the same level of cohesion. Test candidate names: is <code>posts/</code> a peer of <code>users/</code>, or is <code>forum/</code> the module and <em>posting</em> the feature? <a class="src" data-lesson="92">L92</a></li>
+        <li>“If you can't see your features from the folder structure alone, there's a good chance maintainability is under pressure.” <a class="src" data-lesson="93">L93</a></li>
+        <li><strong>Folders ≠ layers.</strong> Layers are theoretical and don't need to map to folders. <a class="src" data-lesson="84">L84</a> The folder tree follows features/modules/slices. The network of objects <em>inside</em> a module follows the stereotypical architecture. <a class="src" data-lesson="92">L92</a></li>
+        <li>Rely on <strong>knowledge in the world</strong>: <code>src/</code> and <code>tests/</code> need no explanation. Call out uncommon folders like <code>packages/</code> in the README. <a class="src" data-lesson="92">L92</a></li>
+      </ul>
+    </div>
+
+    <h4>The README test: 1–2 seconds to a developer use case</h4>
+    <ol class="steps">
+      <li><strong>README</strong> — has a table of contents such as “how to add a feature,” “how to test features,” and says “go to the tests.” <a class="src" data-lesson="92">L92</a> <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Tests by capability</strong> — the tests folder is broken down by capability. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>A feature file per feature</strong> — stories → acceptance criteria / scenarios with concrete examples. <a class="src" data-lesson="93">L93</a></li>
+      <li><strong>Then into code</strong> — the matching <code>src/modules/…</code> folder. <a class="src" data-lesson="93">L93</a></li>
+    </ol>
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> A README that passes the test (headings from L92’s suggestions)</figcaption>
+      <pre><code class="language-markdown"># DDD Forum
+
+## Where things are
+- `packages/` holds three workspaces: `frontend/`, `backend/`, `shared/`
+- Features live in `src/modules/&lt;capability&gt;/&lt;feature&gt;`; tests mirror them in `tests/`
+
+## How to add a feature
+1. Write the `.feature` file in `tests/modules/&lt;capability&gt;/`
+2. Make it fail, then add `src/modules/&lt;capability&gt;/&lt;feature&gt;/`
+
+## How to test features
+- `npm run test:unit` for the fast commit-phase suite
+- `npm run test:e2e` for acceptance tests against a production-like env</code></pre>
+    </figure>
+
+    <blockquote class="quote">“It's about language. And it's about cohesion and it's about design and it's not precise… It requires constant scrutiny and philosophizing.”<cite><a class="src" data-lesson="92">L92</a></cite></blockquote>
+    <p>This is covered in the Best Practice First phase. Drive structure decisions through the theoretical and the physical, not through anxiety. <a class="src" data-lesson="35">L35</a> <a class="src" data-lesson="91">L91</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="architecture--large-codebases" data-title="Understanding Large Codebases">
+    <h3>Understanding Large Codebases via Features <a class="src" data-lesson="29">L29</a> <a class="src" data-lesson="92">L92</a></h3>
+
+    <p>A developer's one main task is to keep delivering user and customer benefit, and “the work that you need to do is entirely on features.” So “if we were to maneuver into the code base, you are looking for features.” Hunting features is the <strong>80/20</strong> of understanding a codebase. <a class="src" data-lesson="29">L29</a></p>
+    <div class="callout def"><strong>Feature</strong>
+      <p>“Features are not just specific operations, API calls. Features are user stories or more general.” In the prism: who → why → what (capabilities) are theoretical; features are the “how.” Modules map to capabilities. <a class="src" data-lesson="29">L29</a></p>
+    </div>
+
+    <h4>Feature tracing: when there are no acceptance tests</h4>
+    <ol class="steps">
+      <li><strong>Find the common features</strong> — ask people, read tickets, ask which features are most used, use the frontend app. <a class="src" data-lesson="29">L29</a></li>
+      <li><strong>Trace each one into the code</strong> — “try to trace to find out how that feature is realized in the code base.” <a class="src" data-lesson="29">L29</a></li>
+      <li><strong>Infer the original mental model</strong> — the tracing shows how the original developers thought. <a class="src" data-lesson="29">L29</a></li>
+      <li><strong>Make features explicit</strong> — add a layer of tests that represent features specifically. <a class="src" data-lesson="29">L29</a> In a messy codebase, “stop the bleeding” first with E2E tests that wrap the whole thing (the tailor's pins), before any pattern-first refactor. <a class="src" data-lesson="92">L92</a></li>
+    </ol>
+
+    <div class="callout tip"><strong>Live demo: “add create post” to DDD Forum</strong> <a class="src" data-lesson="92">L92</a>
+      <p>Walking in as a newcomer: the README “is not helping.” Path taken: <code>packages/</code> → <code>backend/</code> → <code>tests/</code> (test-first) → <code>acceptance/</code> (“what is that?”) → <code>users/</code>. Should <code>posts/</code> go next to <code>users/</code>? Maybe <code>forum/</code> is the module and posting the feature. “It's philosophizing every, every step of the way through.” The process: walk every developer use case from the README and make each one clearer.</p>
+    </div>
+    <p>When interfaces make navigation painful: use feature folders, cohesive naming, and consistent layer rules so use cases predictably reference interfaces. See <a href="#essentials-physical--vertical-slicing">Vertical Slicing</a>. <a class="src" data-lesson="84">L84</a></p>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Folder structure is now a navigation aid for agents as well as humans. An agent dropped into a <code>modules/&lt;capability&gt;/&lt;feature&gt;</code> tree with a README “how to add a feature” reaches the right file in one or two hops, and the mirrored feature tests tell it when it's done. Asking an agent to “trace feature X from the UI to the DB” is a fast way to run step 2 above.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="architecture--code-placement" data-title="Code Placement Quiz">
+    <h3>Code Placement Quiz <a class="src" data-lesson="93">L93</a> <a class="src" data-lesson="92">L92</a></h3>
+    <p>Every line creates a new abstraction and needs a home. A student noted that DDD gives roughly 10–15 named buckets, and that once memorised, you know where code goes. Khalil: “That's fundamentally the task here.” <a class="src" data-lesson="93">L93</a> Each line gets two answers: <strong>which module or feature</strong> (folder, essential vs accidental) and <strong>which layer</strong> (concern). <a class="src" data-lesson="92">L92</a></p>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L93</span> The live quiz line: where does it belong?</figcaption>
+      <pre><code class="language-ts">await this.repo.save(post);</code></pre>
+    </figure>
+    <p>Student answer, confirmed: the <strong>application service / use case</strong> (application layer, high-level persistence logic), not a controller. <a class="src" data-lesson="93">L93</a></p>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> Extended quiz: place each line (answers below)</figcaption>
+      <pre><code class="language-ts">/* 1 */ const { email, username, password } = req.body;
+/* 2 */ if (await this.users.findByEmail(email)) return { type: 'AlreadyCreated' };
+/* 3 */ if (!EMAIL_PATTERN.test(value)) return Result.fail('InvalidEmail');
+/* 4 */ await prisma.user.create({ data: user.toPersistence() });
+/* 5 */ this.createdAt = new Date();
+/* 6 */ export abstract class UseCase&lt;In, Out&gt; { abstract execute(input: In): Promise&lt;Out&gt;; }
+/* 7 */ await notifyAdmins(job); // appended right after postJob()
+/* 8 */ const res = await fetch(`${apiUrl}/users`, { method: 'POST', body: JSON.stringify(dto) });</code></pre>
+    </figure>
+    <table class="tbl">
+      <thead><tr><th>#</th><th>Where it belongs</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Incoming adapter: controller (infrastructure) in the feature folder</td><td>Extracting and validating the request is exactly what incoming tests verify, before the app is called. <a class="src" data-lesson="92">L92</a></td></tr>
+        <tr><td>2</td><td>Application layer: the use case</td><td>“If the user already exists, return an error” is an application concern because it needs the repository. <a class="src" data-lesson="88">L88</a></td></tr>
+        <tr><td>3</td><td>Domain: an <code>Email</code> value object</td><td>Validation is a level-1 input→output question. Keep data and behavior together; don't stash it in a random function in another file. <a class="src" data-lesson="88">L88</a></td></tr>
+        <tr><td>4</td><td>Infrastructure: the concrete repository</td><td>An actor playing the <code>UserRepo</code> role. It touches the DB, so it's infrastructure. <a class="src" data-lesson="84">L84</a></td></tr>
+        <tr><td>5</td><td>Not in the domain: inject a <code>Clock</code></td><td><code>new Date()</code> touches the system clock, which is infrastructure. The domain must be pure. <a class="src" data-lesson="84">L84</a> <a class="src" data-lesson="88">L88</a></td></tr>
+        <tr><td>6</td><td><code>shared/core/</code></td><td>A use-case base class is accidental complexity, “for the developer.” <a class="src" data-lesson="92">L92</a></td></tr>
+        <tr><td>7</td><td>An event handler in the module that cares, triggered by <code>JobPosted</code></td><td>Appended awaited side effects are temporal coupling: if one fails, the rest never run. <a class="src" data-lesson="93">L93</a></td></tr>
+        <tr><td>8</td><td><code>shared/</code>, as an API driver</td><td>A RESTful API driver is accidental complexity. <a class="src" data-lesson="92">L92</a></td></tr>
+      </tbody>
+    </table>
+    <p>Tie-breaker for infrastructure vs core: “It's not about where it comes from, it's about what it touches.” <a class="src" data-lesson="84">L84</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="architecture--app-interface" data-title="Modules as Mini-Applications">
+    <h3>Modules as Mini-Applications: The Application Interface <a class="src" data-lesson="92">L92</a> <a class="src" data-lesson="88">L88</a></h3>
+    <p>A student suggested that each module could be its own application with well-defined interface points. Khalil connected this to the <strong>application interface pattern</strong>: express the whole app as one API that says “everything that your app can do.” The app implements it (pure), and delivery mechanisms such as a web server use it. <a class="src" data-lesson="92">L92</a> <a class="src" data-lesson="88">L88</a> It applies the composition essential: “one big object” composing all the use cases. <a class="src" data-lesson="88">L88</a></p>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L92</span> Whiteboard: the app as one API; REST and GraphQL adapters receive the app instance</figcaption>
+      <pre><code class="language-ts">interface UsersAPI {
+  register(input: RegisterInput): Promise&lt;RegisterResult&gt;;
+  create(input: CreateUserInput): Promise&lt;User&gt;;
+  edit(input: EditUserInput): Promise&lt;User&gt;;
+  getById(id: string): Promise&lt;User | null&gt;;
+}
+interface JobsAPI { /* job use cases */ }
+
+interface ApplicationAPI {
+  users: UsersAPI;
+  jobs: JobsAPI;
+}
+
+// Real app implements the interface; each use case connects to infrastructure.
+class App implements ApplicationAPI {
+  constructor(public users: UsersAPI, public jobs: JobsAPI) {}
+}
+
+const app: ApplicationAPI = compose();          // real use cases + infra
+// REST and GraphQL adapters get the same app injected
+new UsersController(app);                       // calls this.app.users.register(...)</code></pre>
+    </figure>
+
+    <ul>
+      <li><strong>Payoff for tests:</strong> incoming-adapter tests replace the app with a fake. They check only that endpoints call the correct use case with the correct parameters. <a class="src" data-lesson="88">L88</a> <a class="src" data-lesson="92">L92</a> Code in <a href="#testing--strategies">Value-First Test Strategies</a>.</li>
+      <li><strong>Payoff for design:</strong> without it, “you end up building your app within your framework” (a student's point, which Khalil endorsed). <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Is <code>jobs</code> a feature, a module or a bounded context?</strong> Student: “It's both a module and the feature.” Khalil: “It's tricky stuff.” <a class="src" data-lesson="92">L92</a></li>
+    </ul>
+    <p>Wiring the real app together happens in the <a href="#essentials-physical--composition">composition root</a>.</p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="architecture--monolith-vs-microservices" data-title="Modular Monolith vs Microservices">
+    <h3>Modular Monolith vs Microservices <a class="src" data-lesson="84">L84</a> <a class="src" data-lesson="71">L71</a></h3>
+
+    <p>A tech lead planned to rewrite an MVP as microservices with two backend devs. Khalil's framing: that is a <strong>theoretical architecture guess</strong> made before the problem is understood, and it “has exploded into more guesses for you to make”: observability and telemetry across deployable units, messaging infrastructure, deployment. <a class="src" data-lesson="84">L84</a></p>
+
+    <div class="cards">
+      <div class="card"><h4>Justify potential negative value</h4><p>Every architectural complication must be “solidly justified” against the negative value it can introduce. You may not even be aware of the guesses you're forcing on yourself. <a class="src" data-lesson="84">L84</a></p></div>
+      <div class="card"><h4>Fewer components → fewer guesses</h4><p>“The least amount of components you have to manage means the least amount of guesses you have to make.” That's why serverless is popular: you get to focus on the guesses you <em>want</em> to make. <a class="src" data-lesson="84">L84</a></p></div>
+      <div class="card"><h4>Extensibility from first principles</h4><p>Maintainability and extensibility come from vertical slicing plus horizontal decoupling, not from deployment topology. Reading: Vaughn Vernon's <em>Strategic Monoliths and Microservices</em>. <a class="src" data-lesson="84">L84</a></p></div>
+      <div class="card"><h4>Modular monolith ≠ single process</h4><p>“Modular monolith does not mean modular process. This is just how you organize your code.” Several modules live in one project, and at bootstrap you choose which ones share a process. “Usually a better place to start than microservices.” <a class="src" data-lesson="71">L71</a></p></div>
+    </div>
+
+    <figure class="diagram">
+      <pre class="mermaid">flowchart LR
+  subgraph REPO["One project: modular monolith"]
+    direction TB
+    subgraph PA["Process A, chosen at bootstrap"]
+      FB["feedbook module: core, build it"]
+      BW["billing module: thin service wrapper"]
+    end
+    subgraph PB["Process B, chosen at bootstrap"]
+      SE["sessions module: scheduling"]
+    end
+    SH["shared/: core utilities, domain descriptions"]
+  end
+  BUS(["Event bus: register and subscribe"])
+  EXT["External payments provider = the billing bounded context"]
+  FB -- "publishes events" --&gt; BUS
+  BUS -- "handlers" --&gt; SE
+  BUS -- "handlers" --&gt; BW
+  BW -- "minimum integration code" --&gt; EXT</pre>
+      <figcaption><span class="badge copilot">Added by Copilot</span> FeedBook-style layout <a class="src" data-lesson="71">L71</a>: code organisation (modules in one repo) is separate from process topology (chosen at bootstrap). An event bus is the component that lets modules talk <a class="src" data-lesson="71">L71</a>. A bought capability becomes “pretty much that bounded context” behind a thin service <a class="src" data-lesson="84">L84</a>. The process grouping shown is illustrative.</figcaption>
+    </figure>
+
+    <h4>How to organise it</h4>
+    <ul>
+      <li><strong>Subdomain classification drives folders:</strong> core = build it; generic = import a library; supporting = build it anyway, reluctantly. By the architecture step “we've done the majority of the hard work.” <a class="src" data-lesson="71">L71</a> Details in <a href="#ddd-feedbook--architecture">the FeedBook architecture guess point</a>.</li>
+      <li><strong>External services are collaborators:</strong> wrap the minimum integration code (Stripe, PayPal, mail) in a <em>service</em>. <a class="src" data-lesson="84">L84</a> Don't build generic subdomains such as auth or your own SMTP server. <a class="src" data-lesson="88">L88</a></li>
+      <li><strong>Event bus as the backbone:</strong> everyone registers and subscribes to events. Deploying everything in one process is the easiest start. Students proposed SOA without a bus, or WebSockets; the course goes event-driven. “At the end of the day, we just need coordinators.” <a class="src" data-lesson="71">L71</a></li>
+      <li><strong>Microservices in the course:</strong> not covered in depth. The course covers the foundations: temporal decoupling, vertical slicing, horizontal decoupling, deployment. <a class="src" data-lesson="84">L84</a></li>
+    </ul>
+
+    <div class="callout anti"><strong>Anti-pattern: the <code>makePurchase</code> transaction script</strong> <a class="src" data-lesson="88">L88</a>
+      <p>Get cart items → check inventory → bill the card → update inventory → send email, all in one call. A crash between billing and the inventory update leaves an invalid state. Khalil did this on the solidbook site and suffered, with serverless cold starts cutting requests. Instead, model subdomains (e-commerce, orders, billing, emails, inventory), each its own state machine, talking via events.</p>
+    </div>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>An agent can scaffold ten microservices in an afternoon, but the operational guesses (observability, messaging, deploys, partial failure) don't shrink with it. Default to a modular monolith with explicit module boundaries and event contracts. Split processes only when an NFR justifies the extra guesses.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="architecture--monorepo" data-title="Monorepo: Frontend, Backend, Shared">
+    <h3>Monorepo: Frontend, Backend, Shared <a class="src" data-lesson="35">L35</a> <a class="src" data-lesson="82">L82</a> <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="28">L28</a></h3>
+    <p>In Best Practice First the project is a <strong>monolith inside a monorepo</strong>: frontend and backend in one project, sharing code. <a class="src" data-lesson="35">L35</a> The layout is <code>frontend/</code>, <code>backend/</code>, <code>shared/</code>. <code>shared/</code> holds the acceptance tests (a shared executable spec) and later the shared models and DTOs, which are covered in Pattern First. <a class="src" data-lesson="82">L82</a> Kirill's exploration kept it minimal: a shared package via <strong>NPM workspaces</strong> for DTOs and even domain objects. <a class="src" data-lesson="81">L81</a> Refactoring to a monorepo lets you share DTOs and value objects between frontend and backend. <a class="src" data-lesson="28">L28</a></p>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> Monorepo tree following L81/L82/L92 (DDD Forum-style <code>packages/</code>)</figcaption>
+      <pre><code class="language-text">ddd-forum/
+  package.json                    ← { "private": true, "workspaces": ["packages/*"] }
+  README.md                       ← explains packages/ (not "knowledge in the world")
+  packages/
+    frontend/
+      src/modules/users/registration/   ← presenter, controller, UserRepo
+      src/shared/                        ← e.g. hand-written observer store
+      tests/
+    backend/
+      src/modules/users/registration/   ← controller, use case, input/output
+      src/shared/core/                   ← UseCase, Entity base classes
+      tests/
+    shared/
+      src/dtos/                          ← CreateUserDTO, UserDTO
+      src/domain/                        ← value objects both sides need (later)
+      tests/acceptance/registration.feature   ← one spec, runnable on either side</code></pre>
+    </figure>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> One DTO definition, imported by both sides through the workspace package</figcaption>
+      <pre><code class="language-ts">// packages/shared/src/dtos/users.ts
+export type CreateUserDTO = { email: string; username: string; password: string };
+export type UserDTO = { id: string; email: string; username: string };
+
+// packages/backend/src/modules/users/registration/registrationController.ts
+import type { CreateUserDTO, UserDTO } from '@ddd-forum/shared';
+
+// packages/frontend/src/modules/users/registration/usersRepo.ts
+import type { CreateUserDTO, UserDTO } from '@ddd-forum/shared';
+// builds the DTO from the form, POSTs it, caches the returned UserDTO</code></pre>
+    </figure>
+
+    <ul>
+      <li><strong>Each side gets its own MVC.</strong> Extract service/application/domain layers on both sides, and use controllers and presenters on non-trivial frontends. What gets shared is the acceptance tests, and later models and DTOs. <a class="src" data-lesson="82">L82</a></li>
+      <li>In DDD Forum's frontend, <code>UserRepo</code> does the work, “synonymous to a use case” on the backend: it takes the registration form, creates a DTO, sends it, and caches the result. <a class="src" data-lesson="81">L81</a></li>
+      <li>Hosting setups vary (Next.js/SSR, a backend-served frontend, Netlify + Heroku). That decision belongs to the architecture guess point. <a class="src" data-lesson="82">L82</a> Monolith vs monorepo is part of the <a href="#essentials-physical--walking-skeleton">walking skeleton</a>. <a class="src" data-lesson="93">L93</a> Frontend specifics: <a href="#frontend">Frontend Architecture</a>.</li>
+    </ul>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="architecture--better-at-backend" data-title="Getting Better at Backend">
+    <h3>Getting Better at Backend <a class="src" data-lesson="39">L39</a></h3>
+    <p>“The way to get better at backend is to have a problem in your life or have some area where you want to get back time.” Build backend code there, and “make a commitment to actually seeing that through and seeing it actually now give you back time.” Making it public “is going to propel you.” The course <strong>final project</strong> (solo or with a community member) is the intended place to do this. <a class="src" data-lesson="39">L39</a></p>
+
+    <table class="tbl">
+      <thead><tr><th>Phase</th><th>Backend work</th></tr></thead>
+      <tbody>
+        <tr><td>Code First</td><td>Just build it. ChatGPT can produce it, “but we need to take it a little bit further.” <a class="src" data-lesson="39">L39</a></td></tr>
+        <tr><td>Best Practice First</td><td>Acceptance-test the backend, use a production-like environment with Docker, use a lot of patterns. <a class="src" data-lesson="39">L39</a></td></tr>
+        <tr><td>Responsibility First</td><td>Think in responsibilities, roles and collaborations; design, then code “guided by objects.” <a class="src" data-lesson="39">L39</a></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout rule"><strong>Rules</strong>
+      <ul>
+        <li>Pick projects with the question “What areas do I seem to spend a lot of time that I don't want to spend in my time in?” <a class="src" data-lesson="39">L39</a></li>
+        <li>Measure success by whether the project actually gives you time back. <a class="src" data-lesson="39">L39</a></li>
+        <li>Expect a fair amount of theoretical work up front. Use the abstraction prism to know what to do when. <a class="src" data-lesson="39">L39</a></li>
+        <li>Don't stop at looking up how to build something with ChatGPT. Code First alone isn't enough. <a class="src" data-lesson="39">L39</a></li>
+      </ul>
+    </div>
+    <p>Career-level learning paths and books: <a href="#career">Learning Path, Books &amp; Career</a>.</p>
+  </article>
+</section>

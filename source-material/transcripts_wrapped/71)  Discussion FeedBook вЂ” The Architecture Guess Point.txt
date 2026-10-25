@@ -1,0 +1,69 @@
+Last step in the theoretical here is the architecture step. Just let me check the quotes in here comments. Yeah. I got the strength for this feeling like Goku
+right now. Let's see what we got. I'm going to kick this off by asking the key questions to myself. So external systems, components, modules, and deployable
+units. So things for us to talk about here. Are deployable units, which is going to be either modular models, microservices. We need to talk about bounded
+contexts. We've got that. Stereo services. Boom. Let's see what else. The components, which is interesting. How many of you use or have used Redis for something
+in the past? Two years. And what did you use it for? Caching, PubSub. This is coming up in the outgoing adapter guess point. But key value storage. It's just
+amazing. The different roles that can play. Right. Redis can do a lot of things. Like Redis could actually combine Redis with just somebody who's done the
+scheduling work. Like I think there's something called bull JS. Bull H M Q or something like that. That's one name. Oh, it's a queuing system. I think it has
+scheduling too. All of these tools were great. So we got that. How do we organize our code? And then non-functional. This is a good one too. The most important
+thing here is once we get to this architect step, we've done the majority of the hard work. We know the modules that are going to need to find their way into
+our code base. If you're not clear on the stereotypical architecture and how that works, that's something we need to gain some clarity on. Also just talking
+about the way that these modules interact with each other. There's a couple of different ways we could do this. So let's think about it one way. Let's talk
+about the modular monolith first. So ideally what we're going to do here. Once we have our bounded contexts, we know what all of these things are. We know which
+ones of these are going to be things that we have to build ourselves. We know which of these are going to be generic things. We'll just go in and import
+libraries for. And we know which ones of these are supporting that we have to build anyways. We don't really want to. So that is clear. And that's going to tell
+us how we organize our code. As you've seen here, good folder structures, modules, and then you'll have probably a shared folder. Inside the shared folder, you
+might have some like core utilities. You might have some stuff that describes domain, XYZ, right? So this would be the modular monolith. However, it is not
+necessarily mean that everything is going to be running on one process. That's an important distinction. So modular monolith does not mean modular process. This
+is just how you organize your code. But what very well might end up happening here is I'm going to just draw out the stereotypical architecture. So we have
+domain. We're going to have the app. I'm going to have some infra. Right? Actually, I'm just going to draw a domain and app. Actually, I can drive for two.
+There's different ways of realizing this. And what's going to happen here is if you just have one process, like just one domain, how is this going to work? What
+usually works is a request comes in and it's going to hit the domain layer. And then it's going to hit the database. And then it's going to actually go all the
+way down here and then just come back back up. And that's like the vertical slice. Bing bong. Let's pop it up the best drawing. Infra. We also have an adapter
+layer in there. I'm bothering to draw that. So let's say that what you've got here is one of these. Let's say this is feedback. Feedbook and you've used this
+folder structure here where maybe you have feedbook in here as well. It's a few different ways we could do this, but it's a modular monolith. You're going to
+have all of your modules. Actually do that poorly. You have several modules in one project, right? So one thing that you commit and you work on, you can have
+that. Just usually a better place to start than microservices. However, when you actually go to bootstrap your app to actually kick it off. So I don't know what
+was the other one that we had here. Session scheduling. You're going to also have some of these, which are external like milling. What's going to end up
+happening is you can actually run some of these in separate processes. And you could run some of these just all together in one process. So if billing is
+external and this is going to be, say that's core. And maybe I'll run actually sessions doesn't sound like something I want to run together with these. I'll
+probably want to run the separate entirely. And that maybe I want to run these two separately. Right? So I could do that. However, I can organize it all to
+start. In one project like that. However, there is another component of the architecture, which is required, which is what's going to allow all of these things
+to talk to each other. That's going to be some sort of event bus. Now, if you're going to actually deploy all of these in one, that's probably the easiest thing
+for us to start with. If we are really, truly getting started. Yeah, I think I need to actually demonstrate this bit here. This is the type of thing which is
+like just very theoretical, but you actually need to see it in practice. There will need to be a bit down here. It's going to be the event bus. It's where
+everybody can register their events to and subscribe to. And yeah. Bing. On. Bam. So yeah, there's lots of different ways we could do this here. Like it's such,
+it actually is a massive topic. So I'm thinking maybe like for this, I probably need to design this out differently. We're actually present a few different ways
+that we could deploy what it is that we're piecing together. So yeah, I'm probably going to want to redo this one here, but I'm curious, like, how are you doing
+your, is anyone doing this right now where they're deploying a modular monolith. And they have their services organized. Interesting service oriented
+architecture. Without an event bus. How do they integrate with each other? Oh no. Okay. Fair enough. That's one way to do it. Yeah. We're going to go the event
+driven route. So we're not going to be doing that. Web sockets. Yeah. The end of the day, we just need coordinators. However it is, we design that into our
+architecture. Okay. Okay. I think I'm going to leave this here. Other things I wanted to talk about was the non-functional requirements. How does this work?
+Yeah. I think I just need to piece this out for you in a different way. With respect to non-functional requirements though, something that's cool about this is.
+We can apply the same. I haven't even talked about this yet. The three-step responsibility driven design process. We can use that three-step process to find the
+correct architectural components as well. That can actually serve our needs. But yeah, it's a bigger topic. So I think where we are right now, I think this is
+good enough for what we need in order to move to the physical. So when we move to the physical, we have literally all of this stuff. We know how to organize our
+code. We should have an awareness of the stereotypical architecture. We know that we're going to be doing vertical slices. And really at this point, the way
+that we can kick off our project, you would ideally want to do the ideal developer workflow, which means that you do a, you get your deployment pipeline
+working. Okay. Then you do your end-to-end test. Make sure that end-to-end test works in a prod like environment. And then you can jump in and do your level
+three tests. And that's where all the fun stuff starts. However, what we're going to do is because we're still learning the physical, we're actually going to
+jump to level, level two, which is a stateful guess point. However, I don't think we're going to do it tonight because I do feel my brain shutting off. Yeah,
+that was close. You thought I was going to go into it. We did cover a lot. It is almost 4am in the morning. This is awesome though. I'm so hungry. I'm so mad
+for her. I'm going to do this one again tomorrow. Yeah, it's time to sleep. Let's do the, yeah, I'm going to schedule that in. I'm going to probably post these,
+schedule that in. We'll do the, tomorrow we need to do state machines again on the, the, I'm going to do it on feedback, some feedback cycles. And we'll learn
+value objects, entities, domain objects, domain events. We'll use result, we'll use guard. Pretty much just encapsulate the hell out of the object correctly.
+And then there's something I wanted to get to as well. Corel, we had a really good discussion about pure functions, functional programming, XYZ. And then
+there's something that we're going to do with. I think students should be able to implement their domain models using either the functional approach or the
+object oriented approach. Either one should be fine, but the topic of encapsulation, the way that we actually implement encapsulation, I'm going to have to do
+separate videos on that. Because like, how would you implement encapsulation in, like, if we were to take a functional approach, I'm just curious, like, how
+would you do that? I have a technique, but I'm curious what you might do. Nice. And that's it. Yeah. It's the concept of either with functional programming, we
+do encapsulation by co-location and yeah, just having the data and the function close to each other. Because yeah, that's encapsulation is just having data and
+the related behavior together and having the data be protected. And then, yeah, with object oriented programming, it's just all those various things like making
+the constructor private using the static method, making the, changing the scope of getters and setters. Yeah, it's great. It's interesting. You have to, the
+technique is encapsulation, but it's the way you implement it is a little bit different. So we'll do all that tomorrow. And this is going to make for some
+really great videos to cut and put in the platform. Yeah. I got a lot of work to do, but this was great. So I just want to thank everyone who's here on such
+short, such short notice. I literally said like an hour and a half from now, I'm going to do a Q and A. A manian. And we got a lot done. So this is awesome.
+Straight in the platform. I'm going to try to do more of this. Just teach to get the content in as fast as possible. And then we'll come back and clean it all
+up with more refined videos and more refined demos and everything. So yeah, I really appreciate this y'all. This is awesome. Oh yeah. Let me drop the, I'll drop
+this several figmatics we have in here. Great stuff. I have a 20 gigabyte file to compress down now. So I'm going to set that to go before I head off to bed.
+All right, y'all. Talk to you soon, tomorrow. Have a great night, day at work and all of that. See you soon.

@@ -1,0 +1,392 @@
+All right, very good. Let's talk about where we're at with everything here. Over the last couple of weeks, we've got a lot of feedback. In the middle of editing
+the front-end videos, we got towards almost at the end of it, and I realized that it actually would have been a lot better if we introduced how to write E2E
+tests against existing features. It seems like the thing is, everyone has a project that they're currently on, and the assignments right now, like the
+assignments for back-end and front-end, these are quite evolved. And not everyone really has time to go and do the assignments, because I've been noticing very
+few devs are actually going and doing the front-end and back-end assignments. What I would like to happen is I'd like you to be able to watch the front-end
+videos, the back-end videos on E2E testing, and I'd like you to just go and start applying this to your work tomorrow. And I want you to have to take this and
+then do the assignments here in the platform if you don't have time, because there are some folks who are in here, they have plenty of time, and they just want
+to go and do challenges. Some do not have that time at all. So I think what I'm going to do is I'm going to make some of this stuff optional. Particularly the
+assignments around, yeah, doing all the DDD forum stuff, like that we actually do building a project. But I do want to give you clear next action steps for you
+to go. And if you're not going to apply this with DDD forum, the back-end and front-end E2E tests, to actually carve out that infrastructure, to create those
+four layers of abstraction in order to make your E2E tests non-flaky. If you're not going to do that with DDD forum, I do want you to go and do that on a
+project, either on a new feature, or to perform what we call a characterization test. And what this is, it's just writing a test after the fact that we're going
+to do that to characterize what it is that our code is doing. So it just specifies, hey, yeah, like we have all this existing messy code and there's no tests
+for it, but we can actually test the entirety of the system like a black box. So if imagining that we had a whole app here and there's a feature in here that
+does stuff, feature in here, does stuff, all these little features in there that do things, we might not have the ability to actually go and rewrite these from
+scratch. And that's not the point. You don't want to go and rewrite these things from scratch. Instead, what we want to do is, can we just set up some test
+info, right? This is your protocol driver. So if this was the front end, this would be, you would use something like Cypress. That's terribly written. Or you
+would use something like Puppeteer. Whoops. I like Puppeteer. And back here, you'd also make sure you have your executable specification. So this would be your
+actual test code. And then back here, you would have your acceptance test. So this is in Gherkin. So this is given, when, then. And what we would do is, we have
+the system, which is an input output. If I do create user, or if I do add post, or I do any sort of interaction with the front end, it's going to interact with
+the back end. I want to make sure that I'm going to get the same result each time. What you would just do is, have your one, two, three layers. And then you
+write that last layer here. You're going to test. We'll feature. And if you know that this is good, and you could reliably do a feature here, end to end, this
+is good. And this is going to give us the ability to move in a layer, and start messing around with stuff. So everything within these boundaries, we can then
+begin to carve out actual patterns with. So that's when we begin into actually structuring things out a little bit properly. However, when you're at the job,
+you could do one of two things. You could either improve existing code, or add new features. So this is how we would go to improve. This is always the first
+step is, can we just make sure that we get the same inputs and outputs for whatever it is we're doing? That's the first step. And then we would move in and do
+more invasive testing, and more invasive restructuring, and refactoring to patterns. It's also called distillation. And this is something that Eric Evans talks
+about in his DDD book. We would distill some of the domain language and stuff into the code properly. So just using proper patterns. So you could do this as one
+thing, but then the other thing you could do is just screw that. We're just going to do a new feature properly. So you have one, two, three, and then you go and
+you just E2E test a new feature in your project. So realistically, these are the two things you should be able to do with the new assignments. So I'm just
+changing things a little bit up here to make sure that it's as useful as possible, as soon as possible, with the least amount of just you feeling like you have
+to do ceremonious assignments when maybe you actually have stuff that would be a lot more valuable for you to do, like actually implementing new features at
+work. And what's great about this is you could just hook this up. As long as you hook up this test infra, right, all this stuff over here, as long as you set up
+your test infrastructure, you could always just use this on a new feature or an existing feature. But it's something that could be done independently at any
+time. So you take that new feature, improve an existing feature. And those really are just the two things that we ultimately do. Those are the two main use
+cases as a developer, improving features or adding new features. Are there any questions on that so far with where I want us to go with the best practice first
+stuff or with the E2E testing in particular? Any comments? All right, cool. Now let me actually explain a little bit more about the structure of what's coming
+up because it has adjusted a little bit. Based on this, here's actually how I see this going. So in code first, where we last left off was everyone was just
+building out a simple feature on the backend. I want us to also connect to the frontend. Frontend to backend. So there's going to have to be a demo and
+assignment for that with whatever tools you want. Why am I doing this? Because one, we want to make sure we know how to build a feature from end to end. That's
+the whole point of information systems is to have a user be able to click something or interact with something on a screen. And then a backend does state
+management and hopefully gives back time or enriches time. That's the whole point of what we're doing here as developers in general. So we want to make sure
+that we can do that before we move into best practice first. And it doesn't matter how you do this. You could do it as messily as you want, whatever. You could
+use React context for your global state management or screen using that. You could use Redux or whatever. It's just about how you know you currently do things.
+I want to make sure that we hone in and get a reference on how you're currently doing things so that we can really viscerally see how to improve what it is
+you're currently doing. So then when we go into the next module, you'll notice that in the course of restructured things out a little bit here where it's now
+we're talking about testing. All right. So all of those testing modules that I initially had when I first launched the course, we're putting those here. We're
+going to just do the basic testing stuff. So this is like testing basics because, yeah, the next thing for us to do would be to do E2E tests. But we need to
+make sure that we do know how to write tests in general. So all that stuff about emergent design, getting started with tests, FizzBuzz, XYZ, those things are
+going to go here. But what we're going to do is we're going to, first of all, break down what's wrong with code first. And then ultimately, this is going to
+present to us the fact that we need to have automated tests. But you need to know how to write tests in general. So we're going to do the most basic form of
+testing. This is just going to be the FizzBuzz, like simple. And what was the palindrome? So really not a whole lot is changing here. I just have to change a
+little bit of the perception or the language around what I'm talking about. Because initially we were talking a lot about guess points and feedback loops and
+feedback loops, level 1, 2, 3, XYZ. I still think it's good for you to be aware of that stuff because we're going to spend a lot more time on it. But if you're
+just coming in, it might be a little bit overwhelming as it was for everyone else. When we first started doing this in the first pass through. We're going to do
+this basic form of testing. There's the guess points level 1 stuff. So I very well might present to you guys a little bit earlier on in the course. And from
+Code First, where you learn about the main ideas, which are abstraction, feedback. And then the guess points, distance thinking. And then some of the tools,
+faster. And the ideal development workflow. We're also going to have the mindset module. It's also going to be in there as well. Because there's some really
+important stuff around there. One other thing I want to make sure that we talk about today is abstraction and the feedback. Which are the two most important
+mental models of this entire course. And in terms of just you feeling confident in what you're doing. You need to understand these two mental models. And we're
+going to go into this in a lot of detail throughout the course. But also putting in modules towards the front. So, and we'll talk about that here. So this is a
+little bit of the structure that's coming next. So testing basics, guess points, level 1. I want you to, at the end of this, you need to know how to do what's
+called programming by wishful thinking. Which is really just you applying the art of abstraction. This is you specifying what, not how. This is just you saying,
+or another way to say this is telling, not asking. Right? It's you saying, another way to say it, because there's so many ways to say it, is declarative. Right?
+This will make more sense. We need to drill this in because this is the art of abstraction. Again, the number one skill for you guys as developers is this skill
+right here. And this is what's going to make you feel really confident as a developer. Just realizing it's all problem decomposition. So testing basics, right?
+We'll break that down and then we'll go into the best practices. And here is where we're going to do the E2E tests. So first of all, E2E testing on the backend.
+And in order to do this, if you've seen the best practice modules so far on E2E testing on the backend, you'll know that this involves some stuff like using
+Docker to encapsulate. Infra. There's some other stuff. And then there's E2E testing on the front end to create a walking skeleton. And then we deploy this
+walking skeleton. And I'm just going to pause here right now. Question for you guys. Do you guys know what a walking skeleton is? And do you know why we want to
+deploy it right away? Minimum automated use case. Very good. Yep. It's a test from a, let me see what else are you guys saying about that? There's some other
+ways you can explain it too. Danny says the least amount of framework to get it going. It's exactly the same thing as a tracer bullet. You got it. Yep. From
+what's up the pragmatic programmer, right? Yeah. It's exactly the same thing as a tracer bullet. Daniel says it's the most bare bones pipeline to get it from
+local dev to production, at least in a DevOps sense. Yeah. That's another different perception to look at it through, but it is exactly that. We want to get the
+most bare bones version of something that is valuable to somebody out shipped in front of them. Because again, our goal is to get working software in front of
+users. Let's make sure that we can at least get across the goal point, right? The worst thing is for you to spend a lot of time doing work on the front end or
+doing work on the back end in a silo. Or even what I'll teach you guys in pattern first is to take an approach where you're predominantly doing. This is where
+you're going to spend 80% of your time, by the way, is doing work that's in the application layer where it's all pure code. It's very fun code to write,
+actually, because you don't have to deal with databases or web servers. It just feels like you're writing pure logic. And you could cover a ton of edge cases,
+and it's really good to write that code. However, I've made this mistake where I used to start there, and I would write all of my code there. And then I would
+think about, okay, cool, now let's deploy this. And I try to deploy it, and I connect it to infrastructure, and everything's busted and broken. It's like the
+worst. And there's all these weird course errors. Yeah, just like Danny says here, we want to deploy as early as possible, right? If we think about the whole
+thing, yet again, it's as systems thinking, inputs, outputs, model, processes, environments. If we think about the entire system, I called this earlier on the
+value creation system, where we want to get all the way over here to the goal. We start here, and we have to go through all these steps, where right here might
+be deploy, right? And right here might be just even getting clear on what the problem is in general, right? So what that does is, and someone else has asked
+this question too, what this does is it makes things that are a little bit earlier on more theoretical, getting more clear on the problem to be solved, and then
+it makes everything a little bit later on more physical, which is actually us doing the code. It's actually us implementing the feature. And there's this middle
+point here, which is when we make this crossover from the theoretical to the physical, and this is the acceptance test. It's really incredible. But this really,
+truly is when we make that crossover from what to how is what's going on here. So we want to make sure that we can get across the goal point. We want to make
+sure that we can cross this line, and we can get over to here where users are happy, and users are using our software, so we all the way across. So that's the
+goal. That's what we're trying to do here. It's as a best practice. Let's make sure we could win. And deploying is one of the last steps here. And that's why
+I'm placing such an extreme amount of importance on everyone to make sure that they're writing acceptance tests. We will refine our understanding of what gets
+done here. By the way, it's not one, two, three, four, five. There's a lot of these different things we need to do. But these kind of little tiny mini systems
+I've drawn out here, these are what I call the guess points. Because these are what are going to answer, do we even understand what it is we're building? This
+guess point might be the problem one. Like, is this even something that's valuable? And then this one here might be the architecture. Okay. Will these tools
+even work? And it's just a level of descending from just super high level all the way down to the physical level of, okay, it's done. It's deployed. It's in
+production and it's working. And that's it. I don't think deploy is actually the last one. There's one other guess point I like to refer to. Yeah, it's going to
+be in between there, but I call it the execution guess point. And then that guess point, what we're doing is it's going to go somewhere right in there. Or
+actually, realistically, it's more over here because users are using the code. But the execution guess point is, are we getting the KPIs we want? Are users
+using the software in the ways that we want? Are we making the number of sales that we want? Whatever it is that we're trying to measure, is that actually
+happening? And what that does is it flows all the way full circle and it gives us more clarity on what we need to do next. So that's the ecosystem of what it is
+we're doing here. Does that make sense? Really, it's just all systems and systems thinking and it's one big feedback loop. Awesome stuff. Okay. That was a nice
+little tangent here, but let me just finish off what we're doing in best practices. Deploying the walking skeleton. Now, in the process of us doing this, we're
+just going to make it work pretty much, right? But we will make a substantial mess in having that happen. There's two things that are really important at this
+point. One is for us to make sure that when we deploy code, again, the goal is working software. So that means software that is void of bugs. It doesn't have
+bugs. What we want to make sure that we could do is have a minimal deployment pipeline. So this is going to mean that, let's see if I could draw this out here.
+This is something that could be extended on a whole lot. So it's a CICD. So the simplest CICD deployment pipeline we could make is we put code in and it deploys
+and then users are using it. Right? However, this code here could be bad. It could be busted. It could be broken. Right? So this phase here, what we generally
+call this is this is the commit phase. And this has to do a couple of things. So the first is you want to make sure that your code actually follows a style, a
+structure, because everyone might be merging their code into here. So you'll have a number of different devs. One, two, three, four, five. Everyone might merge
+their code. into a source control. And then a commit phase needs to kick off. And what that does is it's going to lint, it's going to build, and it's going to
+test, unit test. And then if that's good, and by the way, these unit tests, these need to give you about 80% confidence. Now, we don't actually have any unit
+tests just yet. We won't really have any just yet because all we will have been doing is acceptance tests. But these unit tests, they're going to need to give
+you 80% confidence so that you know that if these things run, the next phase that we get to here, like there's more in here, but if you get 80% confidence in
+your test, that means that these tests are going to be really freaking good. So how could you even possibly have that? This is why we need to have a testing
+strategy, and this is why we will decouple from infrastructure. So let's assume this is the backend. You're going to have your E2E test that covers everything.
+Let me try this again. I think I'll do it like this. Let's see. This is going to be your, so this is going to be your infrastructure layer. So that might be
+your web server, or this might be your database. This might be your web server. And what that's going to mean is that this code right here, this code right here
+has to be super pure, and this is what has to give you 80% confidence. How could that be the case? Because this code right here is going to be your application
+and domain. This is also called core code. This code right here is going to be just the heart of your app. And these tests that we're going to do here, they're
+going to test that stuff. So we're also going to need to have this. I see there's a question. These tests get run on the local devs, on the devs local machine,
+right? Or something like Husky or similar? That's an option. It is an option. There's no fully correct or non-correct way to do it. You could do it that way.
+However, it does introduce the possibility that devs could just turn that off and push code into the CI CD, and then it just goes and deploys busted code. So
+it's better for you to have this be something that runs with GitHub Actions, something that is a part of your deployment pipeline in general. So this whole
+concept, just saying here, this is a deployment pipeline. I usually do what runs fast, pre-commit, and what takes time on CI. Yeah, excellent. Excellent. I
+think that's good. I've been on projects where I used to run the E2E tests right before you push your code every pre-commit. And oh my God, that was so painful.
+It would take forever. And everyone would just turn it off. No one wanted to use it. What would have worked better is to have actually just put that into the
+CI. However, sometimes it's hard. If we're being honest, it is a little bit difficult to create something like this. So that could be a good start is to just
+make sure ahead of time, we're at least trying to run some tests in a pipeline at a bare minimum. But those tests might actually just not be able to get done in
+here. So the ideal, if I'm talking about, the ideal is this. So you're going to commit your code. And then what happens is GitHub Actions. He's going to run
+this phase here where it's going to lint, build, test your code. Awesome. And then after that's done, it should also package this up so that we could use this
+in the next phases. What are the next phases? Try that out. The next phases here is, traditionally, this is called the acceptance phase. So here's where you
+actually run your E2E tests. Now, how is that going to work? It means you have to deploy to a stage in the staging environment. And then after you deploy to the
+staging environment, then you run the tests. Okay, that's a lot of work. This is an entire other environment you need to create. And then afterwards, you have
+an option here, whether you want to do this manually or you want it to just automatically happen, but then you deploy to production. So this is like a basic
+ideal, but you could always add more steps in the middle here, more steps in the middle there. You could do checks. You could do performance testing. You could
+do all sorts of different things. But if I'm to just think about what it is we want to verify, like what is absolutely necessary? What do we really want here?
+First of all, in order to answer that, I'm going to just say, let's come back to the main mental models, which is one, abstraction, and two, the feedback loop.
+One, I'm going to say, just be aware, this is never ending. It will never be done. You can always add more and more layers of abstraction. Always. If today, all
+you have are two ways to get to the goal, that's what you have today, just know that tomorrow you can improve it by adding another and another. What that's
+going to do is it's going to make each of these more focused and more abstract, of course, and more cohesive. It will, but it could also make it more complex.
+So just know that it's, you can just always continue to improve. That's just the way it's going to go. And then also, with respect to the feedback loop, so how
+do we decide, like, how large this deployment pipeline should be? All we got to do is just get to the goal once, feed forward, get the feedback, and then we'll
+just refine. So those are the two key mental models that we use for the entirety of the course. It permeates everything we're doing. And if you have these
+mental models, you can apply this to anything in life. So if I apply this to the question of what do we need for our minimum deployment pipeline, all we need
+really truly, in my opinion, is just working software. I will say, as long as you could deploy, if you could deploy, and if you can run the E2E tests, and the
+E2E tests run, you're good. And you can always improve on top of that. In terms of using Husky, sure, you could do that, but then you just need to make sure and
+ensure that those E2E tests have been run. There's no right answer is what I'm trying to say here. But what we're going to do in the course, I'm not sure if I'm
+going to put this here because it just might be a little too much, or I'll move it a little bit later on. What we're 1000% going to do for sure is we will
+deploy, and we will build out the commit phase for certain. We might do the staging environment now, or we might do that a little bit later on. But we 1000% are
+going to have those two phases. Are there any questions on that so far? Or any comments? Anything you guys want to drop in there? All right. I think we're good.
+I think everyone gets it, knows what we're doing here. E2E testing, deploy the walking skeleton, minimal deployment pipeline, and then we need to clean up our
+code. We need to improve design. So we need to learn about design and what that even means and how we can improve it. So Kirill actually, Kirill's here. Kirill
+spent some time and went down a path and did a lot of awesome work for us and just tried different ways to improve the design. Some of the things I really love
+from his exploration into that environment and just seeing how things could be better were one, using a mono, mono repo for a number of reasons. Minimal, right?
+Simple design. Also, if you guys have seen recently, I answered a question in course chat about design. I think it was brother Dragino. Yeah, Dragino asked
+about DDD forum, the fact that there's a lot of components in there. There's just a ton of files, a lot of typing. And I will always bring this up. Copy image.
+As I said before, it's never going to be perfect. The whole idea of abstraction is it doesn't ever end. You could always go to higher levels and deeper levels
+of abstraction, but it's very important to be aware of how can you begin to ascertain what is good and what is not good design. The way that you can tell what's
+good design when you're going a little too abstract, you're going a little too deep into the abstraction or when there's not enough abstraction, it's just
+always come back to what does the developer want to accomplish? Does someone else on your team or what do you yourself want to accomplish? And are you able to
+adequately do that or not? This is the seven fundamental principles of design. All designers use this, whether they're designing out an apartment, designing out
+anything that is functional in nature, where there's an actual purpose, there's a purpose to design. Things need to follow these steps. This is something that
+happens in your mind. If you need to go and make a pot of coffee in your hotel room, you're asking yourself, is there coffee here or do I have to go outside?
+What are my options? Okay, I see that there's a coffee thing here in the apartment. Okay, so what am I going to do? So I go over to it and it looks a little bit
+weird. I don't really understand it. Right? But it all starts with what you want to accomplish. Ultimately, the majority of our work that we're doing has to do
+with features in our ability to understand how to implement them because that's what we need to do. I'm going to say a change. Add change, discover, understand.
+Yeah, this could be extend as well. So these are like your use cases as a developer going on in your mind. Let me just come back to this. Maintain code. Yeah,
+like maintaining code is very much making it easy for other developers to do this. So I'm putting this content, this is like foundational, right? If you've read
+through some of the stuff so far, you'll remember we have a couple of goals as developers. All we start with the roles. I'm not trying to rhyme on you guys, but
+the main roles here are we have users, customers, and we have developers. And each of these roles have their own goals. So customers, the main goal, if I'm to
+summarize what their goal is, the summary of the goal for customer is increase revenue and protect revenue. Can anyone remember or think about what the main
+goal for users might be? Awesome, that's one. Yep. Enrich time. Yep, that's another way to say it from state A to state B. Yep. It's all just different kind of
+perceptions of the same thing. Yep. Do their tasks efficiently. Yeah, the way that I like to think about it is a combination of all of that. But I think maybe
+the most apt way to say it is, let's say, enrich time or get back time. Those two things. Think about it. Think about why you bought the sock you bought. Think
+about why you listened to or why you bought a ticket to go see, I don't know, Taylor Swift. Think about why you're using Notion or why you're using some other
+tool that you use that you chose out of your own accord. So I always say get back time or turn rich time. This is very valuable stuff, whether you're an
+entrepreneur or you're a staff developer. It's very important to be aware of this because no one really talks about it. And to be quite honest, you have to be
+careful with this stuff. You don't want to be applying this on everything. So don't apply this to your entire life, but be aware of how it does permeate your
+entire life. Try to create a container around this. But if we need to understand why we're doing what we're doing as developers, this is the tactical tool to do
+that. And then for developers, what is it that you're doing and why? It's to help achieve this. Write code such that you could achieve these two other goals for
+these two other roles. How would we even say this? So if you write code, right? Let's say it works in a sense that you help this, you help the users do that.
+And then when you help the users do that, it does that. But let's say it works and you can't change it. Okay. So now what happens? It works, but you can't
+change it. And there's new features. There's new things that need to happen. Starts taking more and more time to do this. And because it's taking more time to
+do this, it's actually hurting this. It's actually hurting because it costs money to pay developers to do their work. So it's this really interesting cycle that
+gets created here. So if I'm to summarize the way, what it is that we really need to do as developers is to use architecture, testing, design, and strategy to
+keep users and customers in benefit. These are the four tools. One, two, three, four. These four tools are going to give us the ability to have these two things
+here, right? Because if you don't test, you might produce broken code that is not going to enrich time. If you don't have a solid architecture, you're not going
+to be able to write tests in general. You're not going to be able to reason about where things should go and developers are going to get confused. If you don't
+have design, developers are going to get confused. Developers aren't going to understand the conceptual models of, oh, this pattern goes here. That pattern goes
+there. This pattern does that. This pattern does that. You're not going to understand. So you're not going to be able to do your work effectively. You guys,
+this is really complex because it is complex, right? You guys have chosen to understand how to do this well. And this is what's involved. Yeah, it's, it is
+pretty hard. I'm not going to lie. One of the hardest things I could probably imagine here, but what makes it simple, what makes it even me able to help you
+make sense of this is just saying, here's two or three conceptual models that are going to make this all make sense. It really is abstraction, the feedback
+loop, and some of these things here. So these are the four tools that are going to keep them in benefit. So if that's the case, coming back up to where we were,
+we need to improve the design because what we had just done at this point in the best practice, best practices, we will have made a pretty big mess, right?
+We'll have done some E2E testing, some front end testing, deployed that walking skeleton from UI to database to a minimum deployment pipeline. And then now
+it's, oh shit. Like, how are we going to add, how are we going to write code moving forward? This is a lot. Yes, it is. So this is where we're going to spend
+time here in best practices to just think about the design and improve the design of our work so that when we go into the pattern first phase, we could just
+drop into our work and do that effectively. One of the best tools for this in order to improve the design is what I call the ideal developer workflow. Is to
+just have clarity on what it is you need to do in general so that you know the ideal that we're moving towards. If this is the ideal, by doing XYZ, it's going
+to take us further away from the ideal or by doing this, it's going to move us closer to the ideal. I'll just do a quick recap on what the ideal developer
+workflow is, how it works, and then we'll continue along here. But the ideal developer workflow is how we want to ideally produce value, how we would ideally
+like to do our work. And I think about it like this. We have to start up pretty high level with our understanding of the problem. So number one is, can we
+understand the problem? So this is the theoretical. It's understanding the problem, solution, right? And then two, which is going to be architecture. AR, geez,
+this is messy. Sorry, guys. So architecture, we need to make sure that everyone is clear on the patterns that we're going to use moving forward. Remember I just
+said, what's really important, conceptual models. This is why if you have never done DDD before and you drop into a DDD code base to things like value objects,
+entities, aggregates, you're like, what the hell is that? Same thing. If you drop into a front-end code base and stuff like view models, controllers, domain
+objects, you're like, I don't understand why we're doing this. I'm just, why can't I just use React hooks? We need to, it doesn't matter. You could use those
+things and there's going to be advantages and disadvantages to them, but this is a really important step in the ideal developer workflow. It's a really
+important step, which is that everyone has clarity on the patterns, tools, the roles that they play, and the responsibilities of each of those patterns and
+tools. So this could be done a number of different ways. We could do this so many different ways. All that matters is that we understand because this is for
+developers. This right here. Developer understanding. Whereas up here is actually a little bit more for the users and customers. We're getting a little bit of
+each in this ideal developer workflow. We're making sure that we're hitting on stuff that needs to happen for our roles that we know are really important. One,
+two, three. Right? So we get there and then what do we do? Then we set up that test infrastructure in that first test. And that's going to be acceptance. We set
+that up and then we make that work end to end. So we go in here. Oops. So fail pass factor. So we're going to fail that test. Actually, you know what? Let me
+move this a little bit here. I could do this, you guys. I believe in myself. There we go. Yes. Right? We're going to set up that first test and then that's
+going to make us move in a layer and then we're going to be doing our high value unit tests at this level. So again, fail. This is going to be core code. So
+when I said this, it's going to be core code. So again, that's like this right here. The majority of our work is going to happen in here because it's going to
+give us 80% of the confidence. This is going to cover all of the edge cases because really, we don't want to be testing everything in here. So what's really
+going to happen is you're going to have tons of these. That's a mess. But you're going to have a lot of them. Right? And then you do a ton of those and then
+finally, this should work. This is going to pass and then we're done and then we deploy. This goes for any feature work that we do, whether it's a new feature,
+existing one. This is going to make our work consistent. So that's the ideal developer workflow for the most part. And I'm just going to write a couple of quick
+notes on this right over here. This is going to be 80% of our work. This is going to give us 80% confidence. There's also something else we could do after this.
+So I missed this, which is four. It's good to just tidy up and write infrastructure tests. So this is where we would really make sure that our database is
+databasing and our connections to our services are working really nice and well. So I'll teach you some other forms of testing we could do here, like incoming
+and upcoming adapter tests, also called contract tests, also called just driver tests. There's a few other ones we could do, but just know that this is 80% of
+the confidence here. And it's 80% of the confidence because it's the core. It's the app. It's the value. It's the thing we've been asked to do. But it's just,
+damn, I wish this is all we had to do because it feels great writing these tests. It's just, it's pure and it's fun. But alas, we have the whole real world
+around us and things need to connect to stuff and things often make messes. One image I'm going to pull up if no one's seen it thus far is this one. It's one of
+my favorite images I've ever made. Hold on. The image. What's this one here? Let's come back to course, chat, is systems thinking, which is the keyed mental
+model. One of the, pretty much the feedback loop and abstraction design. But, yeah, like right here we're going to have a ton of features in level 2, level 3,
+2, 1. This right here, if I was to just draw something around this. Let's just see if I can do that. That doesn't really draw nicely. This is the core code for
+the most part. I would probably also draw a boundary right here. But that's where all the value is right here. And this is just annoying stuff we need to do in
+order to get our code to work with the real world. It needs to talk to the real world. But this is where if we could just do that and just say, hey, the code
+does that? Great. But it does need to connect. So we're going to write exponentially more tests here than we will here and then we'll here and then we will
+here. So hopefully that makes sense. So here, I'm just going to write this. And for example, I'll give you concrete examples of what this might be. So this
+could be E2B test more. Let's say React. Right. Or maybe also if you're using React, you just want to make sure that your, let's say, drag and drop library
+works properly. I would classify that as a, this is what we call an outgoing adapter. Sorry, outgoing info. And then maybe on, let's say the backend, we want to
+just test, verify. I don't know. Let's just say the database is still returning data in the shape that we want it to return them. I would call that also a
+contract test. Verify, let's say. Crud. There's also another one we could do, which is like, what about the API? Like sometimes the API changes. Like if you
+guys are building public APIs, yeah, sometimes you guys change the route. Sometimes the structure of what is allowed to go in changes a little bit. It's
+incredible to have a test for that, right? You can call that an API test. Some call that an incoming adapter test. I think some call it a driver test. So I like
+to just call it incoming. And you see how we have all these strange names for tests. The way that I simplify all of this is just systems thinking. We have level
+six, incoming. We have level five, system, end to end. We have level four, which is like outgoing. We have level three, app, level two, stateful, level one,
+stateless. If you just really think about it and just recognize, hey man, it is just all inputs and outputs, this thing that we're doing. It's feature
+decomposition. If I need to make sure that somebody is able to register to Instagram and they can accept a friend request, what's going on here is it's start,
+end, register to Instagram, add friend or follow someone. Actually, let's say it's actually Facebook, right? Register to Facebook, send friend request, accept
+friend request, get notification, right? Those are like the steps to go from A to B. All that really needs to happen here is this is the most high level, what?
+And then deep down here are all the tiny little hows. This one has to say. Yeah, love it. So we just want to do this, right? But what's going on here is we have
+vertical slices of functionality. This is a whole feature. Boom. Feature. Use case. Use case. Use case. We're down here. What do we got? Those might be
+database. What's going on up here? Up here. What's going on? Web server. Search. API. So this is called vertical slicing. It's one of the various essentials
+that we talk about. And then right in the middle, I should have chosen a different color because I actually like to use the yellow color for the domain. Improv.
+Improv. Improv. Yeah, exactly. And of course, we could decompose this into many different layers and there are many different layers, but that's fundamentally
+what's going on here. So that's how I think about it. That's how we connect what from how. And where's the feedback loop here? If I do register, is the request
+even going to hit the web server? Will the web server even get it? The server gets recruited? Who knows? And that's why we test. Same thing here. All the way
+through. Who knows if these things will work or not? And that's why we test to make sure that these things actually work. What do you guys think of this? These
+mental models? Is this helpful? This is just how I think of this. Yeah. Vertical slice. Okay, cool. I see there's a question. Two questions in here. We commit
+when each test passes. Do we push once the feature is done? Yeah, that's a good question. I've seen a number of different strategies for this. I'm curious to
+hear what other folks think in terms of that. You could do your own branch and have a feature branch and you could continually be pushing to that branch and
+running your commit tests in that feature branch and then you could merge to trunk. So that's one strategy. I'm curious to hear what Kirill thinks because I
+know Kirill does this as well. But yeah, there's a few different ways we could do this. What do you think about this strategy? E2E test is the happy path, high
+value acceptance test, everything else. Yeah, I think it's great. I would probably chuck in maybe like happy path, maybe one or two sad paths for the E2E test.
+I think that's covering really good ground because let's just be honest, sometimes you're going to see error messages. Let's make sure that error messages show
+up and present to develop like to users in an effective way on the screen. I think that would be really good. And then you might do two or three of those and
+then like literally 12 to 15, sometimes 20 different high value acceptance tests. And if you design them correctly using the stuff that we've been talking about
+before with doing the, when we were doing the basic unit testing, the stateless ones, and I was saying, you want to always use concrete examples at that point,
+pretty solid, pretty good because then all you have to do is just use parameterization and toss in just like a ton of test data and just make sure you get the
+correct result. So it would just be as easy as, oh, I want to add a couple more tests. Let me just add in literally 20 more units of data to make sure that this
+really tests the code properly. So it could get to a level where I think we have it worked really well. And those tests would run super fast because it's all
+pure. Will we cover that parameterization? So we have gone over parameterization in the, I believe, which module was that in? I think it was in the emergent
+one, but I could definitely make it more evident because I think it was just a tip I introduced, but it's a really great technique. Yeah, no worries. It's, this
+is also course design stuff. It's, you know, how we talk about package by feature, package by component, package by infra. I want to make sure that if you guys
+want to find something, you could just pretty much control F and find it. So that means that there might be more modules or more videos, more lessons, but there
+it is again. Abstraction. What is really the best way to do it? Love it. Yeah, those are some of my main thoughts on this here. What else is really important to
+talk about before we split? So this is what's coming up for best practices. We're moving in this direction. So we're going to improve the design. We're going to
+do some monorepo stuff. There's some other things we're going to have to talk about as well, like how I even come to decide where things should belong. So we're
+going to put shared code in a shared package if you use NPM workspaces. Which is great because we often have to share DTOs. You can even share domain objects
+between the front end and the back end using that. I think you should definitely take a peek at this code here. I'm really happy with it. I think we've done a
+great job. I did a lot of stuff that I wanted to introduce to you in the pattern first phase, particularly around the patterns that we're using. Because if I
+show you how some of this works, we're doing this pretty purely. We're not using Redux or we're not using React context for global state. Instead, what we're
+doing is we're just using the observer pattern, just keeping it clean, keeping it clear. So here, look, what would be a good thing to show you? Probably this is
+one thing I do want to actually take out. Having to use hooks, by the way, my God, it really forces you to just completely mangle your code. So what I would do
+here is I would actually extract this out and just have a routing service to not have to use this thing. But here, what I want to show you is a registration
+form view. No, not that one. Domain objects. This is a good one. Yeah, so a registration form is like a domain object. It's going to be something we use to
+determine if we should perform an operation or not. So that's pretty apt. And then let me just pop up and go into the shared. I do want to show you persistence,
+how we're doing this global state right here. This is pretty much no redux, no React context. This is however many lines of code. This is your global state. And
+the way that I designed this out was just programming by wishful thinking. I said, what is it that we probably want to have happen? If I go back to the user
+repo, this is where the work is done. This is synonymous to a use case in domain-driven design on the backend with use cases and using aggregates and stuff. We
+just say, take in a registration form. If the registration form is, actually, we're not validating it here, but we just take that in and we create a DTO. We
+send it to the backend and then we just save it to the cache. And this is how I've decidedly chosen to do that here. Pretty easy. All right, cool. And then
+risky biscuit. Yeah, I found it harder to test the controller when hooks live inside it. Yeah, hooks are just the worst. I actually hate that API so much. Don't
+tell me I need to name things with use in front of it. Does anyone else have anything they wanted to chat about or hop on the mic and just chit-chat for a bit?
+We'll hang out for max 10 more minutes. There's nothing else you guys want to chat about. Invites. Yes. You're live. Yo. There's nothing to break things inside
+into, like, just, for example, suppressing the use cases and doing what you call the high-value tests. Yep. And the feeling that the developers get is that
+since they are locking everything, like the entry of the use case and the infra. Yep. Sometimes they say that we feel that we're not testing anything, actually.
+We're just testing what we make into the tests. Awesome. So how to... What is the argument to that? I love this question. This is one of my favorites. So the
+question, if I can understand this correctly, you guys are doing these high-value unit tests where you're mocking stuff out. Let's say the unit test is, let's
+say, I don't know, like, create user and you're mocking out the user repo, for example. Yes. The question is, wait, what are we really testing here? It seems
+like we're just mocking this thing. Why bother? So here's how I like to think about it. A testing strategy, number one, is going to test multiple different
+things. It's not going to cover everything. It needs to be used with other types of tests for it to really be valuable. When we decide to do high-value unit
+tests, let's just draw out the execution of a vertical slice. The best way to do this is probably like this. Denain, use case, repo. Let's assume this is a
+command. Boom. Okay, so a feature is going to go like that. Actually, I want to draw it like this. Here's a better way. This just came to me right now. Here's
+the best way to draw this. If you ever use case. And it's a system. Yes. Remember, everything is inputs and outputs. Systems. Now, if you've done the, if you've
+done the stateless tests, you'll remember that the stateless tests, they're very basic. Just examples, yeah. Yeah, they're very basic input-outputs. They're
+functions, right? And functions are super easy to understand because you just have palindrome. What's the, is this a palindrome? Yes, it is. Okay, good. Easy to
+get, right? Okay, now, this is such a simple example, but this is everything. It's all just guess points. It's all inputs and outputs. What we need to do here
+is we need to figure out, okay, what is it that we're testing here in the use case? Because this is application. What are we actually verifying? What is the
+model here that we want to confirm is correct or is incorrect? And then it also introduces to us another question of how can we verify that the stuff that this
+uses is correct as well. The palindrome is great because it's pure. It's just, this is the data. The data goes in and the data goes out. It's called a direct
+input, right? It's a string in, a boolean out. When we're using use cases, though, we introduce the concept of indirect inputs and indirect outputs. Here's what
+I mean by that. Indirect inputs and indirect outputs. You know about dependency inversion, right? Yes. Okay. Let's imagine that when we set up a use case, we're
+going to set it up with dependencies. And let's say one of those dependencies that we're hooking it up with is a repo. Let's say another one is a, we don't
+actually want to do this. Actually, let's just make it one to make this simple. So this is an indirect input. This is going to get used in a certain way. So we
+still want to verify. Okay. Imagine this is create user. The question is, what do we want to verify? What matters? Okay. What matters is the success and failure
+results. So that's important to us. And this is why we have something called result verification. There's three different types of verification we could use. We
+could use result. We could use communication. What was the other one? What was it? State verification? Yeah. State verification. Those three. So here we're
+going to do result verification on success, failure, results. If the user already exists, what are we going to do? We want to ensure that we get an already
+created result. That's what we want to verify. Boom, goes in and we get a already created result. So that's going to be a failure. We want to verify that. Now
+we can verify that we get a particular result just by looking at the result. However, we can go a little bit further to also verify that the repo is getting
+changed. Is a state change happening against this? Are we actually performing a state change or not performing a state change in this scenario? Because if we
+know that it's a failure to do already created and let's imagine that we tried to save to the repo if we did already created, that should be bad. So given a
+user was already created, when we try to create that user, I should see an already created response and the repo should not have been attempted to have been
+saved. We shouldn't have tried to save to the repo. So that's one thing we're trying to test here, which is success and failures and to make sure that we're not
+trying to make state changes to the repo. Now, that doesn't quite answer the question about mocking. So you want to do this high value unit test, but you also
+want to do something called contract tests. So do you know what contract tests are? Is it the incoming, outcoming? Yes, it is. Integrate. Yeah, it is. But
+there's something that's amazing about this that most people aren't aware of. It's going to feel like you're not really actually testing anything realistically
+or usefully when you might pass in a mock user repo or a fake user repo. It's going to feel like you're not actually testing this thing correctly or that, oh, I
+don't know if this is actually going to work in production for real once I do it for real. It's going to feel that way when you don't have a contract. I'll try
+to explain this here. When we decouple from infrastructure, say we have the app layer here and this and domain. All right. So we have the app layer here and we
+have the domain. When we're going to decouple, what we're going to do is we're going to define an interface for the user repo and then this is going to rely
+directly on it. It's going to use that. Right. However, you're going to have a fake or in-memory repo. You're going to have a prod one. You might have some
+other one as well. Who knows? Could have a MongoDB one and XYZ one. And this is going to implement. This is going to implement. The problem you're facing is
+probably that you are you're testing your use cases. I'm testing this stuff here. One, two, three features. And maybe you're testing this separately. But the
+problem is when you're doing that and this code relies on it's relying on that and you don't really have what we call test parity. So you don't have parity
+between these two things. Between, and I'm going to just show you a code example so it will all click in a moment here. You don't have parity between one and
+two. So your app is using this fake one but when you go into production you're using this prod one but your tests, you're not really testing this at the same
+time as you're testing like this. So what you want is you want a sort of test that is going to test all of these at the same time. And what's going to happen is
+if any of these fail, so if you're going to test that you can save, that you can get from the database, that you can check by email, however you're testing both
+of these, you want to make sure that you're testing the contract, which is testing. All of these can do what a user repo should do and you're testing them all
+at the same time. So if one of them breaks, they all break. So I'll show you what that might look like in code, Figma driven development. So let's test. Let's
+call this, let's say this file is .ispec. I like that for integration tests, .ts and describe this little technical. And let's say what are you going to want to
+do here? So let's just say it's can add users to it. Make this larger than there. Say it can save users. How would you do this for one? Let's say you had the
+user repo. You would do .save and you would save some data, right? Or some sort of so let's say user in and fill this in, right? Save that. And then what would
+you want to do? Whoops. If you could save and then let's make this. It's, oops, I've done this a little bit wrong. Oh yeah, I've done that wrong. Whoops. So
+boom, save and async. And then what would you do? You'd say fetched user. Let's make clear that. you fetched user. So is equal to dot get and then you'd expect
+that user to equal fetch user. Right? This makes sense so far, right? Yeah. All right. Beautiful. So we got that. So you're going to want to expect that. But
+what, I'm just doing this for one and what is this user repo? Anyways, where did I get that from? Here's what we're going to do. We're not going to just have
+one. We're going to have this. All user repos. You see where I'm going with this? Beautiful. There it is. You just run this for each. It's right. Because yes,
+one of the arguments is what if I'm mistaken on my monk. Exactly. Yeah. That's it. And this is why I don't use just mocks really. So I don't use those like
+little mocks that you create like using the library themselves. I just use that for like tiny little stubs. If I need to just, I just need this thing to just
+not need anything. I'll use that when I need to just quickly make, fill in some arguments. But I know it's not really important. Not really going to be used.
+Xample might be like, oh, this thing needs a logger. I'm like, all right, here, just take this. But when you're actually dealing with anything that's going to
+require a state change, right? Because these things here are indirect inputs, right? The state that these things are in is going to affect the production. It's
+going to actually affect the use case. If this thing is in a state where it has 30 users and one of them is the user that you're going to test, you actually
+need to make sure that when you set these things up properly, right? But if you are, if you are, yeah, like those things are indirect inputs because they'll
+just affect your tests. So you want to make sure that you set up all of these effectively in the same place in these tests. So this is going to create that
+level of test parity because you have them all here. So you do something for one, you do something for all of them because you're testing the contract, not the
+implementation, contract. This is what you're testing. Makes sense, right? Yes. And now my question, what if I have some complex repo that relies on some
+aggregations and the query in itself would be so hard to implement just for a test? Can you give me an example? I have a repo that contains a fine method with
+filters, validation, and I want to test this. How should I submit the DB engine in my book? Yeah, this is a great question. I'm curious to hear what Kirill
+thinks, but my thought here is can you decouple all of that work? Can you make the complexity of what it is that you actually need to use in order to filter?
+Can you pull that out and have that something that you could just test to verify yourself instead of needing that to live within the tool? That's one option.
+This is a little more abstract. I'm just giving you ways to think about it, but again, if I have this one abstraction here and I have this other abstraction
+here and let's say I have both of these are going to get into the same goal. So this is your prod one and this is your fake one. If in order to get from here to
+here, you have to go into tons of stuff down here all of this level of abstraction but with the fake you only have to do that that maybe not even it begs the
+question okay, all of this abstraction you're doing is this just specific to for example this Firebase is this just like Firebase stuff? Is this just Firebase
+stuff in particular or can we just say all right look at all of this maybe this stuff here is its own subdomain of a problem maybe this is actually we'll call
+the subdomain search maybe this needs to get cut out from where it is here and put into its own contract right so I would draw this needs to be putting its own
+stuff its own abstractions and then what happens is these here actually just use it so then when you want to test that this stuff is working properly you have
+more options you could just test this stuff independently so you write your own test against this and then you're in the same situation again so I would always
+I think what Kirill is about to get to here I just want to read through this often devs try to implement a filter to satisfy all possible use cases but in fact
+lots of filters also there are a number of in memory implementations that you can leverage as a basis for your dev repos and that support different filters so
+you can build on top of them I think it should be fine until you cover everything contracts yeah so this is really awesome contracts are just going to tell you
+what it is that you actually need it such an abstract thing to think about because this actually need to be getting done I would say next steps for you if I'm
+to give you concrete advice now flipping into concrete advice I'd say one find the concrete use cases you actually need I hear you have a lot of complex
+filtering XYZ find it baby I did express the fact that these filters is to delegate the heavy lifting of search to the tomb which is the dv yeah exactly oh I
+see what you're saying so if you're going to be testing an external tool yeah test the contract again just test the contract let the external tool do the
+external tooling if you want to test something that's going to be implemented in different ways by different tools that's fine focus on the high level make sure
+that if the high level works because it's again it's input it's the correct level of specificity and it returns the data you need doesn't matter all this
+low-level stuff it doesn't matter as long as it works for both you're good feedback loop systems thinking inputs outputs yeah I think another way I would just
+draw this to is I love this one you just said that I'm thinking this this this is your fake this is your prod it goes in out and this might be like all kinds of
+crazy stuff doesn't matter it's just a crazy model and this one doesn't matter as long as you need on the output I think we're good you can have a complex model
+but if you want to just verify you just give it more examples it really is the examples here this is systems thinking I'll leave it there do you know what
+you're doing here with this first of the RIT concept was really valuable that's the first answer that I got and the second thing is go check if I'm not testing
+a MongoDB or something in that case I'm not bothered with it and if it's let's say a logic that should belong in some domain then maybe abstract it away and
+test it in separation awesome awesome great summary yeah raise the level of abstraction of what it is you're looking at to test so maybe not MongoDB maybe just
+test the concept of the user repo itself aha that's it I love it all right thank you you got it yeah man I've been meaning to get to this stuff but you see the
+way I designed the course that initially it was like we are getting to it in this weird way now I'm just like you'll blast me with your questions and let's just
+get to it now and we'll structure it out cleanly thank you for everything you're very welcome my friend let's keep it going as for the Q&A I think we're good
+you guys if anyone else has anything else you guys know where to find me I'm gonna hop on out of here and yeah with that said you guys I'll see you soon better
+gents

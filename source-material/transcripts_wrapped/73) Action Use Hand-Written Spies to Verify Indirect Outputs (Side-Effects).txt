@@ -1,0 +1,23 @@
+All right, so I just want to quickly comment on this. So quick note is the way I wrote this assignment, which is step five. If you remember from earlier, the
+thing about mocking, right? It just test doubles in general is the fact that they are so confusing. A test double is just anything that stands in for the real
+one, right? Now, I'm looking at the submission here. Tony, you asked me about this. You said it felt like you were doing something wrong for this particular
+part of the assignment. I just added this little bit here where I say handwritten spy. Because what you've done here is excellent. Like you're using the mocking
+library to spy on this collaborator here, which is great. However, the reason why it feels like you're doing something off is because I didn't have this little
+line in there about writing a handwritten spy. Because the thing about test doubles is you can either there's one of two ways to implement them. You can either
+implement them manually handwritten. You actually write them yourself, which would be like using a contract. So I see if I can have an example of that. Maybe
+I'll just pull up some code real quick. Yeah, let's do this. Let's just do a basic text file. No, I'm not going to do that. So an example of that would be a
+handwritten spy. Oh, let's check that in here. And to explain this, I'll just kind of show you what I mean by what you should expect the assert statement to
+say. You should expect to see something like email spy or I just at this point, this is why I just named them fake whatever because the category theory theory
+around whether it's a spy or stub or this that it's like, it's all of those things just start calling these things test doubles because that's the level of
+abstraction that I think is the common denominator across everything because there's different implementations. So just start calling these things fakes I would
+recommend or test doubles or something. So here's what I would expect to see something like here for the assertion. I want to see fake email spy fake email
+service dot get times called or and then maybe to pass in a method like the save method, right? Or even better yet, if you wanted to be able to do more work on
+that, you could say you could have get times called or you could also have get calls to right? So what does that mean? It means with this thing here, you
+actually need to implement the contract of an email service with this. But you also need to have some additional logic to describe or to actually implement to
+demonstrate the spy behavior. You see? Because what really is happening here is this fake email service is playing two roles. It's playing the role of plays the
+role of the spy. Right? Because it needs to be able to, you know, intercept or see calls. But then it's also playing one other contract or what other role? It's
+also playing the role of the email service itself. Right? And you should have an interface for this. So you could go ahead and put this stuff into a contract. I
+wouldn't do that yet. I would follow the the rule of three before you go and do that. But just be aware of that. So to do this assignment correctly, what I want
+you to do is start actually you've already done this part. You've done the the library. So now do it again, but finalize it with a handwritten spy because I
+think you need to learn that. And we all need to learn that. All right, so that's the quick addendum to this. Go ahead and execute that. Okay, so that's the
+quick addendum to this. So let's go ahead and execute that. That's the quick addendum to this. Go ahead and execute that.

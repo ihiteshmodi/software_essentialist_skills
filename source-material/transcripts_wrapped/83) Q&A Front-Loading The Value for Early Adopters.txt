@@ -1,0 +1,15 @@
+What is going on crafters? Khalil here. And I want to show you this video, which is actually a Q&A that I've done a few days ago with the community. And I've
+titled this, the most valuable ideas in this course, front-end architecture and the ideal developer workflow, among other things that we covered in here. And
+the reason why I'm talking about this now is because I'm putting this into the fast track for the V1 of the course. I'm sure you're aware. This is the early
+adopter version of the course that you're currently in. And my goal for V1 of this course is to pretty much just brain dump all of the main, most valuable ideas
+of the course into here. So you can go out and start getting results with them as fast as possible. And I could start seeing how you use the course. So that's
+why in this last Q&A, which I think was really good, I've gone ahead and just summarized some of the key takeaways from them. And if you've read the fast track
+here, a lot of this should actually line up with what we've covered in here. Now, this is two hours long. So if you don't want to commit two hours, that's
+completely fine. You don't have to do that. But do take a look at the key takeaways in here. And I'm going to be cutting the most important bits from this Q&A
+into specific individual videos. And I'm going to be putting those videos inside the platform. Some of it's going to go into the fast track and a lot of it's
+going to go into the appropriate sections that it needs to go into. So in summary, I wanted to make this quick video to let you know about this Q&A here,
+because it really did cover a lot of the things that were really, really useful in this course. I know a lot of developers were waiting to hear more about front
+end architecture and how that even works. And the awesome part about that, without me going into detail, is that it's all the same stereotypical architecture.
+So take a look at the key takeaways in here. Drop a comment or question what you think you are most intrigued by, interested in, and optionally watch this Q&A
+here, and then move along to the following sections. And with that said, I'll leave the video right there, and I'll see you in the next one. And as always, to
+master it.

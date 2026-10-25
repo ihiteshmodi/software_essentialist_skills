@@ -1,0 +1,370 @@
+Good, you went through the code first off. Wonderful. What about everyone else? For me, I'm really late actually on the content. I think I'm still at starting
+the theoretical part. Let me check actually my to-do list. Yeah, well the thing about the... I'm really, really late actually. No, that's totally cool because
+it got restructured like a substantial amount. So now what we're doing is we're moving up the phases of craftship. So perhaps a better question, if you've read
+like my high level summary on the phases of craftship, I guess a better question is like where do you all feel like you might be at those phases of craftship?
+There's code first, best practice, pattern, responsibility, then value first. Oh yeah. For that I'm actually trying to consume the content whenever I get the
+time. But I think what helped me a lot is the book actually, the solid book, which is like covering the same materials as the course, but not the same actually.
+But that one has helped me because it has like a really digest of what you need to know. So I've read all of it, most of it. And yes, I'm trying to also follow
+up with the training, which is the content of the course. But that one, I don't have really the time to actually do the assignments and everything. Yeah, that's
+cool because I think this is where I think I went wrong with doing the initial structure of the course. When I'm doing my software centralist training, it's
+very back and forth. Like I'm saying do this and then you go and you do it and then we take a look at where you are and then we talk. It's very intensive.
+However, with an online course, yeah, I think what I should have done and I realize this now in hindsight, especially with the work that Jatin and I have done
+together where we've kind of just worked together. So what I realized I probably should have done is just get it, get demonstrations of this stuff out faster so
+that you can just gain the mental clarity that you need to, to see, see into what it is that you probably just might not have been aware of. Because that's
+ultimately what's going to make you confident is if you're, if you get to observe and evaluate everything and then you can eliminate down and be like, okay, so
+these are the things I don't know out of what he's talked about. And then you just take action on those things you don't know. That's it. That's what's going to
+make you feel like a confident crafter. And that's, that's what's going to give you what you need. I think to pretty much just go out there and do awesome
+stuff. Actually, I think you couldn't have done otherwise because that's the very nature of this, you know, this knowledge is that you have parts of the
+information and everything is linked together. So once you talk about, I don't know, interface segregation, so you can talk about it in many, many ways, like at
+different levels, blah, blah, blah. So you have to give like these small parts of information, you can come back and forth. And over time, you will get the big
+picture. So I think that's natural to, to have. Yeah, I'm really happy with the structure of the course now. I'm even wondering just how much of the stuff in
+the guest points because it's now separated into two main parts. Wondering just how much of the stuff we need to do towards the like the second half. I think
+we'll still have it. But it really is like the first part of the course now is like it's the ramping up. It's the it really is the essentials because we're now
+going through those essentials and I'll show you some of the images I have on that that I'm putting together for the videos. But it is the beginner and then the
+second half, the guest points, you can only really use some of those techniques like guest points and faster in this thing I described called the ideal
+developer workflow. You can only really use those things and make sense of the theoretical and physical once you've ascended up those phases of craftship and
+now you have the clarity on all the things you need to know. You know what they are. Now it's just about arranging the way that you're gonna work so that you
+just do the things that have the most value at the right time. And I think that's just it makes so much sense now but damn it was a little painful to get here
+but yeah I like it. So cool. Does anyone have any questions about the code for stuff? It seems like mainly just taking in the information and then I can show
+you guys what's coming next. If anyone has questions. I have a question about the checklist that you sent a link. Yes. For me. Is it in order from top to down
+or what's the order of the content that I should study? That's correct. Yeah so it's the action item checklist. So that checklist is going to have all of the
+discrete action items all the things you need to do. But ultimately you want to go from the top to the bottom in the course. I understand it could be a little
+confusing because some of the content isn't quite there yet. Yes. So I'll let I'll make you aware of what got added and what is foundational. But the reason why
+you're probably wondering why is he even doing it that way? Why does he just put all this stuff up the front that he needs to? The reason why is because that's
+what I tried to do when the course first started and then I just started writing thousands and thousands of pages of theory. So I want to avoid writing a ton of
+theory up front and I want to identify when I need to add foundational theory and then just chuck it up towards the top. Does that make sense? Yeah, no it's
+clear for me. Thank you. Yeah, so I apologize. But once I once we get this at least the phases of craftship completely built out, we're going to have everything
+from the top to the bottom and you can just read read through it and watch through it in order. But I do understand it is a little bit tricky right now. So
+what's on my to do list is after I finish this code for or sorry, after I finish the best practice first content, what's on my to do list to do is to jump back
+and just be like, OK, well, we have two of the phases of craftship here. What is it that you really needed to know in order to progress on that? And then I'm
+going to check all of that up towards the intro, because at the very start, the intro was like frickin nine modules initially. And now I've cut it down to
+literally just an introduction and then a mindset training. And then we're diving into code first. First. You know? Yep. So the first assignment is the code
+first. First assignment that is related to user repo and three end points that you assigned to us. And after that, I guess I should start with the unit test
+part. Yeah. Which was guess point levels, stateless levels, if I'm not mistaken. Yeah. So you're going to want to dive into that. Do the emergent. Like, I think
+there's emergent first and then there's the stateless ones. I'm probably going to restructure the way I talk about it in the tour, like in the phases of
+craftship. But the reason why you need to start to get comfortable with testing is because the actual next thing we're going to be doing in the best practice
+first phase of craftship is we're going to break down what's wrong with. We're going to break down what is wrong with the way that we've done it at the code
+first level. And the main thing that's wrong with it is that we're manually testing. So we're going to need to shift to doing automated tests. So the way I'll
+probably structure it out is that first initial code first assignment. Get into doing some like learn how to write tests just very basically. So yes, do what
+you were just about to go and do emergent design and the stateless ones. And then immediately following that, we need to do the code first or sorry, we need to
+do the best practice first assignments, which is the very first thing we're going to do is acceptance test the feature. So yeah, go straight to emergent and
+stateless. Yeah, go to those two next. Sounds good. Thank you. You're welcome. So what I'm going to do is I'm going to show you all some of what's coming next,
+coming straight down the pipe. I've been creating some images here. I don't have them all completely drawn out just yet, but I'll show you all the things that
+I'm going to do. I'll show you a little bit of what we have. So I am streaming. No, I'm about to stream and my computer is going to seem like it wants to go to
+the morgue in a moment. Let's just give that a shot. See how it goes. Pull this up. And I'll just kind of like talk at you guys and tell you what's coming next.
+Because this is where it starts to get really exciting. And this is where we pretty much get into some of the most valuable stuff we possibly can in the course.
+All right. Share screen. This one. All right. You guys let me know if you can see this. I can't see it. All right. Brilliant. So this is what you're supposed to
+do for the first assignment. You're supposed to manually test your API. Pretty much just you have a couple of endpoints. The way that you're thinking about the
+problem as well is you're thinking about endpoints. You're not really thinking about features. And you're manually testing them right now and you're using curl
+and maybe the way that you've set up your database. Maybe you've set it up on your local machine, which is what I did. You know, I think a lot of you are aware
+that that's problematic for a lot of reasons. One is it's going to make it super hard for you to have your environment get your environment set up on another
+machine really quickly. It's going to make it hard for others on your team to also get set up really fast as well. There's just a lot of problems with this
+approach. So what we're going to do next as we move forward is we're going to start to tackle some of the problems here using the essentials. So as I mentioned,
+there's around 12 essentials. The first two, abstraction design and the feedback loop, those are metaphysical essentials is what I call them. And I call them
+metaphysical because they encompass everything you do. One of the biggest mental models for you to become a better developer is to focus more on, is to be able
+to decouple what from how. This is why if you ever notice that you're spending a lot of time debugging and you're just like you're debugging over and over,
+you're changing something, it's not quite working. So you change something else that doesn't work. You change something else. You're like, OK, I don't know
+what's going on. So you just keep on fiddling with it. My advice is stop because you're just so too deep into the how. What you need to do is stop, zoom out,
+draw it up front. Make sure you have mental clarity on what needs to happen and what the responsibilities are. And then you can descend back in a level of
+abstraction down. So I call it metaphysical because metaphysics are about cause and effect. It's about it's not real. It's just all conceptual in your mind. And
+then you descend down into a level where you actually can begin to make things real, make them happen. So Jatine and I had this experience where we were just
+kind of like trying to get this Docker file to work and we were just like changing lines in it and just watching it refail over and over. And it takes like 30
+seconds to see it if it worked or not. I'm like, OK, we got to stop this because we're just too deep in it. This is just not what we want to be doing. So when
+I'm coding, I actually spend very, very little time debugging because I always make sure I start with the question, do I know what I'm doing? And do I know why
+I'm doing it? Do I know who it's for? Do I know at what level this needs to happen? So that's one of the main essentials is abstraction design. So the other one
+is the feedback loop. The other metaphysical one is a feedback loop. So we never want to go too far into what we're doing and not know if that thing we just
+did, those abstractions we just made, will they work? So this is why you need to learn testing. And that's why I'm saying we're going to put, we're going to
+immediately make you begin to write tests right after the code first stuff you just did. So does anyone have questions on what I just said there so far? If
+that, or does that make sense? I'm going to take, we don't really have a chat in here, do we? Let me just see. Yeah, we do. Let me just pop up in the chat to
+see if anyone's leaving comments. No comments. Oh, binary, Eric. Yeah, so I'll just pause there for a second. Just let you guys catch up. Yes, the metaphysical
+is like zooming out. It's like, I truly believe this is just true in life in general. But you can have anything you want in life if you know how it works. It's
+the challenge is the knowing how. And that's like just a much deeper, low level kind of way to think about things than the what. This all stems from BDD, by the
+way. Behavior driven design. Design. We're describing what we want to build first and then writing it exactly correct. Yeah, it is the behavior. It is BDD.
+Fundamentally, there is a really good image I wanted to show y'all. Let me see if I can pull it up. I wonder if I have the book. Yeah, okay, I see. So I might
+have the book here. BDD. Features, examples, executable. Here it is. So. Call the image address. Boom. This is not the greatest. But anyways. Yeah, the
+metaphysical is getting very clear on what it what is we're doing and why. So I have this thing I call role goal. I start with who am I helping? Right. And what
+is it that they want? What is their goal? What is the role? What is the goal? And then in order to achieve the goal, we have to realize features. If we can
+understand some of those features, then what we now need to do is move into describing it with concrete examples. And those concrete examples become acceptance
+tests. So it's like one, two, three steps. Now we have something that we could use to drive all of our work. So I'll give you an example. Let's say, I should
+probably draw this out. Let's go to, create another fig map. New fig jam board. So, that's a good question in there by the way. So the way I'll put it is this,
+right? We have, I'm going to answer that in a moment. Role. What is the, what is their goal? Right. So, and then the features are going to be how. Features are
+actually what. And then what you do, the code. Features. Features. And then, let's do the, the how. So, all of this. So, an example is, we'll do ddd form,
+right? So, ddd form didn't really have a whole, like a really strong reason for doing it, right? Like, what's the purpose of ddd forum in the first place? Well,
+the real reason is I created it because my, my role as a developer, as an educator was to create something to teach you all the main driven design techniques,
+right? But that's not really a solid reason for creating something like in the real world. You guys don't create software so you guys can learn stuff very
+often. You guys are creating software because you need to help the business make money or save money usually. So, what's going on here is you're usually helping
+a customer. Your whole reason for writing code is you're helping a customer accomplish something that is usually around saving money or making money. Right?
+Saving or making money. Right? That's usually what's going on. So, that's super broad and abstract. And you can see the problem with ddd forum is I just told
+you guys, hey, just build these endpoints. Okay. Well, if I tell you to just build endpoints, you're just focused on the technical, like the code, right over
+here. But if I say, alright, well, here's what's going on. There's a conference, like I am a conference organizer. Or I want to, I'm going to be helping a
+conference organizer put together a ddd conference. Right? And on, one of the things I want to do is I want to make sure that I can get a lot of people curious
+about ddd. So, make, uh, obtain an audience of devs curious about ddd to sell tickets to. Right? Okay. This is getting interesting. So, if this is the role and
+that's the goal of this role, the next question is, well, how can we do that? So, let's talk about that. How, how can we do that? Well, there's a myriad of
+different ways we can do this. Right? I'm going to move this over. There's a ton of different ways we could do that. But, one of the ways that we come up with
+in order to make this happen is we say, okay, well, what if we can, you know, one of the things we'll do is we go, we'll get our marketing team to, let's say,
+drive traffic to, you know, a page. And let's like, let's make that page ddd forum. And on that page, maybe what it should say is, um, hey, this was built using
+ddd principles. Peek around to see how it goes. If you want to learn how to build this, uh, here's like, here's a conference that's coming up, you know, put
+your email in, sign in, try around. So, I just said a lot of words there, right? But among that, there's a lot of different features. So, driving traffic is not
+something we do that's outside of our scope. However, being able to register, being able to, um, buy tickets, being able to, you know, view advertisement for
+tickets, being able to ask questions. Ask questions about eddd. All of this stuff kind of comes together and creates a reason for us to write code. We always
+want to make sure that there's a purpose behind the things we're doing. And this is the fastest way to do that because what we've got going on here is the who.
+We've got the why. And we've got the what. So, remember I said abstraction design, the main idea here of everything we're doing is the metaphysical essential.
+And it's metaphysical because it's going to permeate everything we do. Every line of code you write, it's going to permeate why you're writing that line of
+code. What we want to do is we want to decouple the what from the how. So, we want to make sure we're clear on that. So, this is stuff that we're going to have
+to realize as code. But instead of just saying, okay, I'm going to build register, I'm going to do that, I'm going to do that, I'm going to do that. What we
+like to do once we move forward a little bit more is we get concrete examples. And this is going to begin to move us into the territory of how. And what you can
+notice here is we actually have several levels of abstraction. So, I just decoupled the what from the how there. Look at all these levels of abstraction that we
+have in order for us to get to code. Whereas, usually what we do is we don't even do the concrete example. We might, you know, just write, we might just write
+the code in general. So, let me give you an example of a concrete example. Let's take one of these, let's say, buy tickets. So, this is the feature that we're
+going to do. And let's say the scenario, the concrete example is, let's say James buys three tickets. Tickets for his company. Right? So, maybe there's going to
+be, he buys three tickets for his company. There's going to be a couple other devs that can also come to the conference. Right? So, given James is, let's say,
+does he need to be registered? What's the state of the world that James needs to be in, in order for him to buy these tickets? Let's just say that James has
+tickets in cart. Right? When James has three tickets. When James purchases tickets. Yeah, he needs money in his bank account for sure. Although we can't test
+that. Actually, you know, there's an element of us being able to test that, but you know what I'm saying. Given when and then then what needs to happen? He,
+like, what happens after that? Of course, he's emailed access to the tickets. So, he is billed. And actually, no, this is, we're going to make this smaller.
+We're going to say he places an order. He purchased the tickets. That's actually what's going to go on here. He places an order because you'll learn about this
+later on. We need to make sure that the work that gets done here is temporally decoupled. So, we're going to have to talk about that later. And not quite yet.
+That's going to come in the pattern first approach. So, we're kind of just talking about best practice right now. So, this thing right here, that you're looking
+at, this is an acceptance test. We take that right there. That goes straight into our code base. And we use this on either the front end or the back end to
+drive our work. So, acceptance test. And it's going to go, whether you're working on the front ends or, you know, you're working on the back end. What happens
+next is you have the acceptance test. And then it's going to go into a layer of code, a layer of code, a layer of code. And then it's going to test your front
+end. Same thing on the back end. Layer of code, layer of code, layer of code. And then test your back end right here. That's what's going to happen. And this is
+how we should be getting to you doing the work you're doing instead of just diving in and doing work. Look at this. This is incredibly purposeful, right? Super,
+super purposeful. And this is stuff that we're doing because this is what the, it's what the customer wants us to do. And the customer wants us to do things
+that are going to create value for users. So we have the, we have the customer and we have the user and we have the developer. And these are the three roles
+that we should care about the most. And we want to care about what their goals are. Usually the goal of the customer is to make money. the goal of the user is
+to save time or enrich time. Usually the goal of the developer is to make it easier. The goal of the developer is to make it, make code, make what the dev has
+to do more discoverable and understandable. This is just about design. So just make it easy to do these two things. That's what the developer needs to do. So
+those are the three roles and the three goals we need to achieve in us writing code. And we should, we should always check ourselves on, are we doing these
+three things as we're writing code? Or are we not? So that's fundamentally what we need to accomplish. And you can see here, I started putting this together,
+right? I said, this is where we're at right now. Where we need to move to is we're going to take that concrete example. And we're going to just acceptance test
+that. So concrete example, we're going to use a test runner, which is going to read our acceptance test written in the exact format I just showed you. And then
+we're going to have our test code. This is similar to the test code you guys have been doing already so far. And then we need to create an abstraction that is
+going to act almost as if it is the user talking to the system. That's called the protocol driver. And then that thing is going to test end to end. So that's
+what we're going to be doing in the best practice first phase. One of the first things, because there's several things we got to do. So I'll pause right there
+for a sec. And I'm going to take a look at some of the questions. Does an acceptance test include features that need to be implemented in the app as a whole? Or
+do you write an acceptance test for the front and back end in UFRA? It's a great question. So this is why I call it the best practice first phase of craftship,
+because there's a number of different ways you could write this acceptance test. One of the amazing things about having an acceptance test is it doesn't matter
+how it gets implemented. You should always make sure that this is written in such a way that if you want to execute it on the front end, you can. If you want to
+execute it on the back end, you can based on the way it's written. So this is a shared executable specification between your front end and your back end. So if
+you're a full stack developer and you want to really make sure that your front end works properly, your back end works properly. There's two ways you could go
+about it. One of the ways is you write an acceptance test on your back end and it just passes through. Another way is you write an acceptance test end to end
+all the way from your front end. You just take it. You take that same acceptance test we just talked about. Front end. Use another type of protocol driver
+called a page object. And that hits the UI and the UI touches the back end in the way that it's expected to be used in production. Now, admittedly, we will need
+to do this because this is another one of the essentials called the walking skeleton, which means you always want to start your project with an end to end test
+that cuts across all of the components you need for your app. So that's going to be front end, back end, and any infrastructural pieces. You always want to
+deploy this. Step one, deploy a walking skeleton to your deployment pipeline. That's step number one. Make sure we can do that. And then we drive our work with
+acceptance tests. So it's a complex question what you're asking because you might be a full stack developer working, you know, just on the front end, back end.
+You might have a team of front end developers and you might have a team of back end developers. You might like it. It's a complex question because this is where
+we now have to create an element of strategy. This is where we now have to discuss strategy. You might remember I said there's three, there's four things that
+matter in what we're doing. The only four things that matter as a software developer, whether there's AI, whether there's not AI, whether, you know, it's, you
+know, light or dark, you know, doesn't matter. The only things that actually matter as a software developer are architecture, testing, design, and strategy.
+These are the four things that matter most. Because these four things come together and help us achieve these three goals. The challenge with just learning any
+of these things directly is that they're pretty big topics to learn. So in order to break that down, in order to have kind of these repeatable skills that we
+can have awareness on how, if we're getting better or not, and to just make sure that we're checking all of our bases here. And that's why we have 12
+essentials, which are pretty much the, you know, all these things here, just in more smaller micro pieces that you could actually implement. If I say implement
+architecture, you're like, how? I say, okay, deploy a walking skeleton. That's an architectural thing, but it's also a strategic thing. But it also sets up what
+you need for design. And it gives you the testing foundation that you need. Does that make sense? I take the silence as yes. Makes sense. Let's see. So that was
+a good one. Does an acceptance test need include features that need to be implemented in the app as a whole? Or do you write an acceptance test for front and
+back and inner front? Right. So, yeah, I just talked about that. We're going to have to write some other tests as well. For example, one of the things I'm going
+to make you do in the code first phase as well is in order to get this set up, you're going to need to be able to start and stop your database. You're going to
+need to be able to start and stop your web server. So we're going to need tests for those to ensure that we could do that. We're going to also need
+encapsulation to make sure that we could do that as well. So we're going to have a couple of different categories of tests that we're going to write. And I'm
+also going to show you this too in code first as well. But what you need is you're going to need tests that test acceptance. Right. Which is going to say, does
+this do what the customer wants? Okay. Then you're going to have unit tests, which is, does this as a developer do what I think it should? And then you're going
+to have infrastructure tests, which are, so this is more about like, does this core code, which is going to be anything. I'm trying to see how I'm going to
+explain this right now. But the unit tests are going to test everything inside of your app. Like this is going to be the, I'm going to say, does this, this is
+logic, domain logic, application logic, has a developer do what I want it to do. And then the infrastructure tests are, does this infrastructure do what I want
+it to do. So what's going to happen is this is going to, this one right here, this is going to cover around 80%. Oops. The unit test, this is going to cover
+around 80% of the work we do. And these other two are going to be a little bit less. But this right here, I'm going to show you how to write this in an
+extremely powerful way, where you're going to pretty much test everything your acceptance test does at the application level. I'll have to show you that a
+little later. So that's kind of my, my answer to the types of tests that we're going to need to write front end, back end, infra. We need to write several and
+we're going to need scripts for this. We're going to kick that off as well in best practice first as well. Awesome. Glad you liked the explanation. So, should
+the then the result side effect be in past tense to express the fact that it happened, which also used to be interpreted as an event? Let me take a look. Yeah.
+Given when, yeah, that's actually correct. So given, wait, well, this not necessarily. So given James has this, right? When James purchases tickets, then he,
+then this needs to be expressed because this is like what has happened. Yes. So past tense. What did you, what should have, what should have had happened here?
+Yes. Correct. So then, um, in order should have been placed. Great. And email. Sent. Yeah. Good catch. Uh, I think either present or future tense ideally since
+it explains what should happen rather than what had happened. Um, yeah, I, I think for the then you definitely want to make sure you're aware of what had
+happened, but sometimes you, you can actually describe present tense as well. Cause sometimes what you're describing is the, what this is, is it's the
+experience that the user has with the system. So, um, you could say, and I should, um, be something, something, something like when you're designing UI,
+sometimes you want to make sure that, um, it's like when you log in, it's like, and I should be able to do this now. It's like, oh, given I put in my valid
+details and I did that, um, I should be, now I should be logged in. So that's a great example too. Yeah. Good catch again. So maybe there's not a hard, fast
+rule on that, but it does need to make sense. The hard, fast rules I know about this are, it needs to describe the system in the way that the user is
+interacting with it. That's the thing I know that has to be true. So acceptance tests. Okay. I'm on a team with three devs with a strong sense of product
+ownership. Love that. Can you recommend standard artifacts, diagrams, type of documents, opinionated approaches, conventions that product owners for devs doing
+part of product owners work would be familiar with books, resources on that topic? Yeah. Yeah. There's a number. Some of my favorite ones are, um, standard
+artifacts. Yeah. Some of my favorite ones are, um, this one, which I kind of just described, which is sort of like impact mapping. Just here, you might be
+familiar with that, but I call this role goal. Um, something like that. I call it like role goal, sometimes feature, um, example. So that's a really strong one.
+I like to kick it. I usually like to make sure I kick things off with something like this. Um, you need to have an awareness of what you're doing and why. Um,
+however, this is also why once we get to the more advanced sections of the course, I kind of move away from saying you need to have a particular type of
+document. To saying you just need to make sure you go through the, the problem, guess point, the solution, guess point in the architecture, guess point. Because
+all of that is theoretical stuff that needs to be very clear before you begin coding. And the artifacts, of course, they are a side effect of the shared
+understanding. Um, but I think this is a really strong one. This kind of acts as the map. Yeah, I like this one a lot. Um, process modeling is cool. It's a good
+one too. Like this is very good for getting clarity on what it is you need to build. Then also you could drop down into user story mapping and example mapping.
+So there's so many different ones. There's user story mapping, example mapping, process modeling. Um, You know, they will go quickly out of date based on, um,
+what needs to be done, which can really vary. Yeah, those are good ones. Yeah, role goal is really, really good. Um, and I originally got this from, um, like I
+actually found this much later on, but I got this from, um, just studying metaphysics. Um, Aristotle and, um, Jean Paul start existentialism. And I kind of came
+across, cross this much later on, but I just realized it kind of already exists. It's called impact mapping. Uh, it's also called feature injection as well. I'm
+just going to pull that up. Feature injection. This is where you're just like hunting down the value first of all. And then, um, here, this is another good,
+great diagram. It's pretty much the exact same thing I just said, but, um, yeah, this is role goal still feature injection. And these are the features you're
+building capabilities, ways that you could do it. Who's doing it. So role. Why? Uh, what's the goal, the goal for them? And then how could you, or sorry, then
+what is it you need to actually do in order for that to have happened? How is that possible? Such a good one. I'm going to say like never start a project
+without these four words clearly understood. I think that's super clear, super clear. Um, all right. So that's pretty good. Um, and I could go off and talk
+about all other kinds of techniques, but I really think that's foundational. Um, let's see what else we got. As for books to read, I highly recommend, um,
+either BDD in action or specification by example. Those are two BDD books. Um, and I realize now, like all of the success in this industry is really, really,
+yeah, those are two, those are the books right there. You got it. Much of the success here just comes from, as I said, that foundational principle. Like
+abstraction is the root principle of all design. It's what from how, like almost visualize it like this. You have abstraction. It's just the pillar of
+everything. Every possible thing. Extraction. What, being able to ascertain what from how. Right? So if we have clarity on what from how, then it's like, okay,
+we know what it is we want. And we, we have that kind of picture of how we're going to get there. It's funny because I say separating what from how, um, it's
+like right, right there. And then out of this, we have, okay, well now we know what it is we're going to build. So now in this territory right here, I kind of
+just visualize it like this in this territory right here. This is like the how territory. As soon as we kind of like venture out from our safe land of idea
+land. I have this idea. And again, I call this like theoretical. I call this the physical. As soon as we venture out into that land, the first thing we run into
+is, oh, like, is this working? I don't know. Maybe. So that's why the next foundational thing we need is the feedback loop. Exactly. In every other practice we
+use kind of stems from these like the walking skeleton. Right. Subject verification. Which is just making sure that we can draw a boundary around what it is we
+want to test. And we can verify that it works. Right. There's another one. Oh yeah. Vertical slicing. Vertical slicing is just, can we identify like what the
+feature it is? Like, do we know what the what it is that we're trying to build? So this is more about design. Can I at least see that? Can I identify it? Do I,
+can I look into this project and see a folder and be like, oh, that folder is called create user. And now I have an understanding of what it is that this is.
+And now I could dive into it and start. Does it have the stuff that I would expect to see that has to do with create user in it? So this is more about design
+and understanding and discoverability. Right. Then we have horizontal decoupling. Okay. Okay. Okay. Okay. Okay. Okay. Okay. So here's several levels of us
+implementing something and making it work as we kind of just saw with this. Look, we start right here with the, the what? Look at the several levels that we
+have to descend down to in order to make it work all the way down to the database level, which is like the deepest level of low level. So we should really make
+sure that we have a decoupling between each of these layers as we're doing that work. It's just like this, like a gradient getting more and more and more
+technical as we go deeper. So that's horizontal decoupling. Okay. Um, there's a few other ones, right? So, but as I said, these two right here, these are like,
+that's, these are the foundational metaphysical ones. This is how you could successfully accomplish goals. Like anytime you have a goal in life that you want to
+accomplish, you need to kind of track and make sure, you know, if you're getting closer or further away. So this is about setting a very clear goal. This is
+about making sure you're making progress on it. And everything else kind of stems from these two. So we're going to focus in on these essentials here a little
+bit more. We'll keep on attacking them because I don't expect you to be a 10 out of 10 on this or a 10 out of 10 on that or a 10 out of 10 on that in this first
+section, the best practice section. That's not what we're going to do. Instead, I want you to think about all of these as like anyone here play like Fallout or
+like Skyrim. I want you to think of you're starting out at like level, you know, maybe you're starting out here out of the phases of craftship. You're at like
+level 12 out of 100. What we're going to do is we're going to gradually make sure we're getting better and better at each of these. Right. And you kind of I'm
+going to put assessments in there for you to track yourself. I'm going to put some quizzes. And I'm going to just make sure you check your comfort level. And so
+you could kind of assess where you might need to do a little bit more work. Right. So a good question I could ask for subject verification. Right. Maybe you're
+not very good at this just yet. You're like, if I asked you to test a feature at the application level, would you know how to do that on the front end? A very
+good question. A lot of devs don't know how to do that. If I asked you to how would you what do you need to test with respect to Redux on the front end? Do you
+should you test Redux? What type of test is that that you're going to be writing? Good questions. Right. Here, if I asked you the walking skeleton. I say, OK,
+are you able to take an acceptance test and get it to talk to the database all the way from the front end? Right. And then also, I would ask here, too, I'd say,
+OK, well, every time you run your tests, are your tests idempotent? I'd impotent rather, which means that you can run it over and over and over and over and
+over and they will still work. Right. Because that's kind of important. But you can see that everything like that's also kind of the feedback loop. So really,
+as I said, these are the foundational ones. These are the metaphysical and like all of these other ones are just kind of like they all kind of stem from these
+foundational essentials. So we're we will work on this as we move forward. I hope that kind of like sheds some awareness into what we're going to be doing
+moving forward. But the intention is by the end of the phases of craftship, you should be feeling pretty good about each of these essentials. That's not all of
+them. And then in the the guest points, we're just going to go deeper. That's just advanced practice. And I feel like when we get to that, a lot of that stuff
+in the advanced practice, I might actually just be able to remove it because you might be a hundred out of a hundred on a lot of these by the time we get to the
+end. So we'll see what happens when we get there. I'll make sure to check in and see where everyone's at. Make sure everyone has the capabilities I want them to
+have by that point. But yeah, I'm feeling pretty good about this. That's where we're going. Anyone have questions, comments on this so far? Quests. Yeah. Okay.
+No comments, no questions. Great. So what I'll do here then is I'm just going to kind of wrap up by explaining what's coming, like the last parts of what's
+coming next here in the best practice phase that I'm working on. So I'm actively filming this stuff now, which is, again, I apologize why I missed today's Q&A.
+And there's, there's that. And there's the fact that I was messing around with my calendar trying to clean up my systems. And, well, I do not see that event
+here on my iPad. So, so that's kind of what we're doing here. So what's coming next? I will upload this stream. I guarantee I'm going to put it up right after
+this. I promise you. Consider that my apology for, for kind of mucking up today's Q&A. I just put that up straight away. There is a Q&A tomorrow. I'm going to
+do that because there are some folks in other time zones that I wanted to put it a little bit earlier just to be considerate of that. So I'll kind of go over
+again, like what I'm doing here today and maybe other questions based on who comes out. But yeah, yes, we have another Q&A tomorrow. I'm going to do that. It's
+just to cover up for the one that I missed today. Okay. So tail end of this. So I'm drawing out these images here of my messy diagram on my whiteboard. So I'm
+taking a lot of those. You guys are seeing into the, the sausage factory here. This is how it's all made. So what's coming after that? So we got to do, we
+already have that manual testing, which is nasty. We don't like it. We want to make sure we have automated tests. So that's the next thing we're going to do.
+This is going to involve us having to utilize the abstraction, utilize the essentials of abstraction, encapsulation, composition. You're going to learn about
+the composition route. I'm going to make you take your really messy callback code. And I'm going to make you become very aware of the dependencies between your
+abstractions. What do I mean by that? Well, a lot of the time when you write your controllers in Express, you just kind of toss a lot of stuff and you import
+things willy nilly. We need to get rid of that. We need to start becoming very aware of how our application is composed together. Because apps are all made from
+objects that talk to each other. So we need to make sure that we understand those collaborations really clearly. And it's very, very explicit. So we'll get into
+that. And we're going to end up with something like this. We're going to get rid of the database that runs on your machine. And we're going to replace it with
+Docker. Because we want to make sure that we can encapsulate as much as we can in the code base. So if we can encapsulate the provisioning of development
+infrastructure, we want to make sure that we can do that from the code base itself. So we're going to do that. And then we'll move forward. And what I'm going
+to do is I'm actually going to make us deploy a walking skeleton from the front end all the way down to the database. So once we're here, we should begin to
+have a pretty good understanding of acceptance tests of these four layers that are required in order for us to write very high level what focused tests. And
+some of the abstractions that need to work together to do that. So we're going to have a very good understanding of that on the back end. Then we're just going
+to run it again. But we're going to run it on the front end this time. Because ideally, you want to start all of your projects by deploying a walking skeleton,
+a minimal slice of functionality through all of the main architectural components. And we're going to do that from the front end into the back end, all the way
+back up. And then the next thing for us to do is to deploy it. Because we want to make sure that we could deploy our software as early as possible. One of the
+last things you want to do is build out an entire app, spend three weeks on it, spend a month on it, two months on it. Now it's time to deploy. And then none of
+it can be deployed. Very bad. So you want to, as soon as possible, make sure that this thing you're building, let me just thread through all of it. Let me make
+sure I can plan to the end, make sure that we can actually score this thing through the goalpost. It'll actually fit through the door. So we want to deploy
+immediately, as soon as we can. So what we're going to do here is we're going to build a minimal deployment pipeline. There's much that could be said about
+deployment pipelines. And we will go into it into more detail in the guest points. There's actually an entire module I'm planning on doing in there, but we're
+going to do a minimal one, which I still need to draw this out for you. But let me see if I have it in my drawings here. It's not going to mean a whole lot to
+you. But step number one is commit to source. Like it needs to go into GitHub or something, obviously, right? Source control. Then what needs to happen is it
+needs to kick off a build and it needs to run your unit tests. Once your unit tests run successfully. This is called the commit phase. Dave Farley wrote about
+this. Once the commit phase finishes, you need to create a deployable release candidate. So this is going to be, it could be a zip file. It could be a Docker
+file, whatever it is. If we get past the stage, we need to create a new version of your app. This is the thing that if it works, we'll get put into production.
+Then after that, we have an acceptance test phase. And this is going to run that acceptance test that I was showing you all about in a very production like
+environment. And if that passes, then what we'll do here as a part of a minimal deployment infrastructure, minimal deployment pipeline is we'll deploy it. So
+that's minimal. There's so many other things you could do in here. You can insert a lot of different stuff. We're not going to do all of that right now. But
+that's going to be an incredibly important best practice moving forward. So we're doing a lot of valuable stuff in this next phase of craftship. After that, we
+need to do horizontal decoupling. But I'm considering putting this in the pattern first phase because we're going to be doing a lot of digging out of the
+application level in here. So I very well might put this later on. But I'll just explain what it is we're going to do. So when we started out, we had something
+like this view controller database like that. Now, what happens is if we can, it's going to start like this view controller database. One of the first things
+we're going to want to do is make sure that we take all of the stuff that doesn't all of the responsibilities that don't have to do with just being a
+controller. We want our controllers to be very, very slim. So right now in almost everybody's solution, your controller does way too many things. The controller
+should just be passing the request or just pulling the data out of the request and passing it into a service layer. So we're going to carve out a service layer
+is what we're going to do here. And it's called the four tier architecture. Once we do that, it's good. We have a better separation of concerns. However, we
+want to carve out the application layer. We want to make sure that, hey, you know, like that acceptance test we wrote was really good. But damn, we kind of need
+to like kind of complex. We need to start up the entire app, start up the database, make sure the web server is running and then test it that way. And we don't
+want to write all of our tests inside of, we don't want to write all of our tests as acceptance tests that run end to end. Instead, what we want to do is we
+want to have an area of our code base that is pure. So it's going to be pure code. It's just going to be infrastructure on the outside. So if we want to do
+something like this, you have an API. This is a contract, you have a contract. We want to have all of our application and domain logic be pure, something that
+can just be tested without us needing to actually start up a database or start up a web server. If we do that, we can write tests that test the core
+functionality of our app super freaking fast. And this is where you're going to be writing 80% of your tests that are super high value. And this is why I call
+them high value unit tests at the application level. So that's the one of the second last things we're going to do. I'm not sure if we're going to put that in
+best practice or I'm going to put it in pattern first. I'll probably put it in best practice. So we're going to put it in best practice. So we're going to put
+it in best practice. And then, yeah, high value unit tests. And then finally, those acceptance tests, or sorry, finally, all of those unit tests that we're now
+able to run, we want to make sure that we run those in the commit phase back here. Because here's what's awesome. For every one acceptance test that we write,
+if we know that we have 10 unit tests that kind of test that acceptance test in more detail with all these different types of edge cases, like if we had create
+user and we just did the success case end to end. Well, what if we do like 10 or 12 different scenarios of ways that that could fail and what we expect the app
+to do? And we do those at the application level. We're going to want to write all those tests and those will get exercised right here. This is going to give us
+an incredibly high level of confidence in our code for when we create a release candidate. Because we should, we should feel somewhere around 80 to 90%
+confident that, all right, you know what? Yeah, we didn't test infrastructure yet. Yeah, we didn't test. We didn't do the acceptance test yet. But like if all
+of these tests pass, we're probably pretty good. And we're going to run those right here and it'll create the release candidate. I actually forgot one other
+thing that needs to go right after this acceptance test is our infrastructure tests. So those need to run as well. Or actually, they might run before or after.
+It doesn't really matter. But it's going to be like, can I start up the database? Can I connect the database? And can I start up the web server and stop it?
+Stuff like that. So I just said a lot of words, y'all. If your brain is exploding right now, I completely understand. This is a lot. But we're going to get into
+this piece by piece. So that's what's coming. So appreciate the patience. But we're in the thick of it now. And I'm really happy about the fact that we're
+moving on this stuff here. Any comments, questions? Okay, this is a good question. In a mono repo or two separate repos, server and front end, would this
+pattern with the controllers, layers, infra and stuff be shared between front end and back end? Or will the back end have this pattern architecture and will the
+front end also have its own, similar to the back end? Yeah, this is a great question, which is why we have an architecture guest point module where we can talk
+about different ways that we set up our infrastructure. The way that we're going to do it is we're going to have a front end folder, a back end folder, a shared
+folder. What's going to go in that shared folder? Acceptance tests. What else might go in that shared folder later on down the road? Models that we share
+between the front end and the back end. DTOs that the front end might need to rely on. That's a pattern. So we will get into that in the pattern first phase. So
+in a mono repo, that is the way that I would personally do it depending on the infrastructure. Some of you might be using Next.js. Some of you might be doing
+server side rendering. Some of you maybe not. Some of you might be serving up your front end specifically from your back end. Some of you might be using,
+serving your front end on Netlify and then serving your back end on Heroku. You know? So in terms of the architecture model view controller, when you're doing
+your, the view, when the view is served almost like a templating engine server side from your, your back end. Yeah. That's the model view controller like that.
+However, what I found is like in today's day and age, almost every single front end, the level of complexity of front end applications, they're pretty complex.
+They need their own model view controller. So I would just expect, I would just say that every, whatever it is, front end or back end, it's going to need its
+own model view controller. So I want you to know how to separate out, how to design out model view controller on front end and back end. But I also want you to
+know how to decouple from infrastructure, how to decouple and pull out a service layer and pull out the application and domain layer on both front end and back
+end. Will you be doing that all the time on the front end? No, you won't be doing it all the time. Not for like a lot of websites where you're just displaying
+data and, you know, just making quick calls. However, you will be doing it in like larger ones and you're going to want to have the patterns that allow you to
+do that. So I'm going to show you how to do that using controllers and presenters on the front end. Hopefully that was a exhaustive answer to your question. Let
+me know if you have any more questions on that. Cool. Nice. Slick. All right, y'all. So we're going to meet back here again tomorrow. I'm going to take this
+Q&A. I'm going to export it right now and I'm going to just upload it straight into the platform, share it with everyone. I think this was a good one. I'll put
+this into the code first section because it's related to what we're doing. Or I'll put it right at the front of the best practice first section because this
+kind of goes over what we're about to go into anyway. So this was very good. So thank you, everyone. I appreciate y'all jumping in, even though I completely
+missed the Q&A today. So I'll stay for maybe a couple more minutes. If anyone else has some questions, comments, I could dive into them now. But I'm just going
+to set a timer for five, ten minutes and then I'm going to dip out of here. And then I'm going to go film. You got it, Eric. Thanks for coming in. You got it,
+Pablo. Anytime. Anytime. I'm just going to make a note for myself here. Let's see. See you later, Kevin. Later, Lucas. Aha. Alright. The walking skeleton you
+are referring, I haven't seen this. Let me just take a look at what is that. What the heck is this? Oh shit, what's wrong with everyone? Look at this story and
+I dare that forward toっていう Exciting談 podcast notes. It's possible to be a fun video of being interesting though. Okay. Yeah, that's exactly right. If your code
+doesn't do that, you failed the course. It needs to walk exactly like that. If your code doesn't shape into a skeleton and do that exact walk with that poise,
+I'm sorry, but I will give you a refund completely. I failed you. Any philosophy reading material to recommend? Oh my god, dude. At the end of the day, I think
+the key thing here is the metaphysics, Aristotle. I would actually look up maybe Applied Metaphysics. There's a good book on that. Just first principles, cause
+and effect. The Nicomachean Ethics is really interesting. I think that connecting it to what we do, Ayn Rand's philosophy of objectivism is also very
+fascinating. You don't really need to read the books. They're quite flowery. They're quite huge. You can read some of the summaries. I think they're also really
+good. Ayn Rand's kind of a controversial figure, but I think Ayn Rand's kind of controversial because it talks about value and kind of talks about capitalism.
+But everybody here is here because we kind of value truth and we value becoming great crafters. And in order to become a great crafter, you need to be able to
+produce things of value. So that's kind of why it's controversial because it's, it's, it's, the world is kind of messy and it just describes that. So I think
+that's a really good one. I see a lot of linkages between Ayn Rand's philosophy and responsibility driven design. I also see a lot of linkages between
+responsibility driven design, roles, responsibilities, collaborations, and existentialism. You know, like all of us, we get to decide our, this is Jean-Paul
+Sartre speaking. He says, first you exist and then you decide your essence. So you have to get very clear on what your role is and what your responsibilities
+are and how you collaborate with folks in the world. That's a really interesting connection as well. And then of course, I love Camus. Camus has a great book
+called The Fall, which is also a good one. And that's philosophy around absurdism, which is another core part of the way I think and maneuver the world as well.
+And then I think the book on systems thinking, who wrote that one? I haven't completely read it, but it's a foundational part of the way that we think. We
+should be thinking and learning things fast. Inputs, outputs, environments, processes, everything in the world is a system. If you could, if you can minimize
+the inputs and outputs, if you can isolate the inputs and outputs, you can learn anything incredibly fast. So I don't really know anything about investing. I
+don't really know anything about real estate, but I know that if I want to go and learn those things, all I have to do is just make sure I'm aware of, I would
+maneuver them from the, I would maneuver them in two ways. I'd go one, let me apply systems thinking to this. What are the inputs? Like, what's the goal? First
+of all, what's the role? What's the goal? Okay. And then what are all the various inputs to these systems? And I would go as deep as I can until I get down to
+something foundational like money or value. Then I would make sure I could go all the way back up and make sure how all those interconnected pieces connect
+together. Right. So that hopefully you can see the way I'm thinking here and see it really does connect exactly to what we're doing. It's, it's granular levels
+of what versus how. It's just levels of abstraction and the metaphysics are about you connecting to its cause and effect. So I love that. I forget what the name
+of that book is and who wrote it. I have it here on my shelf, which I've only cracked into a couple of times, but it's a good one. And then, um, yeah, good. Oh,
+you got it, man. Systems thinking in general. What's the name of the book? Let me look it up. I'm going to stop.

@@ -1,0 +1,170 @@
+<section id="mindsets" class="doc-section" data-title="Mindsets (Distilled)">
+  <h2>Mindsets (Distilled)</h2>
+  <p class="lede">The course's mindset lessons, cut down to the frameworks you can act on: 4 mindsets, 2 obstacles to flow, 2 clarity strategies, 4 motivation techniques, and 2 habits for decisions (thinking backwards, right action). Hype, anecdotes and pep talks are left out. <a class="src" data-lesson="3">L3</a><a class="src" data-lesson="4">L4</a><a class="src" data-lesson="5">L5</a><a class="src" data-lesson="6">L6</a></p>
+
+  <article class="topic" id="mindsets--four-mindsets" data-title="4 Key Mindsets &amp; the 90/10">
+    <h3>The 4 Key Mindsets &amp; the 90%/10% Framing <a class="src" data-lesson="3">L3</a></h3>
+    <blockquote class="quote">“The value of 90% of my skills just dropped to zero. The leverage for the remaining 10% went up 1000x. I need to recalibrate.” — Kent Beck, on ChatGPT<cite><a class="src" data-lesson="3">L3</a></cite></blockquote>
+    <p>The course uses this tweet to frame <strong>software essentialism</strong>: work out which skills dropped to zero, which gained leverage, and master the ones that matter. <a class="src" data-lesson="3">L3</a></p>
+    <div class="callout def"><strong>Software essentialist</strong> — Follows the Pareto principle (80% of results from 20% of effort), is <em>value-focused</em>, and goes after <em>perennial</em> skills. A skill that wasn't perennial: being the "Webpack guru". <a class="src" data-lesson="3">L3</a></div>
+    <div class="cards">
+      <div class="card"><h4>1 · Refinement</h4>
+        <ul>
+          <li>Ask: <em>is it working and doing what we need?</em> If yes, move on. You can refine later. <a class="src" data-lesson="3">L3</a></li>
+          <li>Stop chasing perfect, because returns diminish. Don't get attached to a design: "kill your designs and do it again." An impasse just means it's time to redesign. <a class="src" data-lesson="3">L3</a></li>
+          <li>“The road to success is built from bricks of feedback.” <a class="src" data-lesson="3">L3</a></li>
+        </ul>
+      </div>
+      <div class="card"><h4>2 · Clarity</h4>
+        <ul>
+          <li>Don't stop at "it depends". Know <em>what</em> it depends on: when to use a tool, when not to, and what its role is. <a class="src" data-lesson="3">L3</a></li>
+          <li>Clarify before you code. <strong>Think backwards</strong>: start from the end state (see <a href="#mindsets--thinking-backwards">below</a>). <a class="src" data-lesson="3">L3</a></li>
+        </ul>
+      </div>
+      <div class="card"><h4>3 · Purpose</h4>
+        <ul>
+          <li>“Everything has a purpose”: polymorphism, encapsulation, every tool. Know each one's purpose before you use it. <a class="src" data-lesson="3">L3</a></li>
+          <li>Clarity builds confidence, and confidence keeps you going. <a class="src" data-lesson="3">L3</a></li>
+        </ul>
+      </div>
+      <div class="card"><h4>4 · Experience</h4>
+        <ul>
+          <li>What counts is how many <strong>reference experiences</strong> you have and how deep they go, not your senior/junior title. <a class="src" data-lesson="3">L3</a></li>
+          <li>If work doesn't give you the chance, practice on your own time (problem decomposition, the 12 essentials). Build up tools and mental models over time. <a class="src" data-lesson="3">L3</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout rule"><strong>Cost of mastery</strong> — “Dedication, discipline, and continually returning to the path.” Mastery also means <em>staying in the game</em>. The tedious katas are there to give you reference experiences. <a class="src" data-lesson="3">L3</a><a class="src" data-lesson="85">L85</a></div>
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span>
+      <p>When agents write most of the code, syntax, framework trivia and typing speed move into Beck's "90%". The "10%" is:</p>
+      <ul>
+        <li><strong>Clarity:</strong> stating what "done" means</li>
+        <li><strong>Decomposition:</strong> splitting work into small, verifiable steps</li>
+        <li><strong>Judgment:</strong> telling good output from plausible output and throwing away bad designs</li>
+      </ul>
+      <p>These map directly onto Clarity, Purpose and Refinement. Output is cheap to regenerate, so the leverage is in knowing what "better" means.</p>
+    </aside>
+  </article>
+
+  <article class="topic" id="mindsets--obstacles-flow" data-title="2 Obstacles &amp; the Flow Channel">
+    <h3>The 2 Obstacles to Mastery: Anxiety &amp; Boredom <a class="src" data-lesson="4">L4</a></h3>
+    <div class="callout def"><strong>Mastery</strong> — Skill in a domain where you're “maneuvering in 3D”. You combine ideas creatively, the work feels effortless yet challenging, and you learn fast because you're building on a strong foundation. Example: once you master abstraction design, you can vet tomorrow's libraries and frameworks. <a class="src" data-lesson="4">L4</a></div>
+    <p><strong>Flow</strong> (extreme focus and presence) is the shortcut to mastery. You can't switch it on. It sits <em>between</em> anxiety and boredom. <a class="src" data-lesson="4">L4</a></p>
+    <figure class="diagram">
+      <svg viewBox="0 0 540 380" role="img" aria-label="Flow channel: challenge on the vertical axis, skill and clarity on the horizontal axis. Anxiety above the diagonal band, boredom below it, flow in the band. Clarity moves you down out of anxiety, purpose moves you up out of boredom.">
+        <defs>
+          <marker id="ms-arrow-axis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--svg-stroke)"/></marker>
+          <marker id="ms-arrow-fix" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--fg)"/></marker>
+        </defs>
+        <polygon points="70,40 70,280 430,40" style="fill:var(--accent);fill-opacity:0.16"/>
+        <polygon points="130,320 490,80 490,320" style="fill:var(--accent-2);fill-opacity:0.16"/>
+        <polygon points="70,320 70,280 430,40 490,40 490,80 130,320" style="fill:var(--accent-3);fill-opacity:0.32;stroke:var(--accent-3);stroke-width:1.5"/>
+        <line x1="70" y1="320" x2="70" y2="28" style="stroke:var(--svg-stroke);stroke-width:2" marker-end="url(#ms-arrow-axis)"/>
+        <line x1="70" y1="320" x2="510" y2="320" style="stroke:var(--svg-stroke);stroke-width:2" marker-end="url(#ms-arrow-axis)"/>
+        <text x="30" y="180" transform="rotate(-90 30 180)" text-anchor="middle" style="fill:var(--fg);font-size:14px;font-weight:600">Challenge</text>
+        <text x="290" y="352" text-anchor="middle" style="fill:var(--fg);font-size:14px;font-weight:600">Skill / clarity</text>
+        <text x="160" y="110" text-anchor="middle" style="fill:var(--accent);font-size:17px;font-weight:700">ANXIETY</text>
+        <text x="160" y="130" text-anchor="middle" style="fill:var(--fg);font-size:12px">challenge &gt; skill · cognitive dissonance</text>
+        <text x="400" y="255" text-anchor="middle" style="fill:var(--accent-2);font-size:17px;font-weight:700">BOREDOM</text>
+        <text x="400" y="275" text-anchor="middle" style="fill:var(--fg);font-size:12px">no challenge · feels irrelevant</text>
+        <text x="280" y="186" text-anchor="middle" transform="rotate(-33.7 280 186)" style="fill:var(--fg);font-size:16px;font-weight:700">FLOW</text>
+        <line x1="175" y1="145" x2="220" y2="185" style="stroke:var(--fg);stroke-width:1.5" marker-end="url(#ms-arrow-fix)"/>
+        <text x="206" y="150" style="fill:var(--fg);font-size:12px;font-style:italic">+ clarity</text>
+        <line x1="380" y1="230" x2="335" y2="190" style="stroke:var(--fg);stroke-width:1.5" marker-end="url(#ms-arrow-fix)"/>
+        <text x="365" y="200" style="fill:var(--fg);font-size:12px;font-style:italic">+ purpose</text>
+      </svg>
+      <figcaption>The flow channel. <span class="badge copilot">Added by Copilot</span> Drawn as the classic challenge-vs-skill chart. The course itself says only that flow sits between anxiety and boredom, and that anxiety is fixed with clarity and boredom with purpose. <a class="src" data-lesson="4">L4</a></figcaption>
+    </figure>
+    <table class="tbl">
+      <thead><tr><th>Blocker</th><th>Cause</th><th>Symptoms</th><th>Antidote</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Anxiety</strong></td><td>Challenge exceeds your skill or clarity. You have the wrong mental models, or the puzzle isn't pieced together yet. <a class="src" data-lesson="4">L4</a></td><td>Overwhelm, jargon overload (dependency inversion, aggregates, domain events…). <strong>Cognitive dissonance</strong>: "foot on the gas and the brakes at the same time". You plateau. <a class="src" data-lesson="4">L4</a></td><td><strong>Clarity</strong> <a class="src" data-lesson="4">L4</a><a class="src" data-lesson="89">L89</a></td></tr>
+        <tr><td><strong>Boredom</strong></td><td>No challenge. The work feels irrelevant or like a waste of time. <a class="src" data-lesson="4">L4</a></td><td>Your mind wanders, you get distracted, and you quit to start something else. <a class="src" data-lesson="4">L4</a></td><td><strong>Purpose</strong>: tie the work to something that matters to you and set goals that inspire you. <a class="src" data-lesson="4">L4</a></td></tr>
+      </tbody>
+    </table>
+    <div class="cards">
+      <div class="card"><h4>Cognitive-dissonance detector</h4><p>If you catch yourself asking <em>“Am I doing this right? Is this best practice? Should I be testing this?”</em> while coding, you're out of flow. Go fix your mental models instead of pushing harder. <a class="src" data-lesson="4">L4</a></p></div>
+      <div class="card"><h4>Boredom anti-pattern</h4><p>Hopping between new libraries, frameworks, jobs and half-started side projects. It gets you no ROI, no growth, and eventually burnout. <a class="src" data-lesson="4">L4</a></p></div>
+      <div class="card"><h4>End goal</h4><p>The coach becomes <em>superfluous</em>. You can then mentor others, and teaching is a higher level of mastery. <a class="src" data-lesson="4">L4</a></p></div>
+    </div>
+  </article>
+
+  <article class="topic" id="mindsets--clarity-strategies" data-title="Clarity Strategies">
+    <h3>Clarity Strategies: Mentorship or Essentialism <a class="src" data-lesson="5">L5</a></h3>
+    <p>Clarity means knowing where you're going and how the pieces fit <em>before</em> you start executing. “It's always going to be the first step.” Without first principles you pattern-match, doubt yourself, defer to others, and relearn the basics with every new tool. <a class="src" data-lesson="5">L5</a></p>
+    <blockquote class="quote">“If you're experiencing a lot of anxiety when you're doing your work, it's because you don't have enough clarity.”<cite><a class="src" data-lesson="89">L89</a></cite></blockquote>
+    <h4>Symptoms of low clarity → response</h4>
+    <div class="cards">
+      <div class="card"><h4>Anxiety</h4><p>A feeling that it might blow up later, because you have no solid mental model. Treat it as a signal of where your skill is, not as a failure. Be coachable. <a class="src" data-lesson="5">L5</a></p></div>
+      <div class="card"><h4>Overwhelm</h4><p>You're trying to fit DDD, TDD, BDD and RDD into one picture. That's the signal to <strong>zoom out</strong>. <a class="src" data-lesson="5">L5</a></p></div>
+      <div class="card"><h4>Analysis paralysis</h4><p>Perfectionism: going down every rabbit hole. Aim for a <em>good enough</em> mental model, then act. <a class="src" data-lesson="5">L5</a></p></div>
+    </div>
+    <div class="callout rule"><strong>Clarity excludes</strong> — Getting clear on what realistically has to happen rules out thousands of other options. Khalil writes a detailed process document before starting, so that implementation “just feels like typing”. Put the <em>what</em> before the <em>how</em>. <a class="src" data-lesson="89">L89</a></div>
+
+    <h4>Quantum moments &amp; triple blindness</h4>
+    <div class="callout def"><strong>Quantum moment</strong> — A point where one decision drastically changes the outcome. Recognize it and you land on the results timeline; miss it and you land on “the timeline of no results”. <a class="src" data-lesson="5">L5</a><a class="src" data-lesson="85">L85</a></div>
+    <p>Examples from the course <a class="src" data-lesson="5">L5</a>:</p>
+    <ul>
+      <li>Writing the test first, or not.</li>
+      <li>Writing lots of code for a product nobody has validated.</li>
+      <li>Building a <strong>testable architecture from the beginning</strong>.</li>
+      <li>Deriving data and behavior <strong>from use cases</strong> instead of building up from the DB layer to the API.</li>
+      <li>Accepting that <strong>design is non-linear</strong>: like writing, great design comes from redesigning. Don't quit after the first attempt.</li>
+    </ul>
+    <p><strong>Triple blindness</strong> is “the greatest manifestation of a lack of clarity” <a class="src" data-lesson="5">L5</a>. It has three layers:</p>
+    <ol>
+      <li>You're not aware that quantum moments exist.</li>
+      <li>You don't know how to rise to them. For example, you're told to "start writing tests", but how, especially in React?</li>
+      <li>You don't know what's possible. For example, shipping features in hours, or building about 90% of a React feature without starting React, because it's decoupled from infrastructure and the view is hooked up last.</li>
+    </ol>
+
+    <h4>Strategy 1 — Decide on your mentor</h4>
+    <div class="cards">
+      <div class="card"><h4>A person (phronimos)</h4><p>Someone who is where you want to be in design, architecture or testing, and who can still tell you the next step. “Absorb the mentor spirit” (Robert Greene), and aim to <em>surpass</em> your mentor. <a class="src" data-lesson="5">L5</a></p></div>
+      <div class="card"><h4>Reality</h4><p>Khalil's own path: learning from reality itself, using the process of essentialism below. It's slower, and the course exists to shortcut it. <a class="src" data-lesson="5">L5</a></p></div>
+    </div>
+    <h4>Strategy 2 — The process of essentialism</h4>
+    <ol class="steps">
+      <li><strong>Observe &amp; Evaluate</strong> — Take in as much information as you can (books, code, blog posts, other developers' views, being corrected) until the bigger puzzle shows. Shorten this step by asking questions in the community. <a class="src" data-lesson="5">L5</a><a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Eliminate</strong> — Get clear on your purpose or goal, spot the patterns, and keep only the <em>essential forms</em>. Khalil's years of eliminating left the <strong>12 essentials</strong>. <a class="src" data-lesson="5">L5</a><a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Execute</strong> — Commit fully to execution and learn that subset in a “straight line” instead of wandering from topic to topic. <a class="src" data-lesson="5">L5</a><a class="src" data-lesson="85">L85</a></li>
+    </ol>
+    <div class="callout tip"><strong>Use it as a diagnostic</strong> — Start from a concrete goal: “What is your current goal?” Many developers “don't even know what they need to know”, so they can't form a question. The course's action item: post one question and help two other developers. Teaching sharpens your own understanding. <a class="src" data-lesson="85">L85</a><a class="src" data-lesson="5">L5</a></div>
+  </article>
+
+  <article class="topic" id="mindsets--motivation" data-title="4 Motivation Techniques">
+    <h3>Endless Motivation: 4 Techniques <a class="src" data-lesson="6">L6</a></h3>
+    <p>Motivation drops at the first sign of friction, because we default to the path of least resistance. Purpose is the antidote to boredom, and <em>emotional</em> reasons keep you on track better than logical ones. You don't need all four techniques; use them when motivation dips. <a class="src" data-lesson="6">L6</a></p>
+    <div class="cards">
+      <div class="card"><h4>1 · Trail of whys</h4><p>Ask “why?” again and again until you reach something with an emotional charge. <em>Learn DDD → my codebase is a mess → I want to do a good job → …</em> Spend 5 minutes on paper and keep the real reason front of mind. <a class="src" data-lesson="6">L6</a></p></div>
+      <div class="card"><h4>2 · Correct social ties</h4><p>Peer norms shape behavior. In the study cited, when a friend became obese you were 45% more likely to gain weight; for a friend-of-a-friend it was about 20%. Join a community with high expectations: ask questions, share wins and losses, help others. <a class="src" data-lesson="6">L6</a></p></div>
+      <div class="card"><h4>3 · Positive/negative × short/long term</h4><p>In the short term, discomfort wins (“I don't want to do it”). Write out the <strong>long-term vision</strong> and the <strong>anti-vision</strong> (the future you want to avoid) so the long-term difference outweighs short-term comfort. <a class="src" data-lesson="6">L6</a></p></div>
+      <div class="card"><h4>4 · Commit to the process</h4><p>Write a contract or letter to yourself, print it, and keep it where you'll see it every day. “Quality is not an act, but a habit.” <a class="src" data-lesson="6">L6</a></p></div>
+    </div>
+  </article>
+
+  <article class="topic" id="mindsets--thinking-backwards" data-title="Thinking Backwards">
+    <h3>Thinking Backwards <a class="src" data-lesson="75">L75</a><a class="src" data-lesson="3">L3</a></h3>
+    <p>Start at the end: get clear on where you want to be or what something should do, and only then do the work. Khalil calls this “pretty much the whole idea of test-driven development”. <a class="src" data-lesson="3">L3</a></p>
+    <ol class="steps">
+      <li><strong>What do we need to have next?</strong> — Name the next result. <a class="src" data-lesson="75">L75</a></li>
+      <li><strong>Where do I want to be next?</strong> — Name the destination. <a class="src" data-lesson="75">L75</a></li>
+      <li><strong>What is the state of the universe I'll be in?</strong> — Describe the end state concretely, then let it “carve the pieces moving back” to the present. <a class="src" data-lesson="75">L75</a></li>
+    </ol>
+    <div class="cards">
+      <div class="card"><h4>In code</h4><p>Write the assertion or desired outcome first, then work back to the setup. This is the same move as Arrange-Act-Assert written backwards. Working backwards with TDD “forces you to kind of have faith” (student). <a class="src" data-lesson="75">L75</a><a class="src" data-lesson="51">L51</a></p></div>
+      <div class="card"><h4>In life / daily planning</h4><p>Khalil writes down the desired end state every day. It counters the tendency to dilly-dally without a defined target. <a class="src" data-lesson="75">L75</a></p></div>
+    </div>
+  </article>
+
+  <article class="topic" id="mindsets--right-action" data-title="Right Action">
+    <h3>Right Action at Quantum Moments <a class="src" data-lesson="85">L85</a></h3>
+    <p>Quantum moments come up constantly during work. <strong>Right action</strong> is choosing well at those moments. <a class="src" data-lesson="85">L85</a></p>
+    <ol class="steps">
+      <li><strong>Become aware</strong> — Learn to recognize the decision points, starting with “how do I start this project?” <a class="src" data-lesson="85">L85</a></li>
+      <li><strong>Know what to do next</strong> — What looks "right" depends on the lens you currently see reality through (code-first → best-practices-first → pattern-first → DDD-first → responsibility-first; see <a href="#course-map">Course Map</a>). <a class="src" data-lesson="85">L85</a></li>
+    </ol>
+    <blockquote class="quote">“Right action really, truly, is based on what you currently value.” … “Whatever you place your awareness on … is what you're going to achieve.”<cite><a class="src" data-lesson="85">L85</a></cite></blockquote>
+    <div class="callout rule"><strong>Heuristic</strong> — If you value writing code, you'll get code. If you value creating value, your first thought at the start of a project becomes “we need to be creating value”, and that's where “the game of software design” begins. <a class="src" data-lesson="85">L85</a></div>
+  </article>
+</section>

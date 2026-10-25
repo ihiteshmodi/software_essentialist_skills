@@ -1,0 +1,76 @@
+What's going on crafters? Khalil here. And in this video, I just really quickly wanted to talk about the various ways that we can apply the high value unit
+testing and also just different approaches with integration testing in general. So recently, yeah, I was in the community and was that Fardim posted this great
+link here about test TDD induced design damage. Yeah, this is a great post. And at the end of the day, I think what he's trying to communicate is you don't want
+to just be driving your tests. You don't want to be driving your designs just with your tests because then you end up in a kind of code first or just test in
+best practice first mindset. We're trying to get away from thinking about solving problems with code. We're trying to move closer towards thinking more about
+value and thinking more about what actually matters. And of course, we need to implement some testing strategy. So at the end of this, what he's saying is he
+does prescribe a particular testing strategy to use. And this seems like it's good, right? However, I just have a problem with prescribing one testing strategy
+1000% in every scenario. I just don't think it's all that productive and good. I think what needs to happen is you need to be aware of all the ways you can
+test. So you need to build those skills first. And then when the situations rise, you can come up with the testing strategy. However, there are some strategies
+that do work really well. This one that he's talking about. Yeah, this will work great. So what I've just done is put together this quick little image here
+where I could just compare and contrast some of these strategies. So let me see if I can make this a little larger. Some of it's a little messy here. The way
+that I look at it, if we're talking about the high value unit tests, the way that I see this is we have about three different options. So the one that I've been
+talking about recently in the community in the course is the high value unit test. This is a little rough, but with this, what we have is if we're talking about
+the back and you have express, you have your controllers, right? So these are going to be relatively decoupled objects and controllers are going to talk to the
+app is going to be composed from or made from a ton of different use cases. Those use cases are going to be configured to either talk to a real database or a
+fake database. So that's the one that we've been talking about a lot. And we use this in combination with the ideal developer workflow. When we use it in
+combination with the ideal developer workflow, you have a really awesome testing stride because you're going to cover. Yes, this is very. Yeah, I need some more
+pixels here, essentially. But when you use the ideal developer workflow, what's going to happen is you're going to test pretty much the entirety of the system.
+So that's going to give you confidence that the whole system works. But then we're going to move in and we're going to do something like this. Where you're
+going to be able to cover a ton of edge cases and you're going to be able to cover those off faster than you would if you were to do them at the end to end
+level. But there are alternatives and he's talking about alternatives in that post. I see one of the alternatives he mentioned is to write tests like this,
+which is what I'm going to call this the high value integration test. And this is where you're testing from the controller. So the incoming adapter or incoming
+infrastructure all the way up to the outgoing. There's benefits and there's drawbacks to all of this stuff. I'm going to say, and then also for this one here
+too, right? It's the same thing. However, we just move in and we test from the application level, but we do include the database as well. So benefits of this
+one here. Yeah, we're testing the database. Legit. We don't have to mock anything out. It's real. However, the downside of course, is that this is going to take
+some more complex testing setup. So you'll want to be able to use your builders properly. We should be good at that by now if we've gone through the best
+practice stuff. So that's one strategy we could use here. And then additionally, the other drawback is that, yeah, if you're going to have hundreds of different
+edge cases or tests that are going to cover those edge cases and make you feel good, you're probably going to want a lot of those. So yeah, you could get to
+hundreds of tests. Those tests are going to run really slow. So how do we count for that? That's why we have this idea of the ideal developer workflow, because
+that's like in the middle. Going to give this this decoupling to be able to achieve that. But also we're going to get this full end-to-end being able to see
+that everything works together in an integration sense as well. You could also write your end-to-end tests just if you're just doing back-end, because this is
+very complex and why we really just need a nuanced understanding of this. And I can't tell you one specific way, because you could write your end-to-end tests
+just on the back-end if you were just doing back-end development, because your role is your back-end developer versus end-to-end tests from front to back.
+Right? So that's another way of looking at this as well. But when are you going to choose this option A? I think choose option A when you need to be very
+tactical and strategic about just covering just a bit more, just getting a tiny little squeeze more of confidence. I would probably take this approach. However,
+you need to take into consideration if this is the only type of test we have, we're leaving a lot of ground open for uncertainty here, because we're not really
+getting clear on, hey, are these requests even going to translate into the correct calls to the use cases, which will then go into the database? I call that all
+the incoming tests. And this is very not high quality, this image here, just drew out on my iPad, unfortunately. But yeah, if we use the four-layer E2B test
+infrastructure, then we could make those calls. And we don't actually have to call into our app. We could just verify that the API is still good. Like the stuff
+that the clients are doing, they're going to call into the correct use cases. We don't have to actually exercise the use cases, but we do need to call into it.
+And you could do that using a test double. And we also need to decouple the concept of the entire application itself from the app itself. Yeah, you'll have a
+test double here, right? That we will be verifying where things called correctly. So that's a good way if you have multiple APIs, GraphQL and REST. This is a
+good way for you to just make sure that your API endpoints are still good. And if folks call them, they will work. It's a nice little lightweight way to do
+that. So yeah, you very well might want to exercise some of that, even if you're doing the high value unit testing. And then for option B, this is actually
+quite good. I like this one a lot. Because sometimes I would do high value. This was way before I started doing the ideal developer workflow and using faster.
+But I used to write just these high value unit tests and try to move to the next step and realize, damn, nothing's really working properly. And it's because
+we're not really touching infrastructure at all. Because we don't really know that. This one here is quite good because you're going to cover some of that
+incoming uncertainty because you're going to formulate your requests. You don't need to actually have Express. This is really important distinction here.
+Express here is acting as a system. It's the server. But what you could do is if you decouple your controllers from Express, you could just test the
+controllers, feed them the request objects. And then you could test to make sure that those request objects get verified, validated, the data gets pulled out of
+them properly. And then we do the whole commands or queries into the database. So that's this approach here. So I think this is quite good. It has the same
+benefits. However, it does cover a little bit more of the incoming. But it also has the same drawbacks where this will take more time and it can get very
+expensive. Yeah, that's just something to be aware of when you're thinking about your testing strategy, the value first phase of craftship. So when to choose
+this? It's a really nice high ground. It's a really nice metal ground. This one here. I do like it a lot. And I think sometimes if you're strapped, this is just
+a really good one. If you don't want to do any end-to-end testing, this is a great way to get some of that, just some of that certainty, like a lot more than
+you would if you were to just do this, because it's this chunk here. This tiny little connection here has messed me up plenty of times. So that one's good. And
+then, of course, we have option C, which is the high-value unit test that you are familiar with. You know that hopefully by now. And yeah, with this high-value
+unit test, it's great because we could chuck in hundreds of concrete examples and the test will run pretty fast. There are particular problems where this will
+be just obvious that we want to do this with, right? If we're testing across tons and tons of data, like front-end or back-end, right? It could be very good.
+And it will run really... Yeah, it's going to run fast. And we're also going to use result verification as well, which, if you'll remember, there's two
+different ways... Sorry, there's three different ways that we can perform subject verification, which is just if I'm trying to better tests are correct or not.
+And result verification is just checking the inputs and the outputs. However, because a lot of these tests here, this is going to involve infrastructure, we
+need to learn how to do communication verification, where if you're at this point in the course of where this is, in the value first phase, you should know how
+to do this. But the communication verification is a little bit more complex because you're dealing with indirect inputs and outputs. And just fundamentally,
+mocking and stubbing and spying is just more complex. Arguable, actually, what's more complex? Setting up mocks and stubs or doing the test, setting up real
+fixtures, actually talk to a real database and a real other pieces of infrastructure. It's hard to say which one is more complex, but that is just a drawback of
+this approach. However, I still think that if you're using, if you're doing E2B tests, if you're doing the ideal developer workflow, I think that combine those
+two together, we're in really good shape and I'm really happy with it. So that's what I wanted to get across here with the high value testing strategies. I hope
+this was helpful. Illuminated maybe some questions here that you were having about this. But yeah, that's pretty much my philosophy here. There is no perfect
+testing strategy. It's going to be entirely context dependent. So instead of just saying, do this or do that, let us understand how to do all of them. And then
+let us know how to determine which ones are going to give us the most ROI based on the time we have, based on the cost, based on the quality that we're looking
+for. And that's going to be drastically varied depending on the type of project we're working on. For example, if I have zero customers and I'm just launching
+something, maybe I'll just chuck some end-to-end tests. However, if I'm a staff developer at a company and it's really important that things work airtight and
+that's to be expected, I'm going to invest a lot more time and energy into an approach that's going to give me the ability to write a lot of tests that will
+cover the edge cases. So that's something to be aware of as well. So I'll leave the video right there, but I hope that was helpful. You know where to find me.
+I'm in here. As always, see you in the next one and to mastery, my friends. Patience

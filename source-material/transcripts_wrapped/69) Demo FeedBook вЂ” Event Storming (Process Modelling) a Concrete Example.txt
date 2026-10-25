@@ -1,0 +1,130 @@
+All right, cool. What are we moving on to? It's time to do the event storming. All right. Fantastic. Finally, let's get the event storming cheat sheet. Event
+storming. If I could type. It's about time, bro. All right. So I've done a little bit of this here. This is must've been me. All right. So I'm grabbing this.
+I'm going to piece this here. Okay. Does everybody know what event storming is? I'm assuming y'all are aware of this technique by now. You'd be surprised if
+anyone says no. I should lopey this point. All right. I'm going to assume you all know exactly what this is. What's the first thing to do? Actually, I don't
+even answer that. First thing to do is I need to get the story together. What are we trying to validate here? What do we want to, what's our concrete example?
+All right, let's get that. Let me get a design story here going. And then you can, we can do the first thing. So that's the first thing we need is a story
+concrete example. Concrete example. Let's see. I'm going to say, I'm going to do a kind of like a given when then structure this. So given. Yeah. Like I
+haven't, let's say I'm on the platform already. I'm a, I'm an author and I'm on the platform, but I haven't uploaded any, let's say I've uploaded my book and I
+already have my book uploaded. When I was going to say when I, and now I'm just going to list out pretty much all the stuff I'm going to do. What do I want?
+What do I want to achieve? Actually, let's start with that. Let's go back to here. There's a number of ways we could do this. Who's familiar with doing this?
+The user story as a way as a, so that I can X, Y, Z. I'm curious how y'all write your user stories and how y'all write these types of statements and definitions
+of what it is the user will be able to do. Curious about how you write these. Okay. Even when then, yeah. I'm going to create and invite pre readers to and
+manage feedback cycles. Let's do something involving choose one of these features and I'm going to implement. That's the goal. Create and invite pre readers to
+and manage feedback cycles. All right. Fantastic. So I'm an author. I'm on the platform. I have my book uploaded. Let's say I don't have, and I don't have any,
+let's say, and I have one. No, I say, and I don't have any pre readers added. So let's give this a, let's call this a scenario. So this feature adding, we're
+going to call this feature adding pre readers to no inviting. Pre readers to review the, you say invite pre readers to the platform. Cause they're going to
+either be there. So given I'm an author, I'm already on the platform and I already have my book uploaded. And I haven't added any, I haven't invited any pre
+readers yet. So let's say, when I enter, when I invite the following pre readers, let's do James, Gmail, com, Bill, email.com in bulk, invite them all together.
+They should get sent an email inviting them to be pre readers. Let's say inviting pre readers to the platform and one in one accepts. And let's take this even
+further. This is going a little bit further than just one particular feature. This is, it's like more of a scenario. The concept of, by the way, there's this
+book by Alistair Copper and I haven't fully read, but the concept of a use case or like a user story subjective, it could go like as long as you really want. It
+could span quite a distance. Actually I'm spanning like just a distance. That's going to be interesting enough for us to model out. So let's say they get an
+email inviting me to pre readers and let's say only Sally accepts and Sally should when X, Y, Z then, and then what are the, then should have an account and
+should be a valid pre reader. And James and Bill should be unvalidated. Pre reader. Unvalidated actually unaccepted invites and there should be unaccepted
+invites for both of these and James and Bill. So it should have a, should have an accepted invites and Sally should be a, should a pre reader account should
+have a pre reader. So that's the end goal. Sally's going to have a pre reader account. Those two are not, there's just going to be unaccepted invites when and
+Sally and when Sally accepts the invite. Okay. It's rough. It could be refined a bit, but I think that's pretty clear what it is we're trying to do. Does anyone
+have questions on this feature? What it is that we're going to be doing here? Yeah. This could be written a bit more formally, but I think that's clear. Yeah.
+Okay, cool. So I'm going to ask you all real quick. What's the first thing to do here? Given what I've got this feature, what to do. Event storming process
+modeling. We now have a clear beginning and an end. We know where to begin and we know that to end where to. Now the question is how do we start this process?
+Does anybody know? We should do first. For call. Domain events. Yes. Correct. Correct. And kick it off with some of those domain events. Somebody take a guess.
+What's an event that we might want to add here? Great. Pre-reader account created. I like it. Yeah. What we're doing here is the order. The exact order is not
+all that important right now. All we actually just want to do is get these events set up. Just get them out of our head. Put them on the screens so that we can
+order them often. So I'm going to just do a couple of them too. Invite accepted. Right. What else? Invite sent. Yeah. So we have invite accepted. Pre-reader
+invites. Yeah. Pre-reader. Invite. I'm going to consolidate the language. Pre-reader invite. Pre-reader. Accepted. I like sent. Yeah. So far that's the
+ordering. Pre-reader account created. Like depends on how we're modeling this. If we model invites and being invited and being a creator, if we model those
+things at the same, as a part of the same concept, then who knows what, which of these are going to come before and after that's going to be something we need
+to determine. But let's just get everything together here. Is that it? I'm an author. Is that literally all I've done here? Oh, actually they should get an
+email, right? Yeah. Email sent. And then let's see. Actually. I also want to say that once they accept the email, then I should also get an email knowing that
+it was accepted. Are invites and so I see the same. They could be the same. We could model them two different ways or invite and email the same. No. If you're
+referring to this, there's success confirmation. All right. So pre-reader invite sent. Let's say, ah, I see. Yes. So I would actually model this a little bit
+differently then. See what you're talking about. Pre-reader invites created, right? And then email sent. Creator, create or invite accepted. And then emails
+sent. And probably also these two would happen at the same time. Yeah. That's looking good. Okay. Does anyone know the next step after we have the events? Yes.
+We come up with the commands, the actions to do. So what are the actions? Let's see. What's the first one? So the pattern for creating the actions is pretty
+simple. All you do is we're supposed to be writing our events in past tense here, right? Those of you who've seen this before, all we really do is we just write
+it in the imperative. So if we have pre-reader invite created, we do create pre-reader invites. So name it's a name. And if we have email sent, we do send. And
+if we have pre-reader invite accepted, we do invite or accept. Pre-reader invites, right? And then these two are your account. Re-reader invites. Now this is
+interesting, right? Because when you imagine that the account is already, if we're doing stuff against a pre-reader, so we have a pre-reader invite, and then we
+have a pre-reader account. Interesting. Could we get rid of some of this information? Some of this may be superfluous. Maybe. I guess it is clear. Like it is
+clear. It's what are you being invited to? This type of questioning that I'm doing is normal when we are doing this process, because we want to have really
+clean and clear commands and events, because this is the logic or sorry, this is the language that we're going to use in our code. So it's worthwhile spending
+time really criticizing this language here. So I'm asking myself, okay, pre- accept pre-reader invites. Pre-reader invite created. The questioning that I'm
+having here is, can we extract the idea of like pre-reader invite? Could it just be an invite in general? And then we create the pre-reader instead of calling
+it pre-reader account, we'll just create the pre-reader. Right. Does that sound better? I think Bashman says yes. Like to hear additional comments on that. So
+Bashman says it would be better to assign a pre-reader status to an already registered user rather than creating another pre-reader account. Okay. So it would
+be better to assign a pre-reader status to already registered user. We didn't talk about the concept of user because we do have a user's generic subdomain, a
+generic bounded context over here, which is different than the pre-reader, which belongs to the pre-reader. Which would probably belong to feed book. So if
+that's what you're referring to when you're saying already registered user or already registered. Yes. Okay. Gotcha. So yeah, I'm not too mad at this
+personally. I think it's okay. However, things will emerge. Things will emerge as I need to, because this is really, truly where the state machine is. So where
+the state machine modeling comes in, where like, why that's pretty apt and important to do, because we can see some weird inconsistencies and see like how
+things might feel a little bit strange when we do that. All right, great. So let's move forward. Assuming we like this and we have that there's two places we
+could go with this now. Let us do the obvious one. What is the obvious one? Bring it out to y'all. Create pre-reader invalues. Yeah, we will want to start with
+that for sure. But what's next for us to find here? What else is missing for us to find in this process of doing a process modeling? The next thing we need to
+identify here. Probably actually label these out. So one. Yeah, actors is a good one. Good call. Yes. We could do actors or we could do aggregates. Either one
+is fair enough to do. So I'm going to say we've got events. Then we find the commands for those events. Actually do like the idea of going to actors and then
+let's go to the last part, which is going to be the data. It's going to be. Let's do that. And then that will be relatively enough. And then the last thing
+we'll do is draw the bounded contests. Okay. So actors. Who's going to do this? And let me go and grab the. Who's going to do this here? It's going to be the
+book owners. Yep. Right. One second. All right. So yeah. Book owners. I will call them authors actually as well. All right. Now here's an interesting one. Who
+does send email? Aha. It's interesting. Who does this? It's tricky one. Yes. It is the system. The system does send email. It's not a person. It is a system.
+That's correct. So we put these actors here. So it's a system. Great. Accept pre-reader invite system. And the person who was going to do this. It's really an
+actor. Is it more of a role? It's a funky thing to do. Yep. Pre-reader. Good call. Good. And then again, it should be obvious. Pre-reader accepted invite. Why,
+why do we have two of these here? So. Accept pre-reader invite. Pre-reader invite accepted. Ah. Pre-reader account created. Create. Create. Moving here. Down.
+Now who's going to do both of these two. Yeah. Exactly. The system just does these next automatically. Right. Because this is event based. So. You're working
+with an event driven architecture. Looks good. That looks good. All right. Now let's do the moment we've all been waiting for. The aggregates, the data. So I'm
+going to go over here. Grab this. Let's blast through this. All right. All right. This is going to be super easy. The aggregate for this is going to be. What? A
+pre-reader invite. Nice. I copy that. Because we're going to. Whoops. That's not a copy. Well, that's a copy. Pre-reader invite right here. Pre-reader. Account
+right here. Right there. Right here. What are we going to be doing? We'll do stuff on an email. And over here, we're doing stuff on an email. Those are the
+aggregates. So these are, this is the data that we're doing work against. That's what we're working with here. Pre-reader aggregate for all pre-reader related
+stuff. Yep. Pre-reader invite. And then we have pre-reader account. Oh, you're thinking about doing pre-reader just for literally everything. If I have that
+correct. Pre-reader invite and then pre-reader account. Yep. That looks good. Yep. Pre-reader invite, pre-reader accounts. So we're sitting on that. I like it.
+Great. And then the last part here is bounded context. This is easy. We've already done this work upfront. And now we, all we have to do is just place the
+boundaries around these properly. And so that's going to be a boundary. That's going to be a boundary. And then we're going to end up moving to another system.
+And actually what we got pre-reader. Accept pre-reader invite. And then this is actually the same system, but it's going to happen as a domain event internally.
+Let's just move that down. And this should also have same. There we go. So let's see. Let's see. Right. Now, as I'm looking at this, right. Whenever I see stuff
+like this, I don't really love it. Whenever I see this relationship here, I don't really love this. So it makes me think when you send a pre-reader invite, it
+makes me think maybe we should, I'm wondering if maybe we should create the account for the pre-reader. Yeah. Creating the account for the pre-reader in
+general, right. With the default state of not valid, like not accepted. So I think that's what you, somebody might've been mentioning that a little bit earlier
+on because, and that's just temporal decoupling. It's me trying to avoid this dynamic here where I'm doing something to a related object within the same, within
+the same process. I want to see if I could avoid that. So I'll just think of an alternative design here. First of all, like before I do that, does everyone see
+what I'm referring to here? Like the kind of the slight weirdness. Yeah. It is twice as large. Right. But imagine if we could let's, here's where state machines
+would help. Right. Let's imagine that maybe if should go to state, let's try this tool, see if this helps. Let's get rid of all this. Right. So let's say
+re-reader. And initially the state it's created in is on accepted. In fact. Right. And then maybe the next state is accepted. So maybe invited and then
+accepted. Right. Maybe this is like the way that we make this simple. So what would this look like? If we just took that, here's an alternate, alternate design.
+You could have is when we do, maybe instead it's just called invite pre-reader, invite new pre-reader. Pre-reader. Right. And what this would actually do is
+this would create, this would kick off the initial state of the pre-reader. So how can a pre-reader come to be in our platform in general? You need to just be
+invited. You can't really be created without being invited. So then really, if that's the case, we would actually not have this at all. We actually lose needing
+to do that in the first place. And what does that do? Boom. Done. Look at that. Some simple naming changes kind of changes. And now we have to change a little
+bit of this stuff here too. So invite new pre-reader. Create new. Maybe I'll take read new. Maybe this is just a part of the domain logic and we could annotate
+these rules. I take this thing here, right? Anytime I have a rule or something that's important to note down, I just, I might put it here. When we create in
+order to create pre-reader. They started out invited. Put those little rules there just so that is well known. Pre-reader. Pre-reader invited. Boom. And then
+accept pre-reader invites. Invite. Invite. Invite. And then this just edits pre-reader. What do we call this? Accept invite. It's accept invite, but we could
+make it more. Accept pre-reader invite. If we'd like, we could do that. Sure. Actually, you know, I like just accept invite. That language just seems nice. So,
+cause we're going to probably call that. This in the colon base anyways. Nah, I actually am liking pre-reader. Except. Keep it specific for now. And then of
+course in this state, what's going to happen is then it becomes accepted. And then the email gets sent. Okay. Thoughts on this. Does everyone understand what we
+just did there? How I use state machines to gain clarity on the initial state. And then. How we could just simplify. What needs to happen here by just dropping
+down a level deeper to look at. Okay. What is this concept we're talking about? How will it change? Starts out this way. And then it moves to being that. As a
+rule of thumb. When possible. If you have. What is that crystal? As a rule of thumb. When you have. Domain events. Occurring within the same domain. Like that
+to change the same. Concept. You want to be very wary of that. Because it's saying. It's what it's saying is you might be missing. Like a potential state
+change, or you just might've modeled your state changes a little bit wrong. Because if there's not like a worthwhile reason. You like here. Like what's going on
+here is in between each time we switch contexts. So this one is the email contexts. Right. Email. And then we've got, I believe this is feedback. Right. And
+then I believe this one is email again and then. Feed book again. Right. Every time we switch contexts, what's happening here. Is this event is getting listened
+to. By the other context. It's going from one to one. And that one's going bleeding over that. Oh, wait, sorry. No, I'm lying. We have, this one is getting
+bleeding over there and then time just passes. Right. And then the pre-reader could just come on and whenever they feel like it. Do that. Do that. And then
+this, the system will listen and do this. Right. So when you have events. Crossing these systems, that's when it makes more sense. But when you have events just
+happening within the same. Thing. Sometimes you just want to be wary of how are you modeling this? Can you possibly try to model this differently where you
+don't need to do several. Little flips of the switch in the same. Context. So just a little thing to be aware of. And this is why I've included the state
+machines. Assignment. Because this will help you just really get clear on how data is maneuvering through. I find that the hardest thing at this level is just
+knowing how to design these correctly. So you don't have that situation. It's like, when should this get created? What is the initial state of that? It can get
+a little bit tricky. So when you're doing your assignments. Yeah, definitely. Let me know how things are going. You could find some weirdness in there. Okay,
+cool. So we've just done a lot. What's next? What do we need here? We have the core supporting. We have the event storm. We have the bound in contexts. Major
+learnings. So quick recap. We are at the solution guest point. We came into this. We put together a concrete example. Cause we forgot to do that at the problem.
+Guest point. We got a concrete example here. We wrote it out like this. This is the given when format. Given when then. And we broke down our. Domain into
+bounded contexts. So that when we actually went to go and do our. Event storm or process model. We had an awareness of what the bounded contexts already were.
+So that we could just place that around these. That's often one of the hardest parts is like figuring out the bounded contexts. Because I think just the
+sequence in which we do these things is a bit off. So that's why I wrote it out like this. Let's get those bounded contexts first. Then we can gather all that
+stuff. And then we can get to this. However, I actually feel like we could probably reorder this. Do the find the core supporting generic domains like first,
+and then do the process model last. Cause really, truly the process model is probably the most key part of the most key part of what we need here. This is going
+to, this gives us the ultimate clarity on the data. The behavior. Even a little bit of the relationships and just the process in general. All of which are
+concerns that we need to codify in our domain model. Lots of different learnings in here with this one. Yeah. I love doing this by the way. This is like one of
+my favorite parts of any project is the solution guest point. The solution guest point. The solution guest point. The solution guest point.

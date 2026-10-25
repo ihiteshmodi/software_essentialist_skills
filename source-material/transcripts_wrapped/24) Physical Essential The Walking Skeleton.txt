@@ -1,0 +1,46 @@
+What's up crafters, Khalil here, and in this video we are returning back to the physical essentials. We're going to talk about the walking skeleton. In our
+discussion of the 12 essentials, we've jumped up to the theoretical ones and been moving from the theoretical downwards into the physical. Now making the shift
+over from the theoretical to the physical is a process that oftentimes includes a lot of scripting, a lot of snags and trouble spots that you'll run into. A lot
+of things that you didn't expect to go wrong will quite often go wrong. And the reason for this is because we are now stepping into reality. We are now stepping
+into the world of where code is actually being written, and that's the physical realm. Be prepared to deal with version conflicts, to deal with outdated tools,
+to deal with containerization issues, and all sorts of things that you probably couldn't even conceive of ahead of time. That's the way it goes. Now I want to
+ask you, which do you think out of these two scenarios is better? Scenario number one is you start on a new project and you build out a lot of React components.
+Maybe you even use a little bit of the testing techniques I'm about to show you, and maybe you know about already, in order to build out some of the core
+functionality on the backend. Maybe you don't even really bother hooking it up to the database just yet, or hooking up the web server. You're just getting the
+almost like the inner workings of things that you know are going to be needed and necessary. You're getting all those things working so that you can compose and
+build them all together. And you spend around two weeks doing this and you have a lot of different pieces and parts that you could use to plug together. You're
+feeling pretty good about the component library you've got. And now it's time to wrap up and actually deploy the feature. Scenario number two is you start by
+deploying the minimum slice of functionality across everything. This is going to feel like hell. It's going to feel like nothing's quite working. You're going
+to run into snag after snag, bug after bug, strangeness all the way. But eventually, maybe a weekend or a week and a half in, you have something deployed. Maybe
+you don't have all the features and maybe you don't have all of the components cleanly built out. Maybe you don't have a lot of that functionality built out
+based comparing to the first scenario. However, what you do have is something deployed, even if it's a little bit crappy. So which one of those two is better?
+If you guessed scenario number two, you would be right. And the reason why it's better is, of course, because we don't actually know how long it's going to take
+for us to get something deployed. Even me building out this course itself for the very first time, I ran into so many different challenges and snags because it
+was the first time I'd ever done something. So this applies to code, this applies to life, this applies to everything. The walking skeleton is a foundational,
+incredibly important essential, which means that we want to build the smallest slice of useful functionality and deploy it as quickly as possible. Now, in terms
+of implementing this out, the steps for the walking skeleton, typically it involves getting very clear on the theoretical aspect. And typically it involves
+getting very clear on the architectural components, having a clear picture in establishing the patterns that we're going to use throughout the architecture and
+how they're going to play together, drawing that all together as a sort of broad stroke architecture diagram, and then shifting right over to the physical to go
+ahead and build that out and test it end to end with some sort of functionality that cuts across all of the main components, and then trying to figure out how
+to deploy that thing. Now, doing this can involve so many different things, as I already said, and there are some guidelines we generally want to follow. So we
+want to do this in an automated way for the most part. That means we want to have a test exercise a piece of functionality, and the best test to use for that is
+an end-to-end test. However, in order to get an end-to-end test set up properly, we need to implement quite a few things. How are we going to organize our code
+base? Are we going to organize it as a monolithic application? Are we going to implement it as a monorepo? How are we going to set all that up? What are the
+tools we'll use for that? What are we going to use for source control? How can we get a deployment pipeline going? What are we going to use for our CI,
+continuous integration? And another thing that is quite important at this level is to make sure that when we're doing our testing, we're testing in the most
+production-like environment as possible. So this is going to mean many different things in terms of setting up your initial test infrastructure. Now, it's
+important to get this set up properly and set up in a reproducible way so that other developers can just as easily pull the code and get it working on their
+machine and test that out. This also takes us into the concept of design. Can we make it very easy for developers at the start when things are admittedly never
+going to be easier? Can we make it very easy for them to be able to implement their key developer use cases? This takes us a little bit into folder structure
+and even structuring up the readme. Thinking things through from this level really can have a drastic major impact on the structure and quality of the project
+moving forward. As I said, we're moving from the architecture guess point. We've gotten clarity on the tools we're using, the patterns, libraries, services, so
+on and so forth. And finally, we move into the physical. And that's when we get to implement an end-to-end test, which is going to cut across everything. And
+we're going to get all the way down into the deployment and delivery and execution guess points. Now, the execution guess point, I refer to this as the guess
+point where the code is actually running in production. And it's something that users can use. At this point, the most important question that we have is pretty
+much can users even use this thing? Will this even work? Does it deploy? And does everything seem to be business as usual? If so, then we're in very good shape
+to continue to move things along and start to implement more features and continue to refine the system in its very early stages. So the walking skeleton is a
+very important technique. It's something that I always recommend we use in order to kick off a project. Even if we're going to kick off a feature in an existing
+project that's not well-structured out, we can still use this walking skeleton technique to begin to pull the project towards a more useful, more structured,
+and maintainable code base. We're going to talk about this perhaps in most detail in the best practice first section, where I'm going to first of all make you
+do some ugly stuff in the code first phase of craftship. And then I'm going to get you to refine that with a walking skeleton in best practice first. So with
+that being said, I'll leave the video right here. Let's dive into the next one. And as always, to mastery.

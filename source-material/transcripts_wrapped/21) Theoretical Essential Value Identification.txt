@@ -1,0 +1,49 @@
+What's going on crafters? Khalil here and in this video we're going to talk about value identification. We are now over to the theoretical essentials, a couple
+of them. We'll return back to some more of the physical ones but let's talk about this. It should now be clear to you that we need to drive all of our work
+through this understanding of the theoretical aspect of abstraction. So allow me to just pull this up again, right? At the very top here what do we have? We
+have the vision. This is can you even conceive of what it is you want to build, what it is we're making. Then we have very clear roles. So we're helping in
+their goals. Then we know what they're going to be enabled to do. From there we can look at the features which starts to take us into the territory of the
+solution space in terms of what it is we actually need to build. Then we have the stories which are real world scenarios and then acceptance criteria and then
+concrete examples. So all of those things are the theoretical. Now when we're referring to value identification what we're trying to gain clarity on up front is
+the vision and the role goal and we want to get clarity on the capabilities as well. So this is going to cover the who, the why, and the reason why this is so
+important is because I don't want you to be the developer who's writing code without a very clear understanding of why you're doing what you're doing. You'll
+remember this from abstraction when we work directionally from the code towards the problem. We end up doing more code focused things that don't actually matter
+that don't actually help us in the longterm and that might actually make our code way more complex. So with value identification what we are concerned with here
+is getting clarity on these three parts up front. And before we drive any work whether it's just to implement a new feature I could even go into the community
+discord and look at different questions on how to do XYZ with this tool. How do I solve this particular design problem? What's the best way to do this? And the
+answer that I will always give up front at the very start is do you have clarity on the theoretical guesses first? And if you do share some examples, share some
+user stories so that we can get clear on what is actually needed, what is actually necessary. So before we get into the how, before we start talking about code,
+we want to clarify the who, the why, and the what. Because this is going to ensure first of all that what we build actually matters. It has value for the user
+and the customer. Now this is quite a topic. I'll admit it is a little more business focused. It's a little more customer driven. However, if you're a software
+essentialist, you need clarity. You want to know why you're doing what you're doing. So in order to actualize this essential here, we will have to do a number
+of strategic things and a number of design oriented things. We'll need to talk to customers, talk to the person that we are building the thing for. We're
+building it for them. This could also take us into prototyping or wireframing. And let's say you join a company and you're going to work on an existing product
+and you need to gain clarity on what problems are currently being solved and how we are already solving them. Maybe one of the problems is that the code base is
+messy. And there's a technique that we could use to gain clarity on the landscape of how we're currently doing things. That technique is event storming and it
+will allow us to gain clarity on what the problem that we're currently dealing with is, what the business does and how it solves that problem today. After doing
+this big picture event storming, something we'll talk about more in the guest points, we can start to then move more into the solution space and think about how
+we're actually going to make changes to the code and implement out our features. Another thing that's really important to mention here is if you are a sort of
+entrepreneurial developer, someone who has ambition to build software that's useful for other people, you actually take on the role of being the customer. What
+that means for you is you actually need to do a fair amount of this strategy work here. That means you need to do some quantitative analysis, qualitative
+analysis. Quantitative analysis is about you being able to know, hey, are there even people that want this thing that I'm trying to build? Are there people with
+a large enough problem? Are there people that are currently in pain that need to move to benefit? How many of those people are there? So that is more of you
+gaining a number, seeing if there are even users out there for you to serve. Qualitative analysis is more of a feel for it. This would be more of something that
+you could feel out through talking with users, through talking with domain experts and feeling into their problem. Now, this is a very different type of skill,
+but again, you are a software essentialist, which means you need to get very good at the things that matter. And the reality is unless we move through this
+problem guess point, this guess point here where we have clarity on who we're helping, what we're trying to achieve and what our users are going to be able to
+do and how we're going to help the customer as well. Unless we have clarity on that, we will be at an impasse. That is a blockage. That is do not pass go. We
+can move forward. We really need to make sure that we have clarity on this and we have a fair amount of confidence that we should be moving forward. There's
+other techniques that we could use as well, like feature injection and impact mapping, both of which are very popular in the domain-driven design communities as
+well, and behavior-driven development communities. And we'll cover more of these in the guess points. If this sounds like a lot, that's totally okay. This is
+just the high level. So you have awareness of what it is we're concerned with at this point, but I just want to go back to this image here and make sure this is
+very clear. Value identification is getting super, super clear on the problem guess point and moving through there. If we have clarity on who we're helping, how
+we're helping them and what they're going to be able to do. And we feel like we have a good enough qualitative and quantitative data to know that it's going to
+be worthwhile to invest in that. Then we are good to move on to the solution guess point. So this is another reason why I really love this idea of the guess
+points, because there are a million myriad of things that we could do to gain clarity on this, to move through. But if we could think about it as inputs and
+outputs systems thinking, then we can constrain down what it is we really need and we could know when to move forward and when not to move forward just by
+thinking about it as inputs and outputs. We're going to talk about this in the best practice first section. Once we reorient, what I ask you to build in code
+first and make it a little bit more valuable, we'll do a little bit more work here with the sub domain mapping and drawing in the pattern first phase. But then
+in the guess points is where we're going to go most deepest on this. So there will be some exercises in there for you to go through and try out to practice this
+skill. This is also something that is going to be relevant when you are thinking about the optional project in the course. And it could be something that you
+take and make a profit from or merely something that you build because it is valuable to you to build in order to learn. So with that being said, I will leave
+this video here and I'll see you in the next one. As always, to Monster. I'll see you again next time. Thank you. Bye bye.

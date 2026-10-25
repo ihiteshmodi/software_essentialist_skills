@@ -1,0 +1,7 @@
+Note on comments is we don't really need comments. You want your code to, this is actually an important point. My stance on comments, which is that your code
+should always express what happens. Comments should express why you've chosen to do what you're doing. That's actually very key because if you can express what
+you need to express in code, make your code so expressive that it actually communicates what it is doing. If your code's not able to adequately communicate what
+it is doing, then there's a problem and you need to look at your code to make sure it can do that. So always make that readability change first. And at a last
+resort, use comments. And that last resort that you're always going to find is that there isn't, as far as I know, a way to express why you do things in your
+code base using code. And that is really, truly the purpose of comments is to express why. That is a really key distinction. So know that and I would get rid of
+your comments.

@@ -1,0 +1,622 @@
+<section id="frontend" class="doc-section" data-title="Frontend Architecture">
+  <h2>Frontend Architecture</h2>
+  <p class="lede">The frontend uses the <strong>same stereotypically testable architecture</strong> as the backend, under different names. Take the control center back from React. Split the app into a <strong>read side</strong> (gateway → cache → observer → presenter → view model → component) and a <strong>write side</strong> (component → controller → domain object → repository → gateway). Test the pure middle without starting React. <a class="src" data-lesson="33">L33</a> <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a> <a class="src" data-lesson="92">L92</a></p>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="frontend--same-architecture" data-title="Same Architecture, Different Terms">
+    <h3>Same Architecture, Different Terms <a class="src" data-lesson="33">L33</a> <a class="src" data-lesson="83">L83</a> <a class="src" data-lesson="87">L87</a></h3>
+
+    <blockquote class="quote">“The architecture you do on the front end that you do on the back end, you do on desktop, pretty much anywhere. It is exactly the same.”<cite><a class="src" data-lesson="87">L87</a></cite></blockquote>
+    <blockquote class="quote">“It's all the same stereotypical architecture.”<cite><a class="src" data-lesson="83">L83</a></cite></blockquote>
+
+    <ul>
+      <li><strong>Frontend and backend are “the same thing because [architectures] are stereotypical.”</strong> Learn the backend patterns first (Pattern First), build with them a few times, then look at the frontend patterns and kinds of state. It will “look a lot like the back-end.” <a class="src" data-lesson="33">L33</a></li>
+      <li><strong>Only the terminology changes.</strong> Master the architecture on one side and “you've effectively mastered it everywhere.” Khalil planned to build it 4–5 times (backend, frontend, desktop, Chrome extension) to show it's “the same stuff over and over.” <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>Framework patterns map onto agnostic patterns.</strong> Redux store and single-file components came from the technology. Their responsibilities map onto stack-agnostic patterns: <em>DTOs, controllers, presenters, global state (fundamentally an observer), gateway, view model, data model</em>. All of these derive from the six RDD object stereotypes. <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>The frontend has real domains.</strong> React Router has its own domain layer (domain/app/adapter/infra) that you <em>install</em> rather than build. “Your app is just a bunch of… domains connected to each other.” <a class="src" data-lesson="88">L88</a></li>
+    </ul>
+
+    <table class="tbl">
+      <thead><tr><th>Frontend term</th><th>Backend counterpart / stereotype</th><th>Responsibility</th></tr></thead>
+      <tbody>
+        <tr><td>Component (React)</td><td>Incoming adapter</td><td>“Just the view.” Renders a view model and forwards user intent. <a class="src" data-lesson="90">L90</a> <a class="src" data-lesson="92">L92</a></td></tr>
+        <tr><td>Controller</td><td>Use case / application service (command handlers)</td><td>Receives commands from components. “Effectively the exact same thing as a backend use case.” <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a></td></tr>
+        <tr><td>Presenter</td><td>Roughly a repository for read models</td><td>Builds view models and hosts selectors. “The presenter's whole job is to build the view models.” <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a></td></tr>
+        <tr><td>Observer (global state)</td><td>Coordinator</td><td>Lets objects subscribe and notifies them on change. “This really is what Redux is doing.” <a class="src" data-lesson="90">L90</a> <a class="src" data-lesson="94">L94</a></td></tr>
+        <tr><td>Cache (API client store)</td><td>Database</td><td>The frontend “database”, i.e. global/app state. “GraphQL is like MySQL for front end.” <a class="src" data-lesson="87">L87</a></td></tr>
+        <tr><td>Gateway / API client</td><td>Outgoing adapter (interfacer)</td><td>Sends requests to the backend (axios, HTTP). <a class="src" data-lesson="90">L90</a></td></tr>
+        <tr><td>Domain object (e.g. <code>RegistrationForm</code>)</td><td>Entity / value objects</td><td>Validates and decides whether a command may proceed. <a class="src" data-lesson="90">L90</a></td></tr>
+        <tr><td>DTO / data model</td><td>DTO</td><td>Wire shape, often handled by GraphQL or just cached. The data model “is actually the DTO”, and it isn't the view model. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a></td></tr>
+      </tbody>
+    </table>
+
+    <h4>Mapping any tool onto the stereotype <a class="src" data-lesson="87">L87</a></h4>
+    <ol class="steps">
+      <li><strong>Read the docs for doings and knowings</strong>: what does the tool actually do and know?</li>
+      <li><strong>List its responsibilities.</strong></li>
+      <li><strong>Map each to an object stereotype and a layer.</strong></li>
+      <li><strong>Decide where it goes and what stays out.</strong> Worked example, Redux: store/reducer = cache/gateway (infrastructure), <code>subscribe</code> = reactivity, <code>dispatch</code> = updating the store, selectors = reactive queries that keep view models in sync. Verdict: Redux has “nothing to do with features.”</li>
+    </ol>
+    <p>The same move vets React Query or Apollo Client. They handle fetching, caching and hooks. At responsibility-first you check whether a tool covers the responsibilities you need and compose the missing ones yourself. <a class="src" data-lesson="90">L90</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="frontend--control-center" data-title="React Must Not Run the Show">
+    <h3>React Must Not Run the Show: Own the Control Center <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="94">L94</a></h3>
+
+    <div class="callout def"><strong>Control center</strong>
+      <p>The <strong>coordinator + controller</strong> objects: “the key place where all of the main decision making logic happens.” It can be centralized or delegated, and there can be several of each (a page may be a controller, page switching may be a coordinator). <a class="src" data-lesson="94">L94</a></p>
+    </div>
+
+    <div class="callout rule"><strong>The coordination test</strong>
+      <p>“If you want to test your features, if you need to start react, then react is doing the coordination.” A view library “becomes a framework when you let [it] do the coordinating and controlling.” You're “in really good shape” if you can go from requirement to coded feature without touching or mentioning React. <a class="src" data-lesson="87">L87</a></p>
+    </div>
+
+    <ul>
+      <li><strong>Payoff:</strong> “You can actually test out 90% of the core use cases without ever even starting react.” Add React “way later” and build the frontend “as if you're writing backend code.” <a class="src" data-lesson="94">L94</a></li>
+      <li><strong>How the UI hooks up:</strong> components get state from the <strong>presenter</strong> and tell the <strong>controller</strong> what to do. That boundary lets you swap React for another view library. <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>Wrap framework rules you can't avoid.</strong> Hooks force a particular structure, so either design things yourself or wrap “the ugly bits and pieces” behind your own abstractions. <a class="src" data-lesson="33">L33</a> Khalil would extract a <strong>routing service</strong> rather than use the router hook: “hooks are just the worst… Don't tell me I need to name things with <code>use</code> in front of it.” <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>Strategy decides how far to go.</strong> An entrepreneur shipping fast can write everything in React, then turn defensive once value is validated. <a class="src" data-lesson="94">L94</a> For small/medium frontends, start with E2E tests and carve out layers only when internal complexity justifies it. “I cannot prescribe to you a single approach.” <a class="src" data-lesson="90">L90</a></li>
+    </ul>
+
+    <div class="compare">
+      <div class="before"><div class="compare-label">Before: the component fetches, maps, validates and patches the cache, so React is the control center</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> “Too much is happening in one place” <a class="src" data-lesson="90">L90</a></figcaption>
+          <pre><code class="language-tsx">// TodosPage.tsx
+export function TodosPage() {
+  const [todos, setTodos] = useState&lt;TodoRow[]&gt;([]);
+  const [title, setTitle] = useState('');
+  const [error, setError] = useState&lt;string | null&gt;(null);
+
+  useEffect(() =&gt; {
+    fetch('/api/todos')                                   // infrastructure
+      .then((res) =&gt; res.json())
+      .then((dtos: TodoDTO[]) =&gt;
+        setTodos(dtos.map((d) =&gt; ({                       // DTO → view mapping
+          id: d.id, label: d.title, done: d.completedAt !== null,
+        }))));
+  }, []);
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    const clean = title.trim();
+    if (clean.length &lt; 1 || clean.length &gt; 80) {        // business rule
+      return setError('Title must be 1–80 characters');
+    }
+    const res = await fetch('/api/todos', {              // infrastructure again
+      method: 'POST', body: JSON.stringify({ title: clean }),
+    });
+    const created: TodoDTO = await res.json();
+    setTodos([...todos, { id: created.id, label: created.title, done: false }]); // hand-rolled cache
+    setTitle('');
+  }
+
+  const remaining = todos.filter((t) =&gt; !t.done).length;  // selector in the component
+  return (/* list, "{remaining} left", form, error */);
+}
+// To test "adding a todo" you must render React and mock fetch.</code></pre>
+        </figure>
+      </div>
+      <div class="after"><div class="compare-label">After: the component only reads a view model and forwards intent</div>
+        <figure class="code">
+          <figcaption><span class="badge copilot">Added by Copilot</span> Thin view: presenter for reads, controller for writes. Shape from <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a></figcaption>
+          <pre><code class="language-tsx">// TodosPage.tsx
+export function TodosPage({ presenter, controller }: TodosPageProps) {
+  const [vm, setVm] = useState(presenter.load());              // initial state from the view model
+  useEffect(() =&gt; presenter.subscribe(() =&gt; setVm(presenter.load())), [presenter]);
+
+  const [title, setTitle] = useState('');                      // component state: ephemeral
+  const [error, setError] = useState&lt;string | null&gt;(null);
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    const result = await controller.createTodo(title);
+    if (result.isFailure) return setError(result.error);
+    setTitle('');
+    setError(null);
+  }
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;ul&gt;{vm.items.map((i) =&gt; &lt;li key={i.id}&gt;{i.label}&lt;/li&gt;)}&lt;/ul&gt;
+      &lt;p&gt;{vm.remaining}&lt;/p&gt;
+      {error &amp;&amp; &lt;p role="alert"&gt;{error}&lt;/p&gt;}
+      &lt;input value={title} onChange={(e) =&gt; setTitle(e.target.value)} /&gt;
+      &lt;button&gt;Add&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}
+// No fetch, no mapping, no rules. Swappable for another view library.</code></pre>
+        </figure>
+      </div>
+    </div>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>Ask an assistant for “a React todo list with an API” and you usually get the <em>Before</em> shape: <code>useEffect</code> fetching, inline validation, a custom hook that coordinates everything. Name the roles in the prompt (“presenter builds a view model, controller calls a domain object, component only renders”) and the generated logic ends up in plain objects that a fast test can check.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="frontend--read-side" data-title="Read Side: Gateway → Component">
+    <h3>Read Side: Gateway → Cache → Observer → Presenter → View Model → Component <a class="src" data-lesson="90">L90</a></h3>
+
+    <ol class="steps">
+      <li><strong>Gateway / API client</strong> (infra): sends the request (axios, HTTP adapter). <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>Cache</strong> (infra): stores fetched data. This is <strong>global/app state</strong>, persisted across screens. <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>Observer / coordinator</strong>: listens to the cache and notifies subscribers on change. “Global state… fundamentally it is an observer.” <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>Presenter</strong>: subscribes to changes and rebuilds view models. Its API is something like <code>presenter.load()</code>. It is also an <em>interfacer</em>, getting data ready for the view. Selectors live here. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>View model</strong>: the shape the component actually renders from. Components “shouldn't take on the job of preparing data to be seen. They should just get the data to be seen.” <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>Component</strong>, below the squiggly boundary (code we don't own). It binds to the presenter via <code>useEffect</code> (or MobX etc.) to re-render: “That's how you connect your pure code to React.” <a class="src" data-lesson="90">L90</a></li>
+    </ol>
+
+    <figure class="diagram" id="fe-diagram-flows">
+      <svg viewBox="0 0 960 330" role="img" aria-label="Two lanes. Read side: gateway to cache to observer to presenter to view model to component. Write side: component to controller to domain object to repository to gateway. The pure middle is dashed.">
+        <defs>
+          <marker id="fe-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+          <marker id="fe-arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent-2)"/></marker>
+        </defs>
+        <rect x="318" y="44" width="480" height="236" rx="10" fill="none" stroke="var(--accent)" stroke-dasharray="6 5" stroke-width="2"/>
+        <text x="558" y="296" text-anchor="middle" font-size="11" fill="var(--fg)">pure middle: presenter / controller / domain tests, no React, no backend</text>
+        <text x="480" y="34" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">READ side (queries): data flows toward the view →</text>
+        <text x="558" y="182" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fg)">← WRITE side (commands): intent → backend</text>
+        <rect x="20" y="50" width="120" height="220" rx="8" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="80" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Gateway /</text>
+        <text x="80" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">API client</text>
+        <text x="80" y="188" text-anchor="middle" font-size="11" fill="var(--fg)">infra ↔ backend</text>
+        <rect x="820" y="50" width="120" height="220" rx="8" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="880" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Component</text>
+        <text x="880" y="168" text-anchor="middle" font-size="11" fill="var(--fg)">React: just the view</text>
+        <text x="880" y="186" text-anchor="middle" font-size="11" fill="var(--fg)">+ component state</text>
+        <path d="M808,50 q6,10 0,20 q-6,10 0,20 q6,10 0,20 q-6,10 0,20 q6,10 0,20 q-6,10 0,20 q6,10 0,20 q-6,10 0,20 q6,10 0,20 q-6,10 0,20 q6,10 0,20" fill="none" stroke="var(--accent-2)" stroke-width="2"/>
+        <rect x="170" y="60" width="130" height="60" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="235" y="86" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Cache</text>
+        <text x="235" y="104" text-anchor="middle" font-size="11" fill="var(--fg)">global / app state</text>
+        <rect x="333" y="60" width="130" height="60" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="398" y="86" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Observer</text>
+        <text x="398" y="104" text-anchor="middle" font-size="11" fill="var(--fg)">coordinator: notify</text>
+        <rect x="496" y="60" width="130" height="60" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="561" y="86" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Presenter</text>
+        <text x="561" y="104" text-anchor="middle" font-size="11" fill="var(--fg)">selectors, builds VM</text>
+        <rect x="659" y="60" width="130" height="60" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="724" y="86" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">View model</text>
+        <text x="724" y="104" text-anchor="middle" font-size="11" fill="var(--fg)">shape to render</text>
+        <line x1="140" y1="90" x2="168" y2="90" stroke="var(--svg-stroke)" stroke-width="1.5" marker-end="url(#fe-arrow)"/>
+        <line x1="300" y1="90" x2="331" y2="90" stroke="var(--svg-stroke)" stroke-width="1.5" marker-end="url(#fe-arrow)"/>
+        <line x1="463" y1="90" x2="494" y2="90" stroke="var(--svg-stroke)" stroke-width="1.5" marker-end="url(#fe-arrow)"/>
+        <line x1="626" y1="90" x2="657" y2="90" stroke="var(--svg-stroke)" stroke-width="1.5" marker-end="url(#fe-arrow)"/>
+        <line x1="789" y1="90" x2="818" y2="90" stroke="var(--svg-stroke)" stroke-width="1.5" marker-end="url(#fe-arrow)"/>
+        <rect x="620" y="200" width="150" height="60" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="695" y="226" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Controller</text>
+        <text x="695" y="244" text-anchor="middle" font-size="11" fill="var(--fg)">use cases</text>
+        <rect x="390" y="200" width="150" height="60" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="465" y="226" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Domain object</text>
+        <text x="465" y="244" text-anchor="middle" font-size="11" fill="var(--fg)">validates, decides</text>
+        <rect x="170" y="200" width="130" height="60" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="235" y="226" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Repository</text>
+        <text x="235" y="244" text-anchor="middle" font-size="11" fill="var(--fg)">writes via gateway</text>
+        <line x1="820" y1="230" x2="772" y2="230" stroke="var(--accent-2)" stroke-width="1.5" marker-end="url(#fe-arrow-accent)"/>
+        <line x1="620" y1="230" x2="542" y2="230" stroke="var(--accent-2)" stroke-width="1.5" marker-end="url(#fe-arrow-accent)"/>
+        <line x1="390" y1="230" x2="302" y2="230" stroke="var(--accent-2)" stroke-width="1.5" marker-end="url(#fe-arrow-accent)"/>
+        <line x1="170" y1="230" x2="142" y2="230" stroke="var(--accent-2)" stroke-width="1.5" marker-end="url(#fe-arrow-accent)"/>
+        <text x="480" y="318" text-anchor="middle" font-size="11" fill="var(--fg)">after a write, the cache updates and the read side re-renders reactively · wavy line = boundary to code we don't own</text>
+      </svg>
+      <figcaption><span class="badge copilot">Added by Copilot</span> Redrawn from Khalil's iPad sketch of the frontend stereotypical architecture <a class="src" data-lesson="90">L90</a>. Includes the observer he said his earlier diagram was missing <a class="src" data-lesson="92">L92</a>. The dashed box is the “pure middle” where high-value unit tests go <a class="src" data-lesson="90">L90</a>.</figcaption>
+    </figure>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L90</span> DDDForum v2: pure global cache, menu presenter and the <code>useEffect</code> binding (Khalil wasn't happy with this version and promised a cleaner one)</figcaption>
+      <pre><code class="language-tsx">class GlobalCache {
+  private subscribers: Array&lt;() =&gt; void&gt; = [];
+  subscribe(cb: () =&gt; void) { this.subscribers.push(cb); }
+  protected notify() { this.subscribers.forEach((cb) =&gt; cb()); }
+}
+
+class MenuPresenter {
+  private viewModel: MenuViewModel;
+  constructor(private cache: GlobalCache) {
+    // on users change -&gt; rebuild view model
+    cache.subscribe(() =&gt; { this.viewModel = this.buildViewModel(); });
+  }
+  load(): MenuViewModel { return this.viewModel; }
+}
+
+function Menu({ presenter }: { presenter: MenuPresenter }) {
+  const [viewModel, setViewModel] = useState(presenter.load());
+  useEffect(() =&gt; { setViewModel(presenter.load()); }, [presenter /* state */]);
+  return &lt;MenuView viewModel={viewModel} /&gt;;
+}</code></pre>
+    </figure>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> Minimal observer store and a presenter that builds the view model used by the <em>After</em> component above</figcaption>
+      <pre><code class="language-ts">// shared/persistence/observable.ts: the whole "global state library"
+type Listener = () =&gt; void;
+
+export class Observable&lt;T&gt; {
+  private listeners = new Set&lt;Listener&gt;();
+  constructor(private state: T) {}
+
+  get(): T { return this.state; }
+
+  set(next: T) {
+    this.state = next;
+    this.listeners.forEach((listener) =&gt; listener());
+  }
+
+  subscribe(listener: Listener): () =&gt; void {
+    this.listeners.add(listener);
+    return () =&gt; { this.listeners.delete(listener); };   // unsubscribe
+  }
+}
+
+// modules/todos/todosPresenter.ts: read side
+export interface TodoItemVM { id: string; label: string; done: boolean }
+export interface TodosViewModel { items: TodoItemVM[]; remaining: string }
+
+export class TodosPresenter {
+  constructor(private cache: Observable&lt;TodoDTO[]&gt;) {}
+
+  load(): TodosViewModel {
+    const todos = this.cache.get();
+    const open = todos.filter((t) =&gt; t.completedAt === null).length; // selector lives here
+    return {
+      items: todos.map((t) =&gt; ({ id: t.id, label: t.title, done: t.completedAt !== null })),
+      remaining: `${open} left`,
+    };
+  }
+
+  subscribe(onChange: () =&gt; void) { return this.cache.subscribe(onChange); }
+}</code></pre>
+    </figure>
+
+    <div class="callout rule"><strong>Read-side rules</strong>
+      <ul>
+        <li>Components must not know about the cache/store (dependency rule). <a class="src" data-lesson="87">L87</a></li>
+        <li>Don't put selectors in component files. Selecting belongs in the presenter. <a class="src" data-lesson="87">L87</a></li>
+        <li>Reads go straight to the data store and return the simplest shape. Don't load domain objects and reshape them (“mapper hell”). Domain objects are for <strong>writes only</strong>. <a class="src" data-lesson="87">L87</a></li>
+        <li>Get reactivity working in the walking skeleton. <a class="src" data-lesson="87">L87</a></li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="frontend--write-side" data-title="Write Side: Component → Gateway">
+    <h3>Write Side: Component → Controller → Domain Object → Repository → Gateway <a class="src" data-lesson="90">L90</a></h3>
+
+    <ol class="steps">
+      <li><strong>Component</strong>: holds ephemeral form state and calls the controller on submit (e.g. the registration page calls <code>controller.register(...)</code>). <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>Controller</strong>: a cluster of use cases / command handlers, like a backend application service. It can be split per use case (<code>CreateUserController</code>, <code>EditUserController</code>, <code>DeleteTodoController</code>). <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>Domain object</strong>: the decision maker. “Anytime you intend to perform a state changing command… it must typically pass through a domain object to determine if we should continue with the request or not.” <a class="src" data-lesson="90">L90</a></li>
+      <li><strong>Repository</strong>: receives valid domain objects and calls the gateway. Repo and gateway may be the same thing. <a class="src" data-lesson="90">L90</a> In DDDForum the frontend <code>UserRepo</code> builds the DTO, sends it, then saves to the cache. <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>Gateway → backend</strong>. The cache updates and “everything flows back down reactively.” <a class="src" data-lesson="87">L87</a></li>
+    </ol>
+    <p>The write path is about throughput: controllers and domain objects decide what gets through. Knowing where each piece belongs encapsulates a lot of frontend complexity. It scales to designs like <strong>pipes and filters</strong> (FL Studio-style effect chains). <a class="src" data-lesson="90">L90</a> Separate read and write code paths so data flows one way. <a class="src" data-lesson="87">L87</a></p>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L90</span> Registration controller: try to create the domain object, return the error or continue to the repository</figcaption>
+      <pre><code class="language-ts">class RegistrationController {
+  constructor(private repo: UsersRepository) {}
+  async register(props: RegistrationProps) {
+    const formOrError = RegistrationForm.create(props); // FirstName, LastName, Username, Email VOs
+    if (formOrError.isError) return formOrError;       // user must fix
+    return this.repo.register(formOrError.value);      // repo -&gt; gateway/API client -&gt; backend
+  }
+}</code></pre>
+    </figure>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> The to-do write side: value object (shareable with the backend), repository that writes through the cache, controller that decides then delegates</figcaption>
+      <pre><code class="language-ts">// packages/shared/todoTitle.ts: imported by frontend AND backend
+export class TodoTitle {
+  private constructor(readonly value: string) {}
+  static create(raw: string): Result&lt;TodoTitle&gt; {
+    const clean = raw.trim();
+    if (clean.length &lt; 1 || clean.length &gt; 80) return Result.fail('Title must be 1–80 characters');
+    return Result.ok(new TodoTitle(clean));
+  }
+}
+
+// modules/todos/todosGateway.ts: the only contract that knows about the backend
+export interface TodosGateway {
+  getAll(): Promise&lt;TodoDTO[]&gt;;
+  create(title: string): Promise&lt;TodoDTO&gt;;
+}
+
+// modules/todos/todosRepository.ts
+export class TodosRepository {
+  constructor(private gateway: TodosGateway, private cache: Observable&lt;TodoDTO[]&gt;) {}
+  async load() { this.cache.set(await this.gateway.getAll()); }
+  async save(title: TodoTitle) {
+    const created = await this.gateway.create(title.value);
+    this.cache.set([...this.cache.get(), created]);     // observers fire → presenter rebuilds
+  }
+}
+
+// modules/todos/todosController.ts: write side
+export class TodosController {
+  constructor(private repo: TodosRepository) {}
+  async createTodo(rawTitle: string): Promise&lt;Result&lt;void&gt;&gt; {
+    const titleOrError = TodoTitle.create(rawTitle);     // domain object decides
+    if (titleOrError.isFailure) return Result.fail(titleOrError.error);
+    await this.repo.save(titleOrError.value);
+    return Result.ok();
+  }
+}</code></pre>
+    </figure>
+
+    <div class="cards">
+      <div class="card"><h4>Share value objects</h4><p>Is it OK to share models between frontend and backend? Yes. Value objects and their validation can come from a <strong>shared package</strong>, so validation isn't duplicated. Frontend-only domain objects like <code>RegistrationForm</code> still exist. <a class="src" data-lesson="90">L90</a> A monorepo with NPM workspaces can share DTOs and even domain objects. <a class="src" data-lesson="81">L81</a></p></div>
+      <div class="card"><h4>Frontend domain logic is real</h4><p>Khalil used to say DDD doesn't belong on the frontend. Now: logic-heavy apps need proper domain models, e.g. a digital audio workstation, a drag-and-drop call-flow editor, or plugin/pedal-board compatibility. Front-loading logic also speeds up feedback because there's no network round trip. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="88">L88</a></p></div>
+      <div class="card"><h4>Name use cases by intent</h4><p>“Submit form” is “not a great name.” Prefer “register user”, “edit user”. <a class="src" data-lesson="90">L90</a></p></div>
+    </div>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="frontend--state" data-title="State Management">
+    <h3>State Management: Kinds of State &amp; Where Each Lives <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a> <a class="src" data-lesson="94">L94</a></h3>
+
+    <blockquote class="quote">“It's either it's global and it gets translated into domain and view or it's component state.”<cite><a class="src" data-lesson="87">L87</a></cite></blockquote>
+
+    <table class="tbl">
+      <thead><tr><th>Kind of state</th><th>Lives in</th><th>Lifetime / notes</th></tr></thead>
+      <tbody>
+        <tr><td>API cache (the frontend “database”)</td><td>API client: axios store, GraphQL client cache, Redux store/reducer</td><td>Infrastructure. Filled by the gateway, updated after writes. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a></td></tr>
+        <tr><td>Global / app state</td><td>Cache + observer (subscriptions)</td><td>Persists across screens. “Fundamentally it is an observer.” <a class="src" data-lesson="90">L90</a></td></tr>
+        <tr><td>Domain models</td><td>Domain objects (write side)</td><td>Rules and validation. Derived from global state when commands need them. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a></td></tr>
+        <tr><td>View models</td><td>Presenter</td><td>Rebuilt on every cache change. Components subscribe and get their <em>initial</em> state from them. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a></td></tr>
+        <tr><td>Component state</td><td>The component (<code>useState</code>)</td><td>Ephemeral: forms, toggles. Gone when you leave the screen. Don't hoist toggle state into global state. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a></td></tr>
+      </tbody>
+    </table>
+
+    <figure class="diagram" id="fe-diagram-state">
+      <svg viewBox="0 0 780 360" role="img" aria-label="State layers from API cache to global state to domain and view models to component initial state to local component state, with interactions going through the controller back to the cache">
+        <defs>
+          <marker id="fe-arrow-state" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--svg-stroke)"/></marker>
+          <marker id="fe-arrow-state-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent-2)"/></marker>
+        </defs>
+        <text x="60" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fg)">infra</text>
+        <text x="60" y="112" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fg)">infra /</text>
+        <text x="60" y="126" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fg)">coordinator</text>
+        <text x="60" y="176" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fg)">application</text>
+        <text x="60" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fg)">(pure)</text>
+        <text x="60" y="248" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fg)">view</text>
+        <text x="60" y="312" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fg)">view</text>
+        <rect x="120" y="20" width="400" height="46" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="320" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">API client cache</text>
+        <text x="320" y="57" text-anchor="middle" font-size="11" fill="var(--fg)">the frontend “database”: GraphQL / axios / Redux store</text>
+        <rect x="120" y="84" width="400" height="46" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="320" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Global / app state</text>
+        <text x="320" y="121" text-anchor="middle" font-size="11" fill="var(--fg)">observer: subscribe + notify</text>
+        <rect x="120" y="148" width="190" height="46" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <text x="215" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Domain models</text>
+        <text x="215" y="185" text-anchor="middle" font-size="11" fill="var(--fg)">rules (writes)</text>
+        <rect x="330" y="148" width="190" height="46" rx="6" fill="var(--svg-fill)" stroke="var(--accent)"/>
+        <text x="425" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">View models</text>
+        <text x="425" y="185" text-anchor="middle" font-size="11" fill="var(--fg)">presenter + selectors (reads)</text>
+        <rect x="120" y="212" width="400" height="46" rx="6" fill="var(--svg-fill)" stroke="var(--svg-stroke)"/>
+        <text x="320" y="232" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Component initial state</text>
+        <text x="320" y="249" text-anchor="middle" font-size="11" fill="var(--fg)">subscribes to the view model</text>
+        <rect x="120" y="276" width="400" height="46" rx="6" fill="var(--svg-fill)" stroke="var(--accent-2)"/>
+        <text x="320" y="296" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Local component state</text>
+        <text x="320" y="313" text-anchor="middle" font-size="11" fill="var(--fg)">forms, toggles: useState, ephemeral</text>
+        <line x1="320" y1="66" x2="320" y2="82" stroke="var(--svg-stroke)" stroke-width="1.5" marker-end="url(#fe-arrow-state)"/>
+        <line x1="215" y1="130" x2="215" y2="146" stroke="var(--svg-stroke)" stroke-width="1.5" marker-end="url(#fe-arrow-state)"/>
+        <line x1="425" y1="130" x2="425" y2="146" stroke="var(--svg-stroke)" stroke-width="1.5" marker-end="url(#fe-arrow-state)"/>
+        <line x1="425" y1="194" x2="425" y2="210" stroke="var(--svg-stroke)" stroke-width="1.5" marker-end="url(#fe-arrow-state)"/>
+        <line x1="320" y1="258" x2="320" y2="274" stroke="var(--svg-stroke)" stroke-width="1.5" marker-end="url(#fe-arrow-state)"/>
+        <rect x="590" y="148" width="170" height="46" rx="6" fill="var(--svg-fill)" stroke="var(--accent-2)" stroke-width="2"/>
+        <text x="675" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fg)">Controller</text>
+        <text x="675" y="185" text-anchor="middle" font-size="11" fill="var(--fg)">→ domain → gateway</text>
+        <path d="M520,299 L675,299 L675,196" fill="none" stroke="var(--accent-2)" stroke-width="1.5" marker-end="url(#fe-arrow-state-accent)"/>
+        <path d="M675,148 L675,43 L522,43" fill="none" stroke="var(--accent-2)" stroke-width="1.5" marker-end="url(#fe-arrow-state-accent)"/>
+        <line x1="310" y1="171" x2="328" y2="171" stroke="var(--svg-stroke)" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="600" y="314" font-size="11" fill="var(--fg)">user interaction</text>
+        <text x="600" y="90" font-size="11" fill="var(--fg)">request → cache updated</text>
+        <text x="600" y="104" font-size="11" fill="var(--fg)">→ flows back down</text>
+        <text x="390" y="350" text-anchor="middle" font-size="11" fill="var(--fg)">down arrows = reactive reads · accent path = the only way writes go up</text>
+      </svg>
+      <figcaption><span class="badge copilot">Added by Copilot</span> Drawing of Khalil's frontend state flow: API client/cache → global state → domain + view models → component initial state → component state, with interactions going through the controller back to the cache <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a>.</figcaption>
+    </figure>
+
+    <div class="cards">
+      <div class="card"><h4>Centralized</h4><p>One <strong>application data model</strong> (Redux-like global state) that everything subscribes to. <a class="src" data-lesson="94">L94</a></p></div>
+      <div class="card"><h4>Delegated</h4><p>Data and behavior live on the related objects (aggregates etc.) and you watch specific objects for changes, like the backend. Khalil built a chess app this way and has seldom worked on centralized ones. <a class="src" data-lesson="94">L94</a></p></div>
+      <div class="card"><h4>Choose knowingly</h4><p>Both have trade-offs, so decide per app. There's “probably a best of both worlds in the middle.” View data, model data, updating view data and triggering a re-render are real responsibilities that need owners. <a class="src" data-lesson="94">L94</a></p></div>
+    </div>
+
+    <ul>
+      <li><strong>No Redux or Context required.</strong> DDDForum's global state is a small hand-written store using the plain <strong>observer pattern</strong>, designed by programming by wishful thinking. <a class="src" data-lesson="81">L81</a></li>
+      <li><strong>Use-case tests don't know Redux exists.</strong> Test cache hydration separately as an outgoing adapter test. “Keep them separate.” <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>State management is part of the pattern catalog</strong>, with the types of state being global, domain objects, view models and component. <a class="src" data-lesson="92">L92</a></li>
+    </ul>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="frontend--structure-nfrs" data-title="Structure &amp; Choosing an Architecture">
+    <h3>Folder Structure &amp; Choosing an Architecture from NFRs <a class="src" data-lesson="92">L92</a></h3>
+
+    <div class="callout rule"><strong>Organize by feature, not by pages/components</strong>
+      <p>Khalil retracted his earlier pages-and-components advice as “miss[ing] the mark.” Features are the abstraction-prism level where all three roles collaborate, and “this is where stuff should begin becoming code.” Pages still exist, one level below. The chain is use cases → features → modules → sub-modules (“that's precisely it”). <a class="src" data-lesson="92">L92</a></p>
+    </div>
+
+    <ul>
+      <li><strong>Outside-in, never inside-out.</strong> Building a reusable component library or composing little functions first is “a fundamentally flawed approach.” Start at the customer boundary with an E2E test. <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>Three north stars:</strong> key developer use cases, customers decide, and discoverability (1–2 seconds from the README to doing the use case). <a class="src" data-lesson="92">L92</a></li>
+      <li><strong><code>modules/</code> vs <code>shared/</code>:</strong> “this modules folder is for the customer. And this [shared] folder is like for the developer.” Essential complexity goes in modules, accidental complexity (drivers, base classes) goes in shared/core. <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>Tree outside, network inside.</strong> The folder tree follows features/modules/slices. <em>Inside</em> a module, objects follow the stereotypical architecture: component → controller → … <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>Avoid packaging by infrastructure</strong> (top-level <code>routes/</code>, <code>controllers/</code>). <a class="src" data-lesson="90">L90</a></li>
+    </ul>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> A frontend tree applying the L92 rules to the to-do example</figcaption>
+      <pre><code class="language-text">README.md                          ← TOC: "how to add a feature", "how to test features"
+src/
+  modules/                         ← customer: essential complexity
+    todos/                         ← feature / module
+      create-todo/                 ← use case (vertical slice)
+        todosController.ts
+      todosPresenter.ts            ← read side for the feature
+      todosRepository.ts
+      todosGateway.ts              ← contract
+      TodosPage.tsx                ← component: last and thinnest
+    account/
+      registration/ …
+  shared/                          ← developer: accidental complexity
+    persistence/observable.ts      ← global state = observer
+    http/apiClient.ts              ← RESTful driver
+    routing/routingService.ts      ← wraps the router hook
+    core/result.ts
+packages/shared/                   ← value objects + DTOs shared with the backend
+tests/
+  features/todos/…                 ← feature → story → scenario → acceptance criteria</code></pre>
+    </figure>
+
+    <h4>Choosing a frontend architecture: the architecture guess point <a class="src" data-lesson="92">L92</a></h4>
+    <ol class="steps">
+      <li><strong>List functional and non-functional requirements.</strong> “The non-functional part, it's how the system does that. And that's where the real complexity lies.”</li>
+      <li><strong>Decompose responsibilities with RDD</strong> (CRC-card style), <strong>assign them to roles</strong>, and <strong>design collaborations</strong>.</li>
+      <li><strong>Pick the architectural tools</strong> that implement those roles.</li>
+      <li><strong>Validate with concrete examples</strong>, then choose. “It depends” is honest, and knowing which NFRs to look for points you in the right direction.</li>
+    </ol>
+
+    <table class="tbl">
+      <thead><tr><th>NFR</th><th>Question</th><th>Lever</th></tr></thead>
+      <tbody>
+        <tr><td>Speed / bundle size</td><td>How fast is the first load?</td><td>Don't ship a 200 MB build. Users drop off at around 3 seconds. <a class="src" data-lesson="92">L92</a></td></tr>
+        <tr><td>SEO</td><td>Will user-generated content drive traffic? Ask the customer.</td><td>Pre-rendering: server-render the first request, then client-side. <a class="src" data-lesson="92">L92</a></td></tr>
+        <tr><td>Security</td><td>What must unauthenticated users never receive?</td><td>SSR: for solidbook, don't even send the page. <a class="src" data-lesson="92">L92</a></td></tr>
+        <tr><td>Availability, real-time…</td><td>How does the system do the slice worldwide?</td><td>Web sockets, where responsibilities live (the multiplayer “start/join game” example). <a class="src" data-lesson="92">L92</a></td></tr>
+      </tbody>
+    </table>
+    <p>The main driver is <strong>moving responsibilities</strong> between client and server: how much security and how much rendering sits on each side. Full treatment comes after responsibility-first. <a class="src" data-lesson="92">L92</a></p>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="frontend--testing" data-title="Frontend Testing Strategy">
+    <h3>Frontend Testing Strategy <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="92">L92</a></h3>
+
+    <div class="cards">
+      <div class="card"><h4>1 · System / E2E</h4><p>Do my API calls work, can I reach the backend, do they translate into the right frontend interactions? Result verification only. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a></p></div>
+      <div class="card"><h4>2 · Whole app</h4><p>Presenter + controller as “a regular JavaScript object”: no React, no real API. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a></p></div>
+      <div class="card"><h4>3 · Application logic</h4><p>High-value unit tests on the pure middle. Does creating a to-do add one to be presented? Does creating a user show validation errors? <a class="src" data-lesson="90">L90</a></p></div>
+      <div class="card"><h4>Components &amp; adapters</h4><p>Components are mostly stateless (level-1-style tests). Stateful ones resemble state machines (level 2). Cache hydration is an outgoing adapter test. Incoming-adapter tests matter less on the frontend. <a class="src" data-lesson="87">L87</a></p></div>
+    </div>
+
+    <div class="callout rule"><strong>One acceptance test per feature, shared by every platform</strong>
+      <p>“You only ever have one acceptance test. You don't switch the test for different environments.” Frontend, backend, mobile and desktop teams take the same spec and each validates it in its own way. For example, the frontend may only check a “check your email” page, while email sending is verified at the application level with a spy. <a class="src" data-lesson="87">L87</a></p>
+    </div>
+
+    <figure class="code">
+      <figcaption><span class="badge recon">Reconstructed from L87</span> To-do app: presenter + controller tested as the whole app</figcaption>
+      <pre><code class="language-ts">describe('todos', () =&gt; {
+  it('creates a new todo when none exists', async () =&gt; {
+    const { presenter, controller } = createApp(); // no React, no real API
+    await controller.createTodo('Buy milk');
+    expect(presenter.getAllTodos()).toHaveLength(1);
+  });
+
+  it('adds a todo to an existing list', async () =&gt; {
+    const { presenter, controller } = createApp(/* initial todos */);
+    await controller.createTodo('New one');
+    const todos = presenter.getAllTodos();
+    expect(todos[todos.length - 1].title).toBe('New one');
+  });
+});</code></pre>
+    </figure>
+
+    <figure class="code">
+      <figcaption><span class="badge copilot">Added by Copilot</span> Testing the presenter/controller from this section with a hand-written fake gateway (keep it honest with a contract test against the real HTTP gateway)</figcaption>
+      <pre><code class="language-ts">// modules/todos/todos.spec.ts
+class FakeTodosGateway implements TodosGateway {
+  private todos: TodoDTO[] = [];
+  created: string[] = [];
+
+  withTodos(...titles: string[]) {
+    this.todos = titles.map((title, i) =&gt; ({ id: String(i + 1), title, completedAt: null }));
+    return this;
+  }
+  async getAll() { return [...this.todos]; }
+  async create(title: string) {
+    const dto = { id: String(this.todos.length + 1), title, completedAt: null };
+    this.todos.push(dto);
+    this.created.push(title);
+    return dto;
+  }
+}
+
+function createApp(gateway = new FakeTodosGateway()) {
+  const cache = new Observable&lt;TodoDTO[]&gt;([]);
+  const repo = new TodosRepository(gateway, cache);
+  return { gateway, repo, presenter: new TodosPresenter(cache), controller: new TodosController(repo) };
+}
+
+describe('todos', () =&gt; {
+  it('shows a new todo at the bottom of an existing list', async () =&gt; {
+    const { repo, presenter, controller } = createApp(new FakeTodosGateway().withTodos('Buy milk'));
+    await repo.load();
+
+    await controller.createTodo('  Walk dog ');
+
+    const vm = presenter.load();
+    expect(vm.items.map((i) =&gt; i.label)).toEqual(['Buy milk', 'Walk dog']);
+    expect(vm.remaining).toBe('2 left');
+  });
+
+  it('rejects a blank title and never calls the backend', async () =&gt; {
+    const { gateway, controller } = createApp();
+
+    const result = await controller.createTodo('   ');
+
+    expect(result.isFailure).toBe(true);
+    expect(gateway.created).toEqual([]);        // communication verification
+  });
+
+  it('notifies the view when the cache changes', async () =&gt; {
+    const { presenter, controller } = createApp();
+    const onChange = jest.fn();
+    presenter.subscribe(onChange);
+
+    await controller.createTodo('Read GOOS');
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+});</code></pre>
+    </figure>
+
+    <h4>Picking a strategy <a class="src" data-lesson="92">L92</a></h4>
+    <ul>
+      <li><strong>Strategy A:</strong> E2E + carve inward with <strong>high-value unit tests</strong>. <strong>Strategy B:</strong> <strong>incoming (contract) tests</strong> + <strong>high-value integration tests</strong>. Judge them by confidence, not dogma. Mixing is fine. <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>For task-based UI apps, start with a few E2E tests</strong>: “there's very little that's going to be as good as E2E tests.” In a messy codebase, <strong>stop the bleeding</strong> first (the tailor pins before cutting). <a class="src" data-lesson="92">L92</a></li>
+      <li><strong>Fakes need contract tests.</strong> Run one spec against every implementation (fake and real) so the fake stays in parity. <a class="src" data-lesson="87">L87</a></li>
+      <li><strong>Structure for more than E2E.</strong> Few people structure frontend code so tests “can go further than just doing end-to-end tests.” <a class="src" data-lesson="33">L33</a></li>
+      <li><strong>Page objects.</strong> A friend's four-tier E2E setup with reusable page objects made new features “plug and play.” <a class="src" data-lesson="92">L92</a></li>
+    </ul>
+
+    <aside class="ai-lens"><span class="badge ai">AI-era lens · Copilot</span><p>When presenters and controllers are plain objects, an agent can run the whole feature suite in milliseconds after every edit, with no browser and no backend. That short loop is what makes AI-generated frontend changes safe to accept. A shared contract test also catches the common agent failure of a fake gateway drifting away from the real API.</p></aside>
+  </article>
+
+  <!-- ============================================================ -->
+  <article class="topic" id="frontend--anti-patterns" data-title="Frontend Anti-Patterns">
+    <h3>Frontend Anti-Patterns <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="90">L90</a></h3>
+
+    <div class="callout anti"><strong>Called out in the course</strong>
+      <ul>
+        <li><strong>Queries directly inside components</strong> (Apollo-era advice). <a class="src" data-lesson="90">L90</a></li>
+        <li><strong>Components that fetch, display and decide how to structure information</strong>: “just too much is happening in one place.” <a class="src" data-lesson="90">L90</a></li>
+        <li><strong>Using the state-management library for literally everything.</strong> <a class="src" data-lesson="90">L90</a></li>
+        <li><strong>Selectors or cache access in component files</strong>, which breaks the dependency rule. <a class="src" data-lesson="87">L87</a></li>
+        <li><strong>Hooks doing coordination</strong>: hooks leaking into controllers “mangle your code” and make controllers hard to test. Khalil calls his own DDDForum v2 controller messy because he was “forced to use react hooks.” <a class="src" data-lesson="81">L81</a> <a class="src" data-lesson="90">L90</a></li>
+        <li><strong>Letting React be the control center</strong>, so you have none of your own and must test through React's hidden behavior. <a class="src" data-lesson="87">L87</a> <a class="src" data-lesson="94">L94</a></li>
+        <li><strong>Massive coupling</strong>. “Coupling… is the enemy of testing.” Insert a contract between clumps so each can be tested alone. <a class="src" data-lesson="90">L90</a></li>
+        <li><strong>Loading domain objects for reads</strong> and mapping them into view shapes (“mapper hell”). <a class="src" data-lesson="87">L87</a></li>
+        <li><strong>Hoisting toggle state into global state.</strong> <a class="src" data-lesson="87">L87</a></li>
+        <li><strong>Duplicating validation</strong> on frontend and backend instead of sharing value objects. <a class="src" data-lesson="90">L90</a></li>
+        <li><strong>Organizing by pages/components</strong> or building a component library first (inside-out). <a class="src" data-lesson="92">L92</a></li>
+        <li><strong>Only E2E tests</strong> because the code isn't structured for anything else. <a class="src" data-lesson="33">L33</a></li>
+        <li><strong>Over-architecting small/medium apps</strong> without strategic justification. <a class="src" data-lesson="90">L90</a></li>
+      </ul>
+    </div>
+
+    <blockquote class="quote">“Once you understand this and you understand it very deeply now you understand front end architecture forever.”<cite><a class="src" data-lesson="90">L90</a></cite></blockquote>
+    <p>Related: <a href="#testing">Testing</a> (contract tests, verification types), <a href="#workflow">ideal developer workflow</a> (outside-in, walking skeleton), <a href="#essentials-physical">physical essentials</a> (horizontal decoupling, composition).</p>
+  </article>
+</section>

@@ -1,0 +1,33 @@
+All right, so another thing that you might be wondering is how and when do I know to commit? How do I do this committing thing? This is going to be really
+important if you want to get feedback on your assignments. You're going to want to commit in a way such that it makes the work that you've done really easy to
+read. So I'm going to show you how to do your commits in a way that is readable. And I'm going to show you two reasons why you will be committing. So let's
+start with the very first test here in this project. And that's going to be the FizzBuzz problem. Write a function that takes numbers from one to a hundred and
+outputs them as a string with a multiples of three. Very first thing I heard there, it's going to output them as a string. So that's the easiest test we could
+write. So where are we right now in this project? Let's go ahead and start our tests. npm run test dev. And this is telling me that we are in the red. Now we do
+not want to commit when we're in red. Khalil here from the future. And I just wanted to cut into this video really quickly to let you know that in the emergent
+design section, this is going to be the first section you're going to be working on this course. I am actually going to ask you to commit on every single phase
+on red and green and refactor. And the reason why I'm going to ask you to do that in this specific section of the course is just so that we can get a sense of
+if you have the physical mechanics down. So I'm about to go into the rest of the video describing why you want to commit only on green. And as you move
+throughout the rest of the course and you're getting feedback on the rest of your assignments, yes, you only do want to be committing on green. This is going to
+make it a lot easier on the reviewers to review your submissions. However, again, for the emergent design section, which is the first section with the first
+assignments you're going to start with, I would like you to commit on red, green, and refactor. All right, back to the video. We only want to commit when we're
+in green. Think of it like you're playing Mario. And imagine it's like you're playing the stage where you're trying not to fall in the flames. Imagine you went
+to go and jump from one platform to the next platform. And in the middle of your jump, you paused. Even the red there. And it's not a very safe place to be for
+you to unpause the game. So that's a similar situation that you're creating here when you commit on red. So let's only commit on green. And we're going to do
+here is try to get in green with this first test. And we're going to say returns a string. Nice. And let's expect that the type of Fizzbuzz. Fizzbuzz we're
+going to pass in five for now to be string. And that looks about right to me. And of course this is going to fail because Fizzbuzz doesn't exist. So let us make
+it exist. And what we're doing here is just returning the very simplest thing we could possibly do. This is the fake it strategy. One of several different ways
+to make our tests pass. And we're going to just go ahead and import. And I'm seeing an error there that I should be seeing. However, when we refresh, we have
+the green test. So now we're in green. Something I like to do just to make sure that this is legit. That should be bad. That should be red. And there we go.
+It's not like flipping the switch on and off just to check. Good. So we're in a good place here. This is a good time for us now to commit. Now there are two
+different types of reasons we would commit when we're in green. And those two reasons are either we've added new functionality or we have done a refactoring.
+What have we done just here? We have added some new functionality. We've actually created this thing and made it return a string. So we're going to formulate
+our commit messages to represent that. So first of all, I'm going to say get add to add the changes. Then I'm going to say get commit. And I have this pattern I
+could use here. It could say new. It could add some new functionality with that. Now, essentially, it doesn't really matter how you do this. You just need to
+communicate that you're adding new functionality. One way I like to do this is just say new. Fizzbuzz. I've done this here. Returns a string. Great. And we've
+just done the commit. So at this point, you could go ahead and write your next test. However, once you go ahead and you run into duplication after seeing that
+three times, you're probably going to want to refactor. In fact, you should. To represent a refactoring, the pattern you could use here is git commit. And you
+could say refactor. Or you could even say design. Or you could even say improvements. At the end of the day, what we're trying to communicate here is that this
+is a transformation. It's a refactoring. It's a refactoring in that we're not adding new functionality. All that we're doing here is changing the structure of
+the code. So with that said, I'll leave the video right there. That is how you write your commit messages. So get in there and start writing some commits and
+plugging through your TD assignments. See you in the next one.

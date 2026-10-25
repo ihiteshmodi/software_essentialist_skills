@@ -1,0 +1,39 @@
+What's going on crafters? Khalil here. And in this video, we're going to talk about systems thinking, which is the most important mental model for developers.
+So what does mailing a package and editing a video in common? These two things can be broken down into systems of starting from A to B with a lot of different
+steps in between, but that's ultimately the case. And systems thinking is incredibly vital for every single software developer. And that's what we're going to
+talk about here. We're going to cover what is systems thinking and how does it work? And why is this so powerful to us as developers? So first up is what is a
+system? In general, a system is just a model in some environment where there's an input and there's an output. And it's funny because we could look at a lot of
+things in life and we could abstract it into this idea of a system. Because in reality, the world is a patchwork of systems. So we'll look at a simple one here
+that will probably make sense because it's about code. Consider this military time validator function. What's the input? Military time, if you've seen it,
+something like I've got here up on the screen, 12.01 to 14.21. So that's noon till about 2.21. That is a valid military time. So what's going on here is we have
+a function and that's the military time validator function. It's the model that's running in some environment, which would be wherever this code could be
+running and we are going to be putting in an input, which is a string and getting an output, which is going to be a Boolean in here. It's true. And what happens
+with the model is the model runs through and does some steps. I haven't actually coded those in there, but you can see, we do have the steps to parse the time
+range, confirm the start time is valid, confirm the end time is valid, confirm both of them are right. We're the start time before the end time. And there we
+have it. That is a system. Thinking about it a little bit higher level, we can look at your entirety of the application you have as a system as well. You have
+the UI, you have the backend, you have the database. UI talks to the backend and the backend talks to the database. And there it is. Yet again, another system.
+And this just shows how we could break systems up into different pieces. Now stepping up a little bit higher, we could even think of the entirety of what you're
+doing as a developer and the context in which you are working as a system itself. If we think about the idea of a business, an entire business is a system. It's
+pretty complex one. Yes. But it's still just models or processes with inputs and outputs that are running in some sort of environment. And they talk to other
+systems as well. This is a life changing mental model personally. And this thing right here is going to be so foundational to a lot of work that we do, if it is
+not already, because with this, we can understand and decompose a lot of problems. And hopefully, if you remember, this is one of the main ideas is to become an
+excellent problem decomposer. If we make this a little bit more meta, we could even look at you, the software developer as a system. You yourself are a system
+where you experience things in the world. You might have an intent or a goal. And what you need to do is you need to figure out how can I go from the state that
+I'm currently in to the state I want to be in. And the model that's happening here with this system is your actions. This is you making decisions. So this is a
+process of us continually refining your ability to make better decisions. This might seem very meta, a little bit abstract, but this is the main idea here. But
+I just want to give you more examples of just how foundational this mental model is. We could apply this to a lot of different things. So the purpose of a
+system in general is to achieve a goal. Whether we are mailing a package, we're going from state A to state B, which is the package is not mailed to the package
+is mailed. For editing a video, we're going from state A to state B. Maybe it's the editor who gets the videos. He acquires the video files. And then finally,
+we have some videos that are edited, exported. Validating text, a very simple one. Same thing. We have unvalidated raw text that comes in and we're going to
+text validated. And that system, which is in between those two states, the inputs and outputs, that system could either just be one system or it could be a
+combination of many systems. So this is such a powerful idea for you as a software developer, because it's going to help you with your problem decomposition
+skills. But also when you have the ability to decompose in breakdown systems, you also have the ability to debug systems. In reality, you will spend a lot less
+time having to debug things. And if you do have to debug things, you're going to find it a lot easier to isolate where the problem might be in order to debug.
+Because what I don't want you to be doing is refreshing the page and just doing mindless stuff. If you think from a systems thinking point of view, it makes it
+all that much easier. And finally, the last thing here is refinement and learning. You can only really refine if you know what to refine. And systems thinking
+is going to help you break down those refinements. So this was a quick little video about systems thinking. And I just wanted you to, again, plant this in your
+mind as a seed. This is something we're going to see a lot moving forward. It's a foundational mental model for the entirety of the course. So let that start
+playing around. Start thinking about systems in the world, thinking about systems in reality, looking into your code, seeing if you can identify those as well.
+Because the next thing we're going to do is we're going to get clear on what our goal is as developers. And we're going to take a look at what that system
+actually is, what that entails, and what are all the different little parts of that system. So let's get clear on that next. So that does it for this video.
+We'll see you in the next one. As always, Timmy. Thanks.." You like you're over對吧, you're going to get this machine, andarcい

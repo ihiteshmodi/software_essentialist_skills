@@ -1,0 +1,505 @@
+Peter, we're rocking and rolling now. Yeah, it's working. Nice. Okay, so what have we got today? We're talking about some front-end architecture things, right?
+Yeah, I asked you how can you get these puzzles, these concepts that we have been studying and use in an application like a Canvas application, you know,
+front-end complex application like a game, like SkyDraw. Yeah, I think it's a good example. Many people know this tool. If you were to develop it, to design a
+tool like Figma, like SkyDraw, how would you deal with your Canvas object? Yeah, how would you do, how would you set up something like that? All right, so we're
+talking about, I'm actually going to grab the, because you put some good notes in the Discord about this. So I'm just going to go ahead and just, snip all of
+that right now, and tuck it in here, because those are quite apt, quite good. So we're designing out a front-end, drawing kind of app, right? Something like
+that? Yeah. Okay, cool. Yeah, Canvas, blah, blah, blah, this, that. So how would we do something like this? Let me go to my Figma as well, my perfect place for
+all creative endeavors. Which one am I going to open up here? Let's do a fig jam. Yeah, first of all, let me ask you, like, what are the, how would you attempt
+this? If you were to do this yourself, what would you do? Because I have a few questions I want to ask you before I get into this. Like, how would you build
+this out? Yeah, sometimes I try to create some small applications using Canvas. And every time I mess up, you know, what I commented that, like, my Canvas
+object just got spread around, many, other, like, the pages of other classes, of other objects. And when I see that a lot of other role is manipulating the
+Canvas stage record. So when I start to read a book and study architecture in a more right approach, I start to think, okay, how would I use this to model my
+application, my Canvas application? How could I test, for example, how could I use test-driven development in this kind of application? What's the role of
+Canvas? So I think that I have a lot of good knowledge, but it's been hard to link everything together and do it in the right way. Like, not just starting code,
+coding, and it's been hard to really get this concept and design it. So really, the challenge here is clarity. The big problem is it's, like, overwhelm, right?
+A little bit of overwhelm, there's a lot of stuff, and we want to just, okay, what is the, how do we piece all this together in a cohesive way that makes sense?
+All right. So I mentioned a lot of things in this kind of response to what you asked earlier. Some of the things I mentioned were abstraction design, which is a
+very broad topic, and we're going to have to attack this over and over throughout the program in tiny little chunks. I mentioned temporal decoupling. I
+mentioned object stereotypes. A lot of different things I'm mentioning here. And the reason why I want us to start with the metaphysics is because I want us to
+start, if I'm just to tell you how to begin to solve this problem, I would tell you, you need to, first of all, understand the responsibilities at play here.
+It's like, we need to get all of the puzzle pieces in front of us, make sure we have all the puzzle pieces, and then we could begin to start to organize those
+puzzle pieces into categories. And then once we have those categories, we could figure out how those things work together. How much do you know about
+responsibility-driven design, by the way? The first time I've listened about you is what is in your book. Aha! So I don't have practice experience with RGG.
+Great. This is RGG. All right. So this is good. Whoa, that just went away. Yeah. How much do you know of RGG? Not much. By the way, it's really hard to find the
+OBShack design blue book. It's probably not existent now. It's probably not existent now since I brought it up. I think for me getting it, it was like, there's
+like two or three copies left. I'm like, oh, this is not going to be easy to get after I start talking about this a lot. And yeah, everyone says they're
+struggling to get it. I think there's a way to get the, the ebook somewhere online for free. I think Rebecca put it up on her site, but yeah, it's hard to get a
+physical version of that. All right. How do I begin to break this down here? All right. So the problem is you want to know how to build this out, but the big
+issue is I find all developers are, by the way, I need to actually make sure this is transcribing. Let me just see if it's doing that as well. More. Yeah. Cause
+actually I'm about to say some, drop some golden nuggets here. I want to make sure I can, whoops. Get into that later on. Preferences. Do the recording. Do zoom
+recordings. Save transcriptions. I don't know. Do that. Oh, it says they automatically transcribe. All right. Good. So I could go back and just read that later.
+Yeah. So how do we begin to break down this problem? I think I'm going to go over here. Cause this is going to be the best way to do this. Jeez. There's a lot.
+Let's start with where people normally start with how they break down their problems. How do we normally think this through? Why don't you explain to me how you
+normally would think this through? Like, all right, I want, I have this thing I want to design. It's hard. What do you do? Do you go for patterns? Are you
+looking for patterns? Are you looking for examples? Are you looking for like libraries? Tools? What exactly, how do you approach this problem? For example, I
+would think in a feature one characteristic of my app. I don't know something that I'm creating, it's like zoom. So I would need a camera. So for me, camera
+would be a service that would make some calculations, the reference, some computer graphics transformations. Yeah. And it would manipulate the canvas. So the
+canvas would be a dependence of camera. And I would try to develop it this, this service, the camera service. Sir, you said that the camera is a dependency of
+the canvas? No, canvas would be a dependence of camera. And canvas, the camera would be responsible for zoom and go up, down, to left, to right in my screen.
+Yeah. Yeah. Yeah. And then you're saying that the, okay, great. So the camera does up, down, left, this, that. And you're saying that what happens is the
+canvas, the way that you've initially designed this out in your mind or in the code or however, right now you're saying what happens is just so I get this,
+actually, I'm going to go and draw one of these here. Let's get that. Camera. Let's make that text a little larger. That's too large. Okay. So is it camera
+depends on canvas or canvas depends on camera? Canvas depends on camera. Like camera, camera uses canvas. Got it. Got it. Awesome. All right. Camera uses
+canvas. Nice. I'm going to put that there. And yeah, it's just funny. All right. And the things it does, what does the, how does the canvas use camera? What
+does it do? No, no, I'm sorry. It's the opposite side. Camera uses canvas. Okay. Okay. Camera. Okay. I'm sorry. Yeah. Yeah. And how does it use the canvas? It
+could, for example, get the rectangle, the position, the region of canvas, the frame, the region of frame. And if some, and get the event cursor, for example,
+if I click control and just roll mouse, it's going to increase. I would get this event and calculate how much I have to increase zoom. And make the necessary
+calculations to reposition the region of my canvas. To reposition the camera's view of the canvas. Yeah. Exactly. Yeah. Great. That's it. Yep. Good stuff. So
+I'm sure there's more things here, right? Now. Yeah. So I'm doing a little bit of information gathering here. Just make sure I got this. But so what, when you
+went to go and design this out, you, I heard you say service. You said this word here, right? Yeah. Now, where did you get this idea of service from? Where does
+that come from? Not thinking about your definitions, your book. Service originally for me is an encapsulated set of responsibilities that I want. I want to,
+that it's going to be secret here. Like a use, for example, an API, an Excel API, an alpha zero, it provides encapsulated sets of things that I don't want to
+develop myself. So I'm a client of it. So I'm going to use an Excel service, but it can develop it internal service too. So camera, okay. It has a set of
+responsibilities that I'm going to use to provide, to, to make it possible for my clients to use zoom. So it's a set of services, camera service, that is going
+to be used in a set of features of my application. So if you want picture is going to use encapsulated set of methods. It's, I'm sorry. I don't know if I'm
+going to. No, you got it. No, you got it. If you want pictures, it'll be a service. If you want camera behavior, this will be a service. If you want, I don't
+know, beanie babies, I don't know, just some random stuff. If you want this, that it's going to be a service. Now, what I'm asking you here, or what I want to
+call out here too, is this is the way I'm hearing you describe this as it's as if it's just a container for everything related to this type of behavior. Right.
+Yeah. Now that's good. That's a good start. There's something I call the phases of craftship. I don't know if you've heard me talk about this before. I'm going
+to be creating content on this, but the phases of craftship are, the ways you think about code, the ways you think about code. And I've been on this journey
+myself and I've seen it in a lot of other developers as well. And I believe I can now call out where people are in their mindset with respect to how they see
+code, but I need to show you where we are going because this is going to show us why we need to get into the metaphysical. What's happening here is there's an
+issue. The issue is we are not quite descending granularly enough to a level of categorization that we need. This idea of service is too broad. It's too
+general. Yes. Things are related. Things are related. They are cohesive. However, you might know that in a layered architecture, in just every application in
+general, there's different layers and concerns. So I know you're probably aware of the infrastructure layer. So, okay, that's where we put express and stuff
+that touches the network and this, that, but the layers that people have concerns with, or the layers that people sometimes struggle with are the more inner
+ones, which are application and domain. And how to structure the objects that go in there properly. And what I see tends to happen is we just call everything a
+service. And don't break it down far enough to the point where, to the point where they can properly, because there are rules that you're going to find. There
+are rules that need to be respected in any architecture and it's going to be the same rules on the front end, back end, desktop, this, that. So these are like
+the laws of software design. You have a question, comment? Yeah. Yeah. So I could think that a camera has a set of important business rules of my application.
+It's an entity. I could think in this way too. A camera is an entity of my application. So yeah, you have cameras and entities. So then what's the point of the
+camera service then? So let's say you have cameras and entity. Is this just one, is this the one concept of camera you have in your app or do you also have
+camera and do you also have camera service? Yeah. I'm thinking about some possibilities here, like instead of designing camera as a service, I should deal with
+it like as a camera because it has business rules important for my application. So maybe it doesn't make sense to talk about camera service. It's not wrong.
+It's not completely wrong. In fact, it's, if it's something you're doing and it's gotten you to this point, there's elements of this that are correct. There's
+just ways it could be better. And I'm going to show you because what we, the purpose here is we want the ability to test and we want the ability to extend and
+add new features really fast. If we back up, why are we even having this conversation right now in the first place? The whole reason why we're here right now is
+because we want the ability to feel confident in what we're doing. We want to know that when we write code, it works and to do that, we need to write tests in
+order for us to do that needs to be testable. So the way that we decompose our app into objects, we need to decompose it into a testable way. And you've called
+out. Yeah. We can have a concept of an entity, but then the question is what are the responsibilities in an entity? And then what are the responsibilities in
+here? How are we starting to break this up? Because you do still want, you will want something here, but what I'm going to get to is what this is, this idea of
+a service is you're probably going to break this up into smaller parts. So you called out a part of it here is the entity. There's some pieces here for sure,
+but we're going to break it up even smaller. And then we're going to see how they all link together. Because there are rules for how we link these things
+together. Stereotypical rules as well. Does that make sense so far where I'm going? Or am I starting to do it? Yeah. Yeah. Yeah. I make sense. Yeah. Yeah.
+Great. So before I go there, I just want to quickly jump over here to the phases of craftship to let you know what's going on here. So when you first start out
+is there's the code first approach with the code first approach. The mindset is okay. I have to build this, that what I'm going to do is okay. I'm going to use
+reacts. I'm going to use this tool and I'm going to use Firebase. And then I'm going to hook it all up together. Database talks to the backend front end talks
+to the backend and then done. It's like a very code first approach to thinking about design. It's very blocky. It's not, there's actually very little design
+happening here. You're thinking more on terms of the concepts of I need to make an API call. It's very technology focused. And sure, that will get you a job,
+but I'm going to say that's where about maybe 60%, maybe students in this program are probably going to be in the code first mindset. It's not bad. It's good
+because it got you the job, but we need to move further from there. I'm going to say where you might be right now is the pattern first mindset, which is taking
+it further. You've realized, okay, it's not enough to just write code and make things work. I need to start to go about these things in a sort of pattern like
+way. There needs, there needs to be certain objects that do certain things and call out some of the patterns you're, you use regularly. If you can call out some
+right now. So you said service, you said entity. What else? Repose. Repose. Yep. Repose. I've never used D, but I know that there is two gates, factories. Yeah.
+Stuff like this. So it's a pattern first approach. This is also very to it's better than code first. Because I'm just going to put your database plus front end
+plus this is better. And this is, yeah, this could be like the D thinking, right. Or D first. Yeah. Or even like paradigm or method methodology first. Better
+than code first, because now the building blocks that you have are smaller and you could be more granular with the way you approach your work because you have
+these building blocks. That I know what this does. This, these things I need to do. They go into these building blocks. Good. However, you're going to get stuck
+here. And this might be where you're stuck right now. We're like, okay, what are the building blocks? I need that are going to solve this. Like I'm using these
+building blocks, but how do I use them correctly? How do I piece them together correctly? And how am I supposed to use this with team? And how does it work with
+these other concepts? So this is where it can feel like, oh, fuck. I know these things, but how do there's a bit of overwhelm here. So. I was here for quite
+some time and developer named Scott Bellware put me on this idea. That you got to let that go. Let go of all the D clean architecture, this, that let go of all
+these methodologies and ways of coding because they're not truly getting to the core of what it is we're doing. These are all just like different lenses on the
+first principles of what we're actually trying to do here. So what I want to show you guys is the first principles. So that's why I call this last layer here.
+This is the first principles. And the gateway to this is going to be responsibility driven design. Because what happens is the smallest, most granular units of
+building blocks we can use are responsibilities. This is the smallest building block we can have. And this is going to be something that we do or something that
+we know. So it's doing and knowing. Smallest building blocks. So are you with me on this so far? Yeah. Yeah. Okay. It's like a divide and conquer strategy. We
+get the high level idea. A client says, okay, I want a software that does this feature here. You get this, you break it down into the smaller, smallest building
+blocks. Then you build again. It's the feedback loop, I guess. That has something to do with it. Like you break it down in a top-down approach that you come
+building again and bottom up. Yes. Precisely. Would be like this. Precisely. We will get to the feedback loop soon, but we get to the feedback loop through
+this. Now, responsibilities are, like if we're talking about the idea of programming, responsibilities are going to be the most tiny core building blocks that
+we need. But this is why now I'm talking about the metaphysics. And with this happening is you can see how, if we're talking about the metaphysics of
+programming, this is, yeah, this is the tiniest part of what it is we need. How familiar are you with your philosophy person? Aren't you? Hmm? Sorry? You're a
+philosophy person, aren't you? You've studied, I think you've studied philosophy, or maybe I'm thinking of someone else. No. I've never studied philosophy. I
+like it. Read something, curiosity, but I'm not a philosopher. Right. So the metaphysics, right? What does this mean? Metaphysics are about the first principles
+of reality, essentially. Right. Where do we even start with that? There's been a lot of different attempts for where we start to understand reality. I think
+Descartes said, I think, therefore I am. It's like, okay, cool. And then others were like, debunk that a little bit. Let's say like Descartes said, yeah, I
+think, therefore I am. And I think Jean-Paul Sartre and the other existentialists, like other existentialists. Actually, yeah. He said, Jean-Paul Sartre, the
+other existentialists said, first you exist, and then you come to realize you exist. It's like, you don't really realize that. It's like, when do you really
+know you were born or you're here or you're a thing? It makes sense to start with us as the first thing we understand in order to begin to understand reality.
+But it is important to start here, to have some building block that we could go based on. It's like, when you're in school and you're studying math, are you
+just kind of using the formulas? Or are you actually understanding? Because we want to actually understand. We don't just want to be using the formulas. So
+we're about to get to true understanding from stuff that we all understand. So what's a good starting point? We're here. You and I are talking. We're real.
+Right? Good starting point. Then from there, we need to go on into understanding like reality. So I'm not going to go too deep into this. Like even in the
+content, I think I'm going to keep it pretty short. But there's a few things we need to hit that are super important. We need to hit the concept of, I'm going
+to say important points. Essence. We need to hit the concept of purpose. And we need to hit the concept of form. This is going to give us all we really need to
+move forward. So let's first talk about essence. All right. I always love this example. What is this thing here? It's a mug. Right? Okay. So I'm holding it. All
+right. So what are some of the attributes of this thing? What are some of the things about this? It's unaffordable. You can get it here. Yeah. I can hold it
+like that. Yep. Yeah. What else? It has a base. It's rounded. It's rounded. Rounded. Yep. Maybe it has some print on it too. It has a hole in it. Right? Yeah.
+It's made out of like ceramic. So it's like. Yep. Now. So those are all like different things. Like about a mug. So mug. Properties. Ceramic. Hole. Let's say
+the handle. Print. Here's an interesting one. Printable. Right? That's how it's starting to look like programming talk. Right there. Starting to look like
+programming talk right here. It could be printed on. See? This is how we're getting into the idea of object-oriented programming. Because I'm sure you've seen
+stuff like that. Serializable. And XYZ-able. We're getting into. This is where we should all be starting if we're talking about object-oriented programming.
+Because we're discussing an object. Great. So these are properties. This is the essence of what this thing is. Now. I use this example here. Printable or
+serializable. But. Am I going to do that? Do I need to print on this? I don't really need to print on it. Because another important topic actually needs to go
+here is concept actors and roles. So who am I really? Let's say I'm a programmer. Right? I'm a programmer. First of all, my actor is just who you are. I'm
+Khalil. And what is the role I play? I'm playing the role of a programmer. Maybe an entrepreneur. Maybe a writer. Okay. Now. The thing about roles is. Roles. Or
+actually the thing about this actor. Me. I have a goal right now. What's my goal? Let's say my goal is to get my work done. Done. Efficiently. Right? So those
+are some of the roles I'm playing. And I want to get my work done efficiently. Which means I need to write some code. Write code. Create modules for students.
+And make sure it's understandable. Right? I'm going to have to do some scripting. But really. What I'm talking about is state B. Subscribe state B. The state I
+want to be in is. Modules. Uploaded. Students. Doing them. That's where I want to be. Now. How might I use this concept of the mug? What properties. Like. Are
+essential for me to use this mug. For what it is I want to do. Because what I want to do now. One of the goals is. I want to actually drink coffee. That's like
+the next goal. It's like a sub goal. I want to drink coffee right here. How am I going to use the mug to do that? Which things here are absolutely essential.
+For me to accomplish that? All right. Coffee. Do I. Does this need to be ceramic? Could I drink coffee out of this? Yeah. Right? Although. What if it was really
+hot? Maybe it would burn my hand. Or if it was paper. So. I'm getting at here is. Oh. Come on. That's so silly. What I'm getting at here is. Objects. Have a
+purpose. Right? The mug has a purpose. But. Purpose starts from the actor. Playing a role. Because I'm playing an entrepreneur. Right? And I'm like. What do I
+want to do? Get work done. Officially. Drink coffee. To get energy. That's what I want to do. That is going to. Create the reason why I need a mug. And. From
+that. Mug. This is going to have. The essential forms here. Like. What out of all of this. Can I strip away? I don't care if it's printable. Don't need that. It
+needs to have a hole in it. I probably can't drink coffee out of it. It doesn't have that. That's it. And. The handle I could do without as well. Ceramic. Yeah.
+Is good. It's good. But maybe not the most necessary. And I'm honestly going to say handle. Also good. But this really is like. The most essential thing. It
+needs to have that. If it doesn't have that. I cannot drink coffee out of it. Cannot achieve. My purpose. So this is the concept of. Role. Goal. You have a
+role. And you have. The goal that you need. To achieve to do that. And this is going to give meaning. To the thing we have here. Because if I was to go over
+here. I know this is a little bit of a derailment. But I trust you. This is really key and important. If I was to go over here. Draw a mug. And I'm going to say
+the essence. And I was to draw a circle. And I was to make the circle. Rotund. And no fill. Over here. And put in all these little properties. Ceramic. Hole.
+Come on. Printable. Like even the color. Right? All that stuff. The other one. I can't. Thinking about it. Like the essential characteristics. Attributes of
+your mug. Depends not only of the goal. But also the actor. For example. If you were a small. A young kid. Maybe a handle. Is necessary. It's not just good.
+Yes. Because it's safer. But. Yes. So. That's key. Yeah. Although. Again. It depends on what their purpose is. What their goal is. So if. You know. It's Lucas.
+And let's say. Khalil. Right. Let's say. You and I are both. Playing the role of. Programmer. Right. You and I both. Play this role. Let me draw this. We need
+to find here. The next thing is the. Hey. What do you want to achieve? There's. And there's a million different ways. Oh. Geez. I need to. Yeah. Not do that.
+Whoa. There's a lot of different ways we can achieve this. The goal is to. Have energy. Let's say. Right. There's. It's not the one way we could do it. We could
+do it by having. Exercise. Extra. Size. Can't spell that. Drink coffee. Go to bed. Right. Time. All these different ways we could achieve this goal. So this is
+like the how we could do it. We're getting clear on how. However, we're going down this path where we're going to select drink coffee as the way. That we're
+going to achieve this. And if that's the case. We have to look at the mug. We can look at the mug to see. All right. Now the mug has a purpose. And what are the
+things we need in order to do that? We need the hole for sure. And the handle could be one. Color doesn't matter. Ceramic. Maybe. Just that. What we've just
+discussed here. What we've just found. This is the mental minds. Like this is the critical thinking process that needs to be happening every single time you
+design an abstraction. Every time. This needs to happen. When we think about where code comes from. Code has to come from an actor. I asked this in the chat
+earlier. They said, oh, can you like about, they're asking about use cases. How, what's the pattern for use cases or whatnot? I'm like, literally, use cases
+come from, you should be writing no code unless you're very clear on who plays what role and why do they need that. And this is like how we're going to go about
+doing that. Which really, whoops. This is the use case. This is the feature. This is where features come from. So we just saw the birth of features. Features
+come from this. So if we want to write the minimal amount of code possible, always, what we need to do is start here. Roll goal, come down to the feature and
+then find the essential properties that are required. Because realistically, we're calling this thing a mug, but this doesn't even have to be a mug. This could
+be my hands, right? Like it could be. What do I need? I need a hole. I don't need a handle. As I just said, this could be my hands. I could use to drink my
+coffee if it wasn't hot. But of course, if it is hot, then I'm going to need ceramic probably, right? Hands are not going to do it. So maybe this is, hopefully
+this is making sense so far. Are you with me on this? Yeah. Okay. Awesome. All right. Now we need to progress forward here. So good. So we're going to get to
+how to approach your problem. What I'm giving you here is the kind of critical thinking ability for me to be superfluous. So you don't need me anymore. So you
+could go and just do this on your own for 9,000 of the problems that are going to come up. I guarantee you. All right. So great. We've talked about that. Role
+goal. Where do I want to go with this now? What I could show you next, let's see. All right. A couple of quick statements. Creator. Creator. It's always up to
+the actor to decide what the purpose of something is. So this is when I give an example. If I see a stone on the ground to a kid, what's the purpose of a stone
+throw into water to skip, make pretty ripples, right? To a warrior purpose for fighting, like turning into weapons, right? Or to a hunter. Weapons for food.
+We're all dealing with the idea of the stone, right? Stone is the essence, which is what is this thing? And from the essence, we go to, we have to look at the
+role and find out what the purpose is. What do they want to achieve? So role goal is going to give us the purpose. And then once we have the purpose, then we
+have the essential properties that we actually need. And what is this? This is the form. This is the form of the stone. The stone is just what's there. And
+based on who is using it and what they're trying to do, the stone is going to turn into something else. It's going to be what we need. So this is what we're
+constantly doing with programming. Now, this is the metaphysics. And this is where I want to end on the metaphysics because this could go into crazy other
+territories. But now that we understand this, let me think about how I want to maneuver this to you. Now we need to talk about programming. Ah, okay. We
+understand the metaphysics. Understand essence, role, goal, purpose, form. What's next? Let's understand how to think about software. Ooh, that's going to be a
+big one. Ready for that? Do you have questions here? Am I, is this overwhelming? I have one question. We arrived at the metaphysics definition of a use case,
+feature. Yeah. How you receive feature in this context. It's how could we see an event in this context? It's an output. It's a response. It's an output of the
+feature, for example. Yeah. Is it an output of a feature? Great. Great question. We're going to get to that in a second here with how to think about software.
+Let me think about how I want. I'll probably just answer this really quickly and then we'll circle back to how I got to that answer. So let's do that. So what
+is an event really? Well, we have, yeah, we're gonna have to circle back to this, but the answer here is all we're really doing in software design is we are
+transforming someone's state. So we're going from, yeah, I'll just do this for now. We're going from state A to state B. Because what we're doing here is we're
+solving problems. Because what is the purpose of software? Actually, the purpose of computing in general, to solve problems. That's the purpose of computing.
+And what is the essence of solving problems or essence of computing? What are all the, I'm going to draw again. What's the essence of that? Let's grab this. And
+then here. What the frick? No, let's go here. Let's try that. When I say essence, I'm really referring to the properties. Actually, I'm going to turn it over to
+you. What are some of the things that are involved with, you think that are involved with computing? Some of the concepts, some of the ideas, some of the things
+that like are just a part of this idea of computing. The ideas of computing, like automation. Beautiful. Yep. What else? Math. I think math when it's talking
+about the math. Yep. Distraction. Distraction. Yep. All that stuff. All a part. You could say it's all a part of computing. I might break this down a little
+differently. But these are, like, these are good starts. I might put an abstraction in. Okay. What's the point of abstraction? Why do I abstract? What's the
+purpose of it? The purpose is understanding. Do I need to understand in order to compute? Not really. Because we had old, low-level programming languages that I
+don't really understand. So it's not really necessary to the essence of computing. We had low-level languages, like super low-level languages that are hard to
+understand. With no abstraction. So these are, this is not. Yeah, go ahead. Sorry. That even binary is already first level. Even thinking about interpreting
+high and low voltage, it's already an abstraction. Yeah, I guess so. That's why I think in computing, abstraction is a sense of computing. Good point. Good
+point. And you know what? While I was sculpting out this section, I realized there's three metaphysical essentials. And abstraction is actually the first one.
+Because it's going to be everything we've just been doing right now, even me saying words to you and you hearing them, is an abstraction. Every single thing
+we're doing is fundamentally, it's an abstraction of meaning, right? Because we'd have to tell you that doesn't marry that point. Yeah. So maybe the essence of
+everything really is like all understanding is like the big thing. Understanding. And then the way we do that is abstraction. And that's all of these concepts.
+That the concept of math is an abstraction for what really is math. That's the abstraction for what that really is. Like these sequence of symbols and words.
+See how far we could go with this? This is why I don't want to go into crazy land territory. Sorry. But I'll make it very simple. We're trying to get to seeing
+how events fit into this. With computing, we want to solve a problem. And in order to solve a problem, I'm thinking, what are the essential things I need to
+solve a problem? Because do I need math to solve a problem? No, I don't necessarily need it. Do I need automation to solve a problem? Don't necessarily need it.
+Really, this is more of the, actually, I would say this is more of the form of computing. Like what is essential forms? And here's what I think is the essential
+forms. Sequence. Selection. What's the other one? Iteration. Yep. That's all we need. Solve problems. How do I get down the street? How do I get to Shopper's
+Drug Mart? Go around the corner. Then do this. If you see this guy standing here, don't talk to him. Then go over there. Oh, and if it's not there, go to the
+next one, which is over there. Problem solved. I like it. Yeah. Makes sense. Yeah. It's going to be these three things in order to solve problems. Now, we have
+that. And the essence of a problem means that they're, like, now what's the essence of a problem? Means there's a state you're in. There's a desirable state.
+And there's an undesirable state. At least. So this is going to be state A. And this is going to be state B. So this is how we get to answering your question.
+See how it's hard for me to just go straight to answering this? Like, I want to give you the good, rigorous answer to this. Because this is the first principles
+of what we're doing here. This is the whole idea. No, it's amazing. We like the first principles of what we really understand things. Yeah. I think if you have
+this and you can do it yourself, you can piece it together yourself. You're going to run into 9,000 other things, as I said. And you're going to need to know
+how to think about breaking those problems down so that you can come back up. It's like, all right, I did my thinking on that. Come back up. And now I'm
+thinking at this level because I don't need to do that again. And that's how now I work with events. I work with like even SAGAs or I work with this, that. And
+I know when to use them because I've done the thinking. I've done the first principles thinking already. Done. Now I know and I can believe in what it is I'm
+doing here based on solved principles. So the concept is there's an undesirable state and there's a desirable state. And, yeah, this is solving a problem going
+from A to B. And what happens when we go from A to B is this is a transition, right? And really the transition here is this is behavior. And there's a fact. And
+the fact is we went from A to B. And that fact is an event. So the fact is we did that. Now, of course, things are not always A to B. Most of the time they're A
+to smaller, right? Most of the time they're from there to there. So really, every time we do this, each and every single one of these are what? These are
+events. And there are also transitions. So we have the behavior, which is the transition. And we have the event, which is the fact that a transition happened.
+So the act of transitioning from one state to another one is the event. The fact that it happened. So really behavior and really this is data. This is where we
+get data from. Where does data come from? Right here. It's describing the initial state. So this is data is going to be the initial state. And events. Because
+we need to always start with some state and then plug that in. And then the behavior, the transition is it acts on state. And then that state trans often gets
+translated into a different state. So then it's in the second version of that data. Now it's in the third version of the data. Now it's in the fourth version of
+the data. Right. And the events are really just carrying along what changed. Where did we go from to what? This is where data comes from. And there's one last
+element here. That's important for us as programmers. And this is this, the purpose of this last element is for understanding. And that is namespacing. What I
+mean by this, it's breaking up data and behavior. So this is when we get into things like, let me just go ahead here. Let's get rid of that. Oh, let's get rid
+of this. So namespacing is encapsulating a set of data and behavior. Yeah. It could be encapsulating this one right here. It could be encapsulating like, maybe
+this is a bounded context, like in domain-driven design. Maybe these events happen. It could be like that. It could also just be the concept of the event is
+being encapsulated in its own thing. Right. So maybe let's pull that back. So maybe that's what we're encapsulating. The concept of an event. Concept of a
+transition. The concept of that. This tool here. Again, the creator created. What is the purpose of this? Purpose. For understanding. So really, this is
+abstraction. This is where abstraction comes from. This is why. Because we can't really do work on data and behavior unless we understand what's going on here.
+And we can understand in a way that is manageable for us. It's interesting to define data as initial states and events. Because even some databases follow this
+paradigm. Like, I think in DynamoDB, you don't change the state. You just record the events that happen. So when you want to get the final stage, you just go.
+It's nice. Beautiful. That's exactly what event sourcing is. It's getting rid of everything. It's like event sourcing and those approaches to doing, to
+organizing your data. Even CQRS, like the deepest level. It's like, we're getting rid of everything that is not the essence of computing and programming. It's
+starting from first principles. What are we trying to do? It's events that are being saved. Really, what is a feature? A feature is just, in this sense, we have
+data that goes in. And then we have rules about what is allowed to happen to that data. And we have rules around, like, how data can even come in. So we have
+application rules. We have validation rules. And then what do we have out? We have your state changes and events. That's it. And this is a feature. And this is
+a use case. And the purpose of this thing here is just to make sure that this data is allowed to change or not allowed to change. Like, just make sure things
+stay consistent. That's it. Nothing else. It's beautiful. So with all this understood, what we just covered here is the essence of software design, the essence
+of... We covered the essence of software, but we didn't cover the essence of software development. So we got very clear on what software is, but we didn't get
+clear on what software development is. So we're going to have to do that. We're going to have to do that. So we're going to have to do that. I'll save that for
+later. Okay. Now, let's jump over to your thing, because this was, like, two pretty much core modules that I have to record. And first of all, let me ask you,
+do you have any questions, comments on how this was so far? No, that's okay. Bye. Okay. What do you think was confusing? What do you think was most interesting
+in this? What was the... I think that the part of events is a little confusing, but I was able to follow with it. I'm thinking about it. I've read the blog,
+so... Yeah, good with it. But I think it's confusing. So seed data is a new state, plays a set of events. It's not so obvious. Obvious doesn't exist. It's not
+so easy to set first. Yeah. But like, when we start here, this is why I tell everyone the correct architecture is the event-based one. This is why I don't
+recommend if you want something to be... If once we get into the idea of software development, if you want your code to be... If you want to be able to
+continually add value to users, you need to design with a event-based architecture in mind. You know what? I feel like I actually do need to get to this in
+order to get you to the point where you can understand how to do your problem well. Because you do need... Events are going to be key to what you're doing to
+solve your problem. Because, yeah, again, the whole point of us being here is you want to continually be adding value to the users. And you want to continually
+make sure that you can do this in a way where you're not screwing up yourself. Where you can't add value. Because your code is unmaintainable. And the way to do
+that is to go... Is to work with the grain of reality. Which means... Start here. Don't start in some other place. That makes no sense. Because if you try to...
+If you're trying to solve this problem and you're like, it's okay. The problem is shaped like this. Right? And the way that you go to attempt to solve it is
+like you build something out that's shaped like that. And you try to like... Can I move this? Put it over top. It's not with the grain of reality. The reality
+is event-based. Right? But what you're doing here is like... Frud based. And so, yeah. Of course it's not going to match up well. Because reality is different
+than what you're doing. And this right here... Is what happens when we do the code-first approach. The pieces. The blocky pieces. They're too large. You're
+seeing what's going on here, right? It's come full circle. Yeah. Alright. Now, I think we've got to get to your question here. Your problem. Because, yeah. This
+is the modules. And this can really go on even further. So now I'm going to skip to this. And I'll just give you what I think you need here. As fast as
+possible. So the problem is you want to make this work. You want to make this scalable. Want it to be testable. Want to have... Sustainable. Yeah. Want to have
+the ability to continually change it over time. And to design it in a way where you can change it. So this is going to mean... What is this going to mean? We
+need... So ultimately, there's three roles who have goals. Three roles are developer, customer, user. And your customer and users could be the same people.
+Because actors can play separate. So for the user, what do they need? No bugs. Developer... Or the customer. Build fast. Cost less money. To do. Developer. Oh,
+and by the way. Is correct. Solves actual problem. So their desires developer can build effectively. So maintain them. Right. And there's ways we'll go about
+doing that. But this is what we want ultimately, right? You can be building fast. Features come out. Build. Great. Yeah, I'm going to skip... I'm going to skip
+over some sections right now. And I'm just going to show you the solution here. Great. So let's... Let me think about what I need to show you. Objects,
+stereotypes. Layers and concerns. Let me see. Let me see a version depends your rule. Let's see what else. Control centers. How to use Rd to break down. And
+what else? What else do we need here? Let's see the application in there probably. Yeah. Coordinating control. And this is going to be the control center. Watch
+this. Yeah. So these are the topics we need to quickly jump into here to do this. And the... I'm going to start with... Let's start with perspective.
+Perspective is... Services... Is what we were doing. Problem. Problem. Not really maintainable. Passing references around. Getting overwhelmed. Fast. Yes. So
+the solution is... First of all... So the solution is RDD. Anytime you are stuck with a design... And yes, like the problem is the building blocks are too big.
+Anytime you're stuck here, what we need to do is go, go deeper. Start with the right building blocks. And then eventually you'll be able to just use object
+stereotypes. You solve these. Okay. So let's do this real quick. All right. Go ahead and list out. So what's the feature called? Name one of the features, by
+the way. Zoom in. Zoom out. Zoom. Zoom in. Zoom out. All right. And name some of the responsibilities. Some of the things, some of the doings and knowings that
+are required for this. What are things that need to be known? What are things that need to be done in order for this to work? But what the actor has to know
+about it? Anything in your app. Like for example, if I was going to send a request out onto the internet, like if my, I was doing like edit user and it was like
+in react. Some of the things that need to be done are... Okay. Okay. You have to scroll your mouse. Okay. Detect. So detect mouse scroll. Yeah. Yeah. What about
+passing the event to some place to be acted upon? What else? Detect mouse scroll. Pass the event. Trigger the event. Object responsible for... Zooming. Doing
+the work? Yeah. To help do the work. Yeah. Subscribing to the work to be done. So subscribing to the... When the work is done. Right. So know when the work is
+done. What else? Subscribing to the... So another, before we do this, I want us to just zoom up a little bit. And we could use faster for this actually. Let's
+do that. Okay. Specify. The thing about faster is it is a system. It's like systems thinking where... Oh, actually I have a new image for it now. I'll just drop
+that in the chat here. Let me go up. Where is that? Right here. Copy that. Image. Yeah, here's a system. So it's a system. And we're going to do some upfront
+design and we're going to do some emergent design with you today. All we can really do is we can really do is the upfront design, I believe. Well, this is a way
+of doing some emergen resultado. And then we went to create some effectiveeny sorry. I believe. And then you would just be doing the emergent design in your
+code, which is going to be with your tests. This is pretty much the exact same thing as red, green, refactor. So let's, I'll walk you through each step of this
+and how this works, but it's a system, it's systems thinking, which means that in systems thinking, you have complex systems can be broken down in terms of just
+input, output. And in the middle, there's a model. So how does the business work? Like the business works in general, all businesses work this way. There's a
+leadership system. So there's the leader that has an idea and it's their health. How do I feel? Like, do I feel good? Is it bad? Is that the leader has to have
+a clear head? Then they have an idea for what they want to do, like how they're going to create value. So that goes in that system. Then they need to
+communicate that to the world. And that's the marketing. And then there's actually serving that. So that's operations. And then of course, oh no, actually
+before that there's marketing, then there's sales. So getting the sale. And then after that, there's operations, which is where you, the developer are actually
+making, doing the work and making the thing that does the thing. And there's finance, which after they have their subscription, it goes into that. So this is
+the business runs this way. It is a system and there's inputs and outputs to each of these. The same way, what you need is a system for how you come to think
+about design. You have a problem. How are you going to approach solving the problem? We're going to do the same thing. We're going to break it down into systems
+and there's inputs and outputs to each. So the first thing we need to do is find a concrete example. Why example? Because of everything we just spent the last,
+however long talking about, we need to go based on real examples of real people. Because if we don't have that, there's this thing I like to say, which is
+vagueness does not compile. We can't be vague. We have to be very specific. So give me a concrete example here. Okay. You want to read some small text in your
+canvas. You have to zoom in. Sorry. So currently, let's say currently zoomed out and want to read text. So I zoom in. Now this type of example, by the way, it's
+going to be interesting the way that we test this. So I'm going to say the first thing we have as the input is the problem statement. And that's what this is
+here. And the output is going to be a concrete example, a concrete example or examples. And the thing about examples is we can break them down into
+responsibilities as well. And that's what kind of what we were doing just here. So when I see a problem statement, one of the processes, because this is the
+part in the middle is I need to determine which level environment actually determine which guest point. We haven't talked about this, but we don't have time to
+get into that now. Feedback loop. Determine which feedback loop we're doing this problem at. I could tell you right now, just from the foresight, looking at, we
+could run this at the end to end level. We could test this end to end. We could test this at the application level. We can test components of this as an
+integration test. These are all different types of tests. We can look at this through the lens of, and it's going to dictate the way that we do the rest of
+this. So that's going to be what environment are we going to run this at? For now, we're going to just discuss this as if it's an end, like an end to end test
+or an application one. And we're going to go through all the different pieces involved with making this work. What we're doing right now is defining the
+responsibilities. So let's see if we can gather any more of these subscribing to the mouse scrolled events, adjusting the canvas, or actually, no, you said it
+was something else. Was adjusting the camera. Yeah. Yeah. It is in the camera and if you want camera's view of the canvas. Ah, very good. Just seeing the
+camera's view of the canvas. And let's see, is there anything else that we need to do here? This is pretty much everything. Is that pretty much everything? It's
+done. But adjusting the camera's view of the canvas is after triggering the object response. That's the workload. So the order here is not quite correct. I'm
+just, we're just, we're just, yeah. Okay. We're just jotting everything out because we have to do work on this in the next step. So do you think we have just
+about everything here? Yeah. Okay, great. So the next step of this system, we've just found the next step is to architect a broad upfront design. So the way
+that this works, especially in RD, is we take these responsibilities and we need to break them out and we need to assign them to what's called role. So let's
+just grab a lot. That's the next step. All right. So we need, the next step is to assign these two roles. I'm actually just going to document this real quick.
+So I'm going to go find, we just did that. Let's make this a little bit larger. That's just in general. That goes there. And let's put this, yeah, let's put
+that there. Next step. Architect. I know this was, this is not a quick call at all. How are we doing energy level wise, by the way? I know I'm a little bit
+insane. I could go, I could go longer. We're good. Okay. Yeah, I'm good. Just checking. All right, cool. So architects. Now, yeah, the next step here, let's
+just quickly discuss that. The input is we have the responsibilities and really we have an example and we could break an example down into responsibilities.
+It's something like if we need to go with examples, we could do that because at the guest point level one with the TDD XS as you just did, you weren't getting
+into responsibilities. You were just using examples. It's good. And however, when we need to do some more challenging things, when we actually need to get clear
+on the components that we're going to design out, we do oftentimes need to break them down into responsibilities. For the guest point, you were just doing the
+TDD exercise. First of all, the point of this step, what do you want on the output? You want to have a clear understanding of the system under test, the
+components that you need. For the TDD exercises you just did, this is going to be really simple. Every single time, it's just going to be either a function or
+it's going to be a state, like a class with a static method, because you're doing these at the stateless. Guest point. This is like level one. Right. That makes
+sense. Right. Makes sense. Yeah. However, we're not doing that right now. We're not working at the stateless guest point. We could be working at level three,
+which if I go to, where can I find this? Go onto my Twitter. Here. Actually, if I go into the straight one, some of my rough notes here. Let's grab that. No.
+That. Whoops. Oh, I see what I got to do. You know, I need to view original image. Grab that. And then let's go here. What we're actually doing is we are very
+likely doing work in this region, the application region here, because you're, we're dealing with stuff like coordination, collaboration, and control. This idea
+of passing off. Control to other objects and listening to events. The idea of listening to events and being aware of when they happened. This is something that
+the. Object stereotype. There's six of these six stereotypical objects that pretty much encompass every single. Object we will ever make. They're going to be at
+least one of these. The idea of coordination, coordinating. If you take a look at this image that looks like Redux, looks like the observer pattern. Looks like
+that. That's what this thing is for. And this happens at a particular level in the layered architecture. It happens at this application level right here. I
+don't know. There's so the coordinator and the controller. Coordinator listens to events. So this is like your express router. This could be your web server. It
+could be event listeners. If you just take a look at this code. It's an event listener. It's going to, you can subscribe to an event or attach. To an event. And
+then when it happens, it'll call you. It'll let you know. That's, I don't know, maybe 10 lines of code. That's what this is. And there's the controller, which
+is responsible for telling other objects to do work. These two stereotypes make up what is called the control center of your app. The control center is the key
+place where all of the main decision making logic happens. Those, it could be spread out. It could express does part of it. It may be you have your controllers
+that you write that do the decision making logic to tell the lower their stuff to do work. Or you could say, you know what? No, I'm doing all of that. You can
+take back ownership of the control center. What happens is when people are doing things like react, they're writing all of their code inside react has, is the
+control center. They don't even have a control center at all. You see how this works. You see what's happening here is when you write all of your code in the
+framework, you don't have a control center anymore. It's very important for you to test your control center. To know that things are being called when they're,
+when you need them to be called. And that they're receiving the messages in the right way. And that's the way because if you let react to do all of this for
+you, you're going to have to go through react in order to test that stuff. And that's going to be tricky and complex to do. Because you have to deal with
+whatever mystery react is doing behind the scenes. There is a way to decouple out of react and to treat react as just the infrastructure. If we look back to
+this image here, because if react is doing all of this stuff, the application layer stuff for you, you're like, damn, I can't test my code. But what you want to
+do is you want to decouple from react and push it all the way out here to the infrastructure. There is a way to do that. It is possible right now when I'm this
+little detour is just to give you some clarity, to show you what is possible, to explain to you what is possible. Just so that you can begin to start thinking
+about, well, how am I going to do that? Because we're going to have to get into that later on. And we will, when we build out the front end project, but that is
+ultimately huge mindset shift. So like, let me pull it over to you for questions. Cause this is a lot. This is a big one right here. That's through the
+objective stereotype that we really decouple our core and model our core software, through the frameworks, through the infrastructure. Sorry, say that one more
+time. That's through the objective stereotypes, the coordinator and the tracing. Yeah, yeah. From them that we really decouple our software. Yeah. Yeah. From
+the framework. Yeah. Yeah. So this is how we D yeah, we want to take back ownership of the control center as responsibilities that we handle, not the framework.
+We are handling these concerns because it's the most important part. It, this is about when our app starts. This is about when our app, you could tear it up and
+you could tear it down. Once you take back ownership of this, you can actually test out 90% of the core use cases without ever even starting react. You could
+actually add react onto your app later. Like way later. Think about that. Not having to refresh to see if it worked, build everything out as if you're writing
+backend code. You don't even have to see the view. You can have a sort of pure understanding, like just objects that describe what your app does concepts of
+pages. You could describe the concept of a page. What is a page? The page might actually very well be a controller because it's stuff that does things very
+well. Could be maybe how are you handling switching pages? Maybe that's a coordinator that does the idea of switching pages or in, by the way, it's not one
+coordinator and it's not one controller. You may have a few different coordinators and a few different controllers of different types, but these are concerns
+that you can, if you say, no, I'm going to handle this. Thank you very much. I'll handle this part. So yes, you can decouple from infrastructure. And that's a
+key goal in terms of getting back the ability to write tests at these really critical, important guess points. Because this is where your really important code
+lives, your use cases. It all, as we saw, it all starts from the use case. Your data and behavior that you need for your app starts there. And if we could take
+back ownership and begin there, incredible. That's going to give us so much control. Now, should you always do that? That's a discussion for another time. It's
+going to depend on how far along you are in your project. Because if you're an entrepreneur, you just need to get something out fast. Maybe just write
+everything in React. However, once you're now providing value to your users, it's a very good time to shift over to being more defensive to, okay, let's make
+sure things are working properly and they're scalable. And we can continue to build things out fast now that we are already providing value. It's a game to be
+played. And that's what we're going to get into in the feedback loop, which is the idea that this is a game we are playing. It's like a sport. We have to be
+strategic. It's there's no one right answer. There's no right tests always. Or right tests at each and every single layer always. It's let's take a look at
+value because what we're doing as developers is we're this is a value creation system. We are constantly in development of I have this. I don't know if I have
+the image here, but from the theoretical to the physical, there's the theoretical guesses and there's the physical guesses. Just like this, the output of it is
+we're creating value, but at each point we could be wrong. And that's why we want to write a guess to make sure. But if you had, if you've made no none of,
+let's say you're starting a new product, you've made none of the theoretical guesses correct. Is it wise for you to be testing every single guess point on the
+physical? Not really. You just want to build fast. And then you could come back to writing more tests later on once you've you validated. Ah, people want it.
+Theoretically, people want this value. Great. Now let's shift over to being defensive and write more tests here. There's no right answer. We have to choose the
+best one for the moment we are in our product. Exactly. That's where everyone gets messed up. That's where everyone's having these discussions. Like people get
+pissed off when people are like, oh, you got to always write tests first, man. Always test first. We made it here. People are buying our thing and I've been
+able to do it without tests. Awesome. So then they're like, never write tests. But then later on they're like, oh, shit, our code is really buggy and shitty.
+It's okay. Shift over to writing tests now. Yeah. We cannot follow it as a bakery asset. I always do this in this way. Put the eggs now, mix it. Oh, it's not so
+close. Yeah, exactly. It's strategy. Once you understand that the essence of, again, the essence, the big circle. Once you see that there's these pieces like
+value, like making guesses, those guesses could be wrong. Negative value, which is bugs. You see this picture of software design. Then you're like, oh, it's a
+game like basketball. You have to be strategic. There's no right. Right. It's like it changes your whole mindset of what it is we're doing. It's guessing. We're
+just trying to be smart about it. Dude, we need to wrap this up because I need to help you get to the solution here. That's okay. But you like this. Oh man,
+there's a lot to cover in this program, but it's going to be a lot of fun. All right. Where are we? We have these pieces here. We need to move to the next step,
+which is the output. So no, we're not doing, we're not making this stateless guess here. This is probably going to be an application level guess, which is going
+to be level three. Very likely. This is guess point three. Right. And we need to know which components we need and we want to know how they interact with each
+other. So what we need here really is the roles, responsibilities, collaborations. And that's RDD right there. All right. Detect mouse scrolled. Now, what would
+be responsible for detecting mouse scrolled? What type of object would that be? What we could do is we could look to the object stereotypes. If we know the
+stereotypical objects, let me let you guess. What do you think would be responsible for detecting that a mouse scrolled? As the mouse, as it's an event, I
+suppose it's a coordinator. You have the idea of a mouse event. Great. So let's grab that. Now, what's the other thing you said? So I think that the coordinator
+is responsible for getting notified of the mouse event. Okay. So maybe let's call this app events or let's say we, yeah, it is a coordinator, but maybe let's
+call it an application observer or something like that. And then this is going to be a coordinator. Okay, great. So we know that, and we also know ahead of time
+that this is going to be given these. It's going to be given mouse events somehow. Great. Yeah. Now this is a, this is not a linear process finding all this
+stuff. So you just said mouse event. We didn't even have that here. And now that we have this, I'm like, okay, what is this responsible for doing and knowing?
+So probably knowing probably just needs to know type. It's going to be mouse event. What might this need to know? How much the angle, how much the angle, other
+stuff. I don't know what else might be in this, but this is what you would want to know. So you see this process that we're doing here is this is the role. So
+these are the responsibilities and what type of object is this? This is going to be called an information holder. That's a stereotypical one. What does this do?
+It just holds data. Doesn't do anything else. Yeah. Not much else than that. All right. Let's go back to this. It's a mouse event. And we know this is a
+coordinator and we, since we know what a coordinator does, we can assume that not subscribing to mouse scrolled event, but probably in more general, we could
+say that what does this thing do? Allows other objects to subscribe to events. Right. That's probably more generally what it does. Allows objects to subscribe
+to events. And since we also know that's what an observer does, we probably also know that this allows objects to, or it notifies objects when an event has
+happened. Or we could say notifies subscribers. And see, as I'm like writing and I'm getting it out, sometimes it's not right the first time. Sometimes I could
+simplify it. So it's notify subscribers to events. Allows other objects to subscribe to events. Notify subscribers to events. Okay. We're getting closer. We
+have a list of things we need to get through here. So what else? Detect mouse scroll. So what would be responsible for detecting that the mouse was scrolled?
+Oh, maybe this is the canvas that actually is the thing that generates the events. Perhaps. What is responsible for that? Maybe the canvas is the thing that
+actually generates the events. So what type of object might this be? I actually don't know. What are other things that your canvas does? Actually, I do know.
+Provide. You provide each coordinate. Actually, your canvas is going to be, by the way, these objects can provide multiple. They could be multiple roles, just
+as we saw. So these are roles, right? Yeah. And we, as we saw earlier, yeah, like I could, I'm an entrepreneur or I'm also a programmer. I'm also this, that.
+I'm going to say that they could play multiple roles. That's fine. But I'm going to say they're going to, there's going to be a dominant role. And we want to
+lean into the dominant role because this is the category theory here. We're trying to categorize as hard as possible to really know where does this thing, where
+should this thing really belong? Because if it's playing two roles, it's possible we could split it up into two different objects. If we really try, because I
+know the object stereotypes and I've studied them and I'm going to make sure everybody does study them. This is the interface. Because why? Because the dominant
+thing about the interface. Is that it is the crossover point to the infrastructure. It's the thing that talks to the outside world and most events, people
+clicking, people using their peripherals. Peripherals are things that exist in the outside world, infrastructural things. So express, GraphQL, repositories,
+external services like Stripe API, mail API. Those things are interfaces. They talk to the outside world. They talk to the network. They talk to the file
+system. They talk to this, that. So your canvas is actually mostly an interface. Is what I will say. Does that make sense? It's like a bridge. Yeah. It's like a
+bridge. A bridge. Yeah. Yeah. It's the thing that humans are interacting with for the most part. Okay. Yeah. So what's this going to do? It's going to be the
+thing that generates the mouse scrolled event. So that's probably the better way to describe that. Okay. Now. Sure. It generates the mouse scrolled event. Now
+what's responsible for passing that mouse scrolled event to the place that needs to be acted upon. Okay. So now we're getting into the point where we have these
+kind of main categories of things that need to be done, but we, it's like, how are they going to talk to each other? Let's see if I can categorize the rest of
+these, by the way, first. Cause I like to do that, that last part of collaboration last. So subscribing to the mouse scrolled, who's going to need to do that?
+Whoever's doing the work of adjusting this, whoever's going to do that work probably could be actually, I'm going to say subscribing to the mouse scrolled
+event. This could be the controller could be. Yeah. Let's, and by the way, when we do one of these, like different approaches too. It's just an object that's
+going to do some math. This one that I use the cameras. Go of the camera. Is it responsible for doing the math or really updating the camera view? Yeah. Good
+point. So anytime I hear state change or updating something to me, that tells me controller. Okay. Yeah. Yeah. It tells me controller or like controller talking
+to an interfacer. So updating the, or even this, geez, even it could be, yeah, we, the next part about this too, is to move to the next step. We will want to
+walk through it. We'll want to take this example and actually walk through and imagine it, how this could work. Because at this point, this is all a guess. It's
+going to get really real to us when we get down here and we write the test code. When we write the test code, real design that actually works is going to emerge
+in front of us. However, we are starting with all guesses. And the more work we do here, the better our guess is probably going to be down here. The less that
+we're going to have to rely on coming back and starting over from complete scratch. So this is all upfront design. It's all a guess. We don't really fully know.
+Yeah. Yeah. It's all a guess. Yeah. So it's like, we don't want to get too hung up here either with what it is we piece together. We just want to have a good
+enough idea, which can make people uncomfortable because it's not certain. All right. So let's see. Subscribe, subscribe into the mouse scrolled event. Let's
+say who does this? In that case, it's a controller, right? I just seen the camera view of the camera. Just to fix it. Let's do that. Canvas interfaces. Okay.
+And what are we going to call this? Sorry, this is an object here. That subscribes to the mouse scrolled event. Because what other events might this need to
+subscribe to on the, let's imagine there's one. Oh, wait. Also subscribes to the mouse scrolled events on the, sorry, this, I see what's going on here.
+Subscribes to the mouse scrolled event on the coordinator. So this is, and then this is the object that might want to do. Yeah. This is going to be the
+controller. I see. Yes. This is the controller. And what are we going to call this? Because you're subscribing to the mouse scrolled event, but you're also
+doing something else from this controller. Is this the camera? You're doing camera work, right? Yeah. Yeah. That's the camera. And what is that camera work
+we're doing? Interesting. We're doing this, but we're going to, let's say the thing about the controller is it's not actually the thing that does the state
+change. It talks to the objects to do the state change. Okay. So it is to describe to the mouse scrolled event, but he doesn't make the change. It just talks
+with the controller. Usually. Yeah. Usually when I look at the controller here, I have post comment here. So let's say I'm trying to post a comment. I'll get
+the post. I'll create the comment and I'll add the comment to the post. But it's the repo that is doing the actual saving. It's the interface. It's doing the
+actual savings. So bringing that back, whatever the camera interfacer of some sort, some something that is stateful, the camera repo to do an update. So it's
+really nice to see a repo out of the context of database. Yeah. Something like that. It's going to, it's going to call upon the lower layer objects to do the
+work to update the camera to compute and update the camera position. That's probably the best way to describe it. And let's call this camera. Starting to piece
+together now. Right? Yeah. Yeah. So what else we got past the event to some place to be. Passed upon. So yeah, this thing is going to subscribe, passing the
+event to some place. This goes to, of course, this is something here. We already have that. Right. No, we need to go from, how do we go from the coordinator
+generates an event? How does it event? No, sorry. The canvas. Where is the canvas? Canvas generates an event. How does the event go from the canvas to the
+coordinator? That's the question. If there is the thing that's between them. There does need to be something here between them. Between them. So, so perhaps
+what you have here is we're going to need some sort of object that takes everything from the canvas and passes it to the coordinator. Yeah. We don't have all of
+them yet. We have one called service provider, right? Yeah. What's it called? I don't know. Service provider. Is there a one called? Service provider. Yeah. We
+are not using all of them yet. I don't remember the other ones. Yeah. We're getting there. One of them. Yeah. We're getting there. We're almost at all of those
+here. Let's see. So we have the interfacer, the controller. Boom. I'm going to take this and move that over there. Relation folder. I'm going to move this over
+here. And then we know that the, this is going to subscribe. To that. And this is going to have access to. No, it's not going to be, it's not going to be called
+the canvas. We still have these responsibilities. We're going to have, we're going to have, yeah, maybe a service provider, but perhaps something that does math
+and we're going to have, I'm going to just name this for now. Something that updates the camera. Yeah. And since we have camera, we're probably also going to
+have the concept of cameras. There's probably rules for like how the camera is allowed to change, how the camera is not allowed to change, how far the camera is
+allowed to go. All of those different concerns need to be brought out and put onto objects. Yeah. Yeah. Those are going to go in information holders. Yeah.
+Usually they may also go in the idea of something called a structure, which is going to pretty much be your aggregate. Yeah. That's going to pretty much be your
+aggregate. It's going to piece together. It's going to have all the essential data that dictates how the camera is allowed to change and how it's not allowed to
+change. This is a structure. It's going to be, yeah, pretty much your aggregate there. It's also going to be the main thing. So I think to me, what I'm hearing
+is the camera is like your aggregate is what I'm hearing. And that's probably going to be a structure. This is, by the way, I'm just calling this out of my
+mind, just foresight now. I'm not even really showing, demonstrating. I'm calling it out. It's made sense camera be an aggregate. Yeah. Structure. Structure.
+Structure. I can't spell that. And the reason why is because, yeah, it's going to adjusting the camera's view of the canvas. Yep. So maybe what now, what does
+this have perhaps is knowing maybe this is the data that's being subscribed to, which is the current position of the camera. And then we're going to, on. Now I
+know what you're going to ask me is like, how do we subscribe to this data if we're using like a frontend framework? Like how, what this is on like an entity?
+How do we, how are we going to make sense of that? There's different ways we can approach this in a frontend application. We can take the object oriented route
+where we put this, the data as close to the objects, like the aggregate and stuff like this as required. And we use them that way. But also in a frontend
+application, we have some inherent concerns. We have inherent concerns, inherent problems on a frontend app that we need to address. One of those, some of those
+concerns are we have a view data. We have model data. And we also have, so I'm going to say, these are knowings knowing, and we also have doing, and the problem
+here is updating view data, getting model data. Those are inherent problems on the frontend and triggering a re-render. These are some problems. We need to put
+these in objects. These need to, again, just like we've done this so far, these need to go somewhere. So this is what I would call, I don't think these are not
+non-functional requirements. These are still pretty functional to a degree. There's still responsibilities that need to be addressed. And yeah, there's
+different ways we could go about doing this. Because one way is just, all right, put the data behavior that belongs to the object as encapsulated on the object
+that's related and just have it like that. And we can do this similar to the way we do it in the backend. That's one way we could do it. Another way we could do
+it is we could have an entire object. Like you could call this like, let's say data model, or just, this could be like the applications data model. And this is
+like what Redux does where you have all of the data for your model on this thing. Sure. You could do that. And then all you have to do is subscribe to. And then
+if this thing is being watched, we can watch this data model entirely. That's one approach. Another approach is, yeah, as I said, we could do the watching on
+these objects specifically. Watch this object for changes specifically. If you use something. Yeah. The application data model would be a global state. Yeah. So
+there's, this is what I mean when I, if we look into control centers, responsibility. We look into this. See where I control. Yeah. There's variations, right?
+Like you, they can be centralized. Like we like the global state, or they can be delegated to other places, delegated into. You now there's advantages and
+disadvantages to both of these. There's. You have to decide how you want to approach it. Some applications is like, bro, we cannot have this all in one place.
+That's too much. Sometimes you're like, this actually is great. We just, we want to have it all in one place. I think we need to explore both. And you have to
+decide. But I built out a chess thing where I took the delegated approach, the very object-oriented approach like this. And I've worked on projects where it was
+like this. I have, I've seldom worked on projects where I've had it all in one place, but it is something that can be done. And there's probably a best of both
+worlds in the middle there too. Anyways, we just, we covered a lot and I think we're gonna have to pause here for now. But yeah. It's much more clear now in my
+mind. You're getting it. You're getting the clarity. Yeah. So yeah. Clarity, then elimination, and then execution. So we got a lot of clarity. Now you need to
+weed out what you don't need. And then you can just go and build. Yeah. I'm going to try to implement a block using these concepts. And it's... Try to make a
+blog post? Okay. Sorry? What'd you say? Try to... I'm going to try to make a proven concept, make play use case using these concepts. Yeah. It's nice. Awesome.
+Awesome. Yeah. We went into a lot here. We covered a lot of different territory, but this was really fun. Thanks for joining. Yeah. Hello. Thanks a lot for it.
+It was amazing. Absolutely. So... Oh, by the way, do you mind if I share some of this on, like with the other devs out there? No, feel free. You can share
+with... Fantastic. Fantastic. If you put it on Notion, I'm going to listen it again. Yeah. Good. Good. Good. Awesome. All right, brother. I will see you in
+there and there's going to be some modules coming up soon. So... Yeah. Get to it. That's it. Thank you. Bye. Bye, bro. Later. Have a good day. Bye, bro. And
+have a good day. Bye. Bye, bro, man. And have a good day. Bye, man. Bye. Bye, man. Bye, man. Bye, buddy,케ase. Bye, man. Bye, man. Bye, man. Bye, man. Bye, man.
+Bye, man, bye. Bye, man. Bye, man, bye. Bye, man. Bye, man. Bye, man, bye. Bye, man. Bye, man, bye. Bye, man. Bye, man. Bye, bye. Bye, man, bye. Bye, bye. Bye,
+man. Bye, mine, bye, shi. Bye, bye. Bye, bye.

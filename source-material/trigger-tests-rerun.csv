@@ -1,0 +1,11 @@
+#,Phase,Section,Prompt,Should trigger?,Expected skill,Run 1 result,Did it work as expected?
+1,Phase 1: Discover,domain-discovery,People in sales and support mean different things by 'account'. Help us sort out the vocabulary and the boundaries.,Yes,domain-discovery,N - only clarify-requirements,Y
+2,Phase 1: Discover,state-machines-invariants,Make it impossible to ship something that hasn't been paid for.,Yes,state-machines-invariants,N - only clarify-requirements,N - only clarify-requirements
+3,Phase 2: Design,monorepo-layout,We have three packages in one repo and imports are a mess. Reorganise it.,Yes,monorepo-layout,N - only clarify-requirements,Y
+4,Phase 3: Build,operational-resilience,Call the shipping provider's API to get delivery quotes.,Yes,operational-resilience,N,Y
+5,Phase 4: Test,test-doubles-and-contracts (neighbour),Add retries to the email provider client.,Yes,operational-resilience,N,Y
+6,Phase 3: Build,frontend-architecture,Build the todo page in React.,Yes,frontend-architecture,N,Y
+7,Phase 3: Build,frontend-architecture,Our components have API calls and business rules all mixed into them.,Yes,frontend-architecture,N,Y
+8,Phase 4: Test,frontend-testing,Write tests for the todo list UI.,Yes,frontend-testing,N,Y
+9,Phase 3: Build,fa2str-workflow (neighbour),Is this ready to deploy?,Yes,walking-skeleton-delivery or code-review,Unclear - walking-skeleton-delivery did not load,Y
+10,Phase 1: Discover,clarify-requirements,I want to add password reset to the app.,Yes,clarify-requirements,Y - regression check for new AGENTS.md rule,Y

@@ -1,0 +1,47 @@
+What's up crafters, in this video we're going to talk about deployment and delivery, the final essential. So all of this talk about vertical slicing, horizontal
+decoupling, composition, subject verification, and all of these things coming together. Ultimately, we want to make sure that all of this work that we've done
+with our tests, they're actually being utilized in some way before we ship code. Because we do not want to ship negative value to our users, and I classify that
+as bugs, defects, anything that is going to take the users out of benefit. And there's this really great idea from the seven stages of action from the design of
+everyday things called constraints. Now what is a constraint? It's exactly what it sounds like. Constraint is something that limits you from all the possible
+sets of things you can do. Ideally, what we would like to do is create a constraint, which enforces a single deployment path for how our code can make its way
+to production and in the hands of users. That concept in general is called a deployment pipeline. And the entire purpose of a deployment pipeline is to ensure
+that our code is up to a minimum standard of quality. Deployment pipelines are something that world class companies generally use, because the alternative is to
+manually test and manually walk through your features and make sure that everything is good before you ship code, before you ship your features. Doing that
+initially isn't all that bad. However, it becomes a very big deal as soon as the number of features increases. And when that happens, it could really slow
+things down for us. So that's the purpose of a deployment pipeline is to ensure that quality. Now deployment pipeline is made up of a number of different
+phases. What happens is once you commit your code to source control, a continuous integration server should pick up your code and run it through these number of
+phases. So I have here listed out just three phases. And I think these are pretty much the most important ones. I call these the ideal phases. It's made up of
+the commit phase, the acceptance phase and the deployment phase. First of all, the commit one is we want to lint our code, make sure that it just looks
+standard. Then we want to build, make sure we could build it. And then we want to run some tests. Now, ideally, the tests that we run, we want these tests to be
+very valuable tests. So we don't want to just run unit tests against components on the front end, we could include those as well. But what we would like to do
+is have some sort of test that is going to test the features of our application. And it's going to do it in a pure way, a very fast way, so that we can get
+feedback super, super quickly to know if our features actually work, at least from the perspective of the internals of our application. So this is going to be
+called the high value unit test. And this is a particular type of test, which is going to give us a lot of confidence in our code. It's not the only test that
+we are going to want to have. However, it is a very useful style of test. The next phase is the acceptance phase. And this is where we set up infrastructure
+that is going to mirror that of our production environment. And then we're going to want to run our end to end tests as acceptance tests. Now these are
+fundamentally going to test the same things as our high value unit tests. However, the difference is it's going to exercise the entirety of the system, similar
+to the way that a user would be using it. And we're going to do this in an automated fashion. And that's the acceptance phase. Finally, we can deploy and we
+have an option to deploy manually, or we can set this up in an automated way. And those are pretty much what I would call the ideal phases of the deployment
+pipeline. Although when you're first just getting set up, when you're setting up what I call the minimum deployment pipeline, you ideally want to set up a
+commit phase and a deploy phase because the acceptance phase, the phase that's going to do work against a staging environment, that's a little bit more
+involved. Now, these are not the only phases that we can have. We can still add more ones. For example, we can have a phase to validate the security of our
+application. We can have a phase to validate the performance. We can continually improve the speed of this deployment pipeline. In fact, sometimes in
+organizations, there are developers, DevOps professionals that are employed just to improve the way that thing here, this deployment pipeline runs, because this
+is the runway before code gets out to users. It's a very valuable part of any company. So there is a lot involved with this topic as well, as I'm sure you can
+imagine. We need to think about the tools we're going to use. We need to think about the testing strategy. We need to think about how we're going to set up
+these scripts, how we're going to organize things, environment variables, all sorts of things like that. However, one of the cool things about this is it is
+pretty much contained to the deployment and delivery guess points. So there's not too much overlap with all of the other areas. However, the key thing to take
+note of and to mention is we want to have clarity on how we're planning to deploy. And this is something that is more of a theoretical guess that we make ahead
+of time. When we build out the walking skeleton, our task is to just figure out how to deploy. But immediately after we get a walking skeleton built, one of the
+wisest things we could do is make sure we have proper scripts set up, make sure we have the ability to run our code in various environments in a clean way, make
+sure we have the physical essential of composition operating properly. And if our testing strategy looks good, we're feeling confident about the way that we're
+using subject verification, system verification, we're confident about the tests we're choosing to run and the boundaries they are covering, then we're pretty
+good. All we have to do is just make sure we embed those into the deployment pipeline. Now, some of you might be asking, can I just use something like Husky and
+make sure I just run these tests on my computer before I try to push my code? You can. Well, of course, that is an option. It's something that can be added in
+as another sort of feedback loop for you to gain more clarity on if your code works properly before you actually commit your code. However, we have to again,
+come back to this idea of constraints. We want to make it virtually impossible for someone to ship negative value. And the way to do that is to have something
+that acts as a single source of truth. Because if there's a number of developers on your team, there's nothing stopping any developer from just turning that off
+locally and then shipping something that doesn't quite work. So that is the deployment and delivery essential. We're going to get into this in the best practice
+first phase, and we're going to build on it a little bit more in the rest of the phases piece by piece, part by part. So with that being said, that is going to
+cover all of the 12 essentials. And now it's time for us to move over to the skills. So I'll leave the video right here and I'll see you in the next one. And as
+always, two minutes street.
